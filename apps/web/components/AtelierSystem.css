@@ -121,8 +121,7 @@
 #atelier #aifly-panel :is(.panel-minimize,.orientation-brief-actions .icon-button){border-radius:50%;border:1px solid var(--ca-edge);border-top-color:var(--ca-edge-top);background:linear-gradient(160deg,color-mix(in srgb,var(--ca-silver) 20%,transparent),color-mix(in srgb,var(--ca-silver) 5%,transparent));box-shadow:inset 0 1px 0 color-mix(in srgb,var(--color-atelier-ink) 30%,transparent),0 10px 22px -12px color-mix(in srgb,var(--color-atelier-canvas) 96%,transparent);transition:transform .28s var(--ca-spring),border-color .2s ease-out}
 #atelier #aifly-panel .panel-minimize:is(:hover,:focus-visible){transform:translateY(-1px);border-color:color-mix(in srgb,var(--ca-warm) 50%,transparent)}
 #atelier #aifly-panel .panel-minimize:active{transform:scale(.94)}
-#atelier #aifly-panel .public-orientation{background:transparent;gap:0}
-#atelier #aifly-panel .orientation-content{background:transparent;scrollbar-width:thin;scrollbar-color:color-mix(in srgb,var(--ca-silver) 30%,transparent) transparent}
+#atelier #aifly-panel .orientation-content{background:transparent}
 #atelier #aifly-panel .orientation-intro{padding:0;border:0;background:none;box-shadow:none;border-radius:0}
 #atelier #aifly-panel .orientation-intro .orientation-speaker{display:none}
 #atelier #aifly-panel .orientation-intro h3{letter-spacing:-.035em;background:linear-gradient(176deg,var(--color-atelier-ink) 18%,color-mix(in srgb,var(--ca-silver) 82%,var(--color-atelier-canvas)));-webkit-background-clip:text;background-clip:text;color:transparent;padding-bottom:.1em}
@@ -137,7 +136,6 @@
 #atelier #aifly-panel .orientation-message .orientation-speaker{display:block;margin-bottom:var(--space-1);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ca-warm)}
 #atelier #aifly-panel .orientation-message.role-user{align-self:flex-end;margin-left:auto;border-color:var(--ca-edge);border-top-color:var(--ca-edge-top)}
 #atelier #aifly-panel .orientation-message.role-user .orientation-speaker{display:none}
-#atelier #aifly-panel .orientation-message.role-assistant{align-self:flex-start;max-width:100%;padding:0 0 0 var(--space-4);border-radius:0}
 #atelier #aifly-panel .orientation-message.role-assistant p{font-size:1rem;line-height:1.55}
 #atelier #aifly-panel .orientation-dots span,#atelier #aifly-panel .orientation-dots i{background:var(--ca-lime)}
 @keyframes ca-in{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:none}}
@@ -151,12 +149,10 @@
 #atelier #aifly-panel .orientation-composer-actions .primary-button:disabled{transform:none}
 #atelier #aifly-panel .orientation-composer-actions .outline-button{border-top-color:var(--ca-edge-top);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
 #atelier #aifly-panel .orientation-counter{position:absolute;right:70px;bottom:14px;font-size:.7rem;color:var(--color-text-sekundaer)}
-#atelier #aifly-panel .connection-note{color:color-mix(in srgb,var(--ca-silver) 70%,transparent);text-align:center;margin:0}
+#atelier #aifly-panel .connection-note{text-align:center;margin:0}
 #atelier #aifly-panel .connection-note a{min-height:0;display:inline}
 #atelier #aifly-panel .orientation-restart{align-self:flex-end;min-height:44px;padding:0 var(--space-4);border-radius:var(--radius-pille);border:1px solid var(--ca-edge);background:color-mix(in srgb,var(--ca-silver) 7%,transparent);text-decoration:none;font-size:.85rem;transition:transform .28s var(--ca-spring),border-color .2s}
 #atelier #aifly-panel .orientation-restart:is(:hover,:focus-visible){transform:translateY(-1px);border-color:color-mix(in srgb,var(--ca-warm) 50%,transparent)}
-#atelier #aifly-panel .orientation-brief{border-radius:22px;border:1px solid var(--ca-edge);border-top-color:var(--ca-edge-top);background:linear-gradient(160deg,color-mix(in srgb,var(--ca-warm) 14%,transparent),color-mix(in srgb,var(--ca-silver) 5%,transparent));box-shadow:inset 0 1px 0 color-mix(in srgb,var(--color-atelier-ink) 26%,transparent)}
-#atelier #aifly-panel :is(.orientation-problem,.error-note){border-radius:22px;border:1px solid color-mix(in srgb,var(--ca-warm) 40%,transparent);background:color-mix(in srgb,var(--ca-warm) 9%,transparent)}
 #atelier #aifly-panel :is(.orientation-problem,.orientation-brief) .outline-button{border-radius:var(--radius-pille);min-height:48px;border:1px solid var(--ca-edge);border-top-color:var(--ca-edge-top);background:linear-gradient(160deg,color-mix(in srgb,var(--ca-silver) 18%,transparent),color-mix(in srgb,var(--ca-silver) 5%,transparent))}
 #atelier .reopen-chat{border-radius:var(--radius-pille);border:1px solid color-mix(in srgb,var(--color-atelier-platinum) 28%,transparent);border-top-color:color-mix(in srgb,var(--color-atelier-ink) 44%,transparent);background:linear-gradient(160deg,color-mix(in srgb,var(--color-atelier-platinum) 22%,transparent),color-mix(in srgb,var(--color-atelier-platinum) 6%,transparent)),color-mix(in srgb,var(--color-atelier-canvas) 72%,transparent);-webkit-backdrop-filter:blur(22px) saturate(170%);backdrop-filter:blur(22px) saturate(170%);box-shadow:inset 0 1px 0 color-mix(in srgb,var(--color-atelier-ink) 30%,transparent),0 20px 44px -18px color-mix(in srgb,var(--color-atelier-canvas) 96%,transparent),0 30px 70px -30px color-mix(in srgb,var(--as-warm) 30%,transparent);transition:transform .3s cubic-bezier(.2,.9,.25,1.15)}
 #atelier .reopen-chat:is(:hover,:focus-visible){transform:translateY(-3px)}
@@ -172,7 +168,6 @@
 }
 #atelier #aifly-panel .orientation-composer-actions .primary-button{position:relative}
 #atelier #aifly-panel .orientation-composer-actions .primary-button span{position:static;margin:0;transform:none}
-#atelier #aifly-panel .orientation-composer-actions .primary-button:disabled{opacity:.7;filter:saturate(.7)}
 #atelier #aifly-panel{--ca-edge:transparent;--ca-edge-top:transparent;border-color:transparent;box-shadow:inset 0 1px 0 color-mix(in srgb,var(--color-atelier-ink) 34%,transparent),inset 0 0 0 1px color-mix(in srgb,var(--ca-silver) 9%,transparent),0 30px 80px -30px color-mix(in srgb,var(--color-atelier-canvas) 96%,transparent),0 60px 140px -60px color-mix(in srgb,var(--ca-warm) 22%,transparent)}
 #atelier #aifly-panel .panel-heading,#atelier #aifly-panel :is(.orientation-brief,.orientation-composer,.orientation-starter,.orientation-restart,.orientation-message,.panel-minimize,.outline-button,.public-orientation,.orientation-content,.sdk-orientation-view){border-color:transparent}
 #atelier #aifly-panel .orientation-message.role-assistant{border-left:0;padding-left:0}
@@ -187,9 +182,6 @@
 #atelier #aifly-panel .panel-heading{padding:22px var(--ca-pad) 14px}
 #atelier #aifly-panel .orientation-content>*{margin-inline:0;max-width:100%}
 #atelier #aifly-panel :is(.orientation-intro,.orientation-history,.orientation-starters,.orientation-path){margin:0;padding-inline:0;width:100%;box-sizing:border-box}
-#atelier #aifly-panel .orientation-composer{margin:0 calc(var(--ca-pad) - 6px) 10px}
-#atelier #aifly-panel .connection-note{padding:0 var(--ca-pad) 14px}
-#atelier #aifly-panel .orientation-brief{margin:0 calc(var(--ca-pad) - 6px) 16px}
 #atelier #aifly-panel .orientation-intro p{font-size:.98rem;line-height:1.6}
 #atelier #aifly-panel .orientation-message{gap:6px;font-size:.98rem;line-height:1.6}
 #atelier #aifly-panel .orientation-message>strong{display:flex;align-items:center;gap:.5em;margin:0 0 6px;font-family:var(--font-mono);font-size:.7rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--ca-warm)}
@@ -201,9 +193,7 @@
 #atelier #aifly-panel .orientation-answer-heading{font-weight:400;font-size:inherit}
 #atelier #aifly-panel .orientation-message :is(ul,ol){margin:.5em 0 0;padding-left:1.2em}
 #atelier #aifly-panel .orientation-message li+li{margin-top:.3em}
-#atelier #aifly-panel .connection-note{font-size:.72rem;line-height:1.5}
-#atelier #aifly-panel .connection-note a{white-space:nowrap;text-decoration:underline;text-underline-offset:3px}
-#atelier #aifly-panel .orientation-problem-actions{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end}
+#atelier #aifly-panel .connection-note a{white-space:nowrap}
 #atelier #aifly-panel :is(.orientation-brief,.orientation-brief-actions,.orientation-problem-actions){background:none;box-shadow:none;padding:0;margin:0;border-radius:0}
 #atelier #aifly-panel :is(.orientation-brief,.orientation-brief-actions,.orientation-problem-actions){display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:8px}
 
@@ -242,7 +232,8 @@
 
 /* ===== Verbindliche Fassung ===== */
 html:has(#atelier),body:has(#atelier){background:var(--color-atelier-canvas)}
-#atelier{--as-pill:999px;--as-area:28px;--as-stage:40px;--as-rim:6px;--as-warm:color-mix(in srgb,var(--color-atelier-ink) 72%,var(--color-semantik-warnung));--as-cool:var(--color-atelier-platinum);--as-ink:var(--color-atelier-ink);--as-deep:var(--color-atelier-canvas);--as-lime:var(--color-marke-lime);--as-glass:linear-gradient(160deg,color-mix(in srgb,var(--as-cool) 20%,transparent),color-mix(in srgb,var(--as-cool) 6%,transparent) 62%),color-mix(in srgb,var(--as-deep) 46%,transparent);--as-glass-dense:linear-gradient(160deg,color-mix(in srgb,var(--as-cool) 16%,transparent),color-mix(in srgb,var(--as-cool) 5%,transparent) 62%),color-mix(in srgb,var(--color-atelier-surface) 88%,transparent);--as-plate:linear-gradient(165deg,color-mix(in srgb,var(--as-cool) 11%,transparent),color-mix(in srgb,var(--as-cool) 3%,transparent) 50%),color-mix(in srgb,var(--color-atelier-raised) 78%,transparent);--as-edge:inset 0 1px 0 color-mix(in srgb,var(--as-ink) 30%,transparent);--as-rest:var(--as-edge),0 18px 40px -22px color-mix(in srgb,var(--as-deep) 96%,transparent);--as-raised:var(--as-edge),0 28px 60px -24px color-mix(in srgb,var(--as-deep) 96%,transparent),0 36px 90px -44px color-mix(in srgb,var(--as-warm) 34%,transparent);--as-focus:0 0 0 2px var(--as-deep),0 0 0 4px var(--as-lime);--as-blur:blur(26px) saturate(175%);--as-spring:cubic-bezier(.2,.9,.25,1.15);--as-heading:linear-gradient(174deg,var(--as-ink) 18%,color-mix(in srgb,var(--as-cool) 82%,var(--as-deep)));position:relative;isolation:isolate;min-height:100vh;background:var(--color-atelier-canvas)}
+html:has(#atelier){color-scheme:dark;scrollbar-color:var(--color-atelier-raised) var(--color-atelier-canvas)}
+#atelier{--as-pill:999px;--as-area:28px;--as-stage:40px;--as-rim:6px;--as-warm:color-mix(in srgb,color-mix(in srgb,var(--color-atelier-ink) 84%,var(--color-semantik-warnung)) 80%,var(--color-atelier-canvas));--as-cool:var(--color-atelier-platinum);--as-ink:var(--color-atelier-ink);--as-deep:var(--color-atelier-canvas);--as-lime:var(--color-marke-lime);--as-glass:linear-gradient(160deg,color-mix(in srgb,var(--as-cool) 20%,transparent),color-mix(in srgb,var(--as-cool) 6%,transparent) 62%),color-mix(in srgb,var(--as-deep) 46%,transparent);--as-glass-dense:linear-gradient(160deg,color-mix(in srgb,var(--as-cool) 16%,transparent),color-mix(in srgb,var(--as-cool) 5%,transparent) 62%),color-mix(in srgb,var(--color-atelier-surface) 88%,transparent);--as-plate:linear-gradient(165deg,color-mix(in srgb,var(--as-cool) 11%,transparent),color-mix(in srgb,var(--as-cool) 3%,transparent) 50%),color-mix(in srgb,var(--color-atelier-raised) 78%,transparent);--as-edge:inset 0 1px 0 color-mix(in srgb,var(--as-ink) 30%,transparent);--as-rest:var(--as-edge),0 18px 40px -22px color-mix(in srgb,var(--as-deep) 96%,transparent);--as-raised:var(--as-edge),0 28px 60px -24px color-mix(in srgb,var(--as-deep) 96%,transparent),0 36px 90px -44px color-mix(in srgb,var(--as-warm) 34%,transparent);--as-focus:0 0 0 2px var(--as-deep),0 0 0 4px var(--as-lime);--as-blur:blur(26px) saturate(175%);--as-spring:cubic-bezier(.2,.9,.25,1.15);--as-heading:linear-gradient(174deg,var(--as-ink) 18%,color-mix(in srgb,var(--as-cool) 82%,var(--as-deep)));position:relative;isolation:isolate;min-height:100vh;background:var(--color-atelier-canvas)}
 #atelier::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse 70% 55% at 10% -6%,color-mix(in srgb,var(--as-warm) 10%,transparent),transparent 72%),radial-gradient(ellipse 55% 60% at 104% 34%,color-mix(in srgb,var(--as-cool) 11%,transparent),transparent 72%),radial-gradient(ellipse 60% 45% at 36% 108%,color-mix(in srgb,var(--as-lime) 5%,transparent),transparent 72%)}
 #atelier .website{background:transparent}
 #atelier .home-concept{background:transparent;overflow:visible}
@@ -345,21 +336,16 @@ html:has(#atelier),body:has(#atelier){background:var(--color-atelier-canvas)}
  #atelier #aifly-panel{margin:0;width:100%;height:var(--chat-viewport-height,100vh);max-height:var(--chat-viewport-height,100vh);border-radius:0;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);background:var(--color-atelier-surface);-webkit-backdrop-filter:none;backdrop-filter:none}
  #atelier #aifly-panel .chat-resize-handle{display:none}
 }
-#atelier #aifly-panel .orientation-content{padding:20px var(--ca-pad) 18px;gap:18px;scroll-padding-top:24px;-webkit-mask-image:linear-gradient(180deg,transparent,var(--color-atelier-canvas) 20px);mask-image:linear-gradient(180deg,transparent,var(--color-atelier-canvas) 20px)}
+#atelier #aifly-panel .orientation-content{padding:20px var(--ca-pad) 18px;gap:18px;scroll-padding-top:24px;-webkit-mask-image:linear-gradient(180deg,transparent,var(--color-atelier-canvas) 20px,var(--color-atelier-canvas) calc(100% - 18px),transparent);mask-image:linear-gradient(180deg,transparent,var(--color-atelier-canvas) 20px,var(--color-atelier-canvas) calc(100% - 18px),transparent)}
 #atelier #aifly-panel .orientation-intro h3{font-size:1.75rem;line-height:1.1;margin:0 0 10px;text-wrap:balance}
 #atelier #aifly-panel .orientation-message.role-user{border-radius:var(--as-area);scroll-margin-top:24px}
 #atelier #aifly-panel .orientation-starter[aria-pressed='true']{background:linear-gradient(160deg,color-mix(in srgb,var(--as-cool) 34%,transparent),color-mix(in srgb,var(--as-cool) 14%,transparent));color:var(--as-ink)}
-#atelier #aifly-panel .orientation-path{display:flex;gap:6px;width:100%;margin:0;padding:0;list-style:none}
-#atelier #aifly-panel .orientation-path>li{box-sizing:border-box;flex:none;display:flex;align-items:center;justify-content:center;gap:.7em;width:44px;max-width:none;height:44px;padding:0;border-radius:var(--as-pill);background:color-mix(in srgb,var(--as-cool) 8%,transparent);color:var(--color-text-sekundaer);font-size:0;white-space:nowrap}
 #atelier #aifly-panel .orientation-path>li::after{content:none}
-#atelier #aifly-panel .orientation-path>li>small{font:500 .75rem/1 var(--font-mono);letter-spacing:.06em;color:inherit}
-#atelier #aifly-panel .orientation-path>li[data-state='current']{flex:1;width:auto;min-width:0;padding:0 16px;justify-content:flex-start;background:color-mix(in srgb,var(--as-cool) 18%,transparent);color:var(--as-ink);font-size:.8125rem;font-weight:500;overflow:hidden;text-overflow:ellipsis}
-#atelier #aifly-panel .orientation-path>li[data-state='done']{background:color-mix(in srgb,var(--as-warm) 18%,transparent);color:var(--as-ink)}
 #atelier #aifly-panel .orientation-followup{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:8px;margin:0;padding:0;border-radius:0;background:none;box-shadow:none}
-#atelier #aifly-panel .chat-return{margin:0 calc(var(--ca-pad) - 6px) 16px;padding:12px 12px 12px 18px;border:0;border-radius:var(--as-area);background:var(--as-glass);box-shadow:var(--as-rest)}
-#atelier #aifly-panel .orientation-composer-actions .outline-button{min-height:48px;padding:0 var(--space-4);border:0;border-radius:var(--as-pill);background:var(--as-glass-dense);box-shadow:var(--as-rest);font-size:.8125rem}
+#atelier #aifly-panel .chat-return{padding:12px 12px 12px 18px;border:0;border-radius:var(--as-area);background:var(--as-glass);box-shadow:var(--as-rest)}
+#atelier #aifly-panel .orientation-composer-actions .outline-button{min-height:48px;padding:0 var(--space-4);border:0;border-radius:var(--as-pill);background:var(--as-glass-dense);box-shadow:var(--as-rest);font-size:.8125rem;white-space:nowrap}
 #atelier #aifly-panel .orientation-composer textarea{min-height:52px;max-height:160px;border-radius:calc(var(--as-area) - var(--as-rim));overflow-y:auto}
-#atelier #aifly-panel .connection-note a{padding-block:15px;color:var(--as-warm)}
+#atelier #aifly-panel .connection-note a{padding-block:15px}
 #atelier #aifly-panel .orientation-message a{color:var(--as-warm);text-decoration-color:color-mix(in srgb,var(--as-warm) 50%,transparent)}
 #atelier .reopen-chat,#atelier .reopen-chat.nexify-control[data-variant]{min-height:48px;height:48px;padding:0 var(--space-5) 0 var(--space-2);gap:var(--space-3);border:0;font-size:.875rem;font-weight:500;line-height:1;right:calc(var(--space-4) + env(safe-area-inset-right));bottom:calc(var(--space-4) + env(safe-area-inset-bottom))}
 #atelier .reopen-chat .oracle-companion{width:36px;height:36px;flex:none}
@@ -403,7 +389,6 @@ body:has(#atelier) .skip-link:focus{border-radius:999px;background:var(--color-a
 #atelier #aifly-panel .orientation-thinking>strong{margin:0}
 #atelier #aifly-panel .orientation-thinking>p{display:flex;align-items:center;min-height:0;margin:0}
 #atelier #aifly-panel .orientation-dots i{background:var(--as-lime)}
-#atelier #aifly-panel .orientation-message.role-assistant{background:none;box-shadow:none;border:0}
 #atelier :is(.site-header,.home-concept,.site-footer,#aifly-panel) :is(a,button,summary,select),#atelier .reopen-chat{border-color:transparent}
 #atelier #aifly-panel :is(.panel-minimize,.icon-button,.orientation-starter,.orientation-restart,.outline-button),#atelier .site-header :is(.header-cta,.outline-button,select){border:0}
 #atelier .home-concept :is(.hc-gallery-card,.hc-product):is(:hover,:focus-visible){color:var(--color-text-primaer)}
@@ -427,3 +412,63 @@ body:has(#atelier) .skip-link:focus{border-radius:999px;background:var(--color-a
  #atelier .home-concept .hc-gallery-card:nth-child(3) .hc-art{width:100%;margin:0 0 var(--space-4)}
 }
 #atelier .home-concept .hc-finish h2{font-size:clamp(34px,5.2cqi,84px)}
+#atelier #aifly-panel .orientation-content{scrollbar-width:thin;scrollbar-color:color-mix(in srgb,var(--as-cool) 28%,transparent) transparent}
+#atelier #aifly-panel .orientation-history>div{display:flex;flex-direction:column;gap:18px}
+#atelier #aifly-panel .orientation-message.role-assistant{align-self:stretch;max-width:100%;padding:0;border:0;border-radius:0;background:none;box-shadow:none}
+#atelier #aifly-panel .orientation-answer-copy{display:grid;gap:.7em}
+#atelier #aifly-panel .orientation-answer-copy .orientation-answer-heading{color:var(--as-ink);font:inherit}
+#atelier #aifly-panel .orientation-answer-note{border:0;border-radius:var(--as-area);background:color-mix(in srgb,var(--as-cool) 8%,transparent)}
+#atelier #aifly-panel .orientation-answer-note summary{min-height:48px;padding:0 18px;font-size:.8125rem;color:var(--color-text-sekundaer)}
+#atelier #aifly-panel .orientation-answer-note p{padding:0 18px 16px;font-size:.8125rem;color:var(--color-text-sekundaer)}
+#atelier #aifly-panel .orientation-page-results{display:grid;gap:8px;margin-top:12px}
+#atelier #aifly-panel .orientation-page-link{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:12px;min-height:48px;padding:14px 18px;border:0;border-radius:var(--as-area);background:var(--as-glass);box-shadow:var(--as-rest);text-decoration:none;transition:transform .28s var(--as-spring),box-shadow .22s ease-out}
+#atelier #aifly-panel .orientation-page-link:is(:hover,:focus-visible){transform:translateY(-2px);background:var(--as-glass);box-shadow:var(--as-raised)}
+#atelier #aifly-panel .orientation-page-index{padding:0;color:var(--as-warm);font:500 .6875rem/1 var(--font-mono)}
+#atelier #aifly-panel .orientation-page-copy strong{font:500 .875rem/1.35 var(--font-text);color:var(--as-ink)}
+#atelier #aifly-panel .orientation-page-copy small{font-size:.75rem;line-height:1.45;color:var(--color-text-sekundaer)}
+#atelier #aifly-panel .orientation-page-arrow{color:var(--color-text-sekundaer);font-size:1rem}
+#atelier #aifly-panel :is(.orientation-problem,.orientation-brief,.orientation-followup) :is(.primary-button,.outline-button){box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 20px;border:0;border-radius:var(--as-pill);font-size:.875rem;font-weight:500;line-height:1.2;text-decoration:none;white-space:nowrap;transition:transform .28s var(--as-spring),box-shadow .22s ease-out}
+#atelier #aifly-panel :is(.orientation-problem,.orientation-brief,.orientation-followup) .outline-button{background:var(--as-glass);box-shadow:var(--as-rest);color:var(--as-ink)}
+#atelier #aifly-panel :is(.orientation-problem,.orientation-brief) .primary-button{background:linear-gradient(180deg,var(--color-marke-lime-hell),var(--as-lime) 46%,var(--color-marke-lime-dunkel));box-shadow:inset 0 1px 0 color-mix(in srgb,var(--as-ink) 85%,transparent),0 14px 30px -12px color-mix(in srgb,var(--as-lime) 58%,transparent);color:var(--color-text-auf-lime)}
+#atelier #aifly-panel .public-orientation:has(.orientation-brief) .orientation-problem .primary-button{background:var(--as-glass);box-shadow:var(--as-rest);color:var(--as-ink)}
+#atelier #aifly-panel :is(.orientation-problem,.orientation-brief,.orientation-followup) :is(.primary-button,.outline-button):hover{transform:translateY(-2px)}
+#atelier #aifly-panel :is(.orientation-problem,.orientation-brief,.orientation-followup) :is(.primary-button,.outline-button):active{transform:translateY(1px) scale(.97)}
+#atelier #aifly-panel :is(.orientation-problem,.error-note){display:grid;gap:14px;margin:0;padding:18px;border:0;border-radius:var(--as-area);background:var(--as-glass);box-shadow:var(--as-rest)}
+#atelier #aifly-panel .orientation-problem p,#atelier #aifly-panel .error-note{margin:0;font-size:.875rem;line-height:1.55;color:var(--color-text-sekundaer)}
+#atelier #aifly-panel .orientation-problem-actions{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-start;margin:0;padding:0;background:none;box-shadow:none}
+#atelier #aifly-panel .orientation-brief{display:grid;gap:12px;margin:0;padding:0;border:0;border-radius:0;background:none;box-shadow:none}
+#atelier #aifly-panel .orientation-brief-heading{display:block}
+#atelier #aifly-panel .orientation-brief-icon{display:none}
+#atelier #aifly-panel .orientation-brief h4{margin:0 0 4px;font:500 1rem/1.3 var(--font-display);color:var(--as-ink)}
+#atelier #aifly-panel .orientation-brief p{margin:0;font-size:.8125rem;line-height:1.5;color:var(--color-text-sekundaer)}
+#atelier #aifly-panel .orientation-brief>label{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+#atelier #aifly-panel .orientation-brief textarea{box-sizing:border-box;display:block;width:100%;min-height:132px;max-height:260px;padding:14px 16px;border:0;border-radius:calc(var(--as-area) - var(--as-rim));background:color-mix(in srgb,var(--as-cool) 9%,transparent);box-shadow:var(--as-edge);color:var(--as-ink);font:400 .875rem/1.55 var(--font-text);resize:none;scrollbar-width:thin;scrollbar-color:color-mix(in srgb,var(--as-cool) 28%,transparent) transparent}
+#atelier #aifly-panel .orientation-brief-actions{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-start;margin:0;padding:0;background:none;box-shadow:none}
+#atelier #aifly-panel .orientation-brief .orientation-brief-hint{font-size:.75rem;color:var(--color-text-tertiaer)}
+#atelier #aifly-panel .orientation-path{display:grid;gap:2px;width:100%;margin:0;padding:0;list-style:none}
+#atelier #aifly-panel .orientation-path>li{display:flex;align-items:center;justify-content:flex-start;gap:12px;width:auto;max-width:none;height:auto;min-height:26px;padding:0;border-radius:0;background:none;color:var(--color-text-tertiaer);font-size:.8125rem;font-weight:400;line-height:1.3;white-space:normal;overflow:visible}
+#atelier #aifly-panel .orientation-path>li>small{flex:none;width:1.6em;font:500 .6875rem/1 var(--font-mono);letter-spacing:.08em;color:var(--as-warm)}
+#atelier #aifly-panel .orientation-path>li[data-state='current']{flex:none;padding:0;background:none;color:var(--as-ink);font-size:.8125rem;font-weight:500}
+#atelier #aifly-panel .orientation-path>li[data-state='current']::after{content:'';flex:none;width:6px;height:6px;border-radius:50%;background:var(--color-marke-lime-signal)}
+#atelier #aifly-panel .orientation-path>li[data-state='done']{background:none;color:var(--color-text-sekundaer)}
+#atelier #aifly-panel .orientation-composer{margin:0 var(--ca-pad) 10px}
+#atelier #aifly-panel .chat-return{margin:0 var(--ca-pad) 16px}
+#atelier #aifly-panel .connection-note{padding:0 12px 12px;font-size:.72rem;line-height:1.5;color:var(--color-text-tertiaer);text-wrap:balance}
+#atelier #aifly-panel .orientation-mode-note{display:inline;margin:0;font-size:inherit;color:inherit}
+#atelier #aifly-panel .orientation-mode-note::after{content:' · '}
+#atelier #aifly-panel .connection-note a{color:var(--color-text-sekundaer);text-decoration:underline;text-decoration-color:color-mix(in srgb,var(--as-cool) 50%,transparent);text-underline-offset:3px}
+#atelier #aifly-panel .orientation-composer-actions .primary-button:disabled{opacity:.6;filter:none}
+#atelier #aifly-panel .public-orientation{padding:0;gap:0;background:transparent}
+#atelier #aifly-panel .conversation{padding:20px var(--ca-pad) 18px;background:transparent}
+#atelier #aifly-panel .welcome-card>p:not(.welcome-body){font:500 1.75rem/1.1 var(--font-display);letter-spacing:-.035em;background:var(--as-heading);-webkit-background-clip:text;background-clip:text;color:transparent;padding-bottom:.08em}
+#atelier #aifly-panel .welcome-card .eyebrow{font-family:var(--font-mono);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--as-warm)}
+#atelier #aifly-panel .action-options{display:flex;flex-wrap:wrap;gap:8px;margin:0}
+#atelier #aifly-panel .action-option{width:auto;min-height:48px;margin:0;padding:0 18px;gap:10px;border:0;border-radius:var(--as-pill);background:var(--as-glass);box-shadow:var(--as-rest);color:var(--as-ink);font-size:.875rem;font-weight:500;transition:transform .28s var(--as-spring),box-shadow .22s ease-out}
+#atelier #aifly-panel .action-option:hover{transform:translateY(-2px);background:var(--as-glass);box-shadow:var(--as-raised);color:var(--as-ink)}
+#atelier #aifly-panel .action-option>span,#atelier #aifly-panel .action-option:hover>span{margin:0;color:var(--color-text-sekundaer);font-size:1rem;transform:none}
+#atelier #aifly-panel :is(.request-fallback,.status-note,.action-card,.result-card){border:0;border-radius:var(--as-area);background:var(--as-glass);box-shadow:var(--as-rest)}
+#atelier #aifly-panel :is(.request-fallback,.action-card,.result-card){padding:18px}
+#atelier #aifly-panel .status-note{padding:14px 18px;font-size:.875rem;color:var(--color-text-sekundaer)}
+#atelier #aifly-panel :is(.request-fallback,.conversation) a:not(.nexify-control):not(.outline-button):not(.primary-button){display:inline-flex;align-items:center;min-height:44px;border-radius:0;color:var(--as-ink);text-decoration:underline;text-decoration-color:color-mix(in srgb,var(--as-cool) 50%,transparent);text-underline-offset:3px}
+#atelier #aifly-panel .conversation :is(input,select,textarea){border:0;border-radius:calc(var(--as-area) - var(--as-rim));background:color-mix(in srgb,var(--as-cool) 9%,transparent);box-shadow:var(--as-edge);color:var(--as-ink)}
+#atelier #aifly-panel .conversation :is(.primary-button,.outline-button,.download-link){min-height:48px;padding:0 20px;border:0;border-radius:var(--as-pill)}
