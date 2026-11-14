@@ -12,6 +12,8 @@
  * Störungen: Der Besucher erhält nur den festen Code chat_llm_failed. Die Ursache steht als
  * eine geheimnisfreie JSON-Zeile im Serverprotokoll (siehe logChatFailure).
  * Keine Secrets im Code, keine erfundenen Werte.
+ * Leitungsweg: Standard ist der 9router. Nur mit CHAT_LLM_ROUTE=cloudflare-ai-gateway läuft der
+ * Aufruf über das Cloudflare AI Gateway (./llm-gateway.ts); ein unbekannter Wert ergibt 503.
  * Die Modellkennung geht nicht an den Browser (Inhaberentscheidung 13.11.2026, DECISIONS.md D-010);
  * sie bleibt in der Ablage der Nachricht.
  */
@@ -45,6 +47,7 @@ import {
   type OutputGuard,
 } from '../../../lib/chat-guidance';
 import { chatRateLimit, clientKey } from '../../../lib/chat-rate-limit';
+import { chatLlmRoute, gatewayConfigured, gatewayRoutePermitted, missingGatewayEnv, streamGatewayCompletion, type ChatLlmRoute } from './llm-gateway';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -85,7 +88,7 @@ type FailureStage = 'llm' | 'persistence';
  * Enthält ausschließlich feste Kennwörter, Statuszahl, Systemfehlercode und Dauer.
  * Niemals: Adresse oder Parameter des Routers, Schlüssel, Antworttext, Nutzertext, Konversations-ID.
  */
-function logChatFailure(stage: FailureStage, error: unknown, context: { stream: boolean; startedAt: number; step?: string }): void {
+function logChatFailure(stage: FailureStage, error: unknown, context: { stream: boolean; startedAt: number; step?: string; llm_route?: string }): void {
   const entry: Record<string, string | number | boolean> = {
     event: 'chat_failure',
     route: '/api/chat',
@@ -94,6 +97,7 @@ function logChatFailure(stage: FailureStage, error: unknown, context: { stream: 
     elapsed_ms: Date.now() - context.startedAt,
   };
   if (context.step) entry.step = context.step;
+  if (context.llm_route) entry.llm_route = context.llm_route;
   if (stage === 'llm') {
     Object.assign(entry, describeChatFailure(error));
   } else {
@@ -113,7 +117,7 @@ function logChatFailure(stage: FailureStage, error: unknown, context: { stream: 
  * Nach dem ersten Fehlschlag entfallen die weiteren Speicherschritte dieser Anfrage: ein hängender
  * Speicher kostet höchstens ein Zeitlimit, nicht eines je Schritt.
  */
-async function persistenceStep<T>(step: string, run: () => Promise<T>, fallback: T, context: { stream: boolean; startedAt: number; storeFailed?: boolean }): Promise<T> {
+async function persistenceStep<T>(step: string, run: () => Promise<T>, fallback: T, context: { stream: boolean; startedAt: number; storeFailed?: boolean; llm_route?: string }): Promise<T> {
   if (context.storeFailed) return fallback;
   try {
     return await run();
@@ -176,10 +180,27 @@ export async function POST(request: Request): Promise<Response> {
     });
     return err('same_origin_required', 403);
   }
-  if (!chatLlmConfigured()) {
-    logChatRejected({ status: 503, cause: 'not_configured', missing: missingLlmEnv(), deployment: deploymentKind() });
+  let llmRoute: ChatLlmRoute;
+  try {
+    llmRoute = chatLlmRoute();
+  } catch {
+    // Unbekannter Wert in CHAT_LLM_ROUTE: nicht raten, nicht auf den Standard zurückfallen.
+    logChatRejected({ status: 503, cause: 'route_invalid', deployment: deploymentKind() });
     return err('chat_llm_not_configured', 503);
   }
+  const viaGateway = llmRoute === 'cloudflare-ai-gateway';
+  if (viaGateway && !gatewayRoutePermitted()) {
+    // config/llm-policy.json nennt als Zielweg nur den 9router: erst Entscheidung und Policy, dann dieser Weg.
+    logChatRejected({ status: 503, cause: 'route_not_permitted_by_policy', deployment: deploymentKind(), llm_route: llmRoute });
+    return err('chat_llm_not_configured', 503);
+  }
+  if (viaGateway ? !gatewayConfigured() : !chatLlmConfigured()) {
+    logChatRejected(viaGateway
+      ? { status: 503, cause: 'not_configured', missing: missingGatewayEnv(), deployment: deploymentKind(), llm_route: llmRoute }
+      : { status: 503, cause: 'not_configured', missing: missingLlmEnv(), deployment: deploymentKind() });
+    return err('chat_llm_not_configured', 503);
+  }
+  const complete = viaGateway ? streamGatewayCompletion : streamChatCompletion;
 
   const declared = Number(request.headers.get('content-length') || '0');
   if (declared > MAX_BODY_BYTES) return err('body_too_large', 413);
@@ -205,7 +226,9 @@ export async function POST(request: Request): Promise<Response> {
   if (!limit.allowed) return err('chat_rate_limited', 429, { 'Retry-After': String(limit.retryAfterSeconds) });
 
   const startedAt = Date.now();
-  const logContext: { stream: boolean; startedAt: number; storeFailed?: boolean } = { stream: wantsStream, startedAt };
+  const logContext: { stream: boolean; startedAt: number; storeFailed?: boolean; llm_route?: string } = { stream: wantsStream, startedAt };
+  // Nur im Gateway-Modus, damit die Protokollzeilen des Standardwegs unverändert bleiben.
+  if (viaGateway) logContext.llm_route = llmRoute;
   const requestedId = typeof req.conversationId === 'string' ? req.conversationId.slice(0, 80) : undefined;
   const localId = requestedId?.startsWith('local-') ? requestedId : `local-${crypto.randomUUID()}`;
   const conversationId =
@@ -258,7 +281,7 @@ export async function POST(request: Request): Promise<Response> {
   // ---- Nicht-gestreamte JSON-Antwort ----
   if (!wantsStream) {
     try {
-      for await (const chunk of streamChatCompletion(llmMessages, { signal: request.signal })) guard.push(chunk);
+      for await (const chunk of complete(llmMessages, { signal: request.signal })) guard.push(chunk);
       guard.finish();
     } catch (error) {
       logChatFailure('llm', error, logContext);
@@ -287,7 +310,7 @@ export async function POST(request: Request): Promise<Response> {
       try {
         send({ type: 'start', conversationId, persisted: isPersisted(), guidance: CHAT_GUIDANCE_VERSION });
         try {
-          for await (const chunk of streamChatCompletion(llmMessages, { signal: request.signal })) {
+          for await (const chunk of complete(llmMessages, { signal: request.signal })) {
             const safe = guard.push(chunk);
             if (safe) send({ type: 'delta', text: safe });
           }
