@@ -117,20 +117,41 @@
 :root[data-skin="nexify-graphite"] ::-webkit-scrollbar{width:10px;height:10px;}
 :root[data-skin="nexify-graphite"] ::-webkit-scrollbar-thumb{background:#4A4F4C;border-radius:999px;border:3px solid transparent;background-clip:content-box;}
 
-/* Zielgröße: jedes Bedienelement mindestens 48px (target.min; Auftrag verlangt ≥44px), auch mit Maus */
-:root[data-skin="nexify-graphite"] button,
-:root[data-skin="nexify-graphite"] [role="button"],
-:root[data-skin="nexify-graphite"] select,
+/* Zielgröße 48px (target.min; Auftrag verlangt ≥44px).
+   Mit Maus oder Trackpad nur für die benannten Bedienelemente von Navigation, Sitzungsliste und
+   Eingabezeile: Sie sind an v0.52.492 gemessen. Dichte Ansichten (Werkzeugkarten, Kanban, Terminal)
+   bleiben dort unberührt, damit kein ungeprüftes Layout bricht. */
+:root[data-skin="nexify-graphite"] .rail-btn,
 :root[data-skin="nexify-graphite"] .nav-tab,
+:root[data-skin="nexify-graphite"] .panel-head-btn,
+:root[data-skin="nexify-graphite"] .session-source-tab,
 :root[data-skin="nexify-graphite"] .session-item,
-:root[data-skin="nexify-graphite"] input[type="text"],
-:root[data-skin="nexify-graphite"] input[type="search"],
-:root[data-skin="nexify-graphite"] input[type="password"],
-:root[data-skin="nexify-graphite"] textarea{min-height:48px;}
-:root[data-skin="nexify-graphite"] button,
-:root[data-skin="nexify-graphite"] [role="button"],
-:root[data-skin="nexify-graphite"] .nav-tab{min-width:48px;}
+:root[data-skin="nexify-graphite"] .suggestion,
+:root[data-skin="nexify-graphite"] .icon-btn,
+:root[data-skin="nexify-graphite"] .send-btn,
+:root[data-skin="nexify-graphite"] .composer-profile-chip,
+:root[data-skin="nexify-graphite"] .composer-workspace-files-btn,
+:root[data-skin="nexify-graphite"] .composer-workspace-chip,
+:root[data-skin="nexify-graphite"] .composer-model-chip,
+:root[data-skin="nexify-graphite"] .composer-reasoning-chip,
+:root[data-skin="nexify-graphite"] .workspace-panel-edge-toggle,
+:root[data-skin="nexify-graphite"] .update-btn,
+:root[data-skin="nexify-graphite"] .app-titlebar button{min-height:48px;min-width:48px;}
+:root[data-skin="nexify-graphite"] .session-search-field input,
+:root[data-skin="nexify-graphite"] .settings-search input{min-height:48px;}
+/* Der Fokusrahmen der Leiste am linken Rand liegt innen, sonst schneidet ihn der Fensterrand ab. */
+:root[data-skin="nexify-graphite"] .rail-btn:focus-visible{outline-offset:-2px !important;}
+/* Mit dem Finger gilt die Zielgröße für jedes Bedienelement. */
 @media (pointer:coarse){
+  :root[data-skin="nexify-graphite"] button,
+  :root[data-skin="nexify-graphite"] [role="button"],
+  :root[data-skin="nexify-graphite"] select,
+  :root[data-skin="nexify-graphite"] input[type="text"],
+  :root[data-skin="nexify-graphite"] input[type="search"],
+  :root[data-skin="nexify-graphite"] input[type="password"],
+  :root[data-skin="nexify-graphite"] textarea{min-height:48px;}
+  :root[data-skin="nexify-graphite"] button,
+  :root[data-skin="nexify-graphite"] [role="button"]{min-width:48px;}
   :root[data-skin="nexify-graphite"] input,
   :root[data-skin="nexify-graphite"] textarea,
   :root[data-skin="nexify-graphite"] select{font-size:16px;} /* atelierSystem.schrift.16: kein Zoom beim Tippen auf iOS */

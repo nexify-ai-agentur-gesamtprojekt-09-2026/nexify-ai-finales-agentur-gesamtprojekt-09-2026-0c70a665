@@ -2,6 +2,13 @@
    Nutzt nur die dokumentierte Schnittstelle window.registerHermesSkin (docs/EXTENSIONS.md,
    „Registering a custom theme (skin)“) und fügt eigene, eindeutig benannte Elemente hinzu.
    Ruft keine API der Oberfläche auf, sendet nichts, liest keine Gespräche.
+   Schreibt im Browser genau zwei Einträge in localStorage:
+     - 'nexify-skin-vorgabe' (eigener Merker: die Vorauswahl ist für diesen Browser erfolgt)
+     - 'hermes-skin' (Eintrag der Oberfläche für den gewählten Skin; nur einmal und nur, wenn
+       dort noch kein anderer Skin gewählt ist). THEMES.md nennt localStorage als Ablage der
+       Skin-Wahl; boot.js erhält dort ausdrücklich einen Skin, den eine Erweiterung erst später
+       anmeldet. Eine eigene Schnittstelle zum Vorauswählen bietet v0.52.492 nicht.
+   ops/hermes/webui/pruefe-gestaltung.py lässt nur diese beiden Schlüssel zu.
    Farbwerte: config/design-tokens.json (Pfad im Kommentar). */
 (function () {
   'use strict';
@@ -90,7 +97,17 @@
     if (farbe && an && farbe.getAttribute('content') !== GRUND) farbe.setAttribute('content', GRUND);
   }
 
-  function lauf() { marke(); zeichen(); }
+  // Die Oberfläche setzt den Platzhalter der Eingabe fest auf Englisch („Message <Name>…“).
+  // Solange der Skin gewählt ist, steht er auf Deutsch; der Name bleibt, wie die Oberfläche ihn setzt.
+  var PLATZ = /^Message (.+)\u2026$/;
+  function platzhalter() {
+    var feld = document.getElementById('msg');
+    if (!feld || !aktiv()) return;
+    var treffer = PLATZ.exec(feld.getAttribute('placeholder') || '');
+    if (treffer) feld.setAttribute('placeholder', 'Nachricht an ' + treffer[1] + '\u2026');
+  }
+
+  function lauf() { marke(); zeichen(); platzhalter(); }
 
   function start() {
     registrieren();
@@ -99,6 +116,8 @@
     new MutationObserver(lauf).observe(document.documentElement, { attributes: true, attributeFilter: ['data-skin', 'class'] });
     var meta = document.getElementById('hermes-theme-color');
     if (meta) new MutationObserver(zeichen).observe(meta, { attributes: true, attributeFilter: ['content'] });
+    var feld = document.getElementById('msg');
+    if (feld) new MutationObserver(platzhalter).observe(feld, { attributes: true, attributeFilter: ['placeholder'] });
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);

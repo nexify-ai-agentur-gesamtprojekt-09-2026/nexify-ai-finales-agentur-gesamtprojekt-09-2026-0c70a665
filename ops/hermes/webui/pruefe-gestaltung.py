@@ -85,6 +85,19 @@ def pruefe() -> list[str]:
         if verboten in js:
             fehler.append(f"{SKIN}.js enthält {verboten}")
 
+    # Browser-Speicher: nur die zwei dokumentierten Schlüssel, kein sessionStorage, keine Cookies.
+    erlaubt = {"'hermes-skin'", "VORGABE"}
+    if "var VORGABE = 'nexify-skin-vorgabe';" not in js:
+        fehler.append(f"{SKIN}.js: Merker 'nexify-skin-vorgabe' fehlt oder heißt anders")
+    for schluessel in re.findall(r"speicher\((?:true|false),\s*([^,)]+)", js):
+        if schluessel.strip() not in erlaubt:
+            fehler.append(f"{SKIN}.js: Browser-Speicher mit nicht dokumentiertem Schlüssel {schluessel.strip()}")
+    if len(re.findall(r"localStorage", re.sub(r"/\*.*?\*/", "", js, flags=re.S))) != 2:
+        fehler.append(f"{SKIN}.js: localStorage darf nur in der einen Hilfsfunktion `speicher` stehen (Lesen und Schreiben)")
+    for verboten in ("sessionStorage", "indexedDB"):
+        if verboten in js:
+            fehler.append(f"{SKIN}.js enthält {verboten}")
+
     ext = json.loads((HIER / "extensions.json").read_text(encoding="utf-8"))
     eintrag = ext["extensions"][0]
     for datei in eintrag["stylesheets"] + eintrag["scripts"]:
