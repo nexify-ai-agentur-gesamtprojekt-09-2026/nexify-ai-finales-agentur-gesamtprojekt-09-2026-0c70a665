@@ -1073,7 +1073,7 @@ html[data-theme='light'] #atelier .nx-logo-x{color:var(--as-accent)}
    stehen fest hinter der Front; die Front bricht sie, ihre Innenkante sammelt sie. --as-front-glanz ersetzt den diagonalen Streif
    (der sich als Bogen im Rand abzeichnete) durch einen weichen Reflex aus der Lichtrichtung. */
 #atelier{
- --as-front-licht:radial-gradient(34% 42% at 84% 8%,color-mix(in srgb,var(--color-dunkel-tag-silber) 46%,transparent),transparent 72%),radial-gradient(30% 38% at 98% 78%,color-mix(in srgb,var(--color-dunkel-tag-lime) 17%,transparent),transparent 74%),radial-gradient(22% 30% at 70% 52%,color-mix(in srgb,var(--color-dunkel-tag-silber) 16%,transparent),transparent 76%);
+ --as-front-licht:radial-gradient(34% 42% at 88% 4%,color-mix(in srgb,var(--color-dunkel-tag-silber) 32%,transparent),transparent 72%),radial-gradient(30% 38% at 98% 78%,color-mix(in srgb,var(--color-dunkel-tag-lime) 17%,transparent),transparent 74%),radial-gradient(22% 30% at 70% 52%,color-mix(in srgb,var(--color-dunkel-tag-silber) 16%,transparent),transparent 76%);
  --as-front-glanz:radial-gradient(120% 46% at 0% 0%,color-mix(in srgb,var(--color-dunkel-licht) 13%,transparent),color-mix(in srgb,var(--color-dunkel-licht) 3%,transparent) 46%,transparent 72%);
  --as-front-kante:inset 1px 1px 0 color-mix(in srgb,var(--color-dunkel-licht) 44%,transparent),inset -1px -1px 0 color-mix(in srgb,var(--color-dunkel-licht) 10%,transparent);
  --as-front-body:linear-gradient(180deg,color-mix(in srgb,var(--color-dunkel-licht) 7%,transparent),color-mix(in srgb,var(--color-dunkel-licht) 1%,transparent) 36%,color-mix(in srgb,var(--color-dunkel-licht) 4%,transparent)),color-mix(in srgb,var(--color-dunkel-grund) 38%,transparent);
@@ -1198,3 +1198,5 @@ html[data-theme='light'] #atelier{
 #atelier :is(a,button)>.nx-zeichen{display:inline-block;vertical-align:-.2em;margin-left:var(--as-s-2)}
 #atelier :is(a,button):is([class*='button'],.tk-cta,.nexify-control)>.nx-zeichen{margin-left:0}
 #atelier :is(.scene-loop-controls button,.nx-feld-schalter)>.nx-zeichen{margin:0;vertical-align:0}
+/* Lesbarkeit im Licht der Front: die Herkunftszeile des Namens steht im Nebentext-Ton (>= 4,5:1 auch im hellsten Feld). */
+#atelier #aifly-panel .nx-oracle-name span.panel-identity-subtitle{color:var(--as-ink-2)}
