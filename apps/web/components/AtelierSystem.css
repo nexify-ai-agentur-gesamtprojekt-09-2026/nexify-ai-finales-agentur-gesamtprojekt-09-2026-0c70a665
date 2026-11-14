@@ -1182,6 +1182,7 @@ html[data-theme='light'] #atelier{
  #atelier #aifly-panel .orientation-host-name{margin:0}
  #atelier #aifly-panel .nx-oracle-name span.panel-identity-subtitle{white-space:normal}
  #atelier #aifly-panel .orientation-starters{margin-top:0}
+ #atelier #aifly-panel .orientation-content>.orientation-path-quiet{margin-top:var(--as-s-6)}
  #atelier #aifly-panel .orientation-composer,#atelier #aifly-panel .connection-note{grid-column:1;box-sizing:border-box;width:auto;max-width:720px;margin-left:var(--ca-lese);margin-right:var(--ca-pad)}
  #atelier #aifly-panel .public-orientation::after{grid-column:1;margin-left:var(--ca-lese)}
 }
