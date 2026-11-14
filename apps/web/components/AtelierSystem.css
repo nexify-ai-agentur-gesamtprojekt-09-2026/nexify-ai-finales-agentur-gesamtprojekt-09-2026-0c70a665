@@ -827,7 +827,9 @@ html:has(#atelier){scroll-padding-top:104px}
 #atelier .site-header::before{inset:12px;transition:inset var(--as-slow) var(--as-ease),transform var(--as-slow) var(--as-ease),background var(--as-slow) var(--as-ease),box-shadow var(--as-slow) var(--as-ease)}
 #atelier[data-scrolled='true'] .site-header{padding-left:calc(var(--layout-page-padding) + var(--kopf-einzug) + 24px);padding-right:calc(var(--layout-page-padding) + var(--kopf-einzug) + 20px)}
 #atelier[data-scrolled='true'] .site-header::before{inset:12px calc(var(--layout-page-padding) + var(--kopf-einzug));background:var(--as-glass-dense);-webkit-backdrop-filter:var(--as-glass-filter-dense);backdrop-filter:var(--as-glass-filter-dense);box-shadow:var(--as-lens),var(--as-depth-raised)}
-@container website (max-width:1119px){
+/* Unter 1400 px passt das volle Menue nicht mehr in die schmalere Glasleiste (gemessen: Knoepfe ragten bei 1120 px 62 px,
+   bei 1600 px mit AIFly-Panel 129 px aus dem Glas). Beim Blaettern zeigt die Leiste deshalb bis 1399 px das Menue-Symbol. */
+@container website (max-width:1399px){
  #atelier[data-scrolled='true'] .site-header .main-navigation{display:none}
  #atelier[data-scrolled='true'] .site-header .mobile-navigation{display:block;margin-left:auto}
 }
@@ -984,9 +986,18 @@ html[data-theme='light'] #atelier .nx-logo-x{color:var(--as-accent)}
 #atelier .site-header{--kopf-einzug:clamp(32px,calc(4.5cqi + max(0px,(100cqi - 1500px) * .1)),96px);--kopf-innen:var(--as-s-8)}
 #atelier[data-scrolled='true'] .site-header{padding-left:calc(var(--layout-page-padding) + var(--kopf-einzug) + var(--kopf-innen));padding-right:calc(var(--layout-page-padding) + var(--kopf-einzug) + var(--as-s-6))}
 #atelier[data-scrolled='true'] .site-header::before{background:var(--as-glass-dense),color-mix(in srgb,var(--as-ground) 34%,transparent);-webkit-backdrop-filter:var(--as-glass-filter-bar);backdrop-filter:var(--as-glass-filter-bar);box-shadow:var(--as-lens),var(--as-volume),var(--as-depth-raised)}
+/* Abstaende der Glasleiste: Inhalt haelt auf jeder Breite Abstand zur Glaskante (Desktop 24 px, Telefon 12 px je Seite).
+   Unter 1000 px ist der Einzug klein, sonst ragt der Projektknopf aus dem Glas (768 px: 7 px). Bis 480 px entfaellt der Claim
+   unter der Wortmarke und das Sprachfeld wird kompakt, sonst ragen die Knoepfe bei 360 px 30 px aus dem Glas. */
+@container website (max-width:999px){#atelier .site-header{--kopf-einzug:var(--as-s-3)}}
+@container website (max-width:480px){
+ #atelier .site-header{gap:var(--as-s-1)}
+ #atelier .site-header .nx-logo-claim{display:none}
+ #atelier .site-header .header-actions select{min-width:0;padding:0 var(--as-s-6) 0 var(--as-s-3)}
+}
 @container website (max-width:640px){
  #atelier .site-header{--kopf-einzug:0px;--kopf-innen:var(--as-s-2)}
- #atelier[data-scrolled='true'] .site-header{padding-left:var(--layout-page-padding);padding-right:var(--layout-page-padding)}
+ #atelier[data-scrolled='true'] .site-header{padding-left:calc(var(--layout-page-padding) + var(--kopf-innen));padding-right:var(--layout-page-padding)}
  #atelier[data-scrolled='true'] .site-header::before{inset:calc(var(--as-s-2) + env(safe-area-inset-top)) calc(var(--layout-page-padding) - var(--as-s-3)) var(--as-s-2)}
 }
 
