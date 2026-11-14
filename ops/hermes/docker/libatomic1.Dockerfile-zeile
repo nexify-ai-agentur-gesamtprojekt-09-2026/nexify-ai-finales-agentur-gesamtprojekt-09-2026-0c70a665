@@ -1,0 +1,9 @@
+# NeXify · Korrektur für „node: error while loading shared libraries: libatomic.so.1“
+# (MCP-Server `rea` startet im Container `hermes` nicht).
+# Einfügen im Dockerfile des Compose-Projekts `docker-hermes`, in der Laufzeitstufe,
+# vor einem etwaigen Wechsel auf einen Nicht-root-Benutzer (USER ...).
+# Gilt für Debian/Ubuntu-Basisimages; bei Alpine heißt das Paket `libatomic`
+# (Hermes-Doku getting-started/installation.md, Abschnitt Prerequisites).
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends libatomic1 \
+    && rm -rf /var/lib/apt/lists/*
