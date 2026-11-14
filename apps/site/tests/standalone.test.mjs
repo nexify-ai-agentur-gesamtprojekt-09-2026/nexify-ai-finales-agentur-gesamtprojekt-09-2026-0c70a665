@@ -7,13 +7,13 @@ import {spawnSync} from 'node:child_process';
 
 async function fixture(split){
  const root=await mkdtemp(join(tmpdir(),'nexify-standalone-'));
- await mkdir(join(root,'scripts'));await mkdir(join(root,'dist/assets'),{recursive:true});await mkdir(join(root,'dist/fonts'));await mkdir(join(root,'dist/media/presenters'),{recursive:true});
+ await mkdir(join(root,'scripts'));await mkdir(join(root,'dist/assets'),{recursive:true});await mkdir(join(root,'dist/fonts'));await mkdir(join(root,'dist/brand'));await mkdir(join(root,'dist/media/presenters'),{recursive:true});
 
  await writeFile(join(root,'dist/index.html'),'<html><head><script type="module" src="/assets/entry.js"></script><link rel="stylesheet" href="/assets/site.css"></head><body></body></html>');
  await writeFile(join(root,'dist/assets/entry.js'),split?'import {ready} from "./shared.js";document.body.textContent=ready;':'document.body.textContent="ready";');
  if(split)await writeFile(join(root,'dist/assets/shared.js'),'export const ready="ready";');
  await writeFile(join(root,'dist/assets/site.css'),'body{display:block}');
- for(const f of ['portrait.png','media/presenters/hero-trio.png','media/presenters/ai-fly-oracle-avatar-9f705e5b.png','media/presenters/nex-toucan-121a804c.png','media/presenters/pascal-original-6dd03834.png','signet.svg','fonts/geist-latin.woff2','fonts/geist-mono-latin.woff2'])await writeFile(join(root,'dist',f),'fixture');
+ for(const f of ['portrait.png','media/presenters/hero-trio.png','media/presenters/ai-fly-oracle-avatar-9f705e5b.png','media/presenters/nex-toucan-121a804c.png','media/presenters/pascal-original-6dd03834.png','brand/nexify-figur.png','fonts/geist-latin.woff2','fonts/geist-mono-latin.woff2','fonts/inter-latin.woff2','fonts/jakarta-latin.woff2'])await writeFile(join(root,'dist',f),'fixture');
  return root;
 }
 test('split standalone input fails before publishing an incomplete preview',async()=>{

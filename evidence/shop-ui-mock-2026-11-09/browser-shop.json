@@ -1,5 +1,5 @@
 {
-  "recorded_at": "2026-11-09T20:31:01.606Z",
+  "recorded_at": "2026-11-14T10:57:08.006Z",
   "passed": true,
   "mock": true,
   "mock_label": "mit gemockter Antwort: synthetic in-memory shop API; contract copied from apps/shop-api, server code not executed",
@@ -22,20 +22,20 @@
     "commerce_pages_are_german_only_keyboard_operable_and_fit_390px_without_overflow"
   ],
   "source_sha256": {
-    "apps/web/components/shop/api.ts": "77430925e22d30a38a1280cd6e17fd67e8bc32b162773016dd629654de9519eb",
-    "apps/web/components/shop/CatalogView.tsx": "b86cdeca4b06c0d620f24ff6c1ceb1949275f61bc97ebf546e69060ef7d45706",
+    "apps/web/components/shop/api.ts": "c94e85237975d714c0cb1625c7f016d0c3f89c4cff3092f571860ee1a5640e28",
+    "apps/web/components/shop/CatalogView.tsx": "cc4ffce1e2cb59229a2f89aa710011dfd69e73e5c313dd6c064b726cef9a1b23",
     "apps/web/components/shop/CategoryList.tsx": "8025d3506094418b0b076fcbd7dd29d75ffc015474a39a1d22d3e67ba1727bb7",
     "apps/web/components/shop/ProductCard.tsx": "a95cbabdc6514c69562c7502c3e14014a4b70c7f3b74d3fa20e1dcfb7904c403",
-    "apps/web/components/shop/ProductDetail.tsx": "1fcf8013bbad504e6755e211d05b275ded93350cdbe6dfbed2ad0cc1b3c86097",
-    "apps/web/components/shop/CartView.tsx": "300f302deccbfc9ece5a2372ce573f52be6b6234b53ea1ac896e8a7c89ccc96d",
-    "apps/web/components/shop/Checkout.tsx": "dd82945988959a21d634b75a722b7d69b0cb76acc3ed17563fdc22a3006c14c3",
-    "apps/web/components/shop/AddressStep.tsx": "c942e1b2da293fc48fafbd7df918a46f375d29caa20d80a8aa2ee2fd3a862c47",
+    "apps/web/components/shop/ProductDetail.tsx": "76dafd254c53bde57990d0d67b2d77ba537630a77ba868a7339fe81818a81bad",
+    "apps/web/components/shop/CartView.tsx": "e6485c7244b4054b69da79edddd4072f4171fef331691b39eed6707fad73bfd6",
+    "apps/web/components/shop/Checkout.tsx": "44071d2a8eb3793911ebc6161478599b9cc11f3770af98e7ed69661859f6f0dd",
+    "apps/web/components/shop/AddressStep.tsx": "5965e55568b3b89d063aedbe00d7f7d6c4a23dd11ad8f44c83ec9b18b54733af",
     "apps/web/components/shop/SellerInfo.tsx": "046a6b782648d770146bc4cea875ecc615877175df0d5c78af4e5f725f13aa75",
     "apps/web/components/shop/CommerceHeader.tsx": "f438ccd0dae2808a50612f048f684c339eb9c9d3c1fdae23619d02de43eb4a56",
     "apps/web/components/shop/PublicShopContent.tsx": "9153b8cf651806c4afe80e6326d1ff9fbc1639ea9a06ea9e5fd4d168a0372436",
     "apps/web/components/shop/shipping-hint.ts": "8b1b6ad8499e2da9cff1fc7ae4310c510fccfa56afbfcbd6e6b694373c4c3ba6",
-    "apps/web/components/shop/shop.css": "bf3967f563a749aeed6f3bdee7a3e494a6e1fce2260d9efc15a02c791fee0ae3",
-    "apps/web/components/shop/Storefront.css": "ecd5f2d5655c6b20271826c27b491c736f0d1678f59582f78ec13ec6f46a603b",
+    "apps/web/components/shop/shop.css": "586c662e08bb229c20a64509c0fa35e33f9e45d6c7dda11bd7f0ce243a4ed70b",
+    "apps/web/components/shop/Storefront.css": "8af6725a8cfcbd3c1b0f8dce12cada58e05d971a7233a9ef8972c381b9a21c91",
     "apps/web/components/PublicExperience.tsx": "1e599cf9bf7659d2637d641de473d75fea0b06f6c67d958d19770812f0b769c4",
     "apps/site/src/main.tsx": "39e7cf3f8399869a2d579e29dab4dda36617e91cc824b94a31b1bc4ffdb80545",
     "config/shop-interface-copy.json": "478f9e55f45ba09c4aa3767339e4aaae9ac87be1e055b8acf3a75fda57534c3b",
@@ -167,7 +167,7 @@
       "method": "GET",
       "path": "/api/shop/products",
       "status": 200,
-      "count": 16
+      "count": 15
     },
     {
       "method": "GET",
@@ -177,7 +177,7 @@
     }
   ],
   "external_requests": [],
-  "supplier_image_requests_answered_locally": 20,
+  "supplier_image_requests_answered_locally": 21,
   "payment_page_navigations_answered_locally": 1,
   "real_payment_started": false,
   "real_order_submitted": false,
