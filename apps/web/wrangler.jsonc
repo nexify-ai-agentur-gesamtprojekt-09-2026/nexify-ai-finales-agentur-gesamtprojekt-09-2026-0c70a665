@@ -1,11 +1,26 @@
 {
   // Cloudflare Workers hosting for apps/web (OpenNext). Name stays under the
   // 54-character limit of Workers Builds (register OF-06).
+  // Stand, Messwerte und Umzugsplan: docs/04-betrieb/cloudflare-umzug-2026-11-14.md
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "nexify-web",
-  "main": ".open-next/worker.js",
+  // Eigener Einstieg um den OpenNext-Worker (.open-next/worker.js): Content-Security-Policy
+  // und Weiterleitung der Shop-API-Wege, beides leistet auf Vercel die vercel.json.
+  "main": "cloudflare/worker.mjs",
   "compatibility_date": "2026-11-01",
   "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
   "assets": { "directory": ".open-next/assets", "binding": "ASSETS" },
-  "observability": { "enabled": true }
+  "observability": { "enabled": true },
+  // Nur die Vorschau-Adresse nexify-web.<konto>.workers.dev. Bewusst KEINE "routes" und
+  // KEINE "custom_domain": eine eigene Domain wird erst nach der Abnahme zugewiesen
+  // (Umzugsplan, Schritt 6). Ohne diese Zeile schaltet wrangler workers.dev ohnehin ein;
+  // sie steht hier, damit die Absicht lesbar ist.
+  "workers_dev": true,
+  "preview_urls": true,
+  // Laufzeitvariablen stehen NICHT in dieser Datei. Geheimnisse setzt der Inhaber mit
+  // `npx wrangler secret put <NAME>` (Namen: .dev.vars.example); Secrets übersteht jede
+  // Auslieferung. "keep_vars" lässt zusätzlich im Dashboard gesetzte Klartext-Variablen
+  // stehen, die `wrangler deploy` sonst entfernt.
+  // Lokal: .dev.vars (nicht versioniert) nach dem Muster .dev.vars.example.
+  "keep_vars": true
 }
