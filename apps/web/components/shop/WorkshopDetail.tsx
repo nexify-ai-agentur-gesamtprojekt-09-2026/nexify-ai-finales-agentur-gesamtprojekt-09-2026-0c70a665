@@ -1,5 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
+import {ActionButton} from '../ActionControl';
+import {HcArrow} from '../HcArrow';
 import { SiteLink } from "../Router";
 import { api, type ApiError, type Workshop } from "./api";
 
@@ -51,13 +53,13 @@ function RequestForm({ workshop }: { workshop: Workshop }) {
     <label className="tk-terms"><input type="checkbox" checked={form.consent} onChange={e => setForm({ ...form, consent: e.target.checked })} aria-describedby={errors.consent ? "wr-consent-error" : undefined} data-testid="workshop-request-consent" /><span>Ich bin einverstanden, dass meine Angaben zur Bearbeitung dieser Anfrage gespeichert werden.</span></label>
     {errors.consent && <p id="wr-consent-error" role="alert" className="tk-field-error" data-testid="workshop-request-consent-error">Bitte bestätigen Sie die Einwilligung.</p>}
     {failed && <p role="alert" className="tk-alert">Die Anfrage konnte nicht gespeichert werden. Bitte versuchen Sie es erneut.</p>}
-    <button className="primary-button" type="submit" disabled={busy} data-testid="workshop-request-submit">Anfrage senden</button></form>;
+    <ActionButton variant="primary" className="hc-finish-primary" type="submit" disabled={busy} data-testid="workshop-request-submit">Anfrage senden</ActionButton></form>;
 }
 
 export default function WorkshopDetail({ id }: { id: string }) {
   const [w, setW] = useState<Workshop | null>(null), [missing, setMissing] = useState(false);
   useEffect(() => { api<Workshop>("/api/workshops/" + encodeURIComponent(id)).then(setW).catch(() => setMissing(true)); }, [id]);
-  if (missing) return <div className="tk-empty" data-testid="workshop-missing"><h2>Werkstatt nicht gefunden</h2><SiteLink href="/teileklar/werkstatt" className="content-action-link">Zur Werkstattsuche</SiteLink></div>;
+  if (missing) return <div className="tk-empty" data-testid="workshop-missing"><h2>Werkstatt nicht gefunden</h2><SiteLink href="/teileklar/werkstatt" className="hc-text-link">Zur Werkstattsuche<HcArrow/></SiteLink></div>;
   if (!w) return <p role="status">Werkstatt wird geladen …</p>;
   return <div className="tk-ws-detail" data-testid="workshop-detail">
     <div><h2 data-testid="workshop-detail-name">{w.name}</h2><span className="tk-tag" data-testid="workshop-detail-label">{w.kind_label}</span>

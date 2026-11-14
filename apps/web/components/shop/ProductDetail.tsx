@@ -1,5 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
+import {ActionButton} from '../ActionControl';
+import {HcArrow} from '../HcArrow';
 import { SiteLink } from "../Router";
 import { api, notifyCart, type ApiError, type Cart, type ProductDetail as Detail } from "./api";
 import { ProductImage, StockLabel, useShopCopy } from "./ProductCard";
@@ -24,7 +26,7 @@ function AddToCart({ product }: { product: Detail }) {
   return <div className="tk-buy">
     <label htmlFor="tk-qty">{t("quantity")}</label>
     <input id="tk-qty" type="number" min={1} max={Math.max(1, Math.min(20, product.stock ?? 0))} value={quantity} disabled={out} onChange={event => setQuantity(Math.max(1, Math.min(20, Number(event.target.value) || 1)))} data-testid="product-quantity" />
-    <button className="primary-button" disabled={out || state === "busy"} onClick={() => void add()} data-testid="add-to-cart-button">{t("addCart")}</button>
+    <ActionButton variant="primary" className="hc-finish-primary" disabled={out || state === "busy"} onClick={() => void add()} data-testid="add-to-cart-button">{t("addCart")}</ActionButton>
     {out && <p className="tk-note" data-testid="out-of-stock-note">{product.stock === null ? t("unknownNoOrder") : product.price_cents === null ? t("priceNoOrder") : t("outNoOrder")}</p>}
     {state === "done" && <p role="status" data-testid="add-to-cart-success">{t(message)} <SiteLink href="/teileklar/warenkorb">{t("goCart")}</SiteLink></p>}
     {state === "error" && <p role="alert" className="tk-alert" data-testid="add-to-cart-error">{t(message)}</p>}
@@ -44,7 +46,7 @@ export default function ProductDetail({ id, readOnly = false, initialProduct }: 
     return () => { current = false; controller.abort(); };
   }, [id,initialProduct]);
   if (failed) return <p role="alert" className="tk-alert" data-testid="product-error">{t("productError")}</p>;
-  if (missing) return <div className="tk-empty" data-testid="product-missing"><h2>{t("productMissing")}</h2><p>{t("productMissingBody")}</p><SiteLink href="/teileklar/shop" className="content-action-link">{t("goShop")}</SiteLink></div>;
+  if (missing) return <div className="tk-empty" data-testid="product-missing"><h2>{t("productMissing")}</h2><p>{t("productMissingBody")}</p><SiteLink href="/teileklar/shop" className="hc-text-link">{t("goShop")}<HcArrow/></SiteLink></div>;
   if (!product) return <p role="status">{t("productLoading")}</p>;
   const images = product.images.length ? product.images : [null];
   return <article className="tk-product" data-testid="product-detail">

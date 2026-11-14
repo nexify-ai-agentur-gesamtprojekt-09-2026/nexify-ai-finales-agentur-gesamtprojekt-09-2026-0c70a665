@@ -19,11 +19,18 @@ else{const socket=allocator();socket.listen(0,'127.0.0.1');await once(socket,'li
 const browser=await chromium.launch({headless:true}),views=[],text_resize=[],external=[],errors=[],asset_hashes={};
 // Sprache heute: per ?lang= (Next serverseitig in apps/web/proxy.ts seit 5222298; das Vite-SPA liest ?lang= in apps/site/src/main.tsx und reicht es als initialLocale an Workspace, 024c6f2; nexify-locale wird nicht mehr gelesen, OF-12). Beide Renderer liefern de/nl/fr.
 const locales=['de','nl','fr'],suffix=l=>l==='de'?'':'?lang='+l;
-// Next baut interne Links serverseitig mit ?lang=; das Vite-SPA haelt die Sprache im Client-Zustand und navigiert ohne ?lang= (Hero-Links, wie die Footer-Links).
-const linkSuffix=l=>renderer==='next'?suffix(l):'';
 // Heutiger Umbruch der Hero-Spalten auf der Startseite: HomeConcept.css stapelt bis einschliesslich 820 px Containerbreite
 // (IdentityHero.css deklariert 820 px, wird dort uebersteuert). Die Konstante wird gegen die Quelle gebunden und gegen die Renderung gemessen.
-const STACK_MAX=820;assert.ok((await readFile(root+'apps/web/components/HomeConcept.css','utf8')).includes('@container identity-hero (max-width:'+STACK_MAX+'px){.workspace-shell .home-concept .identity-hero .identity-scene{grid-template-columns:1fr}'),'stack threshold declared in HomeConcept.css');
+// Seit f173054 (PR 92) traegt dieselbe Regel zusaetzlich den Abstand (gap). Gebunden bleiben Schwelle, Selektor und die einspaltige Anordnung;
+// weitere Deklarationen in derselben Regel sind zulaessig, eine andere Schwelle oder Spaltenangabe nicht.
+const STACK_MAX=820;assert.match(await readFile(root+'apps/web/components/HomeConcept.css','utf8'),new RegExp('@container identity-hero \\(max-width:'+STACK_MAX+'px\\)\\{\\.workspace-shell \\.home-concept \\.identity-hero \\.identity-scene\\{grid-template-columns:1fr[;}]'),'stack threshold declared in HomeConcept.css');
+// Hero-Medien seit 0ea229c (PR 104, Zusage des Inhabers vom 13.11.2026) und 32616db (PR 127, Fassung vom 14.11.): Eingangshallen-Film,
+// Vorschaubild ist das Bild aus dem Eingangsbereich (brandImages.entrance). Beide Werte sind gegen die Quellen gebunden, der Film zusaetzlich
+// gegen die im Lieferprotokoll festgehaltene Pruefsumme der ausgelieferten Bytes (docs/design/scene-videos-2026-11-13.md).
+const HERO_FILM='/media/scenes/eingangshalle-20261114.mp4',HERO_POSTER='/media/higgsfield/hf-09-1920.webp';
+assert.ok((await readFile(root+'apps/web/components/IdentityHero.tsx','utf8')).includes("asset={{src:'"+HERO_FILM+"',poster:brandImages.entrance.src,"),'hero film and poster as mounted in IdentityHero.tsx');
+assert.ok((await readFile(root+'apps/web/lib/brand-media.ts','utf8')).includes("entrance:{src:'"+HERO_POSTER+"',"),'poster is the entrance scene declared in brand-media.ts');
+const HERO_FILM_SHA256=new RegExp('^\\| `'+HERO_FILM.split('/').pop().replace('.','\\.')+'` \\| `([0-9a-f]{64})` \\|','m').exec(await readFile(root+'docs/design/scene-videos-2026-11-13.md','utf8'))?.[1];assert.ok(HERO_FILM_SHA256,'delivery record lists the hero film');
 const undistorted=f=>!/blur\(|grayscale\(|invert\(|hue-rotate\(|sepia\(|saturate\(0/.test(f);
 try{
  if(child)for(let n=0;n<100;n++){try{if((await fetch(origin)).ok)break;}catch{}if(n===99)throw Error('Next startup timeout');await new Promise(resolve=>setTimeout(resolve,100));}
@@ -33,9 +40,9 @@ try{
   const page=await context.newPage();page.on('pageerror',e=>errors.push(e.name));
   async function closePanel(){if(await page.locator('#aifly-panel').isVisible()){await page.locator('.panel-heading .icon-button').click();await page.waitForFunction(()=>document.activeElement?.classList.contains('reopen-chat'));}}
   async function checkZoom(hero,metadata){
-   const original=await page.evaluateHandle(()=>{const entries=[...document.querySelectorAll('body,body *')].filter(e=>e instanceof HTMLElement).map(element=>({element,size:parseFloat(getComputedStyle(element).fontSize),value:element.style.getPropertyValue('font-size'),priority:element.style.getPropertyPriority('font-size')}));for(const e of entries)e.element.style.setProperty('font-size',String(e.size*2)+'px','important');return entries;});
+   const original=await page.evaluateHandle(()=>{const entries=[...document.querySelectorAll('body,body *')].filter(e=>e instanceof HTMLElement&&!((e instanceof HTMLTrackElement||e instanceof HTMLSourceElement)&&e.parentElement instanceof HTMLMediaElement&&e.childNodes.length===0&&getComputedStyle(e).fontSize==='')).map(element=>({element,size:parseFloat(getComputedStyle(element).fontSize),value:element.style.getPropertyValue('font-size'),priority:element.style.getPropertyPriority('font-size')}));for(const e of entries)e.element.style.setProperty('font-size',String(e.size*2)+'px','important');return entries;});
    try{
-    assert.equal(await original.evaluate(es=>es.every(e=>Math.abs(parseFloat(getComputedStyle(e.element).fontSize)-e.size*2)<.05)),true);
+    assert.equal(await original.evaluate(es=>es.every(e=>Number.isFinite(e.size)&&Math.abs(parseFloat(getComputedStyle(e.element).fontSize)-e.size*2)<.05)),true);// ausgenommen sind nur leere <track>/<source> ohne berechneten Stil (siehe oben); alle uebrigen Elemente muessen messbar sein und verdoppeln
     await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
     const measured=await hero.evaluate(h=>{const r=e=>{const b=e.getBoundingClientRect();return {left:b.left,right:b.right,top:b.top,bottom:b.bottom,width:b.width,height:b.height};};return {scene:r(h.querySelector('.identity-scene')),copy:r(h.querySelector('.identity-copy')),figures:[...h.querySelectorAll('.identity-hero-photo video')].map(r),stacked:getComputedStyle(h.querySelector('.identity-scene')).gridTemplateColumns.split(' ').filter(Boolean).length===1,hero_overflow:h.scrollWidth>h.clientWidth+1};});
     assert.equal(measured.hero_overflow,false,'200% hero horizontal overflow');assert.ok(measured.copy.top>=measured.scene.top-1&&measured.copy.bottom<=measured.scene.bottom+1,'200% copy clipped');
@@ -59,6 +66,7 @@ try{
    // The original video and retained brand-photo poster must both be served.
    const mediaSources=await page.evaluate(()=>{const v=document.querySelector('.identity-hero-photo video');return [v.getAttribute('src'),v.getAttribute('poster')];});
    for(const u of mediaSources){const response=await context.request.get(origin+u);assert.equal(response.status(),200,'hero media served '+u);const body=await response.body();assert.ok(body.length>1000,'hero media bytes present '+u);asset_hashes[u]=createHash('sha256').update(body).digest('hex');}
+   assert.deepEqual(mediaSources,[HERO_FILM,HERO_POSTER],'hero mounts the delivered film with the entrance poster');assert.equal(asset_hashes[HERO_FILM],HERO_FILM_SHA256,'served hero film bytes equal the recorded delivery');
    for(const sidebar of width===1440?['closed','open']:['closed']){
     if(sidebar==='open'){await page.locator('.reopen-chat').click();await page.locator('.workspace-shell.is-open').waitFor();}
     await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
@@ -67,8 +75,11 @@ try{
     assert.equal(await hero.locator('video').count(),1,'one original hero video');
     assert.equal(await hero.locator('audio,.trio-scene,.trio-controls').count(),0,'no duplicate audio or scene controller');
     assert.equal(await hero.locator('video').evaluate(v=>v.paused),true,'reduced motion pauses autoplay');
-    assert.equal(await hero.locator('video').getAttribute('poster'),'/media/higgsfield/hf-02-lobby-walk-1920.webp','approved image is poster');
-    assert.equal(await hero.evaluate(h=>[...h.querySelectorAll('*')].every(e=>{const c=getComputedStyle(e);return c.animationName==='none'&&c.transitionDuration.split(',').every(d=>parseFloat(d)===0);})),true,'reduced-motion: no hero animation or transition');
+    assert.equal(await hero.locator('video').getAttribute('poster'),HERO_POSTER,'approved image is poster');
+    // Der Hero-Film traegt seit 32616db (PR 127) eine Untertitelspur. <track>/<source> in einem Medienelement sind leere Ressourcenverweise ausserhalb
+    // des gerenderten Baums: der Browser berechnet fuer sie keinen Stil (alle Werte ''), sie koennen weder animieren noch Text darstellen.
+    // Genau diese Elemente werden ausgenommen (und muessen leer und ohne berechneten Stil sein); jedes andere Element wird unveraendert geprueft.
+    assert.equal(await hero.evaluate(h=>[...h.querySelectorAll('*')].every(e=>{const c=getComputedStyle(e);if((e instanceof HTMLTrackElement||e instanceof HTMLSourceElement)&&e.parentElement instanceof HTMLMediaElement)return e.childNodes.length===0&&c.animationName===''&&c.display==='';return c.animationName==='none'&&c.transitionDuration.split(',').every(d=>parseFloat(d)===0);})),true,'reduced-motion: no hero animation or transition');
     const videos=hero.locator('.identity-hero-photo video');assert.equal(await videos.count(),1,'hero video present');await videos.first().evaluate(v=>new Promise((resolve,reject)=>{if(v.readyState>=1)return resolve();v.addEventListener('loadedmetadata',resolve,{once:true});v.addEventListener('error',reject,{once:true});}));assert.equal(await videos.first().evaluate(v=>v.videoWidth===1280&&v.videoHeight===720),true,'hero video metadata decoded');
     const geometry=await hero.evaluate(h=>{
      const rect=e=>{const r=e.getBoundingClientRect();return {left:r.left,right:r.right,top:r.top,bottom:r.bottom,width:r.width,height:r.height};};
@@ -78,7 +89,7 @@ try{
     });
     assert.equal(geometry.overflow,false,'viewport overflow');assert.equal(geometry.text_overflow,false,'text overflow');
     if(width===1440&&sidebar==='open')assert.equal(geometry.stacked,false,'desktop hero remains side by side with chat open');
-    for(const f of geometry.figures){const r=f.rect,s=geometry.scene,c=geometry.copy;assert.ok(r.width>0&&r.height>0,'video has size');assert.ok(/\/media\/home-review\/pascal-studio-scene-original-20261109\.mp4$/.test(f.src),'original personal video: '+f.src);assert.ok(f.alt.length>10,'video has an accessible name');assert.ok(f.opacity>=0.99,'video fully visible');assert.ok(undistorted(f.filter),'no identity-distorting filter: '+f.filter);assert.ok(r.left>=s.left-1&&r.right<=s.right+1&&r.top>=s.top-1&&r.bottom<=s.bottom+1,'whole video inside hero scene');assert.equal(r.left<c.right&&r.right>c.left&&r.top<c.bottom&&r.bottom>c.top,false,'copy/video collision');}
+    for(const f of geometry.figures){const r=f.rect,s=geometry.scene,c=geometry.copy;assert.ok(r.width>0&&r.height>0,'video has size');assert.equal(f.src,HERO_FILM,'delivered hero film: '+f.src);assert.ok(f.alt.length>10,'video has an accessible name');assert.ok(f.opacity>=0.99,'video fully visible');assert.ok(undistorted(f.filter),'no identity-distorting filter: '+f.filter);assert.ok(r.left>=s.left-1&&r.right<=s.right+1&&r.top>=s.top-1&&r.bottom<=s.bottom+1,'whole video inside hero scene');assert.equal(r.left<c.right&&r.right>c.left&&r.top<c.bottom&&r.bottom>c.top,false,'copy/video collision');}
     if(width<500)assert.equal(geometry.stacked,true,'narrow layout stacks hero');
     if(geometry.stacked)for(const f of geometry.figures)assert.ok(f.rect.bottom<=geometry.copy.top+1,'stacked video sits above the copy');
     await page.evaluate(()=>{if(document.activeElement instanceof HTMLElement)document.activeElement.blur();});
@@ -99,11 +110,20 @@ try{
    }
    // Operability: hero navigation and real media controls, with reduced-motion autoplay stopped.
    await closePanel();
-   const links=page.locator('.identity-copy .identity-links a');assert.equal(await links.count(),2,'two hero links');
-   for(const link of await links.all()){assert.ok(await link.getAttribute('href'),'hero link has href');const b=await link.boundingBox();assert.ok(b.height>=48&&b.width>=48,'hero link touch target >=48px');await link.focus();assert.equal(await link.evaluate(e=>e===document.activeElement),true,'hero link keyboard-focusable');}
-   assert.equal(await page.locator('.identity-hero video').count(),1);assert.equal(await page.locator('.identity-hero .atelier-film-controls button').count(),2);
+   // Seit f173054 (PR 92) und 205b2c2 (PR 114, "eine einheitliche Haupthandlung", Auftrag des Inhabers vom 13.11.2026) traegt der Hero genau eine
+   // Handlung: einen Schalter, der das Orientierungsgespraech oeffnet (frueher zwei Links nach /kontakt und /leistungen).
+   // Geprueft wird dasselbe wie zuvor an den Links: vorhanden, Zielgroesse, Tastaturbedienung und dass die Handlung ihr Ziel erreicht.
+   const actions=page.locator('.identity-copy .identity-links > *');assert.equal(await actions.count(),1,'one hero action');
+   const action=page.locator('.identity-copy .identity-links button.identity-primary-link');assert.equal(await action.count(),1,'hero action is the primary button');
+   assert.equal(await action.getAttribute('aria-controls'),'aifly-panel','hero action names the panel it opens');assert.ok((await action.innerText()).trim().length>3,'hero action has a visible label');
+   {const b=await action.boundingBox();assert.ok(b.height>=48&&b.width>=48,'hero action touch target >=48px');await action.focus();assert.equal(await action.evaluate(e=>e===document.activeElement),true,'hero action keyboard-focusable');}
+   // Drei Schalter seit 32616db (PR 127): Wiedergabe, Ton und neu die Untertitel zur mitgelieferten Untertitelspur (AtelierFilm.tsx, asset.captions).
+   assert.equal(await page.locator('.identity-hero video').count(),1);assert.equal(await page.locator('.identity-hero .atelier-film-controls button').count(),3);assert.equal(await page.locator('.identity-hero .atelier-film-controls button[aria-pressed]').count(),1,'captions switch exposes its state');
    for(const control of await page.locator('.identity-hero .atelier-film-controls button').all()){const box=await control.boundingBox();assert.ok(box.width>=44&&box.height>=44,'media control touch target');await control.focus();assert.equal(await control.evaluate(e=>e===document.activeElement),true,'media control keyboard-focusable');}
-   for(const [selector,target] of [['.identity-primary-link','/kontakt'],['.identity-secondary-link','/leistungen']]){await page.locator(selector).click();await page.waitForURL(origin+target+linkSuffix(locale));await page.goBack();await page.waitForURL(origin+'/'+suffix(locale));await page.locator('.identity-hero').waitFor();}
+   // Die Handlung per Tastatur ausloesen: das Gespraech oeffnet sich in der Orientierungsansicht, die Seite bleibt dieselbe, und nach dem Schliessen steht der Hero unveraendert da.
+   await action.focus();await page.keyboard.press('Enter');await page.locator('#aifly-panel').waitFor({state:'visible'});await page.locator('#aifly-panel .sdk-orientation-view').waitFor({state:'visible'});
+   assert.equal(await page.locator('#aifly-panel .public-orientation').count(),1,'hero action opens the orientation conversation');assert.equal(page.url(),origin+'/'+suffix(locale),'hero action keeps route and language');
+   await page.locator('.panel-heading .icon-button').click();await page.locator('#aifly-panel').waitFor({state:'hidden'});await page.locator('.identity-hero').waitFor();assert.equal(await page.locator('.identity-hero h1').count(),1);
   }finally{await context.close();}
  }
  assert.equal(views.length,locales.length*11);assert.equal(text_resize.length,locales.length*8);assert.deepEqual(external,[]);assert.deepEqual(errors,[]);assert.deepEqual(await hashes(),before);

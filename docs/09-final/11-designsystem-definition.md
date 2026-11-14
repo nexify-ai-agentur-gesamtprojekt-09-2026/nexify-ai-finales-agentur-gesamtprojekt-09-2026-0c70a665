@@ -30,7 +30,7 @@ Gemeinsame proportionale Bühne auf Desktop, Text über Figuren bei schmalem
 Container. Keine globale Themeänderung und kein Video-/Funktionsnachweis.
 
 ## §3 Typografie (DS-T-01)
-Nur Geist (Text) und Geist Mono (Kicker, Zahlen, IDs, Zeiten). Größen und Zeilenhöhen siehe Designsystem-Seite. Papier: IBM Plex Mono aus der Druckvorlage ist als Ausnahme zugelassen.
+Nur Geist (Text) und Geist Mono (Kicker, Zahlen, IDs, Zeiten). Größen und Zeilenhöhen siehe Designsystem-Seite. Enge Zeilenhöhe der großen Titel (`typografie … zeileEng`, in CSS `--as-z-eng`): 1,12 statt 1,05 seit 14.11.2026 (Inhaberbefund: Überschriften „ein bisschen weiter auseinander"); Hero-Titel, Abschluss-Titel, Konto-Titel und der Titel im Gespräch folgen diesem einen Wert. Papier: IBM Plex Mono aus der Druckvorlage ist als Ausnahme zugelassen.
 
 ## §4 Raum und Radien (DS-R-01)
 4-px-Takt; Container `min(1280px, 100% − 48px)`. Radien: 4 Mini · 8 kleine Steuerung · 10 Button/Eingabe · 12 kleine Karte · 14 Grafik-Fenster/Well · 16 Karte · 18 Leit-Rahmen · 20 Leitkarte · Pille (≥ 999) · Kreis (50 %).

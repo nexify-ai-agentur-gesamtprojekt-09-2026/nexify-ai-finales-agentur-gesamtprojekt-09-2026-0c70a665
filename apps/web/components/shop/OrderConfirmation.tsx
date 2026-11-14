@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import {HcArrow} from '../HcArrow';
 import { SiteLink } from "../Router";
 import { api, dateTime, money, notifyCart, STATUS_LABEL, type Cart, type Order } from "./api";
 import { NextSteps, OrderTimeline } from "./OrderTimeline";
@@ -24,10 +25,10 @@ export default function OrderConfirmation({ id }: { id: string }) {
     {paid && <NextSteps />}
     {pending && <p role="status" data-testid="order-pending">Die Zahlung wird bei Revolut geprüft …</p>}
     {!paid && !pending && <div role="alert" className="tk-alert" data-testid="order-not-completed"><h2>Zahlung nicht abgeschlossen</h2><p>Es wurde keine Zahlung verbucht. Ihr Warenkorb bleibt erhalten.</p>
-      <div className="tk-actions"><SiteLink href="/teileklar/warenkorb" className="content-action-link" data-testid="order-back-to-cart">Zum Warenkorb</SiteLink>{order.status === "zahlung_offen" && order.checkout_url && <a className="content-action-link" href={order.checkout_url} data-testid="order-retry-payment">Zahlung fortsetzen</a>}</div></div>}
+      <div className="tk-actions"><SiteLink href="/teileklar/warenkorb" className="hc-text-link" data-testid="order-back-to-cart">Zum Warenkorb<HcArrow/></SiteLink>{order.status === "zahlung_offen" && order.checkout_url && <a className="hc-text-link" href={order.checkout_url} data-testid="order-retry-payment">Zahlung fortsetzen<HcArrow/></a>}</div></div>}
     <dl className="tk-facts"><dt>Bestellnummer</dt><dd data-testid="order-number">{order.number}</dd><dt>Status</dt><dd data-testid="order-status">{STATUS_LABEL[order.fulfilment || order.status] || order.status}</dd><dt>Bestellt am</dt><dd>{dateTime(order.created_at)}</dd>{order.paid_at && <><dt>Bezahlt am</dt><dd>{dateTime(order.paid_at)}</dd></>}</dl>
     <ul className="tk-review-lines" data-testid="order-lines">{order.lines.map(line => <li key={line.product_id}><span>{line.quantity} × {line.name} <small>(SKU {line.sku})</small></span><span>{money(line.line_cents)}</span></li>)}</ul>
     <dl className="tk-totals"><dt>Zwischensumme</dt><dd>{money(order.subtotal_cents)}</dd><dt>Versand</dt><dd>{money(order.shipping_cents)}</dd><dt className="is-total">Gesamt</dt><dd className="is-total" data-testid="order-total">{money(order.total_cents)}</dd><dt>enthaltene MwSt. ({order.vat_percent} %)</dt><dd>{money(order.vat_included_cents)}</dd></dl>
-    <SiteLink href="/teileklar/bestellungen" className="content-action-link">Alle Bestellungen</SiteLink>
+    <SiteLink href="/teileklar/bestellungen" className="hc-text-link">Alle Bestellungen<HcArrow/></SiteLink>
   </div>;
 }

@@ -1,0 +1,210 @@
+{
+  "slug": "agb",
+  "title": "Allgemeine Geschäftsbedingungen (B2B)",
+  "intro": "Diese AGB gelten für sämtliche Leistungen von NeXify AI gegenüber Unternehmern (§ 14 BGB), juristischen Personen des öffentlichen Rechts und öffentlich-rechtlichen Sondervermögen. Verbraucherverträge (§ 13 BGB) werden nicht geschlossen.",
+  "updated": "5. August 2026",
+  "related": [
+    {
+      "label": "Impressum",
+      "href": "/impressum"
+    },
+    {
+      "label": "Datenschutz",
+      "href": "/datenschutz"
+    },
+    {
+      "label": "AVV",
+      "href": "/avv"
+    },
+    {
+      "label": "Widerruf",
+      "href": "/widerruf"
+    },
+    {
+      "label": "KI-Hinweise",
+      "href": "/ki-hinweise"
+    }
+  ],
+  "sections": [
+    {
+      "id": "geltung",
+      "heading": "§ 1 Geltungsbereich",
+      "paragraphs": [
+        "Diese AGB gelten für alle Verträge, Angebote und sonstigen Leistungen zwischen NeXify AI (nachfolgend „Auftragnehmer“) und dem Auftraggeber.",
+        "Abweichende oder entgegenstehende AGB des Auftraggebers werden nicht Vertragsbestandteil, es sei denn, der Auftragnehmer stimmt ihrer Geltung ausdrücklich schriftlich zu (§ 305 Abs. 3 BGB)."
+      ]
+    },
+    {
+      "id": "vertragsschluss",
+      "heading": "§ 2 Vertragsschluss",
+      "paragraphs": [
+        "Angebote des Auftragnehmers sind freibleibend und unverbindlich, sofern nicht ausdrücklich anders bezeichnet. Schriftliche Angebote sind gemäß § 4.6 für 14 Kalendertage ab Ausstellungsdatum verbindlich.",
+        "Ein Vertrag kommt durch schriftliche Auftragsbestätigung des Auftragnehmers oder durch Aufnahme der Leistungserbringung zustande.",
+        "KI-gestützte Angebotskalkulationen (Angebots-Generator) sind unverbindliche Richtwerte und stellen kein bindendes Angebot dar.",
+        "Nebenabreden und Änderungen bedürfen der Textform."
+      ]
+    },
+    {
+      "id": "leistung",
+      "heading": "§ 3 Leistungsumfang",
+      "paragraphs": [
+        "Der Leistungsumfang ergibt sich aus der Leistungsbeschreibung im jeweiligen Angebot bzw. der Auftragsbestätigung.",
+        "Gegenstand sind insbesondere: Konzeption, Entwicklung, Integration und Betrieb von KI-Agenten, Automatisierungen, Websites und Webanwendungen.",
+        "Nicht enthalten sind – sofern nicht gesondert vereinbart – laufende Hostingkosten, Drittdienstleistungen (z. B. API-Gebühren), Domaingebühren und Wartungsleistungen.",
+        "Die tägliche Leistungserbringung wird durch Tagesberichte dokumentiert; der Tagesbericht dient zugleich als Leistungsnachweis (siehe § 4.1)."
+      ]
+    },
+    {
+      "id": "verguetung",
+      "heading": "§ 4 Vergütung, Tagesabrechnung und Projektkontinuität",
+      "paragraphs": [
+        "(1) NeXify AI erbringt Leistungen zum vereinbarten Netto-Tagessatz (derzeit 449,00 € zzgl. anwendbarer Umsatzsteuer). Der Tagessatz gilt je angefangenem, vollständigem Arbeitstag und ist im schriftlich bestätigten Projektauftrag festgehalten.",
+        "(2) Das Vergütungsmodell von NeXify AI basiert auf dem Prinzip der vollständigen täglichen Transparenz: Der Auftraggeber erhält täglich einen detaillierten Leistungsnachweis (Tagesbericht) und zahlt ausschließlich für tatsächlich erbrachte und dokumentierte Arbeit. Es entstehen keine verdeckten Kosten, keine Pauschalierungen und kein Risiko unerwarteter Nachrechnungen.",
+        "(3) Es gibt keinen Mindestabrechnungszeitraum über einen Arbeitstag hinaus. Der Auftraggeber kann das Projekt täglich mit dem Abschluss eines Arbeitstages ohne weitere Verpflichtung pausieren oder beenden, sofern alle bis dahin fälligen Rechnungen beglichen sind."
+      ],
+      "subsections": [
+        {
+          "id": "tagesbericht",
+          "heading": "§ 4.1 Tagesbericht als Leistungsnachweis",
+          "paragraphs": [
+            "(1) NeXify AI übermittelt dem Auftraggeber jeweils am Ende jedes Arbeitstages, spätestens bis 20:00 Uhr, einen Tagesbericht in digitaler Form (PDF per E-Mail und/oder im Kundenportal). Der Tagesbericht enthält: eine übersichtliche Zusammenfassung der an diesem Tag erbrachten Leistungen, den aktuellen Projektstand und die erreichten Zwischenergebnisse, konkrete nächste Schritte für den Folgetag sowie etwaige Abhängigkeiten, Rückfragen oder Entscheidungsbedarfe.",
+            "(2) Der Tagesbericht dient gleichzeitig als Leistungsnachweis im Sinne des Werkvertrags- und Dienstleistungsrechts. Mit dem Versand des Tagesberichts gilt die Leistung des jeweiligen Arbeitstages als erbracht und zur Abrechnung freigegeben.",
+            "(3) Einwände gegen den Inhalt des Tagesberichts sind dem Auftraggeber innerhalb von 24 Stunden nach Empfang schriftlich mitzuteilen. Widerspricht der Auftraggeber nicht innerhalb dieser Frist, gilt der im Tagesbericht beschriebene Leistungsumfang als anerkannt."
+          ]
+        },
+        {
+          "id": "faelligkeit",
+          "heading": "§ 4.2 Sofortige Fälligkeit und Zahlungsmodalitäten",
+          "paragraphs": [
+            "(1) Jede Tagesrechnung ist sofort fällig. Der Rechnungsbetrag ist bis spätestens 09:00 Uhr des unmittelbar folgenden Arbeitstages auf dem angegebenen Konto von NeXify AI in voller Höhe zu entrichten.",
+            "(2) Die Rechnung wird gemeinsam mit dem Tagesbericht versendet und enthält einen direkten Online-Zahlungslink (Revolut Pay / Kartenzahlung / Banküberweisung), der eine sofortige 1-Klick-Zahlung ermöglicht. Alternativ steht die im Rechnungsdokument angegebene IBAN für Überweisungen zur Verfügung.",
+            "(3) Als Zahlungseingang gilt der Zeitpunkt der Gutschrift auf dem Konto von NeXify AI, nicht der Zeitpunkt der Auslösung der Zahlung durch den Auftraggeber. Bei SEPA-Überweisungen ist daher eine ausreichende Vorlaufzeit einzuplanen; die Nutzung des bereitgestellten Online-Zahlungslinks wird ausdrücklich empfohlen.",
+            "(4) Alle Rechnungen werden unter einer fortlaufenden, unveränderlichen Rechnungsnummer im Format NEXIFY-YYYY-NNNNN ausgestellt. Die Rechnungsnummernvergabe ist lückenlos und nicht rückdatierbar."
+          ]
+        },
+        {
+          "id": "umsatzsteuer",
+          "heading": "§ 4.3 Umsatzsteuer und grenzüberschreitende Leistungen",
+          "paragraphs": [
+            "(1) Alle genannten Preise und Tagessätze verstehen sich als Netto-Beträge zzgl. der jeweils geltenden Umsatzsteuer. NeXify AI ist in den Niederlanden umsatzsteuerlich registriert (BTW NL865786276B01).",
+            "(2) Für Leistungen an Unternehmen (B2B) mit Sitz in einem anderen EU-Mitgliedstaat und gültiger Umsatzsteuer-Identifikationsnummer (USt-IdNr.) gilt das Reverse-Charge-Verfahren nach Art. 196 MwStSystRL: Die Umsatzsteuer wird in diesem Fall nicht von NeXify AI berechnet; der Auftraggeber schuldet die Umsatzsteuer in seinem Ansässigkeitsstaat selbst. Die Rechnung weist in diesem Fall den Hinweis „Steuerschuldnerschaft des Leistungsempfängers“ aus.",
+            "(3) Für Leistungen an Auftraggeber mit Sitz in den Niederlanden wird die niederländische BTW (21 %) berechnet und ausgewiesen.",
+            "(4) NeXify AI richtet sich ausschließlich an Unternehmer im Sinne des § 2 UStG (DE) / Art. 7 Wet OB 1968 (NL). Eine Erbringung von Leistungen an Verbraucher (B2C) findet nicht statt."
+          ]
+        },
+        {
+          "id": "kontinuitaet",
+          "heading": "§ 4.4 Projektkontinuität und Zahlungsverzug",
+          "paragraphs": [
+            "(1) Die pünktliche Zahlung ist die Grundlage der nahtlosen Projektfortsetzung: NeXify AI plant die Arbeitskapazität des Folgetages auf Basis des bestätigten Zahlungseingangs. Diese Struktur gewährleistet, dass dem Auftraggeber stets volle Ressourcen und volle Aufmerksamkeit gewidmet werden können.",
+            "(2) Liegt bis 09:00 Uhr des Folgearbeitstages kein vollständiger Zahlungseingang für die vorangegangene Tagesrechnung vor, sendet NeXify AI zunächst eine freundliche automatische Zahlungserinnerung an den Auftraggeber. Die Arbeit wird in dieser Zeit in den Wartemodus versetzt; die Arbeitsaufnahme erfolgt unverzüglich nach bestätigtem Zahlungseingang.",
+            "(3) Bleibt die Zahlung auch nach der Erinnerung aus, ist NeXify AI berechtigt, die Leistungserbringung bis zum vollständigen Zahlungseingang zu unterbrechen, ohne dass dies als Vertragsverletzung seitens NeXify AI gewertet werden kann.",
+            "(4) Ab dem ersten Werktag nach Ablauf der Zahlungsfrist gerät der Auftraggeber ohne weitere Mahnung in Verzug (§ 286 Abs. 2 Nr. 1 BGB analog / Art. 6:83 BW). Ab Verzugseintritt werden Verzugszinsen in Höhe von 9 Prozentpunkten über dem jeweiligen Basiszinssatz (DE: § 247 BGB; NL: Wettelijk handelsrente) fällig. NeXify AI behält sich die Geltendmachung weiterer Verzugsschäden ausdrücklich vor.",
+            "(5) Erbringt NeXify AI Vorleistungen (z. B. Konzepte, Skizzen, Code-Entwürfe) auf Basis noch nicht beglichener Tagesrechnungen, entsteht hieraus kein Anspruch auf kostenlose Weiterverwendung dieser Vorleistungen. Alle im Rahmen des Projekts erstellten Arbeitsergebnisse verbleiben bis zum vollständigen Zahlungsausgleich im Eigentum von NeXify AI."
+          ]
+        },
+        {
+          "id": "projektstart",
+          "heading": "§ 4.5 Projektstart und erste Tagesrechnung",
+          "paragraphs": [
+            "(1) Die erste Tagesrechnung wird für den ersten tatsächlichen Arbeitstag ausgestellt, unmittelbar nachdem die Auftragsbestätigung des Auftraggebers vorliegt und die Arbeit aufgenommen wurde.",
+            "(2) NeXify AI beginnt in der Regel am nächsten Werktag nach schriftlicher Auftragsbestätigung mit der Arbeit, sofern keine anderweitige Vereinbarung getroffen wurde.",
+            "(3) Für die Erstellung und Zusendung des initialen Konzepts oder Projektplans (sofern im Auftragsumfang enthalten) gilt ebenso die Tagesabrechnung. Der Auftraggeber erhält mit dem ersten Tagesbericht eine vollständige Übersicht aller an diesem Tag durchgeführten Analyse-, Planungs- und Konzeptionsleistungen."
+          ]
+        },
+        {
+          "id": "angebote",
+          "heading": "§ 4.6 Angebote und Kostenrahmen",
+          "paragraphs": [
+            "(1) Alle Angebote von NeXify AI sind 14 Kalendertage ab Ausstellungsdatum verbindlich, sofern keine andere Frist angegeben ist.",
+            "(2) Angebote enthalten eine realistische Aufwandsspanne in Arbeitstagen. Ein verbindlicher Gesamtfestpreis wird vereinbart, sobald Umfang, Inhalte, Integrationen und Abnahmekriterien abschließend schriftlich festgelegt sind.",
+            "(3) Entsteht während der Projektlaufzeit Mehrbedarf, der über den ursprünglich vereinbarten Umfang hinausgeht, wird dieser vor Ausführung transparent angezeigt und erst nach schriftlicher Freigabe durch den Auftraggeber realisiert. Niemals nach der Ausführung."
+          ]
+        },
+        {
+          "id": "ki-kosten",
+          "heading": "§ 4.7 KI-Nutzungskosten (monatliche Abrechnung)",
+          "paragraphs": [
+            "(1) Für die im Rahmen der Leistungserbringung genutzten KI-Dienste stellt NeXify AI dem Auftraggeber die tatsächlich angefallenen Kosten monatlich gesondert in Rechnung. Die Kosten werden in der Rechnung einheitlich als „NeXify AI Kosten“ ausgewiesen; Drittanbieter-, Anbieter- oder Modellnamen werden nicht genannt.",
+            "(2) Auf die tatsächlich angefallenen KI-Kosten erhebt NeXify AI einen Preisaufschlag von 38 % (achtunddreißig Prozent). Der Aufschlag deckt Bereitstellung, Betrieb, Orchestrierung und Betreuung der KI-Infrastruktur.",
+            "(3) Die Abrechnung erfolgt jeweils am 28. eines Monats für den Leistungszeitraum vom 28. des Vormonats bis zum 28. des laufenden Monats. Die Rechnung ist innerhalb von 14 Tagen ab Rechnungsdatum zur Zahlung fällig.",
+            "(4) Die KI-Kosten-Rechnung wird unter einer eigenen fortlaufenden, unveränderlichen Rechnungsnummer im Format NEXIFY-RE-JJJJ-MM-NNNNN ausgestellt und ist von den Tagesrechnungen (Format NEXIFY-JJJJ-NNNNN) getrennt. Die Nummernvergabe ist lückenlos, einmalig und nicht rückdatierbar."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mitwirkung",
+      "heading": "§ 5 Mitwirkungspflichten des Auftraggebers",
+      "paragraphs": [
+        "Der Auftraggeber stellt alle für die Leistungserbringung erforderlichen Inhalte, Zugänge, Daten und Rechte rechtzeitig und vollständig bereit.",
+        "Verzögerungen durch verspätete oder unvollständige Mitwirkung verschieben vereinbarte Termine angemessen; hierdurch entstehender Mehraufwand wird gesondert nach § 4 vergütet.",
+        "Der Auftraggeber ist verpflichtet, dem Auftragnehmer die Nutzung der vertragsgegenständlichen Systeme und Daten zu gestatten, soweit dies für die Leistungserbringung erforderlich ist."
+      ]
+    },
+    {
+      "id": "ki",
+      "heading": "§ 6 KI-gestützte Arbeitsweise",
+      "paragraphs": [
+        "Der Auftragnehmer setzt zur Leistungserbringung KI-Werkzeuge (Large Language Models, Code-Assistenten) ein, um Effizienz und Qualität zu steigern.",
+        "Die fachliche Letztverantwortung für alle erbrachten Leistungen verbleibt beim Auftragnehmer; KI-Ergebnisse werden vor Auslieferung geprüft.",
+        "Der Auftraggeber wird über den Einsatz von KI in der Leistungserbringung gemäß den KI-Hinweisen informiert.",
+        "Keine Verwendung von vertraulichen oder personenbezogenen Daten des Auftraggebers zum Training öffentlicher KI-Modelle."
+      ]
+    },
+    {
+      "id": "abnahme",
+      "heading": "§ 7 Abnahme und Mängelansprüche",
+      "paragraphs": [
+        "Nach Fertigstellung erhält der Auftraggeber die Leistung zur Prüfung. Die Prüffrist beträgt 14 Kalendertage.",
+        "Erfolgt innerhalb der Prüffrist keine Rüge in Textform, gilt die Leistung als abgenommen.",
+        "Die gesetzlichen Mängelgewährleistungsrechte (§§ 634 ff. BGB) gelten entsprechend. Der Auftragnehmer ist berechtigt, zunächst Nacherfüllung zu leisten.",
+        "Mängelansprüche verjähren nach den gesetzlichen Vorschriften; bei B2B gilt die gesetzliche Verjährungsfrist."
+      ]
+    },
+    {
+      "id": "haftung",
+      "heading": "§ 8 Haftung",
+      "paragraphs": [
+        "Der Auftragnehmer haftet unbeschränkt bei Vorsatz, grober Fahrlässigkeit, arglistigem Verschweigen von Mängeln sowie bei Verletzung von Leben, Körper oder Gesundheit.",
+        "Bei leichter Fahrlässigkeit haftet der Auftragnehmer nur für die Verletzung wesentlicher Vertragspflichten (Kardinalpflichten) und nur auf den vertragstypisch vorhersehbaren Schaden, begrenzt auf die Höhe der vereinbarten Vergütung.",
+        "Die Haftung für mittelbare Schäden, entgangenen Gewinn und Datenverlust ist – soweit gesetzlich zulässig – ausgeschlossen.",
+        "Die vorstehenden Haftungsbeschränkungen gelten nicht bei zwingender gesetzlicher Haftung (insbesondere Produkthaftung)."
+      ]
+    },
+    {
+      "id": "rechte",
+      "heading": "§ 9 Nutzungsrechte",
+      "paragraphs": [
+        "Mit vollständiger Zahlung der Vergütung erhält der Auftraggeber die vertraglich vereinbarten, zeitlich und räumlich unbeschränkten Nutzungsrechte an den individuell erstellten Leistungen.",
+        "Open-Source-Software und Drittdienste unterliegen deren jeweiligen Lizenzen.",
+        "Bis zur vollständigen Zahlung verbleiben sämtliche Rechte beim Auftragnehmer (Eigentumsvorbehalt analog § 449 BGB)."
+      ]
+    },
+    {
+      "id": "vertraulichkeit",
+      "heading": "§ 10 Vertraulichkeit",
+      "paragraphs": [
+        "Beide Parteien verpflichten sich, vertrauliche Informationen der jeweils anderen Partei ausschließlich zur Vertragserfüllung zu verwenden und sie vor unbefugtem Zugriff Dritter zu schützen.",
+        "Die Vertraulichkeitsverpflichtung besteht über das Vertragsende hinaus fort.",
+        "Von der Vertraulichkeit ausgenommen sind Informationen, die bereits öffentlich bekannt sind oder dem Empfänger nachweislich bereits bekannt waren."
+      ]
+    },
+    {
+      "id": "referenz",
+      "heading": "§ 11 Referenznennung",
+      "paragraphs": [
+        "Der Auftragnehmer ist berechtigt, den Auftraggeber und die erbrachte Leistung in Referenzlisten, Portfolio und Social-Media-Präsenzen zu nennen, sofern der Auftraggeber nicht innerhalb von 14 Tagen nach Vertragsschluss widerspricht."
+      ]
+    },
+    {
+      "id": "schluss",
+      "heading": "§ 12 Schlussbestimmungen",
+      "paragraphs": [
+        "Es gilt das Recht der Niederlande unter Ausschluss des UN-Kaufrechts (CISG).",
+        "Gerichtsstand für alle Streitigkeiten ist – soweit gesetzlich zulässig – Venlo, Niederlande.",
+        "Sollten einzelne Bestimmungen unwirksam sein, bleibt der Vertrag im Übrigen wirksam. An die Stelle der unwirksamen Bestimmung tritt die gesetzliche Regelung (§ 306 BGB analog)."
+      ]
+    }
+  ]
+}

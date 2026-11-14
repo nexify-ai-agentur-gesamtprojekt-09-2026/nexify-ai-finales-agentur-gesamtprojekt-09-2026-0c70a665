@@ -20,7 +20,7 @@ test('all four locales give explicit local/no-live-AI guidance and exact supplie
  const phrases={de:'ohne Live-KI',nl:'zonder live-AI',fr:'sans IA en direct',en:'without live AI'};
  for(const locale of locales){
   const result=guide('Ads Marketing',locale);
-  assert.match(result.text,/NeXify AI FACTORY B\.V\./);
+  assert.match(result.text,/NeXify AI FACTORY/);
   assert.ok(result.text.includes(phrases[locale]));
   assert.equal(result.cards[0].id,'solutions');
   for(const card of result.cards){const source=pages.find(page=>page.id===card.id);assert.equal(card.title,source.localizedTitle[locale]);assert.equal(card.summary,source.localizedSummary[locale]);assert.equal(card.path,source.path);}

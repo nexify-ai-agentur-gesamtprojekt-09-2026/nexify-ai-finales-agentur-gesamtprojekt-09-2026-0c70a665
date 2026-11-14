@@ -747,7 +747,7 @@
         "$type": "dimension"
       },
       "zeileEng": {
-        "$value": "1.05",
+        "$value": "1.12",
         "$type": "number"
       },
       "zeileTitel": {

@@ -4,9 +4,9 @@ import {useUI} from "../../web/components/Workspace";
 // Suite access is agreed separately from TEILEKLAR shop authentication.
 // This static adapter offers the actual contact route and never mints rights.
 const copy={
- de:{disclaimer:"Für diesen Zugang werden Berechtigungen gesondert vereinbart: keine automatische Adminrolle und kein pauschaler Zugriff auf Mandanten- oder Geschäftsdaten.",note:"Ihr Zugang zur NeX AIFly Suite wird mit der NeXify AI FACTORY B.V. abgestimmt.",contact:"Zugang mit der FACTORY klären"},
- nl:{disclaimer:"Rechten voor deze toegang worden afzonderlijk afgesproken; er is geen automatische beheerdersrol of algemene toegang tot bedrijfsgegevens.",note:"Uw toegang tot de NeX AIFly Suite stemt u af met NeXify AI FACTORY B.V.",contact:"Toegang met de FACTORY afstemmen"},
- fr:{disclaimer:"Les droits sont convenus séparément ; aucun rôle d’administration ni accès général aux données des entreprises n’est attribué automatiquement.",note:"Votre accès à la NeX AIFly Suite est défini avec NeXify AI FACTORY B.V.",contact:"Définir votre accès avec la FACTORY"},
+ de:{disclaimer:"Für diesen Zugang werden Berechtigungen gesondert vereinbart: keine automatische Adminrolle und kein pauschaler Zugriff auf Mandanten- oder Geschäftsdaten.",note:"Ihr NeX AIFly Suite-Zugang wird mit der NeXify AI FACTORY B.V. abgestimmt.",contact:"Zugang mit der FACTORY klären"},
+ nl:{disclaimer:"Rechten voor deze toegang worden afzonderlijk afgesproken; er is geen automatische beheerdersrol of algemene toegang tot bedrijfsgegevens.",note:"Uw NeX AIFly Suite-toegang stemt u af met NeXify AI FACTORY B.V.",contact:"Toegang met de FACTORY afstemmen"},
+ fr:{disclaimer:"Les droits sont convenus séparément ; aucun rôle d’administration ni accès général aux données des entreprises n’est attribué automatiquement.",note:"Votre accès NeX AIFly Suite est défini avec NeXify AI FACTORY B.V.",contact:"Définir votre accès avec la FACTORY"},
  en:{disclaimer:"Permissions are agreed separately; access grants no automatic admin role or general access to tenant or business data.",note:"Arrange your NeX AIFly Suite access with NeXify AI FACTORY B.V.",contact:"Arrange access with the FACTORY"}
 };
 type Mode="login"|"signup";

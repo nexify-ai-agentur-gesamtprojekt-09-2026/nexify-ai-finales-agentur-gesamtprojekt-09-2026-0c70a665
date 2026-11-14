@@ -48,6 +48,7 @@ check-arch:
 # Offline controls only: no inference, credential read, external agent or repair command.
 governance-check:
 	python3 tools/check_llm_policy.py
+	python3 tools/check_hermes_config.py
 	python3 tools/project_skills.py verify
 	python3 tools/check_ai_coverage.py --audit
 
@@ -85,3 +86,6 @@ session-end:
 
 clean-check:
 	bash scripts/clean-state-check.sh
+
+graph:
+	bash tools/graph.sh

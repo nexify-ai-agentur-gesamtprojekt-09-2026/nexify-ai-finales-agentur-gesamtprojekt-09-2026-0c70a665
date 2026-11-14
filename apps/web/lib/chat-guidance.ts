@@ -244,24 +244,35 @@ function digitsOf(value: string): string {
   return value.replace(/[.,]\d{1,2}$/u, '').replace(/\D/gu, '').replace(/^0+(?=\d)/u, '');
 }
 
+/**
+ * Betrag als Ziffernfolge in ganzen Einheiten, mit Maßangabe ausmultipliziert.
+ * Vor einer Maßangabe ist ein Trenner mit ein oder zwei Folgeziffern ein Dezimaltrenner:
+ * "1,5k" -> "1500", "2.5 Mio" -> "2500000". "1.500k" bleibt ein Tausenderpunkt.
+ */
+function amountKey(raw: string, unit = ''): string {
+  const scale = /mio|million/iu.test(unit) ? 1_000_000 : /k|tsd|tausend/iu.test(unit) ? 1_000 : 1;
+  if (scale === 1) return digitsOf(raw);
+  const decimal = /^(.*\d)[.,](\d{1,2})$/u.exec(raw.trim());
+  const whole = (decimal ? decimal[1] : raw).replace(/\D/gu, '');
+  if (!whole) return '';
+  const value = Number(whole) * scale + (decimal ? Math.round((Number(decimal[2]) / 10 ** decimal[2].length) * scale) : 0);
+  return Number.isSafeInteger(value) ? String(value) : '';
+}
+
+const AMOUNT_WITH_UNIT = new RegExp(String.raw`(${AMOUNT})\s?(${UNIT}(?![a-zäöüß]))?`, 'giu');
+
 /** Zahlen, die der Besucher selbst genannt hat (z. B. sein Budget): dürfen wiederholt werden. */
 export function visitorAmounts(turns: readonly GuidanceTurn[], latest = ''): Set<string> {
   const allowed = new Set<string>();
   const collect = (text: string) => {
-    for (const match of text.matchAll(/(\d[\d.,'’\u00a0\u202f ]*\d|\d)\s?(k\b|tsd|tausend|mio|million)?/giu)) {
-      const digits = digitsOf(match[1]);
-      if (!digits) continue;
-      allowed.add(digits + scaleSuffix(match[2] ?? ''));
+    for (const match of text.matchAll(AMOUNT_WITH_UNIT)) {
+      const value = amountKey(match[1], match[2] ?? '');
+      if (value) allowed.add(value);
     }
   };
   for (const turn of turns) if (turn.role === 'user') collect(turn.content);
   collect(latest);
   return allowed;
-}
-
-function scaleSuffix(unit: string): string {
-  if (/mio|million/iu.test(unit)) return '000000';
-  return /k|tsd|tausend/iu.test(unit) ? '000' : '';
 }
 
 /** Enthält der Text einen Geldbetrag, der weder freigegeben noch vom Besucher genannt ist? */
@@ -270,10 +281,9 @@ export function hasUnapprovedAmount(text: string, allowed: ReadonlySet<string> =
   for (const pattern of MONEY_PATTERNS) {
     pattern.lastIndex = 0;
     for (const match of text.matchAll(pattern)) {
-      const digits = digitsOf(match[1] ?? '');
-      if (!digits) return true;
       const unit = new RegExp(String.raw`\d\s?(${UNIT})`, 'iu').exec(match[0])?.[1] ?? '';
-      const value = digits + scaleSuffix(unit);
+      const value = amountKey(match[1] ?? '', unit);
+      if (!value) return true;
       if (!approved.has(value) && !allowed.has(value)) return true;
     }
   }
@@ -334,6 +344,8 @@ export interface OutputGuard {
 
 const MAX_BLOCK_CHARS = 6000;
 const FORCE_RELEASE_CHARS = 480;
+/** Länger als jede Formulierung in HUMAN_CLAIMS. */
+const CLAIM_CARRY_CHARS = 120;
 
 /**
  * Satzzeichen wie auf der Website: Der Gedankenstrich ist der Halbgeviertstrich mit Leerzeichen.
@@ -359,6 +371,8 @@ export function createOutputGuard(options: { locale: GuidanceLocale; allowedAmou
   let inBlock = false;
   let blockOverflow = false;
   let suppressLine = false;
+  // Ende des zuletzt erzwungen freigegebenen Stücks: Eine Aussage, die über den Schnitt reicht, wird damit erkannt.
+  let carry = '';
   const noticed = new Set<GuardViolation>();
 
   const emitNotice = (kind: 'unapproved_amount' | 'human_claim'): string => {
@@ -375,11 +389,14 @@ export function createOutputGuard(options: { locale: GuidanceLocale; allowedAmou
       if (!piece) continue;
       if (/^\n+$/u.test(piece)) {
         suppressLine = false;
+        carry = '';
         out += piece;
         continue;
       }
       if (suppressLine) continue;
-      const kind = claimsToBeHuman(piece) ? 'human_claim' : hasUnapprovedAmount(piece, allowed) ? 'unapproved_amount' : null;
+      const joined = carry + piece;
+      carry = '';
+      const kind = claimsToBeHuman(piece) || claimsToBeHuman(joined) ? 'human_claim' : hasUnapprovedAmount(piece, allowed) ? 'unapproved_amount' : null;
       if (!kind) {
         out += germanDashes(piece);
         continue;
@@ -392,7 +409,7 @@ export function createOutputGuard(options: { locale: GuidanceLocale; allowedAmou
   };
 
   /** Letzte sichere Grenze in pending: Zeilenende oder Satzende vor Leerraum. */
-  const boundary = (text: string, force: boolean): number => {
+  const boundary = (text: string, force: boolean): { cut: number; forced: boolean } => {
     let cut = text.lastIndexOf('\n') + 1;
     const sentence = /[.!?…]["»“”)]?\s+/gu;
     for (let match = sentence.exec(text); match; match = sentence.exec(text)) {
@@ -410,11 +427,10 @@ export function createOutputGuard(options: { locale: GuidanceLocale; allowedAmou
         const after = text.slice(index + 1, index + 12);
         if (/[\d€$£%]\s*$/u.test(before) || /^(?:[\d€$£%]|eur|euro|usd|chf|k\b|tsd|tausend|mio|netto|brutto)/iu.test(after)) continue;
         if (/(?:tagessatz|stundensatz|festpreis|pauschale|rate|tarief|taux)\W*$/iu.test(before)) continue;
-        cut = index + 1;
-        break;
+        return { cut: index + 1, forced: true };
       }
     }
-    return cut;
+    return { cut, forced: false };
   };
 
   const release = (final: boolean): string => {
@@ -457,10 +473,13 @@ export function createOutputGuard(options: { locale: GuidanceLocale; allowedAmou
       // Einen möglichen Blockanfang am Ende ("`", "``") nicht vorzeitig freigeben.
       const held = /`{1,2}$/u.exec(pending)?.[0].length ?? 0;
       const candidate = held ? pending.slice(0, -held) : pending;
-      const cut = boundary(candidate, candidate.length > FORCE_RELEASE_CHARS);
+      const { cut, forced } = boundary(candidate, candidate.length > FORCE_RELEASE_CHARS);
       if (cut > 0) {
-        out += check(candidate.slice(0, cut));
+        const head = candidate.slice(0, cut);
+        out += check(head);
         pending = pending.slice(cut);
+        // Mitten im Satz geteilt: das Ende merken, solange die Zeile nicht ohnehin unterdrückt ist.
+        if (forced && !suppressLine) carry = head.slice(-CLAIM_CARRY_CHARS);
       }
       break;
     }
@@ -556,7 +575,8 @@ export function parseBriefing(body: string, allowedAmounts: ReadonlySet<string> 
     umfang: list(source.umfang).map(clean).filter(Boolean),
     zeitrahmen: clean(field(source.zeitrahmen, 200)),
     // Ohne Währungszeichen greift die Betragsprüfung nicht: jede Zahl im Budget muss vom Besucher stammen.
-    budget: budget && [...budget.matchAll(/\d[\d.,'’   ]*\d|\d/gu)].every((match) => allowedAmounts.has(digitsOf(match[0]))) ? budget : '',
+    // Die Maßangabe zählt mit: "10k €" ist der Betrag 10.000, den der Besucher genannt haben muss.
+    budget: budget && [...budget.matchAll(AMOUNT_WITH_UNIT)].every((match) => allowedAmounts.has(amountKey(match[1], match[2] ?? ''))) ? budget : '',
     leistungen: list(source.leistungen, 6, 40).filter((id) => known.has(id) && id !== 'contact'),
     offene_punkte: list(source.offene_punkte).map(clean).filter(Boolean),
   };

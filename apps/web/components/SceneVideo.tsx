@@ -2,8 +2,10 @@
 
 import {useRef, useState} from "react";
 import "./SceneVideo.css";
+import {FilmPlaybackIcon,compactWords} from "./AtelierFilm";
 
-const words = {
+// `label` ist die KI-Kennzeichnung der Markenfilme (Art. 50 KI-VO); sie steht seit 14.11.2026 im Footer statt auf dem Bild.
+export const words = {
   de: {play: "Video mit Ton abspielen", label: "Markeninszenierung · KI-generiert", title: "Markenszene mit Pascal, NeX und AIFly ORACLE"},
   nl: {play: "Video met geluid afspelen", label: "Merkscène · AI-gegenereerd", title: "Merkscène met Pascal, NeX en AIFly ORACLE"},
   fr: {play: "Lire la vidéo avec le son", label: "Mise en scène de marque · générée par IA", title: "Scène de marque avec Pascal, NeX et AIFly ORACLE"},
@@ -34,8 +36,9 @@ export function SceneVideo({src, locale}: {src: string; locale: string}) {
     <video ref={video} className="scene-video" data-testid="scene-video" data-started={started} src={src} playsInline preload="none"
       controls={started} title={text.title} tabIndex={started ? 0 : -1} onEnded={() => setStarted(false)} onError={() => setFailed(true)}/>
     {!started && <div className="scene-video-bar">
-      <span className="scene-video-label">{text.label}</span>
-      <button type="button" className="scene-video-play" onClick={start} data-testid="scene-video-play">{text.play}</button>
+      <div className="atelier-film-controls">
+        <button type="button" className="scene-video-play" onClick={start} aria-label={text.play} data-testid="scene-video-play"><FilmPlaybackIcon playing={false}/><span>{compactWords[(locale in compactWords ? locale : "de") as keyof typeof compactWords].play}</span></button>
+      </div>
     </div>}
   </>;
 }
