@@ -65,8 +65,8 @@ test('Meta-Tag und Kopfzeile widersprechen sich in keiner Kombination aus Seite,
   assert.equal(compared, 5 * 6 * 7);
 });
 
-test('lib/page-robots.ts ruft die Regel mit denselben Eingaben auf wie der Proxy', () => {
-  const source = read('../../lib/page-robots.ts');
+test('auth/page-robots.ts ruft die Regel mit denselben Eingaben auf wie der Proxy', () => {
+  const source = read('../page-robots.ts');
   assert.match(source, /const indexable = indexablePaths\(siteMap\);/);
   assert.match(source, /robotsDirective\(indexingDecision\(\{path,hosts:requestHosts\(request\.get\('host'\),request\.get\('x-forwarded-host'\)\),env:process\.env,paths:indexable\}\)\)/);
   assert.match(read('../../proxy.ts'), /indexingDecision\(\{path,hosts:requestHosts\(request\.headers\.get\('host'\),request\.headers\.get\('x-forwarded-host'\)\),env:process\.env,paths:indexable\}\)/);

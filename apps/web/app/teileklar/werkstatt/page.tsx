@@ -2,7 +2,7 @@ import ShopFrame from "../../../components/shop/ShopFrame";
 import WorkshopFinder from "../../../components/shop/WorkshopFinder";
 import RouteStructuredData from "../../../components/RouteStructuredData";
 import {routeMetadata} from "../../../lib/page-seo";
-import {pageRobots} from "../../../lib/page-robots";
+import {pageRobots} from "../../../auth/page-robots";
 // Meta `robots` folgt derselben Regel wie die Kopfzeile X-Robots-Tag (auth/indexing.ts), OA-164.
 export const generateMetadata = async () => routeMetadata("tk-workshop", await pageRobots("/teileklar/werkstatt"));
 export default async function FinderPage({ searchParams }: { searchParams: Promise<{ q?: string; umkreis?: string }> }) {

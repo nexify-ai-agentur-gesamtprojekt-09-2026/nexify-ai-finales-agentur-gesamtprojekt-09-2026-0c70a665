@@ -15,7 +15,7 @@ export function seoDescription(text:string,max=160):string{
  const word=cut.lastIndexOf(' ');
  return cut.slice(0,word>=80?word:max-1).replace(/[,;:–-]\s*$/,'')+'…';
 }
-/** Indexierung ist standardmäßig AUS (noindex), bis der Inhaber die Veröffentlichung freigibt. Dieser Schalter (NEXIFY_INDEXING=enabled im Vercel-Projekt, danach neu deployen; Rückweg: Variable entfernen, neu deployen) steuert nur das Meta-Tag der Katalogseiten aus pageMetadata. Maßgeblich ist die Regel in auth/indexing.ts: Sie verlangt zusätzlich Produktion, freigegebenen Host, indexierbaren Pfad und für /teileklar NEXIFY_INDEXING_TEILEKLAR=enabled, und proxy.ts setzt sie als Kopfzeile X-Robots-Tag durch. Seiten mit eigener Route übernehmen diese Entscheidung auch ins Meta-Tag (lib/page-robots.ts, OA-164). */
+/** Indexierung ist standardmäßig AUS (noindex), bis der Inhaber die Veröffentlichung freigibt. Dieser Schalter (NEXIFY_INDEXING=enabled im Vercel-Projekt, danach neu deployen; Rückweg: Variable entfernen, neu deployen) steuert nur das Meta-Tag der Katalogseiten aus pageMetadata. Maßgeblich ist die Regel in auth/indexing.ts: Sie verlangt zusätzlich Produktion, freigegebenen Host, indexierbaren Pfad und für /teileklar NEXIFY_INDEXING_TEILEKLAR=enabled, und proxy.ts setzt sie als Kopfzeile X-Robots-Tag durch. Seiten mit eigener Route übernehmen diese Entscheidung auch ins Meta-Tag (auth/page-robots.ts, OA-164). */
 export const indexingEnabled=():boolean=>process.env.NEXIFY_INDEXING==='enabled';
 export function pageMetadata(page:PublicPage,locale:Locale):Metadata{
  const title=page.localizedTitle[locale]+' · '+(page.site_context==='teileklar'?'TEILEKLAR.shop':'NeXify AI');

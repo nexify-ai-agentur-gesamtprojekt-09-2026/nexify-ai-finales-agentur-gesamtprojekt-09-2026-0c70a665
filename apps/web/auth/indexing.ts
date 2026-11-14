@@ -13,7 +13,7 @@
  * keine Importe, damit es der Proxy, die Sitemap und die Node-Tests gleich verwenden.
  *
  * Das Meta-Tag der Seiten mit eigener Route (/agb, /avv, /widerruf, /teileklar/kategorien, /teileklar/werkstatt) folgt
- * derselben Entscheidung: lib/page-robots.ts ruft indexingDecision mit denselben Eingaben wie der Proxy auf und
+ * derselben Entscheidung: auth/page-robots.ts ruft indexingDecision mit denselben Eingaben wie der Proxy auf und
  * übersetzt das Ergebnis mit robotsDirective (OA-164). Die Katalogseiten aus lib/page-seo.ts (pageMetadata) folgen im
  * Meta-Tag weiter nur dem Schalter NEXIFY_INDEXING; Host, Produktion und der TEILEKLAR-Schalter greifen dort allein
  * über die Kopfzeile.

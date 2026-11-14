@@ -9,14 +9,14 @@ import '../../components/HomeConcept.css';
 import '../../components/PageConcept.css';
 import agb from '../../lib/legal/agb.json';
 import {PUBLIC_ORIGIN} from '../../lib/page-seo';
-import {pageRobots} from '../../lib/page-robots';
+import {pageRobots} from '../../auth/page-robots';
 
 type Subsection = {id?: string; heading: string; paragraphs?: string[]; bullets?: string[]};
 type Section = Subsection & {subsections?: Subsection[]};
 
 const doc = agb as {slug: string; title: string; intro: string; updated: string; sections: Section[]};
 
-// Meta `robots` folgt derselben Regel wie die Kopfzeile X-Robots-Tag (auth/indexing.ts über lib/page-robots.ts), OA-164.
+// Meta `robots` folgt derselben Regel wie die Kopfzeile X-Robots-Tag (auth/indexing.ts über auth/page-robots.ts), OA-164.
 export async function generateMetadata(): Promise<Metadata> {
   return {
     title: `${doc.title} · NeXify AI`,
