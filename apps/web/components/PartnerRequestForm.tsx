@@ -1,6 +1,7 @@
 "use client";
 import {useEffect,useRef,useState,type FormEvent} from "react";
 import {useUI} from "./Workspace";
+import {ActionButton} from "./ActionControl";
 import "./PartnerRequestForm.css";
 
 // Real partner onboarding form: form -> /api/partner/requests -> SQLite -> UI readback via
@@ -185,7 +186,7 @@ export default function PartnerRequestForm(){
    <label>{t.contact}<input name="contact" required maxLength={160} data-testid="partner-contact"/></label>
    <label>{t.email}<input name="email" type="email" required maxLength={254} data-testid="partner-email"/></label>
    <label>{t.message}<textarea name="message" required maxLength={2000} rows={4} data-testid="partner-message"/></label>
-   <button className="primary-button" type="submit" disabled={!session||state==="sending"} data-testid="partner-submit">{buttonLabel}</button>
+   <ActionButton variant="primary" className="hc-finish-primary" type="submit" disabled={!session||state==="sending"} data-testid="partner-submit">{buttonLabel}</ActionButton>
   </form>
   {state==="ok"&&<p role="status" data-testid="partner-ok">{t.ok} · {t.ref}: {reference}</p>}
   {state==="error"&&<p role="alert" data-testid="partner-error">{t.error}</p>}
