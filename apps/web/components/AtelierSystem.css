@@ -1003,7 +1003,8 @@ html[data-theme='light'] #atelier .nx-logo-x{color:var(--as-accent)}
 }
 
 /* ===== Raumlicht hinter dem Film ===== */
-#atelier .home-concept .identity-hero .identity-scene{position:relative;isolation:isolate}
+/* Das Raumlicht reicht seitlich 14 % ueber die Buehne hinaus. Die Buehne kappt es seitlich (deckungsgleich mit der Kante von .website), damit der Hero keine waagerechte Scrollbreite bekommt; nach oben und unten strahlt es weiter. */
+#atelier .home-concept .identity-hero .identity-scene{position:relative;isolation:isolate;overflow-x:clip}
 #atelier .home-concept .identity-hero .identity-scene::before{content:'';position:absolute;inset:-18% -14% -22%;z-index:-1;pointer-events:none;background:var(--as-ambient);filter:blur(24px)}
 
 /* ===== Chat-Front: dicke Scheibe ===== */
