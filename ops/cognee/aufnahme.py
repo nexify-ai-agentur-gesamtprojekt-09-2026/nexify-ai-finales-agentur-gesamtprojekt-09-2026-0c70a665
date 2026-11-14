@@ -2,14 +2,14 @@
 """Aufnahme-Werkzeug: Agenturwissen aus diesem Repository in Cognee aufnehmen.
 
   python3 ops/cognee/aufnahme.py plan      Plan zeigen (ohne Netz, Standard)
-  python3 ops/cognee/aufnahme.py senden    aufnehmen (nur mit Schaltern und Freigabe)
-  python3 ops/cognee/aufnahme.py zustand   Erreichbarkeit lesen (nur mit Schalter)
+  python3 ops/cognee/aufnahme.py senden    aufnehmen (nur mit Schaltern, Rolle und Freigaben)
+  python3 ops/cognee/aufnahme.py zustand   Erreichbarkeit lesen (nur mit Schalter und Freigabe)
 
 Welche Dateien in welchen Datensatz gehen, steht in ``config/integrations/cognee.json``
-(``quellen.aufnehmen``); ``quellen.nie_aufnehmen`` gewinnt immer. Ein Geheimnis-Muster in
-irgendeiner Datei bricht den ganzen Lauf ab, bevor etwas gesendet wird. Gemeldet werden
-Pfad, Größe und Prüfsumme, nie Inhalt. Der Graphbau (Modellkosten) gehört nicht zu
-diesem Werkzeug.
+(``quellen.aufnehmen``); ``quellen.nie_aufnehmen`` gewinnt immer. Symbolische Verknüpfungen
+werden nie verfolgt. Ein Geheimnis-Muster in irgendeiner Datei bricht den ganzen Lauf ab,
+bevor etwas gesendet wird; das ist ein Musterabgleich, kein Schutz. Gemeldet werden Pfad,
+Größe und Prüfsumme, nie Inhalt. Der Graphbau (Modellkosten) gehört nicht zu diesem Werkzeug.
 """
 from __future__ import annotations
 
@@ -21,45 +21,66 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import cognee_client as cc  # noqa: E402
+import geheimnis_filter  # noqa: E402
+
+
+def _inside(root_real: Path, path: Path) -> bool:
+    """Wahr nur, wenn der Pfad ohne jede Verknüpfung in der Wurzel liegt."""
+    try:
+        relative = path.relative_to(root_real)
+    except ValueError:
+        return False
+    return path.resolve() == root_real / relative and not path.is_symlink()
 
 
 def build_plan(root: Path, config: dict) -> dict:
     """Liest nur Dateien aus der Positivliste. Kein Netz."""
+    root_real = Path(root).resolve()
     quellen = config.get("quellen", {})
     limits = config.get("grenzen", {})
-    never = quellen.get("nie_aufnehmen", [])
     max_bytes = int(limits.get("max_bytes_je_datei", 0))
     items, skipped, findings, seen = [], [], [], set()
     for rule in quellen.get("aufnehmen", []):
-        for path in sorted(root.glob(rule["muster"])):
-            relative = path.relative_to(root).as_posix()
-            if relative in seen or not path.is_file() or path.is_symlink():
+        for path in sorted(root_real.glob(rule["muster"])):
+            relative = path.relative_to(root_real).as_posix()
+            if relative in seen:
                 continue
             seen.add(relative)
-            if cc.excluded(relative, never):
-                skipped.append({"pfad": relative, "grund": "nie_aufnehmen"})
+            if not _inside(root_real, path):
+                skipped.append({"pfad": relative, "grund": "verknuepfung_oder_ausserhalb"})
+                continue
+            if not path.is_file():
+                continue
+            try:
+                dataset = cc.dataset_for(relative, config)
+            except cc.Abbruch as stop:
+                skipped.append({"pfad": relative, "grund": stop.grund})
+                continue
+            size = path.stat().st_size
+            if not size or not max_bytes or size > max_bytes:
+                skipped.append({"pfad": relative, "grund": "leer_oder_zu_gross", "bytes": size})
                 continue
             content = path.read_bytes()
-            if not content or (max_bytes and len(content) > max_bytes):
-                skipped.append({"pfad": relative, "grund": "leer_oder_zu_gross", "bytes": len(content)})
-                continue
             try:
                 text = content.decode("utf-8")
             except UnicodeDecodeError:
                 skipped.append({"pfad": relative, "grund": "kein_utf8"})
                 continue
+            if not geheimnis_filter.is_plain_text(text):
+                skipped.append({"pfad": relative, "grund": "steuerzeichen_kein_text"})
+                continue
             hits = cc.find_secrets(text)
             if hits:
                 findings.append({"pfad": relative, "funde": hits})
                 continue
-            items.append({"pfad": relative, "datensatz": rule["datensatz"], "bytes": len(content),
+            items.append({"pfad": relative, "datensatz": dataset, "bytes": len(content),
                           "sha256": hashlib.sha256(content).hexdigest(),
-                          "dokument": cc.document_name(relative, content)})
+                          "dokument": cc.document_name(relative)})
     max_files = int(limits.get("max_dateien_je_lauf", 0))
     status = "plan"
     if findings:
         status = "geheimnis_gefunden"
-    elif max_files and len(items) > max_files:
+    elif not max_files or len(items) > max_files:
         status = "zu_viele_dateien"
     return {"status": status, "dateien": items, "ausgelassen": skipped, "geheimnis_funde": findings,
             "summe_bytes": sum(i["bytes"] for i in items), "grenze_dateien": max_files}
@@ -71,7 +92,7 @@ def send(root: Path, env, *, config=None, transport=None, sleep=None) -> dict:
     if sleep is not None:
         kwargs["sleep"] = sleep
     client = cc.CogneeClient(env, **kwargs)
-    # Reihenfolge: erst Schalter, dann Plan lesen, dann senden. Ohne Schalter wird nicht einmal geplant gesendet.
+    # Reihenfolge: erst Schalter, dann Plan lesen, dann senden.
     if not client.settings.enabled or not client.settings.ingest_enabled:
         return {"status": "aus", "gesendet": False,
                 "grund": "COGNEE_ENABLED und COGNEE_INGEST_ENABLED müssen beide 1 sein"}
@@ -79,20 +100,25 @@ def send(root: Path, env, *, config=None, transport=None, sleep=None) -> dict:
     if plan["status"] != "plan":
         return {"status": plan["status"], "gesendet": False,
                 "geheimnis_funde": plan["geheimnis_funde"], "dateien": len(plan["dateien"])}
-    results = []
+    root_real = Path(root).resolve()
+    results, outdated = [], []
     for item in plan["dateien"]:
         try:
-            result = client.add_document(item["datensatz"], item["pfad"], (root / item["pfad"]).read_bytes())
+            result = client.add_document(item["datensatz"], item["pfad"], (root_real / item["pfad"]).read_bytes())
         except cc.Abbruch as stop:
             # Ein Abbruch gilt für den ganzen Lauf: nichts Weiteres senden.
             return {**stop.als_ergebnis(), "gesendet": bool(results), "ergebnisse": results,
                     "abbruch_bei": item["pfad"]}
-        result.pop("daten", None)
         results.append({"pfad": item["pfad"], **result})
-        if result["status"] not in ("ok", "konflikt"):
+        if result["status"] == "konflikt":
+            # Unter diesem Namen liegt eine andere Fassung: kein Erfolg, Ablösung nötig.
+            results[-1]["status"] = "fassung_veraltet"
+            outdated.append(item["pfad"])
+        elif result["status"] != "ok":
             return {"status": "abgebrochen", "gesendet": True, "ergebnisse": results,
                     "abbruch_bei": item["pfad"]}
-    return {"status": "ok", "gesendet": True, "ergebnisse": results, "netzaufrufe": client.calls}
+    return {"status": "abloesung_noetig" if outdated else "ok", "gesendet": True, "ergebnisse": results,
+            "veraltet": outdated, "netzaufrufe": client.calls}
 
 
 def main(argv, env=os.environ) -> int:

@@ -2,13 +2,18 @@
   "schema_version": 1,
   "hinweis": "NUR nicht geheime Angaben. Schluessel, Kennwoerter und Token stehen ausschliesslich im Geheimnisspeicher (Netzwerk-Geheimnis der Claude-Umgebung, Umgebungsdatei des Hostinger-Projekts) und niemals in dieser Datei, im Repository oder in einem Commit. Offene Freigaben stehen als null; null bedeutet gesperrt.",
   "status": "gebaut_hinter_schalter_standardmaessig_aus",
-  "authority": "Inhaber 14.11.2026: 'Vollwertige Integration von cognee-x532' (aufnehmen); Einspielschritte K0 bis K9 brauchen je eine eigene Freigabe (docs/04-betrieb/cognee-integration-2026-11-14.md).",
-  "loesungsregister": ["cognee-server", "cognee-adapter-repository"],
+  "authority": "Inhaber 14.11.2026: 'Vollwertige Integration von cognee-x532' (aufnehmen); Einspielschritte K0 bis K10 brauchen je eine eigene Freigabe (docs/04-betrieb/cognee-integration-2026-11-14.md).",
+  "loesungsregister": [
+    "cognee-server",
+    "cognee-adapter-repository"
+  ],
   "instanz": {
     "hostinger_projekt": "cognee-x532",
     "server": "srv1941843",
     "oeffentliche_adresse": "https://brain.nexifyai.cloud",
-    "erlaubte_hosts": ["brain.nexifyai.cloud"],
+    "erlaubte_hosts": [
+      "brain.nexifyai.cloud"
+    ],
     "nur_https": true,
     "zustand_2026_11_14": "API-Dienst nicht vorhanden (alle API-Pfade 404), nur Datenbank und MCP-Container laufen; Messung und Quellen in der Betriebsnotiz",
     "dokumentation": "https://docs.cognee.ai/",
@@ -20,20 +25,22 @@
     "COGNEE_COGNIFY_ENABLED": "muss zusaetzlich exakt 1 sein, bevor der Graph gebaut wird; loest Modellkosten aus (Standard: aus)"
   },
   "variablen": {
-    "COGNEE_BASE_URL": "https-Adresse der Instanz; Host muss in instanz.erlaubte_hosts stehen",
-    "COGNEE_TENANT": "Mandant dieser Laufzeit; muss in mandanten stehen und freigegeben sein",
+    "COGNEE_BASE_URL": "https-Adresse der Instanz ohne Pfad; Host muss exakt in instanz.erlaubte_hosts stehen",
+    "COGNEE_TENANT": "Mandant dieser Laufzeit; muss in mandanten stehen",
+    "COGNEE_ROLE": "aufnahme, lesen-claude oder lesen-hermes; bestimmt, welche Wirkungen diese Laufzeit auslösen darf (rollen)",
     "COGNEE_AUTH_MODE": "api_key (Standard) oder proxy (der Proxy der Claude-Umgebung setzt den Kopf X-Api-Key ein, der Adapter sendet dann keinen Schluessel)",
-    "COGNEE_API_KEY": "nur bei api_key: Dienstschluessel des Mandanten, Kopf X-Api-Key; Wert nur im Geheimnisspeicher"
+    "COGNEE_API_KEY": "nur bei api_key: Dienstschluessel der Rolle, Kopf X-Api-Key; Wert nur im Geheimnisspeicher"
   },
   "freigaben": {
     "instanz_wiederhergestellt_und_gesichert": null,
-    "modell_und_embedding_bestaetigt": null,
     "mandant_und_dienstschluessel_angelegt": null,
-    "rechteprobe_bestanden": null,
+    "modell_und_embedding_bestaetigt": null,
     "aufnahme_agenturwissen": null,
     "graph_bauen_mit_kostenrahmen": null,
+    "rechteprobe_bestanden": null,
     "leser_claude_sitzungen": null,
     "leser_hermes": null,
+    "antwortsuche_mit_kostenrahmen": null,
     "leser_website_chat": null,
     "kundendaten": null
   },
@@ -42,14 +49,31 @@
       "art": "agentur",
       "datensatz_praefix": "nexify-agentur--",
       "datensaetze": {
-        "nexify-agentur--entscheidungen": "DECISIONS.md",
-        "nexify-agentur--stand": "PROGRESS.md, GO-LIVE.md",
-        "nexify-agentur--regeln": "AGENTS.md, CLAUDE.md, Projekt-Skills",
-        "nexify-agentur--betrieb": "docs/04-betrieb, Loesungsregister"
+        "nexify-agentur--entscheidungen": {
+          "inhalt": "DECISIONS.md",
+          "id": null
+        },
+        "nexify-agentur--stand": {
+          "inhalt": "PROGRESS.md, GO-LIVE.md",
+          "id": null
+        },
+        "nexify-agentur--regeln": {
+          "inhalt": "AGENTS.md, CLAUDE.md, Projekt-Skills",
+          "id": null
+        },
+        "nexify-agentur--betrieb": {
+          "inhalt": "docs/04-betrieb, Loesungsregister",
+          "id": null
+        }
       },
-      "freigabe_schluessel": "aufnahme_agenturwissen",
-      "schreiber": ["dienstnutzer aufnahme (dieses Repository, ops/cognee/aufnahme.py)"],
-      "leser": ["dienstnutzer lesen-claude", "dienstnutzer lesen-hermes"]
+      "schreiber": [
+        "Rolle aufnahme (dieses Repository, ops/cognee/aufnahme.py)"
+      ],
+      "leser": [
+        "Rolle lesen-claude",
+        "Rolle lesen-hermes"
+      ],
+      "datensatz_id_hinweis": "Kennung (UUID) des Datensatzes auf der Instanz, nicht geheim; wird nach der ersten Aufnahme eingetragen. Ohne Kennung sucht der Adapter nicht: Leser sprechen Datensaetze ueber die Kennung an, weil Namen je Eigentuemer gelten (nicht an der Instanz geprueft)."
     }
   },
   "kundenmandanten": {
@@ -59,40 +83,92 @@
   },
   "quellen": {
     "aufnehmen": [
-      {"muster": "DECISIONS.md", "datensatz": "nexify-agentur--entscheidungen"},
-      {"muster": "PROGRESS.md", "datensatz": "nexify-agentur--stand"},
-      {"muster": "GO-LIVE.md", "datensatz": "nexify-agentur--stand"},
-      {"muster": "AGENTS.md", "datensatz": "nexify-agentur--regeln"},
-      {"muster": "CLAUDE.md", "datensatz": "nexify-agentur--regeln"},
-      {"muster": ".claude/skills/*/SKILL.md", "datensatz": "nexify-agentur--regeln"},
-      {"muster": "skills/*/SKILL.md", "datensatz": "nexify-agentur--regeln"},
-      {"muster": "docs/04-betrieb/*.md", "datensatz": "nexify-agentur--betrieb"},
-      {"muster": "config/loesungsregister.json", "datensatz": "nexify-agentur--betrieb"}
+      {
+        "muster": "DECISIONS.md",
+        "datensatz": "nexify-agentur--entscheidungen"
+      },
+      {
+        "muster": "PROGRESS.md",
+        "datensatz": "nexify-agentur--stand"
+      },
+      {
+        "muster": "GO-LIVE.md",
+        "datensatz": "nexify-agentur--stand"
+      },
+      {
+        "muster": "AGENTS.md",
+        "datensatz": "nexify-agentur--regeln"
+      },
+      {
+        "muster": "CLAUDE.md",
+        "datensatz": "nexify-agentur--regeln"
+      },
+      {
+        "muster": ".claude/skills/*/SKILL.md",
+        "datensatz": "nexify-agentur--regeln"
+      },
+      {
+        "muster": "skills/*/SKILL.md",
+        "datensatz": "nexify-agentur--regeln"
+      },
+      {
+        "muster": "docs/04-betrieb/*.md",
+        "datensatz": "nexify-agentur--betrieb"
+      },
+      {
+        "muster": "config/loesungsregister.json",
+        "datensatz": "nexify-agentur--betrieb"
+      }
     ],
     "nie_aufnehmen": [
-      ".env", ".env.*", "*.env", "*.pem", "*.key", "*.p12",
-      "evidence/*", "reference/*", "node_modules/*", ".git/*", "media/*",
-      "apps/shop-api/*", "db/*", "backend/*", "test_reports/*", "memory/*"
+      ".env",
+      ".env.*",
+      "*.env",
+      "*.pem",
+      "*.key",
+      "*.p12",
+      "evidence/*",
+      "reference/*",
+      "node_modules/*",
+      ".git/*",
+      "media/*",
+      "apps/shop-api/*",
+      "db/*",
+      "backend/*",
+      "test_reports/*",
+      "memory/*"
     ],
-    "nie_aufnehmen_begruendung": "Geheimnisse, Laufzeit- und Kundendaten, personenbezogene Daten ohne Rechtsgrundlage, Belege mit Sitzungsinhalten, fremde Referenzstaende. Jede Datei wird zusaetzlich auf Geheimnis-Muster geprueft; ein Fund bricht den ganzen Lauf ab."
+    "nie_aufnehmen_begruendung": "Geheimnisse, Laufzeit- und Kundendaten, personenbezogene Daten ohne Rechtsgrundlage, Belege mit Sitzungsinhalten, fremde Referenzstaende. Den Schutz traegt die Positivliste: der Adapter nimmt nur Pfade an, die dort stehen, und nur in den dort genannten Datensatz. Der Abgleich auf Geheimnis-Muster dahinter ist ein Musterabgleich, kein Schutz; ein Fund bricht den ganzen Lauf ab."
   },
   "grenzen": {
     "max_dateien_je_lauf": 80,
     "max_bytes_je_datei": 400000,
     "zeitlimit_sekunden": 30,
     "wiederholungen": 2,
-    "wiederholen_bei_status": [502, 503, 504],
-    "nie_wiederholen": "Aufnahme und Graphbau werden nie automatisch wiederholt (unbekanntes Ergebnis wird als ergebnis_unbekannt gemeldet); 4xx einschliesslich 401, 403, 409 und 422 nie. Wiederholt werden nur lesende Aufrufe (health, datasets, search).",
+    "wiederholen_bei_status": [
+      502,
+      503,
+      504
+    ],
+    "nie_wiederholen": "Aufnahme, Graphbau und Antwort-Sucharten (Modellkosten) werden nie automatisch wiederholt; unbekanntes Ergebnis wird als ergebnis_unbekannt gemeldet. 4xx nie. Wiederholt werden nur health, datasets und die einfache Suche, hoechstens zweimal mit 2 und 4 Sekunden Pause.",
     "suchart_standard": "CHUNKS",
-    "treffer_standard": 8
+    "treffer_standard": 8,
+    "treffer_max": 25,
+    "max_antwort_bytes": 2000000,
+    "zeitlimit_hinweis": "Gesamtfrist je Aufruf im echten Transport; der Adapter begrenzt sie auf hoechstens 60 Sekunden."
   },
   "idempotenz": {
-    "dokumentname": "<pfad mit Unterstrichen>@<erste 12 Zeichen von sha256 des Inhalts>.<endung>",
-    "quelle": "Cognee-Dokumentation, Seite add: gleicher Inhalt erneut ist ein No-op; geaenderter Inhalt unter gleichem Namen ergibt 409",
+    "dokumentname": "Pfad mit ~ statt Schraegstrich; eine neue Fassung traegt denselben Namen",
+    "quelle": "Cognee-Dokumentation, Seite add: gleicher Inhalt erneut ist ein No-op (Abgleich ueber die Inhaltspruefsumme); 409 bedeutet, dass die Datei im Datensatz mit anderem Inhalt vorliegt",
+    "veraltete_fassung": "409 wird als fassung_veraltet gemeldet und nicht als Erfolg gewertet. Die Abloesung (PATCH /api/v1/update laut Dokumentation) ist nicht gebaut; sie wird nach der Wiederherstellung an /openapi.json geprueft und braucht eine eigene Freigabe.",
     "live_geprueft": false
   },
   "modelle": {
-    "projektvorgabe": {"id": "deepseek/deepseek-v4.1-flash-1017", "reasoning": "high", "quelle": "config/llm-policy.json"},
+    "projektvorgabe": {
+      "id": "deepseek/deepseek-v4.1-flash-1017",
+      "reasoning": "high",
+      "quelle": "config/llm-policy.json"
+    },
     "instanz_llm_2026_11_14": {
       "LLM_PROVIDER": "custom",
       "LLM_MODEL": "openai/openrouter/deepseek-v4.1-flash-1017",
@@ -110,5 +186,73 @@
     "inhaberentscheidung_embedding": null,
     "adapter_ruft_selbst_ein_modell": false
   },
-  "nicht_im_adapter": ["loeschen und vergessen (nur Inhaber, Weg in der Betriebsnotiz)", "Mandanten, Rollen und Schluessel anlegen", "Server, Container, DNS, Cloudflare"]
+  "nicht_im_adapter": [
+    "loeschen und vergessen (nur Inhaber, Weg in der Betriebsnotiz)",
+    "Abloesen veralteter Fassungen (noch nicht gebaut)",
+    "Mandanten, Rollen und Schluessel anlegen",
+    "Server, Container, DNS, Cloudflare"
+  ],
+  "freigaben_hinweis": "Der Adapter wertet jede Freigabe aus, auch fuer lesende Aufrufe. leser_website_chat und kundendaten haben im Adapter keine Rolle: auch auf true gesetzt oeffnen sie nichts.",
+  "rollen": {
+    "hinweis": "Lesbare Fassung der Regeln im Code (ops/cognee/cognee_client.py, ROLLEN und FREIGABEN); ein Test haelt beide gleich. Jede Wirkung braucht den Hauptschalter, die Freigabe der Rolle und die Freigaben der Wirkung.",
+    "aufnahme": {
+      "freigabe": "aufnahme_agenturwissen",
+      "wirkungen": [
+        "zustand",
+        "datensaetze",
+        "aufnehmen",
+        "graph_bauen"
+      ]
+    },
+    "lesen-claude": {
+      "freigabe": "leser_claude_sitzungen",
+      "wirkungen": [
+        "zustand",
+        "datensaetze",
+        "suchen",
+        "antwortsuche"
+      ]
+    },
+    "lesen-hermes": {
+      "freigabe": "leser_hermes",
+      "wirkungen": [
+        "zustand",
+        "datensaetze",
+        "suchen",
+        "antwortsuche"
+      ]
+    },
+    "freigaben_je_wirkung": {
+      "zustand": [
+        "instanz_wiederhergestellt_und_gesichert"
+      ],
+      "datensaetze": [
+        "instanz_wiederhergestellt_und_gesichert",
+        "mandant_und_dienstschluessel_angelegt"
+      ],
+      "aufnehmen": [
+        "instanz_wiederhergestellt_und_gesichert",
+        "mandant_und_dienstschluessel_angelegt"
+      ],
+      "graph_bauen": [
+        "instanz_wiederhergestellt_und_gesichert",
+        "mandant_und_dienstschluessel_angelegt",
+        "modell_und_embedding_bestaetigt",
+        "graph_bauen_mit_kostenrahmen"
+      ],
+      "suchen": [
+        "instanz_wiederhergestellt_und_gesichert",
+        "mandant_und_dienstschluessel_angelegt",
+        "rechteprobe_bestanden",
+        "modell_und_embedding_bestaetigt"
+      ],
+      "antwortsuche": [
+        "instanz_wiederhergestellt_und_gesichert",
+        "mandant_und_dienstschluessel_angelegt",
+        "rechteprobe_bestanden",
+        "modell_und_embedding_bestaetigt",
+        "antwortsuche_mit_kostenrahmen"
+      ]
+    }
+  }
 }
