@@ -55,7 +55,10 @@ test('chat JSON and SSE hide provider and transport error details while the serv
         assert.doesNotMatch(body, new RegExp(secret));
         assert.doesNotMatch(body, /fixture-key/);
         // Der Besucher sieht nur den festen Code, nie die Ursache.
-        assert.doesNotMatch(body, /upstream_http|network|invalid_response|ECONNREFUSED|429/);
+        // Die zufällige Gesprächskennung zählt nicht dazu: Eine UUID mit der Ziffernfolge "429" ist keine Ursache.
+        const visible = body.replace(/local-[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}/g, '');
+        if (streaming) assert.notEqual(visible, body, 'die Gesprächskennung wurde gefunden und entfernt');
+        assert.doesNotMatch(visible, /upstream_http|network|invalid_response|ECONNREFUSED|429/);
         // Genau eine Protokollzeile mit unterscheidbarer Ursache und ohne Geheimnis, Adresse oder Nutzertext.
         assert.equal(logged.length, 1);
         const entry = JSON.parse(logged[0]);
