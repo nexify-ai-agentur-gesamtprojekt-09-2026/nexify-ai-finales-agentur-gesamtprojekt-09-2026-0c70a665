@@ -104,7 +104,7 @@ export function buildSystemPrompt(input: { locale: GuidanceLocale; pagePath: str
   const pagePath = safePagePath(input.pagePath);
   const site = guidanceSite(pagePath);
   const pages = guidancePages(site);
-  const pageLines = pages.map((page) => `- [${page.label}](${page.path}) — ${page.fit}`);
+  const pageLines = pages.map((page) => `- [${page.label}](${page.path}) – ${page.fit}`);
   const shared = [
     'WAHRHAFTIGKEIT',
     '- Du bist ein KI-System. Gib dich nie als Mensch, als Pascal oder als Mitarbeiterin oder Mitarbeiter aus. Fragt jemand, ob ein Mensch oder eine KI antwortet, antworte wahrheitsgemäß in einem Satz und führe das Gespräch fort.',
@@ -334,6 +334,14 @@ export interface OutputGuard {
 
 const MAX_BLOCK_CHARS = 6000;
 const FORCE_RELEASE_CHARS = 480;
+
+/**
+ * Satzzeichen wie auf der Website: Der Gedankenstrich ist der Halbgeviertstrich mit Leerzeichen.
+ * Der Geviertstrich aus Modellantworten wird ersetzt; vorhandene Abstände bleiben unverändert.
+ */
+export function germanDashes(text: string): string {
+  return text.replace(/(\S)\u2014(?=\S)/gu, '$1 \u2013 ').replace(/\u2014/gu, '\u2013');
+}
 const ABBREVIATION = /(?:^|[\s(])(?:ca|bzw|inkl|zzgl|exkl|ggf|evtl|usw|etc|max|min|mind|vgl|nr|approx|incl|excl|env|circa|z|b|u|a|d|h|e|g|i)\.$/iu;
 
 /**
@@ -373,7 +381,7 @@ export function createOutputGuard(options: { locale: GuidanceLocale; allowedAmou
       if (suppressLine) continue;
       const kind = claimsToBeHuman(piece) ? 'human_claim' : hasUnapprovedAmount(piece, allowed) ? 'unapproved_amount' : null;
       if (!kind) {
-        out += piece;
+        out += germanDashes(piece);
         continue;
       }
       suppressLine = true;

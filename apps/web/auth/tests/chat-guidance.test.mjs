@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import {
   APPROVED_PRICE_FACTS, CHAT_GUIDANCE_VERSION, NEXIFY_GUIDANCE_PAGES, TEILEKLAR_GUIDANCE_PAGES,
-  buildSystemPrompt, claimsToBeHuman, createOutputGuard, formatBriefing, guidanceSite, hasUnapprovedAmount,
+  buildSystemPrompt, claimsToBeHuman, createOutputGuard, formatBriefing, germanDashes, guidanceSite, hasUnapprovedAmount,
   parseBriefing, safePagePath, sanitizeClientHistory, visitorAmounts,
 } from '../../lib/chat-guidance.ts';
 
@@ -189,4 +189,16 @@ test('browser history is bounded context: no system turns, no control characters
   assert.match(many.at(-1).content, /^Beitrag 59 /);
   assert.ok(many.every(turn => turn.content.length <= 2400));
   assert.ok(many.reduce((sum, turn) => sum + turn.content.length, 0) <= 12000);
+});
+
+test('model answers use the en dash of the website instead of the em dash', () => {
+  assert.equal(germanDashes('bringen \u2014 mehr Anfragen'), 'bringen \u2013 mehr Anfragen');
+  assert.equal(germanDashes('Auftritt\u2014oder beides'), 'Auftritt \u2013 oder beides');
+  assert.equal(germanDashes('ohne Strich'), 'ohne Strich');
+  for (const size of [3, 7, 500]) {
+    const guard = run('Was soll die Website vor allem bringen \u2014 mehr Anfragen aus der Region, oder beides? Danke\u2014gern.', {}, size);
+    assert.ok(!guard.text.includes('\u2014'), 'kein Geviertstrich in der Antwort');
+    assert.ok(guard.text.includes('bringen \u2013 mehr Anfragen'));
+    assert.ok(guard.text.includes('Danke \u2013 gern.'));
+  }
 });

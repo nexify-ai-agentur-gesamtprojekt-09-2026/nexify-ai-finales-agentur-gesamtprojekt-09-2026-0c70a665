@@ -15,8 +15,6 @@ import type { PublicPage } from "../lib/page-types";
 import { translations, type Locale } from "../lib/i18n";
 import {ActionButton,type ActionVariant} from './ActionControl';
 import ProjectFilesPanel from './ProjectFilesPanel';
-import './ShellAtelier.css';
-import './ChatAtelier.css';
 import './AtelierSystem.css';
 
 type Intent = "choose" | "quote" | "booking" | "marketing";
@@ -247,6 +245,15 @@ export default function Workspace({children,pages,accountControl,initialLocale='
     en:{title:"Parts, vehicle and workshop",body:"For which vehicle are you looking for a part or a workshop service? Give make, model, year and your request.",eyebrow:"What would you like to start with?",placeholder:"Enter the vehicle and the part you need …",send:"Describe your request",mode:"Parts request"},
   }[locale];
   const pathname=useSitePathname();
+  // Solange die Haupthandlung des Kopfbereichs sichtbar ist, öffnet sie selbst das Gespräch:
+  // der schwebende Schalter tritt mobil zurück und liegt nicht über dem ersten Bildschirm.
+  useEffect(()=>{
+    const root=workspaceRoot.current,action=root?.querySelector('[data-testid="hero-project-link"]');
+    if(!root||!action||typeof IntersectionObserver==='undefined')return;
+    const observer=new IntersectionObserver(([entry])=>{root.dataset.heroActionVisible=String(entry.isIntersecting);});
+    observer.observe(action);
+    return()=>{observer.disconnect();delete root.dataset.heroActionVisible;};
+  },[pathname]);
   const currentPage=pages.find(page=>page.path===pathname);
   const site=(currentPage?currentPage.site_context==="teileklar":pathname.startsWith("/teileklar"))?"teileklar":"nexify";
   const headerCta=site==="teileklar"?{href:"/teileklar/fahrzeug-und-passung",label:{de:"Fahrzeug wählen",nl:"Voertuig kiezen",fr:"Choisir le véhicule",en:"Choose vehicle"}[locale]}:{href:"/kontakt",label:{de:"Projektgespräch anfragen",nl:"Projectgesprek aanvragen",fr:"Demander un échange projet",en:"Request a project conversation"}[locale]};
@@ -265,7 +272,9 @@ export default function Workspace({children,pages,accountControl,initialLocale='
   useEffect(() => {
     // The URL is authoritative so server-rendered translations and SEO agree.
     const query=window.matchMedia("(max-width: 820px)");
-    const preferredOpen=()=>{try{const saved=sessionStorage.getItem("nx-chat-open");return saved==="1"||(saved===null&&site==="nexify");}catch{return site==="nexify";}};
+    // Unter 1200 px Fensterbreite bleibt der Seite ihre volle Spalte: die Scheibe startet eingeklappt, bis jemand sie öffnet.
+    const roomy=()=>window.innerWidth>=1200;
+    const preferredOpen=()=>{try{const saved=sessionStorage.getItem("nx-chat-open");return saved==="1"||(saved===null&&site==="nexify"&&roomy());}catch{return site==="nexify"&&roomy();}};
     try { setChatWidthState(readChatWidth()); } catch {}
     setMobile(query.matches);setOpen(!query.matches&&preferredOpen());
     const resized=()=>{setMobile(query.matches);setOpen(!query.matches&&preferredOpen());};query.addEventListener("change",resized);
@@ -377,7 +386,7 @@ export default function Workspace({children,pages,accountControl,initialLocale='
   }
 
   const launcherLabel=site==="teileklar"?({de:"TEILEKLAR Hilfe",nl:"TEILEKLAR hulp",fr:"Aide TEILEKLAR",en:"TEILEKLAR help"} as const)[locale]:t.open;
-  return <UIContext.Provider value={{locale,t,session:ready?{csrf:csrf.current}:null,chatReady:ready}}><div ref={workspaceRoot} className={`workspace-shell site-${site} ${open?"is-open":"is-closed"}`} style={open?chatWidthStyle(chatWidth,mobile):undefined}>
+  return <UIContext.Provider value={{locale,t,session:ready?{csrf:csrf.current}:null,chatReady:ready}}><div ref={workspaceRoot} id="atelier" className={`workspace-shell site-${site} ${open?"is-open":"is-closed"}`} style={open?chatWidthStyle(chatWidth,mobile):undefined}>
     <div className="website" inert={mobile&&open?true:undefined} aria-hidden={mobile&&open?true:undefined}>
       <a className="skip-link" href="#page-content" onClick={event=>{event.preventDefault();const main=document.getElementById("page-content");main?.focus({preventScroll:true});main?.scrollIntoView({block:"start"});}}>{locale==="de"?"Zum Inhalt":locale==="nl"?"Naar de inhoud":locale==="fr"?"Aller au contenu":"Skip to content"}</a>
       {site==='teileklar'?<CommerceHeader/>:<header className="site-header" data-testid="site-header"><Link href="/" className="brand" aria-label={`NeXify AI · ${locale==='de'?'Startseite':'Home'}`}><span className="brand-signet" aria-hidden="true"/><span className="brand-word">Ne<strong className="brand-x">X</strong>ify <span className="brand-ai">AI</span><small>{t.footer}</small></span></Link>

@@ -7,7 +7,7 @@ const REVEAL = ".hc-intro,.hc-gallery-card,.hc-section-heading,.hc-service-detai
 
 /**
  * Light and depth for the home page (docs/design/startseite-referenz-2026-11-13.md, R9 to R11).
- * Writes CSS variables only; every visible value lives in HomeReference.css.
+ * Writes CSS variables only; every visible value lives in AtelierSystem.css.
  * Nothing runs under reduced motion; without script the page shows complete and still.
  */
 export default function HomeEffects() {

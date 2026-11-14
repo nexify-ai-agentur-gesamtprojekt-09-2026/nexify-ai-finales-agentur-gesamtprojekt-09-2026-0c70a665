@@ -263,8 +263,13 @@ const journeyCopy:Record<Locale,Record<"nexify"|"teileklar",{eyebrow:string;titl
  }
 };
 
-function OrientationStarters({locale,site,label,onChoose}:{locale:Locale;site:"nexify"|"teileklar";label:string;onChoose:(seed:string)=>void}){
- return <div className="orientation-starters" role="group" aria-label={label}>{starters[locale][site].map(([title,seed],index)=><button key={title} type="button" className="orientation-starter" onClick={()=>onChoose(seed)}><span className="orientation-starter-index" aria-hidden="true">0{index+1}</span><span className="orientation-starter-copy"><strong>{title}</strong><small>{starterDetails[locale][site][index]}</small></span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 12h16m-7-7 7 7-7 7"/></svg></button>)}</div>;
+/** Das Eingabefeld wächst mit dem Text (bis zur Grenze aus dem Stylesheet) und schrumpft nach dem Senden zurück. */
+function useAutoGrow(field:{current:HTMLTextAreaElement|null},value:string){
+ useEffect(()=>{const node=field.current;if(!node)return;node.style.height="auto";node.style.height=node.scrollHeight+"px";},[field,value]);
+}
+
+function OrientationStarters({locale,site,label,onChoose,chosen}:{locale:Locale;site:"nexify"|"teileklar";label:string;onChoose:(seed:string)=>void;chosen?:string}){
+ return <div className="orientation-starters" role="group" aria-label={label}>{starters[locale][site].map(([title,seed],index)=><button key={title} type="button" className="orientation-starter" aria-pressed={chosen===seed} onClick={()=>onChoose(seed)}><span className="orientation-starter-index" aria-hidden="true">0{index+1}</span><span className="orientation-starter-copy"><strong>{title}</strong><small>{starterDetails[locale][site][index]}</small></span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 12h16m-7-7 7 7-7 7"/></svg></button>)}</div>;
 }
 
 function OrientationJourney({locale,site,step=0}:{locale:Locale;site:"nexify"|"teileklar";step?:number}){
@@ -390,7 +395,15 @@ function ServerOrientationChat({locale,pagePath,pages,onActivityChange,onUnavail
  useEffect(()=>{mounted.current=true;return()=>{mounted.current=false;controller.current?.abort();};},[]);
  useEffect(()=>{onActivityChange?.(busy);return()=>onActivityChange?.(false);},[busy,onActivityChange]);
  // Während die Antwort wächst, bleibt das Ende im Blick – außer der Besucher hat nach oben geblättert.
- useEffect(()=>{const node=scroller.current;if(node&&pinned.current)node.scrollTop=node.scrollHeight;},[turns,phase]);
+ // Dem Gespräch folgen, aber nie über den Anfang der letzten eigenen Nachricht hinaus: sie bleibt ganz sichtbar.
+ useEffect(()=>{
+  const node=scroller.current;if(!node||!pinned.current)return;
+  const own=node.querySelectorAll<HTMLElement>(".orientation-message.role-user"),last=own[own.length-1];
+  const bottom=node.scrollHeight-node.clientHeight;
+  const top=last?node.scrollTop+last.getBoundingClientRect().top-node.getBoundingClientRect().top-24:bottom;
+  node.scrollTop=Math.max(0,Math.min(bottom,top));
+ },[turns,phase]);
+ useAutoGrow(composerInput,draft);
  const nextId=(role:string)=>`${role}-${++sequence.current}`;
 
  async function send(value:string,options:{retry?:boolean}={}){
@@ -429,7 +442,7 @@ function ServerOrientationChat({locale,pagePath,pages,onActivityChange,onUnavail
   {problem&&<div className="orientation-problem" role="alert"><p>{phase==="limited"?state.limited:state.failed}</p><div className="orientation-problem-actions"><button type="button" className="outline-button" onClick={()=>void send(pending.current,{retry:true})}>{state.retry}</button><SiteLink className="outline-button" href="/kontakt">{state.contact} <span aria-hidden="true">→</span></SiteLink></div></div>}
   {users.length>0&&<OrientationJourney locale={locale} site={site} step={step}/>}
   {site==="nexify"&&latestBriefing&&<ProjectBriefing locale={locale} questions={users.map(turn=>turn.text)} prepared={latestBriefing.text}/>}
-  {turns.length===0&&!busy&&<OrientationStarters locale={locale} site={site} label={text.label} onChoose={seed=>{setDraft(seed);composerInput.current?.focus();}}/>}
+  {turns.length===0&&!busy&&<OrientationStarters locale={locale} site={site} label={text.label} chosen={draft} onChoose={seed=>{setDraft(seed);composerInput.current?.focus();}}/>}
   {turns.length>0&&!busy&&<div className="orientation-followup">{site==="nexify"&&!latestBriefing&&users.length>=2&&!problem&&<button type="button" className="outline-button" onClick={()=>void send(state.briefRequest)}>{state.brief}</button>}<button type="button" className="text-button orientation-restart" onClick={restart}>{state.restart}</button></div>}
   </div>
   <form className="orientation-composer" onSubmit={submit}><label htmlFor="orientation-message">{text.label}</label><textarea ref={composerInput} id="orientation-message" maxLength={MESSAGE_LIMIT} rows={2} value={draft} onChange={event=>setDraft(event.target.value)} onKeyDown={onKeyDown} placeholder={turns.length?state.reply:text.placeholder} aria-describedby="orientation-keys" enterKeyHint="send" required/><span id="orientation-keys" className="visually-hidden">{state.keys}</span><div className="orientation-composer-actions">{draft.length>=MESSAGE_LIMIT-100&&<span className="orientation-counter" aria-live="polite">{draft.length}/{MESSAGE_LIMIT} <span className="visually-hidden">{state.counter}</span></span>}{busy?<button type="button" className="outline-button" onClick={()=>controller.current?.abort()}>{text.stop}</button>:<button className="primary-button" disabled={!draft.trim()}>{text.send} <span aria-hidden="true">→</span></button>}</div></form>
@@ -451,6 +464,7 @@ function StaticOrientationChat({locale,pagePath,pages,onActivityChange,unavailab
  const firstLocale=useRef(locale);
  useEffect(()=>{if(firstLocale.current===locale)return;firstLocale.current=locale;setMessages([]);setError(false);},[locale]);
  const notice=useRef<HTMLDivElement>(null),answered=useRef(0);
+ useAutoGrow(input,draft);
  // Beim Rückfall zuerst den Hinweis mit dem Kontaktweg zeigen, danach wie gewohnt die jeweils neueste Antwort.
  useEffect(()=>{if(!messages.length)return;const first=answered.current===0;answered.current=messages.length;if(first&&unavailable&&notice.current){notice.current.scrollIntoView({block:"end",behavior:"instant"});return;}latest.current?.scrollIntoView({block:"nearest",behavior:"instant"});},[messages,unavailable]);
  function submit(event:FormEvent){
@@ -469,7 +483,7 @@ function StaticOrientationChat({locale,pagePath,pages,onActivityChange,unavailab
   {messages.length>0&&<OrientationJourney locale={locale} site={site}/>}
   {site==="nexify"&&messages.length>0&&<ProjectBriefing locale={locale} questions={messages.map(message=>message.question)}/>}
   {error&&<p className="error-note" role="alert">{text.error}</p>}
-  {messages.length===0&&<OrientationStarters locale={locale} site={site} label={text.label} onChoose={seed=>{setDraft(seed);input.current?.focus();}}/>}
+  {messages.length===0&&<OrientationStarters locale={locale} site={site} label={text.label} chosen={draft} onChoose={seed=>{setDraft(seed);input.current?.focus();}}/>}
   </div>
   <form className="orientation-composer" onSubmit={submit}><label htmlFor="orientation-message">{text.label}</label><textarea ref={input} id="orientation-message" maxLength={1000} rows={2} value={draft} onChange={event=>setDraft(event.target.value)} placeholder={text.placeholder} required/><button className="primary-button" disabled={!draft.trim()}>{text.send} <span aria-hidden="true">→</span></button></form>
   <p className="connection-note">{site==='nexify'&&<span className="orientation-mode-note">{staticModeLabel[locale]}</span>}<ComposerNote locale={locale} site={site} pages={pages}>{text.privacy}</ComposerNote></p>

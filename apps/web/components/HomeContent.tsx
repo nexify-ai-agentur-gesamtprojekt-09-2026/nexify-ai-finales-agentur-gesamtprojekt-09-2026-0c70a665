@@ -9,8 +9,6 @@ import IdentityHero from './IdentityHero';
 import copy from '../../../config/home-concept-copy.json';
 import {brandImages,pageImage,imageAlt,srcSetFor} from '../lib/brand-media';
 import './HomeConcept.css';
-import './HomeReference.css';
-import './HomeAtelier.css';
 import HomeEffects from './HomeEffects';
 
 // Home previews and their detail pages share one verified image assignment.
@@ -61,7 +59,7 @@ export default function HomeContent({home,video,moduleVideos,children,pages}:{ho
   </section>
   <section id="produktwelt" className="hc-section hc-container hc-product-story" aria-labelledby="hc-products-title">
    <header className="hc-section-heading"><div><span className="hc-kicker">{t.productsKicker}</span><h2 id="hc-products-title">{t.productsTitle}</h2></div><p>{t.productsBody}</p></header>
-   <div className="hc-products">{t.products.map(([title,body,action],i)=><SiteLink className="hc-product" key={title} href={products[i]}><figure className="hc-product-art"><img src={productArt[i].src} srcSet={srcSetFor(productArt[i].src)} sizes="(max-width: 900px) 100vw, 50vw" width="2000" height="1125" alt={imageAlt(productArt[i],locale)} loading="lazy" decoding="async"/></figure><div><h3>{title}</h3><p>{body}</p><span className="hc-text-link">{action}</span></div><span className="hc-product-arrow"><DetailArrow direction="out"/></span></SiteLink>)}</div>
+   <div className="hc-products">{t.products.map(([title,body,action],i)=><SiteLink className="hc-product" key={title} href={products[i]}><figure className="hc-product-art"><img src={productArt[i].src} srcSet={srcSetFor(productArt[i].src)} sizes="(max-width: 900px) 100vw, 50vw" width="2000" height="1125" alt={imageAlt(productArt[i],locale)} loading="lazy" decoding="async"/></figure><div><h3>{title}</h3><p>{body}</p><span className="hc-text-link">{action}<DetailArrow/></span></div></SiteLink>)}</div>
   </section>
   <section id="budget" className="hc-section hc-budget hc-container" aria-labelledby="hc-budget-title">
    <div className="hc-budget-story"><header className="hc-section-heading"><span className="hc-kicker">{t.budgetKicker}</span><h2 id="hc-budget-title">{t.budgetTitle}</h2><p>{t.budgetBody}</p><div className="hc-rate" aria-label={`${projectRates[locale].value} ${projectRates[locale].unit}`}><span>{projectRates[locale].eyebrow}</span><strong>{projectRates[locale].value}</strong><small>{projectRates[locale].unit}</small><p>{projectRates[locale].note}</p></div><SiteLink href="/preise-ablauf" className="hc-text-link">{t.budgetLink}<DetailArrow/></SiteLink></header>
