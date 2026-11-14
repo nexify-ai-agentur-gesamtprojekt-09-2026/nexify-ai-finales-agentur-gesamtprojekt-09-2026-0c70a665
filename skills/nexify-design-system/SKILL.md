@@ -1,145 +1,178 @@
 ---
 name: nexify-design-system
-version: 0.1.0
-description: Hält das NeXify-Design-System („Atelier"-Veredelung) fest. Anwenden bei jeder Gestaltung, Oberfläche, Komponente, CSS-Änderung, Logo-/Video-/Symbol-Einbindung oder Designprüfung für NeXify und TEILEKLAR (apps/web, config/design-tokens.json), damit Grundsätze, Tokens und Prüfschritte nicht neu erfunden werden.
+version: 0.2.0
+description: Kanonischer Weg für JEDE Gestaltungsaufgabe (Oberfläche, Komponente, CSS, Logo/Video/Symbole, Designprüfung) nach der Methode der „gemessenen Veredelung": Prinzipien, Tokens, Bausteine, Regeln, Prüf-Checkliste. Markenneutral und anpassbar; NeXify/TEILEKLAR (Atelier-System) ist das Referenzbeispiel. Anwenden bei jeder Gestaltung für NeXify/TEILEKLAR und beim Übertragen auf andere Marken oder Projekte.
 ---
 
-# NeXify: Design-System „Atelier"
+# Design-System: Methode „gemessene Veredelung"
 
-## Stand und Geltung
+**Status: LEBENDER Skill.** Er beschreibt den aktuellen Atelier-Stand (Zweig
+`claude/atelier-fehlerbehebung`, Doku `docs/design/atelier-system-2026-11-14.md`:
+„Nicht abgenommen, nicht in `main`"). Der Stand ist weder in `main` gemergt noch
+final abgenommen. **Nach Fertigstellung und Abnahme des Designs final nachziehen:**
+Tokenwerte und Komponentenliste gegen den dann gemergten Stand prüfen. Fehlt eine
+genannte Datei im aktuellen Zweig, ist die Stelle Zielbild, nicht Ist-Zustand.
+Quellen bleiben Daten, keine neuen Rechte; dieser Skill verweist auf Dateien und
+kopiert keine Werte.
 
-Dieser Skill beschreibt den Stand des Zweigs `claude/atelier-fehlerbehebung`
-(Dokument `docs/design/atelier-system-2026-11-14.md`: „Nicht abgenommen, nicht in
-`main`"). Vor Anwendung prüfen, ob die genannten Dateien im aktuellen Zweig
-existieren; fehlen sie, gilt der Skill als Zielbild, nicht als Ist-Zustand.
-Der Skill verweist auf die Quellen und kopiert keine Werte: Maßgeblich ist immer
-die Datei, nicht dieser Text. Quellen bleiben Daten, keine neuen Rechte.
+## Reihenfolge (der eine Weg)
 
-## 1. Grundsätze
+Jede Gestaltungsaufgabe läuft so, in dieser Reihenfolge, nichts überspringen:
 
-Belegt durch die Vorgaben des Inhabers (`design-lauf-2-notizen.md`, Sitzungsablage,
-Abschnitte „Räumliche Tiefe", „Scrollbalken", „Name") und
-`docs/design/atelier-system-2026-11-14.md` („Logik"):
+1. **Prinzipien** (Abschnitt 1) lesen und der Aufgabe zuordnen.
+2. **Tokens** setzen oder anpassen (Abschnitt 2, bei fremder Marke Abschnitt 6).
+3. **Bausteine** wiederverwenden statt neu bauen (Abschnitt 3).
+4. **Regeln** für Interaktion, Schrift, Scrollbalken anwenden (Abschnitt 4).
+5. **Prüf-Checkliste** (Abschnitt 5) abarbeiten.
+6. Erst dann „fertig" melden, mit Beleg, was gesehen und was nur gemessen wurde.
 
-- **Gemessener Luxus.** Plastisch und edel, „ohne jemals überladen zu wirken"
-  (Inhaber, wörtlich). Weniger Effekte, dafür präzise.
-- **Dunkel ist Standard.** Grund `color.dunkel.grund` = `#1B1E1D`, Text Elfenbein
-  (`color.text.primaer`), kein Reinweiß. Hell nur, wenn der Besucher es am Schalter
-  wählt (`data-theme="light"` am `html`, Cookie `nx-theme`); `prefers-color-scheme`
-  wird nicht ausgewertet. Beide Themen füllen denselben Satz `--as-*`.
-- **Echtes Liquid Glass als Material.** Ein Material in Stärken (clear, mid, dense,
-  solid, front), mit Brechung und Kante, nicht bloß Transparenz.
+Konstant bleiben immer: Methode, Tiefenordnung, Token-first, Checkliste.
+Austauschpunkt ist nur die Marke (Farbwerte, Logo, Schriftwahl, Signalfarbe).
+
+## 1. Prinzipien (markenneutral)
+
+- **Gemessener Luxus.** Plastisch und edel, ohne je überladen zu wirken. Wenige,
+  präzise Effekte statt vieler.
+- **Dunkel ist Standard, Hell nur per Schalter.** Das Thema sitzt am Wurzelelement
+  (`data-theme`), kein Auswerten von `prefers-color-scheme`. Beide Themen füllen
+  denselben Satz Variablen. Grund ist ein getöntes Dunkel, nie Schwarz; Text ein
+  getöntes Hell, nie Reinweiß.
+- **Echtes Glas als Material.** Eine Materialfamilie in Stärken (klar für Schalter,
+  mittel für Kacheln, dicht über Bild/Film/Text, voll für Menüs, Front für den Chat),
+  mit Brechung, Lichtkante und Gegenrand, nicht bloße Transparenz. Keine zweite
+  brechende Schicht in einer Glasfläche.
 - **Eine Lichtrichtung** (oben links): Glanzkante oben/links, Gegenrand unten/rechts,
-  Schatten nach unten, mehrstufig.
+  Schatten nach unten, mehrstufig. Konzentrische Radien, Rundungen mit Volumen.
 - **Feste Tiefenordnung:** Grund, Inhalt, schwebende Flächen (Film, Karten), Glas
-  (Kopfleiste, Chat-Front), Schalter/Menüs. Nummern: `atelierSystem.tiefe.*`.
-- **Lime sparsam.** Nur für die eine Haupthandlung und als kleines Signal (X im Logo,
-  Live-Punkt); nie als Fläche oder Fließtext, nicht grell (`marke.limeSignal`-
-  Beschreibung: Richtungswechsel 05.11.2026). Drei Rollen: Signal, Handlung, Schein.
+  (Kopfleiste, Chat-Front), Schalter und Menüs. Ebenen als Tokens, keine freien
+  `z-index`-Zahlen.
+- **Signalfarbe nur für die eine Haupthandlung und als kleines Signal**, nie als
+  Fläche oder Fließtext, nicht grell. Drei Rollen: Signal (Punkt, Markenzeichen),
+  Handlung (Körper des Hauptschalters), Schein (Licht darunter).
 - **Keine Zierformen:** keine Gitter, Bälle, Zierkreise, Zierlinien, Kästen.
-  Hintergrundlicht ist ruhig und ohne Form (Silber, Hauch Lime).
-- **Keine Fläche hinter dem Chat.** Der Chat ist Glas-Front; es steht kein eigener
-  Kasten dahinter.
-- **Voller Name des Assistenten** überall ausgeschrieben (`ORACLE_NAME` in
-  `Logo.tsx`; Arbeitsfassung, Endform bestätigt der Inhaber).
+  Hintergrundlicht ist ruhig und formlos.
+- **Keine Fläche hinter dem Chat;** er ist selbst die Glas-Front.
 
-## 2. Tokens
+Belege der NeXify-Fassung: Vorgaben des Inhabers (`design-lauf-2-notizen.md`,
+Sitzungsablage: „Räumliche Tiefe", „Scrollbalken", „Name") und der Abschnitt „Logik"
+in `docs/design/atelier-system-2026-11-14.md`.
 
-- Quelle: `config/design-tokens.json` → `node packages/tokens/build-tokens.mjs` →
-  `packages/tokens/tokens.css`, `tokens.json`, `tokens.ts` → CSS-Variablen
-  `--color-*` und weitere Gruppen; das Atelier verkürzt sie in
-  `apps/web/components/AtelierSystem.css` zu `--as-*` (`--as-s-*` Raum, `--as-t-*`
-  Schrift, `--as-z-*` Zeile, `--as-r-*` Radius, `--as-e-*` Ebene).
-- Gruppen siehe `tokens-referenz.md` (nur Namen und Zweck). Das System des Zweigs
-  liegt unter `atelierSystem` (Radius, Raum, Bewegung, Schalter, Chat, Kopf,
-  Zeilenlänge, Schrift, Glas, Tiefe, Logo, Rollbalken, Schwelle).
-- **Regel: Farben und Maße nur aus Tokens, keine rohen Werte.** Neue Werte erst in
-  `config/design-tokens.json`, dann Build, dann nutzen. Gate:
-  `tests/test_public_surface_contract.py` (verbietet Hexfarben, `rgb()`/`hsl()` und
-  Farbwörter in aktiven Stilen; prüft, dass `tokens.*` zur JSON-Quelle passt).
-  Nachweis für Maßzahlen: `node apps/web/scripts/atelier-literale.mjs [--liste]`.
-  Gates nicht abschalten oder umgehen.
-- Media-Queries können keine Variablen lesen; Schwellen stehen unter
-  `atelierSystem.schwelle` nur als Nachweis und werden in CSS gespiegelt.
+## 2. Tokens: Token-first-Disziplin
 
-## 3. Bausteine
+- **Regel: Farben und Maße nur aus Tokens, keine rohen Werte.** Ein neuer Wert
+  kommt zuerst in die Tokenquelle, dann in den Build, dann in die Nutzung.
+- **Aufbau (Referenz NeXify):** `config/design-tokens.json` →
+  `node packages/tokens/build-tokens.mjs` → `packages/tokens/tokens.css|json|ts` →
+  `--color-*` und Gruppenvariablen; `apps/web/components/AtelierSystem.css` kürzt sie
+  zu `--as-*` (`--as-s-*` Raum, `--as-t-*` Schrift, `--as-z-*` Zeile, `--as-r-*`
+  Radius, `--as-e-*` Ebene). Gruppen und Zweck: `tokens-referenz.md`.
+- **Gruppen, die jedes Projekt braucht:** Farben je Thema, Schriftstufen/Zeilenhöhen/
+  Gewichte, Raumraster, Radien, Bewegung (eine Kurve, zwei Dauern), Glasstärken,
+  Tiefenordnung, Schalterhöhen, Logo-Höhen, Scrollbalken, Zeilenlänge (em), Schwellen.
+- **Gate (Referenz):** `tests/test_public_surface_contract.py` verbietet Hexfarben,
+  `rgb()`/`hsl()` und Farbwörter in aktiven Stilen und prüft, dass die erzeugten
+  Tokens zur Quelle passen. Maßzahlen-Nachweis:
+  `node apps/web/scripts/atelier-literale.mjs [--liste]`. Gates nie abschalten; in
+  einem neuen Projekt ein gleichwertiges Gate einführen.
+- Media-Queries können keine Variablen lesen: Schwellen stehen als Token nur zum
+  Nachweis und werden in CSS gespiegelt.
 
-- **Logo** (`apps/web/components/Logo.tsx`): Varianten `voll` (Figur, Wortmarke,
-  Claim), `ohne-claim`, `figur`, `wort` (Wortmarke und Claim ohne Figur); Größen
-  `s`/`m`/`l`. Das X trägt Signal-Lime (hell: Handlungs-Lime). TEILEKLAR hat eine
-  eigene Wortmarke über `wort=` und die Variante `wort`: die NeXify-Figur gehört dort
-  nicht hin. Figur ist eine Datei (`public/brand/nexify-figur.png`); das alte
-  Bildzeichen liegt unter `public/archiv/logo-bis-2026-11-13/`.
-- **SceneVideo / SceneLoop** (`components/SceneVideo.tsx`, `SceneLoop.tsx`): Das
-  Standbild bleibt Poster und Rückfall. Nichts lädt (`preload="none"`) bis Play.
-  Ton nur auf ausdrückliche Wahl. Bei `prefers-reduced-motion` oder Datensparen nur
-  das Bild. Bildflächen: stumm, Schleife, nur im Sichtbereich; nie mehr als ein Film
-  gleichzeitig mit Ton. Fällt das Video aus, verschwindet es, das Bild bleibt.
-- **Zeichensatz** (`components/Zeichen.tsx`): Raster 24, Strich 1.5, runde Enden,
-  Farbe = Textfarbe. Keine Schriftzeichen als Symbol („→", „↗", „›" sind verboten).
-  Neue Zeichen dort ergänzen, nicht inline zeichnen.
-- **Glasflächen:** Stärke nach Rolle wählen (Schalter, Kachel, über Bild/Film/Text,
-  Menü, Chat-Front); Unschärfe je Stärke aus `atelierSystem.glas.*`. In der Chat-Front
-  liegt keine zweite brechende Schicht, nur Tönung und Kante.
-- **Schalterränge:** Haupt (56), Neben, Still, Symbol, jeweils mit Zeilenhöhe aus
-  `atelierSystem.schalter.*` (48/56). Zustände ohne Layoutsprung.
-- **Segmentleiste:** innenliegende Kanten gerade, nur die äußeren Enden rund.
-- **Scrollbalken** (Abschnitt „Rollbalken" in `AtelierSystem.css`, Vorgabe des
-  Inhabers „Auch Scrollbalken gehören zum Design"): schmal, Glas-/Graphit-Ton, runde
-  Enden, Abstand zur Kante (nicht in den Eckradius laufen), Griff beim Zeigen etwas
-  heller, beide Themen; `scrollbar-width`/`scrollbar-color` (Firefox) plus
-  `::-webkit-scrollbar` (Blink/WebKit); `scrollbar-gutter` gegen Layoutsprung. Gilt
-  für Seite, Chat-Verlauf, Textfelder und Menüs.
+## 3. Bausteine (Referenz NeXify, Muster übertragbar)
+
+- **Logo** (`apps/web/components/Logo.tsx`): ein Baustein, vier Varianten (voll,
+  ohne Claim, nur Figur, nur Wort), drei Größen, beide Themen. Die Signalfarbe trägt
+  den einen Buchstaben/Punkt. Eine Teilmarke bekommt eine eigene Wortmarke ohne die
+  Figur der Hauptmarke (TEILEKLAR: Variante `wort`, Text über `wort=`). Figur ist
+  eine einzige Datei, austauschbar.
+- **Szenenvideo** (`components/SceneVideo.tsx`, `SceneLoop.tsx`): Standbild bleibt
+  Poster und Rückfall; nichts lädt (`preload="none"`) bis Start/Sichtbereich; Ton
+  nur auf ausdrückliche Wahl; bei „weniger Bewegung" oder Datensparen nur das Bild;
+  nie mehr als ein Film gleichzeitig mit Ton; bei Fehler verschwindet das Video.
+- **Zeichensatz** (`components/Zeichen.tsx`): ein Raster (24), eine Strichstärke (1.5),
+  runde Enden, Farbe = Textfarbe. Keine Schriftzeichen als Symbole („→", „↗", „›").
+- **Glasflächen**, **Schalterränge** (Haupt, Neben, Still, Symbol; Zustände ohne
+  Layoutsprung), **Segmentleiste** (innenliegende Kanten gerade, nur äußere Enden
+  rund), **Kachel**, **Abschnittskopf**, **Textlink**.
+  Ist-Stand: Gemeinsame React-Bausteine existieren bisher nur für Logo, Zeichen,
+  SceneLoop; die übrigen sind CSS-Muster (siehe Abschnitt 7).
+- **Scrollbalken** (Abschnitt „Rollbalken" in `AtelierSystem.css`; Inhaber: „Auch
+  Scrollbalken gehören zum Design"): schmal, Glas-/Graphitton, runde Enden, Abstand
+  zur Kante (nicht in den Eckradius), Griff beim Zeigen etwas heller, beide Themen;
+  `scrollbar-width`/`scrollbar-color` (Firefox) plus `::-webkit-scrollbar`;
+  `scrollbar-gutter` gegen Layoutsprung. Gilt für Seite, Chat, Textfelder, Menüs.
 
 ## 4. Interaktions- und Schriftregeln
 
 - **Einheitlicher Hover:** ein gemessener Hub für alle Schalter und Karten, nicht
-  mal −1, mal −2, mal −4 px. Hinweis zum Ist-Stand: `AtelierSystem.css` enthält noch
-  `translateY(-1px)`, `-2px` und `-3px` nebeneinander; neue Regeln gehören auf einen
-  gemeinsamen Token-Wert, die alten sind zu vereinheitlichen (offen).
-- **Textlinks nie unterstrichen**, weder in Ruhe noch beim Zeigen. Links im
-  Fließtext: Hauptton, Gewicht 600. Unterscheidung über Farbe/Gewicht und Fokusring.
-- **Senden-Pfeil zeigt nach rechts** (Zeichen `pfeil`).
-- **Rückfallschriften mit angeglichener Laufweite** (`apps/web/app/globals.css`:
-  `Inter Rueckfall`, `Jakarta Rueckfall` mit `size-adjust`, `ascent-/descent-/
-  line-gap-override`, gestuft nach Gewicht), damit Zeilen vor und nach dem Schrift-
-  wechsel gleich umbrechen. Neue Hausschrift oder Gewicht: Rückfall neu messen.
-  Bekannt offen: rund 8 px Versatz im Chat beim Laden (Stand 14.11.2026).
-- **Zeilenlänge in `em`, nicht `ch`** (`atelierSystem.zeilenlaenge.kurz/lese/breit`),
-  weil `ch` von der gerade geladenen Schrift abhängt.
-- Schriftstufen und Zeilenhöhen nur aus `atelierSystem.schrift.*`.
+  mal −1, mal −2, mal −4 px. Ist-Stand NeXify: `AtelierSystem.css` mischt noch
+  `translateY(-1px/-2px/-3px)`; auf einen Token-Wert vereinheitlichen (offen).
+- **Textlinks nie unterstrichen**, weder in Ruhe noch beim Zeigen. Fließtext-Links:
+  Hauptton, Gewicht 600; Fokus bleibt sichtbar (Ring).
+- **Senden-Pfeil zeigt nach rechts.**
+- **Rückfallschriften mit angeglichener Laufweite** (`size-adjust`, `ascent-/descent-/
+  line-gap-override`, nach Gewicht gestuft; Referenz `apps/web/app/globals.css`),
+  damit Zeilen vor und nach dem Schriftwechsel gleich umbrechen. Neue Schrift oder
+  Gewicht: Rückfall neu messen. Offen: rund 8 px Versatz im Chat beim Laden.
+- **Zeilenlänge in `em`, nicht `ch`** (hängt von der geladenen Schrift ab).
+- Schriftstufen und Zeilenhöhen nur aus Tokens.
 
 ## 5. Prüf-Checkliste vor „fertig"
 
-Gestaltungsarbeit gilt erst als fertig, wenn alles davon belegt ist (nicht nur
-gemessen, auch angesehen):
+Alles belegen, nicht nur messen, auch ansehen:
 
-1. Breiten 390, 768, 820, 1440, 1920, 2560; auf großen Breiten wirkt keine Seite
-   leer (Formulare, Rechtstexte, kurze Seiten prüfen).
-2. Beide Themen (dunkel Standard, hell per Schalter), Kontrast gegen gerenderten
-   Hintergrund.
+1. Breiten 390, 768, 820, 1440, 1920, 2560; keine Seite wirkt auf großen Breiten leer.
+2. Beide Themen; Kontrast **AA** gegen den gerenderten Hintergrund (Text, Signalfarbe
+   auf Grund, Text auf Signalfarbe).
 3. Tastaturdurchlauf: Reihenfolge, sichtbarer Fokus, Trefferflächen mindestens 48 px.
-4. Chat: Ladezustand, Fehlerzustand, eingeklappt, Rückfallzustand; Höhen 700 bis 1400.
-5. Sprachen NL, FR, EN (und DE): lange Wörter, Umbrüche, Kopfleiste je Sprache.
-6. Keine Konsolenfehler; CLS 0 (auch beim Schriftwechsel).
+4. Chat: Lade-, Fehler-, eingeklappter und Rückfallzustand; Höhen 700 bis 1400.
+5. Sprachen (NeXify: NL, FR, EN, DE): lange Wörter, Umbrüche, Kopfleiste je Sprache.
+6. Keine Konsolenfehler; CLS 0, auch beim Schriftwechsel.
 7. `reduced-motion`, Datensparen, Videofehler: nur Bild, nichts bricht.
-8. Oberflächen tatsächlich angesehen (Screenshot oder Browser), nicht nur per Skript
-   gemessen. Ungesehene Bilder zählen nicht als geprüft.
-9. Gates grün: `tests/test_public_surface_contract.py`, Token-Build ohne Diff,
-   `atelier-literale.mjs` nicht schlechter als Stand.
+8. Oberflächen tatsächlich angesehen (Screenshot/Browser); Ungesehenes gilt nicht als geprüft.
+9. Gates grün: Token-Gate, Token-Build ohne Diff, Literal-Nachweis nicht schlechter.
 
 Die Prüfskripte der Sitzung (`kontrast.js`, `strich.js`, `chat.js`, `kopf.js`,
-`bewegung.js` u. a.) liegen nicht im Repo; ohne sie die Prüfung mit dem Browser
-nachstellen und das im Bericht benennen.
+`bewegung.js`) liegen nicht im Repo; ohne sie im Browser nachstellen und benennen.
 
-## 6. Offene Schritte
+## 6. Anpassen an eine andere Marke / ein anderes Projekt
+
+**Tauschen (Austauschpunkt Marke):**
+
+| Was | Wo (Referenz) |
+| --- | --- |
+| Farbwerte: Grund, Ebene, Fläche, Schrift-Stufen, Schatten je Thema | `color.dunkel.*`, `color.hell.*` in der Tokenquelle |
+| Signal-/Handlungs-/Schein-Farbe | `marke.limeSignal`, `limeHandlung`, `limeSchein` (Namen markenneutral umbenennen) |
+| Schrift: Hausschrift, Rückfall und gemessene `size-adjust`-Werte | `globals.css`, Schriftdateien |
+| Logo: Figur, Wortmarke, Claim, Höhen | `Logo.tsx`, `public/brand/`, `atelierSystem.logo` |
+| Name von Assistent/Teilmarken, Sprachen | Komponenten und Texte |
+
+**Nicht ändern:** Methode, Reihenfolge, Tiefenordnung, Glas-Materialstärken als
+Konzept, Lichtrichtung, Token-first, Hover-/Link-/Scrollbalken-Regeln, Checkliste.
+
+**Palette übertragen (dunkel Standard, optionaler Hell-Schalter, Signal nur Signal):**
+
+1. Dunklen Grund und zwei bis drei Ebenen daraus ableiten (leicht heller, gleicher
+   Farbton); getöntes Hell als Text, kein Reinweiß.
+2. Signalfarbe wählen, die auf dem Grund AA trägt; sie bleibt kleines Signal. Für
+   Hauptschalter eine ruhigere Handlungsfassung, dazu Schrift-auf-Signal-Farbe mit AA.
+3. Hell-Thema nur als Satz derselben Variablen mit eigenen Werten; die Signalfarbe
+   dort dunkler fassen (Referenz: Handlungs-Lime statt Signal-Lime im hellen Logo-X).
+4. Kontraste per Messung gegen den gerenderten Hintergrund prüfen (Checkliste 2),
+   inklusive Glas über wechselndem Hintergrund.
+5. Tokens bauen, Gate laufen lassen, dann erst Bausteine nutzen.
+6. Rückfallschrift für die neue Hausschrift neu messen.
+
+Für eine Teilmarke im selben Projekt: eigene Wortmarke, keine Figur der Hauptmarke,
+Farbwerte weiter aus den Tokens.
+
+## 7. Offene Schritte
 
 | Schritt | Owner | Nächste Aktion |
 | --- | --- | --- |
-| Registrierung dieses Skills in `config/project-skills.json` (hash-gebunden, bewusst nicht in diesem Zweig geändert) | Projektverantwortliche/r | Eintrag samt Hash in eigenem Änderungssatz anlegen, danach `python3 tools/project_skills.py verify` |
-| Merge des Atelier-Zweigs `claude/atelier-fehlerbehebung` in `main` (Skill beschreibt dessen Stand) | Inhaber (Abnahme) | Abnahme, dann Merge; danach Skill auf Ist-Stand prüfen |
-| Uneinheitlicher Hover, alte überlagerte CSS-Abschnitte, Literale (517 von 2811 laut Dokument) | Design-Umsetzung | Auf Token-Wert vereinheitlichen, Gliederung durchziehen |
+| Registrierung in `config/project-skills.json` (hash-gebunden, bewusst nicht in diesem Zweig geändert) | Projektverantwortliche/r | Eintrag samt Hash in eigenem Änderungssatz, danach `python3 tools/project_skills.py verify` |
+| Atelier-Zweig noch nicht in `main`, nicht abgenommen | Inhaber | Abnahme, Merge, danach Skill-Nachzug: Tokenwerte und Komponentenliste gegen den gemergten Stand prüfen |
+| Uneinheitlicher Hover, alte überlagerte CSS-Abschnitte, Literale (517 von 2811 laut Doku) | Design-Umsetzung | Auf Token-Werte vereinheitlichen |
 | Gemeinsame React-Bausteine (Schalter, Segmentleiste, Glasfläche, Kachel, Abschnittskopf, Textlink), Zeichen-/Palettenblatt | Design-Umsetzung | Nach Abnahme planen |
-| Endform des Assistentennamens | Inhaber | Bestätigen |
+| Endform des Assistentennamens („AIFly ORACLE with NeXify AI Intelligence by NeXify" ist Arbeitsfassung) | Inhaber | Bestätigen |
 
 Fälligkeiten legt der Inhaber fest; hier keine erfunden.
