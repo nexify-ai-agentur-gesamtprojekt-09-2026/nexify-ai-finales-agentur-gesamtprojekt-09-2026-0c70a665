@@ -981,7 +981,7 @@ html[data-theme='light'] #atelier .nx-logo-x{color:var(--as-accent)}
    Innenkante sammelt Licht. Je Seite um --kopf-einzug kuerzer; Inhalt haelt 32 px Abstand zur eigenen Glaskante. */
 #atelier .site-header{--kopf-einzug:clamp(32px,4.5cqi,72px);--kopf-innen:var(--as-s-8)}
 #atelier[data-scrolled='true'] .site-header{padding-left:calc(var(--layout-page-padding) + var(--kopf-einzug) + var(--kopf-innen));padding-right:calc(var(--layout-page-padding) + var(--kopf-einzug) + var(--as-s-6))}
-#atelier[data-scrolled='true'] .site-header::before{background:var(--as-glass-dense),color-mix(in srgb,var(--as-ground) 34%,transparent);-webkit-backdrop-filter:var(--as-glass-filter-bar);backdrop-filter:var(--as-glass-filter-bar);backdrop-filter:var(--as-glass-filter-bar-lens);box-shadow:var(--as-lens),var(--as-volume),var(--as-depth-raised)}
+#atelier[data-scrolled='true'] .site-header::before{background:var(--as-glass-dense),color-mix(in srgb,var(--as-ground) 34%,transparent);-webkit-backdrop-filter:var(--as-glass-filter-bar);backdrop-filter:var(--as-glass-filter-bar);box-shadow:var(--as-lens),var(--as-volume),var(--as-depth-raised)}
 @container website (max-width:640px){
  #atelier .site-header{--kopf-einzug:0px;--kopf-innen:var(--as-s-2)}
  #atelier[data-scrolled='true'] .site-header{padding-left:calc(var(--layout-page-padding) + var(--as-s-2));padding-right:calc(var(--layout-page-padding) + var(--as-s-1))}
@@ -993,7 +993,10 @@ html[data-theme='light'] #atelier .nx-logo-x{color:var(--as-accent)}
 
 /* ===== Chat-Front: dicke Scheibe ===== */
 /* Die Front ist jetzt in beiden Achsen ein Container (front): Breite schaltet die drei Zustaende, Hoehe die Raumverteilung. */
-#atelier #aifly-panel{container:front/size;-webkit-backdrop-filter:var(--as-glass-filter-front);backdrop-filter:var(--as-glass-filter-front);box-shadow:var(--as-front-edge),var(--as-volume),var(--as-depth-raised),var(--as-ambient-front)}
+/* Die Brechung der Front liegt in ::before, nicht auf der Front selbst: so bleibt die Front kein eigener Hintergrund-Ursprung
+   und die Glasschichten darin (Kopfzone, Eingabe, Schalter) koennen den Verlauf unter sich wirklich brechen. */
+#atelier #aifly-panel::before{inset:0;z-index:-1;border-radius:inherit;background:var(--as-front-sheen),var(--as-front-body);-webkit-mask-image:none;mask-image:none;-webkit-backdrop-filter:var(--as-glass-filter-front);backdrop-filter:var(--as-glass-filter-front)}
+#atelier #aifly-panel{container:front/size;background:none;-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:var(--as-front-edge),var(--as-volume),var(--as-depth-raised),var(--as-ambient-front)}
 /* Leerzustand als eine Komposition: Gastgeber, Frage, Einstiege und Weg stehen als Block in der optischen Mitte;
    kein Loch zwischen Einleitung und Kacheln. Mehr Hoehe vergroessert Figur und Abstaende, nicht die Luecke. */
 #atelier #aifly-panel:has(.orientation-starters) .orientation-content{justify-content:safe center;gap:0;padding-top:var(--as-s-20);padding-bottom:calc(var(--ca-fuss,136px) + var(--as-s-4))}
@@ -1042,6 +1045,17 @@ html[data-theme='light'] #atelier .nx-logo-x{color:var(--as-accent)}
  #atelier #aifly-panel .public-orientation::after{grid-column:2}
 }
 @media(max-width:820px){
- #atelier #aifly-panel{container:front/inline-size;box-shadow:none}
+ #atelier #aifly-panel{container:front/inline-size;background:none;-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:none}
+ #atelier #aifly-panel::before{background:var(--as-sheet-body)}
  #atelier #aifly-panel .public-orientation::after{border-radius:0}
 }
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){#atelier #aifly-panel::before{background:var(--as-ground)}}
+@media(prefers-reduced-transparency:reduce){#atelier #aifly-panel::before{-webkit-backdrop-filter:none;backdrop-filter:none;background:var(--as-ground)}}
+/* Leerzustand: der leere Verlauf nimmt keinen Raum; hohe schmale Front stellt den Gastgeber ueber den Namen. */
+#atelier #aifly-panel:has(.orientation-starters) .orientation-history{flex:none;height:0;min-height:0;margin:0;padding:0;overflow:hidden}
+#atelier #aifly-panel .nx-oracle-name span.panel-identity-subtitle{white-space:nowrap}
+@container front (min-height:1200px) and (max-width:479px){
+ #atelier #aifly-panel .orientation-host{flex-direction:column;align-items:flex-start;gap:var(--as-s-5)}
+ #atelier #aifly-panel .orientation-host-name{margin:0}
+}
+#atelier #aifly-panel:has(.orientation-starters) .orientation-path-quiet{margin-bottom:0}
