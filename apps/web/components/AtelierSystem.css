@@ -1215,3 +1215,6 @@ html[data-theme='light'] #atelier{
 #atelier .home-concept .identity-copy .identity-subtitle{max-width:var(--atelier-system-zeilenlaenge-kurz)}
 #atelier .home-concept .identity-copy .identity-body,#atelier #aifly-panel .orientation-intro p.orientation-intro-body{max-width:var(--atelier-system-zeilenlaenge-lese)}
 #atelier .home-concept .hc-intro p{max-width:var(--atelier-system-zeilenlaenge-breit)}
+
+/* ===== HeroStage ohne Bildflaeche (Unterseiten ohne Motiv): einspaltig, sonst unveraendert wie .identity-hero ===== */
+#atelier .home-concept .identity-hero.is-text-only .identity-scene{grid-template-columns:minmax(0,1fr)}
