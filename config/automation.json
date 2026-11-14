@@ -54,8 +54,32 @@
     {
       "id": "paperclip",
       "tool_exposed": false,
-      "status": "user_selected_not_verified",
-      "use": "Factory Aufgaben/Orchestrierung"
+      "status": "superseded_by_owner_decision_not_pursued",
+      "previous_status": "user_selected_not_verified",
+      "superseded_by": "hermes",
+      "decision": "DECISIONS.md#D-019",
+      "superseded_at": "2026-11-14",
+      "use": "Factory Aufgaben/Orchestrierung (bis D-019; Eintrag bleibt als Historie, war nie verifiziert)"
+    },
+    {
+      "id": "hermes",
+      "tool_exposed": false,
+      "status": "owner_selected_container_reported_not_verified",
+      "decision": "DECISIONS.md#D-019",
+      "use": "Orchestrierungs-Laufzeit, in der die Rollen arbeiten (NeX fuehrt aus, AIFly ORACLE koordiniert); keine eigene Rolle, keine Quelle von Berechtigungen",
+      "model_policy_ref": "config/llm-policy.json",
+      "candidate_ref": "config/integrations/nexify-team-runtime-candidate.json",
+      "preparation_ref": "ops/hermes/README.md",
+      "observed": {
+        "source": "docs/04-betrieb/server-befund-2026-11-14.md",
+        "container_running_on": "srv1941843",
+        "version_verified": false,
+        "model_and_route_verified": false,
+        "server_configuration_verified": false,
+        "real_model_call_verified": false
+      },
+      "activated_by_repository": false,
+      "production_accepted": false
     },
     {
       "id": "hostinger-vps",

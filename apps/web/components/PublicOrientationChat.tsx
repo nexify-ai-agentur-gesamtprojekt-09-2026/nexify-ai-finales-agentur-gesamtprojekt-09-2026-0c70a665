@@ -398,11 +398,14 @@ function ServerOrientationChat({locale,pagePath,pages,onActivityChange,onUnavail
  const setDraft=useCallback((next:string)=>{draftRef.current=next;setDraftState(next);},[]);
  useEffect(()=>{mounted.current=true;return()=>{mounted.current=false;run.current++;controller.current?.abort();};},[]);
  // Hoehe der Fusszone (Eingabe + Hinweis) als --ca-fuss an der Wurzel: der Verlauf laeuft unter der Eingabe hindurch
- // und haelt unten genau diesen Abstand.
+ // und haelt unten genau diesen Abstand. Beobachtet werden alle Teile der Fusszone und die Flaeche selbst, auch solange
+ // sie nicht angezeigt werden: auf dem Handy startet das Gespraech eingeklappt, die Teile haben dann keine Hoehe. Wer nur
+ // die beim Start sichtbaren Teile beobachtet, misst dort dauerhaft 0 px, und die Eingabe liegt ueber dem Verlauf.
+ // Ohne Messwert (alles ausgeblendet) bleibt die Angabe weg, dann gilt der Vorgabewert des Stylesheets.
  useEffect(()=>{const node=scroller.current?.parentElement;if(!node||typeof ResizeObserver==='undefined')return;
-  const parts=()=>[...node.children].filter(c=>c!==scroller.current&&(c as HTMLElement).offsetHeight>1) as HTMLElement[];
-  const measure=()=>{const h=parts().reduce((sum,c)=>sum+c.offsetHeight+parseFloat(getComputedStyle(c).marginTop||'0'),0);node.style.setProperty('--ca-fuss',Math.round(h)+'px');};
-  const observer=new ResizeObserver(measure);parts().forEach(c=>observer.observe(c));measure();return()=>observer.disconnect();},[phase]);
+  const parts=()=>[...node.children].filter(c=>c!==scroller.current) as HTMLElement[];
+  const measure=()=>{const h=parts().filter(c=>c.offsetHeight>1).reduce((sum,c)=>sum+c.offsetHeight+parseFloat(getComputedStyle(c).marginTop||'0'),0);if(h>0)node.style.setProperty('--ca-fuss',Math.round(h)+'px');else node.style.removeProperty('--ca-fuss');};
+  const observer=new ResizeObserver(measure);observer.observe(node);parts().forEach(c=>observer.observe(c));measure();return()=>observer.disconnect();},[phase]);
  useEffect(()=>{onActivityChange?.(busy);return()=>onActivityChange?.(false);},[busy,onActivityChange]);
  // Während die Antwort wächst, bleibt das Ende im Blick – außer der Besucher hat nach oben geblättert.
  // Dem Gespräch folgen, aber nie über den Anfang der letzten eigenen Nachricht hinaus: sie bleibt ganz sichtbar.

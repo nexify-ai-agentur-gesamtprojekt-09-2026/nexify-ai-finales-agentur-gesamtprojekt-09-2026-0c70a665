@@ -13,6 +13,13 @@ nicht verfolgt; `apps/web/wrangler.jsonc` und `docs/deployment/cloudflare-worker
 sind eine ungenutzte Vorbereitung und kein Auftrag. Die Führungsentscheidung vom
 04.11.2026 (ChatGPT-Sites-Stand) ist im widersprechenden Umfang historisch.
 
+Stand 14.11.2026, 17:42 UTC: Der Satz „Cloudflare wird als Hosting nicht verfolgt“ und
+die Einordnung „kein Auftrag“ sind HISTORIE, überholt durch D-021 in `DECISIONS.md`.
+Vercel ist der heutige Auslieferungsweg und bleibt es, bis ein Umzug gemessen und vom
+Inhaber abgenommen ist; der Umzug von `apps/web` auf Cloudflare ist nach D-021 in
+Prüfung, nichts ist umgeschaltet, der Shop-Dienst bleibt vorerst auf Vercel. Daraus
+folgt kein Auftrag, DNS, Produktion oder einen Tarif zu ändern (D-016, D-017).
+
 Stand 13.11.2026 (HISTORIE, in Teilen überholt durch den Nachtrag vom 14.11.2026
 direkt darunter): Die Domains
 `nexifyai.de` und `nexifyai.cloud` zeigen per DNS nicht auf dieses Vercel-Projekt; die

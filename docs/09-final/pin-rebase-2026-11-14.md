@@ -217,3 +217,139 @@ Die Fassung vom 10.11. liegt unverändert unter `evidence/resize-2026-11-10/supe
 ### Nicht erneuert
 
 Die Läufe Identity-Hero und Public-Experience bestehen ebenfalls; ihre Belege und Pins wurden in dieser Runde **nicht** erneuert. Critical, Public-Fallbacks und Ausnahmeerfassung bleiben offen wegen Entscheidungen des Inhabers (Abschnitt 6, Entscheidungen 1 bis 3). Keine weiteren Pins, keine Seiten- oder Quelldateien geändert.
+
+## 10. Nachtrag vierte Runde (14.11.2026, Zweig `claude/pins-nach-159`, nach PR 159, 160 und 169)
+
+Anlass: Nach dem Merge von PR 159 (`e0c7e38`) waren Quell-Pins veraltet, und `apps/web/auth/tests/browser-public-experience.mjs` prüfte die Filme der Inhaltsseiten an der Klasse `.scene-video`, die seit PR 159 nicht mehr gerendert wird. `tools/_update_register_shas.py` wurde nicht benutzt; jeder Pin ist einzeln mit seiner Belegart gesetzt.
+
+### Rahmen
+
+- Fester Commit aller Läufe: `c566216` (Harness-Nachführung `7ebb3d9`, darauf Merge von `main` `aceb6a7`). Node v22.23.4, Playwright **1.65.0** mit Chromium 158.0.8127.18 (die in `.github/evidence-runner/package.json` festgelegte Version, für diese Runde in der Laufumgebung nachinstalliert).
+- Build für Public-Experience: `node apps/site/scripts/generate-public-data.mjs`, `pnpm --filter @nexify/web build` ohne Installationsschalter (der Lauf verlangt in dieser Betriebsart 404 für Manifest und Worker). Build für PWA, Gleichmacher und Live-Prüfung: beide `generate-public-data.mjs` und `next build` mit `NEXIFY_PUBLIC_INSTALLATION=public-pwa`.
+
+### Harness `browser-public-experience.mjs`
+
+Bis PR 159 galt für `SceneVideo`: `preload="none"` und kein geladenes Medium vor dem Klick. Die Bedingung hing an `.scene-video` und traf seit PR 159 auf kein Element mehr zu; der Lauf wäre bestanden, ohne sie zu prüfen. Jetzt, am Baustein `AtelierFilm`, ohne dass eine bestehende Prüfung entfällt:
+
+- Jeder Film außer dem selbst startenden Hero-Film der Startseite muss ein `AtelierFilm` sein (sonst scheitert der Lauf, statt die Prüfung still zu überspringen), trägt `preload="none"`, hat `readyState` 0, und seine Bytes werden vor dem Klick nicht angefordert.
+- Bedienleiste: mindestens ein Schalter, jeder sichtbar, benannt und bedienbar; die Bedienelemente des Browsers bleiben aus.
+- Untertitel: Eine Spur gibt es nur zusammen mit ihrem Schalter, und sie wird als WebVTT ausgeliefert; der Hero-Film der Startseite behält seine Spur.
+- Start nur auf Klick, je Seite mit Film einmal (de): Der Abspielschalter startet den Film, erst dann werden die Bytes angefordert; der Ton ist mit einem Klick auf den Tonschalter erreichbar; kein anderer Film läuft mit an.
+
+Abweichung von der Inhaberentscheidung vom 13.11.2026 (`docs/design/scene-videos-2026-11-13.md`), durch PR 159 entstanden und hier nur festgehalten, nicht bewertet:
+
+| 13.11.2026 mit `SceneVideo` | seit PR 159 mit `AtelierFilm` | im Lauf |
+|---|---|---|
+| Ein Knopf „Video mit Ton abspielen“ startet den Film **mit Ton** | Der Abspielschalter startet **stumm**; Ton über den zweiten Schalter „Film mit Ton starten“ | gemessen auf 7 Seiten: nach dem Abspielschalter stumm, nach dem Tonschalter mit Ton (`films[].click`); verlangt wird nur, dass der Ton mit einem Klick erreichbar ist |
+| nach dem Start die Bedienelemente des Browsers | eigene Bedienleiste, `controls` aus | geprüft |
+| keine Untertitel (bewusste Abweichung von WCAG 1.2.2) | unverändert keine Spur auf Inhalts-, Galerie- und Kontofilmen | festgehalten (`films[].captions`), nicht verlangt |
+
+Der Installationsmodus desselben Skripts (`TEST_PUBLIC_INSTALLATION=enabled`) erwartet weiter den Worker ohne Cache aus `apps/site`; seit PR 159 liefert `apps/web` einen eigenen Worker mit begrenztem Cache. Dieser Modus wurde nicht geändert und nicht ausgeführt; den heutigen Worker prüft `browser-pwa-offline.mjs`. Ob der alte Modus stillgelegt oder umgeschrieben wird, ist offen.
+
+### Läufe am 14.11.2026 auf `c566216`
+
+| Lauf | Ergebnis | Beleg |
+|---|---|---|
+| `browser-public-experience.mjs` | bestanden: 70 Routen, 10 private Hüllen, 20 Filmzeilen, 7 Klickproben, 0 Fremdanfragen, 0 Seitenfehler | übernommen nach `evidence/consent-ui-2026-10-28/next-public.json`; alte Fassung unter `superseded/next-public.pre-pins-nach-159-2026-11-14.json`; `check_consent_ui` besteht |
+| `browser-text-spacing.mjs` | bestanden: `{"checks":129,"issues":[]}`, 43 Routen | übernommen nach `evidence/resize-2026-11-10/text-spacing.json`; alte Fassung unter `superseded/text-spacing.pre-pins-nach-159-2026-11-14.json`; `check_text_resize_evidence.py` besteht. Durch die Merges von `main` (PR 170 bis 173) wieder veraltet und auf `078bc31` neu erhoben, siehe „Nacharbeit nach unabhängiger Prüfung“ |
+| `browser-pwa-offline.mjs` (Build mit `public-pwa`) | bestanden, 10 Schritte | kein Belegpfad im Repository vorgesehen; Ergebnis nur hier |
+| `tools/gleichmacher.mjs` (lokaler Build) | 44 Seiten, 14 034 Vergleiche, 0 Abweichungen | nur hier |
+| `tools/live-check.mjs` (lokaler Build) | 329 Prüfungen, 2 Befunde: `/api/shop/status` und `/api/shop/products` antworten lokal mit 404, weil kein Shop-Dienst läuft; keine PWA-Befunde | nur hier |
+| `browser-exception-capture.mjs`, vite und next | **nicht bestanden**, unverändert in Schritt 4 (`.request-fallback` erscheint nicht; `.workspace-chat-modes` fehlt) | nicht übernommen; offene Entscheidung 3 aus Abschnitt 6 |
+
+### Nachgezogene Pins (11)
+
+Stand nach der Nacharbeit (unten): Die erste Fassung dieser Runde zog 16 Pins nach; fünf davon sind zurückgenommen und stehen jetzt unter „Bewusst nicht nachgezogen“.
+
+| Datei | alter Pin | neuer Pin | Belegart | Beleg |
+|---|---|---|---|---|
+| `apps/web/auth/tests/browser-public-experience.mjs` | `17cfd1c25cdc…` | `a2a87a07ee3f…` | Browserlauf | eigener Lauf bestanden, bindet die Datei |
+| `apps/web/app/layout.tsx` | `4dacaac6a22c…` | `ec2b970e0336…` | Browserlauf | Public-Experience-Lauf bindet die Datei |
+| `apps/web/app/anmelden/[[...sign-in]]/page.tsx` | `ae015545eb91…` | `96462bb0686e…` | Browserlauf | wie oben; der Titel je Sprache wird im Lauf geprüft (Befund 3 ist behoben) |
+| `apps/web/app/registrieren/[[...sign-up]]/page.tsx` | `ed41b40219ce…` | `fe10ab376d72…` | Browserlauf | wie oben |
+| `evidence/consent-ui-2026-10-28/next-public.json` | `5cbe162f0071…` | `98c7f0da8cce…` | Browserlauf | neu erhobener Beleg |
+| `apps/web/components/PublicInstallation.tsx` | `45040906aa1f…` | `d8f6a143d98c…` | Browserlauf | Text-Spacing-Lauf bindet die Datei (zuletzt bestanden auf `078bc31`, Bytes unverändert); zusätzlich ausgeübt: mit Schalter Manifestverweis und Worker-Registrierung (`browser-pwa-offline`), ohne Schalter kein Verweis und 404 (Public-Experience) |
+| `apps/web/auth/tests/public-experience.test.mjs` | `d057cd534279…` | `7a9168978792…` | grüner Test | `node --test auth/tests/*.test.mjs`: 105 von 105 |
+| `apps/web/scripts/generate-public-data.mjs` | `dca037e16f2c…` | `6b2453410744…` | grüner Test | von `public-experience.test.mjs` (`prepareInstallation`) und `pwa-worker.test.mjs` (`stampWorker`, `workerVersion`) importiert und ausgeführt; beide Builds Exit 0 |
+| `apps/site/pwa/plugin.mjs` | `185be72f2873…` | `9e95bc41449b…` | grüner Test | `public-installation.test.mjs` führt das Plugin aus und prüft genau die geänderte Eigenschaft (Icon `/brand/nexify-figur.png`, Datei vorhanden); `cd apps/site && node --test`: 132 von 132 |
+| `apps/site/tests/public-installation.test.mjs` | `58d24504a122…` | `51497cae7a9c…` | grüner Test | 132 von 132 |
+| `config/page-media-registry.json` | `3613fbbb8c46…` | `c6f740ca020d…` | grüner Test | wie in Abschnitt 4: `public-video-assets.test.mjs` liest die Datei (132 von 132); das Inhaltsurteil REC-MEDIA-01 bleibt offen |
+
+### Bewusst nicht nachgezogen (28)
+
+| Datei | Grund |
+|---|---|
+| `docs/09-final/11-designsystem-definition.md` (`e214973b693b…`, heute `e43b1a694c96…`) | Diff seit Pin: ein Satz, der einen Gestaltungswert festlegt (enge Zeilenhöhe 1,12 statt 1,05). Das ist Anforderungsinhalt; kein Harness bindet das Dokument, kein Test liest den Satz. Der Gleichmacher bestätigt nur, dass alle Seiten denselben Wert tragen, nicht den Wert |
+| `apps/web/app/sitemap.ts` (`1b0316a5fae3…`, heute `cdeb7bcabf0a…`) | seit `9f8ab46` drei Rechtsrouten ergänzt; kein Lauf und kein Test dieser Runde liest die Sitemap |
+| `apps/web/components/HomeContent.tsx`, `IdentityHero.tsx`, `IdentityHero.css`, `WorkspaceRebuild.css`, `apps/site/tests/browser-identity-hero.mjs` | vom Text-Spacing-Lauf gebunden, aber der eigentlich zuständige Identity-Hero-Lauf wurde in dieser Runde nicht erhoben; die schwächere Bindung ersetzt ihn nicht |
+| `apps/web/components/Workspace.tsx`, `PublicOrientationChat.tsx`, `OracleCompanion.tsx`, `PublicRequestFallback.tsx`, `apps/site/src/Auth.tsx`, `config/site-map.json`, `apps/site/tests/browser-critical.mjs`, `tools/check_browser_evidence.py` | hängen am Critical-, Fallback- oder Ausnahme-Lauf; offene Entscheidungen 1 bis 3 |
+| `config/design-tokens.json` (`1482e2fa0e40…`, heute `0a7ab4ed0d4e…`), `packages/tokens/tokens.css` (`218355ed5fdd…`, heute `b15b16adbd33…`), `tokens.json` (`5b9a4eb32842…`, heute `4635c0bd8cc2…`), `tokens.ts` (`5294aa6ed39b…`, heute `8e10ae37b795…`) | zurückgenommen in der Nacharbeit. Der Text-Spacing-Lauf bindet die Dateien, aber auch `browser-identity-hero.mjs` und `browser-contrast-scope.mjs` binden sie, und beide sind in dieser Runde nicht gelaufen. Die Bindung an einen Lauf, der nur Textabstand und 200 % Textgröße misst, ersetzt die zuständigen Läufe nicht |
+| `config/page-explainers.json` (`16c308f422bf…`, heute `967cccc90aba…`) | zurückgenommen in der Nacharbeit. `public-video-assets.test.mjs` prüft nur die Struktur der Datei, nicht die 185 seit dem Pin geänderten Textzeilen; ein grüner Test, der die geänderte Eigenschaft nicht prüft, trägt keinen Pin. REC-CONTENT-01 bleibt offen |
+| `apps/site/tests/browser-pwa.mjs`, `config/presenter-system.json` | kein Lauf in dieser Runde |
+| `PROGRESS.md`, `AGENTS.md` | führende Dokumente; `nexify-stand-halten` und offene Entscheidung 5 |
+| `apps/web/package.json`, `apps/shop-api/requirements.txt`, `requirements-image.txt`, `skills-lock.json` | Abhängigkeitswechsel ohne geprüfte Herkunft, Befunde 4 und 5 |
+
+### Belege der Ausnahmeerfassung nach PR 169
+
+`evidence/observability-integration-2026-10-28/browser-exceptions-next.json` und `browser-exceptions-vite.json` binden unter `build_input_sha256` alle versionierten Dateien unter `config/` und damit auch `config/automation.json` (PR 169). Geprüft werden von `check_exception_evidence` nur die neun Quellen unter `source_sha256`; davon weichen `apps/web/package.json` und `pnpm-lock.yaml` schon seit vor dieser Runde ab. Beide Belege waren also bereits veraltet; PR 169 fügt keinen neuen roten Test hinzu (Namensvergleich `aceb6a7` gegen `1997ddc`: kein Unterschied in `test_browser_evidence`). `make check` und `make governance-check` enden mit Exit 0. Der Neulauf beider Oberflächen scheitert wie am Vormittag in Schritt 4; die Belege sind deshalb nicht erneuert, ihr Pin im Register zeigt unverändert auf die gespeicherten Bytes.
+
+### Gates
+
+| Gate | vorher | nachher (`c566216` mit dieser Runde) |
+|---|---|---|
+| `python3 -m unittest discover -s tests` | `aceb6a7`: 822 Tests, 49 Failures, 9 Errors (58 Namen). Berichtigung: Die erste Fassung nannte 50 Failures; gemessen sind 49 (nachgemessen in einem eigenen Worktree auf `aceb6a7`) | erste Fassung auf `c566216`: 822 Tests, 34 Failures, 6 Errors (40 Namen); neue Fehlschläge: keine; behoben: 18. Heutiger Stand: Tabelle in der Nacharbeit |
+| davon | 14 `test_browser_evidence`, 39 `test_requirements_reconciliation`, 2 `test_resize_source_binding`, 3 Ladefehler (der Laufumgebung fehlen `fastapi`, `httpx`, `bson`) | 13, 24, 0, 3 |
+| `make check`, `node tools/ds-audit-cli.js` | – | Exit 0; 0 Fehler, 0 Warnungen |
+| `node tools/lint.mjs` | – | 0 Diagnosen |
+| `cd apps/site && node --test` | – | 132 von 132 |
+| `cd apps/web && node --test auth/tests/*.test.mjs` | – | 105 von 105 |
+
+Veraltete Pins im Register: 38 vorher, 23 nach der ersten Fassung, 28 nach der Nacharbeit.
+
+### Nacharbeit nach unabhängiger Prüfung (14.11.2026, `078bc31`)
+
+Der unabhängige Prüfer hat drei Punkte beanstandet; sie sind hier behoben. `tools/_update_register_shas.py` wurde nicht benutzt.
+
+Merge-Stände des Zweigs: `c566216` (mit `main` `aceb6a7`), Arbeitsstand `180866e`, danach `35acfa1` (Merge von `main` `31ccd6c`, PR 170 bis 172) und `078bc31` (Merge von `main` `a2917d2`, PR 173). PR 170 bis 173 ändern unter anderem `apps/web/components/AtelierSystem.css` und `PublicOrientationChat.tsx`; beide bindet der Text-Spacing-Beleg.
+
+1. **Text-Spacing-Beleg neu erhoben.** Der Beleg vom Stand `c566216` band die alten Bytes von `AtelierSystem.css` und `PublicOrientationChat.tsx`; `test_current_report_has_exact_source_binding` und `test_css_script_new_source_and_uncompleted_report_fail_closed` waren dadurch wieder rot. Neuer Lauf von `apps/site/tests/browser-text-spacing.mjs` am festen Commit `078bc31` bei sauberem Arbeitsbaum: Node v22.23.4, Playwright 1.65.0 mit Chromium 158.0.8127.18, davor `node apps/site/scripts/generate-public-data.mjs` (43 Seiten) und `pnpm --filter @nexify/web build` (Exit 0). Der Harness startet seinen eigenen Vite-Server aus `apps/site`; den Next-Build liest er nicht. Ergebnis: bestanden, `{"checks":129,"issues":[]}`, 43 Routen, 173 gebundene Quellen, keine Laufzeitfehler. Übernommen nach `evidence/resize-2026-11-10/text-spacing.json`; die Fassung von `c566216` liegt unverändert unter `superseded/text-spacing.pre-pins-nach-159-merge-173-2026-11-14.json`. `python3 tools/check_text_resize_evidence.py` besteht (43 Routen).
+2. **Fünf Pins zurückgenommen** auf den Wert von `aceb6a7`: `config/design-tokens.json`, `packages/tokens/tokens.css`, `tokens.json`, `tokens.ts`, `config/page-explainers.json`. Begründung in der Tabelle „Bewusst nicht nachgezogen“. `apps/web/components/PublicInstallation.tsx` bleibt nachgezogen: Der neue Text-Spacing-Lauf bindet die Datei und besteht.
+3. **Vorher-Zahl berichtigt:** 49 Failures auf `aceb6a7`, nicht 50.
+
+| Gate | `aceb6a7` | `078bc31` vor der Nacharbeit | `078bc31` mit der Nacharbeit |
+|---|---|---|---|
+| `python3 -m unittest discover -s tests` | 822 Tests, 49 Failures, 9 Errors (58 Namen) | 822 Tests, 34 Failures, 8 Errors (42 Namen) | 822 Tests, 39 Failures, 6 Errors (45 Namen) |
+| davon `test_browser_evidence` / `test_requirements_reconciliation` / `test_resize_source_binding` / Ladefehler (`fastapi`, `httpx`, `bson`) | 14 / 39 / 2 / 3 | 13 / 24 / 2 / 3 | 13 / 29 / 0 / 3 |
+
+Namensvergleich als Mengen: gegenüber `aceb6a7` kein neuer roter Test, 13 behoben. Gegenüber dem Stand vor der Nacharbeit sind die zwei Tests in `test_resize_source_binding` wieder grün; fünf Namen aus `test_recorded_source_hashes_match_actual_bytes` sind wieder rot, genau die fünf zurückgenommenen Pins. `make check`, `make governance-check`, `node tools/ds-audit-cli.js` und `node tools/lint.mjs` enden mit Exit 0; `cd apps/site && node --test` 132 von 132; `cd apps/web && node --test auth/tests/*.test.mjs` 105 von 105.
+
+Nicht geprüft in der Nacharbeit: Public-Experience, PWA, Gleichmacher und Live-Prüfung wurden auf `078bc31` nicht wiederholt; `browser-identity-hero.mjs`, `browser-contrast-scope.mjs`, Critical und Ausnahmeerfassung sind weiter nicht gelaufen bzw. offen.
+
+## 11. Nachtrag fünfte Runde (14.11.2026, Zweig `claude/anfrageweg-bindung`, nach PR 181)
+
+PR 181 (`81b0ae9`, Kontaktformular meldet eine abgewiesene Anfrage ehrlich) hat drei Quellen der Resize-Bindung verändert, ohne den Beleg zu erneuern. `config/text-resize-sources.json` bindet die Verzeichnisse `apps/web/components` und `apps/web/lib` vollständig (Endungen `.tsx`, `.ts`, `.mjs`, `.css`, `.json`); `tools/check_text_resize_evidence.py`, `source_hashes` (Zeilen 25 bis 43) und der Vergleich in Zeile 50 verlangen die genaue Datei- und Byte-Menge.
+
+| Datei | Abweichung durch PR 181 |
+|---|---|
+| `apps/web/components/ContactRequestForm.tsx` | Bytes geändert |
+| `apps/web/lib/contact-copy.ts` | Bytes geändert |
+| `apps/web/lib/contact-outcome.mjs` | neue Datei im gebundenen Verzeichnis |
+
+Folge: `test_current_report_has_exact_source_binding` und `test_css_script_new_source_and_uncompleted_report_fail_closed` (`tests/test_resize_source_binding.py`) waren auf `main` wieder rot. Im Bericht zu PR 181 stand „kein neuer Name“; das war falsch. Die Vorher-Messung lief in einem Arbeitsbaum ohne `apps/site/.generated/public-site.json`, dort scheitern beide Tests schon am fehlenden Bestand, und der Unterschied blieb unsichtbar. Vor jeder Vorher-Messung gehört deshalb `node apps/site/scripts/generate-public-data.mjs` gelaufen.
+
+Ein Verlegen von `contact-outcome.mjs` hätte nicht gereicht, weil auch die beiden geänderten Dateien gebunden sind. Deshalb neu erhoben:
+
+- Lauf von `apps/site/tests/browser-text-spacing.mjs` am festen Commit `81b0ae9` bei sauberem Arbeitsbaum, Playwright 1.65.0, Chromium 158.0.8127.18: 129 Prüfungen, 43 Routen, 0 Befunde, keine Laufzeitfehler.
+- Belegart: Browserlauf. Der Beleg bindet damit alle drei Dateien an ihren heutigen Stand.
+- Vorige Fassung unverändert unter `evidence/resize-2026-11-10/superseded/text-spacing.pre-anfrageweg-2026-11-14.json`.
+
+Python-Suite je Stand (Python 3.13.18, erzeugte Seitendaten vorhanden, ohne `.venv`), Namensvergleich. Die drei Vergleichsstände liefen in Wegwerf-Arbeitsbäumen ohne `node_modules`; dort ist zusätzlich `test_frontend_filters_images_and_shows_error_and_unknown_stock` (`test_product_presentation_integrity`) rot. Mit `node_modules` sind es je Stand ein Name weniger:
+
+| Stand | rote Namen | davon `test_resize_source_binding` |
+|---|---|---|
+| `a8a5d66` | 46 | 0 |
+| `0333c16` (PR 180) | 46 | 0 |
+| `81b0ae9` (PR 181) | 48 | 2 |
+| dieser Zweig (mit `node_modules`) | 45 | 0 |
+
+Bewusst nicht nachgezogen: `apps/web/lib/contact-copy.ts` in `evidence/observability-integration-2026-10-28/browser-exceptions-next.json` und `browser-exceptions-vite.json`. Der zugehörige Lauf scheitert weiter in Schritt 4 (Abschnitt 10); `tools/check_browser_evidence.py` bleibt rot wie zuvor, erster Befund unverändert `apps/site/src/Auth.tsx`.

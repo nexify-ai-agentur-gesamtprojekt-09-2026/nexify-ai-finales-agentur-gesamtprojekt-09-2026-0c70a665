@@ -54,7 +54,7 @@
     "tools/remediation_queue.py": "a1a78b569211c22c1190d738cd957b60f25669f93e12e5aa0c1a1c14a2d716fe",
     "apps/web/components/WorkspaceStatusPanel.tsx": "37226475a1b2a1e216e3e43c7082165b978e98507e182f4f0a8c9cc629de97a7",
     "apps/web/components/WorkspaceStatusPanel.css": "61950fd457bd69b2f5b89a9556d059c098282cb4333338133af8c5a0eac25fc2",
-    "apps/web/proxy.ts": "c5acf79c879503f281d82517adbaa98af35a34e8c6e6901cae026e5f9841104b",
+    "apps/web/proxy.ts": "aaf1245796ba3e19fe1a94b36a8e8dc61e1e67e34106ffca4dabc72ae2b8e240",
     "apps/web/app/api/internal/workspace/status/route.ts": "a7a11b21e7b13a227380fbf8a039c8ffde4aa092e2dd14521f3dffa877c8dd83",
     "apps/web/app/intern/workspace/page.tsx": "73e9716b7860da4aaacd02cc0124f626bee1e6b213b318c4b8c931a1ca0c1cfb",
     "apps/site/tests/browser-workspace-read.mjs": "46b6ec84a6e99375ed3046a6c723632a24bc2c8427cac22be7ac36371036d813",

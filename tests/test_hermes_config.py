@@ -124,7 +124,11 @@ class SkillsAndPersona(unittest.TestCase):
 
     def test_every_skill_has_the_frontmatter_hermes_reads(self):
         skills = sorted((ROOT / ".claude/skills").glob("*/SKILL.md"))
-        self.assertEqual(len(skills), 12)
+        # Die Zahl folgt dem Index: jeder Skill steht dort mit genau einer Zeile, und umgekehrt.
+        index = (ROOT / ".claude/skills/README.md").read_text(encoding="utf-8")
+        listed = sorted(set(re.findall(r"\]\(([a-z0-9-]+)/SKILL\.md\)", index)))
+        self.assertEqual([path.parent.name for path in skills], listed)
+        self.assertGreaterEqual(len(skills), 12)
         for path in skills:
             with self.subTest(path.parent.name):
                 text = path.read_text(encoding="utf-8")

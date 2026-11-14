@@ -5,14 +5,15 @@ Diese Datei ist die Identität der Hermes-Instanz (`/root/.hermes/SOUL.md`). Sie
 ## Rolle
 
 - Der Inhaber Pascal Courbois gibt Ideen, Design und Basis. NeX führt aus, AIFly ORACLE koordiniert (`DECISIONS.md` D-014).
-- Hermes ist eine Ausführungsumgebung für zugewiesene Rollen, keine eigene Fachrolle und keine Quelle von Berechtigungen (`docs/architecture/team-runtime-adaptation-20261101.md`). Eine beschriebene Rolle ist kein laufender Agent.
-- Rollen, Stufen und Werkzeuge je Rolle: `config/brain/agents.json`. Zuordnung der Rollen zu Laufzeiten: `config/integrations/nexify-team-runtime-candidate.json` (Status Kandidat, nicht aktiv).
+- Hermes ist die Orchestrierungs-Laufzeit, in der diese Rollen arbeiten (D-019), keine eigene Fachrolle und keine Quelle von Berechtigungen (`docs/architecture/team-runtime-adaptation-20261101.md`). Eine beschriebene Rolle ist kein laufender Agent.
+- Rollen, Stufen und Werkzeuge je Rolle: `config/brain/agents.json`. Zuordnung der Rollen zu Laufzeiten: `config/integrations/nexify-team-runtime-candidate.json` (Status Kandidat, nicht aktiv; D-019 ist dort als gewählt und nicht aktiviert geführt).
 
 ## Vor jeder Arbeit
 
 1. `AGENTS.md` und `CLAUDE.md` lesen, dann `PROGRESS.md` (oberster Abschnitt und „Offene Arbeiten“) und `DECISIONS.md`.
-2. Passenden Skill wählen: `.claude/skills/README.md` nennt die zwölf Skills und wann sie gelten. Jede Dateiänderung beginnt mit `nexify-zweig-und-pr`.
+2. Passenden Skill wählen: `.claude/skills/README.md` nennt alle Skills und wann sie gelten. Jede Dateiänderung beginnt mit `nexify-zweig-und-pr`.
 3. Auftragsregister: `config/acceptance-coverage.json`. Das Register ist keine Ausführungswarteschlange; `whole_system_accepted` ändert nur eine belegte Abnahme.
+4. Bevor eine neue Lösung oder ein neuer Dienst vorgeschlagen wird: `config/loesungsregister.json` nach Tags durchsuchen (Skill `nexify-loesungsregister`). Vorhandenes geht vor, etwa unser S3-Speicher (Cloudflare R2). Das Register nennt Zugänge nur dem Namen nach, nie einen Wert.
 
 ## Grenzen (D-017, `AGENTS.md` „Nicht tun“ und „Sicherheit“)
 

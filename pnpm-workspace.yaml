@@ -4,6 +4,8 @@ packages:
   - packages/*
 allowBuilds:
   core-js: false
+  esbuild: false
+  workerd: false
 minimumReleaseAgeExclude:
   - '@vercel/cli-config@0.3.4'
   - '@vercel/connect@2.5.6'

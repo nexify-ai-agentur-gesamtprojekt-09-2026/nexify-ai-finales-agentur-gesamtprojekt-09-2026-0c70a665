@@ -42,7 +42,7 @@ Vor jedem Schritt Ausgabe sichern, nach jedem Schritt Zustand zurücklesen. Nich
 4. **Hermes S3:** `libatomic1` in das Image aufnehmen (Dockerfile des Projekts `docker-hermes`), neu bauen, Protokoll auf „MCP server 'rea'“ prüfen. Rückweg: altes Image vorher taggen.
 5. **Hermes Konfiguration:** Dateien aus dem Zweig `claude/hermes-orchestrator` nach Sicherung von `/root/.hermes` einspielen; Modell nach `config/llm-policy.json`.
 6. **S5:** je Dienst die laufende Image-Kennung (`docker inspect --format '{{.Image}}'`) als festen Digest in die Compose-Datei schreiben. Kein Update dabei.
-7. **Entscheidung des Inhabers nötig:** S6 (welche Schlüssel entfallen), S7 (`dify-dqiq` behalten oder entfernen), S8 (SSH auf feste Quellen oder WireGuard beschränken), ungenutzte Volumes und Images mit `-a`.
+7. **Entscheidung des Inhabers nötig:** S6 (welche Schlüssel entfallen), S7 (`dify-dqiq` behalten oder entfernen), S8 (SSH auf feste Quellen oder WireGuard beschränken), ungenutzte Volumes und Images mit `-a` (**gesperrt, siehe Sperrvermerk bei Schritt 2c unter „Folgen für die Arbeitsliste“: darunter liegen die Cognee-Daten**).
 
 ## OFFEN
 
@@ -79,9 +79,16 @@ Erhoben am 14.11.2026, 12:00–12:50 UTC, auf srv1941843 mit einmaligen, nur les
 - **Schritt 2a (neu, größte Wirkung):** `.paperclip-runtime/runs` sichten und nach Freigabe des Inhabers entfernen oder auf die jüngsten Läufe kürzen. Vorher prüfen, dass kein Paperclip-Prozess mehr läuft. Erwartete Entlastung bis rund 77 GiB.
 - **Schritt 2b (neu):** GitLab-Prometheus begrenzen (`prometheus['flags']` mit `storage.tsdb.retention.time` in `gitlab.rb`, dann `gitlab-ctl reconfigure`) oder abschalten, da `monitoring-dus` bereits ein eigenes Prometheus betreibt. Erwartete Entlastung rund 15–20 GiB.
 - **Schritt 2c:** ungenutzte Images und die 11 ungenutzten Volumes erst nach Sichtung der Volume-Namen (rund 6,6 GB).
+  **GESPERRT (Nachtrag 14.11.2026, Messung 18:10–18:45 UTC): kein `docker volume prune`, kein `docker system prune --volumes`, kein `docker image prune -a`.**
+  Zwei der 11 „ungenutzten“ Volumes sind `cognee-x532_cognee-data` und `cognee-x532_cognee-system`: der gesamte Cognee-Wissensbestand (2,69 GB).
+  Docker führt sie nur deshalb als ungenutzt, weil der Cognee-Container fehlt. Ein Prune würde sie unwiederbringlich löschen; ein drittes ist `librechat_librechat-data`.
+  Gefahrlos sind allein die acht GitLab-Runner-Zwischenspeicher (1,3 GB), und auch diese nur einzeln beim Namen und nach Freigabe des Inhabers (D-016).
+  Die Sperre gilt, bis die Cognee-Volumes gesichert und wieder verknüpft sind. Einzelheiten und Reihenfolge: `docs/04-betrieb/aufraeumplan-2026-11-14.md` (Sperrvermerk, Abschnitt 3.1, Phase 0 und 3).
 - **Schritt 2d:** alte Sicherungen unter `/opt/backups` und `/opt/nexifyai/backup` auslagern statt löschen.
 - **Hermes-Route:** in `dynamic.yml` eine `ipAllowList`- oder `basicAuth`-Middleware vor `hermes-webui` und `hermes-api` setzen oder die Router entfernen und über SSH-Tunnel zugreifen. Vorher Datei sichern; Traefik liest sie ohne Neustart neu.
 
 ### Hinterlassen von der Messung
 
 Fünf beendete Compose-Projekte ohne laufende Container auf srv1941843: `nx-messung-20261114`, `nx-messung2-20261114`, `nx-messung3-20261114`, `nx-messung4-20261114`, `nx-messung5-20261114` (Image `docker:27-cli`). Sie können entfernt werden; das Entfernen über die API wurde in der Cloud-Sitzung nicht ausgeführt.
+
+**Nachtrag 14.11.2026, nach 18:45 UTC:** Es stehen jetzt **zehn** beendete Mess-Projekte, nicht fünf: `nx-messung-20261114`, `nx-messung2-20261114` bis `nx-messung8-20261114` (acht, Stand `PROGRESS.md` ca. 14:25 UTC) sowie `nx-messung-cognee-20261114` und `nx-messung-cognee2-20261114` aus der Messung der Gedächtnis-Systeme. Alle ohne laufende Container; entfernt werden nur die Projekt-Einträge, einzeln und nach Freigabe (Aufräumplan, Schritt 1.4).
