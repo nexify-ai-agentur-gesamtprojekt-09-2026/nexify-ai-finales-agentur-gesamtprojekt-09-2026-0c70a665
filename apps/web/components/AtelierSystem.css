@@ -1319,3 +1319,6 @@ html:has(#atelier .mobile-navigation[open]){overflow:hidden}
  #atelier #aifly-panel .chat-resize-handle{display:none}
  #atelier[data-hero-action-visible='true'] .reopen-chat{visibility:hidden;pointer-events:none}
 }
+/* Hinweis unter der Eingabe (Inhaberbefund 14.11.2026: Schrift kleiner): kleinste Schriftstufe des Systems, engere Zeilen.
+   Der Selektor nennt die Flaeche mit, weil die Sammelregel der Schriftgroessen ueber :is() zwei Klassen wiegt. */
+#atelier #aifly-panel .public-orientation>.connection-note,#atelier #aifly-panel .public-orientation>.connection-note a{font-size:var(--as-t-12);line-height:1.45}
