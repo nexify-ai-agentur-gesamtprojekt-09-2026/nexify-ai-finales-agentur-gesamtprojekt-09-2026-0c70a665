@@ -111,6 +111,11 @@ def providers():
     return [{"id": "ninerouter", "label": "Oracle", "model": POLICY_MODEL, "available": configured and pinned}]
 
 
+def router_available():
+    """Looked up by id, never by position: the provider list may have any length."""
+    return any(p.get("id") == "ninerouter" and p.get("available") for p in providers())
+
+
 class ChatIn(BaseModel):
     session_id: str = Field("", max_length=64)
     message: str = Field(min_length=1, max_length=2000)
@@ -560,8 +565,8 @@ async def operator_overview(request: Request):
     outbox = {s: await db.mail_outbox.count_documents({"status": s}) for s in ("sent", "pending", "failed", "not_configured")}
     checks = [
         {"name": "Datenbank", "state": "ok", "detail": "Ping %d ms" % mongo_ms},
-        {"name": "Oracle-Modellzugang", "state": "ok" if os.environ.get("EMERGENT_LLM_KEY") else "blocked", "detail": ", ".join(p["label"] for p in providers() if p["available"]) or "kein Zugang"},
-        {"name": "9router", "state": "ok" if providers()[2]["available"] else "not_configured", "detail": "Endpunkt, Schlüssel und Modell" + ("" if providers()[2]["available"] else " fehlen")},
+        {"name": "Oracle-Modellzugang", "state": "ok" if os.environ.get("EMERGENT_LLM_KEY") else "blocked", "detail": ", ".join(str(p.get("label") or p.get("id") or "") for p in providers() if p.get("available")) or "kein Zugang"},
+        {"name": "9router", "state": "ok" if router_available() else "not_configured", "detail": "Endpunkt, Schlüssel und Modell" + ("" if router_available() else " fehlen")},
         {"name": "Maildienst (Resend)", "state": "ok" if os.environ.get("RESEND_API_KEY") else "not_configured", "detail": "%d gesendet · %d offen · %d fehlgeschlagen" % (outbox["sent"], outbox["pending"], outbox["failed"])},
         {"name": "BigBuy-Katalog", "state": "ok" if await db.products.count_documents({"active": True}) else "blocked", "detail": "%d aktive Produkte" % await db.products.count_documents({"active": True})},
         {"name": "Zahlungsdienst (Revolut)", "state": "ok" if any(os.environ.get(k) for k in ("REVOLUT_MERCHANT_SECRET_KEY_PRODUCTION", "REVOLUT_MERCHANT_SECRET_KEY_SANDBOX")) else "not_configured", "detail": "Shop-Checkout"},
