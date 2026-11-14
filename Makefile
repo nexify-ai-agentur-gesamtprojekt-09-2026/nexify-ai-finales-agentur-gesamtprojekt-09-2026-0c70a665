@@ -85,3 +85,6 @@ session-end:
 
 clean-check:
 	bash scripts/clean-state-check.sh
+
+graph:
+	bash tools/graph.sh

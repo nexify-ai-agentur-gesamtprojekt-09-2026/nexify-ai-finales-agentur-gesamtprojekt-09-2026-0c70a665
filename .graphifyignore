@@ -1,0 +1,8 @@
+# Graphify: was nicht in den Wissensgraphen gehört (zusätzlich zu .gitignore).
+# Fremde Referenzen und Regelwerke: groß, kein eigener Code.
+.design-rules/
+reference/
+# Hash-gebundene Browser-Belege und Rohdaten.
+evidence/
+# Ausgaben des Werkzeugs selbst.
+graphify-out/
