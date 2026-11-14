@@ -1652,7 +1652,7 @@
       ],
       "kategorie": "Code",
       "zweck": "Kanonische Quelle des Codes; `main` ist führend.",
-      "ort": "`github.com/nexifyai-dev/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665`",
+      "ort": "Repository `nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665`; `AGENTS.md` und `config/automation.json` nennen den Besitzer `nexifyai-dev`, der Abruf dieser Sitzung lief über die Organisation `nexify-ai-agentur-gesamtprojekt-09-2026` (welcher Name aktuell gilt, ist nicht geprüft)",
       "zustand": {
         "status": "läuft belegt",
         "beleg": "`AGENTS.md:213`; Abruf und Push dieser Sitzung am 14.11.2026.",

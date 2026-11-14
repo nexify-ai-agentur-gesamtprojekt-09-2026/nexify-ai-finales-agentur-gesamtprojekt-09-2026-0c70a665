@@ -841,7 +841,7 @@ Vorgehen, Pflege und Umgang mit Schlüsseln aus dem Chat: `.claude/skills/nexify
 - **Tags:** `code` `repository` `quellverwaltung` `pull-requests`
 - **Kategorie:** Code
 - **Zweck:** Kanonische Quelle des Codes; `main` ist führend.
-- **Ort:** `github.com/nexifyai-dev/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665`
+- **Ort:** Repository `nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665`; `AGENTS.md` und `config/automation.json` nennen den Besitzer `nexifyai-dev`, der Abruf dieser Sitzung lief über die Organisation `nexify-ai-agentur-gesamtprojekt-09-2026` (welcher Name aktuell gilt, ist nicht geprüft)
 - **Zustand:** läuft belegt (Stand 2026-11-14). Beleg: `AGENTS.md:213`; Abruf und Push dieser Sitzung am 14.11.2026.
 - **Entscheidung:** keine (Nutzerbestimmung vom 26.10.2026 in AGENTS.md)
 - **Rolle im Plan:** tragend
