@@ -30,7 +30,7 @@ export default function CartView() {
     catch { setError("Die Menge konnte nicht geändert werden. Bitte prüfen Sie den Lagerbestand."); await load(); setRevision(value => value + 1); }
     finally { setBusy(false); }
   }
-  if (serviceUnavailable) return <div className="tk-empty" role="alert" data-testid="cart-service-unavailable"><h2>Warenkorb derzeit nicht verfügbar</h2><p>Der Shop kann Ihren Warenkorb momentan nicht abrufen. Bitte versuchen Sie es später erneut oder sprechen Sie uns an.</p><div className="hc-finish-actions" data-testid="cart-service-unavailable-actions"><SiteLink href="/teileklar/shop" className="hc-finish-primary">Zum Shop<HcArrow/></SiteLink><SiteLink href="/kontakt" className="hc-text-link">Kontakt aufnehmen<HcArrow/></SiteLink></div></div>;
+  if (serviceUnavailable) return <div className="tk-empty" role="alert" data-testid="cart-service-unavailable"><h2>Warenkorb derzeit nicht verfügbar</h2><p>Der Shop kann Ihren Warenkorb momentan nicht abrufen. Bitte versuchen Sie es später erneut oder sprechen Sie uns an.</p><SiteLink href="/teileklar/shop" className="hc-text-link">Zum Shop<HcArrow/></SiteLink><SiteLink href="/kontakt" className="hc-text-link">Kontakt aufnehmen<HcArrow/></SiteLink></div>;
   if (!cart) return error ? <p role="alert" className="tk-alert">{error}</p> : <p role="status">Warenkorb wird geladen …</p>;
   if (!cart.lines.length) return <div className="tk-empty" data-testid="cart-empty"><h2>Ihr Warenkorb ist leer</h2><p>Suchen Sie im Shop nach dem passenden Artikel.</p><SiteLink href="/teileklar/shop" className="hc-text-link">Zum Shop<HcArrow/></SiteLink></div>;
   const stockUnknown = cart.lines.some(line => line.stock == null);
