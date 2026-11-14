@@ -324,6 +324,26 @@
         "$value": "#DCE8BE",
         "$type": "color",
         "$description": "Hauch Lime im Licht"
+      },
+      "limeHandlung": {
+        "$value": "#688A3A",
+        "$type": "color",
+        "$description": "Handlungs-Lime fuer Schalterkoerper im hellen Thema; mindestens 3:1 zum Grund"
+      },
+      "limeHandlungHell": {
+        "$value": "#74963F",
+        "$type": "color",
+        "$description": "Obere Stufe des Handlungs-Lime"
+      },
+      "limeSchein": {
+        "$value": "#B9CF8E",
+        "$type": "color",
+        "$description": "Lime-Schein fuer Licht unter dem Hauptschalter"
+      },
+      "aufLime": {
+        "$value": "#10180B",
+        "$type": "color",
+        "$description": "Schrift und Zeichen auf Handlungs-Lime"
       }
     },
     "dunkel": {
@@ -349,12 +369,12 @@
         "$description": "Lichtkante und Glanz auf Glas (Elfenbein)"
       },
       "schrift": {
-        "$value": "#F3F0EA",
+        "$value": "#ECEFEC",
         "$type": "color",
-        "$description": "Haupttext"
+        "$description": "Haupttext, gebrochenes leicht kuehles Hell"
       },
       "schriftNeben": {
-        "$value": "#D3D8D5",
+        "$value": "#CDD3CF",
         "$type": "color",
         "$description": "Nebentext"
       },
@@ -382,6 +402,26 @@
         "$value": "#A8C76A",
         "$type": "color",
         "$description": "Hauch Lime im Licht (marke.lime)"
+      },
+      "limeHandlung": {
+        "$value": "#9AB864",
+        "$type": "color",
+        "$description": "Handlungs-Lime fuer Schalterkoerper: gedaempfter als das Signal-Lime, kein Oliv"
+      },
+      "limeHandlungHell": {
+        "$value": "#B4CF7C",
+        "$type": "color",
+        "$description": "Obere Stufe des Handlungs-Lime"
+      },
+      "limeSchein": {
+        "$value": "#8FAE5A",
+        "$type": "color",
+        "$description": "Lime-Schein fuer Licht unter dem Hauptschalter"
+      },
+      "aufLime": {
+        "$value": "#162010",
+        "$type": "color",
+        "$description": "Schrift und Zeichen auf Handlungs-Lime, tiefes Graphitgruen"
       }
     }
   },
