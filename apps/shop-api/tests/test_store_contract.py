@@ -7,7 +7,8 @@ MongoDB one, later a PostgreSQL one (add a binding class, change no assertion).
 Bindings here:
 * InMemory*: the real Mongo implementation over a small in-memory stand-in for
   the driver. No network, always runs. The stand-in is an assumption about
-  MongoDB semantics, limited to the operators these stores use.
+  MongoDB semantics, limited to the operators these stores use, and it has the
+  call shapes of Motor (the production driver), not of pymongo's async client.
 * DisposableMongo*: the same contracts against a real, explicitly disposable
   local replica set; skipped unless confirmed like test_cart_merge_replica_contract.
 """
@@ -53,6 +54,11 @@ def matches(doc, query):
                 if operator in ('$gt', '$gte'):
                     try:
                         if value is None or isinstance(value, bool) or not (value > operand or (operator == '$gte' and value == operand)): return False
+                    except TypeError:
+                        return False
+                if operator == '$lte':
+                    try:
+                        if value is None or isinstance(value, bool) or not value <= operand: return False
                     except TypeError:
                         return False
                 if operator == '$regex' and not (isinstance(value, str) and re.search(operand, value, re.I if 'i' in expected.get('$options', '') else 0)): return False
@@ -109,6 +115,7 @@ class Collection:
         if sort: rows.sort(sort)
         return rows.rows[0] if rows.rows else None
     async def count_documents(self, query): return sum(matches(d, query) for d in self.docs)
+    async def estimated_document_count(self): return len(self.docs)
     def aggregate(self, pipeline):
         match, unwind, group = pipeline
         field = unwind['$unwind'].lstrip('$'); counts = {}
@@ -120,7 +127,7 @@ class Collection:
         for doc in docs: self._insert(copy.deepcopy(doc))
     def _insert(self, doc):
         doc.setdefault('_id', uuid4().hex)
-        if any(key in doc and d.get(key) == doc[key] for key in self.unique for d in self.docs):
+        if any(key in doc and d.get(key) == doc[key] for key in ['_id', *self.unique] for d in self.docs):
             raise DuplicateKeyError('duplicate')
         self.docs.append(doc)
     async def update_one(self, query, update, upsert=False, session=None):
@@ -155,7 +162,8 @@ class Database:
     def __init__(self):
         self.collections = {'products': Collection(), 'categories': Collection(), 'imports': Collection(),
                             'settings': Collection(), 'carts': Collection(unique=['owner']), 'users': Collection(),
-                            'sessions': Collection(), 'login_failures': Collection(), 'password_resets': Collection()}
+                            'sessions': Collection(), 'login_failures': Collection(), 'password_resets': Collection(),
+                            'workshops': Collection(), 'workshop_requests': Collection()}
         self.client = SimpleNamespace(start_session=lambda: Session(self))
     def __getattr__(self, name): return self.collections[name]
 
@@ -182,9 +190,11 @@ def disposable_uri():
 
 class DisposableMongoBinding(unittest.IsolatedAsyncioTestCase):
     async def asyncSetUp(self):
-        from pymongo import AsyncMongoClient
-        client = AsyncMongoClient(disposable_uri(), serverSelectionTimeoutMS=3000)
-        self.addAsyncCleanup(client.close)
+        # Motor, because that is the driver shop/db.py binds in production. pymongo's own
+        # AsyncMongoClient differs (aggregate() is a coroutine there, a cursor here).
+        from motor.motor_asyncio import AsyncIOMotorClient
+        client = AsyncIOMotorClient(disposable_uri(), serverSelectionTimeoutMS=3000)
+        self.addCleanup(client.close)
         self.database = client['nexify_store_contract_' + uuid4().hex]
         await self.database.carts.create_index('owner', unique=True)
         self.store = load_store(self.database)
@@ -469,6 +479,74 @@ class AccountContract:
         self.assertEqual((await self.store.accounts.consume_password_reset('c' * 64, NOW))['user_id'], 'user_c', 'other tokens stay redeemable')
 
 
+def workshop(wid, **fields):
+    return {'_id': wid, 'id': wid, 'name': 'W ' + wid, **fields}
+
+
+class WorkshopContract:
+    async def fill(self):
+        await self.store.workshops.add_many([
+            workshop('w1', zip='10115', city='Berlin', city_key='berlin', lat=52.53, lon=13.38),
+            workshop('w2', zip='10117', city='Berlin', city_key='berlin', lat=52.52, lon=13.39),
+            workshop('w3', zip='10999', city='Berlin', city_key='berlin'),
+            workshop('w4', zip='80331', city='München', city_key='münchen', lat=48.14, lon=11.57),
+            workshop('w5', zip='10115', city='Berlin-Mitte', city_key='berlin-mitte', lat=52.54, lon=13.37),
+            workshop('w6', zip='10115', city='Berlin', city_key='berlin'),
+            workshop('w7', zip='5020', city='b.erlin', city_key='b.erlin', lat=47.8, lon=13.04),
+        ])
+
+    @staticmethod
+    def ids(rows): return [row['_id'] for row in rows]
+
+    async def test_directory_is_filled_once_and_counted(self):
+        self.assertEqual(await self.store.workshops.estimated_count(), 0)
+        await self.fill()
+        self.assertEqual(await self.store.workshops.estimated_count(), 7)
+        self.assertEqual((await self.store.workshops.get('w4'))['city'], 'München')
+        self.assertIsNone(await self.store.workshops.get('missing'))
+
+    async def test_points_are_only_located_workshops_with_their_coordinates(self):
+        await self.fill()
+        points = await self.store.workshops.points_by_zip('10115')
+        self.assertEqual(self.ids(points), ['w1', 'w5'], 'in storage order, without the unlocated w6')
+        self.assertEqual((points[0]['lat'], points[0]['lon']), (52.53, 13.38))
+        self.assertEqual(await self.store.workshops.points_by_zip('1011'), [], 'a postcode matches only as a whole')
+        self.assertEqual(self.ids(await self.store.workshops.points_by_zip_prefix('101')), ['w1', 'w2', 'w5'])
+        self.assertEqual(self.ids(await self.store.workshops.points_by_zip_prefix('011')), [], 'prefix means from the start')
+        self.assertEqual(self.ids(await self.store.workshops.points_by_city('berlin')), ['w1', 'w2'])
+        self.assertEqual(self.ids(await self.store.workshops.points_by_city('Berlin')), [], 'the caller passes the folded key')
+        self.assertEqual(self.ids(await self.store.workshops.points_by_city_prefix('berl', 500)), ['w1', 'w2', 'w5'])
+        self.assertEqual(self.ids(await self.store.workshops.points_by_city_prefix('berl', 2)), ['w1', 'w2'])
+        self.assertEqual(self.ids(await self.store.workshops.points_by_city_prefix('b.e', 500)), ['w7'], 'the key is text, never a pattern')
+        self.assertEqual(await self.store.workshops.points_by_city_prefix('erlin', 500), [])
+
+    async def test_box_includes_its_edges_and_excludes_unlocated(self):
+        await self.fill()
+        self.assertEqual(self.ids(await self.store.workshops.located_in_box(52.52, 52.53, 13.38, 13.39)), ['w1', 'w2'])
+        self.assertEqual(self.ids(await self.store.workshops.located_in_box(52.521, 52.53, 13.38, 13.39)), ['w1'])
+        self.assertEqual(self.ids(await self.store.workshops.located_in_box(52.52, 52.53, 13.38, 13.389)), ['w1'])
+        self.assertEqual(self.ids(await self.store.workshops.located_in_box(0, 90, 0, 180)), ['w1', 'w2', 'w4', 'w5', 'w7'])
+        self.assertEqual(await self.store.workshops.located_in_box(60, 61, 13, 14), [])
+
+    async def test_unlocated_lists_are_exact_and_limited(self):
+        await self.fill()
+        self.assertEqual(self.ids(await self.store.workshops.unlocated_by_zip('10115', 20)), ['w6'])
+        self.assertEqual(self.ids(await self.store.workshops.unlocated_by_city('berlin', 20)), ['w3', 'w6'])
+        self.assertEqual(self.ids(await self.store.workshops.unlocated_by_city('berlin', 1)), ['w3'])
+        self.assertEqual(await self.store.workshops.unlocated_by_city('münchen', 20), [])
+        self.assertEqual(await self.store.workshops.unlocated_by_zip('101', 20), [])
+
+    async def test_request_is_stored_under_its_id_and_read_back_whole(self):
+        request = {'_id': 'WA-1', 'workshop_id': 'w1', 'workshop_name': 'W w1', 'name': 'N', 'email': 'n@example.invalid', 'phone': '',
+                   'vehicle': 'V', 'message': 'Bitte um Termin', 'consent': True, 'status': 'S', 'created_at': 'c'}
+        await self.store.workshops.add_request(dict(request))
+        self.assertEqual(await self.store.workshops.request('WA-1'), request)
+        self.assertIsNone(await self.store.workshops.request('WA-2'))
+        with self.assertRaises(Exception):
+            await self.store.workshops.add_request({**request, 'name': 'other'})
+        self.assertEqual((await self.store.workshops.request('WA-1'))['name'], 'N', 'an id is never overwritten')
+
+
 class MongoSpecifics:
     """Limits that exist only because a MongoDB cart is one document; not part of the shared contract."""
     def test_cart_at_the_document_limit_is_too_large_and_unencodable_data_is_invalid(self):
@@ -489,9 +567,11 @@ class MongoSpecifics:
 class InMemoryCatalog(CatalogContract, InMemoryBinding): pass
 class InMemoryCarts(CartContract, MongoSpecifics, InMemoryBinding): pass
 class InMemoryAccounts(AccountContract, InMemoryBinding): pass
+class InMemoryWorkshops(WorkshopContract, InMemoryBinding): pass
 class DisposableMongoCatalog(CatalogContract, DisposableMongoBinding): pass
 class DisposableMongoCarts(CartContract, DisposableMongoBinding): pass
 class DisposableMongoAccounts(AccountContract, DisposableMongoBinding): pass
+class DisposableMongoWorkshops(WorkshopContract, DisposableMongoBinding): pass
 
 
 if __name__ == '__main__': unittest.main()
