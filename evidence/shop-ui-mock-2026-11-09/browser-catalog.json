@@ -1,5 +1,5 @@
 {
-  "recorded_at": "2026-11-14T20:12:47.588Z",
+  "recorded_at": "2026-11-14T21:29:01.922Z",
   "passed": true,
   "mock": true,
   "mock_label": "mit gemockter Antwort: synthetic in-memory shop API; contract copied from apps/shop-api, server code not executed",
@@ -24,7 +24,7 @@
     "apps/web/components/shop/PublicShopContent.tsx": "9153b8cf651806c4afe80e6326d1ff9fbc1639ea9a06ea9e5fd4d168a0372436",
     "apps/web/components/shop/CommerceHeader.tsx": "f438ccd0dae2808a50612f048f684c339eb9c9d3c1fdae23619d02de43eb4a56",
     "apps/web/components/shop/shop.css": "0ca0d32e4dc31c21c406af585b8dcf8e043fc33d5a511071f6cd70b452c0c505",
-    "apps/web/components/shop/Storefront.css": "88e86b11952dcd32f5c74378ad2f358f364cc47118286181683031ff6801d4bd",
+    "apps/web/components/shop/Storefront.css": "2fa4d89db6c472fe34765a79159462cd9a94c1a43fed3081c8a6577565fbd132",
     "apps/web/components/PublicExperience.tsx": "1e599cf9bf7659d2637d641de473d75fea0b06f6c67d958d19770812f0b769c4",
     "apps/site/src/main.tsx": "39e7cf3f8399869a2d579e29dab4dda36617e91cc824b94a31b1bc4ffdb80545",
     "config/shop-interface-copy.json": "478f9e55f45ba09c4aa3767339e4aaae9ac87be1e055b8acf3a75fda57534c3b",
