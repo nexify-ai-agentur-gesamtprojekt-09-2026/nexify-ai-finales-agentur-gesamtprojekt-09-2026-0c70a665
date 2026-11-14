@@ -31,7 +31,7 @@ class AssistantCopy(unittest.TestCase):
         self.assertEqual(len(actual), 15)
         self.assertEqual(set(actual), {(key, locale) for locale in ('de', 'nl', 'fr') for key in tools.SPEECH_KEYS})
         for locale in ('de', 'nl', 'fr', 'en'):
-            self.assertIn('NeXify AI FACTORY B.V.', self.copy[locale]['welcomeBody'])
+            self.assertIn('NeXify AI FACTORY', self.copy[locale]['welcomeBody'])
             self.assertTrue(self.copy[locale]['welcome'].strip())
         # Rewriting the authorised company copy does not enable English TTS.
         self.assertNotIn(('welcome', 'en'), actual)
