@@ -12,9 +12,11 @@ const config: NextConfig = {
   allowedDevOrigins: ["*.preview.emergentagent.com", "*.cluster-1.preview.emergentcf.cloud"],
   images: { unoptimized: true },
   async rewrites() {
-    return process.env.NODE_ENV === "development"
-      ? [{ source: "/api/:path*", destination: "http://127.0.0.1:3003/api/:path*" }]
-      : [];
+    const dev=[{ source: "/api/:path*", destination: "http://127.0.0.1:3003/api/:path*" }];
+    // Pflichtadresse der Rechtsseite: /agb bildet auf die kanonische Route /vertragsgrundlagen ab.
+    // Rewrite statt Redirect, damit die Adresse mit HTTP 200 antwortet; Canonical bleibt /vertragsgrundlagen.
+    const legal=[{ source: "/agb", destination: "/vertragsgrundlagen" }];
+    return [...(process.env.NODE_ENV === "development" ? dev : []), ...legal];
   },
   async redirects() {
     // Concept requirement (section 16.2): legacy auth links must resolve to the real routes.
