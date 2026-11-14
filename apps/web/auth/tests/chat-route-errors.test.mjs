@@ -54,11 +54,32 @@ test('chat JSON and SSE hide provider and transport error details while the serv
         assert.match(body, /chat_llm_failed/);
         assert.doesNotMatch(body, new RegExp(secret));
         assert.doesNotMatch(body, /fixture-key/);
-        // Der Besucher sieht nur den festen Code, nie die Ursache.
-        // Die zufällige Gesprächskennung zählt nicht dazu: Eine UUID mit der Ziffernfolge "429" ist keine Ursache.
-        const visible = body.replace(/local-[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}/g, '');
-        if (streaming) assert.notEqual(visible, body, 'die Gesprächskennung wurde gefunden und entfernt');
-        assert.doesNotMatch(visible, /upstream_http|network|invalid_response|ECONNREFUSED|429/);
+        // Der Besucher sieht nur den festen Code, nie die Ursache. Geprüft wird die Struktur der Antwort,
+        // nicht ihr Rohtext: Die zufällige Gesprächskennung (UUID) kann jede Ziffernfolge enthalten, auch "429".
+        const leak = /upstream_http|network|invalid_response|ECONNREFUSED|429/;
+        if (streaming) {
+          // SSE: jeder Block ist genau eine "data:"-Zeile mit JSON; nichts sonst steht im Strom.
+          const blocks = body.split('\n\n');
+          assert.equal(blocks.pop(), '', 'der Strom endet mit einer Leerzeile');
+          const events = blocks.map(block => {
+            assert.match(block, /^data: \{.*\}$/, 'jeder Block ist eine einzelne data-Zeile');
+            return JSON.parse(block.slice(6));
+          });
+          assert.equal(events.length, 2);
+          const [{ conversationId, ...start }, failure] = events;
+          assert.match(conversationId, /^local-[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/);
+          assert.deepEqual(Object.keys(start).sort(), ['guidance', 'persisted', 'type']);
+          assert.equal(start.type, 'start');
+          assert.equal(start.persisted, false);
+          assert.equal(typeof start.guidance, 'string');
+          assert.deepEqual(failure, { type: 'error', error: 'chat_llm_failed' });
+          // Alle Felder außer der Kennung tragen weder Ursache noch Status des Anbieters.
+          assert.doesNotMatch(JSON.stringify([start, failure]), leak);
+        } else {
+          // JSON: genau das eine Feld mit dem festen Code, also kein Platz für Ursache oder Anbieterstatus.
+          assert.deepEqual(JSON.parse(body), { error: 'chat_llm_failed' });
+          assert.doesNotMatch(body, leak);
+        }
         // Genau eine Protokollzeile mit unterscheidbarer Ursache und ohne Geheimnis, Adresse oder Nutzertext.
         assert.equal(logged.length, 1);
         const entry = JSON.parse(logged[0]);
