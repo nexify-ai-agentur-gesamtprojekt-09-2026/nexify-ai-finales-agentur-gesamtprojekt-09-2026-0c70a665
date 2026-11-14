@@ -1,15 +1,36 @@
 /* Atelier-System – die eine Datei fuer Material, Form und Licht der NeXify-Seiten (Kopfleiste, Seite, Chat, Fusszeile).
-   Stand 14.11.2026, helle Fassung. Jede Regel beginnt mit #atelier (Wurzel der Arbeitsflaeche in Workspace.tsx).
+   Stand 14.11.2026. Jede Regel beginnt mit #atelier (Wurzel der Arbeitsflaeche in Workspace.tsx).
 
-   GRUND     warmes helles Weiss-Grau (color.hell.grund), zweite Ebene eine Spur dunkler; weiches Tageslicht ohne Formen.
-   SCHRIFT   Graphit in drei Stufen (--as-ink, --as-ink-2, --as-ink-3), jede >= 4,5:1 auf Grund und Glas.
-   GLAS      ein Material in Staerken: klar (Schalter), mittel (Flaechen mit Text), dicht (ueber Bild, Film, Text), fest (Menues).
-             Koerper fast klar, Linsenkante (heller Innenrand, dunkler Gegenrand), kleiner Glanzbogen, weicher Schatten.
-             Kantenbrechung ueber den SVG-Filter #as-linse als zweite backdrop-filter-Angabe; ohne Unterstuetzung bleibt die erste.
-   SCHALTER  Optik je Rang nur ueber --as-switch-* und --as-main-* im Block #atelier{...}. Lime nur Haupthandlung und Signal.
-   FORM      Schalter = --as-switch-radius, Flaeche = 28 px, Buehne = 40 px.
-   TIEFE     zweistufige weite Schatten mit geringer Deckkraft (--as-depth); Abschnitte trennen sich durch Raum und Tonwert.
-   Farben nur ueber Variablen und color-mix. */
+   UEBERGEORDNETE LOGIK – jeder Wert einer Komponente muss sich hieraus ableiten lassen.
+   THEMEN     dunkel ist Standard (CI-Graphit, Grund = color.dunkel.grund); hell nur nach Wahl des Besuchers
+              (data-theme='light' am html, kuehles Silbergrau, nie Reinweiss). Beide Themen fuellen denselben --as-* Satz;
+              Komponentenregeln kennen kein Thema.
+   LICHT      eine Lichtrichtung: von oben links. Glanzlicht an der oberen/linken Kante, Gegenrand unten/rechts,
+              Schatten fallen nach unten. Im Grund ein einziges ruhiges Licht rechts hinter der Chat-Front (--as-daylight).
+   GLAS       ein Material in Staerken; je dichter, desto mehr Text darf darauf stehen:
+              Schalter  --as-glass-clear   klar, Kantenbrechung (#as-linse)      Schalter, Segmentleisten, Symbolschalter
+              Flaeche   --as-glass-mid     leicht getoent, ohne eigene Brechung  Kacheln, Hinweisflaechen in der Front
+              dicht     --as-glass-dense   lesbar ueber Bild/Film/Text           Film-Steuerung, Eingabe
+              fest      --as-glass-solid   fast deckend                          Menues, verdichtete Kopfleiste
+              Front     --as-front-body    grosse Scheibe mit Spiegelung         Chat-Front
+              Glas liegt nie als brechende Schicht auf Glas: in der Front nur Toenung + Kante.
+   KANTE      --as-lens (Schalter, Flaechen), --as-lens-faint (stille Schalter, Nachrichten), --as-front-edge (Front);
+              immer 1 px, nie ein Strich als Trenner. Abschnitte trennen sich durch Raum und Tonwert.
+   TIEFE      Schattenskala: --as-drop (Schalter) < --as-depth (Flaechen, Karten, Bildflaechen) < --as-depth-raised
+              (Film, Menues, Front); gedrueckt = --as-drop-pressed. Eine Farbe (--as-shade), eine Richtung.
+   FORM       Schalter --as-switch-radius (Kapsel), Flaeche --as-area 28 px, Buehne --as-stage 40 px;
+              innen liegende Formen: Aussenradius minus Innenabstand.
+   RAUM       Raster 4/8: 4 8 12 16 20 24 32 48 64 96. Chat: --ca-pad ist die Fluchtlinie der Flaechen,
+              Text sitzt 20 px dahinter (Kachel, Eingabe, Schritte, Hinweis).
+   SCHRIFT    Plus Jakarta Sans 500 / -0.02em fuer Ueberschriften, Inter fuer alles andere; Groessen 12 13 15 16 18 24
+              + drei fluide Display-Stufen; Zeilenhoehen 1.05 1.2 1.35 1.5 1.6; Farbe --as-ink / --as-ink-2 / --as-ink-3.
+   FARBE      Graphit traegt, Silbergrau ist Licht. Lime nur: Haupthandlung (--as-main-*), Signalpunkt, X im Logo.
+   SCHALTER   Raenge: Haupt (--as-main-*), Neben (--as-switch-*), Still (Text, Glas erst beim Zeigen), Symbol 48,
+              Segmentleiste (innen gerade, aussen rund). Hoehe 48 (Hero-Haupt 56), Schrift 15/600.
+              Zustaende: Zeigen = heller + 1 px hoch, Gedrueckt = 1 px tief, Fokus = --as-focus, Aus = matt. Kein Layoutsprung.
+   BEWEGUNG   eine Kurve (--as-ease), zwei Dauern (--as-fast 160 ms Schalter, --as-slow 320 ms Flaechen/Einblenden);
+              nur transform/opacity/Farbe; prefers-reduced-motion schaltet alles ab.
+   Farben nur ueber Variablen und color-mix (Gate tests/test_public_surface_contract.py). */
 
 /* ===== Bausteine Startseite · Grundformen ===== */
 #atelier .home-concept{--fx-turn:calc(var(--material-film-turn) * 12);--fx-lift:calc(-1 * var(--space-1));--fx-reveal:calc(var(--control-loading-duration) * .7);--fx-glow:radial-gradient(calc(var(--space-9) * 3) circle at var(--glow-x,50%) var(--glow-y,0%),color-mix(in srgb,var(--color-marke-lime) 16%,transparent),color-mix(in srgb,var(--color-atelier-platinum) 6%,transparent) 42%,transparent 70%);position:relative;isolation:isolate;overflow-x:clip}
@@ -610,7 +631,7 @@ body:has(#atelier) .skip-link{font-size:15px;font-weight:600;line-height:1.5}
 #atelier #aifly-panel :is(.panel-minimize,.icon-button):focus-visible{box-shadow:var(--as-switch-shadow),var(--as-focus)}
 #atelier #aifly-panel :is(.panel-minimize,.icon-button):active{transform:translateY(1px);background:var(--as-switch-body-pressed);box-shadow:var(--as-switch-shadow-pressed)}
 #atelier #aifly-panel,#atelier #aifly-panel *{-webkit-hyphens:manual;hyphens:manual;overflow-wrap:break-word;word-break:normal}
-#atelier #aifly-panel .panel-brandline{margin:0;font-family:var(--font-display);font-size:18px;font-weight:500;line-height:1.35;letter-spacing:-.02em;color:var(--as-ink)}
+#atelier #aifly-panel .panel-brandline{margin:0;font-family:var(--font-text);font-size:16px;font-weight:600;line-height:1.5;letter-spacing:0;color:var(--as-ink)}
 #atelier #aifly-panel .panel-identity-subtitle{font-family:var(--font-text);font-size:13px;font-weight:400;line-height:1.5;letter-spacing:0;text-transform:none}
 #atelier #aifly-panel .orientation-message>strong{font-family:var(--font-mono);font-size:12px;font-weight:500;line-height:1.5;letter-spacing:.14em;text-transform:uppercase}
 #atelier #aifly-panel .orientation-message.role-user>strong{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
@@ -630,7 +651,7 @@ body:has(#atelier) .skip-link{font-size:15px;font-weight:600;line-height:1.5}
 #atelier #aifly-panel .orientation-host-figure::after{content:'';position:absolute;inset:auto 12% -10px;height:14px;z-index:-1;border-radius:50%;background:radial-gradient(ellipse 50% 50% at 50% 50%,var(--as-figure-shadow),transparent 72%)}
 #atelier #aifly-panel .orientation-host-figure img{display:block;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 10px 10px var(--as-figure-shadow))}
 #atelier #aifly-panel .orientation-host-name{display:grid;gap:2px;margin:0 0 12px}
-#atelier #aifly-panel .orientation-host-name strong{font-family:var(--font-display);font-size:18px;font-weight:500;line-height:1.35;letter-spacing:-.02em;color:var(--as-ink)}
+#atelier #aifly-panel .orientation-host-name strong{font-family:var(--font-text);font-size:16px;font-weight:600;line-height:1.5;letter-spacing:0;color:var(--as-ink)}
 #atelier #aifly-panel .orientation-host-name span{font-size:13px;font-weight:400;line-height:1.5;letter-spacing:0;color:var(--as-ink-3)}
 #atelier #aifly-panel .orientation-intro h3{margin:0 0 16px;font-family:var(--font-display);font-size:clamp(28px,8.6cqi,36px);font-weight:500;line-height:1.05;letter-spacing:-.02em;color:var(--as-ink);text-wrap:balance}
 #atelier #aifly-panel .orientation-intro p.orientation-intro-body{margin:0;max-width:46ch;font-size:16px;line-height:1.6;color:var(--as-ink-2);text-wrap:pretty}
@@ -794,3 +815,4 @@ html:has(#atelier){scroll-padding-top:104px}
 #atelier .site-header .header-cta:is(:hover,:focus-visible){background:var(--as-switch-body-hover);box-shadow:var(--as-switch-shadow-hover)}
 #atelier .site-header .header-cta:focus-visible{box-shadow:var(--as-switch-shadow),var(--as-focus)}
 #atelier .site-header .header-cta:active{background:var(--as-switch-body-pressed);box-shadow:var(--as-switch-shadow-pressed)}
+#atelier #aifly-panel .orientation-path>li>small{font-variant-numeric:tabular-nums}
