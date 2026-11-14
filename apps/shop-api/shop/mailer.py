@@ -32,13 +32,19 @@ def sender():
     return "TEILEKLAR <%s>" % address if address else ""
 
 
-async def enqueue(event_key, to, subject, html, text, reply_to=""):
-    """Queue once per event key and try to deliver immediately."""
+async def enqueue(event_key, to, subject, html, text, reply_to="", sender=""):
+    """Queue once per event key and try to deliver immediately.
+
+    `sender` is an optional explicit From for mail of another brand than the shop; without it the
+    configured default sender is used exactly as before."""
     if not to:
         return None
     try:
-        await db.outbox.insert_one({"_id": event_key, "to": to, "subject": subject, "html": html, "text": text, "reply_to": reply_to,
-                                    "status": "wartend", "attempts": 0, "created_at": now_iso()})
+        doc = {"_id": event_key, "to": to, "subject": subject, "html": html, "text": text, "reply_to": reply_to,
+               "status": "wartend", "attempts": 0, "created_at": now_iso()}
+        if sender:
+            doc["from"] = sender
+        await db.outbox.insert_one(doc)
     except DuplicateKeyError:
         return await db.outbox.find_one({"_id": event_key}, {"html": 0, "text": 0})
     return await deliver(event_key)
@@ -50,7 +56,7 @@ async def deliver(event_key):
                                                 {"$set": {"status": "wird_vorbereitet", "claimed_at": now_iso(), "claim_id": claim_id}})
     if not claim:
         return await db.outbox.find_one({"_id": event_key}, {"html": 0, "text": 0})
-    key, origin, cap = setting("RESEND_API_KEY"), sender(), setting("MAIL_DAILY_CAP")
+    key, origin, cap = setting("RESEND_API_KEY"), claim.get("from") or sender(), setting("MAIL_DAILY_CAP")
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     if not key or not origin:
         return await _finish(event_key, claim_id, "fehlgeschlagen", "not_configured", count=True)

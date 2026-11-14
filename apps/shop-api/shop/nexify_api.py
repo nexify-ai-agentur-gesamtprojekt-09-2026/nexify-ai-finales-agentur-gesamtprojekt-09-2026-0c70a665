@@ -5,8 +5,10 @@ filter by the session's own user_id; operator endpoints require role=admin. No e
 offer is triggered automatically – offers become binding only after the customer's explicit decision.
 """
 import hashlib
+import hmac
 import json
 import os
+import re
 import secrets
 import time
 import uuid
@@ -17,6 +19,7 @@ from fastapi import APIRouter, HTTPException, Request
 from fastapi.responses import PlainTextResponse, Response, StreamingResponse
 from pydantic import BaseModel, Field
 from pymongo import ReturnDocument
+from pymongo.errors import DuplicateKeyError
 
 from . import mailer
 from .db import db, now_iso
@@ -87,6 +90,7 @@ async def ensure_nexify_indexes():
     for name, keys in (("projects", "tenant_id"), ("offers", "tenant_id"), ("invoices", "tenant_id"), ("documents", "tenant_id"),
                        ("tickets", "tenant_id"), ("api_keys", "tenant_id"), ("oracle_messages", "session_id")):
         await db[name].create_index(keys)
+    await db.oracle_sessions.create_index("session_id", unique=True)
     await db.api_keys.create_index("hash", unique=True)
     await db.invoices.create_index("number", unique=True)
 
@@ -107,6 +111,11 @@ def providers():
     return [{"id": "ninerouter", "label": "Oracle", "model": POLICY_MODEL, "available": configured and pinned}]
 
 
+def router_available():
+    """Looked up by id, never by position: the provider list may have any length."""
+    return any(p.get("id") == "ninerouter" and p.get("available") for p in providers())
+
+
 class ChatIn(BaseModel):
     session_id: str = Field("", max_length=64)
     message: str = Field(min_length=1, max_length=2000)
@@ -119,9 +128,48 @@ async def oracle_providers():
     return {"default": "ninerouter", "providers": providers()}
 
 
+# A conversation is readable and writable only by the party that started it. The session id alone is
+# an identifier, never a credential: signed-in conversations are bound to the account, anonymous ones to
+# an httpOnly visitor cookie of which only the SHA-256 digest is stored.
+ORACLE_OWNER_COOKIE = "nx_oracle_owner"
+_OWNER_TOKEN = re.compile(r"[A-Za-z0-9_-]{32,64}")
+
+
+def _owner_token(request):
+    token = request.cookies.get(ORACLE_OWNER_COOKIE) or ""
+    return token if _OWNER_TOKEN.fullmatch(token) else None
+
+
+def _owner_hash(token):
+    return hashlib.sha256(token.encode()).hexdigest()
+
+
+async def oracle_session_access(session_id, user, request):
+    """Returns "own", "new" (no such conversation yet) or "foreign". Unknown ownership is foreign."""
+    record = await db.oracle_sessions.find_one({"session_id": session_id})
+    if record:
+        if record.get("user_id") and user and hmac.compare_digest(str(record["user_id"]), str(user["user_id"])):
+            return "own"
+        token = _owner_token(request)
+        if record.get("owner_hash") and token and hmac.compare_digest(record["owner_hash"], _owner_hash(token)):
+            return "own"
+        return "foreign"
+    owners = await db.oracle_messages.distinct("user_id", {"session_id": session_id})
+    if not owners:
+        return "new"
+    # Conversations stored before ownership records existed: only an account that is the sole
+    # recorded author may continue. Purely anonymous legacy conversations have no provable owner.
+    accounts = {owner for owner in owners if owner}
+    return "own" if user and accounts == {user["user_id"]} else "foreign"
+
+
 @router.get("/api/oracle/history/{session_id}")
-async def oracle_history(session_id: str):
-    items = await db.oracle_messages.find({"session_id": session_id[:64]}, {"_id": 0}).sort("at", 1).to_list(200)
+async def oracle_history(session_id: str, request: Request):
+    session_id = session_id[:64]
+    if await oracle_session_access(session_id, await current_user(request), request) != "own":
+        # Same answer for "does not exist" and "belongs to someone else": no existence oracle.
+        raise HTTPException(404, {"error": "not_found"})
+    items = await db.oracle_messages.find({"session_id": session_id}, {"_id": 0, "owner_hash": 0}).sort("at", 1).to_list(200)
     return {"session_id": session_id, "messages": items}
 
 
@@ -151,14 +199,32 @@ async def _stream_ninerouter(history, message):
 async def oracle_chat(body: ChatIn, request: Request):
     user = await current_user(request)
     session_id = body.session_id if body.session_id and body.session_id.replace("-", "").isalnum() else uuid.uuid4().hex
+    access = await oracle_session_access(session_id, user, request)
+    if access == "foreign":
+        raise HTTPException(404, {"error": "not_found"})
     since = (datetime.now(timezone.utc) - timedelta(days=1)).isoformat()
-    if await db.oracle_messages.count_documents({"session_id": session_id, "role": "user", "at": {"$gte": since}}) >= CHAT_DAILY_LIMIT:
+    # The limit follows the party, not the conversation: a new conversation id does not reset it.
+    # Signed-in: per account. Anonymous: per visitor cookie. (This service has no sender-address
+    # limiter; a client that discards the cookie is a new visitor and is not bounded here.)
+    owner_token = None if user else (_owner_token(request) or secrets.token_urlsafe(32))
+    owner_hash = _owner_hash(owner_token) if owner_token else None
+    party = {"user_id": user["user_id"]} if user else {"owner_hash": owner_hash}
+    if await db.oracle_messages.count_documents({**party, "role": "user", "at": {"$gte": since}}) >= CHAT_DAILY_LIMIT:
         raise HTTPException(429, {"error": "rate_limited", "message": "Das Tageslimit für diesen Chat ist erreicht. Schreiben Sie uns gern über das Kontaktformular."})
     chosen = next((p for p in providers() if p["available"]), None)
     if not chosen:
         raise HTTPException(503, {"error": "oracle_unavailable", "message": "Oracle ist gerade nicht erreichbar."})
     history = [{"role": m["role"], "content": m["content"]} for m in await db.oracle_messages.find({"session_id": session_id}, {"_id": 0}).sort("at", 1).to_list(40)]
-    base = {"session_id": session_id, "user_id": user["user_id"] if user else None, "page": body.page}
+    base = {"session_id": session_id, "user_id": user["user_id"] if user else None, "owner_hash": owner_hash, "page": body.page}
+    new_owner_token = None
+    if access == "new":
+        new_owner_token = owner_token if owner_token and owner_token != _owner_token(request) else None
+        try:
+            await db.oracle_sessions.insert_one({"session_id": session_id, "user_id": user["user_id"] if user else None,
+                                                 "owner_hash": owner_hash, "created_at": now_iso()})
+        except DuplicateKeyError:
+            # Someone else claimed this id between the check and the insert.
+            raise HTTPException(404, {"error": "not_found"}) from None
     await db.oracle_messages.insert_one({**base, "role": "user", "content": body.message.strip(), "at": now_iso()})
 
     async def events():
@@ -176,10 +242,23 @@ async def oracle_chat(body: ChatIn, request: Request):
                                                  "ms": int((time.time() - started) * 1000), "at": now_iso()})
         yield "event: done\ndata: {}\n\n"
 
-    return StreamingResponse(events(), media_type="text/event-stream", headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"})
+    response = StreamingResponse(events(), media_type="text/event-stream", headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"})
+    if new_owner_token:
+        response.set_cookie(ORACLE_OWNER_COOKIE, new_owner_token, max_age=60 * 60 * 24 * 30, httponly=True, secure=True, samesite="lax", path="/api/oracle")
+    return response
 
 
 # ---------- Customer portal ----------
+def own_requests(user):
+    """Public contact requests carry the address typed into the form. Matching them to an account by
+    address is only sound once that account has proven control of the address; otherwise registering
+    with someone else's address would expose their requests."""
+    scope = [{"user_id": user["user_id"]}]
+    if user.get("email_verified") is True:
+        scope.append({"email": user["email"]})
+    return {"$or": scope}
+
+
 async def mine(collection, user, sort="created_at"):
     return [clean(d) for d in await db[collection].find({"tenant_id": user["user_id"]}).sort(sort, -1).to_list(200)]
 
@@ -192,7 +271,7 @@ async def portal_overview(request: Request):
     offers_open = await db.offers.count_documents({"tenant_id": tid, "status": "sent"})
     invoices_open = await db.invoices.count_documents({"tenant_id": tid, "status": {"$in": ["open", "overdue"]}})
     tickets_open = await db.tickets.count_documents({"tenant_id": tid, "status": {"$ne": "closed"}})
-    reqs = await db.requests.count_documents({"$or": [{"user_id": tid}, {"email": user["email"]}]})
+    reqs = await db.requests.count_documents(own_requests(user))
     sub = clean(await db.subscriptions.find_one({"tenant_id": tid}))
     next_steps = [s for p in projects for s in p.get("next_steps", [])][:6]
     return {"user": clean(user), "projects": projects[:5], "counts": {"offers_open": offers_open, "invoices_open": invoices_open, "tickets_open": tickets_open, "requests": reqs,
@@ -202,7 +281,7 @@ async def portal_overview(request: Request):
 @router.get("/api/portal/requests")
 async def portal_requests(request: Request):
     user = await need_user(request)
-    items = await db.requests.find({"$or": [{"user_id": user["user_id"]}, {"email": user["email"]}]}, {"_id": 0, "payload_hash": 0}).sort("created_at", -1).to_list(100)
+    items = await db.requests.find(own_requests(user), {"_id": 0, "payload_hash": 0}).sort("created_at", -1).to_list(100)
     return {"items": items}
 
 
@@ -225,14 +304,18 @@ async def portal_offer_decision(offer_id: str, body: DecisionIn, request: Reques
     if offer["status"] != "sent":
         raise HTTPException(409, {"error": "already_decided", "status": offer["status"]})
     status = "accepted" if body.decision == "accept" else "declined"
-    await db.offers.update_one({"offer_id": offer_id}, {"$set": {"status": status, "decided_at": now_iso(), "decision_note": body.note}})
+    # Tenant and open state are conditions of the write itself, not only of the read before it.
+    decided = await db.offers.update_one({"offer_id": offer_id, "tenant_id": user["user_id"], "status": "sent"},
+                                         {"$set": {"status": status, "decided_at": now_iso(), "decision_note": body.note}})
+    if not decided.matched_count:
+        raise HTTPException(409, {"error": "already_decided"})
     await audit(user, "offer_" + status, offer["number"], body.note)
     to = mailer.setting("MAIL_INTERNAL_TO")
     if to:
         await mailer.enqueue("offer-decision:" + offer_id, to, "Angebot %s %s" % (offer["number"], "angenommen" if status == "accepted" else "abgelehnt"),
                              "<p>%s hat das Angebot <b>%s</b> (%s) %s.</p><p>%s</p>" % (user["email"], offer["number"], offer["title"], "angenommen" if status == "accepted" else "abgelehnt", body.note),
                              "%s: %s %s" % (user["email"], offer["number"], status))
-    return clean(await db.offers.find_one({"offer_id": offer_id}))
+    return clean(await db.offers.find_one({"offer_id": offer_id, "tenant_id": user["user_id"]}))
 
 
 @router.get("/api/portal/projects")
@@ -428,7 +511,7 @@ class ProfileIn(BaseModel):
 @router.get("/api/portal/profile")
 async def portal_profile(request: Request):
     user = await need_user(request)
-    team = [clean(m) for m in await db.team_members.find({"tenant_id": user["user_id"]}).to_list(50)]
+    team = [clean(m) for m in await db.team_members.find({"tenant_id": user["user_id"], "archived_at": None}).to_list(50)]
     privacy = [clean(p) for p in await db.privacy_requests.find({"tenant_id": user["user_id"]}).sort("created_at", -1).to_list(20)]
     return {"user": clean(user), "team": team, "privacy_requests": privacy}
 
@@ -456,8 +539,30 @@ async def portal_team_add(body: TeamIn, request: Request):
 @router.delete("/api/portal/team/{member_id}")
 async def portal_team_remove(member_id: str, request: Request):
     user = await need_user(request)
-    await db.team_members.delete_one({"member_id": member_id, "tenant_id": user["user_id"]})
-    return {"ok": True}
+    # Nothing is deleted irreversibly: the entry is archived, hidden from lists and can be restored.
+    res = await db.team_members.update_one({"member_id": member_id, "tenant_id": user["user_id"], "archived_at": None},
+                                           {"$set": {"archived_at": now_iso(), "archived_by": user["user_id"], "status": "archiviert"}})
+    if not res.matched_count:
+        raise HTTPException(404, {"error": "not_found"})
+    await audit(user, "team_member_archived", member_id)
+    return {"ok": True, "archived": True}
+
+
+@router.get("/api/portal/team/archive")
+async def portal_team_archive(request: Request):
+    user = await need_user(request)
+    return {"items": [clean(m) for m in await db.team_members.find({"tenant_id": user["user_id"], "archived_at": {"$ne": None}}).to_list(200)]}
+
+
+@router.post("/api/portal/team/{member_id}/restore")
+async def portal_team_restore(member_id: str, request: Request):
+    user = await need_user(request)
+    res = await db.team_members.update_one({"member_id": member_id, "tenant_id": user["user_id"], "archived_at": {"$ne": None}},
+                                           {"$set": {"archived_at": None, "archived_by": None, "status": "eingeladen", "restored_at": now_iso()}})
+    if not res.matched_count:
+        raise HTTPException(404, {"error": "not_found"})
+    await audit(user, "team_member_restored", member_id)
+    return clean(await db.team_members.find_one({"member_id": member_id, "tenant_id": user["user_id"]}))
 
 
 class PrivacyIn(BaseModel):
@@ -487,8 +592,8 @@ async def operator_overview(request: Request):
     outbox = {s: await db.mail_outbox.count_documents({"status": s}) for s in ("sent", "pending", "failed", "not_configured")}
     checks = [
         {"name": "Datenbank", "state": "ok", "detail": "Ping %d ms" % mongo_ms},
-        {"name": "Oracle-Modellzugang", "state": "ok" if os.environ.get("EMERGENT_LLM_KEY") else "blocked", "detail": ", ".join(p["label"] for p in providers() if p["available"]) or "kein Zugang"},
-        {"name": "9router", "state": "ok" if providers()[2]["available"] else "not_configured", "detail": "Endpunkt, Schlüssel und Modell" + ("" if providers()[2]["available"] else " fehlen")},
+        {"name": "Oracle-Modellzugang", "state": "ok" if os.environ.get("EMERGENT_LLM_KEY") else "blocked", "detail": ", ".join(str(p.get("label") or p.get("id") or "") for p in providers() if p.get("available")) or "kein Zugang"},
+        {"name": "9router", "state": "ok" if router_available() else "not_configured", "detail": "Endpunkt, Schlüssel und Modell" + ("" if router_available() else " fehlen")},
         {"name": "Maildienst (Resend)", "state": "ok" if os.environ.get("RESEND_API_KEY") else "not_configured", "detail": "%d gesendet · %d offen · %d fehlgeschlagen" % (outbox["sent"], outbox["pending"], outbox["failed"])},
         {"name": "BigBuy-Katalog", "state": "ok" if await db.products.count_documents({"active": True}) else "blocked", "detail": "%d aktive Produkte" % await db.products.count_documents({"active": True})},
         {"name": "Zahlungsdienst (Revolut)", "state": "ok" if any(os.environ.get(k) for k in ("REVOLUT_MERCHANT_SECRET_KEY_PRODUCTION", "REVOLUT_MERCHANT_SECRET_KEY_SANDBOX")) else "not_configured", "detail": "Shop-Checkout"},
