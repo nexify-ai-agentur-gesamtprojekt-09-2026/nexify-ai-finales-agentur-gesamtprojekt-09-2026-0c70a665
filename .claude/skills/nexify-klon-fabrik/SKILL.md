@@ -71,3 +71,32 @@ Entsteht mit Freigabe des Inhabers ein neuer gemeinsamer Baustein, im selben Com
 
 1. Zeile in der Inventar-Tabelle oben ergänzen.
 2. Eintrag in `BAUSTEINE` in `tools/gleichmacher.mjs` ergänzen (Name und Selektor). Kommt der Baustein auf der Startseite nicht vor, als `[Selektor, Norm-Baustein]` eintragen: verglichen wird dann mit dem genannten Baustein der Startseite.
+
+## Mobil und PWA
+
+Stand 14.11.2026. `apps/web` liefert ein Manifest (`/manifest.webmanifest`), einen kleinen handgeschriebenen Worker (`apps/web/pwa/worker.js`, ausgeliefert als `/public-install-worker.js`) und die Offline-Seite `/offline` (aus `HeroStage`, `ActionButton`, `ActionLink`; Texte in `apps/web/lib/offline-copy.ts`). Alles drei gibt es nur im Build mit `NEXIFY_PUBLIC_INSTALLATION=public-pwa`; ohne den Schalter entfernt die Seite eine vorhandene eigene Registrierung samt eigener Caches wieder.
+
+Cache-Grenzen des Workers. Sie werden nicht aufgeweicht; wer mehr speichern will, braucht die Freigabe des Inhabers und einen Vertrag über Daten, Rechte und Löschung.
+
+- **Cache-zuerst nur für statische Dateien:** `/_next/static/**`, `/fonts/**`, `/brand/**`, `/glass/**` und die Icons. Die Cache-Namen tragen die Build-Version.
+- **Einzige gespeicherte Seite ist `/offline`** (Deutsch bei der Installation, weitere Sprachen erst bei Nutzung), ohne Cookies abgerufen. Jede andere Seite kommt immer aus dem Netz; ohne Netz erscheint die Offline-Seite mit Status 503, nie ein alter Stand der angefragten Seite.
+- **Nie beantwortet und nie gespeichert:** `/api/**`, `/webhook/**`, Anmeldung, Registrierung, Passwort, Konto, Warenkorb, Kasse, Bestellungen, Portale und `/intern` (Liste `PRIVATE_PREFIXES`); alles außer `GET`; fremde Ursprünge; Bereichsanfragen und Filme (`/media/**`); Seitendaten (`?_rsc=`).
+- **Nie gespeichert:** Antworten mit `Cache-Control: no-store` oder `private`, mit `Set-Cookie`, mit anderem Status als 200, umgeleitete und fremde Antworten.
+- **Kein `skipWaiting`, kein `clients.claim`:** ein neuer Worker übernimmt erst, wenn alle Fenster geschlossen sind, und räumt dann nur Caches mit dem eigenen Präfix `nexify-public-` ab.
+- **Kein Push, keine Hintergrund-Synchronisierung, kein eigener Installations-Dialog.** Der Worker setzt kein Cookie und keine Kennung.
+- Registriert wird nur im Produktions-Build und nicht im Datensparmodus (`Save-Data`).
+- TEILEKLAR ist eine eigene Marke ohne eigenes App-Icon: Seiten unter `/teileklar` verlinken das Manifest nicht und bekommen offline einen schlichten eigenen Hinweis statt der NeXify-Offline-Seite.
+
+Kommt ein neuer Pfad mit Sitzung, Konto oder Zahlung dazu, im selben Commit `PRIVATE_PREFIXES` in `apps/web/pwa/worker.js` ergänzen.
+
+Prüfen:
+
+```bash
+cd apps/web && node --test auth/tests/pwa-worker.test.mjs
+```
+
+```bash
+node apps/web/auth/tests/browser-pwa-offline.mjs http://localhost:3311
+```
+
+`tools/live-check.mjs` prüft lesend Manifest, Icons, Worker-Datei, Offline-Seite und den Manifest-Verweis im Kopf.

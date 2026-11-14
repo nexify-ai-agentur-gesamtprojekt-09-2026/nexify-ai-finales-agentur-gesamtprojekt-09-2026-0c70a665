@@ -66,6 +66,21 @@ try{
    try{const r=await page.request.get(base+path,{timeout:30000});status=r.status();if(status!==200){try{grund=(await r.json())?.detail?.reason??null;}catch{}}}catch{status=-1;}
    record(`Shop-Dienst ${path.split('?')[0]}`,status===200,'Echte Kundenwege: Sortiment lädt',{status,grund});}
   await page.close();}
+ // 7. Mobil und PWA: installierbar und offline-fähig. Nur lesend. Grenzen des Workers: .claude/skills/nexify-klon-fabrik/SKILL.md.
+ {const page=await browser.newPage();const vorgabe='Mobil und PWA: installierbar, offline-fähig';
+  const get=async path=>{try{const r=await page.request.get(base+path,{timeout:30000,maxRedirects:0});return {status:r.status(),type:r.headers()['content-type']||'',cache:r.headers()['cache-control']||'',text:await r.text()};}catch{return {status:-1,type:'',cache:'',text:''};}};
+  const m=await get('/manifest.webmanifest');let manifest=null;try{manifest=JSON.parse(m.text);}catch{}
+  const fehlend=['id','name','short_name','start_url','scope','display','lang','dir','background_color','theme_color'].filter(k=>!manifest?.[k]);
+  const icons=manifest?.icons||[],hat=(groesse,zweck)=>icons.some(i=>i.sizes===groesse&&(i.purpose||'any')===zweck);
+  record('PWA Manifest erreichbar und vollständig',m.status===200&&/manifest\+json/.test(m.type)&&!!manifest&&fehlend.length===0&&hat('192x192','any')&&hat('512x512','any')&&icons.some(i=>i.purpose==='maskable'),vorgabe,{status:m.status,type:m.type,fehlend,icons:icons.map(i=>i.sizes+' '+(i.purpose||'any'))});
+  const tot=[];for(const ziel of [...icons.map(i=>i.src),...(manifest?.shortcuts||[]).map(k=>k.url)]){const r=await get(ziel);if(r.status!==200)tot.push({ziel,status:r.status});}
+  record('PWA Icons und Kurzwege erreichbar',!!manifest&&icons.length>0&&tot.length===0,vorgabe,{tot});
+  const w=await get('/public-install-worker.js'),alter=/max-age=(\d+)/.exec(w.cache);
+  record('PWA Service Worker erreichbar, als Skript, ohne langes Caching',w.status===200&&/javascript/.test(w.type)&&!/immutable/.test(w.cache)&&(/no-cache|no-store/.test(w.cache)||(!!alter&&Number(alter[1])===0)),vorgabe,{status:w.status,type:w.type,cache:w.cache});
+  record('PWA Service Worker übernimmt keine offene Sitzung',w.status===200&&/addEventListener\('fetch'/.test(w.text)&&!/skipWaiting\s*\(|clients\s*\.\s*claim\s*\(/.test(w.text),vorgabe,{status:w.status});
+  const o=await get('/offline');record('PWA Offline-Seite erreichbar',o.status===200&&/data-testid="offline-page"/.test(o.text),vorgabe,{status:o.status});
+  const h=await get('/');record('PWA Manifest im Kopf verlinkt',/<link[^>]+rel="manifest"[^>]+href="\/manifest\.webmanifest"/.test(h.text),vorgabe,{status:h.status});
+  await page.close();}
 }finally{await browser.close();}
 
 const failed=results.filter(r=>!r.ok);
