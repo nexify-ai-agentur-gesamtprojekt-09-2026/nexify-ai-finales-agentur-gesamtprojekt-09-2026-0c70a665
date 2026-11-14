@@ -25,9 +25,20 @@ diff docker-compose.yml.vorher-socket docker-compose.yml   # erwartet: genau ein
 docker compose config >/dev/null && echo gueltig       # startet nichts
 ```
 
-Wirksam wird es erst mit dem Neuerstellen des Containers (Schritt 5 der Anleitung in `../README.md`); ein `docker restart` genügt nicht, weil Volumes beim Erstellen festgelegt werden.
+Wirksam wird es erst mit dem Neuerstellen des Containers (Schritt E6 in `docs/04-betrieb/hermes-arbeitsbereich-2026-11-14.md`). Der Modellschlüssel wird erst danach eingetragen (E7): Solange der Socket im Container hängt, hätte ein handlungsfähiger Agent Root auf dem Host. Zum Neuerstellen: ein `docker restart` genügt nicht, weil Volumes beim Erstellen festgelegt werden.
 
-## Vorher prüfen
+## Vorher prüfen: Wer verwaltet die Compose-Datei?
+
+Das Projekt `docker-hermes` ist über den Docker Manager von Hostinger sichtbar (die API liefert seinen Compose-Inhalt). OFFEN ist, ob Hostinger dafür eine eigene Fassung führt. Wäre das so, könnte ein späteres Speichern oder Neustarten über das Hostinger-Panel die Zeile wieder einsetzen.
+
+```bash
+docker compose ls                                       # nennt die Datei, aus der das Projekt läuft
+docker inspect hermes --format '{{ index .Config.Labels "com.docker.compose.project.config_files" }}'
+```
+
+Die genannte Datei mit dem Inhalt vergleichen, den `GET /virtual-machines/1941843/docker/docker-hermes` liefert (Skill `nexify-server-messung`, vor jeder Ausgabe maskieren). Sind beide gleich und liegt die Datei unter einem von Hostinger verwalteten Pfad, wird die Änderung über den Docker Manager gemacht und nicht an der Datei vorbei; sonst gilt der Weg unten. Nach der Änderung und nach jedem späteren Eingriff über das Panel die „Prüfung danach“ wiederholen.
+
+## Vorher prüfen: Wird der Socket gebraucht?
 
 ```bash
 docker exec hermes sh -c 'command -v docker || echo "kein docker-Client im Container"'
