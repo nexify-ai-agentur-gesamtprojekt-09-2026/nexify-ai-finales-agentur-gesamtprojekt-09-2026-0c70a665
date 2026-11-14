@@ -1,7 +1,7 @@
 # TEILEKLAR-Shop auf der eigenen Supabase-Instanz (PostgreSQL) — Bestandsaufnahme und Umstellungsplan
 
 Stand 14.11.2026 · Branch `claude/shop-supabase` · Grundlage, kein Umbau. Entscheidung
-des Inhabers vom 14.11.2026 (D-012 in `DECISIONS.md`): Shop und übrige Datenhaltung
+des Inhabers vom 14.11.2026 (D-013 in `DECISIONS.md`): Shop und übrige Datenhaltung
 laufen künftig auf der selbst gehosteten Supabase-Instanz.
 
 **Was heute vorliegt:** Zielschema `db/shop/001_shop.sql`, Prüfungen `db/shop/verify.sql`

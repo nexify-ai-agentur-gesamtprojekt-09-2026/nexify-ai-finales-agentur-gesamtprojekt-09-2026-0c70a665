@@ -23,6 +23,7 @@
 ## D-006 — MongoDB als Shop-Speicher
 - **Entscheidung:** Produkte, Preise, Warenkörbe, Bestellungen, Zahlungsereignisse, Werkstätten, Nutzer und Sitzungen liegen in MongoDB (`MONGO_URL`/`DB_NAME` aus der Umgebung). Preise/Summen werden ausschließlich serverseitig berechnet.
 - **Grund:** Vorgegebene Laufzeitumgebung; Clientpreise werden ignoriert.
+- **Stand 14.11.2026:** Als Zielbild überholt durch D-013 (alle Datenhaltung auf der eigenen Supabase-Instanz). D-006 beschreibt weiter den IST von `apps/shop-api`, bis die Migration nach D-013 umgesetzt und abgenommen ist.
 
 ## D-007 — Clerk ersetzt durch eigene Konten + Emergent Google Auth
 - **Entscheidung:** Eigene Konten (bcrypt, serverseitige Sitzung im httpOnly-/Secure-Cookie `tk_session`, Registrierung, Login, Logout, Reset per Resend, Sperre nach 5 Fehlversuchen in 15 Minuten, Fehlertext „E-Mail oder Passwort ist falsch“) plus „Mit Google anmelden“ über Emergent-managed Google Auth, per E-Mail mit demselben Nutzer verknüpft. Rollen (`customer`, `admin`) stehen im eigenen Nutzerdatensatz; Gast-Warenkorb wird beim Login zusammengeführt. `@clerk/*` ist aus `apps/web` und `apps/site` entfernt; `LocaleAwareClerk.tsx` und `auth/public-provider.ts` bleiben nur als SDK-freie Hüllen für bestehende Inventare. `PREVIEW_TEST_AUTH` entfällt.
@@ -84,10 +85,47 @@ Pascal verlangt eine weniger militaristische, luxuriöse Gestaltung mit edlen Me
 - **Umfang:** Sichtbare Texte in `config/` (site-map, Oberflächen-, Startseiten-, Erklär-, Medien-, Presenter-Texte) und `apps/` in de/nl/fr/en. Interne IDs, Test-IDs und die Adresse `/produkte/nex2fly` bleiben unverändert, damit Links, Nachweise und Routen stabil bleiben; Nutzer, die „NeX2fly“ eingeben, landen in der Orientierung weiterhin auf der Suite-Seite. Historische Abgleich- und Quellinventare (`content-reconciliation-*`, `policy-source-inventory`, `rebuild-source-map`, `research/`, `integrations/`) bleiben als Historie unverändert.
 - **Folge:** Die im Anforderungsabgleich festgehaltenen Quell-Prüfsummen von `apps/site/src/Auth.tsx` und `config/presenter-system.json` sind dadurch veraltet und werden – wie die bestehenden 40 Abweichungen dieser Art – erst mit einer echten Neuprüfung erneuert, nicht nebenbei. Die Freigabeliste `config/presenter-sources.json` wurde nur für `config/site-map.json` aktualisiert, nachdem geprüft war, dass sich die Datei gegenüber dem freigegebenen `main`-Stand ausschließlich durch die Namensersetzung unterscheidet (vorgesehener Ablauf „intentional source changes require reviewed inventory refresh“).
 
-## D-012 — Shop und übrige Datenhaltung auf der eigenen Supabase-Instanz (PostgreSQL) (14.11.2026)
-- **Entscheidung (Inhaber Pascal Courbois, 14.11.2026):** Der TEILEKLAR-Shop und alle übrige Datenhaltung werden auf der selbst gehosteten Supabase-Instanz (OSS, PostgreSQL) gebaut. Das löst D-006 (MongoDB als Shop-Speicher) ab, sobald die Umstellung abgenommen ist; bis dahin bleibt der Code unverändert auf MongoDB.
-- **Herkunft des Belegs:** Die Entscheidung wurde dieser Arbeitssitzung über die koordinierende Sitzung übermittelt. In diesem Repository liegt kein weiterer Beleg vor.
-- **Grund:** Die Shop-API antwortet in der Produktion mit 503 (Projektbindung im ausliefernden Projekt, nicht antwortende MongoDB im früheren); die verbindliche Regel „Mandantentrennung per RLS“ (`AGENTS.md`) ist mit MongoDB nicht erfüllt.
-- **Stand:** Zielschema `db/shop/001_shop.sql` mit Prüfungen (`db/shop/verify.sql`, `db/shop/test.sh`) und Umstellungsplan `docs/deployment/shop-auf-supabase-2026-11-14.md`. Nichts davon ist auf einer echten Instanz angewendet; der Dienstcode ist nicht umgestellt.
-- **Was bewusst bleibt:** Die Projektbindung (`SHOP_ALLOWED_PROJECT_IDS`), der Namespace-Marker und der Namespace-Operator bleiben in Kraft, bis der Inhaber den im Plan beschriebenen Ersatz freigibt. Preise, Steuersatz und Rechtstexte sind nicht berührt.
-- **Offen beim Inhaber:** Verbindungsweg (direkte PostgreSQL-Verbindung oder PostgREST), Anwenden der Migrationen, Rolle und Mandant, Schlüssel in Vercel, Abnahme der Zahlung. Liste im Plan, Abschnitt 5.
+## Inhaberentscheidungen aus dem Gespräch vom 14.11.2026 (D-012 bis D-017)
+
+Quelle aller sechs Einträge: Inhaber Pascal Courbois im Gespräch mit der koordinierenden Sitzung am 14.11.2026, dieser Arbeitssitzung als Auftrag übermittelt. Ein weiterer Beleg (Mitschrift, Mail) liegt im Repository nicht vor. Kennzeichnung: SOLL = gültige Vorgabe, IST = belegt mit Datum und Quelle, OFFEN = fehlt oder nicht belegt.
+
+Hinweis zur Nummerierung: Der nicht gemergte Zweig `origin/claude/marke-texte` (Stand `45f0555`, 14.11.2026) vergibt D-011 bis D-020 für andere Entscheidungen. Führend ist `main`; beim Zusammenführen müssen die Einträge jenes Zweigs neu nummeriert werden.
+
+## D-012 — Startseite ist die einzige fertige Referenz; Wiederverwendung und Gleichmacher vor jeder Auslieferung (14.11.2026)
+- **Entscheidung (SOLL, Inhaber Pascal Courbois, 14.11.2026):** Die Startseite `/` ist die einzige fertige Referenz. Jede andere Seite verwendet ihre Bausteine wieder (Strict-Reuse); Nachbau und Wertekopien sind Fehler. Jede Auslieferung läuft vorher durch den „Gleichmacher“ (`tools/gleichmacher.mjs`).
+- **Quelle:** Inhaber im Gespräch 14.11.2026.
+- **Folgen (IST):** Hero-Baustein `HeroStage` für alle Seiten (PR 133, 139), TEILEKLAR-Abschnitte aus den Bausteinen der Startseite (PR 144), Werkzeug und Skill `.claude/skills/nexify-klon-fabrik/SKILL.md` (PR 142, 145). Messung gegen `https://nexifyai.de` am 14.11.2026, 10:42 UTC: 44 Seiten, 9.240 Vergleiche, 0 Abweichungen. Bausteinliste und Vorgehen stehen nur im Skill, nicht hier.
+- **Offen:** Der Gleichmacher prüft elf Bausteine; Formulare, Karten und Eingabefelder sind nicht in der Prüfliste. Eine Messung ohne Abweichung belegt Gleichheit der geprüften Bausteine, keine Gestaltungs- oder Barrierefreiheitsabnahme.
+
+## D-013 — Alle Datenhaltung auf der eigenen, selbst gehosteten Supabase-Instanz, auch der Shop (14.11.2026)
+- **Entscheidung (SOLL, Inhaber Pascal Courbois, 14.11.2026):** Sämtliche Datenhaltung wird auf der eigenen, selbst gehosteten Supabase-Instanz gebaut (Open Source, PostgreSQL mit Row-Level-Security). Das gilt auch für den Shop.
+- **Quelle:** Inhaber im Gespräch 14.11.2026.
+- **Folgen:** D-006 (MongoDB als Shop-Speicher) ist als Zielbild überholt und bleibt IST, bis migriert ist. Die Entscheidung deckt sich mit `AGENTS.md` (Stack: PostgreSQL mit RLS; Regel „Mandantentrennung per RLS“). Chat, Angebote und Bestellungen liegen bereits im Supabase-Schema `chat` (`apps/web/supabase/migrations/0001` bis `0003`, `GO-LIVE.md`).
+- **IST (14.11.2026):** `apps/shop-api` arbeitet weiter mit MongoDB (`MONGO_URL`/`MONGODB_URI`, `DB_NAME`); der Dienstcode nutzt kein PostgreSQL (Schema-Entwurf siehe Nachtrag). In Produktion antwortet der Shop-Dienst mit 503 `project_binding_unverified` (Messung 10:41 UTC, siehe `PROGRESS.md`).
+- **Offen:** Adresse und Zugang der Supabase-Instanz sind im Repository nicht belegt. Es fehlen Shop-Schema mit RLS, Plan für die Datenübernahme (Produkte, Bestellungen, Zahlungsereignisse, Konten und Sitzungen nach D-007), Idempotenz der Buchungen im neuen Speicher, Backup mit Wiederherstellungsnachweis und ein Rückweg. Umstellung der Produktion und jeder Eingriff in die bestehende MongoDB brauchen die Freigabe des Inhabers (D-016). Im führenden Register als Konflikt `DATA-STORE-001` geführt.
+- **Nachtrag Schema-Entwurf (14.11.2026):** Zielschema `db/shop/001_shop.sql` mit Prüfungen (`db/shop/verify.sql`, `db/shop/test.sh`) und Umstellungsplan `docs/deployment/shop-auf-supabase-2026-11-14.md`. Nichts davon ist auf einer echten Instanz angewendet; der Dienstcode ist nicht umgestellt. Projektbindung (`SHOP_ALLOWED_PROJECT_IDS`), Namespace-Marker und Namespace-Operator bleiben in Kraft, bis der Inhaber den im Plan beschriebenen Ersatz freigibt. Offen beim Inhaber: Verbindungsweg (direkte PostgreSQL-Verbindung oder PostgREST), Anwenden der Migrationen, Rolle und Mandant, Schlüssel in Vercel, Abnahme der Zahlung (Plan, Abschnitt 5).
+
+## D-014 — AI FACTORY: Rollen von NeX und AIFly ORACLE (14.11.2026)
+- **Entscheidung (SOLL, Inhaber Pascal Courbois, 14.11.2026):** Präzisierung zu D-011: Der Inhaber gibt Ideen, Design und Basis. NeX führt aus, AIFly ORACLE koordiniert; beide erarbeiten alles Weitere. Orchestriert wird über Paperclip.
+- **Quelle:** Inhaber im Gespräch 14.11.2026.
+- **Folgen:** Deckt sich mit `AGENTS.md`, Abschnitt „Umsatz zuerst“ („AIfly ORACLE koordiniert“). Die Grenzen aus D-017 gelten für jede Rolle.
+- **Offen:** Paperclip steht in `config/automation.json` als `user_selected_not_verified`. Instanz, Zugang, Konfiguration und Migration sind nicht belegt; es gibt keinen Nachweis eines laufenden Workers. Eine beschriebene Rolle ist kein laufender Agent (`AGENTS.md`).
+
+## D-015 — Mobile Optimierung und PWA gehören zum Auftrag (14.11.2026)
+- **Entscheidung (SOLL, Inhaber Pascal Courbois, 14.11.2026):** Mobile Optimierung und eine installierbare Web-App (PWA) sind Teil des Auftrags.
+- **Quelle:** Inhaber im Gespräch 14.11.2026.
+- **Folgen:** Betrifft `apps/web` (ausgelieferte Oberfläche). Im Register besteht dazu MASTER-13 (PWA, `apps/site`, lokal geprüft) und MASTER-09 (Responsive/Barrierefreiheit, lokal offen).
+- **IST (14.11.2026):** `apps/web/app/manifest.webmanifest/route.ts` ist vorhanden. Live-Prüfung 10:41 UTC: kein Querüberlauf bei 360 und 1440 px auf den geprüften Seiten.
+- **Offen:** Installation, Aktualisierung und Deinstallation auf echten Geräten sind nicht abgenommen (MASTER-13). Kein privater Offline-Betrieb ohne eigenen Produkt- und Datenvertrag. Umfang der PWA für `apps/web` (Service Worker, Offline-Seiten) ist nicht festgelegt.
+
+## D-016 — Server-Bereinigung nur mit Freigabe und Rückweg (14.11.2026)
+- **Entscheidung (SOLL, Inhaber Pascal Courbois, 14.11.2026):** Aufräumen auf den Servern geschieht nur mit Freigabe des Inhabers je Schritt und mit geprüftem Rückweg. `vsk-mongodb`, Traefik und laufende Kundenseiten werden nicht destruktiv angefasst.
+- **Quelle:** Inhaber im Gespräch 14.11.2026.
+- **Folgen:** Lesende Bestandsaufnahme ist zulässig; Stoppen, Löschen, Umkonfigurieren und Datenänderungen sind es ohne Freigabe nicht. Passt zu `AGENTS.md` („keine endgültige Löschung“, Hartsperren im Gateway).
+- **Offen:** Ein aktuelles Inventar der Server und Dienste liegt in dieser Sitzung nicht vor; welche Dienste zu `vsk-mongodb` und Traefik gehören und welche Kundenseiten laufen, ist hier nicht belegt.
+
+## D-017 — Die Grenzen bleiben (14.11.2026)
+- **Entscheidung (SOLL, Inhaber Pascal Courbois, 14.11.2026):** Unverändert gilt für jede Arbeit der Agenten: keine Zahlungen, keine Änderung an Preisen oder Rechtstexten, kein Lockern von Schutzmechanismen, keine Zugangsdaten im Klartext, nichts löschen.
+- **Quelle:** Inhaber im Gespräch 14.11.2026.
+- **Folgen:** Bestätigt bestehende Regeln, ersetzt keine: `AGENTS.md` „Nicht tun“, „Constraints“ und „Verbindliche Regeln › Sicherheit“. D-012 bis D-016 sind innerhalb dieser Grenzen auszuführen.
+- **Offen:** Laut Sitzungsnotiz vom 14.11.2026 standen Zugangsdaten (BigBuy, Composio) im Gespräch; ob sie erneuert wurden, ist nicht belegt (siehe `PROGRESS.md`, „Offene Arbeiten“).

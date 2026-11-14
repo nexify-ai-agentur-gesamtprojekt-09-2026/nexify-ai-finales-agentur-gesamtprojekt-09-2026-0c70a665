@@ -11,6 +11,8 @@ const base=(args.find(a=>!a.startsWith('--'))||'https://nexifyai.de').replace(/\
 const widths=(args.find(a=>a.startsWith('--breiten='))?.slice(10)||'390,1440').split(',').map(Number).filter(Boolean);
 
 // Baustein -> Selektor. Die Norm ist das erste Vorkommen auf der Startseite.
+// Hat die Startseite einen Baustein nicht selbst (sie hat kein Formular), steht statt des Selektors [Selektor, Norm-Baustein]:
+// gemessen wird dann gegen den genannten Baustein der Startseite. Der Absendeschalter eines Formulars ist der primaere Schalter.
 const BAUSTEINE={
  'Hero-Titel':'.identity-hero .identity-copy h1',
  'Hero-Titel-Akzent':'.identity-hero .identity-title-accent',
@@ -23,6 +25,7 @@ const BAUSTEINE={
  'Abschnitts-Titel':'.hc-section-heading h2',
  'Text-Schalter':'.hc-text-link',
  'Abschluss-Schalter':'.hc-finish-primary',
+ 'Formular-Schalter-absenden':['.home-concept form button[type="submit"]','Abschluss-Schalter'],
 };
 // Eigenschaften, die ein Baustein ueberall gleich tragen muss. Breite/Hoehe gehoeren nicht dazu (Inhalt bestimmt sie).
 const EIGENSCHAFTEN=['font-family','font-size','font-weight','line-height','letter-spacing','color','background-color','border-radius','text-transform','padding-top','padding-bottom','padding-left','padding-right','min-height'];
@@ -31,7 +34,7 @@ const EIGENSCHAFTEN=['font-family','font-size','font-weight','line-height','lett
 // vom Elternlayout ab, und die Startseite nutzt dieselbe Abschnittsueberschrift selbst in mehreren Layouts.
 const messen=(page)=>page.evaluate(([bausteine,eigenschaften])=>{
  const out={};
- for(const [name,sel] of Object.entries(bausteine)){const el=document.querySelector(sel);if(!el)continue;
+ for(const [name,eintrag] of Object.entries(bausteine)){const el=document.querySelector(Array.isArray(eintrag)?eintrag[0]:eintrag);if(!el)continue;
   const r=el.getBoundingClientRect();const s=getComputedStyle(el);if(r.width===0||r.height===0||s.display==='none')continue;
   out[name]=Object.fromEntries(eigenschaften.map(e=>[e,s.getPropertyValue(e)]));}
  return out;},[BAUSTEINE,EIGENSCHAFTEN]);
@@ -61,8 +64,8 @@ try{
   if(!Object.keys(norm).length){fehler.push({breite:w,grund:'Norm nicht messbar: Startseite zeigt keinen Baustein'});await page.close();continue;}
   for(const route of routes){if(route==='/')continue;let ist=null;
    try{const r=await page.goto(base+route,{waitUntil:'domcontentloaded',timeout:45000});if((r?.status()??0)!==200)continue;await page.waitForTimeout(350);ist=await messen(page);}catch{fehler.push({breite:w,seite:route,grund:'nicht ladbar'});continue;}
-   for(const [name,werte] of Object.entries(ist)){if(!norm[name])continue;
-    for(const e of EIGENSCHAFTEN){if(e==='min-height'&&!name.includes('Schalter'))continue;vergleiche++;if(werte[e]!==norm[name][e])abweichungen.push({seite:route,breite:w,baustein:name,eigenschaft:e,norm:norm[name][e],ist:werte[e]});}}
+   for(const [name,werte] of Object.entries(ist)){const eintrag=BAUSTEINE[name],soll=norm[Array.isArray(eintrag)?eintrag[1]:name];if(!soll)continue;
+    for(const e of EIGENSCHAFTEN){if(e==='min-height'&&!name.includes('Schalter'))continue;vergleiche++;if(werte[e]!==soll[e])abweichungen.push({seite:route,breite:w,baustein:name,eigenschaft:e,norm:soll[e],ist:werte[e]});}}
   }
   await page.close();
  }
