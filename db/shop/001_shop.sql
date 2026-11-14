@@ -264,7 +264,7 @@ CREATE TABLE IF NOT EXISTS shop.customer_order (
   vat_percent numeric(5,2) NOT NULL CHECK (vat_percent BETWEEN 0 AND 100),
   currency text NOT NULL DEFAULT 'EUR' CHECK (currency = 'EUR'),
   address jsonb NOT NULL CHECK (jsonb_typeof(address) = 'object'
-    AND address->>'country' IN ('DE', 'AT', 'NL', 'BE', 'LU') AND coalesce(address->>'email', '') <> ''),
+    AND coalesce(address->>'country', '') IN ('DE', 'AT', 'NL', 'BE', 'LU') AND coalesce(address->>'email', '') <> ''),
   shipping_method text NOT NULL DEFAULT 'standard' CHECK (shipping_method = 'standard'),
   terms_accepted_at timestamptz NOT NULL,
   cart_revision bigint CHECK (cart_revision >= 0),
@@ -551,7 +551,7 @@ DECLARE t text;
 BEGIN
   FOR t IN SELECT c.relname FROM pg_class c WHERE c.relnamespace = 'shop'::regnamespace AND c.relkind = 'r' ORDER BY 1 LOOP
     EXECUTE format('ALTER TABLE shop.%I ENABLE ROW LEVEL SECURITY', t);
-    -- schema_migration: eingeschaltet, ohne Richtlinie und ohne Rechte; nur der Eigentümer schreibt sie.
+    -- schema_migration: nur der Eigentümer schreibt sie; der Dienst liest sie für die Startprüfung der Schemaversion.
     CONTINUE WHEN t = 'schema_migration';
     EXECUTE format('ALTER TABLE shop.%I FORCE ROW LEVEL SECURITY', t);
     EXECUTE format('DROP POLICY IF EXISTS service_read ON shop.%I', t);
@@ -646,7 +646,9 @@ GRANT INSERT (tenant_id, id, number, owner, user_id, idempotency_key, request_ha
   revolut_mode, created_at) ON shop.customer_order TO shop_storefront;
 
 GRANT SELECT ON ALL TABLES IN SCHEMA shop TO shop_service;
-REVOKE SELECT ON shop.schema_migration FROM shop_service;
+-- schema_migration: Lesen für die Startprüfung (Umstellungsplan, Ersatz des Namespace-Markers); kein Schreibrecht.
+DROP POLICY IF EXISTS service_version_read ON shop.schema_migration;
+CREATE POLICY service_version_read ON shop.schema_migration FOR SELECT TO shop_service USING (true);
 GRANT INSERT ON shop.setting, shop.price_release, shop.import_run, shop.source_manifest, shop.category, shop.product,
   shop.product_category, shop.cart, shop.cart_item, shop.cart_merge, shop.customer_order, shop.order_line, shop.payment,
   shop.payment_event, shop.payment_webhook, shop.outbox, shop.account, shop.account_session, shop.login_failure,

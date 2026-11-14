@@ -204,6 +204,12 @@ SELECT shop_test.raises($$INSERT INTO shop.customer_order(tenant_id, number, own
 SELECT shop_test.raises($$INSERT INTO shop.customer_order(tenant_id, number, owner, idempotency_key, request_hash, subtotal_cents, shipping_cents, total_cents, vat_included_cents, vat_percent, address, terms_accepted_at, revolut_mode)
   VALUES ('10000000-0000-0000-0000-00000000000a', 'TK-FIXTURE-6', 'guest:' || repeat('a', 32), 'fixture-idempotency-6', repeat('c', 64), 0, 0, 0, 0, 0, '{"country":"US","email":"x@example.invalid"}', now(), 'sandbox')$$,
   '23514', 'unsupported delivery country is rejected');
+SELECT shop_test.raises($$INSERT INTO shop.customer_order(tenant_id, number, owner, idempotency_key, request_hash, subtotal_cents, shipping_cents, total_cents, vat_included_cents, vat_percent, address, terms_accepted_at, revolut_mode)
+  VALUES ('10000000-0000-0000-0000-00000000000a', 'TK-FIXTURE-6A', 'guest:' || repeat('a', 32), 'fixture-idempotency-6a', repeat('c', 64), 0, 0, 0, 0, 0, '{"email":"x@example.invalid"}', now(), 'sandbox')$$,
+  '23514', 'missing delivery country is rejected');
+SELECT shop_test.raises($$INSERT INTO shop.customer_order(tenant_id, number, owner, idempotency_key, request_hash, subtotal_cents, shipping_cents, total_cents, vat_included_cents, vat_percent, address, terms_accepted_at, revolut_mode)
+  VALUES ('10000000-0000-0000-0000-00000000000a', 'TK-FIXTURE-6B', 'guest:' || repeat('a', 32), 'fixture-idempotency-6b', repeat('c', 64), 0, 0, 0, 0, 0, '{"country":null,"email":"x@example.invalid"}', now(), 'sandbox')$$,
+  '23514', 'null delivery country is rejected');
 SELECT shop_test.raises($$INSERT INTO shop.customer_order(tenant_id, number, owner, idempotency_key, request_hash, status, paid_at, paid_transitions, subtotal_cents, shipping_cents, total_cents, vat_included_cents, vat_percent, address, terms_accepted_at, revolut_mode)
   VALUES ('10000000-0000-0000-0000-00000000000a', 'TK-FIXTURE-7', 'guest:' || repeat('a', 32), 'fixture-idempotency-7', repeat('c', 64), 'bezahlt', now(), 1, 0, 0, 0, 0, 0, '{"country":"DE","email":"x@example.invalid"}', now(), 'sandbox')$$,
   '42501', 'storefront cannot create an order that is already paid');
@@ -223,6 +229,8 @@ SELECT shop_test.raises($$INSERT INTO shop.order_line(tenant_id, order_id, posit
 
 -- Dienstseite, Mandant A --------------------------------------------------
 SET ROLE shop_service;
+SELECT shop_test.expect((SELECT count(*) = 1 FROM shop.schema_migration WHERE version = 1), 'service can read the schema version for its start check');
+SELECT shop_test.raises($$INSERT INTO shop.schema_migration(version, description) VALUES (99, 'x')$$, '42501', 'service cannot write the schema version');
 SELECT shop_test.ctx('20000000-0000-0000-0000-00000000000a', '10000000-0000-0000-0000-00000000000a', '');
 SELECT shop_test.expect((SELECT count(*) = 2 FROM shop.product) AND (SELECT count(*) = 3 FROM shop.cart) AND (SELECT count(*) = 2 FROM shop.customer_order),
   'service sees the whole own tenant, published or not, and nothing of tenant B');

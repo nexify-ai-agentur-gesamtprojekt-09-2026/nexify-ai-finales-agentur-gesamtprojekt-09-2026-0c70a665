@@ -159,7 +159,7 @@ Bündelprüfung (`tests/verify_vercel_bundle.cjs`) alle dort versionierten Datei
 SQL-Dateien gehören nicht in die ausgelieferte Funktion.
 
 Aufbau (belegt, Zahlen aus dem Testlauf): 24 Tabellen (23 Fachtabellen und
-`schema_migration`), 107 Richtlinien, 54 Indizes, 27 Fremdschlüssel, 83 Prüfbedingungen,
+`schema_migration`), 108 Richtlinien, 54 Indizes, 27 Fremdschlüssel, 83 Prüfbedingungen,
 35 Primär- und Eindeutigkeitsschlüssel.
 
 - **Mandant:** jede Fachtabelle trägt `tenant_id`; Schlüssel und Fremdschlüssel sind
