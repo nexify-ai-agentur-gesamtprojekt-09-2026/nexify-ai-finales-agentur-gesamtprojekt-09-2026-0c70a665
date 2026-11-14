@@ -258,8 +258,114 @@ class CatalogContract:
         self.assertEqual((await self.store.catalog.last_finished_import())['_id'], 'r2')
 
 
+ITEM = {'product_id': 'a', 'name': 'A', 'quantity': 1, 'price_seen_cents': 100}
+
+
+class CartContract:
+    async def revision(self, owner): return (await self.store.carts.get(owner)).get('revision')
+
+    async def test_missing_cart_is_none_and_first_write_creates_revision_one(self):
+        self.assertIsNone(await self.store.carts.get('guest:one'))
+        await self.store.carts.replace_items('guest:one', None, [ITEM], create=True)
+        cart = await self.store.carts.get('guest:one')
+        self.assertEqual((cart['owner'], cart['items'], cart['revision']), ('guest:one', [ITEM], 1))
+        self.assertEqual(cart['updated_at'], 'contract-time')
+
+    async def test_each_write_needs_the_current_revision(self):
+        await self.store.carts.replace_items('guest:one', None, [ITEM], create=True)
+        await self.store.carts.replace_items('guest:one', 1, [], create=False)
+        self.assertEqual(await self.revision('guest:one'), 2)
+        for stale in (1, 0, 3, None):
+            with self.subTest(stale=stale), self.assertRaises(self.store.RevisionStale):
+                await self.store.carts.replace_items('guest:one', stale, [ITEM], create=False)
+        cart = await self.store.carts.get('guest:one')
+        self.assertEqual((cart['items'], cart['revision']), ([], 2), 'a rejected write changes nothing')
+
+    async def test_creating_a_cart_that_already_exists_is_stale_not_a_second_cart(self):
+        await self.store.carts.replace_items('guest:one', None, [ITEM], create=True)
+        with self.assertRaises(self.store.RevisionStale):
+            await self.store.carts.replace_items('guest:one', None, [], create=True)
+        self.assertEqual((await self.store.carts.get('guest:one'))['items'], [ITEM])
+
+    async def test_writing_a_missing_cart_without_create_is_stale(self):
+        with self.assertRaises(self.store.RevisionStale):
+            await self.store.carts.replace_items('guest:none', 0, [ITEM], create=False)
+        self.assertIsNone(await self.store.carts.get('guest:none'))
+
+    async def test_cart_without_revision_is_matched_by_none_only(self):
+        await self.seed('carts', [{'owner': 'guest:old', 'items': [ITEM]}])
+        with self.assertRaises(self.store.RevisionStale):
+            await self.store.carts.replace_items('guest:old', 0, [], create=False)
+        await self.store.carts.replace_items('guest:old', None, [], create=False)
+        self.assertEqual(await self.revision('guest:old'), 1)
+
+    async def test_owners_do_not_affect_each_other(self):
+        await self.store.carts.replace_items('guest:one', None, [ITEM], create=True)
+        await self.store.carts.replace_items('user:two', None, [], create=True)
+        await self.store.carts.replace_items('user:two', 1, [{**ITEM, 'quantity': 3}], create=False)
+        self.assertEqual((await self.store.carts.get('guest:one'))['items'], [ITEM])
+        self.assertEqual(await self.revision('guest:one'), 1)
+
+    async def test_transaction_applies_all_writes_and_keeps_merge_receipts_in_order(self):
+        await self.store.carts.replace_items('guest:one', None, [ITEM], create=True)
+        async def work(tx):
+            guest = await self.store.carts.get('guest:one', tx=tx)
+            self.assertIsNone(await self.store.carts.get('user:two', tx=tx))
+            await self.store.carts.replace_items('user:two', None, guest['items'], create=True, tx=tx)
+            await self.store.carts.replace_items('guest:one', guest['revision'], [], create=False, tx=tx, archive_entry={'id': 'first'})
+        await self.store.carts.in_transaction(work)
+        await self.store.carts.replace_items('guest:one', 2, [], create=False, archive_entry={'id': 'second'})
+        guest = await self.store.carts.get('guest:one')
+        self.assertEqual((guest['items'], guest['revision'], [e['id'] for e in guest['merge_history']]), ([], 3, ['first', 'second']))
+        self.assertEqual((await self.store.carts.get('user:two'))['items'], [ITEM])
+
+    async def test_failed_transaction_leaves_nothing_and_passes_the_callers_error_through(self):
+        await self.store.carts.replace_items('guest:one', None, [ITEM], create=True)
+        class Abort(Exception): pass
+        async def work(tx):
+            await self.store.carts.replace_items('user:two', None, [ITEM], create=True, tx=tx)
+            await self.store.carts.replace_items('guest:one', 1, [], create=False, tx=tx)
+            raise Abort()
+        with self.assertRaises(Abort):
+            await self.store.carts.in_transaction(work)
+        self.assertIsNone(await self.store.carts.get('user:two'))
+        self.assertEqual((await self.store.carts.get('guest:one'))['items'], [ITEM])
+        self.assertEqual(await self.revision('guest:one'), 1)
+
+    async def test_stale_write_inside_a_transaction_undoes_the_earlier_write(self):
+        await self.store.carts.replace_items('guest:one', None, [ITEM], create=True)
+        async def work(tx):
+            await self.store.carts.replace_items('user:two', None, [ITEM], create=True, tx=tx)
+            await self.store.carts.replace_items('guest:one', 7, [], create=False, tx=tx)
+        with self.assertRaises(self.store.RevisionStale):
+            await self.store.carts.in_transaction(work)
+        self.assertIsNone(await self.store.carts.get('user:two'))
+
+    async def test_ordinary_cart_with_receipt_is_archivable(self):
+        self.assertIsNone(self.store.carts.check_archivable({'owner': 'guest:one', 'items': [], 'merge_history': [{'id': 'x', 'guest_snapshot': {'items': [ITEM]}}]}))
+
+
+class MongoSpecifics:
+    """Limits that exist only because a MongoDB cart is one document; not part of the shared contract."""
+    def test_cart_at_the_document_limit_is_too_large_and_unencodable_data_is_invalid(self):
+        with self.assertRaises(self.store.ArchiveTooLarge):
+            self.store.carts.check_archivable({'padding': 'x' * (16 * 1024 * 1024)})
+        with self.assertRaises(self.store.StoredDataInvalid):
+            self.store.carts.check_archivable({'value': object()})
+
+    async def test_unavailable_transactions_are_reported_as_store_unavailable(self):
+        from pymongo.errors import ConfigurationError
+        def refuse(): raise ConfigurationError('synthetic')
+        self.store.carts.db = SimpleNamespace(client=SimpleNamespace(start_session=refuse))
+        async def work(tx): self.fail('work must not run')
+        with self.assertRaises(self.store.StoreUnavailable):
+            await self.store.carts.in_transaction(work)
+
+
 class InMemoryCatalog(CatalogContract, InMemoryBinding): pass
+class InMemoryCarts(CartContract, MongoSpecifics, InMemoryBinding): pass
 class DisposableMongoCatalog(CatalogContract, DisposableMongoBinding): pass
+class DisposableMongoCarts(CartContract, DisposableMongoBinding): pass
 
 
 if __name__ == '__main__': unittest.main()

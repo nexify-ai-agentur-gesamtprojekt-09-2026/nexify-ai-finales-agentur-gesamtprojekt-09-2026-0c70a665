@@ -10,7 +10,7 @@ from unittest.mock import AsyncMock, patch
 from bson.int64 import Int64
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
-from pymongo.errors import ConfigurationError, DuplicateKeyError
+from pymongo.errors import DuplicateKeyError
 
 ROOT = Path(__file__).resolve().parents[1]
 SHOP = ROOT / 'apps/shop-api/shop'
@@ -80,6 +80,7 @@ class CartStockTests(unittest.TestCase):
         self.client = TestClient(app)
         self.db = db
         self.catalog = modules[name + '.catalog_api']
+        self.store = modules[name + '.cart_api'].store
         self.checkout = modules[name + '.checkout_api']
         self.fulfillment = modules[name + '.fulfillment']
         self.revolut = modules[name + '.revolut']
@@ -192,8 +193,9 @@ class CartStockTests(unittest.TestCase):
         self.assertEqual(self.writes, [])
 
     def test_cart_write_conflict_is_reported_without_success(self):
-        self.db.carts.update_one = AsyncMock(return_value=SimpleNamespace(matched_count=0, upserted_id=None))
+        self.store.carts.replace_items = AsyncMock(side_effect=self.store.RevisionStale())
         result = self.client.post('/api/shop/cart/items', json={'product_id':'fixture-product','quantity':1})
+        self.store.carts.replace_items.assert_awaited_once()
         self.assertEqual(result.status_code, 409)
         self.assertEqual(result.json()['detail']['error'], 'cart_changed')
         self.external.assert_not_awaited()
@@ -201,9 +203,12 @@ class CartStockTests(unittest.TestCase):
     def test_merge_unavailable_does_not_fall_back_to_nontransactional_write(self):
         self.auth.identity = AsyncMock(return_value=SimpleNamespace(owner='user:fixture', user_id='fixture', guest_id='guestfixture'))
         guest = {'_id':'fixture-guest','items':[{'product_id':'fixture-product','quantity':1}]}
-        self.db.carts.find_one = AsyncMock(return_value=guest)
-        self.db.client = SimpleNamespace(start_session=AsyncMock(side_effect=ConfigurationError('synthetic unavailable')))
+        self.store.carts.get = AsyncMock(return_value=guest)
+        self.store.carts.in_transaction = AsyncMock(side_effect=self.store.StoreUnavailable())
+        self.store.carts.replace_items = AsyncMock()
         result = self.client.get('/api/shop/cart')
+        self.store.carts.in_transaction.assert_awaited_once()
+        self.store.carts.replace_items.assert_not_awaited()
         self.assertEqual(result.status_code, 503)
         self.assertEqual(result.json()['detail']['error'], 'cart_merge_unavailable')
         self.assertEqual(guest['items'][0]['quantity'], 1)
