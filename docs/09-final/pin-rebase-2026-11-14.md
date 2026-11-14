@@ -251,13 +251,15 @@ Der Installationsmodus desselben Skripts (`TEST_PUBLIC_INSTALLATION=enabled`) er
 | Lauf | Ergebnis | Beleg |
 |---|---|---|
 | `browser-public-experience.mjs` | bestanden: 70 Routen, 10 private Hüllen, 20 Filmzeilen, 7 Klickproben, 0 Fremdanfragen, 0 Seitenfehler | übernommen nach `evidence/consent-ui-2026-10-28/next-public.json`; alte Fassung unter `superseded/next-public.pre-pins-nach-159-2026-11-14.json`; `check_consent_ui` besteht |
-| `browser-text-spacing.mjs` | bestanden: `{"checks":129,"issues":[]}`, 43 Routen | übernommen nach `evidence/resize-2026-11-10/text-spacing.json`; alte Fassung unter `superseded/text-spacing.pre-pins-nach-159-2026-11-14.json`; `check_text_resize_evidence.py` besteht |
+| `browser-text-spacing.mjs` | bestanden: `{"checks":129,"issues":[]}`, 43 Routen | übernommen nach `evidence/resize-2026-11-10/text-spacing.json`; alte Fassung unter `superseded/text-spacing.pre-pins-nach-159-2026-11-14.json`; `check_text_resize_evidence.py` besteht. Durch die Merges von `main` (PR 170 bis 173) wieder veraltet und auf `078bc31` neu erhoben, siehe „Nacharbeit nach unabhängiger Prüfung“ |
 | `browser-pwa-offline.mjs` (Build mit `public-pwa`) | bestanden, 10 Schritte | kein Belegpfad im Repository vorgesehen; Ergebnis nur hier |
 | `tools/gleichmacher.mjs` (lokaler Build) | 44 Seiten, 14 034 Vergleiche, 0 Abweichungen | nur hier |
 | `tools/live-check.mjs` (lokaler Build) | 329 Prüfungen, 2 Befunde: `/api/shop/status` und `/api/shop/products` antworten lokal mit 404, weil kein Shop-Dienst läuft; keine PWA-Befunde | nur hier |
 | `browser-exception-capture.mjs`, vite und next | **nicht bestanden**, unverändert in Schritt 4 (`.request-fallback` erscheint nicht; `.workspace-chat-modes` fehlt) | nicht übernommen; offene Entscheidung 3 aus Abschnitt 6 |
 
-### Nachgezogene Pins (16)
+### Nachgezogene Pins (11)
+
+Stand nach der Nacharbeit (unten): Die erste Fassung dieser Runde zog 16 Pins nach; fünf davon sind zurückgenommen und stehen jetzt unter „Bewusst nicht nachgezogen“.
 
 | Datei | alter Pin | neuer Pin | Belegart | Beleg |
 |---|---|---|---|---|
@@ -266,16 +268,14 @@ Der Installationsmodus desselben Skripts (`TEST_PUBLIC_INSTALLATION=enabled`) er
 | `apps/web/app/anmelden/[[...sign-in]]/page.tsx` | `ae015545eb91…` | `96462bb0686e…` | Browserlauf | wie oben; der Titel je Sprache wird im Lauf geprüft (Befund 3 ist behoben) |
 | `apps/web/app/registrieren/[[...sign-up]]/page.tsx` | `ed41b40219ce…` | `fe10ab376d72…` | Browserlauf | wie oben |
 | `evidence/consent-ui-2026-10-28/next-public.json` | `5cbe162f0071…` | `98c7f0da8cce…` | Browserlauf | neu erhobener Beleg |
-| `apps/web/components/PublicInstallation.tsx` | `45040906aa1f…` | `d8f6a143d98c…` | Browserlauf | Text-Spacing-Lauf bindet die Datei; zusätzlich ausgeübt: mit Schalter Manifestverweis und Worker-Registrierung (`browser-pwa-offline`), ohne Schalter kein Verweis und 404 (Public-Experience) |
-| `config/design-tokens.json` | `1482e2fa0e40…` | `0a7ab4ed0d4e…` | Browserlauf | Text-Spacing-Lauf bindet die Datei (129 Prüfungen); bisheriger Grund für „offen“ war, dass kein bindender Lauf bestand. Die Läufe Identity-Hero und Critical, die sie ebenfalls binden, sind in dieser Runde nicht gelaufen bzw. offen |
-| `packages/tokens/tokens.css`, `tokens.json`, `tokens.ts` | `218355ed5fdd…`, `5b9a4eb32842…`, `5294aa6ed39b…` | `b15b16adbd33…`, `4635c0bd8cc2…`, `8e10ae37b795…` | Browserlauf | wie die Quelle; vom Text-Spacing-Lauf gebunden |
+| `apps/web/components/PublicInstallation.tsx` | `45040906aa1f…` | `d8f6a143d98c…` | Browserlauf | Text-Spacing-Lauf bindet die Datei (zuletzt bestanden auf `078bc31`, Bytes unverändert); zusätzlich ausgeübt: mit Schalter Manifestverweis und Worker-Registrierung (`browser-pwa-offline`), ohne Schalter kein Verweis und 404 (Public-Experience) |
 | `apps/web/auth/tests/public-experience.test.mjs` | `d057cd534279…` | `7a9168978792…` | grüner Test | `node --test auth/tests/*.test.mjs`: 105 von 105 |
 | `apps/web/scripts/generate-public-data.mjs` | `dca037e16f2c…` | `6b2453410744…` | grüner Test | von `public-experience.test.mjs` (`prepareInstallation`) und `pwa-worker.test.mjs` (`stampWorker`, `workerVersion`) importiert und ausgeführt; beide Builds Exit 0 |
 | `apps/site/pwa/plugin.mjs` | `185be72f2873…` | `9e95bc41449b…` | grüner Test | `public-installation.test.mjs` führt das Plugin aus und prüft genau die geänderte Eigenschaft (Icon `/brand/nexify-figur.png`, Datei vorhanden); `cd apps/site && node --test`: 132 von 132 |
 | `apps/site/tests/public-installation.test.mjs` | `58d24504a122…` | `51497cae7a9c…` | grüner Test | 132 von 132 |
-| `config/page-explainers.json`, `config/page-media-registry.json` | `16c308f422bf…`, `3613fbbb8c46…` | `967cccc90aba…`, `c6f740ca020d…` | grüner Test | wie in Abschnitt 4: `public-video-assets.test.mjs` liest die Dateien (132 von 132); die Inhaltsurteile REC-CONTENT-01 und REC-MEDIA-01 bleiben offen |
+| `config/page-media-registry.json` | `3613fbbb8c46…` | `c6f740ca020d…` | grüner Test | wie in Abschnitt 4: `public-video-assets.test.mjs` liest die Datei (132 von 132); das Inhaltsurteil REC-MEDIA-01 bleibt offen |
 
-### Bewusst nicht nachgezogen (23)
+### Bewusst nicht nachgezogen (28)
 
 | Datei | Grund |
 |---|---|
@@ -283,6 +283,8 @@ Der Installationsmodus desselben Skripts (`TEST_PUBLIC_INSTALLATION=enabled`) er
 | `apps/web/app/sitemap.ts` (`1b0316a5fae3…`, heute `cdeb7bcabf0a…`) | seit `9f8ab46` drei Rechtsrouten ergänzt; kein Lauf und kein Test dieser Runde liest die Sitemap |
 | `apps/web/components/HomeContent.tsx`, `IdentityHero.tsx`, `IdentityHero.css`, `WorkspaceRebuild.css`, `apps/site/tests/browser-identity-hero.mjs` | vom Text-Spacing-Lauf gebunden, aber der eigentlich zuständige Identity-Hero-Lauf wurde in dieser Runde nicht erhoben; die schwächere Bindung ersetzt ihn nicht |
 | `apps/web/components/Workspace.tsx`, `PublicOrientationChat.tsx`, `OracleCompanion.tsx`, `PublicRequestFallback.tsx`, `apps/site/src/Auth.tsx`, `config/site-map.json`, `apps/site/tests/browser-critical.mjs`, `tools/check_browser_evidence.py` | hängen am Critical-, Fallback- oder Ausnahme-Lauf; offene Entscheidungen 1 bis 3 |
+| `config/design-tokens.json` (`1482e2fa0e40…`, heute `0a7ab4ed0d4e…`), `packages/tokens/tokens.css` (`218355ed5fdd…`, heute `b15b16adbd33…`), `tokens.json` (`5b9a4eb32842…`, heute `4635c0bd8cc2…`), `tokens.ts` (`5294aa6ed39b…`, heute `8e10ae37b795…`) | zurückgenommen in der Nacharbeit. Der Text-Spacing-Lauf bindet die Dateien, aber auch `browser-identity-hero.mjs` und `browser-contrast-scope.mjs` binden sie, und beide sind in dieser Runde nicht gelaufen. Die Bindung an einen Lauf, der nur Textabstand und 200 % Textgröße misst, ersetzt die zuständigen Läufe nicht |
+| `config/page-explainers.json` (`16c308f422bf…`, heute `967cccc90aba…`) | zurückgenommen in der Nacharbeit. `public-video-assets.test.mjs` prüft nur die Struktur der Datei, nicht die 185 seit dem Pin geänderten Textzeilen; ein grüner Test, der die geänderte Eigenschaft nicht prüft, trägt keinen Pin. REC-CONTENT-01 bleibt offen |
 | `apps/site/tests/browser-pwa.mjs`, `config/presenter-system.json` | kein Lauf in dieser Runde |
 | `PROGRESS.md`, `AGENTS.md` | führende Dokumente; `nexify-stand-halten` und offene Entscheidung 5 |
 | `apps/web/package.json`, `apps/shop-api/requirements.txt`, `requirements-image.txt`, `skills-lock.json` | Abhängigkeitswechsel ohne geprüfte Herkunft, Befunde 4 und 5 |
@@ -295,11 +297,30 @@ Der Installationsmodus desselben Skripts (`TEST_PUBLIC_INSTALLATION=enabled`) er
 
 | Gate | vorher | nachher (`c566216` mit dieser Runde) |
 |---|---|---|
-| `python3 -m unittest discover -s tests` | `1997ddc`: 810 Tests, 50 Failures, 9 Errors (58 Namen); `aceb6a7`: 822 Tests, dieselben Namen | 822 Tests, 34 Failures, 6 Errors (40 Namen); neue Fehlschläge: keine; behoben: 18 |
+| `python3 -m unittest discover -s tests` | `aceb6a7`: 822 Tests, 49 Failures, 9 Errors (58 Namen). Berichtigung: Die erste Fassung nannte 50 Failures; gemessen sind 49 (nachgemessen in einem eigenen Worktree auf `aceb6a7`) | erste Fassung auf `c566216`: 822 Tests, 34 Failures, 6 Errors (40 Namen); neue Fehlschläge: keine; behoben: 18. Heutiger Stand: Tabelle in der Nacharbeit |
 | davon | 14 `test_browser_evidence`, 39 `test_requirements_reconciliation`, 2 `test_resize_source_binding`, 3 Ladefehler (der Laufumgebung fehlen `fastapi`, `httpx`, `bson`) | 13, 24, 0, 3 |
 | `make check`, `node tools/ds-audit-cli.js` | – | Exit 0; 0 Fehler, 0 Warnungen |
 | `node tools/lint.mjs` | – | 0 Diagnosen |
 | `cd apps/site && node --test` | – | 132 von 132 |
 | `cd apps/web && node --test auth/tests/*.test.mjs` | – | 105 von 105 |
 
-Veraltete Pins im Register: 38 vorher, 23 nachher.
+Veraltete Pins im Register: 38 vorher, 23 nach der ersten Fassung, 28 nach der Nacharbeit.
+
+### Nacharbeit nach unabhängiger Prüfung (14.11.2026, `078bc31`)
+
+Der unabhängige Prüfer hat drei Punkte beanstandet; sie sind hier behoben. `tools/_update_register_shas.py` wurde nicht benutzt.
+
+Merge-Stände des Zweigs: `c566216` (mit `main` `aceb6a7`), Arbeitsstand `180866e`, danach `35acfa1` (Merge von `main` `31ccd6c`, PR 170 bis 172) und `078bc31` (Merge von `main` `a2917d2`, PR 173). PR 170 bis 173 ändern unter anderem `apps/web/components/AtelierSystem.css` und `PublicOrientationChat.tsx`; beide bindet der Text-Spacing-Beleg.
+
+1. **Text-Spacing-Beleg neu erhoben.** Der Beleg vom Stand `c566216` band die alten Bytes von `AtelierSystem.css` und `PublicOrientationChat.tsx`; `test_current_report_has_exact_source_binding` und `test_css_script_new_source_and_uncompleted_report_fail_closed` waren dadurch wieder rot. Neuer Lauf von `apps/site/tests/browser-text-spacing.mjs` am festen Commit `078bc31` bei sauberem Arbeitsbaum: Node v22.23.4, Playwright 1.65.0 mit Chromium 158.0.8127.18, davor `node apps/site/scripts/generate-public-data.mjs` (43 Seiten) und `pnpm --filter @nexify/web build` (Exit 0). Der Harness startet seinen eigenen Vite-Server aus `apps/site`; den Next-Build liest er nicht. Ergebnis: bestanden, `{"checks":129,"issues":[]}`, 43 Routen, 173 gebundene Quellen, keine Laufzeitfehler. Übernommen nach `evidence/resize-2026-11-10/text-spacing.json`; die Fassung von `c566216` liegt unverändert unter `superseded/text-spacing.pre-pins-nach-159-merge-173-2026-11-14.json`. `python3 tools/check_text_resize_evidence.py` besteht (43 Routen).
+2. **Fünf Pins zurückgenommen** auf den Wert von `aceb6a7`: `config/design-tokens.json`, `packages/tokens/tokens.css`, `tokens.json`, `tokens.ts`, `config/page-explainers.json`. Begründung in der Tabelle „Bewusst nicht nachgezogen“. `apps/web/components/PublicInstallation.tsx` bleibt nachgezogen: Der neue Text-Spacing-Lauf bindet die Datei und besteht.
+3. **Vorher-Zahl berichtigt:** 49 Failures auf `aceb6a7`, nicht 50.
+
+| Gate | `aceb6a7` | `078bc31` vor der Nacharbeit | `078bc31` mit der Nacharbeit |
+|---|---|---|---|
+| `python3 -m unittest discover -s tests` | 822 Tests, 49 Failures, 9 Errors (58 Namen) | 822 Tests, 34 Failures, 8 Errors (42 Namen) | 822 Tests, 39 Failures, 6 Errors (45 Namen) |
+| davon `test_browser_evidence` / `test_requirements_reconciliation` / `test_resize_source_binding` / Ladefehler (`fastapi`, `httpx`, `bson`) | 14 / 39 / 2 / 3 | 13 / 24 / 2 / 3 | 13 / 29 / 0 / 3 |
+
+Namensvergleich als Mengen: gegenüber `aceb6a7` kein neuer roter Test, 13 behoben. Gegenüber dem Stand vor der Nacharbeit sind die zwei Tests in `test_resize_source_binding` wieder grün; fünf Namen aus `test_recorded_source_hashes_match_actual_bytes` sind wieder rot, genau die fünf zurückgenommenen Pins. `make check`, `make governance-check`, `node tools/ds-audit-cli.js` und `node tools/lint.mjs` enden mit Exit 0; `cd apps/site && node --test` 132 von 132; `cd apps/web && node --test auth/tests/*.test.mjs` 105 von 105.
+
+Nicht geprüft in der Nacharbeit: Public-Experience, PWA, Gleichmacher und Live-Prüfung wurden auf `078bc31` nicht wiederholt; `browser-identity-hero.mjs`, `browser-contrast-scope.mjs`, Critical und Ausnahmeerfassung sind weiter nicht gelaufen bzw. offen.
