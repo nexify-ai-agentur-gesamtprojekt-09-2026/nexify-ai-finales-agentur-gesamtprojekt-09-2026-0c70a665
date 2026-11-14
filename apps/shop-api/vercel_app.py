@@ -70,7 +70,7 @@ OPTIONAL_INDEXES = {
 }
 PREFIXES = ("/api/shop", "/api/auth", "/api/admin", "/api/workshops", "/api/requests", "/api/partner-applications")
 MODULES = ("accounts_api", "catalog_api", "cart_api", "checkout_api", "workshops_api", "admin_api", "requests_api",
-           "teileklar_admin_api", "partners_api")
+           "teileklar_admin_api", "partners_api", "product_release_api")
 HEALTH_PATHS = ("/api/health", "/api/openapi.json", "/api/docs", "/api/docs/oauth2-redirect")
 # Internal diagnostics: answers 404 unless SHOP_DIAGNOSTICS_TOKEN is configured and
 # presented. Reports reason codes and variable NAMES only.
@@ -82,7 +82,7 @@ DIAGNOSTICS_TOKEN_MIN_LENGTH = 32
 # mode read). Everything else under an owned prefix needs a bound payment mode: a
 # route nobody classified is closed, not open.
 PAYMENT_FREE_PREFIXES = ("/api/auth", "/api/workshops", "/api/requests", "/api/partner-applications", "/api/shop/cart",
-                         "/api/shop/products", "/api/admin/partner-applications", "/api/admin/teileklar")
+                         "/api/shop/products", "/api/admin/partner-applications", "/api/admin/teileklar", "/api/admin/products")
 PAYMENT_FREE_EXACT = HEALTH_PATHS + ("/api/shop/status", "/api/shop/categories")
 # Feature switch -> (paths it owns, optional collections it needs).
 FEATURES = {

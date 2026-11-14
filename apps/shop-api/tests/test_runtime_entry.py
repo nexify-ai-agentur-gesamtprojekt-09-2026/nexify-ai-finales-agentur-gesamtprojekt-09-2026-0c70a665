@@ -163,7 +163,8 @@ class EveryBlockingReason(unittest.TestCase):
 
 class PartialOperation(unittest.TestCase):
     FREE = ['/api/shop/status', '/api/shop/categories', '/api/shop/products', '/api/shop/products/bb-1', '/api/shop/cart', '/api/shop/cart/items',
-            '/api/workshops/search', '/api/workshops/TKW-1/requests', '/api/requests', '/api/auth/login', '/api/auth/register', '/api/auth/me']
+            '/api/workshops/search', '/api/workshops/TKW-1/requests', '/api/requests', '/api/auth/login', '/api/auth/register', '/api/auth/me',
+            '/api/admin/products/release', '/api/admin/products/bb-1/release', '/api/admin/products/release/reevaluate']
     PAID = ['/api/shop/checkout/quote', '/api/shop/orders', '/api/shop/orders/x', '/api/shop/webhooks/revolut', '/api/admin/settings', '/api/admin/orders', '/api/admin/outbox']
 
     def test_missing_payment_mode_closes_only_payment_dependent_paths(self):
