@@ -1,6 +1,7 @@
 """Laufzeit: treibt Läufe Schritt für Schritt – ohne Modell, ohne Netz.
 
-Modell und Werkzeuge kommen als Ports herein. Jede öffentliche Operation
+Modell und Werkzeuge kommen als Ports herein; das Modell nur als von der
+Policy zugelassener Port (policy.ModellPolicy.zulassen). Jede öffentliche Operation
 verlangt den Mandanten; ein Lauf eines anderen Mandanten ist „unbekannt".
 
 Feste Regeln (nicht konfigurierbar):
@@ -36,10 +37,11 @@ from .lauf import (
 )
 from .ports import (
     MAX_AUFTRAG_ZEICHEN, Abschluss, Aufgabenvorschlag, ErgebnisseImArbeitsspeicher,
-    Ergebnisspeicher, Laufsicht, ModellPort, Modellantwort, SkillAnfordern, UnbekannterAusgang,
+    Ergebnisspeicher, Laufsicht, Modellantwort, SkillAnfordern, UnbekannterAusgang,
     Unterauftrag, Verlaufseintrag, VoruebergehenderFehler, WerkzeugAufruf, WerkzeugPort,
     Werkzeugergebnis, werkzeug_pruefen,
 )
+from .policy import PolicyFehler, ZugelassenerModellPort
 from .skills import SkillFehler, SkillRegister
 from .typen import (
     NAME, FreigabeUngueltig, GrenzenFehler, IdempotenzKonflikt, KernFehler, LaufNichtWartend,
@@ -116,15 +118,15 @@ class _Lauf:
 
 
 class Laufzeit:
-    def __init__(self, *, modell: ModellPort, werkzeuge: Iterable[WerkzeugPort],
+    def __init__(self, *, modell: ZugelassenerModellPort, werkzeuge: Iterable[WerkzeugPort],
                  wiederholung: Wiederholungsregel, skills: SkillRegister | None = None,
                  ergebnisse: Ergebnisspeicher | None = None,
                  uhr: Callable[[], datetime] = _jetzt_utc,
                  schlaf: Callable[[float], None] = time.sleep,
                  kennungen: Callable[[], str] = _neue_kennung,
                  journal_salz: bytes | None = None) -> None:
-        if not isinstance(modell, ModellPort):
-            raise KernFehler("modell_port_fehlt")
+        if type(modell) is not ZugelassenerModellPort:
+            raise KernFehler("modell_port_nicht_gegen_policy_geprueft")
         if type(wiederholung) is not Wiederholungsregel:
             raise GrenzenFehler("wiederholungsregel_ist_pflicht")
         if skills is not None and type(skills) is not SkillRegister:
@@ -341,6 +343,9 @@ class Laufzeit:
             sicht = self.__sicht(lauf)
             try:
                 antwort = self.__modell.entscheiden(sicht)
+            except PolicyFehler:  # anderes Modell als zugelassen: Ergebnis verwerfen
+                self.__ablegen(lauf, "modell_policy_verletzt")
+                return
             except Exception:  # Ausgang und Kosten unbekannt: nicht wiederholen
                 self.__ablegen(lauf, "modell_ausgang_unbekannt")
                 return

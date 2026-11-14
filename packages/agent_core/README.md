@@ -15,6 +15,7 @@ Das bestehende TypeScript-Paket `packages/agent-runtime` bleibt unberührt; dies
 | `laufzeit.py` | `Laufzeit`: `anlegen`, `fortsetzen`, `status`, `freigabe_erteilen`, `freigabe_ablehnen`, `abbrechen`, `journal`, `fehlerablage` – Mandant immer erstes Argument |
 | `journal.py` | Verkettetes Journal: Zeit, Schritt, Ereignis, gesalzene Eingabe-/Ausgabe-Hashes, Kosten, fester Code; nimmt technisch keinen Freitext an |
 | `ports.py` | `ModellPort`, `WerkzeugPort`, `Ergebnisspeicher`; Entscheidungen des Modells; deterministische Stellvertreter `SkriptModell`, `StellvertreterWerkzeug` |
+| `policy.py` | `ModellPolicy`: liest `config/llm-policy.json`, lässt nur Ports mit genau dieser Kennung und Denkstufe zu (`zulassen`), prüft die fertige Anfrage (`pruefe_anfrage`); die `Laufzeit` nimmt nur zugelassene Ports an |
 | `typen.py` | `Aktionsklasse`, `Laufstatus`, `Mensch`, Fehlertypen |
 
 ## Feste Regeln
@@ -39,13 +40,21 @@ Das bestehende TypeScript-Paket `packages/agent-runtime` bleibt unberührt; dies
   endet geschlossen.
 - **Kosten:** ganze Kosteneinheiten; fehlende oder ungültige Kosten beenden den Lauf. Beträge und Einheit
   legt der Inhaber fest – der Kern enthält keine.
+- **Modell:** Die Laufzeit nimmt nur einen von `ModellPolicy.zulassen` versiegelten Port. Abweichende
+  Kennung, Denkstufe oder ein gemeldeter Ersatz führen zur Verweigerung bzw. zum Ende des Laufs
+  (`modell_policy_verletzt`); es gibt keinen stillen Ersatz. Der Stellvertreter ist nie policy-konform und
+  nur mit ausdrücklichem `stellvertreter_erlaubt=True` (Tests) zulässig.
 - **Aufgaben:** nur Entwürfe im Ergebnis, je Lauf schaltbar; der Kern schreibt in kein System.
 
 ## Tests
 
 ```sh
 python3 -m unittest discover -s tests -p 'test_agent_core_*.py'
+python3 -m unittest discover -s tests -p test_agent_runs_contract.py
 ```
+
+Schnittstellenvertrag der späteren HTTP-Fassade (nur Vertrag, kein Server):
+`docs/contracts/agent-runs.openapi.json`.
 
 ## Grenzen dieses Kerns (ehrlich)
 

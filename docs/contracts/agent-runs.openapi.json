@@ -1,0 +1,242 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "NeXify Agentenkern – Schnittstellenvertrag /agent/runs",
+    "version": "0.1.0-entwurf",
+    "summary": "Lauf anlegen, Status lesen, Freigabe erteilen oder ablehnen, abbrechen.",
+    "description": "Nur Vertrag, kein Server. Stand 14.11.2026. Der Vertrag beschreibt die HTTP-Fassade vor dem Python-Laufzeitkern (packages/agent_core). Es gibt weder einen laufenden Dienst noch einen Host. Der Mandant kommt ausschließlich aus der serverseitig geprüften Sitzung und Mitgliedschaft; kein Feld dieser Schnittstelle trägt einen Mandanten. Ein Lauf eines anderen Mandanten ist nicht von einem unbekannten Lauf unterscheidbar (404).",
+    "x-implementation-status": "proposed_not_implemented",
+    "x-quelle": "packages/agent_core/nexify_agent_core/laufzeit.py",
+    "x-mandant-quelle": "sitzung_und_mitgliedschaft_niemals_anfrage"
+  },
+  "security": [{ "sitzung": [] }],
+  "paths": {
+    "/agent/runs": {
+      "post": {
+        "operationId": "laufAnlegen",
+        "summary": "Lauf anlegen",
+        "description": "Legt einen Lauf an und antwortet sofort mit der Lauf-Kennung; auf das Ergebnis wird nicht gewartet. Grenzen (Schritte, Kosten, Tiefe, Wiederholungen) und Rechte (Werkzeuge, Skills) setzt der Server aus der Konfiguration des Mandanten. Der Aufrufer kann sie nur verengen, nie erweitern.",
+        "parameters": [{ "$ref": "#/components/parameters/IdempotenzSchluessel" }],
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/LaufAnlegen" } } }
+        },
+        "responses": {
+          "202": { "description": "Lauf angelegt.", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Lauf" } } } },
+          "200": { "description": "Derselbe Idempotenzschlüssel mit demselben Auftrag: der bereits angelegte Lauf.", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Lauf" } } } },
+          "401": { "$ref": "#/components/responses/NichtAngemeldet" },
+          "403": { "$ref": "#/components/responses/NichtErlaubt" },
+          "409": { "description": "Idempotenzschlüssel bereits mit anderem Auftrag verwendet.", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Fehler" } } } },
+          "422": { "$ref": "#/components/responses/Ungueltig" }
+        }
+      }
+    },
+    "/agent/runs/{lauf}": {
+      "get": {
+        "operationId": "laufStatus",
+        "summary": "Status eines Laufs",
+        "parameters": [{ "$ref": "#/components/parameters/Lauf" }],
+        "responses": {
+          "200": { "description": "Momentaufnahme des Laufs.", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Lauf" } } } },
+          "401": { "$ref": "#/components/responses/NichtAngemeldet" },
+          "404": { "$ref": "#/components/responses/Unbekannt" }
+        }
+      }
+    },
+    "/agent/runs/{lauf}/freigabe": {
+      "post": {
+        "operationId": "laufFreigabeEntscheiden",
+        "summary": "Freigabe erteilen oder ablehnen",
+        "description": "Entscheidung eines angemeldeten Menschen über genau eine wartende Aktion. Erteilen verlangt den bestätigten SHA-256 der angezeigten Argumente; die Freigabe gilt einmal und nur für diesen Aufruf. Ablehnen übergibt dem Lauf nur einen festen Grundcode. Diese Operation ist nicht über API-Schlüssel, Dienstkonten oder Agenten erreichbar.",
+        "x-freigeber": "angemeldeter_mensch",
+        "x-nicht_abschaltbar": true,
+        "parameters": [{ "$ref": "#/components/parameters/Lauf" }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  { "$ref": "#/components/schemas/FreigabeErteilen" },
+                  { "$ref": "#/components/schemas/FreigabeAblehnen" }
+                ],
+                "discriminator": { "propertyName": "entscheidung" }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Entscheidung verbucht; der Lauf läuft weiter oder endet.", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Lauf" } } } },
+          "401": { "$ref": "#/components/responses/NichtAngemeldet" },
+          "403": { "$ref": "#/components/responses/NichtErlaubt" },
+          "404": { "$ref": "#/components/responses/Unbekannt" },
+          "409": { "description": "Für diesen Lauf ist keine passende Freigabe offen (bereits entschieden, abgebrochen oder andere Anfrage).", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Fehler" } } } },
+          "422": { "$ref": "#/components/responses/Ungueltig" }
+        }
+      }
+    },
+    "/agent/runs/{lauf}/abbruch": {
+      "post": {
+        "operationId": "laufAbbrechen",
+        "summary": "Lauf abbrechen",
+        "description": "Bricht den Lauf samt wartender Unterläufe ab und verwirft eine offene Freigabe. Bereits ausgeführte Schritte werden nicht rückgängig gemacht. Ein beendeter Lauf bleibt unverändert.",
+        "parameters": [{ "$ref": "#/components/parameters/Lauf" }],
+        "responses": {
+          "200": { "description": "Lauf abgebrochen oder bereits beendet.", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Lauf" } } } },
+          "401": { "$ref": "#/components/responses/NichtAngemeldet" },
+          "403": { "$ref": "#/components/responses/NichtErlaubt" },
+          "404": { "$ref": "#/components/responses/Unbekannt" }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "sitzung": {
+        "type": "apiKey",
+        "in": "cookie",
+        "name": "sitzung",
+        "description": "Platzhalter für die serverseitige Sitzung der Web-App. Name und Verfahren legt die Suite fest; der Mandant wird daraus abgeleitet."
+      }
+    },
+    "parameters": {
+      "Lauf": {
+        "name": "lauf",
+        "in": "path",
+        "required": true,
+        "schema": { "$ref": "#/components/schemas/Kennung" }
+      },
+      "IdempotenzSchluessel": {
+        "name": "Idempotency-Key",
+        "in": "header",
+        "required": true,
+        "description": "Vom Aufrufer vergebener Schlüssel; gilt je Mandant.",
+        "schema": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,127}$" }
+      }
+    },
+    "responses": {
+      "NichtAngemeldet": { "description": "Keine gültige Sitzung.", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Fehler" } } } },
+      "NichtErlaubt": { "description": "Sitzung gültig, Rolle reicht nicht (z. B. keine menschliche Freigaberolle).", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Fehler" } } } },
+      "Unbekannt": { "description": "Lauf unbekannt – auch dann, wenn er einem anderen Mandanten gehört.", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Fehler" } } } },
+      "Ungueltig": { "description": "Eingabe ungültig, z. B. bestätigter Hash passt nicht zur Anfrage.", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Fehler" } } } }
+    },
+    "schemas": {
+      "Kennung": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$" },
+      "Name": { "type": "string", "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$", "maxLength": 64 },
+      "Code": { "type": "string", "pattern": "^[a-z][a-z0-9_]{0,79}$" },
+      "Sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+      "LaufAnlegen": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["auftrag"],
+        "properties": {
+          "auftrag": { "type": "string", "minLength": 1, "maxLength": 20000 },
+          "skills": { "type": "array", "uniqueItems": true, "maxItems": 32, "items": { "$ref": "#/components/schemas/Name" }, "description": "Teilmenge der für den Mandanten freigeschalteten Skills." },
+          "werkzeuge": { "type": "array", "uniqueItems": true, "maxItems": 64, "items": { "$ref": "#/components/schemas/Name" }, "description": "Teilmenge der für den Mandanten freigeschalteten Werkzeuge." },
+          "aufgaben_vorschlagen": { "type": "boolean", "default": false, "description": "Nur wirksam, wenn für den Mandanten freigeschaltet." },
+          "grenzen_wunsch": { "$ref": "#/components/schemas/GrenzenWunsch" }
+        }
+      },
+      "GrenzenWunsch": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "Wird nur verengend berücksichtigt: wirksam ist das Minimum aus Wunsch und Servergrenze.",
+        "properties": {
+          "max_schritte": { "type": "integer", "minimum": 1 },
+          "max_kosten": { "type": "integer", "minimum": 1 }
+        }
+      },
+      "Grenzen": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["max_schritte", "max_kosten", "max_tiefe", "max_wiederholungen"],
+        "properties": {
+          "max_schritte": { "type": "integer", "minimum": 1 },
+          "max_kosten": { "type": "integer", "minimum": 1, "description": "Ganze Kosteneinheiten; Einheit und Betrag legt der Inhaber fest." },
+          "max_tiefe": { "type": "integer", "minimum": 0 },
+          "max_wiederholungen": { "type": "integer", "minimum": 0 }
+        }
+      },
+      "Laufstatus": {
+        "type": "string",
+        "enum": ["angelegt", "laeuft", "wartet_auf_freigabe", "abgeschlossen", "fehlgeschlagen", "abgebrochen", "grenze_erreicht"]
+      },
+      "FreigabepflichtigeAktionsklasse": {
+        "type": "string",
+        "enum": ["zahlung", "vertrag", "loeschung", "rechteaenderung", "versand_nach_aussen"]
+      },
+      "Freigabeanfrage": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["kennung", "lauf", "schritt", "werkzeug", "aktionsklasse", "argumente_hash", "argumente"],
+        "properties": {
+          "kennung": { "$ref": "#/components/schemas/Kennung" },
+          "lauf": { "$ref": "#/components/schemas/Kennung", "description": "Lauf oder Unterlauf, der wartet." },
+          "schritt": { "type": "integer", "minimum": 1 },
+          "werkzeug": { "$ref": "#/components/schemas/Name" },
+          "aktionsklasse": { "$ref": "#/components/schemas/FreigabepflichtigeAktionsklasse" },
+          "argumente_hash": { "$ref": "#/components/schemas/Sha256" },
+          "argumente": { "type": "object", "description": "Genau die Argumente, die ausgeführt würden – zur Anzeige für den Menschen." }
+        }
+      },
+      "FreigabeErteilen": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["entscheidung", "anfrage", "bestaetigter_hash"],
+        "properties": {
+          "entscheidung": { "const": "erteilen" },
+          "anfrage": { "$ref": "#/components/schemas/Kennung" },
+          "bestaetigter_hash": { "$ref": "#/components/schemas/Sha256" }
+        }
+      },
+      "FreigabeAblehnen": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["entscheidung", "anfrage", "grund"],
+        "properties": {
+          "entscheidung": { "const": "ablehnen" },
+          "anfrage": { "$ref": "#/components/schemas/Kennung" },
+          "grund": { "$ref": "#/components/schemas/Code" }
+        }
+      },
+      "Aufgabenentwurf": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["lauf", "titel", "beschreibung", "status"],
+        "description": "Vorschlag im Ergebnis. Wird von dieser Schnittstelle in keinem System angelegt oder ausgeführt.",
+        "properties": {
+          "lauf": { "$ref": "#/components/schemas/Kennung" },
+          "titel": { "type": "string", "maxLength": 200 },
+          "beschreibung": { "type": "string", "maxLength": 20000 },
+          "status": { "const": "entwurf" }
+        }
+      },
+      "Lauf": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["kennung", "status", "rolle", "tiefe", "schritte", "kosten", "grenzen", "aufgaben"],
+        "properties": {
+          "kennung": { "$ref": "#/components/schemas/Kennung" },
+          "status": { "$ref": "#/components/schemas/Laufstatus" },
+          "rolle": { "$ref": "#/components/schemas/Name" },
+          "tiefe": { "type": "integer", "minimum": 0 },
+          "schritte": { "type": "integer", "minimum": 0 },
+          "kosten": { "type": "integer", "minimum": 0 },
+          "grenzen": { "$ref": "#/components/schemas/Grenzen" },
+          "offene_freigabe": { "oneOf": [{ "$ref": "#/components/schemas/Freigabeanfrage" }, { "type": "null" }] },
+          "ergebnis": { "type": ["string", "null"] },
+          "aufgaben": { "type": "array", "items": { "$ref": "#/components/schemas/Aufgabenentwurf" } },
+          "ende_code": { "oneOf": [{ "$ref": "#/components/schemas/Code" }, { "type": "null" }] },
+          "unterlauf": { "oneOf": [{ "$ref": "#/components/schemas/Lauf" }, { "type": "null" }] }
+        }
+      },
+      "Fehler": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["code"],
+        "description": "Fester Code ohne Inhalte, Argumente oder interne Meldungen.",
+        "properties": { "code": { "$ref": "#/components/schemas/Code" } }
+      }
+    }
+  }
+}

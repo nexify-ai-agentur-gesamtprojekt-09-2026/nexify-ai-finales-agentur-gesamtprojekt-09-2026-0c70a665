@@ -22,6 +22,7 @@ from nexify_agent_core import (  # noqa: E402
 
 A, B = nk.Mandant("mandant-a"), nk.Mandant("mandant-b")
 PASCAL = Mensch("inhaber-1")
+POLICY = kern.ModellPolicy.aus_datei(ROOT / "config/llm-policy.json")
 T0 = datetime(2026, 11, 14, 9, 0, tzinfo=timezone.utc)
 PFLICHTIG = (AK.ZAHLUNG, AK.VERTRAG, AK.LOESCHUNG, AK.RECHTEAENDERUNG, AK.VERSAND_NACH_AUSSEN)
 
@@ -38,7 +39,7 @@ class Aufbau:
         self.wartezeiten = []
         self._zeit, self._nr = T0, 0
         self.laufzeit = kern.Laufzeit(
-            modell=self.modell, werkzeuge=werkzeuge, wiederholung=kern.Wiederholungsregel(1, 2, 10),
+            modell=POLICY.zulassen(self.modell, stellvertreter_erlaubt=True), werkzeuge=werkzeuge, wiederholung=kern.Wiederholungsregel(1, 2, 10),
             uhr=self._uhr, schlaf=self.wartezeiten.append, kennungen=self._kennung, journal_salz=salz, **kw)
 
     def _uhr(self):
@@ -160,7 +161,7 @@ class GrenzenTests(unittest.TestCase):
         with self.assertRaises(kern.GrenzenFehler):
             aufbau.laufzeit.anlegen(A, "Auftrag", grenzen=None, rechte=rechte(), idempotenzschluessel="auftrag-0001")
         with self.assertRaises(TypeError):
-            kern.Laufzeit(modell=aufbau.modell, werkzeuge=[])  # Wiederholungsregel ist Pflicht
+            kern.Laufzeit(modell=POLICY.zulassen(aufbau.modell, stellvertreter_erlaubt=True), werkzeuge=[])  # Regel ist Pflicht
 
     def test_schrittgrenze_stoppt_den_lauf(self):
         lesen = Werkzeug("wissen.lesen", AK.LESEN)
@@ -228,7 +229,7 @@ class Freigabepunkte(unittest.TestCase):
                 self.assertNotRegex(name, r"freigabe|approval|auto|ohne|skip|bypass|vertrau")
         for kw in ({"freigaben_aus": True}, {"auto_freigabe": True}, {"freigabepflichtig": frozenset()}):
             with self.subTest(kw=kw), self.assertRaises(TypeError):
-                kern.Laufzeit(modell=kern.SkriptModell({}), werkzeuge=[],
+                kern.Laufzeit(modell=POLICY.zulassen(kern.SkriptModell({}), stellvertreter_erlaubt=True), werkzeuge=[],
                               wiederholung=kern.Wiederholungsregel(1, 2, 10), **kw)
         # ein freigabepflichtiges Werkzeug darf sich nicht als wiederholbar anmelden
         with self.assertRaises(kern.KernFehler):

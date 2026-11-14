@@ -66,6 +66,7 @@ class Modellantwort:
 
     entscheidung: Entscheidung
     kosten: int
+    bedient_von: str | None = None   # Kennung des Modells, das laut Anbieter geantwortet hat
 
 
 @dataclass(frozen=True, slots=True)
