@@ -49,7 +49,7 @@ export default function AuthForms({ mode, token = "" }: { mode: Mode; token?: st
     <input id={"auth-" + key} type={type} autoComplete={auto} value={value} onChange={e => set(e.target.value)} aria-invalid={Boolean(errors[key])} aria-describedby={errors[key] ? "auth-" + key + "-error" : undefined} data-testid={"auth-" + key + "-input"} />
     {errors[key] && <p id={"auth-" + key + "-error"} role="alert" className="tk-field-error" data-testid={"auth-" + key + "-error"}>{FIELD_MSG[errors[key]] || FIELD_MSG.invalid}</p>}</div>;
   return <section className="public-page tk-shop" aria-labelledby="auth-title" data-testid={"auth-" + mode}>
-    <header className="tk-shop-head"><span className="eyebrow">TEILEKLAR-Kundenkonto</span><h1 id="auth-title">{TITLES[mode]}</h1><p className="tk-meta" data-testid="auth-scope-note">Dieses Konto gilt für den TEILEKLAR-Shop: Bestellungen, Warenkorb und Werkstattanfragen. Es ist kein Zugang zur NeXify-Suite (NeX2fly, one, API); dieser Zugang ist noch nicht freigeschaltet.</p></header>
+    <header className="tk-shop-head"><span className="eyebrow">TEILEKLAR-Kundenkonto</span><h1 id="auth-title">{TITLES[mode]}</h1><p className="tk-meta" data-testid="auth-scope-note">Dieses Konto gilt für den TEILEKLAR-Shop: Bestellungen, Warenkorb und Werkstattanfragen. Es ist kein Zugang zur NeXify-Suite (NeX AIFly Suite, one, API); dieser Zugang ist noch nicht freigeschaltet.</p></header>
     <form className="tk-form tk-auth" noValidate onSubmit={submit} data-testid={"auth-" + mode + "-form"}>
       {mode === "register" && field("name", "Name (optional)", name, setName, "text", "name")}
       {mode !== "reset" && field("email", "E-Mail-Adresse", email, setEmail, "email", "email")}
