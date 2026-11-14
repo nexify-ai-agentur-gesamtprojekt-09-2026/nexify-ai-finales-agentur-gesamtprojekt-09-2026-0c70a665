@@ -1,5 +1,5 @@
 "use client";
-import {SceneVideo} from './SceneVideo';
+import AtelierFilm from './AtelierFilm';
 import {type ReactNode} from 'react';
 import {useUI} from './Workspace';
 import {SiteLink} from './Router';
@@ -43,7 +43,8 @@ export default function HomeContent({home,video,moduleVideos,children,pages}:{ho
   </section>
   <nav className="hc-gallery hc-container" aria-label={t.introTitle}>
    {t.galleryTitles.map((title,i)=><article className="hc-gallery-card" key={title}>
-    <figure className={`hc-art hc-art-${i}`}><img src={galleryArt[i].src} srcSet={srcSetFor(galleryArt[i].src)} sizes="(max-width: 640px) 100vw, (max-width: 1200px) 50vw, 33vw" width="2000" height="1125" alt={imageAlt(galleryArt[i],locale)} loading="lazy" decoding="async"/><SceneVideo src={galleryFilm[i]} locale={locale}/></figure>
+    {/* Exakt die Einbettung des Hero (identity-media > identity-hero-photo > AtelierFilm); nur Film, Poster und Titel je Karte. */}
+    <div className={`identity-media hc-art hc-art-${i}`}><figure className="identity-hero-photo"><AtelierFilm hero locale={locale} asset={{src:galleryFilm[i],poster:galleryArt[i].src,posterAlt:imageAlt(galleryArt[i],locale),width:1280,height:720,title:title,hasAudio:true,autoplayWithAudio:false}}/></figure></div>
     <SiteLink className="hc-gallery-link" href={galleries[i]} data-testid={`home-still-${i}`}>
      <span className="hc-scene-context">{t.galleryContexts[i]}</span><h3>{title}<DetailArrow direction="out"/></h3><p>{t.galleryBodies[i]}</p><small className="hc-scene-value">{t.galleryValues[i]}</small><span className="hc-text-link">{t.galleryLinks[i]}<DetailArrow/></span>
     </SiteLink>
@@ -58,7 +59,7 @@ export default function HomeContent({home,video,moduleVideos,children,pages}:{ho
   </section>
   <section id="zusammenarbeit" className="hc-section hc-process hc-container" aria-labelledby="hc-process-title">
    <header className="hc-section-heading"><div><span className="hc-kicker">{t.processKicker}</span><h2 id="hc-process-title">{t.processTitle}</h2></div><p>{t.processBody}</p></header>
-   <figure className="hc-plate hc-plate-process"><img src={brandImages.welcome.src} srcSet={srcSetFor(brandImages.welcome.src)} sizes="(max-width: 820px) 100vw, 80vw" width="2000" height="1125" alt={imageAlt(brandImages.welcome,locale)} loading="lazy" decoding="async"/></figure>
+   <figure className="hc-plate hc-plate-process"><img src={brandImages.design.src} srcSet={srcSetFor(brandImages.design.src)} sizes="(max-width: 820px) 100vw, 80vw" width="2000" height="1125" alt={imageAlt(brandImages.design,locale)} loading="lazy" decoding="async"/></figure>
    <ol>{t.steps.map(([title,body])=><li key={title}><h3>{title}</h3><p>{body}</p></li>)}</ol>
   </section>
   <section id="produktwelt" className="hc-section hc-container hc-product-story" aria-labelledby="hc-products-title">
