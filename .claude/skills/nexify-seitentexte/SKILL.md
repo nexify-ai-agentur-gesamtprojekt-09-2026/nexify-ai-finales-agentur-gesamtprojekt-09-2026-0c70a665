@@ -14,9 +14,9 @@ Texte stehen in Konfigurationsdateien, nicht in Komponenten. Geändert wird an d
 | `config/site-map.json` | alle Seiten unter `pages`: `title`, `summary`, `sections`, `metadata`, je Feld ein Objekt mit `de`, `nl`, `fr`, `en` |
 | `config/home-concept-copy.json` | Startseite, oberste Ebene `de`, `nl`, `fr`, `en` mit identischen Schlüsseln |
 | `config/fakten.json`, `config/api-prepaid.json` | einzige Quelle für Zahlen, Zeiten und alles mit Preisbezug |
-| `docs/05-marketing/` | Konzept und Prüfmaßstäbe (`marketing-psychologie-pruefung.md`, `seo-i18n-und-local-marketing.md`, `signalfeld-philosophie.md`, `story-3d-startseite.md`) |
+| `docs/05-marketing/` | Konzept `gesamtkonzept-2026-11-14.md` und Prüfmaßstäbe (`marketing-psychologie-pruefung.md`, `seo-i18n-und-local-marketing.md`, `signalfeld-philosophie.md`, `story-3d-startseite.md`) |
 
-Das Gesamtkonzept `docs/05-marketing/gesamtkonzept-2026-11-14.md` liegt am 14.11.2026 im offenen PR (Zweig `claude/marketing-gesamtkonzept`), noch nicht auf `main`. Lesen mit `git show origin/claude/marketing-gesamtkonzept:docs/05-marketing/gesamtkonzept-2026-11-14.md`; bis zur Freigabe ist es Entwurf und keine Vorgabe.
+Maßgebliches Konzept ist `docs/05-marketing/gesamtkonzept-2026-11-14.md` (seit dem 14.11.2026 auf `main`, gemergt als Texte „zur Freigabe“). Die übrigen Dateien des Ordners sind Prüfmaßstäbe dazu.
 
 ## Regeln
 
