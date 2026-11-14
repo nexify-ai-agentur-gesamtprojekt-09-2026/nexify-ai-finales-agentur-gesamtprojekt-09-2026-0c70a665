@@ -47,6 +47,14 @@ class MongoCartStore:
         if not result.matched_count and result.upserted_id is None:
             raise RevisionStale()
 
+    async def remove_products(self, owner, expected_revision, product_ids):
+        """Nimmt die genannten Produkte heraus und erhöht den Stand, aber nur bei genau dem erwarteten Stand.
+
+        Ein inzwischen geänderter oder fehlender Warenkorb bleibt unberührt; das ist kein Fehler.
+        """
+        await self.db.carts.update_one(revision_filter(owner, expected_revision),
+            {"$pull": {"items": {"product_id": {"$in": product_ids}}}, "$inc": {"revision": 1}})
+
     def check_archivable(self, candidate):
         """ArchiveTooLarge, wenn der Warenkorb mit Beleg die Dokumentgrenze erreicht; StoredDataInvalid, wenn er nicht ablegbar ist."""
         try:

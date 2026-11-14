@@ -7,7 +7,7 @@ import uuid
 
 import httpx
 
-from . import config
+from . import config, store
 from .db import now_iso
 
 BASES = {"live": "https://merchant.revolut.com", "sandbox": "https://sandbox-merchant.revolut.com"}
@@ -43,9 +43,10 @@ def webhook_url():
     return config.PUBLIC_ORIGIN + "/api/shop/webhooks/revolut"
 
 
-async def ensure_webhook(db):
+async def ensure_webhook(db=None):
+    """db wird nicht mehr gelesen; der Parameter bleibt, bis admin_api umgestellt ist."""
     mode, url = config.revolut_mode(), webhook_url()
-    stored = await db.revolut_webhooks.find_one({"_id": mode})
+    stored = await store.payments.webhook_registration(mode)
     if stored and stored.get("url") == url and stored.get("signing_secret"):
         return stored
     data = await call("GET", "/api/webhooks")
@@ -56,7 +57,7 @@ async def ensure_webhook(db):
     else:
         detail = await call("POST", "/api/webhooks", {"url": url, "events": WEBHOOK_EVENTS})
     doc = {"_id": mode, "webhook_id": detail["id"], "url": url, "signing_secret": detail["signing_secret"], "events": detail.get("events"), "stored_at": now_iso()}
-    await db.revolut_webhooks.replace_one({"_id": mode}, doc, upsert=True)
+    await store.payments.save_webhook_registration(mode, doc)
     return doc
 
 

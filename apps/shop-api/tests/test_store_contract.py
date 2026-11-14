@@ -142,9 +142,16 @@ class Collection:
         for doc in docs: self._insert(copy.deepcopy(doc))
     def _insert(self, doc):
         doc.setdefault('_id', uuid4().hex)
-        if any(key in doc and d.get(key) == doc[key] for key in ['_id', *self.unique] for d in self.docs):
+        def taken(key):
+            fields = key if isinstance(key, tuple) else (key,)
+            return any(f in doc for f in fields) and any(all(d.get(f) == doc.get(f) for f in fields) for d in self.docs)
+        if any(taken(key) for key in ['_id', *self.unique]):
             raise DuplicateKeyError('duplicate')
         self.docs.append(doc)
+    async def replace_one(self, query, replacement, upsert=False):
+        target = next((d for d in self.docs if matches(d, query)), None)
+        if target is not None: self.docs[self.docs.index(target)] = copy.deepcopy(replacement)
+        elif upsert: self._insert(copy.deepcopy(replacement))
     async def update_one(self, query, update, upsert=False, session=None):
         target = next((d for d in self.docs if matches(d, query)), None)
         created = target is None and upsert
@@ -177,7 +184,8 @@ class Database:
                             'settings': Collection(), 'carts': Collection(unique=['owner']), 'users': Collection(),
                             'sessions': Collection(), 'login_failures': Collection(), 'password_resets': Collection(),
                             'workshops': Collection(), 'workshop_requests': Collection(), 'requests': Collection(),
-                            'outbox': Collection()}
+                            'outbox': Collection(), 'orders': Collection(unique=[('owner', 'idempotency_key')]),
+                            'webhook_events': Collection(unique=['event_key']), 'revolut_webhooks': Collection()}
         self.client = SimpleNamespace(start_session=lambda: Session(self))
     def __getattr__(self, name): return self.collections[name]
 
@@ -189,6 +197,7 @@ class InMemoryBinding(unittest.IsolatedAsyncioTestCase):
         await self.store.accounts.ensure_indexes(900)
 
     async def seed(self, collection, docs): await getattr(self.database, collection).insert_many(docs)
+    async def events(self): return [e async for e in self.database.webhook_events.find({})]
 
 
 def disposable_uri():
@@ -211,10 +220,13 @@ class DisposableMongoBinding(unittest.IsolatedAsyncioTestCase):
         self.addCleanup(client.close)
         self.database = client['nexify_store_contract_' + uuid4().hex]
         await self.database.carts.create_index('owner', unique=True)
+        await self.database.orders.create_index([('owner', 1), ('idempotency_key', 1)], unique=True)
+        await self.database.webhook_events.create_index('event_key', unique=True)
         self.store = load_store(self.database)
         await self.store.accounts.ensure_indexes(900)
 
     async def seed(self, collection, docs): await self.database[collection].insert_many(copy.deepcopy(docs))
+    async def events(self): return [e async for e in self.database.webhook_events.find({})]
 
 
 # --- contracts --------------------------------------------------------------------------
@@ -389,6 +401,28 @@ class CartContract:
         with self.assertRaises(self.store.RevisionStale):
             await self.store.carts.in_transaction(work)
         self.assertIsNone(await self.store.carts.get('user:two'))
+
+    async def test_paid_products_leave_the_cart_only_at_the_quoted_revision(self):
+        other = {**ITEM, 'product_id': 'b'}
+        await self.store.carts.replace_items('guest:one', None, [ITEM, other, {**ITEM, 'product_id': 'c'}], create=True)
+        await self.store.carts.remove_products('guest:one', 0, ['a'])
+        await self.store.carts.remove_products('guest:one', 2, ['a'])
+        await self.store.carts.remove_products('guest:one', None, ['a'])
+        cart = await self.store.carts.get('guest:one')
+        self.assertEqual((len(cart['items']), cart['revision']), (3, 1), 'a cart changed since the quote is left alone')
+        await self.store.carts.remove_products('guest:one', 1, ['a', 'c', 'missing'])
+        cart = await self.store.carts.get('guest:one')
+        self.assertEqual((cart['items'], cart['revision']), ([other], 2))
+        await self.store.carts.remove_products('guest:one', 1, ['b'])
+        self.assertEqual((await self.store.carts.get('guest:one'))['items'], [other], 'the same removal does not apply twice')
+        await self.store.carts.remove_products('guest:none', None, ['a'])
+        self.assertIsNone(await self.store.carts.get('guest:none'), 'removing from a missing cart creates none')
+        await self.seed('carts', [{'owner': 'guest:old', 'items': [ITEM, other]}])
+        await self.store.carts.remove_products('guest:old', 0, ['a'])
+        self.assertEqual(len((await self.store.carts.get('guest:old'))['items']), 2, 'a cart without revision is matched by none only')
+        await self.store.carts.remove_products('guest:old', None, ['a'])
+        cart = await self.store.carts.get('guest:old')
+        self.assertEqual((cart['items'], cart['revision']), ([other], 1))
 
     async def test_ordinary_cart_with_receipt_is_archivable(self):
         self.assertIsNone(self.store.carts.check_archivable({'owner': 'guest:one', 'items': [], 'merge_history': [{'id': 'x', 'guest_snapshot': {'items': [ITEM]}}]}))
@@ -758,6 +792,190 @@ class OutboxContract:
         self.assertIsNone(await self.store.outbox.get('missing'))
 
 
+def order(oid, owner='user:a', key=None, **fields):
+    return {'_id': oid, 'id': oid, 'number': 'TK-' + oid, 'owner': owner, 'user_id': None, 'idempotency_key': key or 'key-' + oid,
+            'status': 'zahlung_offen', 'lines': [{'product_id': 'a', 'quantity': 2, 'unit_cents': 500}], 'subtotal_cents': 1000,
+            'shipping_cents': 995, 'total_cents': 1995, 'currency': 'EUR', 'address': {'email': 'a@example.invalid'},
+            'created_at': '2026-11-14T12:00:00+00:00', 'paid_transitions': 0, 'request_hash': 'h' * 64, 'cart_revision': 1, **fields}
+
+
+class OrderContract:
+    async def field(self, oid, *names):
+        doc = await self.store.orders.get(oid)
+        return tuple(doc.get(name) for name in names)
+
+    async def test_order_is_stored_once_per_owner_and_idempotency_key(self):
+        first = order('o1')
+        await self.store.orders.add(dict(first))
+        self.assertEqual(await self.store.orders.get('o1'), first, 'amounts, lines and address come back as stored')
+        with self.assertRaises(self.store.AlreadyExists):
+            await self.store.orders.add(order('o2', key='key-o1', total_cents=1))
+        self.assertIsNone(await self.store.orders.get('o2'))
+        self.assertEqual((await self.store.orders.by_idempotency_key('user:a', 'key-o1'))['total_cents'], 1995, 'the first order is kept')
+        await self.store.orders.add(order('o3', owner='user:b', key='key-o1'))
+        await self.store.orders.add(order('o4', key='key-other'))
+        self.assertEqual((await self.store.orders.by_idempotency_key('user:b', 'key-o1'))['_id'], 'o3', 'a key belongs to its owner')
+        self.assertEqual((await self.store.orders.by_idempotency_key('user:a', 'key-o1'))['_id'], 'o1')
+        self.assertIsNone(await self.store.orders.by_idempotency_key('user:c', 'key-o1'))
+        self.assertIsNone(await self.store.orders.by_idempotency_key('user:a', 'key-none'))
+        self.assertIsNone(await self.store.orders.get('missing'))
+
+    async def test_order_is_readable_only_for_its_owners_and_by_provider_reference(self):
+        await self.store.orders.add(order('o1', owner='guest:g'))
+        await self.store.orders.add(order('o2', owner='user:b', revolut_order_id='rev-2'))
+        self.assertEqual((await self.store.orders.get_for_owners('o1', ['user:a', 'guest:g']))['_id'], 'o1')
+        self.assertIsNone(await self.store.orders.get_for_owners('o1', ['user:a', 'user:b']))
+        self.assertIsNone(await self.store.orders.get_for_owners('o1', []))
+        self.assertIsNone(await self.store.orders.get_for_owners('missing', ['guest:g']))
+        self.assertEqual((await self.store.orders.by_provider_order_id('rev-2'))['_id'], 'o2')
+        self.assertIsNone(await self.store.orders.by_provider_order_id('rev-1'))
+
+    async def test_recent_orders_of_one_owner_newest_first_and_limited(self):
+        for oid, created, owner in (('o1', '2026-11-01T00:00:00+00:00', 'user:a'), ('o2', '2026-11-03T00:00:00+00:00', 'user:a'),
+                                    ('o3', '2026-11-02T00:00:00+00:00', 'user:a'), ('o4', '2026-11-04T00:00:00+00:00', 'user:b')):
+            await self.store.orders.add(order(oid, owner=owner, created_at=created))
+        self.assertEqual([o['_id'] for o in await self.store.orders.recent_of_owner('user:a', 100)], ['o2', 'o3', 'o1'])
+        self.assertEqual([o['_id'] for o in await self.store.orders.recent_of_owner('user:a', 2)], ['o2', 'o3'])
+        self.assertEqual(await self.store.orders.recent_of_owner('user:c', 100), [])
+
+    async def test_payment_reference_replaces_an_earlier_error_and_leaves_the_order_as_ordered(self):
+        await self.store.orders.add(order('o1')); await self.store.orders.add(order('o2'))
+        await self.store.orders.record_payment_error('o2', 'revolut_unreachable')
+        self.assertEqual(await self.field('o2', 'payment_error', 'checkout_url'), ('revolut_unreachable', None))
+        await self.store.orders.record_checkout('o2', 'rev-2', 'https://checkout.example.invalid/2', 'pending')
+        self.assertEqual(await self.field('o2', 'revolut_order_id', 'checkout_url', 'payment_state', 'status'),
+                         ('rev-2', 'https://checkout.example.invalid/2', 'pending', 'zahlung_offen'))
+        self.assertNotIn('payment_error', await self.store.orders.get('o2'))
+        await self.store.orders.record_payment_state('o2', 'processing')
+        self.assertEqual(await self.field('o2', 'payment_state', 'status', 'total_cents', 'paid_transitions'), ('processing', 'zahlung_offen', 1995, 0),
+                         'the provider state is a note; it is not the order status')
+        self.assertEqual(await self.store.orders.get('o1'), order('o1'), 'another order is never touched')
+        await self.store.orders.record_payment_error('missing', 'x'); await self.store.orders.record_checkout('missing', 'r', 'u', 's')
+        await self.store.orders.record_payment_state('missing', 's')
+        self.assertIsNone(await self.store.orders.get('missing'), 'recording on a missing order creates none')
+
+    async def test_paid_is_reached_exactly_once(self):
+        await self.store.orders.add(order('o1')); await self.store.orders.add(order('o2'))
+        self.assertIs(await self.store.orders.mark_paid('o1', T0), True)
+        self.assertIs(await self.store.orders.mark_paid('o1', T1), False)
+        self.assertEqual(await self.field('o1', 'status', 'paid_at', 'paid_transitions', 'paid_mail_recovery_pending', 'total_cents'),
+                         ('bezahlt', T0, 1, True, 1995), 'the first transition stands; amounts are untouched')
+        self.assertEqual(await self.field('o2', 'status', 'paid_transitions', 'paid_at'), ('zahlung_offen', 0, None))
+        self.assertIs(await self.store.orders.mark_paid('missing', T0), False)
+        self.assertIsNone(await self.store.orders.get('missing'))
+
+    async def test_concurrent_paid_transitions_have_one_winner(self):
+        await self.store.orders.add(order('o1'))
+        import asyncio
+        results = await asyncio.gather(*(self.store.orders.mark_paid('o1', T0) for _ in range(8)))
+        self.assertEqual(sorted(results), [False] * 7 + [True])
+        self.assertEqual(await self.field('o1', 'status', 'paid_transitions'), ('bezahlt', 1))
+
+    async def test_payment_failure_is_recorded_for_an_open_order_only_and_never_unpays(self):
+        await self.store.orders.add(order('o1')); await self.store.orders.add(order('o2'))
+        await self.store.orders.mark_payment_failed('o1')
+        self.assertEqual(await self.field('o1', 'status'), ('zahlung_nicht_abgeschlossen',))
+        self.assertIs(await self.store.orders.mark_paid('o1', T0), True, 'a late completed payment still counts once')
+        await self.store.orders.mark_payment_failed('o1')
+        self.assertEqual(await self.field('o1', 'status', 'paid_transitions'), ('bezahlt', 1), 'a paid order never becomes unpaid')
+        self.assertEqual(await self.field('o2', 'status'), ('zahlung_offen',))
+        await self.store.orders.mark_payment_failed('missing')
+        self.assertIsNone(await self.store.orders.get('missing'))
+
+    async def test_pending_confirmation_mails_are_listed_until_recorded_for_paid_orders_only(self):
+        for oid in ('o1', 'o2', 'o3', 'o4'):
+            await self.store.orders.add(order(oid))
+        await self.store.orders.mark_paid('o1', T0); await self.store.orders.mark_paid('o2', T0)
+        await self.seed('orders', [order('o5', status='bezahlt'), order('o6', paid_mail_recovery_pending=True)])
+        pending = lambda: self.store.orders.paid_with_pending_mails()
+        self.assertEqual([o['_id'] async for o in pending()], ['o1', 'o2'], 'paid and marked pending; legacy and unpaid orders are not listed')
+        await self.store.orders.mark_paid_mails_recorded('o2')
+        await self.store.orders.mark_paid_mails_recorded('o3')
+        await self.store.orders.mark_paid_mails_recorded('missing')
+        self.assertEqual(await self.field('o2', 'paid_mail_intents_recorded', 'paid_mail_recovery_pending', 'status'), (True, False, 'bezahlt'))
+        self.assertEqual(await self.field('o3', 'paid_mail_intents_recorded', 'paid_mail_recovery_pending'), (None, None), 'only a paid order is marked')
+        self.assertEqual([o['_id'] async for o in pending()], ['o1'])
+        self.assertEqual((await pending().__anext__())['address'], {'email': 'a@example.invalid'}, 'orders come back whole')
+        self.assertIsNone(await self.store.orders.get('missing'))
+
+    async def test_supplier_handover_is_claimed_once_and_released_by_a_failure(self):
+        await self.store.orders.add(order('o1')); await self.store.orders.add(order('o2', bigbuy_order_id=''))
+        await self.seed('orders', [order('o3', bigbuy_order_id='BB-9'), order('o4', bigbuy_order_id=None, bigbuy_submitting=True),
+                                   order('o5', bigbuy_order_id=None, bigbuy_submitting=False)])
+        self.assertIs(await self.store.orders.claim_supplier_submission('o1', T0), True)
+        self.assertIs(await self.store.orders.claim_supplier_submission('o1', T1), False, 'a second run must not place a second supplier order')
+        self.assertEqual(await self.field('o1', 'bigbuy_submitting', 'fulfillment_checked_at'), (True, T0))
+        self.assertIs(await self.store.orders.claim_supplier_submission('o2', T0), True, 'an empty supplier reference means not yet ordered')
+        self.assertIs(await self.store.orders.claim_supplier_submission('o3', T0), False, 'an order already at the supplier is never claimed')
+        self.assertIs(await self.store.orders.claim_supplier_submission('o4', T0), False)
+        self.assertIs(await self.store.orders.claim_supplier_submission('o5', T0), True)
+        self.assertIs(await self.store.orders.claim_supplier_submission('missing', T0), False)
+        self.assertEqual(await self.field('o3', 'bigbuy_submitting', 'fulfillment_checked_at'), (None, None))
+        await self.store.orders.record_supplier_failure('o1', 'insufficient_balance', T1)
+        self.assertEqual(await self.field('o1', 'fulfillment_error', 'bigbuy_submit_pending', 'bigbuy_submitting', 'fulfillment_checked_at', 'status'),
+                         ('insufficient_balance', True, False, T1, 'zahlung_offen'))
+        self.assertIs(await self.store.orders.claim_supplier_submission('o1', T2), True, 'after a recorded failure the handover can be retried')
+        self.assertIsNone(await self.store.orders.get('missing'))
+
+    async def test_supplier_order_is_recorded_without_replacing_a_different_one(self):
+        await self.store.orders.add(order('o1')); await self.store.orders.add(order('o2', fulfilment='versendet'))
+        await self.seed('orders', [order('o3', bigbuy_order_id='BB-other')])
+        for oid in ('o1', 'o2'):
+            await self.store.orders.claim_supplier_submission(oid, T0)
+        await self.store.orders.record_supplier_failure('o1', 'bigbuy_submit_failed', T0)
+        await self.store.orders.record_supplier_order('o1', None, 'BB-1', 'SEUR', T1, T2)
+        self.assertEqual(await self.field('o1', 'bigbuy_order_id', 'bigbuy_submitted_at', 'bigbuy_submit_pending', 'fulfillment_error', 'bigbuy_carrier',
+                                          'bigbuy_submitting', 'fulfilment', 'processing_at'), ('BB-1', T1, False, None, 'SEUR', False, 'in_bearbeitung', T2))
+        await self.store.orders.record_supplier_order('o2', None, 'BB-2', 'GLS', T1)
+        self.assertEqual(await self.field('o2', 'bigbuy_order_id', 'bigbuy_carrier', 'bigbuy_submitting', 'fulfilment', 'processing_at'), ('BB-2', 'GLS', False, 'versendet', None),
+                         'without a processing time the delivery state is left as it is')
+        await self.store.orders.record_supplier_order('o3', None, 'BB-3', 'SEUR', T1, T2)
+        self.assertEqual(await self.field('o3', 'bigbuy_order_id', 'bigbuy_carrier', 'fulfilment'), ('BB-other', None, None), 'a different supplier order is not overwritten')
+        await self.store.orders.record_supplier_order('o3', 'BB-other', 'BB-3', 'SEUR', T1)
+        self.assertEqual(await self.field('o3', 'bigbuy_order_id'), ('BB-3',), 'the known one may be replaced')
+        self.assertIs(await self.store.orders.claim_supplier_submission('o1', T2), False, 'an order at the supplier is not handed over again')
+        await self.store.orders.record_supplier_order('missing', None, 'BB-4', 'SEUR', T1)
+        self.assertIsNone(await self.store.orders.get('missing'))
+
+    async def test_shipped_is_reached_once_and_never_from_shipped_or_delivered(self):
+        await self.store.orders.add(order('o1')); await self.store.orders.add(order('o2', fulfilment='in_bearbeitung'))
+        await self.store.orders.add(order('o3', fulfilment='zugestellt', tracking_number='OLD', shipped_at=T0))
+        self.assertIs(await self.store.orders.mark_shipped('o1', 'TR-1', 'SEUR', T1), True)
+        self.assertIs(await self.store.orders.mark_shipped('o1', 'TR-9', 'GLS', T2), False)
+        self.assertEqual(await self.field('o1', 'fulfilment', 'tracking_number', 'carrier', 'shipped_at'), ('versendet', 'TR-1', 'SEUR', T1))
+        self.assertIs(await self.store.orders.mark_shipped('o2', 'TR-2', '', T1), True)
+        self.assertIs(await self.store.orders.mark_shipped('o3', 'TR-3', 'SEUR', T2), False)
+        self.assertEqual(await self.field('o3', 'fulfilment', 'tracking_number', 'shipped_at'), ('zugestellt', 'OLD', T0), 'a delivered order never moves back')
+        self.assertIs(await self.store.orders.mark_shipped('missing', 'TR-4', 'SEUR', T1), False)
+        self.assertIsNone(await self.store.orders.get('missing'))
+
+
+class PaymentContract:
+    async def test_one_webhook_registration_per_mode_is_replaced_whole(self):
+        self.assertIsNone(await self.store.payments.webhook_registration('sandbox'))
+        self.assertEqual(await self.store.payments.webhook_registrations(), [])
+        first = {'_id': 'sandbox', 'webhook_id': 'w1', 'url': 'https://example.invalid/hook', 'signing_secret': 'synthetic-one', 'events': ['E'], 'stored_at': T0}
+        await self.store.payments.save_webhook_registration('sandbox', dict(first))
+        self.assertEqual(await self.store.payments.webhook_registration('sandbox'), first)
+        second = {'_id': 'sandbox', 'webhook_id': 'w2', 'url': 'https://example.invalid/other', 'signing_secret': 'synthetic-two', 'stored_at': T1}
+        await self.store.payments.save_webhook_registration('sandbox', dict(second))
+        self.assertEqual(await self.store.payments.webhook_registration('sandbox'), second, 'no field of the replaced registration survives')
+        await self.store.payments.save_webhook_registration('live', {'_id': 'live', 'webhook_id': 'w3', 'signing_secret': 'synthetic-three'})
+        self.assertEqual(sorted(h['webhook_id'] for h in await self.store.payments.webhook_registrations()), ['w2', 'w3'])
+        self.assertEqual((await self.store.payments.webhook_registration('sandbox'))['webhook_id'], 'w2')
+        self.assertIsNone(await self.store.payments.webhook_registration('other'))
+
+    async def test_webhook_event_is_recorded_once_per_content_key(self):
+        await self.store.payments.record_webhook_event('k' * 64, 'ORDER_COMPLETED', 'rev-1', T0)
+        with self.assertRaises(self.store.AlreadyExists):
+            await self.store.payments.record_webhook_event('k' * 64, 'ORDER_FAILED', 'rev-2', T1)
+        await self.store.payments.record_webhook_event('m' * 64, 'ORDER_COMPLETED', 'rev-1', T1)
+        await self.store.payments.record_webhook_event('n' * 64, None, None, T1)
+        events = await self.events()
+        self.assertEqual([(e['event_key'][0], e['event'], e['order_id'], e['received_at']) for e in events],
+                         [('k', 'ORDER_COMPLETED', 'rev-1', T0), ('m', 'ORDER_COMPLETED', 'rev-1', T1), ('n', None, None, T1)])
+
+
 class MongoSpecifics:
     """Limits that exist only because a MongoDB cart is one document; not part of the shared contract."""
     def test_cart_at_the_document_limit_is_too_large_and_unencodable_data_is_invalid(self):
@@ -781,12 +999,16 @@ class InMemoryAccounts(AccountContract, InMemoryBinding): pass
 class InMemoryWorkshops(WorkshopContract, InMemoryBinding): pass
 class InMemoryRequests(RequestContract, InMemoryBinding): pass
 class InMemoryOutbox(OutboxContract, InMemoryBinding): pass
+class InMemoryOrders(OrderContract, InMemoryBinding): pass
+class InMemoryPayments(PaymentContract, InMemoryBinding): pass
 class DisposableMongoCatalog(CatalogContract, DisposableMongoBinding): pass
 class DisposableMongoCarts(CartContract, DisposableMongoBinding): pass
 class DisposableMongoAccounts(AccountContract, DisposableMongoBinding): pass
 class DisposableMongoWorkshops(WorkshopContract, DisposableMongoBinding): pass
 class DisposableMongoRequests(RequestContract, DisposableMongoBinding): pass
 class DisposableMongoOutbox(OutboxContract, DisposableMongoBinding): pass
+class DisposableMongoOrders(OrderContract, DisposableMongoBinding): pass
+class DisposableMongoPayments(PaymentContract, DisposableMongoBinding): pass
 
 
 if __name__ == '__main__': unittest.main()

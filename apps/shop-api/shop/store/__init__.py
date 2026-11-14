@@ -8,7 +8,9 @@ from .accounts import MongoAccountStore
 from .carts import MongoCartStore
 from .catalog import MongoCatalogStore
 from .errors import AlreadyExists, ArchiveTooLarge, RevisionStale, StoreUnavailable, StoredDataInvalid
+from .orders import MongoOrderStore
 from .outbox import MongoOutboxStore
+from .payments import MongoPaymentStore
 from .requests import MongoRequestStore
 from .workshops import MongoWorkshopStore
 
@@ -18,5 +20,7 @@ accounts = MongoAccountStore(db)
 workshops = MongoWorkshopStore(db)
 requests = MongoRequestStore(db)
 outbox = MongoOutboxStore(db)
+orders = MongoOrderStore(db)
+payments = MongoPaymentStore(db)
 
-__all__ = ["AlreadyExists", "ArchiveTooLarge", "RevisionStale", "StoreUnavailable", "StoredDataInvalid", "accounts", "carts", "catalog", "outbox", "requests", "workshops"]
+__all__ = ["AlreadyExists", "ArchiveTooLarge", "RevisionStale", "StoreUnavailable", "StoredDataInvalid", "accounts", "carts", "catalog", "orders", "outbox", "payments", "requests", "workshops"]

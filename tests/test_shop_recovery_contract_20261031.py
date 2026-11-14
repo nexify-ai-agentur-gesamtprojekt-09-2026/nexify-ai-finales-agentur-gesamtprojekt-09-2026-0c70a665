@@ -35,6 +35,10 @@ def load_store(path, name, database, **names):
     return namespace[name](database)
 
 
+def order_store(database):
+    return load_store("apps/shop-api/shop/store/orders.py", "MongoOrderStore", database)
+
+
 class ShopRecoveryContract(unittest.IsolatedAsyncioTestCase):
     async def test_missing_price_approval_is_unreleased(self):
         class Catalog:
@@ -77,7 +81,7 @@ class ShopRecoveryContract(unittest.IsolatedAsyncioTestCase):
         validator_ns = {"HTTPException": HTTPException, "hashlib": hashlib}
         exec(compile(ast.fix_missing_locations(ast.Module(body=[validation], type_ignores=[])), "checkout_api.py", "exec"), validator_ns)
         namespace = {"auth": types.SimpleNamespace(identity=identity), "validate_order_replay": validator_ns["validate_order_replay"],
-                     "owner_for": owner_for, "db": types.SimpleNamespace(orders=orders),
+                     "owner_for": owner_for, "store": types.SimpleNamespace(orders=order_store(types.SimpleNamespace(orders=orders))),
                      "require_price_release": require_price_release, "payment_response": payment_response,
                      "replay": lambda order: {"order_id": order["_id"]}}
         exec(compile(ast.fix_missing_locations(ast.Module(body=[node], type_ignores=[])), "checkout_api.py", "exec"), namespace)
@@ -139,10 +143,11 @@ class ShopRecoveryContract(unittest.IsolatedAsyncioTestCase):
         templates = types.SimpleNamespace(order_confirmation=lambda _: ("subject", "html", "text"),
                                           internal_new_order=lambda _: ("subject", "html", "text"))
         fake_db = types.SimpleNamespace(orders=Orders(), carts=Carts())
+        store = types.SimpleNamespace(orders=order_store(fake_db), carts=load_store("apps/shop-api/shop/store/carts.py", "MongoCartStore", fake_db))
         send = load_function("apps/shop-api/shop/checkout_api.py", "send_paid_mails",
-                             {"PAID": "bezahlt", "db": fake_db, "mailer": FakeMailer(), "mail_templates": templates})
+                             {"PAID": "bezahlt", "store": store, "mailer": FakeMailer(), "mail_templates": templates})
         namespace = {"PAID": "bezahlt", "OPEN": "zahlung_offen", "FAILED": "zahlung_nicht_abgeschlossen",
-                     "db": fake_db, "revolut": FakeRevolut(), "revision_filter": lambda owner, revision: {"owner": owner, "revision": revision},
+                     "store": store, "revolut": FakeRevolut(),
                      "now_iso": lambda: "2026-10-31T00:00:00Z", "send_paid_mails": send}
         sync_payment = load_function("apps/shop-api/shop/checkout_api.py", "sync_payment", namespace)
         with self.assertRaisesRegex(RuntimeError, "injected interruption after paid transition"):
@@ -189,7 +194,7 @@ class ShopRecoveryContract(unittest.IsolatedAsyncioTestCase):
         templates = types.SimpleNamespace(order_confirmation=lambda _: ("subject", "html", "text"),
                                           internal_new_order=lambda _: ("subject", "html", "text"))
         orders = Orders()
-        ns = {"PAID": "bezahlt", "db": types.SimpleNamespace(orders=orders), "mailer": Mailer(), "mail_templates": templates}
+        ns = {"PAID": "bezahlt", "store": types.SimpleNamespace(orders=order_store(types.SimpleNamespace(orders=orders))), "mailer": Mailer(), "mail_templates": templates}
         send = load_function("apps/shop-api/shop/checkout_api.py", "send_paid_mails", ns)
         recover = load_function("apps/shop-api/shop/checkout_api.py", "recover_paid_mail_intents", ns)
         await send(copy.deepcopy(order))
@@ -215,7 +220,7 @@ class ShopRecoveryContract(unittest.IsolatedAsyncioTestCase):
                 return {"_id": key} if to else None
         templates = types.SimpleNamespace(order_confirmation=lambda _: ("subject", "html", "text"),
                                           internal_new_order=lambda _: ("subject", "html", "text"))
-        ns = {"PAID": "bezahlt", "db": types.SimpleNamespace(orders=Orders()), "mailer": Mailer(), "mail_templates": templates}
+        ns = {"PAID": "bezahlt", "store": types.SimpleNamespace(orders=order_store(types.SimpleNamespace(orders=Orders()))), "mailer": Mailer(), "mail_templates": templates}
         send = load_function("apps/shop-api/shop/checkout_api.py", "send_paid_mails", ns)
         await send(order)
         self.assertTrue(order["paid_mail_recovery_pending"])

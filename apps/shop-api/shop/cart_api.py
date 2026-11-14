@@ -6,7 +6,6 @@ from pydantic import BaseModel, ConfigDict, Field
 
 from . import auth, bigbuy_order, config, pricing, store
 from .db import now_iso
-from .store.carts import revision_filter  # noqa: F401  (checkout_api nutzt ihn, bis es selbst umgestellt ist)
 
 router = APIRouter(prefix="/api/shop/cart")
 MAX_QTY = 20

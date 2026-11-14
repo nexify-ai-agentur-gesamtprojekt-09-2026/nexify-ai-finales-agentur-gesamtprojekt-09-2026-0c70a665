@@ -3,8 +3,8 @@
 All external calls are wrapped so a failure never raises out of the payment/webhook path; a failed
 BigBuy submission is recorded (bigbuy_submit_pending) and an internal alert is enqueued for retry.
 """
-from . import bigbuy_order, config, mail_templates, mailer
-from .db import db, now_iso
+from . import bigbuy_order, config, mail_templates, mailer, store
+from .db import now_iso
 
 # One persisted field for the delivery state: orders.fulfilment (the admin view and the customer timeline read it).
 PAID = "bezahlt"
@@ -22,10 +22,7 @@ async def submit_order(order):
     if not lines:
         return
     # Claim before any create: a duplicate webhook/run must never place two paid BigBuy orders.
-    claimed = await db.orders.find_one_and_update(
-        {"_id": order["_id"], "bigbuy_order_id": {"$in": [None, ""]}, "bigbuy_submitting": {"$ne": True}},
-        {"$set": {"bigbuy_submitting": True, "fulfillment_checked_at": now_iso()}})
-    if not claimed:
+    if not await store.orders.claim_supplier_submission(order["_id"], now_iso()):
         return
     environment = order.get("source_environment") or "production"
     address = order.get("address") or {}
@@ -41,24 +38,17 @@ async def submit_order(order):
     try:
         created = await bigbuy_order.create_order(environment, payload)
     except bigbuy_order.BigBuyOrderError as error:
-        await db.orders.update_one({"_id": order["_id"]}, {"$set": {
-            "fulfillment_error": error.code, "bigbuy_submit_pending": True, "bigbuy_submitting": False,
-            "fulfillment_checked_at": now_iso()}})
+        await store.orders.record_supplier_failure(order["_id"], error.code, now_iso())
         await _alert_admin(order, error.code)
         return
     except Exception:
-        await db.orders.update_one({"_id": order["_id"]}, {"$set": {
-            "fulfillment_error": "bigbuy_submit_failed", "bigbuy_submit_pending": True, "bigbuy_submitting": False,
-            "fulfillment_checked_at": now_iso()}})
+        await store.orders.record_supplier_failure(order["_id"], "bigbuy_submit_failed", now_iso())
         return
     bigbuy_id = str((created or {}).get("id") or (created or {}).get("order_id") or "")
-    update = {"bigbuy_order_id": bigbuy_id, "bigbuy_submitted_at": now_iso(), "bigbuy_submit_pending": False,
-              "fulfillment_error": None, "bigbuy_carrier": carrier, "bigbuy_submitting": False}
+    submitted_at, processing_at = now_iso(), None
     if not order.get("fulfilment") or order.get("fulfilment") == PAID:
-        update["fulfilment"] = "in_bearbeitung"
-        update["processing_at"] = now_iso()
-    await db.orders.update_one({"_id": order["_id"], "bigbuy_order_id": {"$in": [None, "", order.get("bigbuy_order_id")]}},
-                               {"$set": update})
+        processing_at = now_iso()
+    await store.orders.record_supplier_order(order["_id"], order.get("bigbuy_order_id"), bigbuy_id, carrier, submitted_at, processing_at)
 
 
 async def poll_and_update_tracking(order):
@@ -73,13 +63,9 @@ async def poll_and_update_tracking(order):
     number, carrier = _extract_tracking(data)
     if not number:
         return
-    changed = await db.orders.find_one_and_update(
-        {"_id": order["_id"], "fulfilment": {"$nin": [SHIPPED, DELIVERED]}},
-        {"$set": {"fulfilment": SHIPPED, "tracking_number": number,
-                  "carrier": carrier or order.get("bigbuy_carrier", ""), "shipped_at": now_iso()}})
-    if not changed:
+    if not await store.orders.mark_shipped(order["_id"], number, carrier or order.get("bigbuy_carrier", ""), now_iso()):
         return
-    shipped = await db.orders.find_one({"_id": order["_id"]})
+    shipped = await store.orders.get(order["_id"])
     try:
         subject, html, text = mail_templates.order_status(shipped, SHIPPED)
         await mailer.enqueue("order_status:versendet:" + order["_id"], (shipped.get("address") or {}).get("email", ""),
