@@ -13,11 +13,52 @@ nicht verfolgt; `apps/web/wrangler.jsonc` und `docs/deployment/cloudflare-worker
 sind eine ungenutzte Vorbereitung und kein Auftrag. Die Führungsentscheidung vom
 04.11.2026 (ChatGPT-Sites-Stand) ist im widersprechenden Umfang historisch.
 
-Offen und nicht als erledigt zu behandeln (Stand 13.11.2026): Die Domains
+Stand 13.11.2026 (HISTORIE, in Teilen überholt durch den Nachtrag vom 14.11.2026
+direkt darunter): Die Domains
 `nexifyai.de` und `nexifyai.cloud` zeigen per DNS nicht auf dieses Vercel-Projekt; die
 Shop-API antwortet dort mit 503 (Laufzeit-Zugänge fehlen); Indexierung ist aus und das
 Impressum hat keine bestätigten Anbieterangaben. Nachweis:
 `docs/04-betrieb/befund-2026-11-13.md`.
+
+Nachtrag 14.11.2026 (IST, gemessen 14.11.2026, 10:37 bis 10:43 UTC): `nexifyai.de`,
+`www.nexifyai.de`, `nexifyai.cloud` und `www.nexifyai.cloud` antworten mit 200 von
+Vercel und zeigen die Oberfläche aus `apps/web` mit den Änderungen vom 14.11.2026;
+ausliefernd ist laut `docs/deployment/environment-variables.md` Abschnitt 6 das Projekt
+`…-ut7r` (`prj_lKQEWQKzjqq4Ifvmwy6dh1XCIgVR`). Der Satz zu DNS oben ist damit überholt. Offen und nicht als erledigt zu
+behandeln: Die Shop-API antwortet in Produktion mit 503 `project_binding_unverified`
+(Sortiment, Warenkorb und Kasse ohne Funktion); die Indexierung ist aus
+(`noindex, nofollow`); das Impressum trägt seit PR 102 Anbieterangaben nach Angabe des
+Inhabers, `apps/site/src/Auth.tsx` nennt aber weiter „B.V.“, die Rechtsform ist damit
+nicht widerspruchsfrei belegt. Messwerte und Quellen: `PROGRESS.md`, Abschnitt
+„Stand 14.11.2026“.
+
+## Inhaberentscheidungen · 14.11.2026
+
+Maßgeblich sind die Einträge D-011 bis D-018 in `DECISIONS.md`; sie werden hier nicht
+wiederholt. Für die Arbeit in diesem Repository folgt daraus:
+
+- Die Startseite ist die einzige fertige Referenz. Neue Seiten und Abschnitte in
+  `apps/web` entstehen nach `.claude/skills/nexify-klon-fabrik/SKILL.md`; vor jeder
+  Auslieferung laufen `tools/gleichmacher.mjs` und `tools/live-check.mjs` (siehe
+  „Verification“).
+- Zielbild der Datenhaltung ist die eigene, selbst gehostete Supabase-Instanz
+  (PostgreSQL mit RLS), auch für den Shop (D-013). MongoDB-Aussagen in diesem
+  Repository beschreiben den IST von `apps/shop-api` und sind als Zielbild überholt.
+- Der sichtbare Produktname ist „NeX AIFly Suite“ (D-011). „NeX2fly“ in älteren
+  Abschnitten und Dokumenten ist Historie; IDs und die Adresse `/produkte/nex2fly`
+  bleiben.
+- Führende Dokumente nach jedem Merge und jeder Inhaberentscheidung nachführen:
+  `.claude/skills/nexify-stand-halten/SKILL.md`.
+- Der Wissensgraph (Graphify) wird in jedem Projekt eingesetzt, je Projekt getrennt
+  (D-018). Vor dem Einzellesen vieler Dateien und vor jeder Änderung an einem gemeinsam
+  genutzten Baustein den Graphen befragen: `.claude/skills/nexify-graph/SKILL.md`
+  (`make graph`, `tools/graph.sh`). Der Graph ersetzt keine Prüfung und kein Gate.
+- Kundenprojekte werden in eigenen Repositories und eigenen Sitzungen bearbeitet.
+  Kundendaten und Einzelheiten zu Vorfällen gehören nicht in dieses Repository; hier
+  steht höchstens ein Verweis (`PROGRESS.md`, „Offene Arbeiten“).
+- Aktueller Stand, offene Entwürfe und was beim Inhaber liegt: `PROGRESS.md`, oberster
+  Abschnitt und „Offene Arbeiten“. Dort nachlesen, bevor eine Arbeit begonnen wird, die
+  ein anderer Zweig schon trägt.
 
 ## Frühere Führungsentscheidung · 04.11.2026
 
@@ -232,6 +273,8 @@ Pascal Courbois · mail@nexifyai.cloud (Firmendaten in `docs/09-final/08` bitte 
 - `make build` — Prototypen-Manifest (`sha256sum -c`) + `config/*.json` valide.
 - `make e2e` — vollständige Prüfkette (Audit + Tests + Artefakt-/Config-Integrität).
 - `make check-arch` — Architektur-Regeln (`.harness/arch-rules.json`); `make clean-check` — Sauber-Zustand.
+- `node tools/gleichmacher.mjs [basis-url] [--breiten=390,1440]` — misst jede Seite im echten Browser gegen die Startseite (D-012). Pflicht vor jeder Auslieferung von `apps/web`, Ziel 0 Abweichungen; Exit 1 bei Abweichung. Nur lesend, braucht Playwright. Ein Befund wird an der Ursache behoben, nicht im Prüfskript.
+- `node tools/live-check.mjs [basis-url]` — Live-Prüfung aller verlinkten Seiten einschließlich Shop-Dienst (Standard `https://nexifyai.de`). Pflicht vor jeder Auslieferung gegen den lokalen Build und danach gegen die Produktion; Exit 1 bei Befund. Nur lesend, braucht Playwright. Ein grüner Lauf ist keine Gesamtabnahme.
 Vor jeder Abschlussmeldung `make check && make test`.
 
 ## Constraints (MUST / MUST NOT)
@@ -302,6 +345,12 @@ Promotion-Prinzip: **jede im Review gefundene Fehlerkategorie wird zu einer Rege
 
 
 ## Vercel-Einrichtung und projektbezogene Plattform-Skills
+
+Stand 14.11.2026: Die beiden folgenden Sätze sind HISTORIE. Produktion ist seit der
+Führungsentscheidung vom 13.11.2026 das Projekt `…-ut7r` (Team `nexify-projekte`), und
+`.de` wie `.cloud` werden von dort ausgeliefert (Nachtrag 14.11.2026 oben).
+`prj_Po7jl…` bleibt die Bindung der Shop-API, solange `SHOP_ALLOWED_PROJECT_IDS` nicht
+gesetzt ist (`docs/deployment/environment-variables.md` Abschnitt 6).
 
 Vercel-Hauptprojekt ist `prj_Po7jlB7srMP6sxyMvf5zIwzXzNyh`, Scope
 `pascals-projects-2864de33`. `.de` ist die Vorschau des Entwicklungszweigs;

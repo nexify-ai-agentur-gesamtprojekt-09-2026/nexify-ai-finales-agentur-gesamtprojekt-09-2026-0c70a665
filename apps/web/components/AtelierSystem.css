@@ -1153,15 +1153,8 @@ html[data-theme='light'] #atelier{
 #atelier .nx-feld-schalter:focus-visible{outline:2px solid var(--as-ink);outline-offset:-2px}
 #atelier .nx-konto .tk-field-error,#atelier .nx-konto .tk-alert{margin:0;font-size:var(--as-t-13);line-height:var(--as-z-text);color:var(--color-semantik-fehler)}
 #atelier .nx-konto .tk-success{margin:0;padding:var(--as-s-3) var(--as-s-4);border-radius:var(--as-r-feld);background:var(--as-glass-faint);box-shadow:var(--as-lens-faint);font-size:var(--as-t-15);line-height:var(--as-z-text);color:var(--as-ink)}
-#atelier .nx-konto .tk-auth .tk-cta{box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;gap:var(--as-s-3);width:100%;height:var(--as-h-haupt);min-height:var(--as-h-haupt);margin:0;padding:0 var(--as-s-6);border:0;border-radius:var(--as-switch-radius);font-size:var(--as-t-16);font-weight:var(--as-g-stark);cursor:pointer;transition:transform var(--as-move),box-shadow var(--as-move),background var(--as-move)}
-#atelier .nx-konto .tk-auth .primary-button.tk-cta{margin-top:var(--as-s-2);background:var(--as-main-body);box-shadow:var(--as-main-shadow);color:var(--as-main-ink)}
-#atelier .nx-konto .tk-auth .primary-button.tk-cta:is(:hover,:focus-visible):not(:disabled){transform:translateY(-1px);background:var(--as-main-body-hover);box-shadow:var(--as-main-shadow-hover)}
-#atelier .nx-konto .tk-auth .primary-button.tk-cta:active:not(:disabled){transform:translateY(1px);background:var(--as-main-body-pressed);box-shadow:var(--as-main-shadow-pressed)}
-#atelier .nx-konto .tk-auth .primary-button.tk-cta:disabled{background:var(--as-main-off);box-shadow:var(--as-lens-faint);cursor:default}
-#atelier .nx-konto .tk-auth .nx-konto-neben{background:var(--as-switch-body);box-shadow:var(--as-switch-shadow);color:var(--as-ink)}
-#atelier .nx-konto .tk-auth .nx-konto-neben:is(:hover,:focus-visible){transform:translateY(-1px);background:var(--as-switch-body-hover);box-shadow:var(--as-switch-shadow-hover)}
-#atelier .nx-konto .tk-auth .nx-konto-neben:active{transform:translateY(1px);background:var(--as-switch-body-pressed);box-shadow:var(--as-switch-shadow-pressed)}
-#atelier .nx-konto .tk-auth .tk-cta:focus-visible{outline:2px solid var(--as-ink);outline-offset:3px}
+#atelier .nx-konto .tk-auth .tk-cta{width:100%;margin:0;justify-content:center}
+#atelier .nx-konto .tk-auth .primary-button.tk-cta{margin-top:var(--as-s-2)}
 #atelier .nx-konto-oder{justify-self:center;margin-block:calc(var(--as-s-2) * -1);font-size:var(--as-t-13);line-height:var(--as-z-kurz);color:var(--as-ink-3)}
 #atelier .nx-konto .tk-actions{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--as-s-1) var(--as-s-6);margin:var(--as-s-2) 0 0;padding:0;border:0}
 #atelier .nx-konto .tk-actions p{margin:0;font-size:var(--as-t-15);line-height:var(--as-z-text);color:var(--as-ink-3)}

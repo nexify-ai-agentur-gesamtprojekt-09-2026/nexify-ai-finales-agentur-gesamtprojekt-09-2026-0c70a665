@@ -1,0 +1,192 @@
+{
+ "werkzeug": "lighthouse 12.6.1, mobile-Preset (Standard), simulierte Drosselung, Chromium ueber den Agent-Proxy",
+ "ziel": "https://nexify-ai-finales-agentur-gesamtpro-one.vercel.app",
+ "hinweis": "Laborwerte, kein Feldwert; INP ist im Labor nicht messbar (TBT als Ersatzgroesse)",
+ "seiten": {
+  "/": {
+   "punkte": {
+    "performance": 59,
+    "accessibility": 100,
+    "best-practices": 93,
+    "seo": 69
+   },
+   "lcp_ms": 3839,
+   "cls": 0,
+   "tbt_ms": 1525,
+   "fcp_ms": 1964,
+   "speed_index_ms": 3772,
+   "unter_90": [
+    [
+     "first-contentful-paint",
+     "First Contentful Paint"
+    ],
+    [
+     "largest-contentful-paint",
+     "Largest Contentful Paint"
+    ],
+    [
+     "speed-index",
+     "Speed Index"
+    ],
+    [
+     "total-blocking-time",
+     "Total Blocking Time"
+    ],
+    [
+     "max-potential-fid",
+     "Max Potential First Input Delay"
+    ],
+    [
+     "errors-in-console",
+     "Browser errors were logged to the console"
+    ],
+    [
+     "interactive",
+     "Time to Interactive"
+    ],
+    [
+     "label-content-name-mismatch",
+     "Elements with visible text labels do not have matching accessible names."
+    ],
+    [
+     "inspector-issues",
+     "Issues were logged in the `Issues` panel in Chrome Devtools"
+    ],
+    [
+     "is-crawlable",
+     "Page is blocked from indexing"
+    ],
+    [
+     "bf-cache",
+     "Page prevented back/forward cache restoration"
+    ],
+    [
+     "forced-reflow-insight",
+     "Forced reflow"
+    ],
+    [
+     "lcp-discovery-insight",
+     "LCP request discovery"
+    ],
+    [
+     "network-dependency-tree-insight",
+     "Network dependency tree"
+    ]
+   ]
+  },
+  "/kontakt": {
+   "punkte": {
+    "performance": 63,
+    "accessibility": 100,
+    "best-practices": 93,
+    "seo": 69
+   },
+   "lcp_ms": 3480,
+   "cls": 0,
+   "tbt_ms": 1630,
+   "fcp_ms": 1830,
+   "speed_index_ms": 2695,
+   "unter_90": [
+    [
+     "first-contentful-paint",
+     "First Contentful Paint"
+    ],
+    [
+     "largest-contentful-paint",
+     "Largest Contentful Paint"
+    ],
+    [
+     "total-blocking-time",
+     "Total Blocking Time"
+    ],
+    [
+     "max-potential-fid",
+     "Max Potential First Input Delay"
+    ],
+    [
+     "errors-in-console",
+     "Browser errors were logged to the console"
+    ],
+    [
+     "interactive",
+     "Time to Interactive"
+    ],
+    [
+     "label-content-name-mismatch",
+     "Elements with visible text labels do not have matching accessible names."
+    ],
+    [
+     "inspector-issues",
+     "Issues were logged in the `Issues` panel in Chrome Devtools"
+    ],
+    [
+     "is-crawlable",
+     "Page is blocked from indexing"
+    ],
+    [
+     "bf-cache",
+     "Page prevented back/forward cache restoration"
+    ],
+    [
+     "network-dependency-tree-insight",
+     "Network dependency tree"
+    ]
+   ]
+  },
+  "/leistungen": {
+   "punkte": {
+    "performance": 64,
+    "accessibility": 100,
+    "best-practices": 93,
+    "seo": 69
+   },
+   "lcp_ms": 3105,
+   "cls": 0,
+   "tbt_ms": 3120,
+   "fcp_ms": 1530,
+   "speed_index_ms": 2218,
+   "unter_90": [
+    [
+     "largest-contentful-paint",
+     "Largest Contentful Paint"
+    ],
+    [
+     "total-blocking-time",
+     "Total Blocking Time"
+    ],
+    [
+     "max-potential-fid",
+     "Max Potential First Input Delay"
+    ],
+    [
+     "errors-in-console",
+     "Browser errors were logged to the console"
+    ],
+    [
+     "interactive",
+     "Time to Interactive"
+    ],
+    [
+     "label-content-name-mismatch",
+     "Elements with visible text labels do not have matching accessible names."
+    ],
+    [
+     "inspector-issues",
+     "Issues were logged in the `Issues` panel in Chrome Devtools"
+    ],
+    [
+     "is-crawlable",
+     "Page is blocked from indexing"
+    ],
+    [
+     "bf-cache",
+     "Page prevented back/forward cache restoration"
+    ],
+    [
+     "network-dependency-tree-insight",
+     "Network dependency tree"
+    ]
+   ]
+  }
+ }
+}

@@ -1,0 +1,3 @@
+# Graphify-Projekteinstellungen (gelesen von update, query und Hooks).
+query_budget=3000
+query_depth=2
