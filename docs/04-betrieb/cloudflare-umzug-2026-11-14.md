@@ -7,9 +7,10 @@ andere Dinge."
 **Status: vorbereitet und lokal gemessen. Nicht umgeschaltet.** Kein DNS-Eintrag, keine
 Domain-Zuweisung, kein Cloudflare-Objekt und kein Vercel-Objekt wurde geändert; nichts
 wurde gekauft oder gebucht. Auf Cloudflare wurde nichts ausgeliefert, weil `wrangler`
-in der Arbeitsumgebung nicht angemeldet ist. Nachtrag vom selben Tag: Das danach
-hinterlegte API-Token wird von Cloudflare als ungültig abgelehnt; die Messung auf
-Cloudflare steht deshalb weiter aus (Abschnitt 13).
+in der Arbeitsumgebung nicht angemeldet ist. Nachtrag vom selben Tag (Abschnitt 13): Im vierten
+Versuch wurde eine Vorschau **ohne statische Dateien** auf `workers.dev` ausgeliefert
+und die Rechenzeit auf Cloudflare gemessen. Das Konto hat bereits den Tarif
+Workers Paid.
 
 Alle Messungen: 14.11.2026, Zweig `claude/cloudflare-umzug` auf `main` `31ccd6c`,
 Node 22.23.4, pnpm 12.15.0, `@opennextjs/cloudflare` 1.20.17, `wrangler` 4.161.0,
@@ -430,41 +431,130 @@ Dem Token fehlt Konto „Workers Scripts: Edit" (schon „Read" fehlt); außerde
 „Account Settings: Read" (Konto, Tarif, workers.dev-Subdomain), „Zone: Read",
 „Workers Tail: Read" und „Account Analytics: Read". Abgebrochen wie vereinbart.
 
-### Was offen bleibt (unverändert Abschnitt 12)
+### Vierter Versuch mit Konto-Token · 14.11.2026, 18:45 bis 19:00 UTC · **gemessen**
 
-Tarif des Kontos (Workers Free oder Paid); ob `nexifyai.de` und `nexifyai.cloud` im
-selben Konto liegen; Rechenzeit je Anfrage auf Cloudflare und die Quote der Fehler
-1102; Antwortzeiten gegen `https://nexifyai.de`; `live-check` und `gleichmacher` auf
-der Vorschau; Auslieferungsprüfung der Vorschau. Das Urteil „kostenfrei tragfähig"
-bleibt deshalb bei der lokalen Schätzung aus Abschnitt 3 und 6 (46 bis 56 ms gegen
-10 ms; Weg A nicht zu erwarten), **ohne Beleg von Cloudflare**.
+Vorschau: **https://nexify-web-vorschau.nexify-login.workers.dev** (Worker
+`nexify-web-vorschau`, nur `workers.dev`, keine Route, keine eigene Domain, keine
+Vorschau-Adressen je Version, keine Geheimnisse; einzige Variable
+`NEXIFY_PUBLIC_INSTALLATION=public-pwa`). Stand: Zweig auf `main` `2906f58`.
 
-### Was in diesem Lauf trotzdem erledigt wurde
+**Einschränkung: Die Vorschau hat keine statischen Dateien** (kein CSS, kein
+JavaScript, keine Bilder, Filme, Symbole). `wrangler deploy` mit Dateien scheitert in
+dieser Arbeitsumgebung an `POST /accounts/<id>/workers/assets/upload` mit 401: Dieser
+Aufruf braucht im Authorization-Kopf das Sitzungs-Token des Uploads, der Proxy ersetzt
+den Kopf für `api.cloudflare.com` aber durch das API-Token. Nicht umgangen. Ausgeliefert
+wurde deshalb derselbe Worker ohne `assets` (vorübergehende Konfiguration, nicht
+versioniert). Für die Rechenzeit der Seiten ist das gleichwertig, weil statische
+Dateien nie durch den Worker laufen; für Aussehen, Filme und PWA nicht.
 
-- `main` eingeholt: zuerst `29f0691`, im zweiten Versuch `2906f58` (angepasste
-  Kopfleisten-Prüfung).
-- Bau wie in Abschnitt 3: Exit 0. `wrangler deploy --dry-run --name nexify-web-vorschau
-  --var NEXIFY_PUBLIC_INSTALLATION:public-pwa`: 11 214,20 KiB, gzip 2 529,08 KiB,
-  231 statische Dateien; Bindungen nur `ASSETS` und diese eine Variable.
-- `noindex` für die Vorschau, in der lokalen Workers-Laufzeit mit dem Hostnamen
-  `nexify-web-vorschau.example.workers.dev` geprüft (`wrangler dev --host …`):
-  `X-Robots-Tag: noindex, nofollow` auf `/`, `/leistungen`, `/?lang=nl`,
-  `/api/health` (503), `/api/chat` (405 auf GET), einem erfundenen Pfad (404),
-  `/robots.txt`, `/manifest.webmanifest`. **Nicht** auf `/media/runway/hero.mp4`:
-  Statische Dateien liefert Cloudflare am Worker vorbei aus. Für Bilder und Filme der
-  Vorschau fehlt die Kopfzeile also; die Seiten selbst tragen sie.
-- Befund am Rand: Die Seiten senden unabhängig vom Hostnamen
-  `<meta name="robots" content="noindex, nofollow">` (`app/layout.tsx`), auch
-  `https://nexifyai.de/` in Produktion (Abruf 14.11.2026). Für die Vorschau ist das
-  doppelte Sicherheit; ob es für die Produktion so gewollt ist, entscheidet der Inhaber.
+#### Konto (gelesen)
 
-### Fertige Befehlsfolge, sobald das Token gültig ist
+- **Tarif: Workers Paid** (5 USD je Monat, Status „Paid"), `usage_model` „standard".
+  Die 10-ms-Grenze des kostenlosen Tarifs gilt für dieses Konto also nicht; es gilt
+  die Grenze von 30 s (Standard). Im Konto laufen weitere kostenpflichtige
+  Abonnements; welche, steht im Bericht an den Inhaber, nicht hier.
+- **Zonen:** `nexifyai.de` und `nexifyai.cloud` liegen in diesem Konto, beide „Free
+  Website", aktiv. Nicht verändert.
+- `workers.dev`-Subdomain des Kontos: `nexify-login` (war vorhanden).
+- Worker vorher 5 (unverändert, nicht berührt), jetzt zusätzlich `nexify-web-vorschau`.
+
+#### Rechenzeit je Anfrage (`wrangler tail`, Feld `cpuTime`, je Weg 25 Abrufe nacheinander)
+
+| Weg | Status | Median | Minimum | Maximum | über 10 ms |
+|---|---|---|---|---|---|
+| `/` | 200 | 216 ms | 32 ms | 859 ms | 25 von 25 |
+| `/leistungen` | 200 | 83 ms | 40 ms | 550 ms | 25 von 25 |
+| `/kontakt` | 200 | 76 ms | 40 ms | 183 ms | 25 von 25 |
+| `/teileklar` | 200 | 50 ms | 28 ms | 319 ms | 25 von 25 |
+| `/anmelden` | 200 | 59 ms | 30 ms | 534 ms | 25 von 25 |
+| `/?lang=nl` | 200 | 73 ms | 30 ms | 374 ms | 25 von 25 |
+| `POST /api/chat`, ungültiges JSON, ohne Schlüssel | 503 `chat_llm_not_configured` | 34 ms | 4 ms | 146 ms | 19 von 25 |
+
+Alle 175 Aufrufe `outcome: ok`, **kein Fehler 1102** (Grenze im bezahlten Tarif 30 s).
+`/` wurde als Erstes abgerufen und enthält die meisten Kaltstarts; ein zweiter Lauf mit
+je 20 Abrufen ergab Mediane von 46 bis 78 ms für die Unterseiten und 348 ms für `/`.
+Die kleinste je gemessene Rechenzeit einer Seite war 28 ms. Die lokale Schätzung
+(46 bis 56 ms) war also eher zu niedrig.
+
+#### 1102-Quote unter einer 10-ms-Grenze (Nachstellung des kostenlosen Tarifs)
+
+Derselbe Worker vorübergehend mit `limits.cpu_ms = 10` (von Cloudflare bestätigt),
+danach wieder ohne Grenze ausgeliefert:
+
+| Lauf | Abrufe | Fehler 1102 (HTTP 503) |
+|---|---|---|
+| 7 Wege je 20-mal nacheinander | 140 | 0 |
+| `/leistungen`, 8 gleichzeitig | 120 | 0 |
+| `/`, 8 gleichzeitig | 120 | 2 |
+
+Cloudflare setzt die Grenze also nicht bei jeder einzelnen Überschreitung durch,
+sondern erst unter Last, und dann mit Fehlerseiten. **Belastbarkeit:** Das ist die
+Grenze `limits.cpu_ms` in einem bezahlten Konto, nicht der kostenlose Tarif selbst;
+ob der kostenlose Tarif genauso nachsichtig ist, ist damit nicht belegt. Belegt ist:
+Jede Seite braucht das 3- bis 20-Fache der erlaubten Rechenzeit.
+
+#### Urteil
+
+- **Kostenfrei im Sinn von „Workers Free" (Weg A): nein.** Keine Seite bleibt unter
+  10 ms; unter Last kamen Fehler 1102. Nur mit Umbau auf fertige Seiten (Weg B).
+- **Ohne zusätzliche Kosten: ja**, denn das Konto bezahlt Workers Paid bereits
+  (Weg C ist schon gebucht). Enthalten sind 10 Mio. Anfragen und 30 Mio. CPU-ms je
+  Monat für das ganze Konto. Bei rund 80 ms je Seite (Median der Unterseiten; `/`
+  höher) sind das etwa 375 000 gerenderte Seiten je Monat ohne Aufpreis, danach
+  0,02 USD je Mio. CPU-ms. Der Verbrauch der anderen Worker im Konto wurde nicht
+  erhoben.
+
+#### Antwortzeit bis zum ersten Byte (je 10 Abrufe, Median, aus der Arbeitsumgebung in den USA)
+
+| Weg | Vorschau | `https://nexifyai.de` (Vercel) |
+|---|---|---|
+| `/` | 805 ms (direkt nach einer Auslieferung, Kaltstarts; im Lauf davor 463 ms) | 272 ms |
+| `/leistungen` | 290 ms | 241 ms |
+| `/kontakt` | 561 ms | 252 ms |
+| `/teileklar` | 270 ms | 247 ms |
+| `/anmelden` | 276 ms | 250 ms |
+| `/?lang=nl` | 298 ms | 244 ms |
+
+Die Vorschau ist im Median 10 bis 20 % langsamer, mit deutlich größeren Ausreißern
+(Maximum 1,0 bis 1,8 s gegen 0,3 bis 0,6 s). Messort ist nicht Deutschland.
+
+#### Verhalten, `noindex`, Auslieferungsprüfung
+
+- Statuscodes wie lokal: Seiten 200, `/login` 308, `/robots.txt` und `/sitemap.xml`
+  200, `/api/internal/workspace/status` 401, `/api/health` 503
+  (`shop_api_origin_not_configured`), erfundener Pfad 404.
+- `X-Robots-Tag: noindex, nofollow` und die Content-Security-Policy auf allen 14
+  geprüften Antworten der echten Adresse, dazu `<meta name="robots" content="noindex,
+  nofollow">` in der Seite.
+- Auslieferungsprüfung nach `nexify-auslieferung-pruefen`, 18:54 UTC, nur
+  Statuscodes: Gegenprobe `/` 200, erfundener Pfad 404. 31 Pfade (`/.git/HEAD`,
+  `/.git/config`, `/.gitignore`, Wurzeldateien, `/vercel.json`, `/wrangler.jsonc`,
+  `/.dev.vars`, drei `.env`, `/cloudflare/worker.mjs`, `/.open-next/worker.js` und zehn
+  Verzeichnisse): 21-mal 404; die zehn Verzeichnisse mit Schrägstrich 308 auf den Pfad
+  ohne Schrägstrich, dort 404. **0 Treffer.**
+
+#### Abnahmewerkzeuge
+
+- `node tools/live-check.mjs` gegen die Vorschau: 329 Prüfungen, **49 Befunde**,
+  Exit 1. 47 davon folgen aus den fehlenden statischen Dateien (36-mal Querüberlauf,
+  6-mal Kopfleiste, 3-mal KI-Hinweis im Fuß, Galerie-Filme, PWA-Symbole 404), 2 sind
+  der Shop-Dienst (503, wie in Produktion). **Als Abnahme nicht verwertbar.**
+- `node tools/gleichmacher.mjs`: nicht ausgeführt. Ohne Stylesheets misst das
+  Werkzeug keine Seite, sondern das unformatierte Dokument.
+
+### Was offen bleibt
+
+Auslieferung mit statischen Dateien und damit `live-check`, `gleichmacher`
+(zweimal), Filme, PWA, Sichtprüfung. Dafür muss `wrangler deploy` von einem Ort
+laufen, an dem der Authorization-Kopf nicht ersetzt wird (Rechner des Inhabers mit
+`wrangler login`, oder Workers Builds aus Git im Dashboard). Außerdem offen: Chat
+mit echtem Modell, Verbrauch der übrigen Worker im Konto, Messung aus Deutschland.
+
+### Befehlsfolge für die vollständige Vorschau (mit statischen Dateien)
 
 ```bash
-export CLOUDFLARE_API_TOKEN=proxy-injected            # Platzhalter, der Proxy setzt den Wert ein
-export NODE_EXTRA_CA_CERTS=/root/.ccr/ca-bundle.crt
-curl -sS https://api.cloudflare.com/client/v4/accounts   # Konto-ID ablesen
-export CLOUDFLARE_ACCOUNT_ID=<Konto-ID>
+npx wrangler login                                    # am Rechner des Inhabers
+export CLOUDFLARE_ACCOUNT_ID=a112f895c19e0d65f6f64b3e89f747f8
 node apps/site/scripts/generate-public-data.mjs
 cd apps/web
 NEXIFY_PUBLIC_INSTALLATION=public-pwa node scripts/generate-public-data.mjs
@@ -481,4 +571,5 @@ Tarif oder ein Zahlungsmittel: abbrechen.
 `npx wrangler delete --name nexify-web-vorschau` in `apps/web` (löscht nur diesen
 Worker samt seiner statischen Dateien) oder im Dashboard unter Workers & Pages →
 `nexify-web-vorschau` → Settings → Delete. Die fünf vorhandenen Worker, DNS und
-Zonen sind davon nicht berührt. Derzeit gibt es nichts zu entfernen.
+Zonen sind davon nicht berührt. Die Vorschau besteht seit 14.11.2026, 18:46 UTC, und
+bleibt bis zur Entscheidung des Inhabers stehen; sie verursacht ohne Abrufe keine Kosten.
