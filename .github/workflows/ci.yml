@@ -62,6 +62,8 @@ jobs:
         run: |
           docker --host=unix:///var/run/docker.sock rename "$DATABASE_CONTAINER" onboarding-postgres
           bash db/foundation/test.sh onboarding-postgres nx_foundation
+      - name: Shop schema, owner and tenant RLS, idempotency counterexamples
+        run: bash db/shop/test.sh onboarding-postgres
   openapi-schema:
     runs-on: ubuntu-24.04
     timeout-minutes: 10
