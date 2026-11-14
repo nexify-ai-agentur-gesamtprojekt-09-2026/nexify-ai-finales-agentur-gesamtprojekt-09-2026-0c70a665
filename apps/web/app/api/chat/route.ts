@@ -53,7 +53,9 @@ export const maxDuration = 60;
 const LOCALES: ReadonlySet<string> = new Set(['de', 'nl', 'fr', 'en']);
 // Die Oberfläche begrenzt auf 1.000 Zeichen; die Route lässt Spielraum für andere Eingänge.
 const MAX_MESSAGE = 4000;
-const MAX_BODY_BYTES = 64 * 1024;
+// Die Oberfläche schickt bis zu 16 ungekürzte Beiträge als Verlauf mit; gekürzt wird erst in
+// sanitizeClientHistory. Die Eingangsgrenze muss ein langes Gespräch tragen, sonst endet es mit 413.
+const MAX_BODY_BYTES = 256 * 1024;
 const HISTORY_LIMIT = 20;
 
 function err(error: string, status: number, headers: Record<string, string> = {}): Response {
@@ -186,7 +188,7 @@ export async function POST(request: Request): Promise<Response> {
   let body: unknown;
   try {
     const raw = await request.text();
-    if (raw.length > MAX_BODY_BYTES) return err('body_too_large', 413);
+    if (new TextEncoder().encode(raw).length > MAX_BODY_BYTES) return err('body_too_large', 413);
     body = JSON.parse(raw);
   } catch {
     return err('invalid_json', 400);
