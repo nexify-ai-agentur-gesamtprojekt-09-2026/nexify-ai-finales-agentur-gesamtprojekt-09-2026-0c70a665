@@ -1745,10 +1745,10 @@
             "type": "route",
             "target_id": "signup",
             "label": {
-              "de": "NeX2fly Suite. Ihr eigener Einstieg.",
-              "nl": "NeX2fly Suite. Uw eigen start.",
-              "fr": "NeX2fly Suite. Votre propre accès.",
-              "en": "NeX2fly Suite. Your own starting point."
+              "de": "NeX AIFly Suite. Ihr eigener Einstieg.",
+              "nl": "NeX AIFly Suite. Uw eigen start.",
+              "fr": "NeX AIFly Suite. Votre propre accès.",
+              "en": "NeX AIFly Suite. Your own starting point."
             }
           },
           "source_refs": [

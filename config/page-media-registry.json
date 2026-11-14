@@ -58,7 +58,7 @@
     },
     {
       "id": "NXV-DE-02",
-      "title": "NeX2fly Suite",
+      "title": "NeX AIFly Suite",
       "locale": "de",
       "scope": "public",
       "bound_page_id": "nex2fly",
@@ -507,7 +507,7 @@
       "site_context": "nexify",
       "visibility": "public",
       "context_id": "context-nex2fly",
-      "context_title": "NeX2fly Suite: dein Einstieg",
+      "context_title": "NeX AIFly Suite: dein Einstieg",
       "film_id": "NXV-DE-02",
       "scene_ids": [
         "NXV-DE-02-S01",

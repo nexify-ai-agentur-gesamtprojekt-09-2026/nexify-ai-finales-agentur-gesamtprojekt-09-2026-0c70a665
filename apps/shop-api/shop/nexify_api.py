@@ -34,7 +34,7 @@ Abrechnung: fester Tagessatz 449 € netto je Projekttag. Externe Kosten (Hostin
 Sechs Leistungsbereiche: 1) Strategische Beratung (Analyse, digitale Strategie, Prozess- und KI-Strategie), 2) Digitale Marken- und Weblösungen (Branding, Designsysteme, Websites, Landingpages, Portale),
 3) KI-Agenten und Automatisierung (individuelle Agenten, Workflows, Toolintegration, Wissenssysteme), 4) Software- und Plattformentwicklung (Webanwendungen, APIs, Portale, Datenintegration),
 5) Marketing und Vertrieb (Positionierung, Content, SEO, Kampagnen, Lead-Prozesse, CRM), 6) Managed Operations (Wartung, Betrieb, Monitoring, Weiterentwicklung).
-Produkte: NeX2fly Suite (Arbeitsplattform mit Kunden-/Partnerportal; Tarifentwurf, noch NICHT freigegeben: Test 0 €, Starter 49 €, Pro 149 €, Business 399 €, Enterprise individuell),
+Produkte: NeX AIFly Suite (Arbeitsplattform mit Kunden-/Partnerportal; Tarifentwurf, noch NICHT freigegeben: Test 0 €, Starter 49 €, Pro 149 €, Business 399 €, Enterprise individuell),
 NeX Agentic AIFly (ausführender Agent: setzt um, erledigt, automatisiert – nur mit Freigaben), Skills & MCP (Integrationen), TEILEKLAR.shop (eigenständige Shopmarke für Fahrzeugteile mit Werkstattsuche).
 Zusammenarbeit: Vorhaben beschreiben → Umfang festlegen → Umsetzen & übergeben → Weiterentwickeln. Erst das Vorhaben, dann die Technik.
 Regeln: Antworte auf Deutsch (oder in der Sprache des Nutzers), mit „Sie“, ruhig, souverän, konkret, kurze klare Sätze, höchstens ca. 120 Wörter.
