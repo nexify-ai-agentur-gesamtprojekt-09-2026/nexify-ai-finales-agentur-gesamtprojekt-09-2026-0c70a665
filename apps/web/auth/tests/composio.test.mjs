@@ -119,7 +119,7 @@ const session = (userId) => async () => (userId ? { userId, tenantId: 'konto:' +
 function fakeClient(calls) {
   return {
     async createConnectLink(input) { calls.push(['link', input]); return { redirectUrl: 'https://connect.invalid/x', connectedAccountId: 'ca_new' }; },
-    async completeAuth(id) { calls.push(['complete', id]); },
+    async completeAuth(input) { calls.push(['complete', input]); return { connectedAccountId: 'ca_1', toolkitSlug: 'gmail' }; },
   };
 }
 const post = (body) => new Request('https://nexifyai.cloud/api/suite/composio/connect', { method: 'POST', headers: { origin: 'https://nexifyai.cloud', host: 'nexifyai.cloud' }, body: JSON.stringify(body) });
@@ -147,26 +147,67 @@ test('Connect: nur für Angemeldete, nur bei Schalter, nur erlaubte Auth-Config'
   } finally { COMPOSIO_CONFIG.erlaubte_auth_config_ids.length = 0; }
 });
 
-test('Verify: nur der gebundene Nutzer schließt ab; Query-Parameter werden nicht vertraut', async () => {
+test('Verify: session_uri + Sitzungs-Nutzer -> complete_auth, Konto gebunden, Weiterleitung', async () => {
   const calls = [];
   const store = await seeded();
   const deps = { env: ON, store, client: fakeClient(calls), nowMs: () => NOW };
   const url = (q) => new Request('https://nexifyai.cloud/api/suite/composio/verify?' + q);
-  assert.equal((await handleVerify(url('connected_account_id=ca_1'), { ...deps, env: {}, resolveSession: session('u1') })).status, 503);
-  assert.equal((await handleVerify(url('connected_account_id=ca_1'), { ...deps, resolveSession: session(null) })).status, 401);
-  assert.equal((await handleVerify(url('connected_account_id=..%2F'), { ...deps, resolveSession: session('u1') })).status, 422);
-  // fremder Nutzer, auch mit user_id-Parameter des Eigentümers
-  const foreign = await handleVerify(url('connected_account_id=ca_1&user_id=u1&status=success'), { ...deps, resolveSession: session('u2') });
-  assert.equal(foreign.status, 403);
-  assert.equal((await handleVerify(url('connected_account_id=ca_unbekannt'), { ...deps, resolveSession: session('u1') })).status, 403);
+  assert.equal((await handleVerify(url('session_uri=su_1'), { ...deps, env: {}, resolveSession: session('u1') })).status, 503);
+  assert.equal((await handleVerify(url('session_uri=su_1'), { ...deps, resolveSession: session(null) })).status, 401);
+  // fehlend oder ungültig: 400, kein Aufruf
+  assert.equal((await handleVerify(url(''), { ...deps, resolveSession: session('u1') })).status, 400);
+  assert.equal((await handleVerify(url('connected_account_id=ca_1'), { ...deps, resolveSession: session('u1') })).status, 400);
   assert.equal(calls.length, 0);
-  assert.equal((await store.getConnection('ca_1')).status, 'pending');
-  const ok = await handleVerify(url('connected_account_id=ca_1'), { ...deps, resolveSession: session('u1') });
-  assert.equal(ok.status, 200);
-  assert.deepEqual(await ok.json(), { verified: true, user_id: 'u1', connected_account_id: 'ca_1' });
-  assert.equal((await store.getConnection('ca_1')).status, 'verified');
-  await handleVerify(url('connected_account_id=ca_1'), { ...deps, resolveSession: session('u1') });
-  assert.equal(calls.filter(c => c[0] === 'complete').length, 1);
+  // user_id/connected_account_id aus der Query zählen nicht; user_id kommt aus der Sitzung
+  const ok = await handleVerify(url('session_uri=su_1&user_id=u2&connected_account_id=ca_evil'), { ...deps, resolveSession: session('u1') });
+  assert.equal(ok.status, 303);
+  assert.equal(ok.headers.get('location'), 'https://nexifyai.cloud/?composio=verified');
+  assert.deepEqual(calls, [['complete', { sessionUri: 'su_1', userId: 'u1' }]]);
+  const rec = await store.getConnection('ca_1');
+  assert.deepEqual([rec.tenantId, rec.userId, rec.status, rec.authConfigId], ['konto:u1', 'u1', 'verified', AC]);
+  assert.equal(await store.getConnection('ca_evil'), null);
+  // verbrauchte session_uri wird nicht erneut eingelöst
+  const again = await handleVerify(url('session_uri=su_1'), { ...deps, resolveSession: session('u1') });
+  assert.equal(again.status, 409);
+  assert.equal(calls.length, 1);
+});
+
+test('Verify: Fehlerpfade von complete_auth (400/404/401/500) ohne interne Texte, session_uri bleibt verbraucht', async () => {
+  const { createComposioClient } = await import('../../lib/composio.ts');
+  const url = (q) => new Request('https://nexifyai.cloud/api/suite/composio/verify?' + q);
+  const run = async (status, uri) => {
+    const store = await seeded();
+    const fetchImpl = async () => new Response('interner Fehlertext geheim', { status });
+    const client = createComposioClient({ env: { COMPOSIO_API_KEY: 'test-key' }, fetchImpl });
+    const deps = { env: ON, store, client, resolveSession: session('u2'), nowMs: () => NOW };
+    const r = await handleVerify(url('session_uri=' + uri), deps);
+    const text = JSON.stringify(await r.json());
+    assert.ok(!text.includes('geheim'));
+    assert.equal((await store.getConnection('ca_1')).status, 'pending');
+    assert.equal((await handleVerify(url('session_uri=' + uri), deps)).status, 409);
+    return r.status;
+  };
+  assert.equal(await run(400, 'su_a'), 403); // user_id nicht Besitzer (fremder Nutzer)
+  assert.equal(await run(404, 'su_b'), 410); // abgelaufen oder verbraucht
+  assert.equal(await run(401, 'su_c'), 502); // eigener Schlüssel ungültig
+  assert.equal(await run(500, 'su_d'), 502);
+  // Antwort ohne connected_account_id
+  const store = await seeded();
+  const client = createComposioClient({ env: { COMPOSIO_API_KEY: 'test-key' }, fetchImpl: async () => Response.json({}) });
+  assert.equal((await handleVerify(url('session_uri=su_e'), { env: ON, store, client, resolveSession: session('u1') })).status, 502);
+  // Konto gehört laut Speicher einem anderen Nutzer: keine Umbindung
+  const fremd = fakeClient([]);
+  const r = await handleVerify(url('session_uri=su_f'), { env: ON, store, client: fremd, resolveSession: session('u2') });
+  assert.equal(r.status, 403);
+  assert.equal((await store.getConnection('ca_1')).userId, 'u1');
+});
+
+test('Verify: unbekanntes Konto (z. B. Speicher neu gestartet) wird an den Sitzungs-Nutzer gebunden', async () => {
+  const store = createMemoryComposioStore();
+  const r = await handleVerify(new Request('https://nexifyai.cloud/api/suite/composio/verify?session_uri=su_n'), { env: ON, store, client: fakeClient([]), resolveSession: session('u3'), nowMs: () => NOW });
+  assert.equal(r.status, 303);
+  const rec = await store.getConnection('ca_1');
+  assert.deepEqual([rec.tenantId, rec.userId, rec.status], ['konto:u3', 'u3', 'verified']);
 });
 
 test('Konfiguration enthält nur Nicht-Geheimes und keine Personendaten', () => {
@@ -186,10 +227,22 @@ test('Client: Anfrage nach Doku, Schlüssel nur im Header, Fehler ohne Antwortte
   assert.deepEqual(link, { redirectUrl: 'https://connect.invalid/a', connectedAccountId: 'ca_9' });
   assert.equal(seen.url, 'https://backend.composio.dev/api/v3.1/connected_accounts/link');
   assert.equal(seen.init.headers['x-api-key'], 'test-key');
-  assert.deepEqual(JSON.parse(seen.init.body), { user_id: 'u1', auth_config_id: AC, callback_url: 'https://nexifyai.cloud/cb' });
+  assert.deepEqual(JSON.parse(seen.init.body), { auth_config_id: AC, user_id: 'u1', callback_url: 'https://nexifyai.cloud/cb' });
+  // callback_url ist optional; nicht anderes als die belegten Felder (id/connectionId werden nicht gelesen)
+  await client.createConnectLink({ userId: 'u1', authConfigId: AC });
+  assert.deepEqual(JSON.parse(seen.init.body), { auth_config_id: AC, user_id: 'u1' });
+  const wrongShape = createComposioClient({ env: { COMPOSIO_API_KEY: 'test-key' }, fetchImpl: async () => Response.json({ id: 'ca_1', connectionId: 'ca_1', redirectUrl: 'https://c.invalid/' }) });
+  await assert.rejects(() => wrongShape.createConnectLink({ userId: 'u1', authConfigId: AC }), (e) => e.code === 'composio_link_incomplete');
+  // complete_auth: Body { session_uri, user_id }, Antwort { connected_account_id, toolkit_slug }
+  const completeClient = createComposioClient({ env: { COMPOSIO_API_KEY: 'test-key' }, fetchImpl: async (u, i) => { seen = { url: u, init: i }; return Response.json({ connected_account_id: 'ca_7', toolkit_slug: 'gmail' }); } });
+  assert.deepEqual(await completeClient.completeAuth({ sessionUri: 'su_x', userId: 'u1' }), { connectedAccountId: 'ca_7', toolkitSlug: 'gmail' });
+  assert.equal(seen.url, 'https://backend.composio.dev/api/v3.1/connected_accounts/complete_auth');
+  assert.deepEqual(JSON.parse(seen.init.body), { session_uri: 'su_x', user_id: 'u1' });
+  assert.equal(seen.init.headers['x-api-key'], 'test-key');
+  assert.equal(seen.init.headers['x-project-id'], undefined);
   assert.ok(!seen.init.body.includes('test-key'));
   const failing = createComposioClient({ env: { COMPOSIO_API_KEY: 'test-key' }, fetchImpl: async () => new Response('geheimer Fehlertext', { status: 500 }) });
-  await assert.rejects(() => failing.completeAuth('ca_9'), (e) => e.code === 'composio_upstream_failed' && !String(e.message).includes('geheim'));
+  await assert.rejects(() => failing.completeAuth({ sessionUri: 'su_9', userId: 'u1' }), (e) => e.code === 'composio_upstream_failed' && !String(e.message).includes('geheim'));
   const noId = createComposioClient({ env: { COMPOSIO_API_KEY: 'test-key' }, fetchImpl: async () => Response.json({ redirect_url: 'https://c.invalid/' }) });
   await assert.rejects(() => noId.createConnectLink({ userId: 'u1', authConfigId: AC, callbackUrl: 'https://x.invalid' }), (e) => e.code === 'composio_link_incomplete');
 });

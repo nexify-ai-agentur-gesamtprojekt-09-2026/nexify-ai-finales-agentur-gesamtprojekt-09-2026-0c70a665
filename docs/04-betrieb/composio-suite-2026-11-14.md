@@ -13,14 +13,36 @@ und einem Mandanten; Mandant und Nutzer stammen nie aus Anfrage-Parametern oder 
 
 1. Der angemeldete Suite-Nutzer ruft `POST /api/suite/composio/connect` mit `{"auth_config_id": "..."}` auf (nur erlaubte
    Kennungen aus `config/integrations/composio.json`, `erlaubte_auth_config_ids`; leer = alles verweigert).
-   Die Route erzeugt über Composio (`POST /connected_accounts/link`) einen Connect-Link und legt die Verbindung als
-   `pending` an Nutzer und Mandant gebunden ab. Antwort: `redirect_url`.
-2. Der Nutzer autorisiert beim Anbieter. Composio führt den Browser zu `GET /api/suite/composio/verify?connected_account_id=...`
-   (OAuth user verification). Die Route prüft die Suite-Sitzung, vergleicht die Kontokennung mit der gemerkten Verbindung
-   (gleicher Nutzer, gleicher Mandant), ruft dann `complete_auth` bei Composio auf und antwortet mit dem angemeldeten
-   Suite-Nutzer. Fremde oder unbekannte Kennungen: einheitlich 403.
+   Die Route erzeugt über Composio (`POST /connected_accounts/link`, Body `auth_config_id`, `user_id` aus der Sitzung, optional
+   `callback_url`) einen Connect-Link und legt die Verbindung als `pending` an Nutzer und Mandant gebunden ab. Gelesen werden
+   `redirect_url` und `connected_account_id` der 201-Antwort. Antwort der Suite: `redirect_url`, `connected_account_id`.
+2. Der Nutzer autorisiert beim Anbieter. Composio leitet den Browser auf die Verifier-URL `GET /api/suite/composio/verify?session_uri=...`
+   (Identity-Verification; **nur** `session_uri`, keine Kontokennung, keine `user_id`). Die Route prüft die Suite-Sitzung
+   (nicht angemeldet: 401; `session_uri` fehlt: 400), nimmt die `user_id` ausschließlich aus der serverseitigen Sitzung und ruft
+   `POST /connected_accounts/complete_auth` mit `{session_uri, user_id}`. Bei 200 (`connected_account_id`, `toolkit_slug`) bindet sie
+   das Konto an Nutzer und Mandant der Sitzung (gehört es laut Speicher einem anderen: 403) und leitet den Nutzer per 303 auf
+   `/?composio=verified` weiter. Fehler von Composio: 400 (user_id nicht Besitzer) -> 403 `verification_mismatch`; 404 (unbekannt,
+   abgelaufen, verbraucht) -> 410 `session_uri_expired_or_used`; sonst (u. a. 401, 5xx) -> 502 `composio_upstream_failed`;
+   nie mit Antworttext. Ein bereits eingelöstes `session_uri` wird lokal mit 409 abgewiesen (nur der Hash wird gemerkt).
 3. Composio aktiviert die Verbindung und sendet `composio.connected_account.activated` (bzw. `.expired`) an den Webhook.
    `composio.trigger.message` und `composio.trigger.disabled` werden mandantengebunden abgelegt und an die Übergabestelle gereicht (siehe Trigger-Schicht).
+
+## Belegte Composio-Shapes (geklärt, Quelle: Composio-Doku, abgerufen 14.11.2026)
+
+Basis `https://backend.composio.dev/api/v3.1`, Header `x-api-key` (aus `COMPOSIO_API_KEY`).
+
+- `POST /connected_accounts/link`: Body `{auth_config_id (Pflicht), user_id (Pflicht), callback_url (optional)}`; 201:
+  `redirect_url` (Connect-URL), `connected_account_id`, `link_token`, `expires_at`.
+- Callback: Composio leitet den Browser mit NUR `session_uri` auf die Verifier-URL. Unser Server ruft
+  `POST /connected_accounts/complete_auth` mit `{session_uri (Pflicht), user_id (Pflicht)}`; `user_id` ist immer die Suite-Sitzungs-Nutzer-ID.
+  200: `{connected_account_id, toolkit_slug}`, Verbindung ACTIVE. `session_uri` ist einmalig, 10 Minuten gültig, verbraucht sich auch bei
+  Fehlern; zweiter Aufruf 404. 400, wenn `user_id` nicht der Besitzer ist (Verbindung wird FAILED). Ein beim Erstellen gesetztes
+  `callback_url` wird bei dieser Prüfung nicht genutzt; danach leitet der eigene Endpunkt den Nutzer selbst weiter.
+- Trigger: `GET /triggers_types/{slug}`, `POST /trigger_instances/{slug}/upsert` (unverändert, Basis geprüft).
+
+**Korrigiert:** Die frühere Annahme (Kontokennung `connected_account_id` im Callback, `complete_auth` mit `connected_account_id`, Header
+`x-project-id`) war falsch bzw. unbelegt und ist ersetzt. Alle früheren „Annahmen" zu Link-Antwortfeld, Pfad/Body von `complete_auth` und
+Verifier-URL-Aufrufform sind damit geklärt.
 
 ## Webhook
 
@@ -40,7 +62,7 @@ und einem Mandanten; Mandant und Nutzer stammen nie aus Anfrage-Parametern oder 
 | `COMPOSIO_API_KEY` | ja | REST-Aufrufe (`x-api-key`) |
 | `COMPOSIO_AUTH_TOKEN` | ja | reserviert, vom Code derzeit nicht gelesen |
 | `COMPOSIO_WEBHOOK_SECRET` | ja | Webhook-Signaturprüfung |
-| `COMPOSIO_PROJECT_ID` | nein | Projekt (Standard aus der Konfiguration) |
+| `COMPOSIO_PROJECT_ID` | nein | derzeit vom Code nicht gelesen (kein `x-project-id`-Header mehr) |
 | `COMPOSIO_ORG_ID` | nein | reserviert |
 
 Zusätzlich für die Sitzungsprüfung: `SHOP_API_BASE_URL` (wie im Shop-Code). Nicht geheime Kennungen stehen in
@@ -95,9 +117,8 @@ Zusätzliche offene Punkte: Trigger- und Ereignisspeicher teilen die Grenze des 
    Idempotenz und Status sind damit nicht verlässlich. Datenbank-Implementierung mit Mandanten-RLS nötig.
 2. Mandant: bis zur Anbindung der Organisations-Mitgliedschaft gilt `konto:<user_id>` als Mandant (`suite-session.ts`).
 3. `erlaubte_auth_config_ids` befüllen (Freigabe durch den Inhaber).
-4. Annahmen gegen die Composio-Referenz prüfen: Antwortfeld `connected_account_id` des Link-Endpunkts, Pfad und Body von
-   `complete_auth`, Header `x-project-id`, Aufrufform des Verifier-URL. Die Seite zur Nutzerprüfung war nicht abrufbar;
-   diese Teile stehen isoliert in `apps/web/lib/composio.ts` und `composio-routes.ts`.
+4. Echte Composio-Aufrufe sind noch nicht erfolgt (alle Tests mit Fake-`fetch`). Verifier-URL (`/api/suite/composio/verify`) im
+   Composio-Projekt hinterlegen, sobald ausgeliefert. Offen aus der Trigger-Schicht: Antwortfeld der Trigger-Kennung.
 5. Webhook im Composio-Dashboard erst nach Auslieferung und Einschalten auf den Live-Pfad zeigen lassen.
 
 ## Prüfen

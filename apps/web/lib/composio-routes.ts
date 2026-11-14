@@ -2,7 +2,8 @@
  * Handler für Connect-Link und Nutzerprüfung (OAuth user verification). Rein über Abhängigkeiten
  * (Sitzung, Speicher, Client), damit sie ohne Netz testbar sind. Die Route-Dateien sind dünne Hüllen.
  */
-import { COMPOSIO_CONFIG, COMPOSIO_ID, COMPOSIO_VERIFY_PATH, ComposioError, composioEnabled, createComposioClient, type ComposioClient, type ComposioEnv } from './composio.ts';
+import { createHash } from 'node:crypto';
+import { COMPOSIO_CONFIG, COMPOSIO_ID, COMPOSIO_VERIFY_PATH, SESSION_URI, ComposioError, composioEnabled, createComposioClient, type ComposioClient, type ComposioEnv } from './composio.ts';
 import { getComposioStore, type ComposioStore } from './composio-store.ts';
 import { shopApiSessionResolver, type SessionResolver } from './suite-session.ts';
 
@@ -76,10 +77,14 @@ export async function handleConnect(request: Request, deps: RouteDeps = {}): Pro
   }
 }
 
+/** Ziel nach erfolgreicher Verbindung (nur Pfad, fest; nie aus Query/Header). */
+export const COMPOSIO_VERIFIED_REDIRECT = '/?composio=verified';
+
 /**
- * OAuth user verification: Composio führt den Browser nach dem OAuth-Rücksprung hierher. Die Verbindung wird nur
- * abgeschlossen, wenn der angemeldete Suite-Nutzer derselbe ist, für den sie angelegt wurde. Aus der URL zählt allein
- * die Kontokennung; `user_id`, `status` & Co. aus der Query werden ignoriert.
+ * OAuth Identity-Verification (belegt, Composio-Doku 14.11.2026): Composio leitet den Browser mit NUR `session_uri` hierher.
+ * Der Server ruft `complete_auth { session_uri, user_id }`; `user_id` ist ausschließlich die Suite-Sitzungs-Nutzer-ID.
+ * Composio prüft den Besitzer (400 bei Fremdem). Query-Parameter außer `session_uri` werden ignoriert.
+ * `session_uri` ist einmalig: ein zweiter Einlösungsversuch wird lokal abgewiesen (Composio selbst antwortet dann 404).
  */
 export async function handleVerify(request: Request, deps: RouteDeps = {}): Promise<Response> {
   const env = deps.env ?? process.env;
@@ -87,24 +92,40 @@ export async function handleVerify(request: Request, deps: RouteDeps = {}): Prom
   const session = await (deps.resolveSession ?? shopApiSessionResolver(env))(request);
   if (!session) return reply({ error: 'authentication_required' }, 401);
 
-  const accountId = new URL(request.url).searchParams.get('connected_account_id') ?? '';
-  if (!COMPOSIO_ID.test(accountId)) return reply({ error: 'invalid_connected_account_id' }, 422);
+  const sessionUri = new URL(request.url).searchParams.get('session_uri') ?? '';
+  if (!SESSION_URI.test(sessionUri)) return reply({ error: 'session_uri_required' }, 400);
 
+  const client = makeClient(deps, env);
+  if (!client) return reply({ error: 'composio_not_configured' }, 503);
   const store = deps.store ?? getComposioStore();
-  const record = await store.getConnection(accountId);
-  // Unbekannt oder fremd: einheitlich dieselbe Antwort, damit keine Kennungen erraten werden können.
-  if (!record || record.tenantId !== session.tenantId || record.userId !== session.userId) return reply({ error: 'verification_mismatch' }, 403);
-  if (record.status === 'expired') return reply({ error: 'connection_expired' }, 409);
 
-  if (record.status === 'pending') {
-    const client = makeClient(deps, env);
-    if (!client) return reply({ error: 'composio_not_configured' }, 503);
-    try {
-      await client.completeAuth(accountId);
-    } catch {
-      return reply({ error: 'composio_upstream_failed' }, 502);
-    }
-    await store.putConnection({ ...record, status: 'verified', updatedAt: deps.nowMs?.() ?? Date.now() });
+  // Einmaligkeit: nur ein Hash wird gemerkt, nie die URI selbst. Verbraucht auch bei Fehlern, daher keine Freigabe.
+  const claimKey = 'session_uri:' + createHash('sha256').update(sessionUri).digest('hex');
+  if (!(await store.claimEvent(claimKey))) return reply({ error: 'session_uri_already_used' }, 409);
+
+  let result: { connectedAccountId: string; toolkitSlug: string };
+  try {
+    result = await client.completeAuth({ sessionUri, userId: session.userId });
+  } catch (error) {
+    const status = error instanceof ComposioError ? error.upstreamStatus : undefined;
+    if (error instanceof ComposioError && error.code === 'composio_not_configured') return reply({ error: error.code }, 503);
+    // 400: user_id ist nicht der Besitzer der Verbindung. 404: unbekannt, abgelaufen oder schon verbraucht.
+    if (status === 400) return reply({ error: 'verification_mismatch' }, 403);
+    if (status === 404) return reply({ error: 'session_uri_expired_or_used' }, 410);
+    return reply({ error: 'composio_upstream_failed' }, 502);
   }
-  return reply({ verified: true, user_id: session.userId, connected_account_id: accountId }, 200);
+
+  const existing = await store.getConnection(result.connectedAccountId);
+  // Gehört das Konto laut eigenem Speicher jemand anderem, wird es nicht umgebunden.
+  if (existing && (existing.tenantId !== session.tenantId || existing.userId !== session.userId)) return reply({ error: 'verification_mismatch' }, 403);
+  await store.putConnection({
+    connectedAccountId: result.connectedAccountId,
+    tenantId: session.tenantId,
+    userId: session.userId,
+    authConfigId: existing?.authConfigId ?? '',
+    // Ein bereits per Webhook aktives Konto bleibt aktiv; sonst gilt es als geprüft (Composio meldet ACTIVE).
+    status: existing?.status === 'active' ? 'active' : 'verified',
+    updatedAt: deps.nowMs?.() ?? Date.now(),
+  });
+  return new Response(null, { status: 303, headers: { ...PRIVATE, Location: COMPOSIO_CONFIG.public_origin + COMPOSIO_VERIFIED_REDIRECT } });
 }

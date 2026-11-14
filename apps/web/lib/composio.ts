@@ -13,6 +13,9 @@ export const COMPOSIO_CONFIG = composioConfig;
 export const COMPOSIO_API_BASE: string = composioConfig.api_base;
 export const COMPOSIO_VERIFY_PATH = '/api/suite/composio/verify';
 
+/** `session_uri` aus dem Composio-Redirect: nur Zeichen einer URL, begrenzt. */
+export const SESSION_URI = /^[A-Za-z0-9._~:/?#@!$&'()*+,;=%-]{1,2048}$/;
+
 /** Kennungen (Konto, Auth-Config) bleiben auf ein enges Zeichenalphabet beschränkt. */
 export const COMPOSIO_ID = /^[A-Za-z0-9_-]{1,128}$/;
 
@@ -25,9 +28,12 @@ export type ComposioErrorCode = 'composio_not_configured' | 'composio_upstream_f
 
 export class ComposioError extends Error {
   readonly code: ComposioErrorCode;
-  constructor(code: ComposioErrorCode) {
+  /** HTTP-Status der Composio-Antwort (nur Zahl, nie Antworttext), falls der Fehler von dort stammt. */
+  readonly upstreamStatus?: number;
+  constructor(code: ComposioErrorCode, upstreamStatus?: number) {
     super(code);
     this.code = code;
+    if (upstreamStatus !== undefined) this.upstreamStatus = upstreamStatus;
   }
 }
 
@@ -43,9 +49,13 @@ export type ComposioClient = {
   getTriggerType(slug: string): Promise<TriggerType>;
   /** Legt einen Trigger für den Suite-Nutzer an (POST /trigger_instances/{slug}/upsert). */
   createTrigger(userId: string, slug: string, triggerConfig: Record<string, unknown>, connectedAccountId?: string): Promise<{ triggerId: string }>;
-  createConnectLink(input: { userId: string; authConfigId: string; callbackUrl: string }): Promise<ConnectLink>;
-  /** Schließt eine zurückgehaltene OAuth-Verbindung nach erfolgreicher Nutzerprüfung ab. */
-  completeAuth(connectedAccountId: string): Promise<void>;
+  /** POST /connected_accounts/link { auth_config_id, user_id, callback_url? } -> 201 { redirect_url, connected_account_id, ... }. */
+  createConnectLink(input: { userId: string; authConfigId: string; callbackUrl?: string }): Promise<ConnectLink>;
+  /**
+   * Identity-Verification: POST /connected_accounts/complete_auth { session_uri, user_id } -> 200 { connected_account_id, toolkit_slug }.
+   * `userId` ist immer die Suite-Sitzungs-Nutzer-ID. `session_uri` ist einmalig und verbraucht sich auch bei Fehlern.
+   */
+  completeAuth(input: { sessionUri: string; userId: string }): Promise<{ connectedAccountId: string; toolkitSlug: string }>;
 };
 
 type ClientOptions = { env?: ComposioEnv; fetchImpl?: typeof fetch; timeoutMs?: number };
@@ -59,9 +69,6 @@ export function createComposioClient(options: ClientOptions = {}): ComposioClien
 
   async function call(path: string, body: unknown, method: 'GET' | 'POST' = 'POST'): Promise<Record<string, unknown>> {
     const headers: Record<string, string> = { 'content-type': 'application/json', 'x-api-key': apiKey as string };
-    // Annahme: Projekt-Kennung als Kopfzeile (nicht geheim). Fehlt sie, entscheidet der Schlüssel allein.
-    const project = env.COMPOSIO_PROJECT_ID || composioConfig.projekt_id;
-    if (project) headers['x-project-id'] = project;
     let response: Response;
     try {
       response = await doFetch(COMPOSIO_API_BASE + path, {
@@ -74,7 +81,7 @@ export function createComposioClient(options: ClientOptions = {}): ComposioClien
     } catch {
       throw new ComposioError('composio_upstream_failed');
     }
-    if (!response.ok) throw new ComposioError('composio_upstream_failed');
+    if (!response.ok) throw new ComposioError('composio_upstream_failed', response.status);
     try {
       const parsed: unknown = await response.json();
       return parsed && typeof parsed === 'object' ? (parsed as Record<string, unknown>) : {};
@@ -104,19 +111,24 @@ export function createComposioClient(options: ClientOptions = {}): ComposioClien
       return { triggerId };
     },
     async createConnectLink({ userId, authConfigId, callbackUrl }) {
-      // Doku "Hosted authentication": POST /connected_accounts/link { user_id, auth_config_id, callback_url } -> redirect_url
-      const result = await call('/connected_accounts/link', { user_id: userId, auth_config_id: authConfigId, callback_url: callbackUrl });
+      // Belegt (Composio-Doku, 14.11.2026): Body { auth_config_id, user_id, callback_url? }, Antwort 201 { redirect_url, connected_account_id, link_token, expires_at }.
+      const body: Record<string, unknown> = { auth_config_id: authConfigId, user_id: userId };
+      if (callbackUrl) body.callback_url = callbackUrl;
+      const result = await call('/connected_accounts/link', body);
       const redirectUrl = result.redirect_url;
       const connectedAccountId = result.connected_account_id;
-      // Ohne Kontokennung ließe sich der Rücksprung später nicht an den Nutzer binden: lieber abbrechen.
       if (typeof redirectUrl !== 'string' || !/^https:\/\//.test(redirectUrl)) throw new ComposioError('composio_link_incomplete');
       if (typeof connectedAccountId !== 'string' || !COMPOSIO_ID.test(connectedAccountId)) throw new ComposioError('composio_link_incomplete');
       return { redirectUrl, connectedAccountId };
     },
-    async completeAuth(connectedAccountId) {
-      // Annahme (Doku-Seite zur Nutzerprüfung war nicht abrufbar): POST /connected_accounts/complete_auth
-      // mit der Kontokennung. Der Pfad steht nur hier und ist leicht austauschbar.
-      await call('/connected_accounts/complete_auth', { connected_account_id: connectedAccountId });
+    async completeAuth({ sessionUri, userId }) {
+      // Belegt: Body { session_uri, user_id }, Antwort 200 { connected_account_id, toolkit_slug }. 400 = user_id ist nicht der Besitzer
+      // (Verbindung wird FAILED); 404 = session_uri unbekannt, abgelaufen (10 Min) oder schon verbraucht.
+      const result = await call('/connected_accounts/complete_auth', { session_uri: sessionUri, user_id: userId });
+      const connectedAccountId = result.connected_account_id;
+      const toolkitSlug = result.toolkit_slug;
+      if (typeof connectedAccountId !== 'string' || !COMPOSIO_ID.test(connectedAccountId)) throw new ComposioError('composio_link_incomplete');
+      return { connectedAccountId, toolkitSlug: typeof toolkitSlug === 'string' && COMPOSIO_ID.test(toolkitSlug) ? toolkitSlug : '' };
     },
   };
 }
