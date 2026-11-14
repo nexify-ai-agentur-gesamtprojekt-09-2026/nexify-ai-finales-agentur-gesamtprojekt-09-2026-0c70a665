@@ -69,3 +69,6 @@ apps/shop-api/data/
 # Cloudflare Workers (OpenNext) Build-Ausgaben
 apps/web/.open-next/
 apps/web/.wrangler/
+
+# Graphify-Wissensgraph: wird lokal mit tools/graph.sh erzeugt, nicht versioniert (rund 14 MB je Stand)
+graphify-out/
