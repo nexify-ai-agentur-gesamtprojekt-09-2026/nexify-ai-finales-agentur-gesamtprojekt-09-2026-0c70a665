@@ -13,10 +13,12 @@ from fastapi import APIRouter, HTTPException, Query
 from pydantic import BaseModel, Field
 
 from . import config
-from . import mail_templates_teileklar, mailer
+from . import mail_templates_teileklar, mailer, workshop_blocklist
 from .db import db, now_iso
 
 router = APIRouter(prefix="/api/workshops")
+# Workshops that asked not to be shown (workshop_blocklist.json); a list that cannot be read closes the directory.
+BLOCKLIST_FILE = workshop_blocklist.DEFAULT_FILE
 # What happens to a request addressed to a workshop without confirmed partnership. Default (unset or any
 # other value): accept and store it as before, with the truthful text. "abweisen": no request is taken and
 # nothing is stored; the visitor is pointed to the workshop. "an_teileklar": stored as a wish to TEILEKLAR.
@@ -55,6 +57,18 @@ async def import_workshops(database=None):
     return len(docs)
 
 
+def blocklist():
+    try:
+        return workshop_blocklist.load(BLOCKLIST_FILE)
+    except workshop_blocklist.BlocklistError as error:
+        raise HTTPException(503, {"error": "workshop_blocklist_unavailable", "reason": str(error)}) from None
+
+
+def listed(doc, blocked):
+    """Shown in the search: not on the opt-out list and not a marked duplicate of another record."""
+    return not blocked.blocks(doc) and "duplicate_of" not in doc
+
+
 def public(doc, distance=None):
     item = {k: doc[k] for k in FIELDS if doc.get(k) not in (None, "")}
     item.update({"kind_label": "Verzeichnisbetrieb", "partner": False})
@@ -81,6 +95,7 @@ async def locate(term):
 @router.get("/search")
 async def search(q: str = Query(..., min_length=2, max_length=80), radius: int = Query(25, ge=5, le=200), limit: int = Query(50, ge=1, le=100)):
     term = q.strip()
+    blocked = blocklist()
     center = await locate(term)
     if not center:
         return {"q": term, "radius_km": radius, "center": None, "total": 0, "results": [], "unlocated": []}
@@ -88,19 +103,23 @@ async def search(q: str = Query(..., min_length=2, max_length=80), radius: int =
     dlat, dlon = radius / 111.0, radius / (111.0 * max(0.2, math.cos(lat * math.pi / 180)))
     box = {"lat": {"$gte": lat - dlat, "$lte": lat + dlat}, "lon": {"$gte": lon - dlon, "$lte": lon + dlon}}
     hits = sorted([(km(lat, lon, d["lat"], d["lon"]), d) async for d in db.workshops.find(box)], key=lambda x: x[0])
-    hits = [(dist, d) for dist, d in hits if dist <= radius]
+    hits = [(dist, d) for dist, d in hits if dist <= radius and listed(d, blocked)]
     key = {"zip": term} if term.isdigit() else {"city_key": term.casefold()}
-    unlocated = [public(d) async for d in db.workshops.find({**key, "lat": {"$exists": False}}).limit(20)]
+    unlocated = [public(d) async for d in db.workshops.find({**key, "lat": {"$exists": False}}).limit(20) if listed(d, blocked)]
     return {"q": term, "radius_km": radius, "center": {"lat": lat, "lon": lon, "basis": basis}, "total": len(hits),
             "results": [public(d, dist) for dist, d in hits[:limit]], "unlocated": unlocated}
 
 
 @router.get("/{workshop_id}")
 async def detail(workshop_id: str):
+    blocked = blocklist()
     doc = await db.workshops.find_one({"_id": workshop_id})
-    if not doc:
+    if not doc or blocked.blocks(doc):
         raise HTTPException(404, {"error": "workshop_not_found"})
-    return public(doc)
+    item = public(doc)
+    if doc.get("duplicate_of"):
+        item["duplicate_of"] = doc["duplicate_of"]  # kept record to show instead; this one stays reachable for existing links
+    return item
 
 
 def nonpartner_mode(env=None):
@@ -134,8 +153,9 @@ class RequestIn(BaseModel):
 
 @router.post("/{workshop_id}/requests", status_code=201)
 async def create_request(workshop_id: str, body: RequestIn):
+    blocked = blocklist()
     doc = await db.workshops.find_one({"_id": workshop_id})
-    if not doc:
+    if not doc or blocked.blocks(doc):
         raise HTTPException(404, {"error": "workshop_not_found"})
     errors = {}
     if len(body.name.strip()) < 2:

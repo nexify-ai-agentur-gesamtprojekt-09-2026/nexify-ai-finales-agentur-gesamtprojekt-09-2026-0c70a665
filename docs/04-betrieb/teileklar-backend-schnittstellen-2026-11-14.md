@@ -109,3 +109,62 @@ Bestehende Wege bleiben: `GET /api/shop/status` und `GET /api/shop/categories` z
 **OFFEN – Index.** Für die Filter wären Indizes auf `release.status` und `release.brand` sinnvoll. `db.ensure_indexes` und die
 Pflichtliste des Vercel-Einstiegs (`INDEXES`) wurden bewusst nicht geändert (ein neuer Pflichtindex würde den Einstieg schließen).
 Nicht gegen eine echte Datenbank gemessen.
+
+## 3. TK-16 Werkstattverzeichnis bereinigen
+
+### Dublettenerkennung (IST, nur als Werkzeug)
+`shop.workshop_directory.dedupe(db)` nach dem Muster von `shop.brands.backfill(db)`. **Standard ist der Probelauf**: er meldet
+und schreibt nichts. `dedupe(db, apply=True)` setzt an den Kopien `duplicate_of` (Kennung des behaltenen Betriebs),
+`duplicate_rule` und `duplicate_marked_at`; sonst ändert sich kein Feld, nichts wird gelöscht. Ein zweiter Lauf ändert nichts.
+Das Werkzeug ist nirgends eingehängt (weder Start noch Anfragewege noch Betreiber-Route); ein Betreiber ruft es bewusst auf.
+`unmark(db, id)` nimmt eine Markierung zurück (ebenfalls Probelauf, `apply=True` schreibt).
+
+Regel: im selben Markt sind zwei Einträge Dubletten, wenn der normalisierte **Name** und die normalisierte **Straße** gleich sind und
+die **PLZ** gleich ist (fehlt eine PLZ: dann der Ort). Normalisierung: Groß-/Kleinschreibung, Umlaute (ä = ae), Akzente, „&“ = „und“,
+Satzzeichen, Rechtsformen (GmbH, e.K., B.V. …), „Straße / Str. / Strasse / straat“. Gleicher Name und gleiche PLZ mit anderer oder fehlender Straße
+(Filialen einer Kette) wird **nur gemeldet** (`possible_groups`), nie markiert. Namen unter 3 Zeichen nehmen nicht teil.
+Behalten wird: Partner, dann der vollständigere Eintrag, dann der mit Position, dann die kleinste Kennung. Stehen zwei Partner in einer
+Gruppe, wird nichts markiert (`needs_review`).
+Antwort: `examined`, `groups`, `would_mark`, `marked`, `needs_review`, `possible_groups`, `applied`, `remaining_possible`, `details[]`
+(`keep`, `duplicates`, `rule`, `name`, höchstens 100), `possible_details[]`.
+
+Wirkung in der Anzeige: **Suche** lässt markierte Kopien weg (Gesamtzahl entsprechend). **Detail** einer Kopie bleibt erreichbar
+(bestehende Links und Anfragen) und trägt `duplicate_of` mit der Kennung des Betriebs, der stattdessen zu zeigen ist.
+
+### Sperrliste (IST)
+Konfiguration `apps/shop-api/shop/workshop_blocklist.json` (Version 1, **ausgeliefert leer**; kein Eintrag wurde erfunden).
+Ein Eintrag nennt den Betrieb entweder mit `id` oder mit `name` und `zip` (Schreibweise egal, damit auch ein neu importierter Eintrag mit anderer
+Kennung erfasst wird) sowie `grund` und `datum`. Unbekannte Schlüssel, fehlende Begründung, mehr als 5000 Einträge oder ungültige Kennungen
+lehnt das Laden ab. Änderungen gelten ab der nächsten Anfrage (Prüfung nach Änderungszeit), ohne Neustart.
+
+Wirkung: ein gesperrter Betrieb fehlt in der **Suche** (auch in `unlocated`), das **Detail** und die **Anfrage** an ihn antworten
+`404 workshop_not_found`; es wird nichts gespeichert. Der Eintrag bleibt in der Datenbank.
+**Ist die Liste nicht lesbar oder ungültig, antworten Suche, Detail und Anfrage mit `503 workshop_blocklist_unavailable`**: lieber geschlossen
+als jemanden zeigen, der nicht gezeigt werden will.
+
+**OFFEN – Vercel-Bündel.** Ob `shop/workshop_blocklist.json` im Vercel-Bündel liegt, wurde nicht geprüft (wie bei `partner_policy.json`,
+siehe `docs/04-betrieb/shop-api-laufzeit-2026-11-14.md`, Abschnitt 6). Fehlt die Datei dort, antwortet das gesamte Werkstattverzeichnis mit 503.
+Vor Auslieferung mit `apps/shop-api/tests/verify_vercel_bundle.cjs` prüfen.
+**OFFEN – Wer pflegt die Liste?** Wunsch eines Betriebs und Quelle gehören in `grund`; wer Einträge freigibt und wie ein Wunsch nachprüfbar
+ankommt, ist nicht festgelegt.
+
+## 4. Betrieb: Aufruf der Werkzeuge (nie automatisch)
+
+```
+# in einer Umgebung mit denselben Variablen wie die Shop-API, Probelauf zuerst
+python3 - <<'PY'
+import asyncio
+from shop.db import db
+from shop import workshop_directory
+print(asyncio.run(workshop_directory.dedupe(db)))          # schreibt nichts
+PY
+```
+Produkt-Neubewertung: `POST /api/admin/products/release/reevaluate` mit `{}` (Probelauf) bzw. `{"apply": true}`.
+
+## 5. Nicht geprüft
+
+- Alles gegen einen Speicher im Arbeitsspeicher; **keine** echte MongoDB (Aggregationen, Sortierung mit Kennung, Indexnutzung, Laufzeit bei großem Bestand).
+- `tests/test_teileklar_shop_api.py` braucht eine echte Datenbank und wurde übersprungen; seine Beispielprodukte wurden an die Pflichtangaben
+  angepasst, der Lauf selbst steht aus.
+- Kein Lauf gegen Lieferanten-Schnittstellen; der Importer bleibt durch `tenant_publication_contract_unverified` gesperrt.
+- Ob die Pflichtangaben rechtlich genügen (E12), ob die Lieferzeit-Quelle feststeht, ob die Sperrliste im Vercel-Bündel liegt.
