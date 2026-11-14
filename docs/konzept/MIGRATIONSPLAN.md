@@ -1,6 +1,6 @@
 # Migrationsplan zum führenden Konzept
 
-Stand: 14.11.2026 · Fassung 1.0 · Status: Arbeitsfassung der Projektleitung, Bestätigung Inhaber offen (`DECISIONS.md` D-019).
+Stand: 14.11.2026 · Fassung 1.1 (Nachführung, siehe Abschnitt 6) · Status: Arbeitsfassung der Projektleitung, Bestätigung Inhaber offen (`DECISIONS.md` D-019).
 Gehört zu `docs/konzept/FUEHRENDES-KONZEPT.md` (im Folgenden **FK**). Kürzel und Marken wie dort.
 
 ## 0. Was dieser Plan ist
@@ -27,14 +27,12 @@ Ohne Inhaberentscheidung, ohne Zugänge, ohne Rechtsprüfung. Reihenfolge innerh
 
 ### 1.1 TEILEKLAR (zuerst)
 
+TK-01, TK-02, TK-03 und TK-06 sind nicht mehr „sofort baubar“: Sie sind auf dem Zweig `claude/teileklar-backend` gebaut (Abschnitt 1.4a). Die übrigen Zeilen unverändert.
+
 | ID | Ziel | Schreibbereich | Abhängigkeiten | Blocker | Abnahmekriterien | Test | Rückweg |
 |---|---|---|---|---|---|---|---|
-| **TK-01** | Projektbindung der Shop-API konfigurierbar statt fester Kennung; Liste der fehlenden Laufzeitvariablen, nur Namen (W1-04) | `apps/shop-api/vercel_app.py`, `apps/shop-api/tests/test_vercel_adapter.py` | PR 118 zuerst zusammenführen oder Bereich abstimmen (PR 118 ändert `apps/shop-api/shop/*`) | keiner | Bindung kommt aus der Umgebung; ohne Zugänge bleibt die API geschlossen (503); Variablenliste ohne Werte | Adaptertest: passende und abweichende Bindung | Commit zurücknehmen |
-| **TK-02** | Werkstattanfrage wahrheitsgemäß: interne Benachrichtigung, Liste im Betreiberbereich, Bestätigungstext ohne nicht vorhandenen Schritt (W1-09) | `apps/shop-api/shop/workshops_api.py`, `admin_api.py`, neu `mail_templates_teileklar.py`, `apps/web/components/shop/WorkshopDetail.tsx` | – | keiner. Die Zustellung an Nichtpartner bleibt aus (Inhaber, EV-13) | Anfrage erzeugt einen internen Mail-Auftrag und erscheint in der Liste; der Text nennt nur, was geschieht | Test der Anfrage mit Attrappe für den Mail-Ausgang | Commit zurücknehmen |
-| **TK-03** | Anfragen nach Marke trennen: Pflichtfeld Marke, eigene Vorgangsnummer und Mail-Marke für TEILEKLAR (W1-11) | `apps/shop-api/shop/requests_api.py`, `mail_templates_teileklar.py`; Filter in `nexify_api.py` als Zuarbeit an den Suite-Schreiber | TK-02 | keiner | Partneranfrage erscheint nicht in der NeXify-Ansicht und umgekehrt | Negativtest beider Richtungen | Feld ignorieren; Daten bleiben |
 | **TK-04** | Sitzungsgrenze NeXify ↔ TEILEKLAR, Stufe 1: getrennte Sitzung je Marke; Hülle nach Marke getrennt (W1-06) | `apps/shop-api/shop/accounts_api.py` (Cookie), `apps/web/proxy.ts`, `apps/web/app/[...slug]/page.tsx` (Zuarbeit an den Web-Schreiber) | PR 118 (ändert `accounts_api.py`) | keiner. Stufe 2 mit eigener Adresse: TK-41 | Eine TEILEKLAR-Sitzung öffnet keine NeXify- oder internen Bereiche und umgekehrt; bestehende Anmeldung bleibt nutzbar | Negativtest je Richtung; abgelaufene Sitzung | Cookie-Einstellung zurück |
 | **TK-05** | Seite „Partner werden“ ohne Kostenaussage: Nutzen, Ablauf in vier Schritten, Fragen und Antworten, Felder Leistungen, Ort, Einzugsgebiet. Eine Kostenzeile erscheint nur, wenn ein Fakt in `config/fakten.json` steht (W1-10) | `apps/web/components/shop/PartnerJourney.tsx`, `ContactRequestForm.tsx`, `apps/shop-api/shop/requests_api.py`; Seitentext über den Text-Schreiber | TK-02 | keiner | Ohne Fakt keine Kostenzeile; mit Fakt genau der Faktentext | Komponententest beider Fälle; Formularprüfung | Commit zurücknehmen |
-| **TK-06** | Partnerantrag mit Statusmodell und Annahmeprotokoll: eingereicht → in Prüfung → angenommen oder abgelehnt; Abgleich mit der Verzeichnis-Kennung; Technik für eine versionierte Konditionsfassung ohne Text (W1-12) | neu `apps/shop-api/shop/partners_api.py`, `shop/db.py` (Indizes), `admin_api.py`, `apps/web/components/shop/AdminShop.tsx` | TK-03 | keiner. Text der Konditionen: Inhaber und Recht (TK-33) | Nur erlaubte Zustandswechsel; Doppelantrag und fremder Betrieb abgewiesen; Annahme nur der gültigen Fassung | Zustandstests | Sammlung ungenutzt; Commit zurück |
 | **TK-07** | Rolle `partner`, gebunden an genau einen Betrieb; Zugriff nur auf eigene Daten (W1-13) | `apps/shop-api/shop/accounts_api.py`, `auth.py`, `apps/web/proxy.ts`, `apps/web/auth/policy.ts` | TK-04, TK-06 | keiner | Partner A liest B nicht; Kunde ohne Partnerzugriff | Negativtests | Rolle entziehen; Commit zurück |
 | **TK-08** | Partnerseite als Vorlage mit Zuständen: Seite aus dem Profil, Vorschau, Freigabe durch den Partner, Veröffentlichung getrennt; Kennzeichen nur bei „veröffentlicht“ (W1-14) | `apps/web/components/shop/WorkshopDetail.tsx`, `apps/shop-api/shop/workshops_api.py`, neue Profilfelder | TK-06, TK-07 | keiner | Nichtpartner ohne Kennzeichen; zurückgezogenes Profil verschwindet; Vorschau nur für den Partner | Zustandstests; Sichtprüfung 390 und 1440 px | Status zurück; Commit zurück |
 | **TK-09** | Partnerportal Stufe 1 und Verknüpfung Kauf ↔ Einbauanfrage: Partner sieht eigene Anfragen, nimmt an oder lehnt ab; die Anfrage trägt Bestellung und Teil (W1-15) | `apps/shop-api/shop/workshops_api.py`, `apps/web/components/shop/OrderConfirmation.tsx`; Portalansicht über den Web-Schreiber | TK-07, TK-08 | keiner | Zustellstatus getrennt von Speicherung; keine Doppelmail; nur eigene Bestellung verknüpfbar | Ablauftest mit Attrappe | Ansicht ausblenden; Feld optional |
@@ -79,6 +77,28 @@ Ebenfalls sofort baubar, in Abschnitt 2.4 geführt: **REA-01** (Entscheidungsvor
 | W0-b Suite-Fundament | PR 118 | Dateiliste per REST; Inhalt nicht geprüft |
 | W1-16 Wissensport, W1-17 Laufzeitkern, W1-18 Policy-Prüfer und Schnittstellenvertrag, W1-20 Skill-Bestand | PR 121 | Dateiliste per REST; Inhalt nicht geprüft |
 | W1-19 Chat-Daten-Migrationsentwurf, W1-21 Messaufbau | PR 120 | Dateiliste per REST; Inhalt nicht geprüft |
+
+
+### 1.4a Gebaut, nur auf Zweig: TEILEKLAR-Backend (Entwurfs-PR 122)
+
+**IST** (nachgeprüft am 14.11.2026 mit `git log origin/claude/teileklar-backend` und `git show --stat`): Zweig `claude/teileklar-backend`, Spitze `6791178`, Entwurfs-PR 122 (`refs/pull/122/head` = `6791178`). Basis ist `claude/epic-hopper-7d3duf` (PR 118, Spitze `1220a3e`): Der Zweig liegt 3 Commits vor PR 118 und 14 Commits vor `main` (`0080377`). Betriebsnotiz auf dem Zweig: `docs/04-betrieb/shop-api-laufzeit-2026-11-14.md`.
+**Nicht geprüft:** Die Tests der Commits wurden in dieser Arbeit nicht ausgeführt; „gebaut“ heißt hier: Code und Tests liegen im Zweig. Nicht ausgeliefert, nicht live (Regel 5).
+
+| Paket | Commit | Dateien (IST, `git show --stat`) | Was enthalten ist | Was noch fehlt |
+|---|---|---|---|---|
+| TK-01 | `6791178` | `apps/shop-api/vercel_app.py`, `namespace_operator.py`, `tests/test_vercel_adapter.py`, neu `tests/test_runtime_entry.py`, `vercel.json`, Betriebsnotiz | Zulassungsliste `SHOP_API_ALLOWED_PROJECT_IDS` statt fester Kennung; Teilbetrieb ohne Zahlungsmodus; Diagnose mit Variablennamen (nie Werte); Erweiterung des Namensraums um optionale Sammlung | Setzen der Variablen in Vercel (TK-31, Zugang). Dass die API dadurch antwortet, ist **OFFEN** (Messung 14.11. vor der Änderung: 503 `project_binding_unverified`) |
+| TK-02 (Backend) | `fabbf4f` | `shop/workshops_api.py`, `mail_templates.py`, neu `mail_templates_teileklar.py`, `teileklar_admin_api.py`, `requests_api.py`, Tests | Antwort und Eingangsmail ohne nicht vorhandenen Schritt; maschinenlesbarer Zustand; interne Benachrichtigung über den Mail-Ausgang; Schalter `TEILEKLAR_NONPARTNER_REQUESTS` (Standard: wie bisher) und `TEILEKLAR_OPERATOR_INBOX` | Oberfläche (`WorkshopDetail.tsx`, Betreiberbereich im Web) nicht enthalten. Zustellung an Nichtpartner bleibt Inhaberentscheidung (EV-13) |
+| TK-03 | `fabbf4f` | neu `shop/brands.py`, `nexify_api.py` (Filter), `requests_api.py`, Mail-Vorlagen, `tests/test_teileklar_requests.py` | Pflichtfeld `brand`, eigene Vorgangsnummer und Mail für TEILEKLAR, Lesewege nach Marke gefiltert, `brands.backfill` kennzeichnet Altbestand (läuft nie von selbst) | Anwendung des Backfills auf Echtdaten (Zugang) |
+| TK-06 (Backend) | `446cea0` | neu `shop/partners_api.py`, `shop/partner_policy.json`, `shop/db.py`, `shop/main.py`, `tests/test_partner_applications.py` | Antrag mit Statusmodell, Prüfprotokoll, Zuordnung zum Verzeichniseintrag, Wege nur mit Betreiberrolle; Schalter `TEILEKLAR_PARTNER_APPLICATIONS` (Standard aus); `partner_policy.json` ohne Preise und Fristen, `freigabe_inhaber: false` | Betreiber-Oberfläche (`AdminShop.tsx`) nicht enthalten; Sammlung `partner_applications` im Namensraum anlegen; Konditionstext (TK-33, Inhaber und Recht); Datei im Vercel-Bündel nicht geprüft |
+
+Ursprüngliche Planzeilen (unverändert, damit Abnahmekriterien und Rückweg erhalten bleiben):
+
+| ID | Ziel | Schreibbereich | Abhängigkeiten | Blocker | Abnahmekriterien | Test | Rückweg |
+|---|---|---|---|---|---|---|---|
+| **TK-01** | Projektbindung der Shop-API konfigurierbar statt fester Kennung; Liste der fehlenden Laufzeitvariablen, nur Namen (W1-04) | `apps/shop-api/vercel_app.py`, `apps/shop-api/tests/test_vercel_adapter.py` | PR 118 zuerst zusammenführen oder Bereich abstimmen (PR 118 ändert `apps/shop-api/shop/*`) | keiner | Bindung kommt aus der Umgebung; ohne Zugänge bleibt die API geschlossen (503); Variablenliste ohne Werte | Adaptertest: passende und abweichende Bindung | Commit zurücknehmen |
+| **TK-02** | Werkstattanfrage wahrheitsgemäß: interne Benachrichtigung, Liste im Betreiberbereich, Bestätigungstext ohne nicht vorhandenen Schritt (W1-09) | `apps/shop-api/shop/workshops_api.py`, `admin_api.py`, neu `mail_templates_teileklar.py`, `apps/web/components/shop/WorkshopDetail.tsx` | – | keiner. Die Zustellung an Nichtpartner bleibt aus (Inhaber, EV-13) | Anfrage erzeugt einen internen Mail-Auftrag und erscheint in der Liste; der Text nennt nur, was geschieht | Test der Anfrage mit Attrappe für den Mail-Ausgang | Commit zurücknehmen |
+| **TK-03** | Anfragen nach Marke trennen: Pflichtfeld Marke, eigene Vorgangsnummer und Mail-Marke für TEILEKLAR (W1-11) | `apps/shop-api/shop/requests_api.py`, `mail_templates_teileklar.py`; Filter in `nexify_api.py` als Zuarbeit an den Suite-Schreiber | TK-02 | keiner | Partneranfrage erscheint nicht in der NeXify-Ansicht und umgekehrt | Negativtest beider Richtungen | Feld ignorieren; Daten bleiben |
+| **TK-06** | Partnerantrag mit Statusmodell und Annahmeprotokoll: eingereicht → in Prüfung → angenommen oder abgelehnt; Abgleich mit der Verzeichnis-Kennung; Technik für eine versionierte Konditionsfassung ohne Text (W1-12) | neu `apps/shop-api/shop/partners_api.py`, `shop/db.py` (Indizes), `admin_api.py`, `apps/web/components/shop/AdminShop.tsx` | TK-03 | keiner. Text der Konditionen: Inhaber und Recht (TK-33) | Nur erlaubte Zustandswechsel; Doppelantrag und fremder Betrieb abgewiesen; Annahme nur der gültigen Fassung | Zustandstests | Sammlung ungenutzt; Commit zurück |
 
 ---
 
@@ -170,7 +190,7 @@ Status aller Pakete: geplant. REA ist in dieser Arbeit nicht installiert und nic
 
 ## 4. Reihenfolge für das Zusammenführen der PRs 67, 118, 119, 120, 121
 
-Stand der PRs (IST, REST-Abfrage 14.11.2026): alle fünf offen, alle Entwurf, alle gegen `main`.
+Stand der PRs (IST, REST-Abfrage 14.11.2026; PR 122 am selben Tag über `git ls-remote` nachgetragen): alle offen, alle Entwurf. PR 122 hat als Basis den Zweig von PR 118, nicht `main`.
 
 | Nr. | Zweig | Umfang | Berührt |
 |---|---|---|---|
@@ -178,6 +198,7 @@ Stand der PRs (IST, REST-Abfrage 14.11.2026): alle fünf offen, alle Entwurf, al
 | 121 | `claude/agentenkern` | 24 Dateien, 5 Commits | nur neue Pakete `packages/agent_core/`, `packages/knowledge/`, Tests, drei Dokumente |
 | 118 | `claude/epic-hopper-7d3duf` | 28 Dateien, 11 Commits | App-Code: `apps/shop-api/shop/accounts_api.py`, `mailer.py`, `main.py`, `nexify_api.py`; neu `apps/suite/*`, `db/foundation/002_*`, `config/suite-plans.json` |
 | 120 | `claude/regeln-daten` | 10 Dateien, 3 Commits | `skills/` (neuer Skill), Migrationsentwurf unter `apps/web/supabase/`, `config/messplan-werbeaussagen.json`, `tools/messauswertung.py` |
+| 122 | `claude/teileklar-backend` | 3 Commits auf PR 118 (14 vor `main`) | `apps/shop-api/vercel_app.py`, `namespace_operator.py`, `shop/{brands,partners_api,workshops_api,requests_api,nexify_api,mail_templates*,teileklar_admin_api,db,main}.py`, `shop/partner_policy.json`, `vercel.json`, Tests, eine Betriebsnotiz |
 | 67 | `claude/youthful-sagan-bzmkkr` | 195 Dateien, 72 Commits, Stand 04.–05.11. | quer durch das Repository; älter als die Führungsentscheidung vom 13.11. |
 
 **Vorschlag (ANNAHME, von der Projektleitung zu bestätigen; jedes Zusammenführen nur mit Freigabe des Inhabers):**
@@ -186,17 +207,64 @@ Stand der PRs (IST, REST-Abfrage 14.11.2026): alle fünf offen, alle Entwurf, al
 1. **PR 119 zuerst.** Nur Dokumente, Namensregel und ein meldender Prüfer. Kein Laufzeitrisiko. Die anderen PRs verweisen auf D-011 bis D-018 und auf K1114. Vorher: doppelte ADR-Nummer auflösen (RE-01).
 2. **PR 121.** Nur neue Pakete, keine Überschneidung mit bestehenden Dateien. Baut auf der ADR Cognee aus PR 119 auf.
 3. **PR 118.** Erster PR mit Änderungen am laufenden App-Code. Einzeln prüfen, weil Konten, Mail und Portal-API betroffen sind. Danach sind TK-01, TK-04, SU-01 und SU-03 baubar. Zu klären: `config/suite-plans.json` darf keine Beträge enthalten, die nicht freigegeben sind (nicht geprüft).
+3a. **PR 122 direkt nach PR 118.** Baut auf PR 118 auf (Basis `1220a3e` = Spitze von PR 118). Erst nach PR 118 zusammenführen oder den Zweig dann auf `main` umsetzen; wird er vorher zusammengeführt, bringt er die 11 Commits von PR 118 mit. Berührt dieselben Dateien wie PR 118 und wie die Übernahme der Mailer-Tagesgrenze aus PR 67 (`vercel_app.py`, `main.py`; siehe `docs/konzept/TK-10-sichtung-pr67.md`). Vor dem Zusammenführen: Tests des Zweigs laufen lassen (nicht geprüft) und Betriebsnotiz lesen (Variablen nur in Vercel setzen).
 4. **PR 120.** Der Migrationsentwurf für Chat-Daten braucht das Format der Mandanten-Kennung aus PR 118 (K1114 W1-19). Der neue Skill liegt unter `skills/`; ob `config/project-skills.json` und `skills-lock.json` nachgezogen werden müssen, ist vor dem Zusammenführen zu prüfen (`python3 tools/project_skills.py verify`). Die Migration bleibt ein Entwurf und wird nicht eingespielt (KW-15).
 5. **PR 67 nicht als Ganzes zusammenführen.** Erst sichten (TK-10), dann in kleinen Paketen übernehmen: Shopkonzept als Dokument, Produktpflichtfelder (TK-11), Vertrauensleiste (TK-47), Fahrzeugleiste (TK-37), Tests. Gründe: 72 Commits auf einem Stand vom 05.11., Bezug auf `apps/site` und auf die damalige Führungsentscheidung, doppelte Dokumentnummer 0020, Überschneidung mit dem Web-Schreiber. Der PR bleibt als Quelle erhalten und wird nicht geschlossen, bevor die Übernahmeliste abgearbeitet ist.
 
 Nach jedem Schritt: `make check`, `make test`, Vergleich mit dem Ausgangswert, Eintrag im führenden Register.
 
+### 4.1 Zustand der Zweige gegenüber `main` (nachgemessen 14.11.2026)
+
+**IST** Am 13.11.2026 zwischen 21:55 und 22:56 (UTC+1; 20:55 bis 21:56 UTC) wurden auf GitHub PRs nach `main` zusammengeführt, außerhalb dieser Arbeit. Gefundene Squash-Commits auf `main` in diesem Fenster (`git log origin/main`, `git show --stat`):
+
+| PR | Commit | Inhalt (Dateien) |
+|---|---|---|
+| 96 | `d1837e6` | `docs/04-betrieb/befund-2026-11-13.md` (neu, 174 Zeilen) |
+| 95 (nicht genannt, im Fenster) | `73ae263` | 19 Dateien: Hero-Videosteuerung (`apps/web/components/{AtelierFilm,HomeConcept,PageConcept,WorkspaceRebuild}.css`, `ContactRequestForm.tsx`, `IdentityHero.tsx`, `SiteNavigation.tsx`, `lib/contact-focus.*`), Browsertests unter `apps/site/tests/`, `.github/workflows/hero-browser.yml`, `package.json`, `scripts/export-gesamtprojekt.mjs`, Auftragsregister |
+| 79 (nicht genannt, im Fenster) | `268fee9` | `requirements-image.txt` (Pillow 12.3.0 → 13.0.0) |
+| 99 | `2698d8d` | drei Szenen-Videos unter `apps/web/public/media/scenes/`, `SceneVideo.tsx/.css`, `lib/brand-media.ts`, `PublicContent.tsx`, `docs/design/scene-videos-2026-11-13.md` |
+| 98 | `454cd3e` | `apps/shop-api/requirements.txt` (dnspython 2.9.1 → 2.9.2) |
+| 97 | `fb17a0d` | OpenNext/Cloudflare-Vorbereitung: `apps/web/{open-next.config.ts,package.json,wrangler.jsonc}`, `docs/deployment/cloudflare-workers.md`, `.gitignore`, `pnpm-lock.yaml` (+3 161 Zeilen) |
+| 101 | `0421415` | `AGENTS.md` (+18/−1): Führungsentscheidung 13.11. Auslieferung über Vercel |
+| 102 | `b403cf2` | Impressum, Rechtsform Eenmanszaak statt B.V.: 8 Dateien (`config/site-map.json` u. a., `PublicRequestFallback.tsx`, `static-orientation.ts`, vier weitere `config/*-copy`/`*-registry`-Dateien) |
+| 103 (nicht genannt, im Fenster) | `cd6e611` | zwei weitere Szenen-Videos, Dokument |
+
+Danach bis 00:56 am 14.11. weitere PRs (#104, #106, #112, #113, #114, #116, #117; Startseite, Chat). `main` steht auf `0080377`.
+
+**IST** Konfliktprüfung mit `git merge-tree --write-tree` (schreibt keine Zweige und keinen Arbeitsbaum; legt nur Objekte an):
+
+| Zweig | Basis `main` enthalten? | Commits vor `main` | Konflikte beim Zusammenführen mit `main` |
+|---|---|---|---|
+| `claude/marke-texte` (PR 119) | ja (`0080377`) | 8 | **0** |
+| `claude/regeln-daten` (PR 120) | ja | 3 | **0** |
+| `claude/agentenkern` (PR 121) | ja | 5 | **0** |
+| `claude/atelier-fehlerbehebung` (kein PR) | ja | 55 | **0** |
+| `claude/epic-hopper-7d3duf` (PR 118) | ja | 11 | **0** |
+| `claude/teileklar-backend` (PR 122) | ja | 14 | **0** |
+| `claude/youthful-sagan-bzmkkr` (PR 67) | nein (Vorfahr `2f872a7`, 04.–05.11.) | 72 | **63** (59 Inhalt, 4 Änderung/Löschung); Einzelheiten und Dateien in `docs/konzept/TK-10-sichtung-pr67.md` |
+
+Alle sechs Entwurfszweige sind erst nach den Zusammenführungen vom 13.11. aus dem heutigen `main` entstanden (jeder erste eigene Commit hat `0080377` als Elternteil; keine Merge-Commits) und enthalten die sechs PRs daher bereits. Die Zusammenführungen vom 13.11. erzeugen für sie **keine** Konflikte. Die älteren Angaben aus Fassung 1.0 („`claude/atelier-fehlerbehebung` 48 Commits vor `main`“) sind überholt: heute 55.
+
+**IST** Paarweise Konfliktprüfung der sechs Entwurfszweige untereinander (15 Paare, `merge-tree --write-tree`): **0 Konflikte in allen 15 Paaren.** Nicht geprüft: alle sechs zusammen in Folge (die Prüfung gilt je Paar), und ob ein textlich sauberes Zusammenführen auch inhaltlich verträglich ist (Beispiel: PR 118 und PR 122 ändern beide `accounts_api.py` und `vercel_app.py`; Reihenfolge nach 4 oben einhalten).
+**IST** PR 67 gegen die anderen Zweige: 63 bis 65 Konflikte (gegen `claude/teileklar-backend` und `claude/atelier-fehlerbehebung` je 65, sonst 63).
+
 ---
 
 ## 5. Was nicht geprüft wurde
 
-- Kein Paket wurde gebaut oder getestet. Schreibbereiche stammen aus K1114 Abschnitt 5 und aus RA; einzelne Dateinamen können sich auf `main` seit dem 14.11.2026 geändert haben.
-- Inhalte der PRs 67, 118, 120, 121 wurden nicht gelesen (nur Dateilisten und, für PR 67, das Shopkonzept).
+- Von dieser Arbeit wurde kein Paket gebaut. Schreibbereiche stammen aus K1114 Abschnitt 5 und aus RA; einzelne Dateinamen können sich auf `main` seit dem 14.11.2026 geändert haben.
+- Inhalte der PRs 118, 120, 121 und 122 wurden nicht gelesen (Dateilisten; für PR 122 zusätzlich die Commit-Texte und die Betriebsnotiz). PR 67 ist in `docs/konzept/TK-10-sichtung-pr67.md` gesichtet, nicht ausgeführt.
 - Ob die Pakete aus PR 118, 120 und 121 die Abnahmekriterien aus K1114 erfüllen, ist nicht geprüft.
 - Die Zuordnung der Pakete zu P01–P26 ist nicht vorgenommen.
 - PR 94, PR 75, PR 115, PR 107 und der Zweig `claude/atelier-fehlerbehebung` sind nicht Teil der Reihenfolge und nur als Abhängigkeit genannt.
+
+---
+
+## 6. Nachführung Fassung 1.1 (14.11.2026)
+
+- **TK-01, TK-02 (Backend), TK-03, TK-06 (Backend):** von „sofort baubar“ nach „gebaut, nur auf Zweig“ verschoben (Abschnitt 1.4a); PR 122 in die Reihenfolge aufgenommen (Abschnitt 4, Schritt 3a).
+- **TK-10:** erledigt als Dokument `docs/konzept/TK-10-sichtung-pr67.md` (Entwurf; Gegenlesen durch die Projektleitung steht aus).
+- **TK-12:** erledigt als Entwurf `docs/konzept/TK-12-weiterleitungsplan-teileklar.md`, nicht aktiviert (TK-30 bleibt blockiert).
+- **BE-04:** gemessen, Bericht `docs/04-betrieb/pruefkette-main-2026-11-14.md`. Ausgangswert auf `main` `0080377`: `make check` grün; `make check-arch` 7 von 32 Regeln rot; `make test` 136 Fehler (ohne Node-Pakete) bzw. 135 (mit). Die Korrekturen sind noch nicht ausgeführt und kein Paket; Besitzer und Vorschläge stehen im Bericht.
+- **Abschnitt 4.1:** Stand der Zweige gegenüber `main` und untereinander, einschließlich der Zusammenführungen vom 13.11.
+- **REA:** Der Inhaber hat die Einführung am 14.11.2026 freigegeben (`DECISIONS.md` D-020; FK Entscheidung Nr. 35 entschieden, Nr. 36 und 37 offen). Damit entfällt der Inhaber-Blocker für REA-02 nur **teilweise**: Es ist **OFFEN**, welches „Premium“ gemeint ist und welche Ziele untersucht werden dürfen (bis zur Klärung nur eigene Systeme). REA-01 (Entscheidungsvorlage) bleibt sofort schreibbar, REA-02 wartet auf die Klärung der beiden Punkte.

@@ -238,3 +238,27 @@ Gemeinsame Angaben für D-011 bis D-018:
   als „Kopfzeile ausstehend“ (Abschnitt 11.4). Nichts wurde gelöscht oder umbenannt.
 - **Rückweg:** Eintrag als überholt kennzeichnen und die fünf Kopfzeilen entfernen; der Konzeptstand
   vom 14.11.2026 ist unverändert.
+
+## D-020 — REA: Einführung vom Inhaber freigegeben (14.11.2026)
+
+- **Entscheidung:** Der Inhaber hat am 14.11.2026 die Einführung von REA freigegeben. Wortlaut (von der
+  Projektleitung wiedergegeben): „okay. freigabe. ich kaufe jetzt den premium.“ Im führenden Konzept ist
+  Entscheidung Nr. 35 damit entschieden (`docs/konzept/FUEHRENDES-KONZEPT.md`, Abschnitt 10; Abschnitt 3.5).
+  Nr. 36 (Kauf von Hopper) und Nr. 37 (erlaubte Ziele) bleiben offen.
+- **OFFEN 1 — welches „Premium“:** In den REA-Unterlagen ist kein Premium-Tarif belegt. Kostenpflichtig
+  ist dort nur Hopper (kommerzieller Provider; `FUEHRENDES-KONZEPT.md` Abschnitt 3.5, Stand der
+  Projektleitung vom 14.11.2026, README nur teilweise gelesen). Ob „Premium“ Hopper, ein anderes Produkt
+  oder ein Tarif eines anderen Anbieters meint, ist nicht geklärt. Es wird nichts gekauft und kein Konto
+  angelegt, bevor der Inhaber das benennt (Anbieter, Produkt, Betrag, Zahlungsweg).
+- **OFFEN 2 — erlaubte Ziele:** Bis zur Klärung dürfen nur **eigene Systeme** untersucht werden. Fremde
+  Software und Mitschnitte mit Kundendaten sind ausgeschlossen (`AGENTS.md` Z. 184: nur autorisierte Quell-
+  und Zielbereiche).
+- **Status:** Entscheidung Inhaber. Auslegung der Freigabe und die beiden offenen Punkte: Projektleitung
+  fragt nach.
+- **Grenze:** Dieser Eintrag installiert, kauft und konfiguriert nichts. REA-02 (Probeinstallation in
+  abgeschotteter Umgebung, Sicherung der Agenten-Konfiguration vorher) und REA-01 folgen dem
+  Migrationsplan (`docs/konzept/MIGRATIONSPLAN.md`, Abschnitt 2.4). Statische Analyse ist kein
+  Laufzeitbeleg; Katalog und Annotationen sind Hinweise, keine Rechte. Zugangsdaten gehören nicht in
+  Dateien.
+- **Rückweg:** Eintrag als überholt kennzeichnen; bei bereits erfolgter Probeinstallation `rea uninstall`
+  und Sicherung der Konfiguration zurückspielen.

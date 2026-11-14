@@ -573,11 +573,11 @@ EV-Nummern verweisen auf die ausführlichen Vorlagen in K1114 Abschnitt 6 (Frage
 34. Welche Datei die Gestaltung verbindlich beschreibt (W-45).
 
 **REA**
-35. Einführung von REA: ja oder nein; Freigabe der Probeinstallation, weil sie die Konfiguration der Agenten verändert (REA-01, REA-02).
+35. ~~Einführung von REA: ja oder nein; Freigabe der Probeinstallation, weil sie die Konfiguration der Agenten verändert (REA-01, REA-02).~~ **ENTSCHIEDEN am 14.11.2026** (Inhaber, wörtlich: „okay. freigabe. ich kaufe jetzt den premium.“; `DECISIONS.md` D-020). Offen bleibt, welches „Premium“ gemeint ist (Nr. 36) und welche Ziele untersucht werden dürfen (Nr. 37).
 36. Kauf von Hopper: ja oder nein (Entscheidungsvorlage in REA-01).
 37. Erlaubte Ziele: welche eigenen Systeme untersucht werden dürfen; Umgang mit fremder Software und mit Kundendaten in Mitschnitten nach Fachberatung.
 
-**Zahl der offenen Inhaberentscheidungen: 37.**
+**Zahl der offenen Inhaberentscheidungen: 36** (Nr. 35 am 14.11.2026 entschieden; Nr. 36 und 37 bleiben offen).
 
 ---
 
