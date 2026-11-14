@@ -1,0 +1,619 @@
+{
+  "schema_version": 1,
+  "stand": "2026-11-14",
+  "status": "arbeitsregel_entscheidung_projektleitung_bestaetigung_inhaber_offen",
+  "authority": {
+    "entscheidung": "DECISIONS.md D-011, D-012, D-014",
+    "grundlage": "docs/konzept/2026-11-14/01-marke-marketing.md Abschnitt 1 (Namensmatrix); docs/konzept/2026-11-14/00-gesamtkonzept.md Abschnitt 2.0 und 2.1",
+    "hinweis": "Entscheidung der Projektleitung vom 14.11.2026, vom Inhaber zu bestätigen. Diese Datei ist eine Schreibregel, keine Freigabe von Texten, Preisen, Leistungen oder Rechtsangaben."
+  },
+  "pruefung": {
+    "werkzeug": "tools/check_brand_names.py",
+    "verhalten": "liest nur, meldet Fundstellen mit Datei:Zeile, ändert nichts, Exit-Code 0 – kein Gate",
+    "suchbereiche": ["config", "apps/web"],
+    "ausgenommen": "Technische Kennungen in Kleinschreibung (Pfade, Schlüssel, Kennungen wie nex2fly, teileklar, aifly-panel, oracle) sind keine Schreibweisen im Sinne dieser Regel. Die Muster beachten Groß- und Kleinschreibung.",
+    "einstufungen": {
+      "verboten": "vom Inhaber oder von der Projektleitung ausdrücklich ausgeschlossen",
+      "alt": "frühere Schreibweise, durch die kanonische zu ersetzen",
+      "zu_klaeren": "weicht ab, die Ersetzung hängt an einer offenen Entscheidung des Inhabers"
+    }
+  },
+  "sprachen": {
+    "regel": "Namen werden in keiner Sprache übersetzt, gebeugt oder getrennt. Übersetzt wird nur das beschreibende Wort davor.",
+    "anrede": {
+      "de": "Sie",
+      "nl": "u",
+      "fr": "vous",
+      "en": "neutral-professionell"
+    }
+  },
+  "names": [
+    {
+      "id": "aifly-oracle",
+      "kanonisch": "AIFly ORACLE with NeXify AI Intelligence by NeXify",
+      "art": "Figur",
+      "weitere_arten": ["Produkt"],
+      "bezeichnet": "Das KI-System von NeXify AI und zugleich die Figur, die im Chat antwortet.",
+      "beschreibendes_wort": {
+        "de": "das KI-System",
+        "nl": "het AI-systeem",
+        "fr": "le système d’IA",
+        "en": "the AI system"
+      },
+      "darf_erscheinen": [
+        "Chat-Kopf (zweizeilig setzbar: Zeile 1 „AIFly ORACLE“, Zeile 2 „with NeXify AI Intelligence by NeXify“ – ein Name, zwei Zeilen)",
+        "Fließtext, auch bei Wiederholung",
+        "Produkt- und Hinweisseiten",
+        "Filmtexte und Figurenstimme",
+        "E-Mail und Social"
+      ],
+      "darf_nicht_erscheinen": [
+        "in gekürzter Form an irgendeiner sichtbaren Stelle",
+        "übersetzt (etwa „Orakel“, „Intelligenz“)"
+      ],
+      "kurzform": null,
+      "kurzform_erlaubt": false,
+      "kurzform_regel": "Weisung des Inhabers: „Immer der volle Name“. Es gibt keine Kurzform. Wiederholungen im Fließtext werden über das beschreibende Wort gelöst („das KI-System“), nicht über eine Abkürzung des Namens.",
+      "zeilenumbruch": {
+        "erlaubt_nach": "AIFly ORACLE",
+        "hinweis": "Ein Umbruch ist Satz, keine Kürzung. Beide Zeilen stehen immer zusammen."
+      },
+      "verbotene_schreibweisen": [
+        {
+          "id": "oracle-aifly-by-nexify",
+          "schreibweise": "Oracle AIFly by NeXify",
+          "muster": "Oracle AIFly by NeXify",
+          "einstufung": "verboten",
+          "grund": "vom Inhaber ausdrücklich verworfen (Auftrag 14.11.2026)"
+        },
+        {
+          "id": "oracel",
+          "schreibweise": "ORACEL",
+          "muster": "(?i:\\bORACEL\\b)",
+          "einstufung": "verboten",
+          "grund": "Schreibfehler; der Inhaber verlangt richtiges Englisch"
+        },
+        {
+          "id": "orakel",
+          "schreibweise": "Orakel / ORAKEL",
+          "muster": "\\b(?:Orakel|ORAKEL)\\b",
+          "einstufung": "verboten",
+          "grund": "deutsche Übersetzung; bezeichnet intern zusätzlich ein Prüfwerkzeug – Verwechslungsgefahr"
+        },
+        {
+          "id": "aifly-oracle-ohne-zusatz",
+          "schreibweise": "AIFly ORACLE (ohne „with NeXify AI Intelligence by NeXify“)",
+          "muster": "(?<!NeX & )AIFly ORACLE\\b(?! with NeXify AI Intelligence by NeXify)",
+          "einstufung": "alt",
+          "grund": "bisheriger Name; D-010-Namensklausel durch D-011 überholt"
+        },
+        {
+          "id": "aifly-oracle-gemischt",
+          "schreibweise": "AIFly Oracle",
+          "muster": "AIFly Oracle\\b",
+          "einstufung": "alt",
+          "grund": "ORACLE steht in Versalien"
+        },
+        {
+          "id": "aifly-kleines-f",
+          "schreibweise": "AIfly ORACLE / AIfly",
+          "muster": "\\bAIfly\\b",
+          "einstufung": "alt",
+          "grund": "AIFly mit großem F"
+        },
+        {
+          "id": "ai-fly",
+          "schreibweise": "AI Fly / AI Fly Oracle",
+          "muster": "\\bAI Fly\\b",
+          "einstufung": "alt",
+          "grund": "AIFly ist ein Wort"
+        },
+        {
+          "id": "aifly-kleines-i",
+          "schreibweise": "AiFly",
+          "muster": "\\bAiFly\\b",
+          "einstufung": "alt",
+          "grund": "AIFly mit großem I"
+        },
+        {
+          "id": "ai-bindestrich-fly",
+          "schreibweise": "AI-Fly",
+          "muster": "\\bAI-Fly\\b",
+          "einstufung": "alt",
+          "grund": "AIFly ohne Bindestrich"
+        },
+        {
+          "id": "aifly-versalien",
+          "schreibweise": "AIFLY",
+          "muster": "(?<![\\w/.-])AIFLY(?![\\w/.-])",
+          "einstufung": "alt",
+          "grund": "nur ORACLE steht in Versalien"
+        },
+        {
+          "id": "aifly-by-nexify",
+          "schreibweise": "AIFly by NeXify",
+          "muster": "(?<!Oracle )(?<!Agentic )\\bAIFly by NeXify",
+          "einstufung": "alt",
+          "grund": "gekürzte Form; widerspricht „Immer der volle Name“"
+        },
+        {
+          "id": "aifly-allein",
+          "schreibweise": "AIFly (allein)",
+          "muster": "(?<!Oracle )(?<!Agentic )\\bAIFly\\b(?! ORACLE)(?! Oracle)(?! by NeXify)",
+          "einstufung": "alt",
+          "grund": "gekürzte Form; widerspricht „Immer der volle Name“"
+        },
+        {
+          "id": "oracle-allein",
+          "schreibweise": "Oracle (allein)",
+          "muster": "(?<!AIFly )(?<!AI Fly )\\bOracle\\b(?! AIFly)",
+          "einstufung": "alt",
+          "grund": "gekürzte Form; zugleich Name eines fremden Unternehmens"
+        },
+        {
+          "id": "oracle-versalien-allein",
+          "schreibweise": "ORACLE (allein)",
+          "muster": "(?<!AIFly )(?<!AIfly )(?<![\\w/.-])ORACLE(?![\\w/-])",
+          "einstufung": "alt",
+          "grund": "gekürzte Form; zugleich Name eines fremden Unternehmens"
+        }
+      ],
+      "offene_fragen": [
+        "EV-04: Endform des Namens vom Inhaber zu bestätigen.",
+        "EV-04: Kürzungsregel für Seitentitel, Schaltflächen und Alt-Texte ist OFFEN. Bis zur Entscheidung wird nicht gekürzt; wo der volle Name nicht passt, steht das beschreibende Wort oder die Stelle bleibt ohne Namen.",
+        "EV-19: Markenrecherche vor dem Festschreiben („ORACLE“ ist auch ein fremder Unternehmensname).",
+        "Aussprache: Ausspracheblatt fehlt."
+      ]
+    },
+    {
+      "id": "nexify-ai-factory",
+      "kanonisch": "NeXify AI FACTORY",
+      "art": "Firma",
+      "bezeichnet": "Der Unternehmensauftritt. Anzeigename ohne Rechtsform.",
+      "beschreibendes_wort": {
+        "de": "das Unternehmen",
+        "nl": "het bedrijf",
+        "fr": "l’entreprise",
+        "en": "the company"
+      },
+      "darf_erscheinen": [
+        "Seite Unternehmen",
+        "Fußzeile",
+        "Angebote",
+        "E-Mail-Signatur",
+        "Absenderzeile in Social und E-Mail"
+      ],
+      "darf_nicht_erscheinen": [
+        "mit Rechtsformzusatz, solange der Rechtsträger nicht bestätigt ist (EV-05)"
+      ],
+      "kurzform": "NeXify AI",
+      "kurzform_erlaubt": true,
+      "kurzform_regel": "Als Kurzform dient die Dachmarke „NeXify AI“ (eigener Eintrag). „FACTORY“ allein ist keine Kurzform für Kundentexte.",
+      "verbotene_schreibweisen": [
+        {
+          "id": "factory-mit-rechtsform",
+          "schreibweise": "NeXify AI FACTORY B.V.",
+          "muster": "NeXify AI (?:FACTORY|Factory) B\\.? ?V\\.?",
+          "einstufung": "verboten",
+          "grund": "Rechtsform ungeklärt (EV-05); bis zum Nachweis erscheint keine"
+        },
+        {
+          "id": "factory-gemischt",
+          "schreibweise": "NeXify AI Factory",
+          "muster": "NeXify AI Factory\\b",
+          "einstufung": "alt",
+          "grund": "FACTORY steht in Versalien"
+        }
+      ],
+      "offene_fragen": [
+        "EV-05: Rechtsträger und Anbieterangaben."
+      ]
+    },
+    {
+      "id": "nexify-ai",
+      "kanonisch": "NeXify AI",
+      "art": "Firma",
+      "weitere_arten": ["Dachmarke"],
+      "bezeichnet": "Dachmarke und Kurzform des Unternehmens.",
+      "beschreibendes_wort": {
+        "de": "die Marke",
+        "nl": "het merk",
+        "fr": "la marque",
+        "en": "the brand"
+      },
+      "darf_erscheinen": [
+        "Kopfzeile",
+        "Seitentitel",
+        "Fließtext als Kurzform",
+        "Wortmarke"
+      ],
+      "darf_nicht_erscheinen": [
+        "zusammengeschrieben oder in abweichender Groß- und Kleinschreibung"
+      ],
+      "kurzform": "NeXify",
+      "kurzform_erlaubt": true,
+      "kurzform_regel": "„NeXify“ allein ist im Fließtext zulässig, wenn die Marke auf der Seite schon vollständig genannt ist, sowie im Zusatz „by NeXify“ und in Produktnamen.",
+      "verbotene_schreibweisen": [
+        {
+          "id": "nexifyai-zusammen",
+          "schreibweise": "NeXifyAI",
+          "muster": "\\bNeXifyAI\\b",
+          "einstufung": "alt",
+          "grund": "alte Schreibweise aus Prototypen; mit Leerzeichen schreiben"
+        },
+        {
+          "id": "nexify-kleines-x",
+          "schreibweise": "Nexify",
+          "muster": "\\bNexify\\b",
+          "einstufung": "alt",
+          "grund": "großes X"
+        },
+        {
+          "id": "nexify-versalien",
+          "schreibweise": "NEXIFY",
+          "muster": "(?<![\\w/.-])NEXIFY(?![\\w/.-])",
+          "einstufung": "alt",
+          "grund": "in sichtbarem Text nicht in Versalien; technische Kennungen mit Unterstrich, Bindestrich oder in Pfaden sind nicht gemeint"
+        },
+        {
+          "id": "nexify-ai-by-nexify",
+          "schreibweise": "NeXify AI by NeXify / NeXify AI (by NeXify)",
+          "muster": "NeXify ?AI \\(?by NeXify\\)?",
+          "einstufung": "zu_klaeren",
+          "grund": "bisherige Anbieterbezeichnung neben „NeXify AI FACTORY“; hängt am Rechtsträger (EV-05). In config/fakten.json steht sie als Verkäuferangabe und wird dort nicht ohne Freigabe geändert."
+        }
+      ],
+      "offene_fragen": []
+    },
+    {
+      "id": "claim",
+      "kanonisch": "Chat it. Automate it.",
+      "art": "Claim",
+      "bezeichnet": "Claim der Dachmarke.",
+      "darf_erscheinen": [
+        "unter der Wortmarke",
+        "Chat-Fuß",
+        "Fußzeile",
+        "Abbinder in Film, Social und E-Mail"
+      ],
+      "darf_nicht_erscheinen": [
+        "übersetzt",
+        "als Teil eines Satzes",
+        "mit Ausrufezeichen oder ohne die beiden Punkte"
+      ],
+      "kurzform": null,
+      "kurzform_erlaubt": false,
+      "kurzform_regel": "Der Claim steht immer vollständig und in dieser Zeichensetzung.",
+      "verbotene_schreibweisen": [
+        {
+          "id": "claim-autopilot",
+          "schreibweise": "Ihr Unternehmen. Auf Autopilot.",
+          "muster": "Auf Autopilot",
+          "einstufung": "alt",
+          "grund": "älterer Dachsatz; der Masterplan schließt „Autopilot“ aus"
+        },
+        {
+          "id": "claim-zeichensetzung",
+          "schreibweise": "Chat it, automate it / Chat it! Automate it!",
+          "muster": "Chat it(?:[,!;:] ?| )[Aa]utomate it|Chat it\\. automate it|Chat it\\. Automate it!",
+          "einstufung": "alt",
+          "grund": "abweichende Zeichensetzung oder Schreibung"
+        }
+      ],
+      "offene_fragen": [
+        "Ob der Claim auch auf Startseite und Kopfzeile steht, ist offen (B01 Abschnitt 4.1 Nr. 18)."
+      ]
+    },
+    {
+      "id": "nex-agentic",
+      "kanonisch": "NeX Agentic",
+      "art": "Produkt",
+      "bezeichnet": "Der ausführende Agent.",
+      "beschreibendes_wort": {
+        "de": "der Agent",
+        "nl": "de agent",
+        "fr": "l’agent",
+        "en": "the agent"
+      },
+      "darf_erscheinen": [
+        "Produktseiten",
+        "Navigation und Fußzeile",
+        "Fließtext"
+      ],
+      "darf_nicht_erscheinen": [
+        "als Mischform mit dem Namen des KI-Systems"
+      ],
+      "kurzform": null,
+      "kurzform_erlaubt": false,
+      "kurzform_regel": "Als Produkt immer „NeX Agentic“. „NeX“ allein bezeichnet die Figur (eigener Eintrag), nicht das Produkt.",
+      "verbotene_schreibweisen": [
+        {
+          "id": "nex-agentic-aifly",
+          "schreibweise": "NeX Agentic AIFly",
+          "muster": "NeX Agentic AIFly\\b",
+          "einstufung": "alt",
+          "grund": "Mischform aus zwei Namen"
+        },
+        {
+          "id": "nex-agentic-ai",
+          "schreibweise": "NeX Agentic AI",
+          "muster": "NeX Agentic AI\\b",
+          "einstufung": "alt",
+          "grund": "bisheriger Produktname; D-010-Namensklausel durch D-011 überholt"
+        }
+      ],
+      "offene_fragen": [
+        "EV-20: Bestätigung des Produktnamens durch den Inhaber."
+      ]
+    },
+    {
+      "id": "nex-figur",
+      "kanonisch": "NeX",
+      "art": "Figur",
+      "bezeichnet": "Die Figur (Tukan).",
+      "darf_erscheinen": [
+        "Filmtexte",
+        "Bildbeschreibungen",
+        "Figurenstimme"
+      ],
+      "darf_nicht_erscheinen": [
+        "als Name des Produkts (das heißt „NeX Agentic“)"
+      ],
+      "kurzform": null,
+      "kurzform_erlaubt": false,
+      "kurzform_regel": "Der Figurenname ist bereits die kürzeste Form.",
+      "verbotene_schreibweisen": [],
+      "offene_fragen": []
+    },
+    {
+      "id": "suite",
+      "kanonisch": "NeX & AIFly ORACLE Suite",
+      "art": "Produkt",
+      "bezeichnet": "Der eigene Arbeitsbereich für Kunden.",
+      "beschreibendes_wort": {
+        "de": "die Suite",
+        "nl": "de suite",
+        "fr": "la suite",
+        "en": "the suite"
+      },
+      "darf_erscheinen": [
+        "Produktseiten",
+        "Registrierung und Anmeldung",
+        "Navigation und Fußzeile",
+        "Fließtext"
+      ],
+      "darf_nicht_erscheinen": [
+        "ohne das Wort „Suite“"
+      ],
+      "kurzform": "die Suite",
+      "kurzform_erlaubt": true,
+      "kurzform_regel": "Nach der ersten vollständigen Nennung auf einer Seite darf „die Suite“ stehen. Der Produktname selbst wird nicht verkürzt.",
+      "verbotene_schreibweisen": [
+        {
+          "id": "nex2fly-suite",
+          "schreibweise": "NeX2fly Suite",
+          "muster": "\\bNeX2fly Suite\\b",
+          "einstufung": "zu_klaeren",
+          "grund": "bisheriger Suite-Name; ob er durch „NeX & AIFly ORACLE Suite“ ersetzt wird oder ein zweites Produkt bleibt, ist offen (EV-20)"
+        },
+        {
+          "id": "nex2fly-ohne-suite",
+          "schreibweise": "NeX2fly (ohne „Suite“)",
+          "muster": "\\bNeX2fly\\b(?! Suite)",
+          "einstufung": "zu_klaeren",
+          "grund": "wie oben; zusätzlich fehlt „Suite“"
+        },
+        {
+          "id": "nex2fly-grosses-f",
+          "schreibweise": "NeX2Fly",
+          "muster": "\\bNeX2Fly\\b",
+          "einstufung": "alt",
+          "grund": "abweichende Schreibung"
+        },
+        {
+          "id": "nex2fly-versalien",
+          "schreibweise": "NEX2FLY",
+          "muster": "(?<![\\w/.-])NEX2FLY(?![\\w/.-])",
+          "einstufung": "alt",
+          "grund": "abweichende Schreibung; technische Kennungen mit Unterstrich, Bindestrich oder in Pfaden sind nicht gemeint"
+        },
+        {
+          "id": "one-plus",
+          "schreibweise": "one+",
+          "muster": "(?<![\\w-])one\\+(?!\\w)",
+          "einstufung": "zu_klaeren",
+          "grund": "historische Ausbaustufe; Verbleib offen (EV-20)"
+        }
+      ],
+      "offene_fragen": [
+        "EV-20: Verhältnis zur bisherigen „NeX2fly Suite“; Verbleib von one/one+ und des Pfads /produkte/one."
+      ]
+    },
+    {
+      "id": "nexify-ai-intelligence",
+      "kanonisch": "NeXify AI Intelligence",
+      "art": "Technik",
+      "weitere_arten": ["Produktbegriff"],
+      "bezeichnet": "Die eigene KI-Kette als Produktbegriff. Die inhaltliche Definition in einem Satz ist offen (EV-14).",
+      "darf_erscheinen": [
+        "im vollen Namen des KI-Systems",
+        "als Produktbegriff, sobald die Bedeutung vom Inhaber festgelegt ist"
+      ],
+      "darf_nicht_erscheinen": [
+        "mit einer Leistungsaussage, solange kein Beleg vorliegt (EV-18)",
+        "übersetzt"
+      ],
+      "kurzform": null,
+      "kurzform_erlaubt": false,
+      "kurzform_regel": "Keine Kurzform.",
+      "verbotene_schreibweisen": [
+        {
+          "id": "intelligenz",
+          "schreibweise": "NeXify AI Intelligenz",
+          "muster": "NeXify AI Intelligenz",
+          "einstufung": "verboten",
+          "grund": "der Inhaber verlangt richtiges Englisch"
+        }
+      ],
+      "offene_fragen": [
+        "EV-14: Was bezeichnet „NeXify AI Intelligence“ in einem Satz?"
+      ]
+    },
+    {
+      "id": "nexify-api",
+      "kanonisch": "NeXify API",
+      "art": "Produkt",
+      "bezeichnet": "Die Schnittstelle für eigene Anwendungen.",
+      "beschreibendes_wort": {
+        "de": "die Schnittstelle",
+        "nl": "de koppeling",
+        "fr": "l’interface",
+        "en": "the API"
+      },
+      "darf_erscheinen": [
+        "Produktseiten",
+        "Navigation und Fußzeile",
+        "Fließtext"
+      ],
+      "darf_nicht_erscheinen": [],
+      "kurzform": "die API",
+      "kurzform_erlaubt": true,
+      "kurzform_regel": "Nach der ersten vollständigen Nennung darf „die API“ stehen.",
+      "verbotene_schreibweisen": [
+        {
+          "id": "nexify-ai-api",
+          "schreibweise": "NeXify AI API",
+          "muster": "NeXify AI API\\b",
+          "einstufung": "zu_klaeren",
+          "grund": "config/fakten.json führt den Namen „NeXify AI API“ als Fakt; sichtbar steht „NeXify API“. Welche Form gilt, entscheidet der Inhaber. Die Faktenquelle wird nicht ohne Freigabe geändert."
+        }
+      ],
+      "offene_fragen": [
+        "Abgleich mit config/fakten.json (api.name)."
+      ]
+    },
+    {
+      "id": "teileklar",
+      "kanonisch": "TEILEKLAR",
+      "art": "Produkt",
+      "weitere_arten": ["eigene Marke"],
+      "bezeichnet": "Die eigenständige Shop- und Werkstattmarke.",
+      "beschreibendes_wort": {
+        "de": "die Marke",
+        "nl": "het merk",
+        "fr": "la marque",
+        "en": "the brand"
+      },
+      "darf_erscheinen": [
+        "im eigenen Auftritt überall",
+        "im Auftritt von NeXify AI als „eigene Marke“"
+      ],
+      "darf_nicht_erscheinen": [
+        "als Produkt von NeXify AI mit gemeinsamem Konto",
+        "in gemischter Schreibung"
+      ],
+      "kurzform": null,
+      "kurzform_erlaubt": false,
+      "kurzform_regel": "Immer in Versalien und vollständig.",
+      "verbotene_schreibweisen": [
+        {
+          "id": "teileklar-gemischt",
+          "schreibweise": "Teileklar",
+          "muster": "\\bTeileklar\\b",
+          "einstufung": "alt",
+          "grund": "Schreibregel Versalien (docs/01-konzept/NeXifyAI-CI-Schema.md)"
+        },
+        {
+          "id": "teileklar-binnen-k",
+          "schreibweise": "TeileKlar",
+          "muster": "\\bTeileKlar\\b",
+          "einstufung": "alt",
+          "grund": "Schreibregel Versalien"
+        },
+        {
+          "id": "teileklar-shop-im-text",
+          "schreibweise": "TEILEKLAR.shop",
+          "muster": "TEILEKLAR\\.shop\\b",
+          "einstufung": "alt",
+          "grund": "Im Fließtext steht die Marke; die Adresse wird klein geschrieben"
+        }
+      ],
+      "offene_fragen": [
+        "Slogan und Sichtbarkeit des Lieferantennamens (EV-20).",
+        "Verkäuferangabe (EV-05)."
+      ]
+    },
+    {
+      "id": "pascal",
+      "kanonisch": "Pascal Courbois",
+      "art": "Figur",
+      "weitere_arten": ["Person"],
+      "bezeichnet": "Inhaber und persönlicher Ansprechpartner.",
+      "darf_erscheinen": [
+        "überall, wo die persönliche Begleitung beschrieben wird"
+      ],
+      "darf_nicht_erscheinen": [],
+      "kurzform": "Pascal",
+      "kurzform_erlaubt": true,
+      "kurzform_regel": "„Pascal“ im Gesprächston (Startseite, Chat, Film). „Pascal Courbois“ bei der ersten Nennung in förmlichen Texten und in Signaturen.",
+      "verbotene_schreibweisen": [],
+      "offene_fragen": []
+    },
+    {
+      "id": "kontakt",
+      "kanonisch": "mail@nexifyai.cloud",
+      "art": "Technik",
+      "weitere_arten": ["Kontaktadresse"],
+      "bezeichnet": "Die eine Kontaktadresse.",
+      "darf_erscheinen": [
+        "Kontakt",
+        "Fehler- und Rückfalltexte",
+        "Signatur"
+      ],
+      "darf_nicht_erscheinen": [],
+      "kurzform": null,
+      "kurzform_erlaubt": false,
+      "kurzform_regel": "Keine zweite Adresse.",
+      "verbotene_schreibweisen": [
+        {
+          "id": "hello-adresse",
+          "schreibweise": "hello@nexifyai.cloud",
+          "muster": "hello@nexifyai\\.cloud",
+          "einstufung": "alt",
+          "grund": "zweite Kontaktadresse; es gilt mail@nexifyai.cloud"
+        }
+      ],
+      "offene_fragen": []
+    }
+  ],
+  "kundentext_jargon": {
+    "regel": "DECISIONS.md D-014: Diese Begriffe erscheinen nicht in Kundentexten. Die Prüfung meldet nur die eindeutigen Wendungen; Einzelwörter wie „Gate“ oder „Mandant“ kommen in Konfiguration und Code berechtigt vor und werden deshalb nicht gezählt.",
+    "gemeldet": [
+      {
+        "id": "jargon-ohne-live-ki",
+        "schreibweise": "ohne Live-KI",
+        "muster": "(?i:ohne Live-KI)"
+      },
+      {
+        "id": "jargon-entwicklungsvorschau",
+        "schreibweise": "Entwicklungsvorschau",
+        "muster": "Entwicklungsvorschau"
+      },
+      {
+        "id": "jargon-zielbild",
+        "schreibweise": "Zielbild",
+        "muster": "\\bZielbild\\b"
+      }
+    ],
+    "nicht_gemeldet_aber_ausgeschlossen": [
+      "Gate",
+      "Mandant",
+      "Tenant",
+      "Lease",
+      "Brain",
+      "Freischaltung",
+      "Betriebsstand",
+      "Name des internen Prüfwerkzeugs"
+    ]
+  }
+}

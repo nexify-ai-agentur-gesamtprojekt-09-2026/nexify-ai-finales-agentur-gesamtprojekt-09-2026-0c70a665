@@ -1,3 +1,5 @@
+> **HISTORIE – abgelöst durch docs/konzept/FUEHRENDES-KONZEPT.md (14.11.2026)**
+
 # NeXify AI — verbindlicher Soll-Stand und Frontend-Abnahme
 
 ## Geltung und Priorität

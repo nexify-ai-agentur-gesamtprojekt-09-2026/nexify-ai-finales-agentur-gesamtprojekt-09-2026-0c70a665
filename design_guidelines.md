@@ -1,3 +1,5 @@
+> **HISTORIE – abgelöst durch docs/konzept/FUEHRENDES-KONZEPT.md (14.11.2026)**
+
 # NeXify AI – Design Guidelines (CI beibehalten, keine Implementierung)
 
 > **Priorität:** Aktuelle ausdrückliche Vorgaben von Pascal haben Vorrang vor älteren Prototypen. **Kein Rebranding.** Bestehende finale Markenassets verwenden.
