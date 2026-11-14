@@ -1,7 +1,7 @@
 // Manifest der öffentlichen Installation von apps/web. Grundlage ist das gemeinsame Manifest aus
 // apps/site/pwa/plugin.mjs (Kennung, Start, Bereich, Icons aus dem vorhandenen Logo). Ergänzt wird nur,
 // was apps/web tatsächlich ausliefert: Schreibrichtung, die Grundfarbe der Kopfleiste (app/layout.tsx)
-// und zwei Kurzwege zu vorhandenen Seiten. /signet.svg liegt nur in apps/site und entfällt hier.
+// und zwei Kurzwege zu vorhandenen Seiten. Übernommen werden nur die drei deckenden App-Icons (INSTALL_ICONS).
 import {publicInstallationManifest} from '../../site/pwa/plugin.mjs';
 
 /** Kurzwege mit den Namen der Hauptnavigation (components/SiteNavigation.tsx). Nur Seiten aus config/site-map.json. */
