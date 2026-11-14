@@ -8,11 +8,13 @@ from .accounts import MongoAccountStore
 from .carts import MongoCartStore
 from .catalog import MongoCatalogStore
 from .errors import AlreadyExists, ArchiveTooLarge, RevisionStale, StoreUnavailable, StoredDataInvalid
+from .requests import MongoRequestStore
 from .workshops import MongoWorkshopStore
 
 catalog = MongoCatalogStore(db)
 carts = MongoCartStore(db)
 accounts = MongoAccountStore(db)
 workshops = MongoWorkshopStore(db)
+requests = MongoRequestStore(db)
 
-__all__ = ["AlreadyExists", "ArchiveTooLarge", "RevisionStale", "StoreUnavailable", "StoredDataInvalid", "accounts", "carts", "catalog", "workshops"]
+__all__ = ["AlreadyExists", "ArchiveTooLarge", "RevisionStale", "StoreUnavailable", "StoredDataInvalid", "accounts", "carts", "catalog", "requests", "workshops"]

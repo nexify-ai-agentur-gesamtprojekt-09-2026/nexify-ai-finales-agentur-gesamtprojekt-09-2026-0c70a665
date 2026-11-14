@@ -6,10 +6,9 @@ from datetime import datetime, timedelta, timezone
 
 from fastapi import APIRouter, Header, HTTPException, Request
 from pydantic import BaseModel, Field
-from pymongo.errors import DuplicateKeyError
 
-from . import mail_templates, mailer
-from .db import db, now_iso
+from . import mail_templates, mailer, store
+from .db import now_iso
 
 router = APIRouter(prefix="/api/requests")
 EMAIL = re.compile(r"[^@\s]+@[^@\s]+\.[^@\s]+")
@@ -77,25 +76,25 @@ async def create_request(body: RequestIn, request: Request, idempotency_key: str
                "service": body.service.strip(), "budget": body.budget.strip(), "timeline": body.timeline.strip(), "phone": body.phone.strip()}
     payload_hash = hashlib.sha256(json.dumps(payload, sort_keys=True, ensure_ascii=False, separators=(",", ":")).encode()).hexdigest()
     request_id = "request:" + hashlib.sha256(idempotency_key.encode()).hexdigest()
-    existing = await db.requests.find_one({"_id": request_id})
+    existing = await store.requests.get(request_id)
     if existing:
         return replay_request(existing, payload_hash)
     since = (datetime.now(timezone.utc) - timedelta(hours=1)).isoformat()
-    if await db.requests.count_documents({"email": email, "created_at": {"$gte": since}}) >= HOURLY_LIMIT:
+    if await store.requests.count_from_email_since(email, since) >= HOURLY_LIMIT:
         raise HTTPException(429, {"error": "rate_limited", "message": "Zu viele Anfragen. Bitte versuchen Sie es später erneut."})
     number = "NX-%s-%s" % (datetime.now(timezone.utc).strftime("%Y%m%d"), request_id.split(":", 1)[1][:24].upper())
-    # Request and durable notification intent are one atomic Mongo document.
+    # Request and durable notification intent are stored as one atomic record.
     doc = {"_id": request_id, **payload, "payload_hash": payload_hash, "number": number,
            "status": "eingegangen", "stage": "lead", "user_id": await _requester(request), "created_at": now_iso(), "notify_recovery_pending": True, "notify_status": "wartend"}
     try:
-        await db.requests.insert_one(doc)
-    except DuplicateKeyError:
-        existing = await db.requests.find_one({"_id": request_id})
+        await store.requests.add(doc)
+    except store.AlreadyExists:
+        existing = await store.requests.get(request_id)
         if not existing:
             raise HTTPException(503, {"error": "request_readback_unavailable"})
         return replay_request(existing, payload_hash)
     await record_notification(doc)
-    return receipt(await db.requests.find_one({"_id": request_id}) or doc)
+    return receipt(await store.requests.get(request_id) or doc)
 
 
 def replay_request(existing, payload_hash):
@@ -108,14 +107,14 @@ async def record_notification(doc):
     try:
         status = await notify(doc)
         if status != "not_configured":
-            await db.requests.update_one({"_id": doc["_id"]}, {"$set": {"notify_status": status, "notify_recovery_pending": False}})
+            await store.requests.record_notification(doc["_id"], status)
     except Exception:
         # Persistence already succeeded. Keep the intent for recovery, never ask for a new request.
         return
 
 
 async def recover_request_mail_intents():
-    docs = [doc async for doc in db.requests.find({"notify_recovery_pending": True}).limit(50)]
+    docs = await store.requests.pending_notifications(50)
     for doc in docs:
         await record_notification(doc)
     return len(docs)

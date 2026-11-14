@@ -163,7 +163,7 @@ class Database:
         self.collections = {'products': Collection(), 'categories': Collection(), 'imports': Collection(),
                             'settings': Collection(), 'carts': Collection(unique=['owner']), 'users': Collection(),
                             'sessions': Collection(), 'login_failures': Collection(), 'password_resets': Collection(),
-                            'workshops': Collection(), 'workshop_requests': Collection()}
+                            'workshops': Collection(), 'workshop_requests': Collection(), 'requests': Collection()}
         self.client = SimpleNamespace(start_session=lambda: Session(self))
     def __getattr__(self, name): return self.collections[name]
 
@@ -518,6 +518,7 @@ class WorkshopContract:
         self.assertEqual(self.ids(await self.store.workshops.points_by_city_prefix('berl', 500)), ['w1', 'w2', 'w5'])
         self.assertEqual(self.ids(await self.store.workshops.points_by_city_prefix('berl', 2)), ['w1', 'w2'])
         self.assertEqual(self.ids(await self.store.workshops.points_by_city_prefix('b.e', 500)), ['w7'], 'the key is text, never a pattern')
+        self.assertEqual(await self.store.workshops.points_by_city_prefix('b.r', 500), [], 'a dot is a dot')
         self.assertEqual(await self.store.workshops.points_by_city_prefix('erlin', 500), [])
 
     async def test_box_includes_its_edges_and_excludes_unlocated(self):
@@ -547,6 +548,47 @@ class WorkshopContract:
         self.assertEqual((await self.store.workshops.request('WA-1'))['name'], 'N', 'an id is never overwritten')
 
 
+def contact(rid, **fields):
+    return {'_id': 'request:' + rid * 64, 'payload_hash': rid * 64, 'number': 'NX-' + rid, 'email': 'a@example.invalid', 'name': 'N',
+            'message': 'Eine Anfrage', 'kind': 'contact', 'consent': True, 'status': 'eingegangen', 'stage': 'lead', 'user_id': None,
+            'created_at': '2026-11-14T12:00:00+00:00', 'notify_recovery_pending': True, 'notify_status': 'wartend', **fields}
+
+
+class RequestContract:
+    async def test_request_is_stored_once_under_its_idempotent_id(self):
+        first = contact('a')
+        await self.store.requests.add(dict(first))
+        self.assertEqual(await self.store.requests.get(first['_id']), first)
+        self.assertIsNone(await self.store.requests.get('request:' + 'f' * 64))
+        with self.assertRaises(self.store.AlreadyExists):
+            await self.store.requests.add({**first, 'message': 'anderer Inhalt', 'payload_hash': 'b' * 64})
+        self.assertEqual(await self.store.requests.get(first['_id']), first, 'the first request is kept unchanged')
+
+    async def test_rate_window_counts_one_address_from_the_boundary_inclusive(self):
+        for rid, created in (('a', '2026-11-14T10:59:59+00:00'), ('b', '2026-11-14T11:00:00+00:00'), ('c', '2026-11-14T11:30:00+00:00')):
+            await self.store.requests.add(contact(rid, created_at=created))
+        await self.store.requests.add(contact('d', email='b@example.invalid'))
+        since = '2026-11-14T11:00:00+00:00'
+        self.assertEqual(await self.store.requests.count_from_email_since('a@example.invalid', since), 2)
+        self.assertEqual(await self.store.requests.count_from_email_since('b@example.invalid', since), 1)
+        self.assertEqual(await self.store.requests.count_from_email_since('c@example.invalid', since), 0)
+
+    async def test_pending_notifications_are_listed_in_order_until_recorded(self):
+        for rid in 'abc':
+            await self.store.requests.add(contact(rid))
+        await self.store.requests.add(contact('d', notify_recovery_pending=False))
+        legacy = contact('e'); del legacy['notify_recovery_pending']
+        await self.store.requests.add(legacy)
+        numbers = lambda rows: [row['number'] for row in rows]
+        self.assertEqual(numbers(await self.store.requests.pending_notifications(50)), ['NX-a', 'NX-b', 'NX-c'])
+        self.assertEqual(numbers(await self.store.requests.pending_notifications(2)), ['NX-a', 'NX-b'])
+        await self.store.requests.record_notification(contact('b')['_id'], 'gesendet')
+        self.assertEqual(numbers(await self.store.requests.pending_notifications(50)), ['NX-a', 'NX-c'])
+        recorded = await self.store.requests.get(contact('b')['_id'])
+        self.assertEqual((recorded['notify_status'], recorded['notify_recovery_pending'], recorded['message']), ('gesendet', False, 'Eine Anfrage'))
+        self.assertEqual((await self.store.requests.get(contact('a')['_id']))['notify_status'], 'wartend')
+
+
 class MongoSpecifics:
     """Limits that exist only because a MongoDB cart is one document; not part of the shared contract."""
     def test_cart_at_the_document_limit_is_too_large_and_unencodable_data_is_invalid(self):
@@ -568,10 +610,12 @@ class InMemoryCatalog(CatalogContract, InMemoryBinding): pass
 class InMemoryCarts(CartContract, MongoSpecifics, InMemoryBinding): pass
 class InMemoryAccounts(AccountContract, InMemoryBinding): pass
 class InMemoryWorkshops(WorkshopContract, InMemoryBinding): pass
+class InMemoryRequests(RequestContract, InMemoryBinding): pass
 class DisposableMongoCatalog(CatalogContract, DisposableMongoBinding): pass
 class DisposableMongoCarts(CartContract, DisposableMongoBinding): pass
 class DisposableMongoAccounts(AccountContract, DisposableMongoBinding): pass
 class DisposableMongoWorkshops(WorkshopContract, DisposableMongoBinding): pass
+class DisposableMongoRequests(RequestContract, DisposableMongoBinding): pass
 
 
 if __name__ == '__main__': unittest.main()
