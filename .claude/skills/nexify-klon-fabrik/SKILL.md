@@ -56,9 +56,11 @@ Ein Befund wird an der Ursache behoben: Die Seite verwendet den Baustein oder se
 
 Danach die Gates aus `AGENTS.md`: `make check`, `node tools/ds-audit-cli.js`, `node tools/lint.mjs`, `node apps/web/scripts/atelier-literale.mjs`.
 
-## Stand bei Anlage (14.11.2026, gegen nexifyai.de)
+## Stand (14.11.2026, gegen nexifyai.de)
 
-44 Seiten, 6.860 Vergleiche. Alle NeXify-Seiten sind normgleich. Abweichungen nur auf den TEILEKLAR-Seiten bei 1440 px: Titel und Schalter im Hero sind größer als auf der Startseite, weil der Shop-Behälter breiter ist und die Schriftgröße mit der Behälterbreite wächst.
+44 Seiten, 0 Abweichungen. Geprüft werden elf Bausteine: Hero-Titel, Akzent, Hero-Text, primärer Hero-Schalter, Kopfleiste, Logo, Fußzeile, Fußzeilen-Link, Abschnitts-Titel, Text-Schalter und Abschluss-Schalter.
+
+Gemessen wird überall mit geschlossener Chat-Scheibe. Die Scheibe öffnet sich ab 1200 px nur auf NeXify-Seiten von selbst und macht den Inhalt schmaler; weil die Schriftgröße mit der Behälterbreite wächst, sähe ein Vergleich mit gemischtem Zustand wie eine Abweichung aus. Der erste Lauf des Werkzeugs meldete deshalb 70 Abweichungen im Shop, die keine waren.
 
 ## Neuen Baustein in die Prüfung aufnehmen
 
