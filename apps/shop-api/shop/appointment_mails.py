@@ -2,8 +2,9 @@
 
 ENTWURF. Diese Texte sind nicht freigegeben. Vor dem ersten Versand brauchen sie die Freigabe des Inhabers
 (Wortlaut, Absender, Sprachen: E-12; Umfang der Angaben an die Werkstatt: E-09). Bis dahin bleibt
-VOM_INHABER_FREIGEGEBEN auf False, und die Schnittstelle versendet nur, wenn der Betrieb den Versand
-ausdrücklich einschaltet (appointments_api.SCHALTER_NACHRICHTEN, Standard aus).
+VOM_INHABER_FREIGEGEBEN auf False, und solange es False ist, versendet die Schnittstelle NICHTS, auch nicht bei
+gesetztem Umgebungsschalter. Die Freigabe ist damit eine Änderung dieser Datei (ein eigener, sichtbarer Commit),
+der Umgebungsschalter appointments_api.SCHALTER_NACHRICHTEN (Standard aus) kommt zusätzlich hinzu.
 
 Regeln: nur Sachstand, Vorgangsnummer und Verwaltungsweg; keine Werbung, kein Preis, keine Rechtsaussage,
 kein Einwilligungstext. Nachrichten an die Werkstatt tragen keine Angaben des Kunden. Zeitangaben stehen in
@@ -69,7 +70,8 @@ def n1(termin, empfaenger, kontext):
 
 def n2(termin, empfaenger, kontext):
     absaetze = ["Für Ihren Betrieb liegt ein neuer Terminwunsch vor. Es besteht noch kein Termin.",
-                "Bitte antworten Sie angemeldet im Partnerbereich: bestätigen, ablehnen oder einen anderen Zeitpunkt vorschlagen. Ohne Antwort bis zum genannten Zeitpunkt verfällt der Wunsch."]
+                "Ohne Antwort bis zum genannten Zeitpunkt verfällt der Wunsch."]
+    # Der Weg zum Antworten (Partneranmeldung, W7, E-08) existiert noch nicht und wird deshalb nicht genannt.
     return "Neuer Terminwunsch %s" % termin["nummer"], "Neuer Terminwunsch", absaetze, _zeilen(termin, _fenster(termin), ("Antwort bis", _zeit(termin, termin["antwort_bis"])))
 
 
@@ -98,10 +100,11 @@ def n6(termin, empfaenger, kontext):
 
 
 def n7(termin, empfaenger, kontext):
+    # Nur was der Code festgestellt hat: Die Frist ist abgelaufen. Ob die Werkstatt den Wunsch je erhalten hat, weiß er nicht.
     if _letzter(termin).get("nr") == "U6":
-        satz = "Die Werkstatt hat innerhalb der Frist nicht geantwortet. Es besteht kein Termin."
+        satz = "Der Terminwunsch wurde bis zum Ablauf der Frist nicht bestätigt. Es besteht kein Termin."
     else:
-        satz = "Auf den Vorschlag für einen anderen Zeitpunkt wurde innerhalb der Frist nicht geantwortet. Es besteht kein Termin."
+        satz = "Der Vorschlag für einen anderen Zeitpunkt wurde bis zum Ablauf der Frist nicht angenommen. Es besteht kein Termin."
     return "Frist abgelaufen %s" % termin["nummer"], "Frist abgelaufen", [satz], _zeilen(termin)
 
 

@@ -68,7 +68,8 @@ ZEITZONE_JE_LAND = {"DE": "Europe/Berlin", "AT": "Europe/Vienna", "NL": "Europe/
                     "CH": "Europe/Zurich", "LU": "Europe/Luxembourg"}
 
 EMAIL = re.compile(r"[^@\s]+@[^@\s]+\.[^@\s]+")
-ZEITFORM = re.compile(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(:\d{2})?(Z|[+-]\d{2}:\d{2})?")
+JAHR_VON, JAHR_BIS = 2000, 2199   # technische Grenze der Eingabe, keine Frist: außerhalb ist die Umrechnung nicht verlässlich
+ZEITFORM = re.compile(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(:\d{2})?(Z|[+-]\d{2}:\d{2})?", re.ASCII)
 
 # Sichten nach Abschnitt 5.2 ("Sichtbar für"). zugriff_kunde sieht niemand.
 SICHT_GEMEINSAM = ("id", "nummer", "werkstatt_id", "werkstatt_name", "werkstatt_anschrift", "zustand", "version", "wunsch_von", "wunsch_bis",
@@ -76,6 +77,10 @@ SICHT_GEMEINSAM = ("id", "nummer", "werkstatt_id", "werkstatt_name", "werkstatt_
                    "grund_code", "grund_text", "abgesagt_von", "vorgaenger_id", "erstellt_am", "geaendert_am")
 SICHT_WERKSTATT_ZUSATZ = ("kunde_name", "fahrzeug", "anliegen")  # Kontaktdaten des Kunden erst nach E-09
 SICHT_NIEMAND = ("zugriff_kunde",)
+# Was ein Übergang ändern kann. Jeder Verlaufseintrag hält diesen Stand fest, damit die Wiederholung eines
+# Aufrufs das damalige Ergebnis liefert und nicht den heutigen Stand (6.1).
+STAND_FELDER = ("zustand", "version", "termin_am", "dauer_minuten", "vorschlag_am", "vorschlag_von", "vorschlag_runde", "antwort_bis",
+                "grund_code", "grund_text", "abgesagt_von", "geaendert_am")
 VERLAUF_OEFFENTLICH = ("nr", "von", "nach", "ausloeser", "zeit", "version", "grund_code")
 
 
@@ -124,7 +129,7 @@ def fristen_aus(werte):
     zahlen = []
     for name in FRIST_NAMEN:
         roh = werte.get(name)
-        if not isinstance(roh, str) or not re.fullmatch(r"\d{1,7}", roh.strip()):
+        if not isinstance(roh, str) or not re.fullmatch(r"[0-9]{1,7}", roh.strip()):
             return None
         zahlen.append(int(roh.strip()))
     f1, f2, f3, f4, f5, f11 = zahlen
@@ -170,14 +175,16 @@ def lies_zeitpunkt(text, zeitzone):
         raise Feldfehler("invalid")
     try:
         gelesen = datetime.fromisoformat(text.strip().replace("Z", "+00:00"))
-    except ValueError:
+        if not JAHR_VON <= gelesen.year <= JAHR_BIS:
+            raise ValueError("Jahr außerhalb des angenommenen Bereichs")
+        wand = gelesen.replace(tzinfo=None)
+        moeglich = []
+        for fold in (0, 1):
+            kandidat = wand.replace(tzinfo=zone, fold=fold).astimezone(UTC)
+            if kandidat.astimezone(zone).replace(tzinfo=None) == wand and kandidat not in moeglich:
+                moeglich.append(kandidat)
+    except (ValueError, OverflowError):
         raise Feldfehler("invalid") from None
-    wand = gelesen.replace(tzinfo=None)
-    moeglich = []
-    for fold in (0, 1):
-        kandidat = wand.replace(tzinfo=zone, fold=fold).astimezone(UTC)
-        if kandidat.astimezone(zone).replace(tzinfo=None) == wand and kandidat not in moeglich:
-            moeglich.append(kandidat)
     if not moeglich:
         raise Feldfehler("time_not_existent")
     if gelesen.tzinfo is None:
@@ -198,15 +205,19 @@ def ortszeit_text(utc, zeitzone):
 
 
 def erinnerung_am_vortag(termin_utc, zeitzone):
-    """Dieselbe Uhrzeit am Vortag in Ortszeit der Werkstatt (F6, F7); über eine Umstellung sind das 23 oder 25 Stunden."""
+    """Dieselbe Uhrzeit am Vortag in Ortszeit der Werkstatt (F6, F7); über eine Umstellung sind das 23 oder 25 Stunden.
+
+    Ungenutzt, bis E-11 entschieden ist. Wirft Feldfehler, wenn es die Uhrzeit am Vortag nicht oder zweimal gibt.
+    """
     zone = _zone(zeitzone)
     ort = aus_text(termin_utc).astimezone(zone)
-    vortag = (ort.replace(tzinfo=None) - timedelta(days=1)).replace(tzinfo=zone, fold=ort.fold)
-    return utc_text(vortag)
+    vortag = ort.replace(tzinfo=None) - timedelta(days=1)
+    # Gibt es die Uhrzeit am Vortag nicht oder zweimal, wird nichts verschoben: Feldfehler wie bei jeder Eingabe.
+    return utc_text(lies_zeitpunkt(vortag.strftime("%Y-%m-%dT%H:%M:%S"), zeitzone))
 
 
 def pruefsumme(wert):
-    return hashlib.sha256(json.dumps(wert, sort_keys=True, ensure_ascii=False, separators=(",", ":")).encode()).hexdigest()
+    return hashlib.sha256(json.dumps(wert, sort_keys=True, ensure_ascii=False, separators=(",", ":")).encode("utf-8", "backslashreplace")).hexdigest()
 
 
 # ---------------------------------------------------------------- Anlegen (U1)
@@ -295,6 +306,7 @@ def neuer_wunsch(eingabe, werkstatt, jetzt, fristen, *, kennung, schluessel_prue
         "zugriff_kunde": zugriff_pruefsumme, "nutzlast_pruefsumme": nutzlast_pruefsumme, "benachrichtigungen": [],
         "vorgaenger_id": vorgaenger_id, "erstellt_am": stempel, "geaendert_am": stempel,
     }
+    termin["verlauf"][0]["stand"] = {name: termin[name] for name in STAND_FELDER}
     return termin, [("N2", WERKSTATT), ("N1", KUNDE)]
 
 
@@ -312,6 +324,7 @@ def verfall(termin, jetzt):
     zeile = _zeile(termin["zustand"], "expire")
     eintrag = _eintrag(zeile, termin, SYSTEM, jetzt, None, None, antwort_bis_zuvor=termin["antwort_bis"], vorschlag_am_zuvor=termin.get("vorschlag_am"))
     setze = {"zustand": "verfallen", "version": termin["version"] + 1, "antwort_bis": None, "vorschlag_am": None, "geaendert_am": utc_text(jetzt)}
+    eintrag["stand"] = _stand_nach(termin, setze)
     return Aenderung(zeile["nr"], setze, eintrag, [(nachricht, rolle) for nachricht in zeile["nachricht"] for rolle in zeile["empfaenger"]])
 
 
@@ -342,6 +355,10 @@ def _bedingung(zeile, termin, jetzt, fristen):
     return True
 
 
+def _stand_nach(termin, setze):
+    return {name: setze.get(name, termin.get(name)) for name in STAND_FELDER}
+
+
 def _stand(termin):
     return {"zustand": termin["zustand"], "version": termin["version"]}
 
@@ -361,7 +378,7 @@ def _empfaenger(zeile, termin, rolle):
     return list(regel)
 
 
-def pruefe_eingabe(termin, aktion, rolle, eingabe, jetzt):
+def pruefe_eingabe(termin, aktion, rolle, eingabe, jetzt, fristen=None):
     """Feldprüfung eines Übergangs (422). Liefert die bereinigten Werte."""
     fehler, werte, hinweis = {}, {}, None
     version = eingabe.get("version")
@@ -381,6 +398,8 @@ def pruefe_eingabe(termin, aktion, rolle, eingabe, jetzt):
             im_fenster = aus_text(termin["wunsch_von"]) <= zeitpunkt <= aus_text(termin["wunsch_bis"])
             if zeitpunkt <= jetzt:
                 fehler[feld] = "in_past"
+            elif fristen is not None and zeitpunkt > jetzt + fristen.f4:
+                fehler[feld] = "too_late"   # auch ein Vorschlag liegt höchstens so weit voraus wie ein Wunsch (F4)
             elif termin["zustand"] == "wunsch" and aktion == "confirm" and not im_fenster:
                 fehler[feld], hinweis = "window_invalid", "propose"   # U2: nur im Wunschfenster; sonst U4
             elif termin["zustand"] == "wunsch" and aktion == "propose" and im_fenster:
@@ -431,13 +450,25 @@ def wiederholung(termin, schluessel_pruefsumme, aktion, rolle, nutzlast_pruefsum
     return False
 
 
+def ergebnis_von(termin, schluessel_pruefsumme):
+    """Der Termin, wie ihn der Aufruf mit diesem Schlüssel hinterlassen hat: gespeichertes Ergebnis einer Wiederholung."""
+    for stelle, eintrag in enumerate(termin.get("verlauf", ())):
+        if schluessel_pruefsumme and eintrag.get("schluessel_pruefsumme") == schluessel_pruefsumme:
+            damals = copy.deepcopy(termin)
+            damals.update(copy.deepcopy(eintrag.get("stand") or {}))
+            damals["verlauf"] = damals["verlauf"][:stelle + 1]
+            damals["benachrichtigungen"] = [a for a in damals.get("benachrichtigungen", ()) if a.get("version", 0) <= eintrag["version"]]
+            return damals
+    return None
+
+
 def uebergang(termin, aktion, rolle, eingabe, jetzt, fristen, *, schluessel_pruefsumme, nutzlast_pruefsumme):
     """Prüft einen Aufruf in der Reihenfolge aus Abschnitt 9 und liefert die Änderung. Fasst den Termin nicht an.
 
     Reihenfolge: Feldprüfung (422) -> Frist (409 appointment_expired) -> Übergang und Rolle erlaubt (409)
     -> Version (409). Das Schreiben selbst ist Sache des Aufrufers und dort ein bedingter Schreibvorgang.
     """
-    werte = pruefe_eingabe(termin, aktion, rolle, eingabe, jetzt)
+    werte = pruefe_eingabe(termin, aktion, rolle, eingabe, jetzt, fristen)
     if ist_faellig(termin, jetzt):
         raise Abweisung(409, "appointment_expired", **_stand(termin))
     zeile = _zeile(termin["zustand"], aktion) if aktion in AKTIONEN else None
@@ -471,6 +502,7 @@ def uebergang(termin, aktion, rolle, eingabe, jetzt, fristen, *, schluessel_prue
     eintrag["grund_code"] = werte.get("grund_code")
     if werte.get("grund_text"):
         eintrag["grund_text"] = werte["grund_text"]
+    eintrag["stand"] = _stand_nach(termin, setze)
     nachrichten = [(nachricht, seite) for nachricht in zeile["nachricht"] for seite in _empfaenger(zeile, termin, rolle)]
     return Aenderung(nr, setze, eintrag, nachrichten)
 

@@ -331,7 +331,7 @@ class Maschine(unittest.TestCase):
             "erledigt": schritt(bestaetigt(), "complete", W, jetzt=datetime(2027, 3, 11, 9, 0, tzinfo=UTC))[0],
             "verfallen": A.anwenden(wunsch(), A.verfall(wunsch(), JETZT + timedelta(days=30))),
         }
-        eingaben = {"confirm": {"termin_am": "2027-06-10T10:00"}, "decline": {"grund_code": "sonstiges"}, "propose": {"vorschlag_am": "2027-06-12T10:00"},
+        eingaben = {"confirm": {"termin_am": "2027-05-10T10:00"}, "decline": {"grund_code": "sonstiges"}, "propose": {"vorschlag_am": "2027-05-12T10:00"},
                     "accept": {}, "cancel": {"grund_code": "sonstiges"}, "complete": {}}
         self.assertEqual(set(enden), set(A.ENDZUSTAENDE))
         for zustand, termin in enden.items():
@@ -561,6 +561,114 @@ class Vorlagen(unittest.TestCase):
         self.assertIn("https://beispiel.invalid/teileklar/termine?id=1#zugriff=abc", text)
         with self.assertRaises(KeyError):
             M.nachricht("N8", termin, K)
+
+
+class Nacharbeit(unittest.TestCase):
+    """Befunde der unabhängigen Prüfung von PR 195 und dort unentdeckte Veränderungen, soweit sie die Zustandsmaschine betreffen."""
+
+    def test_m03_durchfuehrung_genau_zum_terminbeginn_ist_noch_verboten(self):
+        termin = bestaetigt()
+        beginn = A.aus_text(termin["termin_am"])
+        with self.assertRaises(A.Abweisung) as fehler:
+            schritt(termin, "complete", W, jetzt=beginn)
+        self.assertEqual(fehler.exception.code, "appointment_transition_forbidden")
+        self.assertNotIn("complete", A.erlaubte_aktionen(termin, W, beginn, FRISTEN))
+        self.assertEqual(schritt(termin, "complete", W, jetzt=beginn + timedelta(seconds=1))[0]["zustand"], "erledigt")
+
+    def test_m31_fristen_von_null_sind_keine_fristen(self):
+        for name in ("TEILEKLAR_APPOINTMENTS_F1_MINUTES", "TEILEKLAR_APPOINTMENTS_F2_MINUTES", "TEILEKLAR_APPOINTMENTS_F4_MINUTES", "TEILEKLAR_APPOINTMENTS_F11_ROUNDS"):
+            self.assertIsNone(A.fristen_aus({**BEISPIELWERTE, name: "0"}), name)
+        for name in ("TEILEKLAR_APPOINTMENTS_F3_MINUTES", "TEILEKLAR_APPOINTMENTS_F5_MINUTES"):
+            self.assertIsNotNone(A.fristen_aus({**BEISPIELWERTE, name: "0"}), name)
+        for unsinn in (None, 5, 5.0, " ", "+5", "5 ", "0x10", "١٢"):
+            werte = {**BEISPIELWERTE, "TEILEKLAR_APPOINTMENTS_F1_MINUTES": unsinn}
+            ergebnis = A.fristen_aus(werte)
+            self.assertTrue(ergebnis is None or ergebnis.f1 == timedelta(minutes=5), unsinn)
+
+    def test_m20_b15_vorschlag_in_der_vergangenheit_oder_zu_weit_voraus(self):
+        for termin, rolle in ((wunsch(), W), (bestaetigt(), K), (bestaetigt(), W), (verschoben_von_werkstatt(), K)):
+            for wert, code in (("2027-03-01T09:59", "in_past"), ("2027-03-01T10:00", "in_past"), ("2027-04-30T11:01", "too_late"), ("2999-01-01T10:00", "invalid")):
+                with self.assertRaises(A.Abweisung) as fehler:
+                    schritt(termin, "propose", rolle, vorschlag_am=wert)
+                self.assertEqual((fehler.exception.status, fehler.exception.extra["fields"]), (422, {"vorschlag_am": code}), (termin["zustand"], wert))
+        self.assertEqual(schritt(bestaetigt(), "propose", K, vorschlag_am="2027-04-30T11:00")[0]["zustand"], "verschoben", "genau am Höchstvorlauf")
+        with self.assertRaises(A.Abweisung) as fehler:
+            schritt(wunsch(), "confirm", W, jetzt=JETZT + timedelta(days=1), termin_am="2027-03-02T10:00")
+        self.assertEqual(fehler.exception.extra["fields"], {"termin_am": "in_past"})
+
+    def test_b2_zeitpunkte_ausserhalb_des_bereichs_sind_feldfehler(self):
+        for wert in ("0001-01-01T00:00", "9999-12-31T23:59", "0001-01-01T00:00+14:00", "9999-12-31T23:59-14:00", "1999-12-31T23:59", "2200-01-01T00:00"):
+            for zone in ("Europe/Berlin", "Europe/Amsterdam"):
+                with self.assertRaises(A.Feldfehler) as fehler:
+                    A.lies_zeitpunkt(wert, zone)
+                self.assertEqual(fehler.exception.code, "invalid", wert)
+        self.assertEqual(len(A.pruefsumme({"name": "\ud800"})), 64, "auch ein einzelnes Surrogat bringt die Prüfsumme nicht zu Fall")
+
+    def test_m27_m28_laengengrenzen(self):
+        for eingabe, feld in (({"telefon": "0" * 41}, "telefon"), ({"fahrzeug": "x" * 161}, "fahrzeug"), ({"email": "a@" + "b" * 160 + ".invalid"}, "email")):
+            with self.assertRaises(A.Abweisung) as fehler:
+                wunsch(**eingabe)
+            self.assertEqual(fehler.exception.extra["fields"], {feld: "invalid"})
+        self.assertEqual(wunsch(telefon="0" * 40)["kunde_telefon"], "0" * 40)
+        for aktion, rolle, termin, mehr in (("decline", W, wunsch(), {"grund_code": "sonstiges"}), ("cancel", K, wunsch(), {}), ("cancel", W, bestaetigt(), {"grund_code": "verhindert"})):
+            with self.assertRaises(A.Abweisung) as fehler:
+                schritt(termin, aktion, rolle, grund_text="x" * 201, **mehr)
+            self.assertEqual(fehler.exception.extra["fields"], {"grund_text": "invalid"})
+            with self.assertRaises(A.Abweisung):
+                schritt(termin, aktion, rolle, grund_text=["kein", "text"], **mehr)
+            self.assertEqual(schritt(termin, aktion, rolle, grund_text=" " + "x" * 200 + " ", **mehr)[0]["grund_text"], "x" * 200)
+
+    def test_m25_absage_nimmt_zeitpunkt_und_vorschlag_weg(self):
+        for termin, rolle, mehr in ((bestaetigt(), K, {}), (bestaetigt(), W, {"grund_code": "verhindert"}), (verschoben_von_werkstatt(), K, {}), (verschoben_von_kunde(), I, {"grund_code": "betrieblich"})):
+            neu, _ = schritt(termin, "cancel", rolle, **mehr)
+            self.assertEqual((neu["termin_am"], neu["vorschlag_am"], neu["antwort_bis"]), (None, None, None))
+            self.assertEqual((neu["verlauf"][-1]["termin_am_zuvor"], neu["verlauf"][-1]["vorschlag_am_zuvor"]), (termin["termin_am"], termin["vorschlag_am"]))
+
+    def test_b13_ergebnis_eines_frueheren_aufrufs(self):
+        erster, _ = schritt(wunsch(), "confirm", W, schluessel="sA", termin_am="2027-03-10T10:00")
+        erster["benachrichtigungen"] = [{"version": 1, "ereignis": "N1"}, {"version": 2, "ereignis": "N3"}]
+        erster["verlauf"].append({"art": "zugriff", "ausloeser": I, "zeit": A.utc_text(JETZT)})
+        spaeter, _ = schritt(erster, "cancel", K, schluessel="sB")
+        spaeter["benachrichtigungen"].append({"version": 3, "ereignis": "N6"})
+        damals = A.ergebnis_von(spaeter, "sA")
+        self.assertEqual((damals["zustand"], damals["version"], damals["termin_am"], damals["abgesagt_von"]), ("bestaetigt", 2, "2027-03-10T09:00:00+00:00", None))
+        self.assertEqual(([e.get("nr") for e in damals["verlauf"]], [a["ereignis"] for a in damals["benachrichtigungen"]]), (["U1", "U2"], ["N1", "N3"]))
+        self.assertEqual({k: v for k, v in damals.items() if k not in ("verlauf", "benachrichtigungen")},
+                         {k: v for k, v in erster.items() if k not in ("verlauf", "benachrichtigungen")})
+        anfang = A.ergebnis_von(spaeter, "s0")
+        self.assertEqual((anfang["zustand"], anfang["version"], anfang["termin_am"], len(anfang["verlauf"])), ("wunsch", 1, None, 1))
+        self.assertEqual((spaeter["zustand"], spaeter["version"]), ("abgesagt", 3), "der Termin selbst bleibt unberührt")
+        self.assertIsNone(A.ergebnis_von(spaeter, "unbekannt"))
+        self.assertIsNone(A.ergebnis_von(spaeter, None))
+        self.assertNotIn("stand", A.sicht(spaeter, K)["verlauf"][0])
+        self.assertNotIn("stand", A.sicht(spaeter, W)["verlauf"][0])
+
+    def test_b16_erinnerung_am_vortag_verschiebt_keine_uhrzeit(self):
+        for termin_ortszeit, code in (("2027-03-29T02:30", "time_not_existent"), ("2027-11-01T02:30", "time_ambiguous")):
+            termin = A.utc_text(A.lies_zeitpunkt(termin_ortszeit, "Europe/Berlin"))
+            with self.assertRaises(A.Feldfehler) as fehler:
+                A.erinnerung_am_vortag(termin, "Europe/Berlin")
+            self.assertEqual(fehler.exception.code, code)
+
+    def test_b8_b9_m34_wortlaut_der_nachrichten(self):
+        angaben = {"telefon": "+49 241 5550123", "fahrzeug": "Beispielwagen 1.6 Kombi"}
+        w = wunsch(**angaben)
+        verfallen = A.anwenden(w, A.verfall(w, JETZT + timedelta(days=30)))
+        v = schritt(w, "propose", W, vorschlag_am="2027-03-12T10:00")[0]
+        vorschlag_verfallen = A.anwenden(v, A.verfall(v, JETZT + timedelta(days=30)))
+        for termin, empfaenger in ((verfallen, K), (vorschlag_verfallen, K), (vorschlag_verfallen, W)):
+            betreff, html, text = M.nachricht("N7", termin, empfaenger)
+            for behauptung in ("nicht geantwortet", "Werkstatt hat", "Kunde hat", "nicht reagiert"):
+                self.assertNotIn(behauptung, text + html)
+            self.assertIn("Es besteht kein Termin", text)
+        abgesagt = schritt(schritt(w, "confirm", W, termin_am="2027-03-10T10:00")[0], "cancel", K)[0]
+        for code, termin in (("N2", w), ("N5", schritt(schritt(w, "confirm", W, termin_am="2027-03-10T10:00")[0], "propose", K, vorschlag_am="2027-03-15T10:00")[0]),
+                             ("N6", abgesagt), ("N7", vorschlag_verfallen), ("N3", schritt(v, "accept", K)[0])):
+            betreff, html, text = M.nachricht(code, termin, W, verwaltungslink="https://beispiel.invalid/x#zugriff=geheim")
+            ganz = betreff + html + text
+            for angabe in (w["kunde_name"], w["kunde_email"], w["kunde_telefon"], w["fahrzeug"], w["anliegen"], "geheim", "Partnerbereich", "Partnerportal", "angemeldet"):
+                self.assertNotIn(angabe, ganz, (code, angabe))
+        self.assertIn("geheim", M.nachricht("N1", w, K, verwaltungslink="https://beispiel.invalid/x#zugriff=geheim")[2])
 
 
 if __name__ == "__main__":

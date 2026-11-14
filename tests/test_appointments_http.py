@@ -10,6 +10,7 @@ import sys
 import unittest
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from unittest import mock
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "apps" / "shop-api"))
@@ -87,6 +88,11 @@ class Fall(unittest.IsolatedAsyncioTestCase):
                        "sitzung-fremd": {"user_id": "u-fremd", "role": "customer"}}
         self.nie_anschreiben = {ADRESSE["V"]}
         self.zaehler = 0
+        # Die Vorlagen sind Entwurf und im Code nicht freigegeben. Nur der Test stellt die Freigabe nach, damit die
+        # Regeln des Versands prüfbar sind; test_ohne_freigabe_des_inhabers_geht_nichts_hinaus prüft den echten Stand.
+        freigabe = mock.patch.object(API.appointment_mails, "VOM_INHABER_FREIGEGEBEN", True)
+        freigabe.start()
+        self.addCleanup(freigabe.stop)
 
         async def verzeichnis(werkstatt_id):
             return copy.deepcopy(self.betriebe.get(werkstatt_id))
@@ -95,7 +101,7 @@ class Fall(unittest.IsolatedAsyncioTestCase):
             kopf = request.headers.get("authorization", "")
             return copy.deepcopy(self.konten.get(kopf[7:])) if kopf.lower().startswith("bearer ") else None
 
-        abh = API.Abhaengigkeiten(speicher=self.speicher, verzeichnis=verzeichnis, sitzung=sitzung, post=self.post, uhr=self.uhr,
+        self.abh = abh = API.Abhaengigkeiten(speicher=self.speicher, verzeichnis=verzeichnis, sitzung=sitzung, post=self.post, uhr=self.uhr,
                                   einstellung=lambda name: self.werte.get(name, ""), herkunft=HERKUNFT)
         app = FastAPI()
         app.include_router(API.router_fuer(abh))
@@ -183,8 +189,8 @@ class Anlegen(Fall):
         self.assertEqual((erste.status_code, zweite.status_code), (201, 200))
         self.assertEqual(zweite.json()["id"], erste.json()["id"])
         self.assertEqual((len(self.speicher.zeilen), len(self.post.eingereiht)), (1, 2))
-        self.assertIsNone(zweite.json()["zugriff"], "der Nachweis wird nur einmal ausgegeben; gespeichert ist nur seine Prüfsumme")
-        self.assertEqual({k: v for k, v in zweite.json().items() if k != "zugriff"}, {k: v for k, v in erste.json().items() if k != "zugriff"})
+        self.assertEqual(zweite.json(), erste.json(), "die Wiederholung liefert die gespeicherte Antwort, auch den Nachweis")
+        self.assertEqual((await self.lies(erste.json()["id"], {"X-Appointment-Access": zweite.json()["zugriff"]})).status_code, 200)
 
     async def test_03_derselbe_schluessel_mit_anderer_nutzlast(self):
         erste = await self.anlegen(schluessel="derselbe-schluessel-01")
@@ -272,7 +278,7 @@ class Anlegen(Fall):
             for antwort in (await self.anlegen(), await self.lies(termin_id, kunde), await self.ruf("cancel", termin_id, kunde, 1),
                             await self.client.get("/api/workshops/P/appointments", headers=self.als("p")),
                             await self.client.get("/api/admin/appointments", headers=self.als("inhaber"))):
-                self.fehler(antwort, 404, "appointment_not_found")
+                self.assertEqual((antwort.status_code, antwort.json()), (404, {"detail": "Not Found"}))
         self.werte["TEILEKLAR_APPOINTMENTS"] = "1"
         for name in A.FRIST_NAMEN:
             ohne = dict(BEISPIELWERTE)
@@ -487,7 +493,7 @@ class Ablauf(Fall):
         await self.ruf("complete", erledigt, "p", 2)
         await self.lies(verfallen, k3)
         enden = {"abgelehnt": (abgelehnt, k1), "abgesagt": (abgesagt, k2), "verfallen": (verfallen, k3), "erledigt": (erledigt, k4)}
-        eingaben = {"confirm": {"termin_am": "2027-06-10T10:00"}, "decline": {"grund_code": "sonstiges"}, "propose": {"vorschlag_am": "2027-06-12T10:00"},
+        eingaben = {"confirm": {"termin_am": "2027-04-10T10:00"}, "decline": {"grund_code": "sonstiges"}, "propose": {"vorschlag_am": "2027-04-12T10:00"},
                     "accept": {}, "cancel": {"grund_code": "sonstiges"}, "complete": {}}
         self.assertEqual(set(enden), set(A.ENDZUSTAENDE))
         post = len(self.post.eingereiht)
@@ -845,6 +851,391 @@ class Speicher(unittest.IsolatedAsyncioTestCase):
         self.assertEqual((gelesen["zustand"], gelesen["version"], gelesen["verlauf"], gelesen["benachrichtigungen"][0]["status"]), ("bestaetigt", 2, [eintrag], "wartend"))
         gelesen["zustand"] = "von außen geändert"
         self.assertEqual((await speicher.hole("t1"))["zustand"], "bestaetigt", "der Speicher gibt Kopien heraus")
+
+
+class Nacharbeit(Fall):
+    """Befunde der unabhängigen Prüfung von PR 195 (B1 bis B17) und die dort unentdeckten Veränderungen (M..)."""
+
+    # ---- B1, M08: gesperrter oder nicht mehr freigeschalteter Betrieb
+    async def test_b1_gesperrter_oder_entpartnerter_betrieb_liest_und_aendert_nichts(self):
+        # Testfall 62 bleibt als Entscheidung E-15 offen. Geprüft wird hier nur: bis dahin wird verweigert, nicht erlaubt.
+        for merkmal, wert in (("gesperrt", True), ("partner", False)):
+            termin_id, kunde = await self.wunsch(email="%s@example.invalid" % merkmal)
+            self.betriebe["P"][merkmal] = wert
+            vorher = copy.deepcopy(self.gespeichert(termin_id))
+            for antwort in (await self.ruf("confirm", termin_id, "p", 1, termin_am="2027-03-10T10:00"), await self.ruf("decline", termin_id, "p", 1, grund_code="sonstiges"),
+                            await self.ruf("propose", termin_id, "p", 1, vorschlag_am="2027-03-12T10:00"), await self.lies(termin_id, "p"),
+                            await self.client.get("/api/workshops/P/appointments", headers=self.als("p"))):
+                self.fehler(antwort, 404, "appointment_not_found")
+            self.assertEqual((self.gespeichert(termin_id), self.post.zahl("N3")), (vorher, 0))
+            self.assertEqual((await self.lies(termin_id, kunde)).status_code, 200, "der Kunde erreicht seinen Termin weiter")
+            self.assertEqual((await self.lies(termin_id, "inhaber")).status_code, 200)
+            vor = self.post.zahl("N6")
+            absage = await self.ruf("cancel", termin_id, kunde, 1)
+            self.assertEqual(absage.status_code, 200)
+            self.assertEqual(absage.json()["benachrichtigung"], [{"ereignis": "N6", "empfaenger": "werkstatt", "status": "kein_empfaenger"}])
+            self.assertEqual(self.post.zahl("N6"), vor, "keine Nachricht an einen gesperrten oder nicht freigeschalteten Betrieb")
+            self.betriebe["P"].update(gesperrt=False, partner=True)
+
+    # ---- B2, B10: keine 500
+    async def test_b2_eingaben_von_aussen_enden_nie_als_500(self):
+        self.assertEqual(self.fehler(await self.anlegen(wunsch_von="0001-01-01T00:00"), 422, "appointment_invalid")["fields"].get("wunsch_von"), "invalid")
+        self.assertEqual(self.fehler(await self.anlegen(wunsch_bis="9999-12-31T23:59"), 422, "appointment_invalid")["fields"].get("wunsch_bis"), "invalid")
+        termin_id, kunde = await self.wunsch()
+        for wert in ("0001-01-01T00:00", "9999-12-31T23:59+14:00"):
+            self.assertEqual(self.fehler(await self.ruf("confirm", termin_id, "p", 1, termin_am=wert), 422, "appointment_invalid")["fields"], {"termin_am": "invalid"})
+        for abfrage in ("von=0001-01-01T00:00%2B14:00", "bis=9999-12-31T23:59-14:00", "von=2027-02-30T00:00Z", "seite=0", "seite=x"):
+            self.fehler(await self.client.get("/api/workshops/P/appointments?" + abfrage, headers=self.als("p")), 422, "appointment_invalid")
+        kopf = {"Idempotency-Key": self.schluessel(), "Content-Type": "application/json"}
+        for rumpf in (b'{"name": "\\ud800"}', b"[" * 16000, b'{"a":' * 3000, b"\xff\xfe"):
+            self.assertEqual(self.fehler(await self.client.post("/api/workshops/P/appointments", content=rumpf, headers=kopf), 422, "appointment_invalid")["fields"], {"rumpf": "invalid"})
+        surrogat = await self.client.post("/api/workshops/appointments/%s/cancel" % termin_id, content=b'{"version": 1, "grund_text": "\\udfff"}',
+                                          headers={**kopf, **kunde})
+        self.assertEqual(self.fehler(surrogat, 422, "appointment_invalid")["fields"], {"rumpf": "invalid"})
+        self.assertEqual((len(self.speicher.zeilen), self.gespeichert(termin_id)["zustand"]), (1, "wunsch"))
+
+    async def test_b10_ausfall_von_speicher_verzeichnis_oder_sitzung_ist_503_ohne_fehlertext(self):
+        termin_id, kunde = await self.wunsch()
+
+        async def faellt_aus(*_, **__):
+            raise RuntimeError("geheimer Treibertext mongodb://nutzer:kennwort@host")
+        for ziel, name in ((self.speicher, "hole"), (self.speicher, "lege_an"), (self.speicher, "schreibe_uebergang"), (self.speicher, "liste"),
+                           (self.abh, "verzeichnis"), (self.abh, "sitzung")):
+            with mock.patch.object(ziel, name, faellt_aus):
+                antworten = [await self.anlegen(email="otto@example.invalid"), await self.lies(termin_id, kunde), await self.ruf("cancel", termin_id, kunde, 1),
+                             await self.client.get("/api/admin/appointments", headers=self.als("inhaber"))]
+            self.assertIn(503, [a.status_code for a in antworten], name)
+            for antwort in antworten:
+                self.assertNotEqual(antwort.status_code, 500, name)
+                self.assertNotIn("geheim", antwort.text)
+                self.assertNotIn("mongodb", antwort.text)
+                if antwort.status_code == 503:
+                    self.assertEqual(antwort.json(), {"detail": {"error": "appointments_unavailable"}})
+            self.speicher.zeilen = {k: v for k, v in self.speicher.zeilen.items() if k == termin_id}
+            self.speicher.zeilen[termin_id].update(zustand="wunsch", version=1)
+
+    async def test_ausfall_des_verzeichnisses_beim_versand_aendert_den_gespeicherten_uebergang_nicht(self):
+        termin_id, kunde = await self.wunsch()
+        echtes = self.abh.verzeichnis
+
+        async def faellt_aus(_):
+            raise RuntimeError("verzeichnis nicht erreichbar")
+        self.abh.verzeichnis = faellt_aus
+        antwort = await self.ruf("cancel", termin_id, kunde, 1)
+        self.abh.verzeichnis = echtes
+        self.assertEqual((antwort.status_code, self.gespeichert(termin_id)["zustand"]), (200, "abgesagt"))
+        self.assertEqual(antwort.json()["benachrichtigung"], [{"ereignis": "N6", "empfaenger": "werkstatt", "status": "nicht_eingereiht"}])
+
+    # ---- B3: Bedingungen gehören zum Schreibvorgang
+    async def test_b3_mengengrenze_haelt_gleichzeitigen_aufrufen_stand(self):
+        antworten = await asyncio.gather(*[self.anlegen(wunsch_von="2027-03-%02dT09:00" % tag, wunsch_bis="2027-03-%02dT10:00" % tag) for tag in range(10, 22)])
+        self.assertEqual(sorted(a.status_code for a in antworten), [201] * API.STUNDENGRENZE + [429] * (12 - API.STUNDENGRENZE))
+        self.assertEqual((len(self.speicher.zeilen), self.post.zahl("N1")), (API.STUNDENGRENZE, API.STUNDENGRENZE))
+
+    async def test_b3_doppelwunsch_haelt_gleichzeitigen_aufrufen_stand(self):
+        for lauf in range(3):
+            antworten = await asyncio.gather(*[self.anlegen(email="lauf%d@example.invalid" % lauf, wunsch_von="2027-03-10T%02d:00" % (9 + n), wunsch_bis="2027-03-10T17:00") for n in range(4)])
+            self.assertEqual(sorted(a.status_code for a in antworten), [201, 409, 409, 409])
+            self.assertEqual({a.json()["detail"]["error"] for a in antworten if a.status_code == 409}, {"appointment_duplicate"})
+        self.assertEqual((len(self.speicher.zeilen), self.post.zahl("N1"), self.post.zahl("N2")), (3, 3, 3))
+
+    async def test_b3_doppelbestaetigung_haelt_gleichzeitigen_aufrufen_stand(self):
+        kennungen = [(await self.wunsch(email="k%d@example.invalid" % n))[0] for n in range(4)]
+        antworten = await asyncio.gather(*[self.ruf("confirm", kennung, "p", 1, termin_am="2027-03-10T12:00") for kennung in kennungen])
+        self.assertEqual(sorted(a.status_code for a in antworten), [200, 409, 409, 409])
+        self.assertEqual({a.json()["detail"]["error"] for a in antworten if a.status_code == 409}, {"appointment_overlap"})
+        self.assertEqual((sorted(self.gespeichert(k)["zustand"] for k in kennungen), self.post.zahl("N3")), (["bestaetigt", "wunsch", "wunsch", "wunsch"], 1))
+        mit = await asyncio.gather(*[self.ruf("confirm", k, "p", 1, termin_am="2027-03-10T12:00", ueberschneidung_bestaetigt=True) for k in kennungen if self.gespeichert(k)["zustand"] == "wunsch"])
+        self.assertEqual([a.status_code for a in mit], [200, 200, 200], "die ausdrückliche zweite Bestätigung hebt die Bedingung auf")
+
+    async def test_speicher_bedingungen_beim_anlegen(self):
+        speicher = API.ArbeitsspeicherTermine()
+        def termin(kennung, email="a@example.invalid", von="2027-03-10T08:00:00+00:00", bis="2027-03-10T16:00:00+00:00", **mehr):
+            return {"id": kennung, "werkstatt_id": "P", "kunde_email": email, "zustand": "wunsch", "version": 1, "wunsch_von": von, "wunsch_bis": bis,
+                    "antwort_bis": "2027-03-03T09:00:00+00:00", "erstellt_am": "2027-03-01T09:00:00+00:00", "termin_am": None, "verlauf": [], "benachrichtigungen": [], **mehr}
+        jetzt, seit = "2027-03-01T09:00:00+00:00", "2027-03-01T08:00:00+00:00"
+        await speicher.lege_an(termin("t1"), seit=seit, grenze=2, jetzt=jetzt)
+        with self.assertRaises(API.SchonVorhanden):
+            await speicher.lege_an(termin("t1"), seit=seit, grenze=2, jetzt=jetzt)
+        with self.assertRaises(API.DoppelterWunsch):
+            await speicher.lege_an(termin("t2", von="2027-03-10T15:59:00+00:00", bis="2027-03-10T18:00:00+00:00"), seit=seit, grenze=2, jetzt=jetzt)
+        await speicher.lege_an(termin("t3", von="2027-03-10T16:00:00+00:00", bis="2027-03-10T18:00:00+00:00"), seit=seit, grenze=2, jetzt=jetzt)
+        with self.assertRaises(API.MengeErreicht):
+            await speicher.lege_an(termin("t4", von="2027-03-11T08:00:00+00:00", bis="2027-03-11T09:00:00+00:00"), seit=seit, grenze=2, jetzt=jetzt)
+        await speicher.lege_an(termin("t5", email="b@example.invalid"), seit=seit, grenze=2, jetzt=jetzt)
+        await speicher.lege_an(termin("t6", werkstatt_id="P2", email="b@example.invalid"), seit=seit, grenze=2, jetzt=jetzt)
+        # M15: Ein fälliger, noch nicht als verfallen gespeicherter Wunsch blockiert keinen neuen.
+        await speicher.lege_an(termin("t7", email="c@example.invalid"), seit=seit, grenze=5, jetzt=jetzt)
+        await speicher.lege_an(termin("t8", email="c@example.invalid"), seit=seit, grenze=5, jetzt="2027-03-03T09:00:00+00:00")
+        self.assertEqual(sorted(speicher.zeilen), ["t1", "t3", "t5", "t6", "t7", "t8"])
+        with self.assertRaises(API.BeginnBelegt):
+            speicher.zeilen["t1"].update(zustand="bestaetigt", termin_am="2027-03-10T09:00:00+00:00")
+            await speicher.schreibe_uebergang("t3", "P", "wunsch", 1, {"zustand": "bestaetigt", "version": 2, "termin_am": "2027-03-10T09:00:00+00:00"}, {"nr": "U2"}, [],
+                                              beginn_frei="2027-03-10T09:00:00+00:00")
+        self.assertEqual(speicher.zeilen["t3"]["version"], 1)
+
+    async def test_m15_faelliger_wunsch_blockiert_keinen_neuen(self):
+        erster, _ = await self.wunsch(wunsch_von="2027-03-20T09:00", wunsch_bis="2027-03-20T17:00")
+        self.uhr.jetzt = JETZT + timedelta(days=3)   # antwort_bis des ersten ist erreicht, gelesen hat ihn niemand
+        self.assertEqual(self.gespeichert(erster)["zustand"], "wunsch")
+        self.assertEqual((await self.anlegen(wunsch_von="2027-03-20T09:00", wunsch_bis="2027-03-20T17:00")).status_code, 201)
+
+    # ---- B4: Schalter aus
+    async def test_b4_bei_schalter_aus_antwortet_jeder_pfad_und_jede_methode_wie_ein_unbekannter_pfad(self):
+        termin_id, kunde = await self.wunsch()
+        pfade = ["/api/workshops/P/appointments", "/api/workshops/appointments/" + termin_id, "/api/admin/appointments"] + \
+                ["/api/workshops/appointments/%s/%s" % (termin_id, aktion) for aktion in A.AKTIONEN]
+        unbekannt = await self.client.get("/api/gibt/es/nicht")
+        self.assertEqual((unbekannt.status_code, unbekannt.json()), (404, {"detail": "Not Found"}))
+        self.werte["TEILEKLAR_APPOINTMENTS"] = ""
+        for pfad in pfade:
+            for methode in ("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS", "HEAD"):
+                antwort = await self.client.request(methode, pfad, headers={**kunde, **self.als("inhaber"), "Idempotency-Key": self.schluessel()})
+                self.assertEqual(antwort.status_code, 404, (methode, pfad))
+                self.assertNotIn("allow", antwort.headers)
+                if methode != "HEAD":
+                    self.assertEqual(antwort.content, unbekannt.content, (methode, pfad))
+        self.assertEqual((self.gespeichert(termin_id)["zustand"], len(self.gespeichert(termin_id)["verlauf"])), ("wunsch", 1))
+        self.werte["TEILEKLAR_APPOINTMENTS"] = "1"
+        for methode, pfad, erlaubt in (("DELETE", pfade[1], "GET"), ("GET", pfade[3], "POST"), ("POST", pfade[2], "GET"), ("PUT", pfade[0], "POST")):
+            antwort = await self.client.request(methode, pfad, headers=kunde)
+            self.assertEqual((antwort.status_code, antwort.headers["allow"], antwort.headers["cache-control"]), (405, erlaubt, "no-store"))
+        self.assertEqual(self.gespeichert(termin_id)["zustand"], "wunsch")
+
+    # ---- B5: Anschlussstelle für die Begrenzung je Herkunft
+    async def test_b5_begrenzung_je_herkunft_ist_als_anschlussstelle_vorgesehen(self):
+        gesehen = []
+
+        async def grenze(request):
+            gesehen.append(request.url.path)
+            return len(gesehen) <= 2
+        self.abh.herkunftsgrenze = grenze
+        erste = await self.anlegen(email="a@example.invalid", schluessel="herkunft-schluessel-01")
+        self.assertEqual((erste.status_code, (await self.anlegen(email="b@example.invalid")).status_code), (201, 201))
+        self.fehler(await self.anlegen(email="c@example.invalid"), 429, "rate_limited")
+        self.assertEqual((len(self.speicher.zeilen), self.post.zahl("N2")), (2, 2))
+        self.assertEqual((await self.anlegen(email="a@example.invalid", schluessel="herkunft-schluessel-01")).status_code, 200, "eine Wiederholung zählt nicht neu")
+
+    # ---- B6, M30, M18, M07, B17: Zugriffsnachweis
+    async def test_b6_nachweis_ueberlebt_die_verlorene_erste_antwort(self):
+        self.werte["TEILEKLAR_APPOINTMENT_MAILS"] = ""   # Standard: kein Versand, also auch kein Link in N1
+        erste = await self.anlegen(schluessel="verlorene-antwort-0001")
+        zweite = await self.anlegen(schluessel="verlorene-antwort-0001")
+        andere = await self.anlegen(email="otto@example.invalid")
+        nachweis = zweite.json()["zugriff"]
+        self.assertEqual((zweite.status_code, nachweis), (200, erste.json()["zugriff"]))
+        self.assertGreaterEqual(len(nachweis), 43, "256 Bit")
+        self.assertNotEqual(nachweis, andere.json()["zugriff"])
+        self.assertNotIn(nachweis, repr(self.speicher.zeilen), "gespeichert ist nur die Prüfsumme")
+        self.assertNotIn(erste.json()["id"], nachweis)
+        self.assertEqual((await self.lies(erste.json()["id"], {"X-Appointment-Access": nachweis})).status_code, 200)
+        self.fehler(await self.lies(andere.json()["id"], {"X-Appointment-Access": nachweis}), 404, "appointment_not_found")
+        self.fehler(await self.anlegen(schluessel="verlorene-antwort-0001", anliegen="Anderes Anliegen, gleicher Schlüssel."), 409, "idempotency_conflict")
+        self.fehler(await self.lies(erste.json()["id"], {"X-Appointment-Access": nachweis[:8]}), 404, "appointment_not_found")
+
+    async def test_m18_nachweis_wird_nur_als_kopf_angenommen(self):
+        termin_id, kunde = await self.wunsch()
+        nachweis = kunde["X-Appointment-Access"]
+        for abfrage in ("zugriff", "x-appointment-access", "X-Appointment-Access", "nachweis", "access", "token"):
+            self.fehler(await self.client.get("/api/workshops/appointments/%s?%s=%s" % (termin_id, abfrage, nachweis)), 404, "appointment_not_found")
+            antwort = await self.client.post("/api/workshops/appointments/%s/cancel?%s=%s" % (termin_id, abfrage, nachweis), json={"version": 1, "zugriff": nachweis},
+                                             headers={"Idempotency-Key": self.schluessel()})
+            self.fehler(antwort, 404, "appointment_not_found")
+        self.fehler(await self.lies(termin_id, {"Cookie": "x-appointment-access=" + nachweis}), 404, "appointment_not_found")
+        self.assertEqual(self.gespeichert(termin_id)["zustand"], "wunsch")
+
+    async def test_m07_b17_nachweisvergleich_in_konstanter_zeit_auch_ohne_gespeicherte_pruefsumme(self):
+        termin_id, kunde = await self.wunsch()
+        with mock.patch.object(API.hmac, "compare_digest", wraps=API.hmac.compare_digest) as vergleich:
+            await self.lies(termin_id, kunde)
+            await self.lies("0" * 64, kunde)
+            await self.lies(termin_id, None)
+        self.assertEqual(vergleich.call_count, 3, "verglichen wird immer, auch ohne Termin und ohne Nachweis")
+        for kaputt in (None, "", 5, "kurz"):
+            self.speicher.zeilen[termin_id]["zugriff_kunde"] = kaputt
+            self.fehler(await self.lies(termin_id, kunde), 404, "appointment_not_found")
+            self.fehler(await self.lies(termin_id, {"X-Appointment-Access": ""}), 404, "appointment_not_found")
+
+    async def test_m13_sitzung_ohne_nutzerkennung_ist_kein_kunde_fremder_gasttermine(self):
+        termin_id, _ = await self.wunsch()
+        self.assertIsNone(self.gespeichert(termin_id)["kunde_user_id"])
+        for konto in ({"role": "customer"}, {"role": "customer", "user_id": None}, {"role": "customer", "user_id": ""}, {"role": "partner", "user_id": None, "werkstatt_ids": []}, {}):
+            self.konten["sitzung-leer"] = konto
+            self.fehler(await self.lies(termin_id, "leer"), 404, "appointment_not_found")
+            self.fehler(await self.ruf("cancel", termin_id, "leer", 1), 404, "appointment_not_found")
+        self.assertEqual(self.gespeichert(termin_id)["zustand"], "wunsch")
+        eigener = await self.anlegen(email="otto@example.invalid", kopf=self.als("leer"))
+        self.assertIsNone(self.gespeichert(eigener.json()["id"])["kunde_user_id"])
+
+    async def test_m16_aufruf_ohne_berechtigung_stellt_keinen_fristablauf_fest(self):
+        termin_id, kunde = await self.wunsch()
+        self.uhr.jetzt = JETZT + timedelta(days=30)
+        for antwort in (await self.lies(termin_id, None), await self.lies(termin_id, "p2"), await self.lies(termin_id, {"X-Appointment-Access": "falsch"}),
+                        await self.ruf("cancel", termin_id, None, 1), await self.ruf("confirm", termin_id, "p2", 1, termin_am="2027-03-10T10:00")):
+            self.fehler(antwort, 404, "appointment_not_found")
+        self.assertEqual((self.gespeichert(termin_id)["zustand"], self.gespeichert(termin_id)["version"], self.post.zahl("N7")), ("wunsch", 1, 0))
+        self.assertEqual((await self.lies(termin_id, kunde)).json()["zustand"], "verfallen")
+        self.assertEqual(self.post.zahl("N7"), 1)
+
+    # ---- B7: Freigabe der Texte
+    async def test_ohne_freigabe_des_inhabers_geht_nichts_hinaus(self):
+        with mock.patch.object(API.appointment_mails, "VOM_INHABER_FREIGEGEBEN", False):
+            antwort = await self.anlegen()
+            kunde = {"X-Appointment-Access": antwort.json()["zugriff"]}
+            absage = await self.ruf("cancel", antwort.json()["id"], kunde, 1)
+        self.assertEqual((self.werte["TEILEKLAR_APPOINTMENT_MAILS"], self.werte["TEILEKLAR_APPOINTMENT_MAILS_WORKSHOP"]), ("1", "1"))
+        self.assertEqual((antwort.status_code, absage.status_code, self.post.versuche, self.post.eingereiht), (201, 200, 0, {}))
+        self.assertEqual({n["status"] for n in antwort.json()["benachrichtigung"] + absage.json()["benachrichtigung"]}, {"nicht_freigegeben"})
+        from shop import appointment_mails
+        self.assertTrue(appointment_mails.VOM_INHABER_FREIGEGEBEN, "außerhalb des Blocks gilt wieder der Stellvertreter des Tests")
+        quelle = (ROOT / "apps/shop-api/shop/appointment_mails.py").read_text(encoding="utf-8")
+        self.assertIn("\nVOM_INHABER_FREIGEGEBEN = False\n", quelle, "im Code sind die Texte nicht freigegeben")
+
+    # ---- B11, M10: Größe des Rumpfs
+    async def test_b11_rumpf_wird_vor_dem_lesen_und_beim_lesen_begrenzt(self):
+        kopf = {"Idempotency-Key": self.schluessel(), "Content-Type": "application/json"}
+        gross = __import__("json").dumps({**WUNSCH, "fuellung": "x" * API.RUMPF_MAX}).encode()
+        self.assertEqual(self.fehler(await self.client.post("/api/workshops/P/appointments", content=gross, headers=kopf), 422, "appointment_invalid")["fields"], {"rumpf": "invalid"})
+        gelesen = []
+
+        async def strom():
+            for _ in range(200):
+                gelesen.append(1)
+                yield b" " * 1024
+            yield __import__("json").dumps(WUNSCH).encode()
+        antwort = await self.client.post("/api/workshops/P/appointments", content=strom(), headers=kopf)
+        self.assertEqual(self.fehler(antwort, 422, "appointment_invalid")["fields"], {"rumpf": "invalid"})
+        self.assertEqual(self.speicher.zeilen, {})
+        knapp = __import__("json").dumps({**WUNSCH, "fuellung": "x" * (API.RUMPF_MAX - 600)}).encode()
+        self.assertLessEqual(len(knapp), API.RUMPF_MAX)
+        self.assertEqual((await self.client.post("/api/workshops/P/appointments", content=knapp, headers=kopf)).status_code, 201)
+
+    # ---- B13: gespeichertes Ergebnis
+    async def test_b13_wiederholung_liefert_das_damalige_ergebnis(self):
+        termin_id, kunde = await self.wunsch(schluessel="b13-anlegen-schluessel")
+        erste = await self.ruf("confirm", termin_id, "p", 1, schluessel="b13-bestaetigung-0001", termin_am="2027-03-10T10:00")
+        await self.ruf("cancel", termin_id, kunde, 2)
+        self.assertEqual(self.gespeichert(termin_id)["zustand"], "abgesagt")
+        wieder = await self.ruf("confirm", termin_id, "p", 1, schluessel="b13-bestaetigung-0001", termin_am="2027-03-10T10:00")
+        self.assertEqual((wieder.status_code, wieder.json()["zustand"], wieder.json()["version"], wieder.json()["termin_am"]), (200, "bestaetigt", 2, "2027-03-10T09:00:00+00:00"))
+        self.assertEqual({k: v for k, v in wieder.json().items() if k != "erlaubte_aktionen"}, {k: v for k, v in erste.json().items() if k != "erlaubte_aktionen"})
+        angelegt = await self.anlegen(schluessel="b13-anlegen-schluessel")
+        self.assertEqual((angelegt.status_code, angelegt.json()["zustand"], angelegt.json()["version"], len(angelegt.json()["verlauf"])), (200, "wunsch", 1, 1))
+        self.assertEqual((self.gespeichert(termin_id)["zustand"], self.gespeichert(termin_id)["version"], self.post.zahl("N3"), self.post.zahl("N6")), ("abgesagt", 3, 1, 1))
+        self.assertEqual((await self.lies(termin_id, kunde)).json()["zustand"], "abgesagt", "gelesen wird immer der heutige Stand")
+
+    # ---- B14 und Listen des Inhabers
+    async def test_b14_lesen_des_inhabers_steht_je_tag_einmal_im_verlauf(self):
+        termin_id, _ = await self.wunsch(wunsch_von="2027-03-20T09:00", wunsch_bis="2027-03-20T17:00")
+        zugriffe = lambda: [e for e in self.gespeichert(termin_id)["verlauf"] if e.get("art") == "zugriff"]
+        for _ in range(6):
+            await self.lies(termin_id, "inhaber")
+        self.assertEqual((len(zugriffe()), self.gespeichert(termin_id)["version"]), (1, 1))
+        self.uhr.jetzt = JETZT + timedelta(days=1)
+        for _ in range(3):
+            await self.client.get("/api/admin/appointments", headers=self.als("inhaber"))
+            await self.client.get("/api/workshops/P/appointments", headers=self.als("inhaber"))
+        self.assertEqual(len(zugriffe()), 2, "auch die Listen des Inhabers sind ein Lesezugriff")
+        await self.client.get("/api/workshops/P/appointments", headers=self.als("p"))
+        await self.lies(termin_id, "p")
+        self.assertEqual(len(zugriffe()), 2, "Lesen der Werkstatt ist kein Eintrag")
+
+    # ---- B15, M20, M27, M28
+    async def test_b15_m20_grenzen_fuer_vorschlaege_und_angaben(self):
+        termin_id, kunde = await self.wunsch()
+        self.assertEqual(self.fehler(await self.ruf("propose", termin_id, "p", 1, vorschlag_am="2999-01-01T10:00"), 422, "appointment_invalid")["fields"], {"vorschlag_am": "invalid"})
+        self.assertEqual(self.fehler(await self.ruf("propose", termin_id, "p", 1, vorschlag_am="2027-04-30T11:01"), 422, "appointment_invalid")["fields"], {"vorschlag_am": "too_late"})
+        self.assertEqual(self.fehler(await self.ruf("propose", termin_id, "p", 1, vorschlag_am="2027-03-01T09:59"), 422, "appointment_invalid")["fields"], {"vorschlag_am": "in_past"})
+        self.assertEqual(self.fehler(await self.ruf("decline", termin_id, "p", 1, grund_code="sonstiges", grund_text="x" * 201), 422, "appointment_invalid")["fields"], {"grund_text": "invalid"})
+        self.assertEqual(self.gespeichert(termin_id)["zustand"], "wunsch")
+        for feld, wert in (("telefon", "0" * 41), ("fahrzeug", "x" * 161), ("seite", "/" * 201), ("sprache", "deutsch"), ("einwilligung_fassung", "x" * 41)):
+            self.assertEqual(self.fehler(await self.anlegen(email="otto@example.invalid", **{feld: wert}), 422, "appointment_invalid")["fields"], {feld: "invalid"})
+        self.assertEqual((await self.ruf("propose", termin_id, "p", 1, vorschlag_am="2027-04-30T11:00")).status_code, 200)
+        self.abh.einwilligung_fassungen = ("fassung-2027-01",)
+        self.assertEqual(self.fehler(await self.anlegen(email="otto@example.invalid"), 422, "appointment_invalid")["fields"], {"einwilligung_fassung": "invalid"})
+        self.assertEqual((await self.anlegen(email="otto@example.invalid", einwilligung_fassung="fassung-2027-01")).status_code, 201)
+
+    async def test_m25_absage_nimmt_den_zugesagten_zeitpunkt_weg(self):
+        termin_id, kunde = await self.bestaetigt()
+        antwort = await self.ruf("cancel", termin_id, kunde, 2)
+        self.assertEqual((antwort.json()["termin_am"], self.gespeichert(termin_id)["termin_am"], self.gespeichert(termin_id)["antwort_bis"]), (None, None, None))
+        self.assertEqual(self.gespeichert(termin_id)["verlauf"][-1]["termin_am_zuvor"], "2027-03-10T09:00:00+00:00")
+        zweiter, kunde2 = await self.verschoben_fuer("otto@example.invalid")
+        await self.ruf("cancel", zweiter, kunde2, 2)
+        self.assertEqual((self.gespeichert(zweiter)["vorschlag_am"], self.gespeichert(zweiter)["termin_am"]), (None, None))
+
+    async def verschoben_fuer(self, email):
+        termin_id, kunde = await self.wunsch(email=email)
+        await self.ruf("propose", termin_id, "p", 1, vorschlag_am="2027-03-12T11:00")
+        return termin_id, kunde
+
+    # ---- M17, M24 und der Filter nach dem Fristablauf
+    async def test_m17_seiten_der_liste(self):
+        for n in range(API.SEITENGROESSE + 1):
+            self.assertEqual((await self.anlegen(email="k%02d@example.invalid" % n)).status_code, 201)
+        erste = (await self.client.get("/api/workshops/P/appointments", headers=self.als("p"))).json()
+        zweite = (await self.client.get("/api/workshops/P/appointments?seite=2", headers=self.als("p"))).json()
+        dritte = (await self.client.get("/api/admin/appointments?seite=3", headers=self.als("inhaber"))).json()
+        self.assertEqual((len(erste["termine"]), erste["weitere"], erste["seite"]), (API.SEITENGROESSE, True, 1))
+        self.assertEqual((len(zweite["termine"]), zweite["weitere"], zweite["seite"], dritte["termine"]), (1, False, 2, []))
+        self.assertEqual(len({t["id"] for t in erste["termine"] + zweite["termine"]}), API.SEITENGROESSE + 1)
+
+    async def test_m24_zeitfilter_der_liste_wirkt_allein(self):
+        a, _ = await self.bestaetigt(email="a@example.invalid")                                                    # Termin 10.03. 09:00 UTC
+        b, _ = await self.wunsch(email="b@example.invalid", wunsch_von="2027-03-15T09:00", wunsch_bis="2027-03-15T12:00")   # Wunsch ab 15.03. 08:00 UTC
+        c, _ = await self.wunsch(email="c@example.invalid")
+        await self.ruf("propose", c, "p", 1, vorschlag_am="2027-03-20T10:00")                                      # Vorschlag 20.03. 09:00 UTC
+
+        async def kennungen(abfrage):
+            antwort = await self.client.get("/api/workshops/P/appointments?" + abfrage, headers=self.als("p"))
+            return sorted(t["id"] for t in antwort.json()["termine"])
+        self.assertEqual(await kennungen("von=2027-03-12T00:00Z"), sorted([b, c]))
+        self.assertEqual(await kennungen("bis=2027-03-12T00:00Z"), [a])
+        self.assertEqual(await kennungen("von=2027-03-10T09:00:00Z&bis=2027-03-15T08:00:00%2B00:00"), sorted([a, b]))
+        self.assertEqual(await kennungen("von=2027-03-10T10:00:01%2B01:00&bis=2027-03-15T08:59:59%2B01:00"), [])
+        self.assertEqual(await kennungen("von=2027-03-21T00:00Z"), [])
+
+    async def test_liste_filtert_nach_dem_stand_nach_dem_fristablauf(self):
+        faellig, _ = await self.wunsch(email="a@example.invalid", wunsch_von="2027-03-02T10:00", wunsch_bis="2027-03-02T12:00")
+        offen, _ = await self.wunsch(email="b@example.invalid", wunsch_von="2027-03-20T09:00", wunsch_bis="2027-03-20T12:00")
+        self.uhr.jetzt = JETZT + timedelta(days=1, hours=3)   # der erste ist fällig und ungelesen, der zweite noch offen
+
+        async def kennungen(zustand):
+            antwort = await self.client.get("/api/workshops/P/appointments?zustand=" + zustand, headers=self.als("p"))
+            return [t["id"] for t in antwort.json()["termine"]], {t["zustand"] for t in antwort.json()["termine"]}
+        self.assertEqual(self.gespeichert(faellig)["zustand"], "wunsch")
+        self.assertEqual(await kennungen("verfallen"), ([faellig], {"verfallen"}))
+        self.assertEqual(await kennungen("wunsch"), ([offen], {"wunsch"}))
+        self.assertEqual((self.gespeichert(faellig)["zustand"], self.post.zahl("N7")), ("verfallen", 1))
+
+    # ---- M34, B8, B9: was in den Nachrichten steht
+    async def test_m34_nachrichten_an_die_werkstatt_tragen_keine_angaben_des_kunden(self):
+        angaben = {"name": "Erika Beispiel", "email": "erika@example.invalid", "telefon": "+49 241 5550123", "fahrzeug": "Beispielwagen 1.6 Kombi", "anliegen": "Bremsen vorne prüfen."}
+        termin_id, kunde = await self.wunsch(**angaben)
+        await self.ruf("propose", termin_id, kunde, 1) if False else None
+        await self.ruf("cancel", termin_id, kunde, 1)
+        zweiter, kunde2 = await self.bestaetigt(**{**angaben, "email": "erika2@example.invalid"})
+        await self.ruf("propose", zweiter, kunde2, 2, vorschlag_am="2027-03-15T10:00")
+        self.uhr.jetzt = JETZT + timedelta(days=30)
+        await self.lies(zweiter, kunde2)
+        an_werkstatt = [e for e in self.post.eingereiht.values() if e["an"] == ADRESSE["P"]]
+        self.assertEqual(sorted({s.split(":")[2] for s, e in self.post.eingereiht.items() if e["an"] == ADRESSE["P"]}), ["N2", "N5", "N6", "N7"])
+        for nachricht in an_werkstatt:
+            ganz = nachricht["betreff"] + nachricht["html"] + nachricht["text"]
+            for angabe in list(angaben.values()) + ["erika2@example.invalid", kunde["X-Appointment-Access"], kunde2["X-Appointment-Access"], "zugriff="]:
+                self.assertNotIn(angabe, ganz)
+            for wort in ("Partnerbereich", "Partnerportal", "angemeldet"):
+                self.assertNotIn(wort, ganz, "kein Verweis auf einen Weg, den es noch nicht gibt (B9)")
+
+    async def test_b8_n7_sagt_nur_was_der_code_festgestellt_hat(self):
+        self.werte["TEILEKLAR_APPOINTMENT_MAILS_WORKSHOP"] = ""   # die Werkstatt hat den Wunsch nie erhalten
+        termin_id, kunde = await self.wunsch()
+        self.uhr.jetzt = JETZT + timedelta(days=30)
+        await self.lies(termin_id, kunde)
+        n7 = next(e for s, e in self.post.eingereiht.items() if ":N7:" in s)
+        for behauptung in ("nicht geantwortet", "Werkstatt hat", "nicht reagiert", "abgelehnt"):
+            self.assertNotIn(behauptung, n7["text"] + n7["html"])
+        self.assertIn("Es besteht kein Termin", n7["text"])
 
 
 if __name__ == "__main__":
