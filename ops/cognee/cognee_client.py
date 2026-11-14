@@ -195,9 +195,13 @@ class UrllibTransport:
             with response:
                 chunks, size = [], 0
                 while size <= self.max_bytes:
-                    if self._clock() > deadline:
+                    remaining = deadline - self._clock()
+                    if remaining <= 0:
                         raise TransportError("Gesamtfrist")
-                    chunk = response.read(min(65536, self.max_bytes + 1 - size))
+                    self._limit_socket(response, remaining)
+                    # read1 kehrt nach einem Lesevorgang zurück; read würde bei tröpfelnden Daten
+                    # bis zum vollen Block warten und die Gesamtfrist nie prüfen.
+                    chunk = response.read1(min(65536, self.max_bytes + 1 - size))
                     if not chunk:
                         break
                     chunks.append(chunk)
@@ -209,6 +213,15 @@ class UrllibTransport:
             raise TransportError("Zeitlimit") from None
         except (urllib.error.URLError, OSError, ValueError):
             raise TransportError("netzfehler") from None
+
+
+    @staticmethod
+    def _limit_socket(response, seconds: float) -> None:
+        """Restzeit auf den Socket legen, soweit er erreichbar ist; sonst gilt das Zeitlimit je Lesevorgang."""
+        try:
+            response.fp.raw._sock.settimeout(max(seconds, 0.05))
+        except (AttributeError, OSError, ValueError):
+            pass
 
 
 class CogneeClient:

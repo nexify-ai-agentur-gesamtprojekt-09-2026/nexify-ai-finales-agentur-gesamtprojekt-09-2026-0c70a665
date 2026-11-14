@@ -647,6 +647,16 @@ class _Dienst(http.server.BaseHTTPRequestHandler):
             self.send_response(200)
             self.end_headers()
             self.wfile.write(b"x" * 5000)
+        elif self.path == "/tropf":
+            self.send_response(200)
+            self.end_headers()
+            try:
+                for _ in range(40):
+                    self.wfile.write(b"x")
+                    self.wfile.flush()
+                    time.sleep(0.1)
+            except OSError:
+                pass
         elif self.path == "/fehler":
             self.send_response(404)
             self.end_headers()
@@ -699,6 +709,14 @@ class EchterTransportTest(unittest.TestCase):
         with self.assertRaises(cc.TransportError) as stop:
             transport("GET", self.base + "/gross", {}, None, 5)
         self.assertEqual(stop.exception.art, "Gesamtfrist")
+
+    def test_troepfelnde_antwort_haelt_die_gesamtfrist_nicht_auf(self):
+        """Hinweis der automatischen Durchsicht: read() wartete auf den vollen Block."""
+        started = time.monotonic()
+        with self.assertRaises(cc.TransportError) as stop:
+            cc.UrllibTransport(100000)("GET", self.base + "/tropf", {}, None, 0.5)
+        self.assertIn(stop.exception.art, ("Gesamtfrist", "Zeitlimit"))
+        self.assertLess(time.monotonic() - started, 2.5)
 
     def test_nicht_erreichbar_ohne_fehlertext(self):
         with socket.socket() as probe:

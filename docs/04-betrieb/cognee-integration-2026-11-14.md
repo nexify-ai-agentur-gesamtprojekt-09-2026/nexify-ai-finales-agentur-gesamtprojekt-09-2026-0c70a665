@@ -31,7 +31,7 @@ Kennzeichnung: **IST** = heute gemessen · **QUELLE** = gelesen, nicht gemessen 
    51821 (UDP) zu. Die Anzeige „33019:8000 auf 179.198.195.91“ im Panel nennt die Serveradresse,
    nicht die Bindung. Ein Verbindungsversuch von außen fand nicht statt (Abschnitt 6).
 3. **Gebaut, aber aus:** Adapter `ops/cognee/` mit Aufnahme-Werkzeug, Konfiguration
-   `config/integrations/cognee.json` (alle Freigaben `null`), 67 Tests. Ohne gesetzte Variablen
+   `config/integrations/cognee.json` (alle Freigaben `null`), 68 Tests. Ohne gesetzte Variablen
    wird nichts gesendet; jede Wirkung, auch eine lesende, braucht zusätzlich Rolle und
    Freigaben. Es wurde nichts aufgenommen und nichts am Server geändert.
 4. **Vor jeder Aufnahme liegen beim Inhaber:** Sicherung (K0), Absicherung der API (K1),
@@ -319,7 +319,7 @@ kann diese Werte lesen; das gehört in die Bewertung dieses Schlüssels im Lösu
 - [ ] K9: Claude-Sitzung und Hermes lesen je eine Fundstelle.
 - [ ] K10: Rückspielprobe bestanden; Alarm bei Ausfall geprüft.
 - [ ] Löschweg einmal an einem Testdatensatz bis zu den Rohdateien nachvollzogen.
-- [x] Adapter aus: 67 Tests grün (`python3 -m unittest tests.test_cognee_adapter`); 26 gezielte Veränderungen des Codes werden von den Tests entdeckt (Abschnitt 9).
+- [x] Adapter aus: 68 Tests grün (`python3 -m unittest tests.test_cognee_adapter`); 27 gezielte Veränderungen des Codes werden von den Tests entdeckt (Abschnitt 9).
 
 ## 8. Offene Inhaberentscheidungen
 
@@ -371,12 +371,14 @@ nachgestellt, dann behoben.
 | 18 | Zahlen der Notiz | ja | Zahlen neu erhoben, ohne diese Notiz gezählt |
 | 19 | K9 ohne Rückweg, Sperrvermerk fehlt in K0 und K1 | ja | Rückweg für K10, Sperrvermerk am Anfang und in K0 und K2 |
 
-Dazu drei Hinweise der automatischen Durchsicht am PR: Aufnahme außerhalb der Positivliste
-(entspricht Befund 5), Antwortsuche ohne Kostenfreigabe (behoben mit Befund 10) und Suche über
-Namen statt Kennungen (umgestellt auf Kennungen; an der Instanz nicht geprüft).
+Dazu vier Hinweise der automatischen Durchsicht am PR: Aufnahme außerhalb der Positivliste
+(entspricht Befund 5), Antwortsuche ohne Kostenfreigabe (behoben mit Befund 10), Suche über
+Namen statt Kennungen (umgestellt auf Kennungen; an der Instanz nicht geprüft) und eine
+tröpfelnde Antwort, die die Gesamtfrist aufhielt (behoben: je Lesevorgang wird die Restzeit
+geprüft, Test gegen einen tröpfelnden Dienst auf der lokalen Schleife).
 
-Tests: 67 statt 34. In Wegwerfkopien wurden 26 gezielte Veränderungen des Codes eingespielt,
+Tests: 68 statt 34. In Wegwerfkopien wurden 27 gezielte Veränderungen des Codes eingespielt,
 darunter die elf, die die Prüfung als unentdeckt nannte (Umleitungen, Zeitlimit, Rumpf der
 Fehlerantwort, Verknüpfungen im Plan, Graphbau ohne Kostenfreigabe, Netzfehlertext, Host-Prüfung
 per Endung, Pause und Wiederholung ohne Deckel, Fragenlänge, Größengrenze im Plan, Sperrliste im
-Plan); alle 26 lassen die Tests scheitern, keine lässt sie hängen.
+Plan); alle 27 lassen die Tests scheitern, keine lässt sie hängen.
