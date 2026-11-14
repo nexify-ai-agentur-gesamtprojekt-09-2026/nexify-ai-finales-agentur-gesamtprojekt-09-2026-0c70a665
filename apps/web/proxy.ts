@@ -23,4 +23,8 @@ export default function proxy(request: NextRequest) {
   if(privateRoute(path,protectedPaths)){response.headers.set('Cache-Control','private, no-store');response.headers.set('Vary','Cookie, Authorization');response.headers.set('X-Robots-Tag','noindex, nofollow');}
   return response;
 }
-export const config = { matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"] };
+// Statische Dateien brauchen weder Sprach- noch Zugriffslogik und laufen nicht durch den Proxy: die Ordner aus
+// public/ (media, fonts, glass) und Dateien direkt an der Wurzel mit Bild-, Schrift- oder Textendung. Kein geschützter
+// Pfad beginnt mit diesen Ordnern, und unterhalb anderer Ordner (/api, /intern, /portal, /teileklar) greift der Proxy
+// unabhängig von der Endung weiter.
+export const config = { matcher: ["/((?!_next/static|_next/image|media/|fonts/|glass/|[^/]+\\.(?:ico|png|jpg|jpeg|webp|avif|gif|svg|txt|webmanifest|woff2?)$).*)"] };

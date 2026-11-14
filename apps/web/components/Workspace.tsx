@@ -13,6 +13,7 @@ import ChatResizeHandle,{chatWidthStyle,clampChat,readChatWidth,storeChatWidth} 
 import {useSitePathname} from "./Router";
 import type { PublicPage } from "../lib/page-types";
 import { translations, type Locale } from "../lib/i18n";
+import type { InitialChat } from "../lib/chat-panel";
 import {ActionButton,type ActionVariant} from './ActionControl';
 import ProjectFilesPanel from './ProjectFilesPanel';
 import './AtelierSystem.css';
@@ -149,8 +150,6 @@ const starters:Record<Locale,Record<"nexify"|"teileklar",[string,string][]>>={
     ]
   }
 };
-/** Zustand der Gesprächsscheibe im ersten Bildaufbau: offen, eingeklappt oder – ohne gespeicherte Wahl – nach Fensterbreite. */
-export type InitialChat="auto"|"open"|"closed";
 const localeHint:Record<Locale,string>={de:"Auswahl mit der Eingabetaste bestätigen.",nl:"Bevestig uw keuze met Enter.",fr:"Validez votre choix avec Entrée.",en:"Press Enter to confirm your choice."};
 const UIContext=createContext({locale:"de" as Locale,t:translations.de,session:null as {csrf:string}|null,chatReady:false});
 export const useUI=()=>useContext(UIContext);

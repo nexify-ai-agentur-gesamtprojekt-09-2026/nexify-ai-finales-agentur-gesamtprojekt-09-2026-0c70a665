@@ -31,7 +31,7 @@ import {
   type LlmMessage,
 } from '../../../lib/chat-llm';
 import { appendMessage, ensureConversation, parseOfferDraft, persistOffer } from '../../../lib/chat-store';
-import { sbSelect, supabaseConfigured } from '../../../lib/supabase-rest';
+import { SupabaseTimeoutError, sbSelect, supabaseConfigured } from '../../../lib/supabase-rest';
 import {
   CHAT_GUIDANCE_VERSION,
   buildSystemPrompt,
@@ -99,7 +99,7 @@ function logChatFailure(stage: FailureStage, error: unknown, context: { stream: 
   } else {
     // Meldungen des Speichers enthalten Pfad und Antworttext: nur die Statuszahl übernehmen.
     const status = error instanceof Error ? /-> (\d{3})\b/.exec(error.message)?.[1] : undefined;
-    entry.cause = error instanceof Error && error.message === 'supabase_not_configured' ? 'not_configured' : status ? 'upstream_http' : 'unexpected';
+    entry.cause = error instanceof SupabaseTimeoutError ? 'timeout' : error instanceof Error && error.message === 'supabase_not_configured' ? 'not_configured' : status ? 'upstream_http' : 'unexpected';
     if (status) entry.status = Number(status);
   }
   const line = JSON.stringify(entry);
@@ -108,8 +108,13 @@ function logChatFailure(stage: FailureStage, error: unknown, context: { stream: 
   else console.error(line);
 }
 
-/** Speicherfehler dürfen die Antwort nicht verhindern und nicht als Modellfehler erscheinen. */
+/**
+ * Speicherfehler dürfen die Antwort nicht verhindern und nicht als Modellfehler erscheinen.
+ * Nach dem ersten Fehlschlag entfallen die weiteren Speicherschritte dieser Anfrage: ein hängender
+ * Speicher kostet höchstens ein Zeitlimit, nicht eines je Schritt.
+ */
 async function persistenceStep<T>(step: string, run: () => Promise<T>, fallback: T, context: { stream: boolean; startedAt: number; storeFailed?: boolean }): Promise<T> {
+  if (context.storeFailed) return fallback;
   try {
     return await run();
   } catch (error) {
@@ -120,18 +125,20 @@ async function persistenceStep<T>(step: string, run: () => Promise<T>, fallback:
   }
 }
 
+/**
+ * Die jüngsten Beiträge der Konversation in zeitlicher Reihenfolge. Geladen wird absteigend und
+ * begrenzt, damit bei langen Gesprächen die letzten Beiträge zählen und nicht die ersten; danach
+ * wird umgekehrt. Ein Fehler oder Zeitlimit wirft, damit persistenceStep ihn protokolliert.
+ */
 async function loadHistory(conversationId: string): Promise<GuidanceTurn[]> {
   if (!supabaseConfigured() || conversationId.startsWith('local-')) return [];
-  try {
-    const rows = await sbSelect<Record<string, unknown>>(
-      `chat_messages?conversation_id=eq.${encodeURIComponent(conversationId)}&select=role,content&order=created_at.asc&limit=${HISTORY_LIMIT}`,
-    );
-    return rows
-      .map((r) => ({ role: r.role, content: r.content }))
-      .filter((r): r is GuidanceTurn => (r.role === 'user' || r.role === 'assistant') && typeof r.content === 'string');
-  } catch {
-    return [];
-  }
+  const rows = await sbSelect<Record<string, unknown>>(
+    `chat_messages?conversation_id=eq.${encodeURIComponent(conversationId)}&select=role,content&order=created_at.desc&limit=${HISTORY_LIMIT}`,
+  );
+  return rows
+    .reverse()
+    .map((r) => ({ role: r.role, content: r.content }))
+    .filter((r): r is GuidanceTurn => (r.role === 'user' || r.role === 'assistant') && typeof r.content === 'string');
 }
 
 /**
@@ -208,7 +215,7 @@ export async function POST(request: Request): Promise<Response> {
 
   // Gespeicherter Verlauf hat Vorrang. Ohne Speicherung zählt der begrenzte Verlauf aus dem
   // Browser: Kontext des Besuchers, kein Nachweis und nie eine Systemvorgabe.
-  const stored = await loadHistory(conversationId);
+  const stored = await persistenceStep('history', () => loadHistory(conversationId), [] as GuidanceTurn[], logContext);
   const history = stored.length > 0 ? sanitizeClientHistory(stored) : sanitizeClientHistory(req.history);
   await persistenceStep('user_message', () => appendMessage(conversationId, 'user', message, null), undefined, logContext);
 
@@ -227,8 +234,8 @@ export async function POST(request: Request): Promise<Response> {
     return err('chat_llm_failed', 502);
   }
 
-  /** Nach vollständiger Antwort: Blöcke auswerten, speichern, Ergebnis für beide Antwortformen. */
-  const conclude = async () => {
+  /** Nach vollständiger Antwort: Blöcke auswerten. Ohne Speicherzugriff, damit das Ergebnis sofort feststeht. */
+  const evaluate = () => {
     const visible = guard.text;
     const briefingBlock = [...guard.blocks].reverse().find((block) => block.lang === 'briefing');
     const briefingData = briefingBlock ? parseBriefing(briefingBlock.body, allowedAmounts) : null;
@@ -240,9 +247,12 @@ export async function POST(request: Request): Promise<Response> {
     logGuardrail(guard, wantsStream);
     // Gespeichert wird die geprüfte Fassung, damit ein verworfener Betrag nicht in den Verlauf zurückkehrt.
     const record = briefingBlock && briefingData ? `${visible}\n\n\`\`\`briefing\n${JSON.stringify(briefingData)}\n\`\`\`` : visible;
-    await persistenceStep('assistant_message', () => appendMessage(conversationId, 'assistant', record, model), undefined, logContext);
-    const offer = draft ? await persistenceStep('offer', () => persistOffer(conversationId, draft), null, logContext) : null;
-    return { visible, briefing, offer };
+    return { visible, briefing, draft, record };
+  };
+  /** Antwort und Angebot ablegen. Im Strom läuft das erst nach dem Abschlussereignis. */
+  const store = async (result: ReturnType<typeof evaluate>) => {
+    await persistenceStep('assistant_message', () => appendMessage(conversationId, 'assistant', result.record, model), undefined, logContext);
+    return result.draft ? persistenceStep('offer', () => persistOffer(conversationId, result.draft!), null, logContext) : null;
   };
 
   // ---- Nicht-gestreamte JSON-Antwort ----
@@ -254,7 +264,10 @@ export async function POST(request: Request): Promise<Response> {
       logChatFailure('llm', error, logContext);
       return err('chat_llm_failed', 502);
     }
-    const { visible, briefing, offer } = await conclude();
+    const result = evaluate();
+    const { visible, briefing } = result;
+    // Die JSON-Antwort trägt das abgelegte Angebot selbst: hier wird vor der Antwort gespeichert.
+    const offer = await store(result);
     const dto: ChatResponse = {
       conversationId,
       message: { role: 'assistant', content: visible, created_at: new Date().toISOString() },
@@ -285,11 +298,19 @@ export async function POST(request: Request): Promise<Response> {
           send({ type: 'error', error: 'chat_llm_failed' });
           return;
         }
-        const { visible, briefing, offer } = await conclude();
-        if (briefing) send({ type: 'briefing', briefing });
-        if (offer) send({ type: 'offer', offer });
-        const msg: ChatMessageDTO = { role: 'assistant', content: visible, created_at: new Date().toISOString() };
+        const result = evaluate();
+        if (result.briefing) send({ type: 'briefing', briefing: result.briefing });
+        const msg: ChatMessageDTO = { role: 'assistant', content: result.visible, created_at: new Date().toISOString() };
+        // Der Besucher erhält den Abschluss sofort; das Speichern folgt und kann die Antwort nicht mehr aufhalten.
         send({ type: 'done', message: msg });
+        let offer: Awaited<ReturnType<typeof store>> = null;
+        try {
+          offer = await store(result);
+        } catch {
+          /* persistenceStep fängt und protokolliert bereits. */
+        }
+        // Nachgelagert für Abnehmer, die den Strom bis zum Ende lesen; die eigene Oberfläche endet mit „done".
+        if (offer) send({ type: 'offer', offer });
       } catch {
         // Der Besucher hat die Verbindung geschlossen: nichts mehr zu senden.
       } finally {

@@ -8,8 +8,8 @@ import tokens from "../../../packages/tokens/tokens.json";
 import {cookies,headers} from 'next/headers';
 import {localeOf} from '../lib/page-seo';
 import type { ReactNode } from "react";
-import Workspace,{type InitialChat} from "../components/Workspace";
-import {chatWidthFromCookie} from "../components/ChatResizeHandle";
+import Workspace from "../components/Workspace";
+import {chatWidthFromCookie,initialChatFromCookie} from "../lib/chat-panel";
 import NextRouterBridge from "../components/NextRouterBridge";
 import { publicPages,publicExperienceData } from "../lib/catalog";
 import {PublicExperienceProvider} from "../components/PublicExperience";
@@ -32,8 +32,7 @@ export default async function RootLayout({children}:{children:ReactNode}) {
   const theme=themeOf((await cookies()).get('nx-theme')?.value);
   // Gesprächsscheibe: die Wahl des Besuchers steht als Sitzungs-Cookie; ohne Wahl entscheidet das Stylesheet nach Fensterbreite.
   // So erscheint die Scheibe im ersten Bildaufbau im richtigen Zustand und der Inhalt springt nicht (wie beim Thema).
-  const jar=await cookies(),chatChoice=jar.get('nx-chat-open')?.value;
-  const initialChat:InitialChat=chatChoice==='1'?'open':chatChoice==='0'?'closed':'auto';
+  const jar=await cookies(),initialChat=initialChatFromCookie(jar.get('nx-chat-open')?.value);
   // Die Projektfunktionen hinter /api (Sitzung, Angebot, Termin) gibt es nur am lokalen Entwicklungs-Gateway (next.config.ts, rewrites).
   const gateway=process.env.NODE_ENV==='development';
   const content = <NextRouterBridge locale={locale}><PublicExperienceProvider data={publicExperienceData}><Workspace initialLocale={locale} pages={publicPages()} gateway={gateway} initialChat={initialChat} initialChatWidth={chatWidthFromCookie(jar.get('nx-chat-width')?.value)}>{children}</Workspace></PublicExperienceProvider></NextRouterBridge>;

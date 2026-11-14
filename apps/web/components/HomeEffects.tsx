@@ -14,12 +14,19 @@ export default function HomeEffects() {
   useEffect(() => {
     const root = document.querySelector<HTMLElement>(".home-concept");
     if (!root || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    // What the visitor already sees (or has scrolled past) is marked as revealed before the effect is switched on.
+    // Otherwise the server-rendered content would vanish for a moment at hydration and fade in again.
+    const waiting: Element[] = [];
+    const height = window.innerHeight;
+    root.querySelectorAll(REVEAL).forEach(node => {
+      if (node.getBoundingClientRect().top < height) node.classList.add("is-in"); else waiting.push(node);
+    });
     root.dataset.fx = "on";
 
     const seen = new IntersectionObserver(entries => {
       for (const entry of entries) if (entry.isIntersecting) { entry.target.classList.add("is-in"); seen.unobserve(entry.target); }
     }, {rootMargin: "0px 0px -8% 0px", threshold: 0.08});
-    root.querySelectorAll(REVEAL).forEach(node => seen.observe(node));
+    waiting.forEach(node => seen.observe(node));
 
     if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return () => { seen.disconnect(); delete root.dataset.fx; };
 
