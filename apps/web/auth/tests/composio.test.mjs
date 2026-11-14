@@ -193,3 +193,9 @@ test('Client: Anfrage nach Doku, Schlüssel nur im Header, Fehler ohne Antwortte
   const noId = createComposioClient({ env: { COMPOSIO_API_KEY: 'test-key' }, fetchImpl: async () => Response.json({ redirect_url: 'https://c.invalid/' }) });
   await assert.rejects(() => noId.createConnectLink({ userId: 'u1', authConfigId: AC, callbackUrl: 'https://x.invalid' }), (e) => e.code === 'composio_link_incomplete');
 });
+
+test('Keine fest verdrahtete Test-Nutzerkennung im Quelltext; Composio-Nutzer = Suite-Sitzung', () => {
+  for (const f of ['composio.ts', 'composio-routes.ts', 'composio-webhook.ts', 'composio-store.ts', 'suite-session.ts']) {
+    assert.ok(!readFileSync(new URL('../../lib/' + f, import.meta.url), 'utf8').includes('pg-test-'), f);
+  }
+});

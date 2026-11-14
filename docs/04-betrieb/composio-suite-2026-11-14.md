@@ -48,9 +48,15 @@ Zusätzlich für die Sitzungsprüfung: `SHOP_API_BASE_URL` (wie im Shop-Code). N
 
 ## Live-Pfad
 
-`https://nexifyai.cloud/webhook/v1` ist erst nach dem Merge nach `main` und einer Auslieferung der Web-Anwendung erreichbar.
-Offen: Laut `config/environment-contract.json` ist die ausgewählte Vercel-App derzeit `apps/site`, nicht `apps/web`;
-vor dem Einschalten ist zu klären, welche Auslieferung `nexifyai.cloud/webhook/v1` bedient.
+`https://nexifyai.cloud/webhook/v1` ist erst nach dem Merge nach `main` und einer Auslieferung erreichbar. Entscheidung des
+Inhabers: `nexifyai.cloud` wird als Domain der Vercel-App bedient. Die fünf `COMPOSIO_*`-Variablen sind laut Inhaber in
+Vercel (production und preview) gesetzt; der Code liest sie nur über `process.env`. Der Schalter bleibt aus.
+
+Test-Nutzer: Die Composio-Vorschau nutzt Test-Kennungen der Form `pg-test-...`. Im Code ist keine Nutzerkennung fest
+verdrahtet; die Composio-Nutzerkennung ist immer die Suite-Nutzer-ID der Sitzung (Test verhindert `pg-test-` im Quelltext).
+
+SDK: `@composio/core` wird bewusst nicht verwendet (siehe PR-Beschreibung): Der Connect-Fluss braucht nur zwei REST-Aufrufe,
+und der Webhook-Empfänger bleibt ohnehin reine HMAC-Prüfung.
 
 ## Offene Punkte (Owner: Inhaber/Betrieb, vor dem Einschalten)
 
