@@ -201,7 +201,7 @@ ein kurzer Wert ohne erkennbare Zuweisung oder eine andere Kodierung. Die Laufze
 (400.000 Zeichen in unter einer Sekunde gemessen).
 
 **IST des Filters am Repository** (`python3 ops/cognee/aufnahme.py plan`, 14.11.2026, Stand dieses
-Zweigs mit `main` `d4f2032`): 60 Dateien der Positivliste ohne diese Notiz, davon 55 ohne Fund
+Zweigs mit `main` `9c9c806`): 60 Dateien der Positivliste ohne diese Notiz, davon 55 ohne Fund
 (678.603 Bytes) und fünf mit Funden; Ergebnis `geheimnis_gefunden`. Die fünf Dateien tragen
 zusammen 34 Funde; es wird also heute nichts aufgenommen, auch nicht mit allen
 Freigaben. Die Funde sind einzeln gesichtet, ohne die Werte auszugeben, nach Umgebung im Satz,
