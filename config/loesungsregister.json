@@ -2195,6 +2195,79 @@
         "cloudflare-konto",
         "hostinger-srv1941843"
       ]
+    },
+    {
+      "id": "cloudflare-tunnel",
+      "name": "Cloudflare-Tunnel der Server",
+      "tags": [
+        "tunnel",
+        "netz",
+        "cloudflare",
+        "erreichbarkeit",
+        "server"
+      ],
+      "kategorie": "Netz und Zugangsschutz",
+      "zweck": "Macht Dienste der Server unter Adressen der Cloudflare-Zonen erreichbar, ohne dass ein Port am Server offen sein muss.",
+      "ort": "Cloudflare-Konto „NeXify AI Agentur“ (Konto-ID nur im Eintrag `cloudflare-konto`); Tunnel `nexifyai-agentur-cloudflare-tunnel` (von srv1243952), `nexifyai-duesseldorf` (von srv1941843), `nexifyai-contabo` (ohne Verbindung) und ein Tunnel einer Kundenzone",
+      "zustand": {
+        "status": "läuft belegt",
+        "beleg": "`docs/04-betrieb/netz-inventur-2026-11-14.md`, Abschnitte 3.4 und 3.8 (Cloudflare-API, nur lesend, 14.11.2026 22:18–22:23 UTC): zwei Tunnel mit je vier Verbindungen, Zuordnung von Adresse zu lokalem Ziel gelesen. `nexifyai-contabo` ist seit 09.11.2026 10:40 UTC ohne Verbindung; `agenten.nexifyai.cloud` und `librechat.nexifyai.cloud` antworten deshalb mit 530.",
+        "stand": "2026-11-14"
+      },
+      "entscheidung": "keine",
+      "rolle_im_plan": {
+        "art": "tragend",
+        "hinweis": "Die Zuordnung von Adresse zu Server und Port steht bei Cloudflare, nicht im Repository. Änderungen daran sind Netzänderungen und brauchen die Freigabe des Inhabers je Schritt (D-016)."
+      },
+      "zugaenge": [],
+      "wann_nutzen": "Wenn zu klären ist, welcher Server und welcher lokale Port hinter einer Adresse von nexifyai.cloud steht, oder wenn ein Dienst ohne offenen Port erreichbar werden soll.",
+      "nicht_nutzen_fuer": "Änderungen durch Agenten ohne Freigabe; als Zugriffsschutz allein (ein Tunnel schützt nicht, das tut erst Cloudflare Access oder die Anmeldung des Dienstes).",
+      "abhaengigkeiten": [
+        "cloudflare-konto",
+        "cloudflare-dns",
+        "hostinger-srv1243952",
+        "hostinger-srv1941843"
+      ]
+    },
+    {
+      "id": "hostinger-dns",
+      "name": "Hostinger-Domains und Hostinger-DNS",
+      "tags": [
+        "dns",
+        "domains",
+        "registrar",
+        "hostinger",
+        "netz"
+      ],
+      "kategorie": "Netz und Zugangsschutz",
+      "zweck": "Registriert die Domains der Agentur und führt die DNS-Zone der Domains, deren Nameserver bei Hostinger liegen.",
+      "ort": "Hostinger-Konto; wirksame Zone nur für `unternehmensbot.eu` und die geparkten Domains (`teileklar.de`, `.store`, `.pro`, `ainexi2fyi.*`). Für `nexifyai.de`, `nexifyai.cloud` und `teileklar.shop` führt Hostinger eine abgehängte Zone ohne Wirkung; wirksam ist dort Cloudflare.",
+      "zustand": {
+        "status": "läuft belegt",
+        "beleg": "`docs/04-betrieb/netz-inventur-2026-11-14.md`, Abschnitte 1.1 und 2 (Hostinger-API, nur lesend, und öffentliches DNS, 14.11.2026 22:16–22:21 UTC): Nameserver je Domain, Zoneninhalt und Schnappschüsse seit 31.10.2026 gelesen.",
+        "stand": "2026-11-14"
+      },
+      "entscheidung": "keine",
+      "rolle_im_plan": {
+        "art": "unklar",
+        "frage": "Sollen die abgehängten Hostinger-Zonen als Rückweg stehen bleiben, und wohin soll `unternehmensbot.eu` zeigen?"
+      },
+      "zugaenge": [
+        {
+          "bezeichnung": "Hostinger-API-Schlüssel der Claude-Umgebung",
+          "art": "API-Schlüssel als Netzwerk-Geheimnis",
+          "ablageort": "Netzwerk-Geheimnisse der Claude-Umgebung (Host developers.hostinger.com)",
+          "rechteumfang": "wie bei srv1941843; liest Domain-Portfolio, DNS-Zonen und Schnappschüsse (Schreibrecht nicht geprüft)",
+          "erstellt": "nicht belegt",
+          "offengelegt": false,
+          "erneuerung_faellig": false
+        }
+      ],
+      "wann_nutzen": "Wenn zu klären ist, wo eine Domain registriert ist, welche Nameserver gelten oder wie eine Zone vor einer Änderung aussah (Schnappschüsse).",
+      "nicht_nutzen_fuer": "DNS-Änderungen an Domains, deren Nameserver bei Cloudflare liegen (dort wirkungslos); Änderungen durch Agenten ohne Freigabe.",
+      "abhaengigkeiten": [
+        "cloudflare-dns"
+      ]
     }
   ]
 }

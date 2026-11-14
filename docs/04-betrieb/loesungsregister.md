@@ -19,20 +19,20 @@ Vorgehen, Pflege und Umgang mit Schlüsseln aus dem Chat: `.claude/skills/nexify
 
 | Zustand | Anzahl |
 |---|---|
-| läuft belegt | 30 |
+| läuft belegt | 32 |
 | läuft unbelegt | 18 |
 | defekt | 6 |
 | geplant | 1 |
 | stillgelegt | 1 |
 | nicht verfolgt | 2 |
-| **gesamt** | **58** |
+| **gesamt** | **60** |
 
 | Rolle im Plan | Anzahl |
 |---|---|
-| tragend | 21 |
+| tragend | 22 |
 | doppelt | 8 |
 | abzulösen | 2 |
-| unklar | 27 |
+| unklar | 28 |
 
 ## Übersicht
 
@@ -96,6 +96,8 @@ Vorgehen, Pflege und Umgang mit Schlüsseln aus dem Chat: `.claude/skills/nexify
 | `google-workspace` | Google Workspace (Gmail, Kalender, Drive) | Mail | läuft belegt | unklar | keine | `mail` `kalender` `dateien` `postfach` `inhaber` |
 | `postiz` | Postiz | Marketing | läuft unbelegt | unklar | keine | `social-media` `planung` `marketing` |
 | `claude-umgebung` | Claude-Code-Umgebung (Cloud-Sitzungen) | Arbeitsumgebung | läuft belegt | tragend | keine | `agenten` `arbeitsumgebung` `geheimnisspeicher` `netzwerk-geheimnisse` `plugins` |
+| `cloudflare-tunnel` | Cloudflare-Tunnel der Server | Netz und Zugangsschutz | läuft belegt | tragend | keine | `tunnel` `netz` `cloudflare` `erreichbarkeit` `server` |
+| `hostinger-dns` | Hostinger-Domains und Hostinger-DNS | Netz und Zugangsschutz | läuft belegt | unklar | keine | `dns` `domains` `registrar` `hostinger` `netz` |
 
 ## Zugänge mit fälliger Erneuerung
 
@@ -148,6 +150,7 @@ Vorgehen, Pflege und Umgang mit Schlüsseln aus dem Chat: `.claude/skills/nexify
 - `slack` (Slack): Soll Slack der Kanal für Meldungen der Agenten an den Inhaber werden? Hermes hat derzeit keinen aktiven Kanal.
 - `google-workspace` (Google Workspace (Gmail, Kalender, Drive)): Welches Postfach ist führend für Kundenkorrespondenz: Google Workspace oder das Hostinger-Postfach?
 - `postiz` (Postiz): Wird Postiz genutzt? Unabhängig davon sind die Zugangsdaten aus der Mem-Notiz zu widerrufen.
+- `hostinger-dns` (Hostinger-Domains und Hostinger-DNS): Sollen die abgehängten Hostinger-Zonen als Rückweg stehen bleiben, und wohin soll `unternehmensbot.eu` zeigen?
 
 ## Lösungen im Einzelnen
 
@@ -1076,3 +1079,34 @@ Vorgehen, Pflege und Umgang mit Schlüsseln aus dem Chat: `.claude/skills/nexify
 |---|---|---|---|---|---|---|---|
 | Netzwerk-Geheimnis für api.cloudflare.com | API-Token | Netzwerk-Geheimnisse der Claude-Umgebung | Konto-Token mit Worker-Rechten, ohne AI-Gateway-Leserecht (Bericht 14.11., nicht selbst gemessen) | 2026-11-14 | ja | ja | siehe cloudflare-konto |
 | Netzwerk-Geheimnis für developers.hostinger.com | API-Schlüssel | Netzwerk-Geheimnisse der Claude-Umgebung | Hostinger-Konto | nicht belegt | nein | nein | – |
+
+### Cloudflare-Tunnel der Server · `cloudflare-tunnel`
+
+- **Tags:** `tunnel` `netz` `cloudflare` `erreichbarkeit` `server`
+- **Kategorie:** Netz und Zugangsschutz
+- **Zweck:** Macht Dienste der Server unter Adressen der Cloudflare-Zonen erreichbar, ohne dass ein Port am Server offen sein muss.
+- **Ort:** Cloudflare-Konto „NeXify AI Agentur“ (Konto-ID nur im Eintrag `cloudflare-konto`); Tunnel `nexifyai-agentur-cloudflare-tunnel` (von srv1243952), `nexifyai-duesseldorf` (von srv1941843), `nexifyai-contabo` (ohne Verbindung) und ein Tunnel einer Kundenzone
+- **Zustand:** läuft belegt (Stand 2026-11-14). Beleg: `docs/04-betrieb/netz-inventur-2026-11-14.md`, Abschnitte 3.4 und 3.8 (Cloudflare-API, nur lesend, 14.11.2026 22:18–22:23 UTC): zwei Tunnel mit je vier Verbindungen, Zuordnung von Adresse zu lokalem Ziel gelesen. `nexifyai-contabo` ist seit 09.11.2026 10:40 UTC ohne Verbindung; `agenten.nexifyai.cloud` und `librechat.nexifyai.cloud` antworten deshalb mit 530.
+- **Entscheidung:** keine
+- **Rolle im Plan:** tragend (Die Zuordnung von Adresse zu Server und Port steht bei Cloudflare, nicht im Repository. Änderungen daran sind Netzänderungen und brauchen die Freigabe des Inhabers je Schritt (D-016).)
+- **Wann nutzen:** Wenn zu klären ist, welcher Server und welcher lokale Port hinter einer Adresse von nexifyai.cloud steht, oder wenn ein Dienst ohne offenen Port erreichbar werden soll.
+- **Nicht nutzen für:** Änderungen durch Agenten ohne Freigabe; als Zugriffsschutz allein (ein Tunnel schützt nicht, das tut erst Cloudflare Access oder die Anmeldung des Dienstes).
+- **Abhängigkeiten:** `cloudflare-konto`, `cloudflare-dns`, `hostinger-srv1243952`, `hostinger-srv1941843`
+- **Zugänge:** keine erfasst
+
+### Hostinger-Domains und Hostinger-DNS · `hostinger-dns`
+
+- **Tags:** `dns` `domains` `registrar` `hostinger` `netz`
+- **Kategorie:** Netz und Zugangsschutz
+- **Zweck:** Registriert die Domains der Agentur und führt die DNS-Zone der Domains, deren Nameserver bei Hostinger liegen.
+- **Ort:** Hostinger-Konto; wirksame Zone nur für `unternehmensbot.eu` und die geparkten Domains (`teileklar.de`, `.store`, `.pro`, `ainexi2fyi.*`). Für `nexifyai.de`, `nexifyai.cloud` und `teileklar.shop` führt Hostinger eine abgehängte Zone ohne Wirkung; wirksam ist dort Cloudflare.
+- **Zustand:** läuft belegt (Stand 2026-11-14). Beleg: `docs/04-betrieb/netz-inventur-2026-11-14.md`, Abschnitte 1.1 und 2 (Hostinger-API, nur lesend, und öffentliches DNS, 14.11.2026 22:16–22:21 UTC): Nameserver je Domain, Zoneninhalt und Schnappschüsse seit 31.10.2026 gelesen.
+- **Entscheidung:** keine
+- **Rolle im Plan:** unklar → Frage: Sollen die abgehängten Hostinger-Zonen als Rückweg stehen bleiben, und wohin soll `unternehmensbot.eu` zeigen?
+- **Wann nutzen:** Wenn zu klären ist, wo eine Domain registriert ist, welche Nameserver gelten oder wie eine Zone vor einer Änderung aussah (Schnappschüsse).
+- **Nicht nutzen für:** DNS-Änderungen an Domains, deren Nameserver bei Cloudflare liegen (dort wirkungslos); Änderungen durch Agenten ohne Freigabe.
+- **Abhängigkeiten:** `cloudflare-dns`
+
+| Zugang (Bezeichnung) | Art | Ablageort des Werts | Rechteumfang | erstellt | offengelegt | Erneuerung fällig | Hinweis |
+|---|---|---|---|---|---|---|---|
+| Hostinger-API-Schlüssel der Claude-Umgebung | API-Schlüssel als Netzwerk-Geheimnis | Netzwerk-Geheimnisse der Claude-Umgebung (Host developers.hostinger.com) | wie bei srv1941843; liest Domain-Portfolio, DNS-Zonen und Schnappschüsse (Schreibrecht nicht geprüft) | nicht belegt | nein | nein | – |
