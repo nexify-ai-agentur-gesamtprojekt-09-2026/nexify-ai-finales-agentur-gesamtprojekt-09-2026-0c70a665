@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "hinweis": "NUR nicht geheime Kennungen und Namen. Geheimnisse (API-Schluessel, Token, Webhook-Signaturschluessel) stehen ausschliesslich in der Laufzeitumgebung und niemals in dieser Datei, im Repository oder in einem Commit.",
+  "status": "gebaut_hinter_schalter_standardmaessig_aus",
+  "public_origin": "https://nexifyai.cloud",
+  "api_base": "https://backend.composio.dev/api/v3.1",
+  "projekt_id": "pr_Rl-waED4hLoX",
+  "org_id": "ok_B3D3CzcsUe7T",
+  "webhook": {
+    "id": "ws_TxH3Q0ETet7R",
+    "pfad": "/webhook/v1",
+    "version": "V3",
+    "signatur": {
+      "quelle": "https://docs.composio.dev/docs/webhook-verification",
+      "header": ["webhook-signature", "webhook-id", "webhook-timestamp"],
+      "verfahren": "HMAC-SHA256 ueber '{webhook-id}.{webhook-timestamp}.{roher Body}', Base64, Schluessel = COMPOSIO_WEBHOOK_SECRET",
+      "toleranz_sekunden": 300
+    },
+    "ereignisse": [
+      "composio.trigger.message",
+      "composio.trigger.disabled",
+      "composio.connected_account.activated",
+      "composio.connected_account.expired"
+    ]
+  },
+  "erlaubte_auth_config_ids": [],
+  "erlaubte_auth_config_ids_hinweis": "Leer = Connect-Link wird verweigert (fail-closed). Nicht geheime Auth-Config-Kennungen (ac_...) hier eintragen, sobald der Inhaber sie freigibt.",
+  "erlaubte_trigger_slugs": [],
+  "erlaubte_trigger_slugs_hinweis": "leer bis Inhaberfreigabe. Leer = Trigger-Anlage wird verweigert (422 trigger_slug_not_allowed, fail-closed). Trigger-Slugs in Grossbuchstaben (z. B. GITHUB_COMMIT_EVENT) erst nach Freigabe eintragen.",
+  "env": {
+    "geheim": ["COMPOSIO_API_KEY", "COMPOSIO_AUTH_TOKEN", "COMPOSIO_WEBHOOK_SECRET"],
+    "nicht_geheim": ["COMPOSIO_PROJECT_ID", "COMPOSIO_ORG_ID"],
+    "schalter": ["NEXIFY_SUITE", "NEXIFY_SUITE_COMPOSIO", "NEXIFY_COMPOSIO_WEBHOOK"],
+    "schalter_webhook": "NEXIFY_COMPOSIO_WEBHOOK=on schaltet nur den Webhook-Empfang ein (Signaturpruefung, Quittung), nicht die Suite-Funktionen.",
+    "schalter_regel": "Nur der exakte Wert 'on' schaltet ein; beide Schalter muessen 'on' sein (wie apps/suite/flags.py). Alles andere = aus."
+  }
+}
