@@ -566,17 +566,18 @@
         "chat"
       ],
       "kategorie": "Arbeitsplatz-Oberfläche",
-      "zweck": "Web-Oberfläche zu Hermes; vorgeschlagen als Arbeitsplatz des Inhabers.",
-      "ort": "srv1941843, Port 8788, über Traefik unter `unternehmensbot.eu` öffentlich erreichbar",
+      "zweck": "Web-Oberfläche zu Hermes (eigenes Projekt `nesquena/hermes-webui`); nach Auftrag des Inhabers vom 14.11.2026 sein Arbeitsbereich.",
+      "ort": "`unternehmensbot.eu`; der A-Eintrag zeigt auf srv1243952 (72.62.152.47). Eine Instanz ist auf srv1941843 belegt (Projekt `docker-hermes`, Port 8788); welche öffentlich antwortet, ist offen. Gestaltung im Repository unter `ops/hermes/webui/`",
       "zustand": {
         "status": "läuft belegt",
-        "beleg": "`docs/04-betrieb/server-befund-2026-11-14.md:75` (Messung 14.11.2026): öffentlich erreichbar, nur durch die Hermes-eigene Anmeldung geschützt; das widerspricht D-019 Folge 4.",
+        "beleg": "`docs/04-betrieb/hermes-arbeitsbereich-2026-11-14.md`, Abschnitt 2 (Messung 14.11.2026, 20:28–20:44 UTC): Version v0.52.492, öffentlich erreichbar, nur durch die eigene Anmeldung geschützt; das widerspricht D-019 Folge 4. Der Graphite-Skin ist lokal geprüft und nicht eingespielt.",
         "stand": "2026-11-14"
       },
       "entscheidung": "D-019",
       "rolle_im_plan": {
         "art": "unklar",
-        "frage": "Soll Hermes WebUI der Arbeitsplatz des Inhabers werden (Vorschlag: als neue Entscheidung festhalten), und wird die Oberfläche vorher vom öffentlichen Netz genommen?"
+        "frage": "Über welchen Weg wird die Oberfläche vom öffentlichen Netz genommen (Vorlage: Cloudflare Access mit Tunnel, WireGuard, Anmeldung am Proxy, SSH-Tunnel), und auf welchem der beiden Server soll der Arbeitsbereich laufen?",
+        "hinweis": "Auftrag des Inhabers vom 14.11.2026: Arbeitsbereich einschließlich Gestaltung. Einspielschritte und Abnahmeliste: `docs/04-betrieb/hermes-arbeitsbereich-2026-11-14.md`."
       },
       "zugaenge": [
         {
@@ -594,7 +595,9 @@
       "nicht_nutzen_fuer": "Die Suite für Kunden: keine Kundenkonten, keine Mandantentrennung.",
       "abhaengigkeiten": [
         "hermes",
-        "traefik"
+        "traefik",
+        "hostinger-srv1243952",
+        "cloudflare-access"
       ]
     },
     {

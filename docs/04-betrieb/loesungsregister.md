@@ -127,7 +127,7 @@ Vorgehen, Pflege und Umgang mit Schlüsseln aus dem Chat: `.claude/skills/nexify
 - `cloudflare-mcp-server` (MCP-Server-Eintrag `nexify-ai-mcp-server-cf`): Unter welcher Adresse soll der eigene MCP-Server laufen (Vorschlag: `mcp.nexifyai.cloud`), und welcher Code steht dahinter (der Entwurf aus PR 124)?
 - `cloudflare-access` (Cloudflare Access und Tunnel): Sollen die Hermes-Oberfläche und andere interne Oberflächen hinter Cloudflare Access oder einen Tunnel gelegt werden, um D-019 Folge 4 (nicht öffentlich) zu erfüllen?
 - `hostinger-srv1243952` (Hostinger-Server srv1243952): Was läuft auf srv1243952, liegt dort die Shop-Datenbank, und wird der Server weiter gebraucht?
-- `hermes-webui` (Hermes WebUI): Soll Hermes WebUI der Arbeitsplatz des Inhabers werden (Vorschlag: als neue Entscheidung festhalten), und wird die Oberfläche vorher vom öffentlichen Netz genommen?
+- `hermes-webui` (Hermes WebUI): Über welchen Weg wird die Oberfläche vom öffentlichen Netz genommen (Vorlage: Cloudflare Access mit Tunnel, WireGuard, Anmeldung am Proxy, SSH-Tunnel), und auf welchem der beiden Server soll der Arbeitsbereich laufen?
 - `9router` (9router (eigener LLM-Router)): Soll 9router die einzige Tür zu den Modellen sein, oder gehen die Aufrufe direkt an OpenRouter (oder über das Cloudflare AI Gateway)? Der Compose-Kommentar nennt 9router als abgelöst, die Modellregel als Ziel.
 - `cognee-plugin-lokal` (Cognee-Plugin in Claude Code (lokale Instanz)): Soll das Plugin nach der Wiederherstellung auf die dauerhafte Server-Instanz zeigen oder abgeschaltet werden (Entscheidung 8 im Aufräumplan)?
 - `kb-gateway` (kb-gateway): Wird das kb-gateway noch aufgerufen, und soll es nach der Ablösung als einziger Eingang vor Cognee bleiben oder entfallen?
@@ -366,14 +366,14 @@ Vorgehen, Pflege und Umgang mit Schlüsseln aus dem Chat: `.claude/skills/nexify
 
 - **Tags:** `arbeitsplatz` `oberflaeche` `hermes` `chat`
 - **Kategorie:** Arbeitsplatz-Oberfläche
-- **Zweck:** Web-Oberfläche zu Hermes; vorgeschlagen als Arbeitsplatz des Inhabers.
-- **Ort:** srv1941843, Port 8788, über Traefik unter `unternehmensbot.eu` öffentlich erreichbar
-- **Zustand:** läuft belegt (Stand 2026-11-14). Beleg: `docs/04-betrieb/server-befund-2026-11-14.md:75` (Messung 14.11.2026): öffentlich erreichbar, nur durch die Hermes-eigene Anmeldung geschützt; das widerspricht D-019 Folge 4.
+- **Zweck:** Web-Oberfläche zu Hermes (eigenes Projekt `nesquena/hermes-webui`); nach Auftrag des Inhabers vom 14.11.2026 sein Arbeitsbereich.
+- **Ort:** `unternehmensbot.eu`; der A-Eintrag zeigt auf srv1243952 (72.62.152.47). Eine Instanz ist auf srv1941843 belegt (Projekt `docker-hermes`, Port 8788); welche öffentlich antwortet, ist offen. Gestaltung im Repository unter `ops/hermes/webui/`
+- **Zustand:** läuft belegt (Stand 2026-11-14). Beleg: `docs/04-betrieb/hermes-arbeitsbereich-2026-11-14.md`, Abschnitt 2 (Messung 14.11.2026, 20:28–20:44 UTC): Version v0.52.492, öffentlich erreichbar, nur durch die eigene Anmeldung geschützt; das widerspricht D-019 Folge 4. Der Graphite-Skin ist lokal geprüft und nicht eingespielt.
 - **Entscheidung:** D-019
-- **Rolle im Plan:** unklar → Frage: Soll Hermes WebUI der Arbeitsplatz des Inhabers werden (Vorschlag: als neue Entscheidung festhalten), und wird die Oberfläche vorher vom öffentlichen Netz genommen?
+- **Rolle im Plan:** unklar → Frage: Über welchen Weg wird die Oberfläche vom öffentlichen Netz genommen (Vorlage: Cloudflare Access mit Tunnel, WireGuard, Anmeldung am Proxy, SSH-Tunnel), und auf welchem der beiden Server soll der Arbeitsbereich laufen? (Auftrag des Inhabers vom 14.11.2026: Arbeitsbereich einschließlich Gestaltung. Einspielschritte und Abnahmeliste: `docs/04-betrieb/hermes-arbeitsbereich-2026-11-14.md`.)
 - **Wann nutzen:** Wenn der Inhaber selbst mit den Agenten arbeiten will und nach seiner Arbeitsoberfläche gefragt wird.
 - **Nicht nutzen für:** Die Suite für Kunden: keine Kundenkonten, keine Mandantentrennung.
-- **Abhängigkeiten:** `hermes`, `traefik`
+- **Abhängigkeiten:** `hermes`, `traefik`, `hostinger-srv1243952`, `cloudflare-access`
 
 | Zugang (Bezeichnung) | Art | Ablageort des Werts | Rechteumfang | erstellt | offengelegt | Erneuerung fällig | Hinweis |
 |---|---|---|---|---|---|---|---|
