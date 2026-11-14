@@ -978,8 +978,10 @@ html[data-theme='light'] #atelier .nx-logo-x{color:var(--as-accent)}
 
 /* ===== Kopfleiste: schwebendes Glas mit Volumen ===== */
 /* Beim Blaettern liegt die Leiste als dicke Scheibe ueber Film und Bildern: Kante bricht (as-linse-leiste), Mitte bleibt klar,
-   Innenkante sammelt Licht. Je Seite um --kopf-einzug kuerzer; Inhalt haelt 32 px Abstand zur eigenen Glaskante. */
-#atelier .site-header{--kopf-einzug:clamp(32px,4.5cqi,72px);--kopf-innen:var(--as-s-8)}
+   Innenkante sammelt Licht. Je Seite um --kopf-einzug kuerzer; Inhalt haelt 32 px Abstand zur eigenen Glaskante.
+   Ab 1500 px Containerbreite waechst der Einzug um 10 % der Mehrbreite (bis 96 px), damit die Leiste auf sehr breiten Schirmen
+   nicht die ganze Breite fuellt; darunter unveraendert (gemessen 1000 bis 1835 px: Rahmen und Abstaende identisch). */
+#atelier .site-header{--kopf-einzug:clamp(32px,calc(4.5cqi + max(0px,(100cqi - 1500px) * .1)),96px);--kopf-innen:var(--as-s-8)}
 #atelier[data-scrolled='true'] .site-header{padding-left:calc(var(--layout-page-padding) + var(--kopf-einzug) + var(--kopf-innen));padding-right:calc(var(--layout-page-padding) + var(--kopf-einzug) + var(--as-s-6))}
 #atelier[data-scrolled='true'] .site-header::before{background:var(--as-glass-dense),color-mix(in srgb,var(--as-ground) 34%,transparent);-webkit-backdrop-filter:var(--as-glass-filter-bar);backdrop-filter:var(--as-glass-filter-bar);box-shadow:var(--as-lens),var(--as-volume),var(--as-depth-raised)}
 @container website (max-width:640px){
