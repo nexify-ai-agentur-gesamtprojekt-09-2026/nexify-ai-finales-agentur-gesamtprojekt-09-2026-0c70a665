@@ -47,7 +47,7 @@ import {
   type OutputGuard,
 } from '../../../lib/chat-guidance';
 import { chatRateLimit, clientKey } from '../../../lib/chat-rate-limit';
-import { chatLlmRoute, gatewayConfigured, missingGatewayEnv, streamGatewayCompletion, type ChatLlmRoute } from './llm-gateway';
+import { chatLlmRoute, gatewayConfigured, gatewayRoutePermitted, missingGatewayEnv, streamGatewayCompletion, type ChatLlmRoute } from './llm-gateway';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -88,7 +88,7 @@ type FailureStage = 'llm' | 'persistence';
  * Enthält ausschließlich feste Kennwörter, Statuszahl, Systemfehlercode und Dauer.
  * Niemals: Adresse oder Parameter des Routers, Schlüssel, Antworttext, Nutzertext, Konversations-ID.
  */
-function logChatFailure(stage: FailureStage, error: unknown, context: { stream: boolean; startedAt: number; step?: string }): void {
+function logChatFailure(stage: FailureStage, error: unknown, context: { stream: boolean; startedAt: number; step?: string; llm_route?: string }): void {
   const entry: Record<string, string | number | boolean> = {
     event: 'chat_failure',
     route: '/api/chat',
@@ -97,6 +97,7 @@ function logChatFailure(stage: FailureStage, error: unknown, context: { stream: 
     elapsed_ms: Date.now() - context.startedAt,
   };
   if (context.step) entry.step = context.step;
+  if (context.llm_route) entry.llm_route = context.llm_route;
   if (stage === 'llm') {
     Object.assign(entry, describeChatFailure(error));
   } else {
@@ -116,7 +117,7 @@ function logChatFailure(stage: FailureStage, error: unknown, context: { stream: 
  * Nach dem ersten Fehlschlag entfallen die weiteren Speicherschritte dieser Anfrage: ein hängender
  * Speicher kostet höchstens ein Zeitlimit, nicht eines je Schritt.
  */
-async function persistenceStep<T>(step: string, run: () => Promise<T>, fallback: T, context: { stream: boolean; startedAt: number; storeFailed?: boolean }): Promise<T> {
+async function persistenceStep<T>(step: string, run: () => Promise<T>, fallback: T, context: { stream: boolean; startedAt: number; storeFailed?: boolean; llm_route?: string }): Promise<T> {
   if (context.storeFailed) return fallback;
   try {
     return await run();
@@ -188,6 +189,11 @@ export async function POST(request: Request): Promise<Response> {
     return err('chat_llm_not_configured', 503);
   }
   const viaGateway = llmRoute === 'cloudflare-ai-gateway';
+  if (viaGateway && !gatewayRoutePermitted()) {
+    // config/llm-policy.json nennt als Zielweg nur den 9router: erst Entscheidung und Policy, dann dieser Weg.
+    logChatRejected({ status: 503, cause: 'route_not_permitted_by_policy', deployment: deploymentKind(), llm_route: llmRoute });
+    return err('chat_llm_not_configured', 503);
+  }
   if (viaGateway ? !gatewayConfigured() : !chatLlmConfigured()) {
     logChatRejected(viaGateway
       ? { status: 503, cause: 'not_configured', missing: missingGatewayEnv(), deployment: deploymentKind(), llm_route: llmRoute }
@@ -220,7 +226,9 @@ export async function POST(request: Request): Promise<Response> {
   if (!limit.allowed) return err('chat_rate_limited', 429, { 'Retry-After': String(limit.retryAfterSeconds) });
 
   const startedAt = Date.now();
-  const logContext: { stream: boolean; startedAt: number; storeFailed?: boolean } = { stream: wantsStream, startedAt };
+  const logContext: { stream: boolean; startedAt: number; storeFailed?: boolean; llm_route?: string } = { stream: wantsStream, startedAt };
+  // Nur im Gateway-Modus, damit die Protokollzeilen des Standardwegs unverändert bleiben.
+  if (viaGateway) logContext.llm_route = llmRoute;
   const requestedId = typeof req.conversationId === 'string' ? req.conversationId.slice(0, 80) : undefined;
   const localId = requestedId?.startsWith('local-') ? requestedId : `local-${crypto.randomUUID()}`;
   const conversationId =

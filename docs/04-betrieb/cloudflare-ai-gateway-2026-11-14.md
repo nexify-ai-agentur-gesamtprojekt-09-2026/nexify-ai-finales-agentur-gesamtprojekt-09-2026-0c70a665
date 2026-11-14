@@ -119,7 +119,24 @@ bietet den datierten Stand `-1017` nicht an und führt das Modell unter
   beides sind Rechtstexte und damit Sache des Inhabers (D-017). Auch ohne Protokoll laufen
   die Texte durch Cloudflare hindurch.
 
-## 5. Umschaltung im Code (vorbereitet, aus)
+## 5. Umschaltung im Code (vorbereitet, aus und gesperrt)
+
+**Zuerst die Policy, dann der Schalter.** `config/llm-policy.json` nennt im Zielbild vom
+10.11.2026 `gateway: 9router_only` und `direct_provider_bypass_allowed: false`. Ein Aufruf
+über das Cloudflare-Gateway an OpenRouter widerspricht dem. `CHAT_LLM_ROUTE` darf deshalb
+erst gesetzt werden, wenn (1) ein D-Eintrag den Weg erlaubt (Abschnitt 8) und (2) die Policy
+nachgeführt ist. Der Code erzwingt das: `llm-gateway.ts` führt die Sperre
+`POLICY_PERMITS_CLOUDFLARE_GATEWAY = false`, gespiegelt aus der Policy; ein Test vergleicht
+sie mit der Datei. Solange sie gilt, antwortet die Route im Gateway-Modus mit 503 und
+protokolliert `route_not_permitted_by_policy`. Die Policy-Datei wird zur Laufzeit nicht
+gelesen (sie liegt nicht im Build von `apps/web`); nach einer Policy-Änderung sind Sperre
+und Test im selben Commit nachzuführen.
+
+`CHAT_LLM_ROUTE` wird wörtlich verglichen: Kleinschreibung zählt, Anführungszeichen im Wert
+gehören nicht hinein (`"cloudflare-ai-gateway"` mit Zeichen ist ein unbekannter Wert und
+ergibt 503). Nach dem Setzen und Ausliefern ist sofort ein Rauchtest fällig: eine
+Chat-Nachricht auf der Seite und ein Blick ins Vercel-Protokoll auf `chat_rejected` und
+`chat_failure`.
 
 Der bisherige Chat-Weg ist **nicht** anbieterneutral: `apps/web/lib/chat-llm.ts` sendet
 immer `Authorization: Bearer <ROUTER_KEY>` und den festen Router-Namen
@@ -134,7 +151,7 @@ eingebunden in `apps/web/app/api/chat/route.ts`, geprüft in
 | Variable (Vercel, Production, serverseitig) | Wert |
 |---|---|
 | `CHAT_LLM_ROUTE` | `cloudflare-ai-gateway` |
-| `CF_AIG_CHAT_URL` | die im Verbindungstest bestätigte Adresse, z. B. `https://gateway.ai.cloudflare.com/v1/a112f895c19e0d65f6f64b3e89f747f8/default/openrouter/v1/chat/completions` |
+| `CF_AIG_CHAT_URL` | die im Verbindungstest bestätigte Adresse, z. B. `https://gateway.ai.cloudflare.com/v1/<konto>/default/openrouter/v1/chat/completions` |
 | `CF_AIG_TOKEN` | Token aus Schritt 5 in Abschnitt 3 (Geheimnis, als „Sensitive" anlegen) |
 | `CF_AIG_BYOK_ALIAS` | nur, wenn in Schritt 3 ein anderer Alias als `default` vergeben wurde |
 
@@ -145,13 +162,19 @@ Verhalten des Gateway-Wegs:
   (OpenRouter: nur Anbieter, die alle Parameter annehmen).
 - Kopfzeilen: `cf-aig-authorization`, `cf-aig-collect-log-payload: false`,
   `cf-aig-skip-cache: true`, wahlweise `cf-aig-byok-alias`. Keine `Authorization`.
-- Die Adresse muss `https` sein und auf `/openrouter/chat/completions` oder
-  `/openrouter/v1/chat/completions` enden. `/compat/...` und andere Anbieter werden
-  abgewiesen (`invalid_endpoint`).
+- Die Adresse muss wörtlich
+  `https://gateway.ai.cloudflare.com/v1/<konto>/<gateway>/openrouter/chat/completions`
+  lauten (wahlweise `/openrouter/v1/chat/completions`; `<konto>` sind 32 Hex-Zeichen).
+  Anderer Host (auch `gateway.nexifyai.cloud`), Zugangsdaten, Port, Query, Fragment,
+  `/compat/...` und andere Anbieter werden abgewiesen (`invalid_endpoint`).
+  Weiterleitungen werden nicht verfolgt.
 - Antwortprüfung: Nennt die Antwort ein anderes Modell als die Policy-Kennung oder meldet
   das Gateway einen Ausweichschritt (`cf-aig-step` ungleich `0`), endet der Aufruf mit
-  `model_policy`; der Besucher sieht `chat_llm_failed`, keinen Text. Nennt die Antwort gar
-  kein Modell, kann der Code es nicht prüfen und lässt sie durch.
+  `model_policy`; der Besucher sieht `chat_llm_failed`, keinen Text. Text wird
+  zurückgehalten, bis ein Datenblock die Policy-Kennung genannt hat. Eine Antwort ganz
+  ohne Modellangabe wird abgelehnt.
+- Protokollzeilen des Gateway-Wegs tragen `llm_route`; Verbindungsfehler melden den
+  Systemcode wie auf dem Router-Weg.
 - Fehlen `CF_AIG_CHAT_URL` oder `CF_AIG_TOKEN`: 503, auch wenn die Router-Variablen gesetzt
   sind. Kein Rückfall auf den Router. Unbekannter Wert in `CHAT_LLM_ROUTE`: 503
   (`route_invalid`).
@@ -161,10 +184,17 @@ ausliefern. `ROUTER_URL` und `ROUTER_KEY` bleiben während der Umstellung unver�
 gesetzt; sie werden im Gateway-Modus nicht gelesen.
 
 Ob die eigene Adresse `gateway.nexifyai.cloud` denselben Pfadaufbau hat wie
-`gateway.ai.cloudflare.com/v1/<konto>/<gateway>/`, ist nicht belegt: Eine eigene Domain für
+`gateway.ai.cloudflare.com/v1/<konto>/<gateway>/`, ist nicht belegt, und der Code nimmt sie
+nicht an: Eine eigene Domain für
 das AI Gateway kommt auf den abgerufenen Dokumentationsseiten nicht vor. Gemessen am
 14.11.2026: `https://gateway.nexifyai.cloud/` und `.../compat/chat/completions` antworten
-auf einen Abruf ohne Anmeldung mit 401 (JSON). Bis zur Klärung die Cloudflare-Adresse nehmen.
+auf einen Abruf ohne Anmeldung mit 401 (JSON). Soll die eigene Domain gelten, ist das eine
+Codeänderung mit eigenem Test.
+
+Offene Kleinigkeiten für die Zusammenführung mit `apps/web/lib/chat-llm.ts` (dort nicht
+geändert, weil die Datei an den Browser-Beleg `evidence/resize-2026-11-10` gebunden ist):
+Der Router-Weg verfolgt Weiterleitungen (kein `redirect: 'error'`); `networkCode` und die
+Auswertung des Antwortstroms sind im Gateway-Adapter nachgebildet statt geteilt.
 
 **Hermes:** spricht OpenAI-kompatibel und könnte dieselbe Gateway-Adresse als Basisadresse
 nutzen. `ops/hermes/home/config.yaml` nennt heute `provider: openrouter` direkt. Ob Hermes
@@ -179,7 +209,7 @@ Platzhalter nicht in Dateien oder Chats schreiben; den Token nur in der eigenen 
 
 ```bash
 export CF_AIG_TOKEN='<Token des Gateways>'
-curl -sS -D - https://gateway.ai.cloudflare.com/v1/a112f895c19e0d65f6f64b3e89f747f8/default/openrouter/v1/chat/completions \
+curl -sS -D - https://gateway.ai.cloudflare.com/v1/<konto>/default/openrouter/v1/chat/completions \
   -H "cf-aig-authorization: Bearer $CF_AIG_TOKEN" \
   -H 'content-type: application/json' \
   -H 'cf-aig-collect-log-payload: false' -H 'cf-aig-skip-cache: true' \
