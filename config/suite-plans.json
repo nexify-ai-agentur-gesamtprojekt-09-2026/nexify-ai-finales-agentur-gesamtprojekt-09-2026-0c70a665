@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "status": "technical_scaffold_no_plan_released",
+  "note": "Neutrale Kennungen ohne Betrag, Währung, Limit oder Anbieter. Stufen, Namen, Inhalte und Preise legt ausschließlich der Inhaber fest. Solange released=false, entsteht aus keiner Stufe und keiner Testphase eine Berechtigung.",
+  "capabilities": ["chat", "dashboard", "connections"],
+  "plans": {
+    "plan_a": {"released": false, "capabilities": []},
+    "plan_b": {"released": false, "capabilities": []},
+    "plan_c": {"released": false, "capabilities": []}
+  },
+  "trial": {
+    "released": false,
+    "capabilities": [],
+    "duration_source": "config/selfservice-policy.json#trial.duration_seconds"
+  },
+  "past_due": {
+    "grace_period_seconds": null,
+    "grace_status": "owner_decision_required_no_period_invented"
+  },
+  "after_end": {
+    "capabilities": [],
+    "status": "owner_decision_required_read_and_export_scope_not_released"
+  }
+}
