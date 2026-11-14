@@ -170,3 +170,68 @@ Dies ist die **Zuarbeit für `docs/01-konzept/library-erweiterung-2026-11-14.md`
 3. **LIB-TK-01 + LIB-TK-03 (Passungs-Assistent + Werkstatt-Partner):** TEILEKLARs zwei einzigartige, belegbar nachgefragte Hebel (Fehlkauf-Schmerz [Q10], schrumpfender Werkstattmarkt [Q12]) — die klarste Abgrenzung zu Autodoc & Marktplätzen.
 
 **Abhängigkeiten/Sperren, die die Reihenfolge beeinflussen:** Preisfreigabe (O-1) begrenzt NX-Angebotskommunikation; Referenzfreigabe (O-2) begrenzt LIB-NX-04-Inhalte; Shop-Betrieb/Lieferantenvertrag begrenzen LIB-TK-01/05. Diese sind Inhaber-Entscheidungen, keine Bau-Blocker für die Vorbereitung.
+
+---
+
+## 4. Botschaften je Zielsegment (AKP 4)
+
+Im Ton der jeweiligen Marke (NeXify siezt, sachlich-ruhig, keine Superlative/Garantien; TEILEKLAR duzt, alltagsnah, ehrlich). Regeln: `gesamtkonzept-2026-11-14.md` Abschnitt 5. **Keine fertigen Rechtstexte, keine Preisversprechen, keine Antwortzeit-Zusagen.** Kanal je Botschaft aus dem Marketing-Gesamtkonzept abgeleitet.
+
+### 4.1 NeXify AI
+
+| Segment | Kernbotschaft(en) | Passender Kanal |
+|---|---|---|
+| **NX-A Handwerk/Bau/Fertigung** | 1) „Die Büroarbeit, die Sie jeden Abend kostet, übernimmt ein Ablauf — Sie behalten die Entscheidung." 2) „Fangen wir bei der Stelle an, an der es hakt: ein Tag, ein schriftliches Ergebnis." | Lokale/organische Suche (Stadt-/Branchenseiten, LIB-NX-03), GEO-Faktenblöcke, Empfehlung. Kein Kaltakquise-Versand. |
+| **NX-B Dienstleister/Handel/Organisationen** | 1) „Ein Ort für den Vorgang statt Postfach, Telefon und Liste." 2) „Sie kennen den Umfang vor dem Start — ein Ansprechpartner statt drei Dienstleister." | Organische Suche nach Vorgang/Lösung, LinkedIn (Pascal persönlich, Vorher/Nachher ohne unbelegte Zahl), Wissenshub (LIB-NX-08). |
+| **NX-C technische Ansprechpersonen / API** | 1) „KI in Ihrer Anwendung — abgerechnet nach Nutzung, Daten und Code bleiben bei Ihnen." 2) „Kein Abo je Platz, keine Blackbox: eigene Schlüssel, klare Kosten je Aufruf." | Produktseiten `/produkte/api` & `/produkte/skills-mcp`, technische Doku, Entwickler-/GEO-Suche. |
+
+Dach über allen: **„Ein Gespräch. Ein Projekt, das passt."** (Leitbotschaft, PR 119 / gesamtkonzept-2026-11-14 Abschnitt 4.)
+
+### 4.2 TEILEKLAR
+
+| Segment | Kernbotschaft(en) | Passender Kanal |
+|---|---|---|
+| **TK-1 Selbstschrauber/Halter** | 1) „Wähl dein Fahrzeug einmal aus — dann siehst du nur noch, was passt." 2) „Ehrlich bleibt ehrlich: Ein Foto belegt keine Passung. So prüfst du es selbst." | Organische/lokale Suche nach Teil + Fahrzeug, Teilenummer-Zielseiten (LIB-TK-02), Passungsseite. |
+| **TK-2 freie Werkstätten** | 1) „Aufträge, bei denen Fahrzeug und Teil schon geklärt sind." 2) „Kunden aus Ihrer Umgebung finden Sie — ohne Rückfrage-Pingpong." (Sie-Form im B2B) | Werkstattverzeichnis, lokale Suche, Partner-Formular (LIB-TK-03/04), Fachumfeld. |
+| **TK-3 Zubehör-/Saisonkäufer** | 1) „Zubehör für Auto und Motorrad — mit klaren Angaben statt Rätselraten." 2) „Zur Saison das Richtige: Reifen, Batterie, Pflege — passend ausgewählt." | Kategorie-/Stöberseiten, SEO, saisonale Social-Posts (Postiz, LIB-TK-07). |
+
+Dach über allen: **„Für Auto und Motorrad. Klar gefunden."** (TEILEKLAR-Startseite, gesamtkonzept-2026-11-14 Abschnitt 6.)
+
+---
+
+## 5. Quellen- und Annahmenverzeichnis (AKP 5)
+
+### 5.1 Externe Quellen (öffentliche Webrecherche, abgerufen 14.11.2026)
+
+- **[Q1]** DMB/Salesforce „KI-Index Mittelstand 2025" (zit. n. Mittelstandsbund & marktundmittelstand.de): ~33,1 % Nutzung, 9,5 % voll implementiert, 43 % ohne Pläne. https://www.mittelstandsbund.de/alle-nachrichten/ki-index-mittelstand-jeder-dritte-mittelstaendler-setzt-ki-ein · https://www.marktundmittelstand.de/ratgeber/ein-drittel-der-mittelstaendler-setzt-bereits-auf-kuenstliche-intelligenz
+- **[Q2]** business.digital „KI im Mittelstand 2026" (referiert Destatis IKT 2025: 23/36/57 % nach Größe; 81 % messen ROI nicht). https://business.digital/magazin/ki-im-mittelstand
+- **[Q3]** bebensee.it „KI im deutschen Mittelstand" (referiert Bitkom ~36 % / ifo ~40,9 % ab 20 Beschäftigten). https://bebensee.it/de/blog/ki-im-deutschen-mittelstand-strategieluecken-fakten-und-handlungsrahmen/index.html
+- **[Q4]** FZI/Hochschule Karlsruhe „KI-Einsatz im deutschen Mittelstand" (40 % Einsatz, 21 % mit Strategie). https://www.fzi.de/2025/10/06/ki-einsatz-im-deutschen-mittelstand/
+- **[Q5]** Bitkom-Handwerksstudie 2025 (504 Betriebe; Azubimangel 83 %, Fachkräftemangel 75 %, Digitalisierungsnote 3, 54 % Wettbewerb um Fachkräfte) + marktundmittelstand.de (KI für Büroaufgaben; 84 % skeptisch). https://www.bitkom.org/sites/main/files/2026-01/bitkom-studienbericht-handwerk.pdf · https://www.marktundmittelstand.de/technologie/84-prozent-sind-skeptisch
+- **[Q6]** CBS / Eurostat (NL, zit. n. ictmagazine.nl, clevertech.nl, werkenmetai.nl): Microbedrijven 13,8 % (von 6,8 % 2023), MKB 29,8 %, Grootbedrijf 66,2 %; Eurostat NL 33,2 % vs. EU 20,0 %; Microbetriebe Marketing/Verkauf 32,7 %. https://www.ictmagazine.nl/nieuws/slechts-14-procent-van-nederlandse-microbedrijven-gebruikt-ai/ · https://werkenmetai.nl/blog/hoeveel-nederlandse-bedrijven-gebruiken-ai
+- **[Q7]** Anbieterlandschaft DACH-Automatisierungsagenturen (Selbstdarstellungen, Preise anbietereigen): Sanetech, FullCircle, DARE Solutions, Webmaster Studios, ki-agentur.io, Automated KI-Agentur; Tool-Vergleich Make/Zapier/n8n. https://www.sanetech-solutions.de/leistungen/n8n-agentur/ · https://dare-solutions.de/n8n-agentur/ · https://ki-agentur.io/leistungen/ki-automatisierung · https://techflow.ai/blog/make-vs-zapier-vs-n8n
+- **[Q8]** GM Insights „Europe E-commerce Automotive Aftermarket" (Markt ~21,09 Mrd. USD 2025; Autodoc ~9,2 %; Top 5 = 28,4 %) + amz.de (Fragmentierung, kfzteile24 #3, Speed4Trade −6,4 % Besuchsfrequenz). https://www.gminsights.com/industry-analysis/europe-e-commerce-automotive-aftermarket · https://www.amz.de/onlinemarkt-fuer-autoteile-studie-zeigt-fragmentierung
+- **[Q9]** Autodoc-Geschäftszahlen 2025 (Unternehmensmitteilung, zit. n. eqs-news.com & vau-max.de): ~1,8 Mrd. € Umsatz, 18,9 Mio. Bestellungen (+12,4 %), 72,5 Mio. Artikel (+10,7 %), 9,3 Mio. aktive Kunden. https://www.eqs-news.com/news/corporate/autodoc-festigt-europaeische-marktfuehrerschaft-mit-starker-performance-im-jahr-2025/564219a5-1dc0-4d42-bd11-036272ebcd5f_de
+- **[Q10]** Passungs-/Fehlkauf-Problem: Autodoc-Ratgeber (zit. n. Stuttgarter Zeitung — HSN/TSN nur erster Filter, Baujahr/Schlüsselnummer führt häufig zu Fehlbestellung), AutoScout24 (VIN/Teilenummer), Kfz-Meisterbetrieb (häufigster Fehler = falsches Bauteil). https://www.stuttgarter-zeitung.de/wissen/online-handel-so-findet-man-das-richtige-ersatzteil-fuers-auto-79519314.html · https://www.autoscout24.de/informieren/ratgeber/kfz-technik/kfz-ersatzteile/
+- **[Q11]** Web-Agentur-/KMU-Website-Preise (Anbieter-Ratgeber, Spannen): sellwerk.de, studiomeyer.io, drweb.de (KMU-Website 1.500–8.000 €, Individualprojekte ab 8.000–12.000 €). https://sellwerk.de/wissenswert/was-kostet-eine-website · https://www.drweb.de/website-kosten/
+- **[Q12]** Werkstattmarkt DE: e-mobil BW „Freie Werkstätten und Servicemarkt 2040" (~36.570 Werkstätten, ~22.000 markenungebunden 2021; −20 % bis 2030, −40 % bis 2040) + DEKRA/Ipsos (digitales Serviceangebot hinter Erwartungen). https://www.e-mobilbw.de/fileadmin/media/e-mobilbw/Downloads/Pressemeldungen/2023/PM_e_mobilBW_Freie_Werkstaetten_und_Servicemarkt_2040.pdf · https://www.autohaus.de/nachrichten/schadenbusiness/aktuelle-dekra-ipsos-studie-beim-digitalen-service-bescheinigen-autobesitzer-ihren-werkstaetten-fortschritte-3893469
+
+**Vorbehalt zu allen Marktzahlen:** KI-Nutzungsquoten variieren je nach Studiendefinition erheblich; Autodoc-/Agenturzahlen stammen teils aus Eigenangaben; Marktgrößen sind Schätzungen einzelner Research-Häuser und nicht direkt vergleichbar. Für Zitate im Außenauftritt sind die Primärquellen (Destatis, Bitkom, CBS, Geschäftsberichte) direkt zu prüfen. Nicht gefunden: belastbare Einzelzahl zum Zeitaufwand fürs Angebotsschreiben im Handwerk; kfzteile24-Umsatz/-Volumen; deutschlandspezifische Teilemarktgröße (nur europäisch belegt).
+
+### 5.2 Interne Quellen (nur gelesen, Daten keine neuen Rechte)
+
+`CLAUDE.md`, `AGENTS.md`, `config/llm-policy.json`, `config/source-boundaries.json`, `config/selfservice-policy.json`, `config/operating-model.json`, `config/fakten.json`, `config/loesungsregister.json`, `config/site-map.json` (Verweis), `docs/01-konzept/NeXify-Marketingkonzept.md` (MKT-002), `docs/01-konzept/teileklar-shop.md`, `docs/05-marketing/gesamtkonzept-2026-11-14.md`. Ausgewählt über `tools/context_executor.py`.
+
+### 5.3 Annahmenverzeichnis (nicht belegt — als ANNAHME markiert)
+
+| # | Annahme | Warum offen / nächster Schritt |
+|---|---|---|
+| A-1 | Budgetrahmen NX-A/NX-B/TK-2 | Keine NeXify-Preisfreigabe (O-1) und keine gemessenen Abschlusswerte; Marktanker sind fremde Anbieterpreise. Inhaber-Entscheidung O-1. |
+| A-2 | Wettbewerbstyp „generische KI-Assistenten/SaaS" (NeXify #4) | Marktbeobachtung ohne Einzelbeleg; bei Bedarf gezielte Quelle nachziehen. |
+| A-3 | Priorisierung TK-3 nach TK-1/TK-2 | Hängt an Katalog-/Preisanbindung (Lieferantenvertrag, IST offen). |
+| A-4 | Benelux-Priorität (NX-09) | NL-MKB-Nachfrage belegt [Q6], aber NeXify-Hauptmarkt bleibt DE (SOLL); muttersprachliche Prüfung offen (O-12). |
+| A-5 | Wirkung-×-Aufwand-Einstufungen in Abschnitt 3 | Experteneinschätzung aus Belegen + internem Stand, keine gemessenen Umsetzungsdaten; im Meeting durch Inhaber zu validieren. |
+
+---
+
+*Ende der Recherche. Offene Inhaber-Entscheidungen (O-1 Preise, O-2 Referenzen, O-9 TEILEKLAR-Betrieb/Lieferant) bleiben die wichtigsten fehlenden Belege und sind zugleich die größten Hebel für die Angebots- und Library-Roadmap.*
