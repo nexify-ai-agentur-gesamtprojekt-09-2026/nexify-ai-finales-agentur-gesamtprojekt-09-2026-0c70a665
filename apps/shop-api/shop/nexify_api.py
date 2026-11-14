@@ -511,7 +511,7 @@ class ProfileIn(BaseModel):
 @router.get("/api/portal/profile")
 async def portal_profile(request: Request):
     user = await need_user(request)
-    team = [clean(m) for m in await db.team_members.find({"tenant_id": user["user_id"]}).to_list(50)]
+    team = [clean(m) for m in await db.team_members.find({"tenant_id": user["user_id"], "archived_at": None}).to_list(50)]
     privacy = [clean(p) for p in await db.privacy_requests.find({"tenant_id": user["user_id"]}).sort("created_at", -1).to_list(20)]
     return {"user": clean(user), "team": team, "privacy_requests": privacy}
 
@@ -539,8 +539,30 @@ async def portal_team_add(body: TeamIn, request: Request):
 @router.delete("/api/portal/team/{member_id}")
 async def portal_team_remove(member_id: str, request: Request):
     user = await need_user(request)
-    await db.team_members.delete_one({"member_id": member_id, "tenant_id": user["user_id"]})
-    return {"ok": True}
+    # Nothing is deleted irreversibly: the entry is archived, hidden from lists and can be restored.
+    res = await db.team_members.update_one({"member_id": member_id, "tenant_id": user["user_id"], "archived_at": None},
+                                           {"$set": {"archived_at": now_iso(), "archived_by": user["user_id"], "status": "archiviert"}})
+    if not res.matched_count:
+        raise HTTPException(404, {"error": "not_found"})
+    await audit(user, "team_member_archived", member_id)
+    return {"ok": True, "archived": True}
+
+
+@router.get("/api/portal/team/archive")
+async def portal_team_archive(request: Request):
+    user = await need_user(request)
+    return {"items": [clean(m) for m in await db.team_members.find({"tenant_id": user["user_id"], "archived_at": {"$ne": None}}).to_list(200)]}
+
+
+@router.post("/api/portal/team/{member_id}/restore")
+async def portal_team_restore(member_id: str, request: Request):
+    user = await need_user(request)
+    res = await db.team_members.update_one({"member_id": member_id, "tenant_id": user["user_id"], "archived_at": {"$ne": None}},
+                                           {"$set": {"archived_at": None, "archived_by": None, "status": "eingeladen", "restored_at": now_iso()}})
+    if not res.matched_count:
+        raise HTTPException(404, {"error": "not_found"})
+    await audit(user, "team_member_restored", member_id)
+    return clean(await db.team_members.find_one({"member_id": member_id, "tenant_id": user["user_id"]}))
 
 
 class PrivacyIn(BaseModel):

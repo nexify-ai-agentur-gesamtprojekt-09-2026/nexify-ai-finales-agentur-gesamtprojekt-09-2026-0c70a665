@@ -17,6 +17,13 @@ except ImportError:
     HTTP_DEPS = False
 
 
+class NoHardDeletes(unittest.TestCase):
+    def test_portal_api_contains_no_irreversible_delete(self):
+        source = (ROOT / "apps/shop-api/shop/nexify_api.py").read_text()
+        for call in ("delete_one(", "delete_many(", ".drop(", "find_one_and_delete("):
+            self.assertNotIn(call, source, call)
+
+
 @unittest.skipUnless(HTTP_DEPS, "pinned FastAPI/httpx dependencies unavailable")
 class Base(unittest.IsolatedAsyncioTestCase):
     async def asyncSetUp(self):
@@ -94,6 +101,29 @@ class ChatLimitPerParty(Base):
             self.assertEqual(history.status_code, 200)
             self.assertNotIn("owner_hash", history.text)
             self.assertNotIn(token, repr(self.db.oracle_messages.rows))
+
+
+class TeamArchive(Base):
+    async def test_removal_archives_hides_and_can_be_restored(self):
+        created = (await self.call("POST", "/api/portal/team", "a", json={"email": "kollegin@example.invalid", "role": "lesen"})).json()
+        member_id = created["member_id"]
+        self.assertEqual((await self.call("DELETE", "/api/portal/team/" + member_id, "b")).status_code, 404)
+        removed = await self.call("DELETE", "/api/portal/team/" + member_id, "a")
+        self.assertEqual(removed.json(), {"ok": True, "archived": True})
+        row = self.db.team_members.rows[0]
+        self.assertEqual((row["email"], row["archived_by"], row["status"]), ("kollegin@example.invalid", "user_a", "archiviert"))
+        self.assertTrue(row["archived_at"])
+        self.assertEqual((await self.call("GET", "/api/portal/profile", "a")).json()["team"], [])
+        self.assertEqual([m["member_id"] for m in (await self.call("GET", "/api/portal/team/archive", "a")).json()["items"]], [member_id])
+        self.assertEqual((await self.call("GET", "/api/portal/team/archive", "b")).json()["items"], [])
+        self.assertEqual((await self.call("DELETE", "/api/portal/team/" + member_id, "a")).status_code, 404)  # already archived
+        self.assertEqual((await self.call("POST", "/api/portal/team/%s/restore" % member_id, "b")).status_code, 404)
+        restored = await self.call("POST", "/api/portal/team/%s/restore" % member_id, "a")
+        self.assertEqual((restored.status_code, restored.json()["archived_at"], restored.json()["status"]), (200, None, "eingeladen"))
+        self.assertEqual(len((await self.call("GET", "/api/portal/profile", "a")).json()["team"]), 1)
+        self.assertEqual((await self.call("POST", "/api/portal/team/%s/restore" % member_id, "a")).status_code, 404)
+        self.assertEqual([a["action"] for a in self.db.audit.rows], ["team_member_archived", "team_member_restored"])
+        self.assertEqual(len(self.db.team_members.rows), 1)
 
 
 if __name__ == "__main__":
