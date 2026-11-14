@@ -706,15 +706,18 @@ body:has(#atelier) .skip-link{font-size:15px;font-weight:600;line-height:1.5}
 #atelier #aifly-panel .connection-note a{padding-block:0;color:var(--as-ink-2);text-decoration-color:var(--as-underline)}
 /* Mittel: groessere Figur, Kacheln nebeneinander. */
 @container front (min-width:480px){
- #atelier #aifly-panel{--ca-pad:32px}
+ #atelier #aifly-panel>*{--ca-pad:32px}
  #atelier #aifly-panel .orientation-host-figure{width:136px;height:136px}
- #atelier #aifly-panel .orientation-starters{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+ #atelier #aifly-panel .orientation-starters{gap:12px}
+}
+@container front (min-width:640px){
+ #atelier #aifly-panel .orientation-starters{grid-template-columns:repeat(3,minmax(0,1fr))}
  #atelier #aifly-panel .orientation-starter{grid-template-columns:minmax(0,1fr);grid-template-rows:1fr auto;align-items:start;min-height:144px;padding:20px}
  #atelier #aifly-panel .orientation-path-quiet{display:flex;flex-wrap:wrap;gap:4px 24px;padding-left:20px}
 }
 /* Breit: zweispaltige Buehne - links der Gastgeber, rechts Einstiege oder Verlauf in einer Lesespalte; die Eingabe sitzt in derselben Spalte. */
 @container front (min-width:820px){
- #atelier #aifly-panel{--ca-pad:48px;--ca-host:clamp(260px,32cqi,380px);--ca-gap:64px}
+ #atelier #aifly-panel>*{--ca-pad:48px;--ca-host:clamp(260px,32cqi,380px);--ca-gap:64px}
  #atelier #aifly-panel .public-orientation{display:grid;grid-template-columns:var(--ca-host) minmax(0,720px);grid-template-rows:minmax(0,1fr) auto auto;column-gap:var(--ca-gap);padding-inline:var(--ca-pad)}
  #atelier #aifly-panel .orientation-content{grid-column:1/-1;display:grid;grid-template-columns:var(--ca-host) minmax(0,720px);column-gap:var(--ca-gap);row-gap:0;align-content:center;padding:0 0 24px}
  #atelier #aifly-panel .orientation-content>*{grid-column:2;margin-block:12px}
@@ -816,3 +819,8 @@ html:has(#atelier){scroll-padding-top:104px}
 #atelier .site-header .header-cta:focus-visible{box-shadow:var(--as-switch-shadow),var(--as-focus)}
 #atelier .site-header .header-cta:active{background:var(--as-switch-body-pressed);box-shadow:var(--as-switch-shadow-pressed)}
 #atelier #aifly-panel .orientation-path>li>small{font-variant-numeric:tabular-nums}
+#atelier #aifly-panel[hidden]{display:none}
+#atelier #aifly-panel .panel-heading{box-sizing:border-box;width:100%;max-width:none}
+@container front (min-width:820px){
+ #atelier #aifly-panel .orientation-path-quiet{display:grid;gap:4px;padding-left:24px}
+}
