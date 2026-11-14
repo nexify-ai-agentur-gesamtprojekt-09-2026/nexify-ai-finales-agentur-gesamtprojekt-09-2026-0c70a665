@@ -25,10 +25,10 @@ const subtitles:Record<Locale,string>={
  en:'Websites, apps, shops and AI – shaped around what your business actually needs.',
 };
 const bodies:Record<Locale,string>={
- de:'Höchste Qualität zu einem fairen Preis. Pascal begleitet Ihr Projekt persönlich, vom ersten Gespräch bis zur Übergabe.',
- nl:'Topkwaliteit voor een eerlijke prijs. Pascal begeleidt uw project persoonlijk, van het eerste gesprek tot de oplevering.',
- fr:'La plus haute qualité à un prix juste. Pascal accompagne personnellement votre projet, du premier échange à la remise.',
- en:'The highest quality at a fair price. Pascal guides your project personally, from the first conversation to handover.',
+ de:'Pascal begleitet Ihr Projekt persönlich, vom ersten Gespräch bis zur Übergabe. Und Sie wissen vor dem Start, was enthalten ist.',
+ nl:'Pascal begeleidt uw project persoonlijk, van het eerste gesprek tot de oplevering. En u weet vóór de start wat inbegrepen is.',
+ fr:'Pascal accompagne personnellement votre projet, du premier échange à la remise. Et vous savez avant le départ ce qui est inclus.',
+ en:'Pascal guides your project personally, from the first conversation to handover. And you know before we start what is included.',
 };
 const primaryCta:Record<Locale,string>={de:'Vorhaben schildern',nl:'Uw plan beschrijven',fr:'Décrire votre projet',en:'Describe your project'};
 
