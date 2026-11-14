@@ -2,6 +2,14 @@
   "schema_version": 1,
   "hinweis": "NUR nicht geheime Kennungen und Namen. Geheimnisse (API-Schluessel, Token, Webhook-Signaturschluessel) stehen ausschliesslich in der Laufzeitumgebung und niemals in dieser Datei, im Repository oder in einem Commit.",
   "status": "gebaut_hinter_schalter_standardmaessig_aus",
+  "ablage": {
+    "status": "gebaut_migration_noch_nicht_eingespielt",
+    "ziel": "eigene, selbst gehostete Supabase-Instanz (PostgREST), Schema composio",
+    "migration": "apps/web/supabase/migrations/0004_composio.sql",
+    "postgrest_schemas": "public,chat,composio",
+    "tabellen": ["connections", "triggers", "event_claims", "events"],
+    "hinweis": "Stand 14.11.2026: Speicher und Migration sind gebaut und ohne Netz sowie gegen ein lokales PostgreSQL geprueft. Auf der echten Instanz ist die Migration noch nicht eingespielt und das Schema noch nicht ueber PostgREST freigegeben; beides erledigt der Inhaber vor dem Ausliefern (GO-LIVE.md, Abschnitt 6a). Ohne Supabase-Variablen bleibt es beim Arbeitsspeicher, der nichts dauerhaft haelt."
+  },
   "public_origin": "https://nexifyai.cloud",
   "api_base": "https://backend.composio.dev/api/v3.1",
   "projekt_id": "pr_Rl-waED4hLoX",
@@ -30,6 +38,8 @@
   "env": {
     "geheim": ["COMPOSIO_API_KEY", "COMPOSIO_AUTH_TOKEN", "COMPOSIO_WEBHOOK_SECRET"],
     "nicht_geheim": ["COMPOSIO_PROJECT_ID", "COMPOSIO_ORG_ID"],
+    "ablage_geheim": ["SUPABASE_SERVICE_ROLE_KEY"],
+    "ablage_nicht_geheim": ["SUPABASE_URL", "SUPABASE_TIMEOUT_MS"],
     "schalter": ["NEXIFY_SUITE", "NEXIFY_SUITE_COMPOSIO", "NEXIFY_COMPOSIO_WEBHOOK"],
     "schalter_webhook": "NEXIFY_COMPOSIO_WEBHOOK=on schaltet nur den Webhook-Empfang ein (Signaturpruefung, Quittung), nicht die Suite-Funktionen.",
     "schalter_regel": "Nur der exakte Wert 'on' schaltet ein; beide Schalter muessen 'on' sein (wie apps/suite/flags.py). Alles andere = aus."

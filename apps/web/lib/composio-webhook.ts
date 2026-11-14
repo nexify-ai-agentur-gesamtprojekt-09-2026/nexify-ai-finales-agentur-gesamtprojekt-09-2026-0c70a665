@@ -13,7 +13,7 @@
 import { createHmac, timingSafeEqual } from 'node:crypto';
 import { COMPOSIO_CONFIG, composioWebhookEnabled, type ComposioEnv } from './composio.ts';
 import { getAgentPort, type AgentEreignisPort } from './composio-agent-port.ts';
-import { getComposioStore, type ComposioStore, type StoredEvent } from './composio-store.ts';
+import { ComposioStoreError, getComposioStore, type ComposioStore, type StoredEvent } from './composio-store.ts';
 
 export const SIGNATURE_TOLERANCE_SECONDS: number = COMPOSIO_CONFIG.webhook.signatur.toleranz_sekunden;
 export const MAX_BODY_BYTES = 1024 * 1024;
@@ -104,14 +104,38 @@ export async function handleComposioWebhook(request: Request, deps: WebhookDeps 
 
   const store = deps.store ?? getComposioStore();
   // Je Ereignis-Kennung höchstens einmal. Scheitert die Verarbeitung, wird die Kennung freigegeben (Wiederzustellung).
-  if (!(await store.claimEvent(eventId))) return reply({ status: 'duplicate' }, 200);
+  let claimed: boolean;
+  try {
+    claimed = await store.claimEvent(eventId);
+  } catch (error) {
+    // Speicher nicht erreichbar oder Zeitlimit: 500, damit Composio erneut zustellt. Ob die Kennung noch
+    // eingetragen wurde, ist dann offen (Zeitlimit nach dem Schreiben); sie wird deshalb nach bestem Bemühen
+    // freigegeben. Sonst gälte die Wiederzustellung als Duplikat und das Ereignis ginge verloren.
+    await releaseQuietly(store, eventId, type);
+    console.error(JSON.stringify({ event: 'composio_webhook_store_failed', step: 'claim', type, code: storeErrorCode(error) }));
+    return reply({ error: 'storage_unavailable' }, 500);
+  }
+  if (!claimed) return reply({ status: 'duplicate' }, 200);
   try {
     const outcome = await processEvent(store, deps.agentPort ?? getAgentPort(), type, eventId, payload, deps.nowMs?.() ?? Date.now());
     return reply({ status: outcome }, 200);
-  } catch {
-    await store.releaseEvent(eventId);
-    console.error(JSON.stringify({ event: 'composio_webhook_failed', type }));
+  } catch (error) {
+    await releaseQuietly(store, eventId, type);
+    console.error(JSON.stringify({ event: 'composio_webhook_failed', type, code: storeErrorCode(error) }));
     return reply({ error: 'processing_failed' }, 500);
+  }
+}
+
+/** Nur der feste Code des Speichers gelangt ins Protokoll, nie die Meldung eines fremden Fehlers. */
+function storeErrorCode(error: unknown): string {
+  return error instanceof ComposioStoreError ? error.code : 'unknown';
+}
+
+async function releaseQuietly(store: ComposioStore, eventId: string, type: string): Promise<void> {
+  try {
+    await store.releaseEvent(eventId);
+  } catch (error) {
+    console.error(JSON.stringify({ event: 'composio_webhook_store_failed', step: 'release', type, code: storeErrorCode(error) }));
   }
 }
 

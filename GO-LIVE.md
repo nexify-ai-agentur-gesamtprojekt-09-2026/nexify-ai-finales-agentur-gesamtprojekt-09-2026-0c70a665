@@ -57,6 +57,9 @@ PGRST_DB_SCHEMAS="public,chat"
 ```
 (DB-Neustart/Reload nötig, damit `chat` über REST erreichbar ist.)
 
+Die Composio-Ablage hat eine eigene Migration (`0004_composio.sql`, Schema `composio`) und ist vom
+Chat-Fluss unabhängig; siehe Abschnitt 6a. Mit ihr lautet die Zeile `PGRST_DB_SCHEMAS="public,chat,composio"`.
+
 ## 5) Reihenfolge der Schritte
 
 1. **DB vorbereiten:** Migration `0001_chat_offers_orders.sql` einspielen, `PGRST_DB_SCHEMAS="public,chat"`
@@ -128,6 +131,73 @@ eine JSON-Zeile im Laufzeitprotokoll der Funktion (Vercel → Projekt → Logs, 
 (`step` nennt den Schritt). Die Zeile enthält nie Adresse, Schlüssel, Antworttext des Routers,
 Nutzertext oder Konversations-ID. Geprüft mit `apps/web/auth/tests/chat-llm.test.mjs` und
 `chat-route-errors.test.mjs`; der echte Router wurde dabei nicht aufgerufen.
+
+## 6a) Composio-Webhook: dauerhafte Ablage (Stand 14.11.2026)
+
+Der Empfänger (`POST /webhook/v1` und `/api/webhook/v1`, `apps/web/lib/composio-webhook.ts`) legt
+Verbindungen, Trigger, beanspruchte Ereignis-Kennungen und Ereignis-Zusammenfassungen auf der eigenen,
+selbst gehosteten Supabase-Instanz ab (`createSupabaseComposioStore()` in `apps/web/lib/composio-store.ts`,
+über denselben PostgREST-Client wie der Chat). Der Speicher wird automatisch gewählt, sobald
+`SUPABASE_URL` und `SUPABASE_SERVICE_ROLE_KEY` gesetzt sind; sonst bleibt es beim Arbeitsspeicher einer
+Funktionsinstanz, der auf Vercel nichts dauerhaft hält.
+
+**Reihenfolge (wichtig):** Sind die Supabase-Variablen im Vercel-Projekt schon gesetzt (der Chat braucht
+dieselben), nutzt diese Fassung die Datenbank sofort nach dem Ausliefern. Schritte 1 und 2 müssen dann
+**vorher** erledigt sein, sonst antwortet der Webhook auf jedes gültige, behandelte Ereignis mit 500.
+
+1. Migration einspielen (durch Pascal, bewusst, nicht automatisch):
+   ```bash
+   psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f apps/web/supabase/migrations/0004_composio.sql
+   ```
+   Sie ist unabhängig von `0001` bis `0003` und darf mehrfach laufen.
+2. Schema über PostgREST freigeben und PostgREST neu laden:
+   ```
+   PGRST_DB_SCHEMAS="public,chat,composio"
+   ```
+3. Variablen (Vercel-Projekt, serverseitig): `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` (vorhanden),
+   `NEXIFY_COMPOSIO_WEBHOOK=on`, `COMPOSIO_WEBHOOK_SECRET`. Optional `SUPABASE_TIMEOUT_MS`.
+   Neue Variablen braucht die Ablage nicht.
+4. Ausliefern, dann Rauchtest: Im Composio-Dashboard ein Test-Ereignis senden. Erwartet wird `200`;
+   in `composio.event_claims` steht danach die Kennung der Zustellung. Dieselbe Zustellung erneut
+   senden ergibt `200` mit `{"status":"duplicate"}`.
+
+| Tabelle (`composio.`) | Inhalt | Schlüssel |
+| --- | --- | --- |
+| `connections` | Verbindung mit Mandant, Nutzer, Auth-Config, Status | `connected_account_id`; Index `(tenant_id, user_id)` |
+| `triggers` | angelegte Trigger | `(tenant_id, user_id, trigger_id)` |
+| `event_claims` | beanspruchte Ereignis-Kennungen (Idempotenz) | `event_id` |
+| `events` | Ereignis: Typ, Mandant, Nutzer, Zeitpunkt, Trigger-Slug, Trigger-Kennung | `id`; eindeutig `event_id`; Index `(tenant_id, user_id, received_at)` |
+
+- **Zugriff:** Row-Level-Security ist auf allen vier Tabellen an, ohne Richtlinie. `anon` und
+  `authenticated` haben keine Tabellenrechte; gelesen und geschrieben wird nur serverseitig mit Service-Role.
+- **Idempotenz:** `claimEvent` ist ein einzelnes `INSERT ... ON CONFLICT (event_id) DO NOTHING` mit Rückgabe
+  der Zeile. Von gleichzeitigen Zustellungen derselben Kennung gewinnt genau eine; die übrigen werden mit
+  `200 duplicate` quittiert. Scheitert die Verarbeitung, wird die Kennung wieder freigegeben.
+- **Mandantentrennung:** Mandant und Nutzer sind Pflichtspalten. Sie kommen aus der Verbindung, die die
+  Suite angelegt hat, nie aus dem Ereignis. Eine Verbindung kann den Besitzer nicht wechseln (Trigger in der Datenbank).
+- **Datensparsamkeit:** Vom Inhalt eines Ereignisses wird nichts gespeichert, nur Trigger-Slug und Trigger-Kennung.
+- **Störung:** Ist die Datenbank nicht erreichbar oder zu langsam, antwortet der Webhook mit `500`
+  (`storage_unavailable` beim Beanspruchen, `processing_failed` danach) und Composio stellt erneut zu.
+  Im Protokoll steht eine Zeile `{"event":"composio_webhook_store_failed","step":"claim","code":"composio_store_timeout"}`
+  (Codes: `composio_store_timeout`, `composio_store_failed`, `composio_store_not_configured`), ohne Adresse,
+  Schlüssel, Datenbanktext oder Kennungen.
+
+Bekannte Grenzen:
+
+- Es gibt keine automatische Löschung. `composio.events` und `composio.event_claims` wachsen, bis eine
+  Aufbewahrungsfrist festgelegt und ein Löschlauf eingerichtet ist (Entscheidung Pascal). Gelesen werden je
+  Mandant und Nutzer höchstens die jüngsten 200 Ereignisse.
+- Bricht die Funktion zwischen Beanspruchen und Verarbeiten hart ab (Absturz, Zeitgrenze der Plattform),
+  bleibt die Kennung beansprucht und eine Wiederzustellung gilt als Duplikat. Abhilfe von Hand:
+  `delete from composio.event_claims where event_id = '<webhook-id>';`
+- Schlägt schon das Beanspruchen fehl, gibt der Empfänger die Kennung vorsorglich frei, damit die
+  Wiederzustellung nicht als Duplikat verloren geht. Läuft in genau diesem Moment eine zweite Zustellung
+  derselben Kennung, kann das Ereignis zweimal verarbeitet werden; die Schreibvorgänge sind dafür wiederholbar
+  (Status setzen, Ereignis je Kennung nur einmal).
+
+Geprüft: `apps/web/auth/tests/composio-supabase-store.test.mjs` (ohne Netz, Fake-PostgREST) und
+`apps/web/supabase/tests/composio_store.sql` (gegen ein lokales Wegwerf-PostgreSQL 16). Gegen die echte
+Supabase-Instanz und gegen ein echtes PostgREST ist nichts gelaufen; der Rauchtest in Schritt 4 steht aus.
 
 ## 7) Offene Punkte vor dem Live-Gang (Entscheidungen durch Pascal)
 
