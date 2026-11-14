@@ -296,7 +296,8 @@ export default function Workspace({children,pages,accountControl,initialLocale='
         for(const element of document.elementsFromPoint(x,y)){
           if(!element.closest('.website'))continue;
           const control=element.closest<HTMLElement>('a[href],button,input,select,textarea,summary');
-          if(control&&control.getBoundingClientRect().height<=96){covers=true;break;}
+          // Ganze Karten (Link um Bild oder Überschrift) zählen nicht: sonst wäre der Schalter über Kartenrastern nie zu sehen.
+          if(control&&!control.querySelector('img,picture,video,figure,h2,h3')){covers=true;break;}
         }
         if(covers)break;}if(covers)break;}
       setLauncherCovers(covers);
