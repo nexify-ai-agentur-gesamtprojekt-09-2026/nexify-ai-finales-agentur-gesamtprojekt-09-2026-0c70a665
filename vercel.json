@@ -97,7 +97,19 @@
       }
     },
     {
+      "source": "/api/partner-applications/:path*",
+      "destination": {
+        "service": "shop"
+      }
+    },
+    {
       "source": "/api/health",
+      "destination": {
+        "service": "shop"
+      }
+    },
+    {
+      "source": "/api/health/runtime",
       "destination": {
         "service": "shop"
       }
