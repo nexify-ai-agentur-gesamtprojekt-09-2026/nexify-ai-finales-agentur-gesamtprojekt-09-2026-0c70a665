@@ -184,7 +184,8 @@ begin
     end if;
     return new;
   end if;
-  if (new.status = 'pending' and old.status <> 'pending') or (old.status = 'pending' and new.status = 'unsubscribed') then
+  -- pending -> unsubscribed schließt die Formprüfung der Tabelle aus (abgemeldet heißt: vorher bestätigt).
+  if new.status = 'pending' and old.status <> 'pending' then
     raise exception 'subscription_status_forward_only' using errcode = '23514';
   end if;
 

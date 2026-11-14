@@ -639,6 +639,23 @@ test('Sperrlink überlebt den Verfall der Anmeldung: auch wer die Mail nach der 
   assert.equal(await other.store.getSubscription(emailHash(ADDRESS)), null);
 });
 
+test('Verfallen kurz nach einem Aufräumlauf: die Anmeldung entsteht sofort neu, statt bis zum nächsten Lauf zu blockieren', async () => {
+  const { deps, outbox, store, state } = setup();
+  await subscribe(deps);
+  // Zehn Sekunden vor Fristablauf läuft das Aufräumen (durch irgendeinen Aufruf); die Zeile ist da noch gültig.
+  state.now = NOW + 48 * HOUR - 10_000;
+  await unsubscribe(deps, 'A'.repeat(43));
+  assert.notEqual(await store.getSubscription(emailHash(ADDRESS)), null);
+  // Zwanzig Sekunden später ist sie verfallen, das nächste Aufräumen aber noch nicht fällig.
+  state.now = NOW + 48 * HOUR + 10_000;
+  assert.equal((await subscribe(deps)).status, 202);
+  assert.equal(outbox.length, 2, 'neue Mail');
+  const record = await store.getSubscription(emailHash(ADDRESS));
+  assert.deepEqual([record.status, record.requestedAt, record.confirmExpiresAt], ['pending', state.now, state.now + 48 * HOUR], 'neue Anmeldung mit neuer Frist');
+  assert.equal((await confirm(deps, tokenFromMail(outbox[0]))).status, 404, 'der Link der verfallenen Anmeldung wirkt nicht');
+  assert.equal((await confirm(deps, tokenFromMail(outbox[1]))).status, 200);
+});
+
 test('Abmeldung einer bestätigten Adresse: der Nachweis der Einwilligung bleibt, die Zeile wird abgemeldet statt gelöscht', async () => {
   const { deps, outbox, store, state } = setup();
   await subscribe(deps);
