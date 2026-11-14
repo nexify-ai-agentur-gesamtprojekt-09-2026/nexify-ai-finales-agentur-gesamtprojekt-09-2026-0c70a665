@@ -1080,7 +1080,7 @@ html[data-theme='light'] #atelier .nx-logo-x{color:var(--as-accent)}
  --as-ambient:radial-gradient(52% 58% at 30% 34%,color-mix(in srgb,var(--color-dunkel-tag-silber) 34%,transparent),transparent 72%),radial-gradient(44% 50% at 76% 78%,color-mix(in srgb,var(--color-dunkel-tag-lime) 20%,transparent),transparent 74%)}
 html[data-theme='light'] #atelier{
  --as-front-licht:radial-gradient(34% 42% at 84% 8%,color-mix(in srgb,var(--color-hell-licht) 90%,transparent),transparent 72%),radial-gradient(30% 38% at 98% 78%,color-mix(in srgb,var(--color-hell-schatten) 12%,transparent),transparent 74%);
- --as-front-glanz:radial-gradient(120% 46% at 0% 0%,color-mix(in srgb,var(--color-hell-licht) 60%,transparent),color-mix(in srgb,var(--color-hell-licht) 12%,transparent) 46%,transparent 72%);
+ --as-front-glanz:radial-gradient(120% 60% at 0% 0%,color-mix(in srgb,var(--color-hell-licht) 34%,transparent),color-mix(in srgb,var(--color-hell-licht) 10%,transparent) 40%,transparent 80%);
  --as-front-kante:inset 1px 1px 0 color-mix(in srgb,var(--color-hell-licht) 100%,transparent),inset -1px -1px 0 color-mix(in srgb,var(--color-hell-schatten) 12%,transparent);
  --as-front-body:linear-gradient(180deg,color-mix(in srgb,var(--color-hell-licht) 54%,transparent),color-mix(in srgb,var(--color-hell-licht) 36%,transparent) 40%,color-mix(in srgb,var(--color-hell-licht) 46%,transparent))}
 #atelier::after{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;background:var(--as-front-licht)}
