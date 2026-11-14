@@ -1,0 +1,1039 @@
+{
+ "quelle": "apps/site/.generated/public-site.json",
+ "seiten": [
+  {
+   "pfad": "/",
+   "kontext": "nexify",
+   "abschnitte": 2,
+   "woerter_de": 70,
+   "floskeln": {},
+   "sprachen": {
+    "nl": {
+     "woerter": 70,
+     "verhaeltnis": 1.0,
+     "wie_de": false
+    },
+    "fr": {
+     "woerter": 71,
+     "verhaeltnis": 1.01,
+     "wie_de": false
+    },
+    "en": {
+     "woerter": 74,
+     "verhaeltnis": 1.06,
+     "wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/leistungen",
+   "kontext": "nexify",
+   "abschnitte": 3,
+   "woerter_de": 100,
+   "floskeln": {},
+   "sprachen": {
+    "nl": {
+     "woerter": 97,
+     "verhaeltnis": 0.97,
+     "wie_de": false
+    },
+    "fr": {
+     "woerter": 108,
+     "verhaeltnis": 1.08,
+     "wie_de": false
+    },
+    "en": {
+     "woerter": 103,
+     "verhaeltnis": 1.03,
+     "wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/leistungen/websites",
+   "kontext": "nexify",
+   "abschnitte": 2,
+   "woerter_de": 69,
+   "floskeln": {},
+   "sprachen": {
+    "nl": {
+     "woerter": 73,
+     "verhaeltnis": 1.06,
+     "wie_de": false
+    },
+    "fr": {
+     "woerter": 75,
+     "verhaeltnis": 1.09,
+     "wie_de": false
+    },
+    "en": {
+     "woerter": 75,
+     "verhaeltnis": 1.09,
+     "wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/leistungen/agenten-automatisierung",
+   "kontext": "nexify",
+   "abschnitte": 2,
+   "woerter_de": 63,
+   "floskeln": {},
+   "sprachen": {
+    "nl": {
+     "woerter": 62,
+     "verhaeltnis": 0.98,
+     "wie_de": false
+    },
+    "fr": {
+     "woerter": 72,
+     "verhaeltnis": 1.14,
+     "wie_de": false
+    },
+    "en": {
+     "woerter": 64,
+     "verhaeltnis": 1.02,
+     "wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/leistungen/apps-portale",
+   "kontext": "nexify",
+   "abschnitte": 2,
+   "woerter_de": 60,
+   "floskeln": {},
+   "sprachen": {
+    "nl": {
+     "woerter": 60,
+     "verhaeltnis": 1.0,
+     "wie_de": false
+    },
+    "fr": {
+     "woerter": 69,
+     "verhaeltnis": 1.15,
+     "wie_de": false
+    },
+    "en": {
+     "woerter": 63,
+     "verhaeltnis": 1.05,
+     "wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/leistungsumfang",
+   "kontext": "nexify",
+   "abschnitte": 2,
+   "woerter_de": 72,
+   "floskeln": {},
+   "sprachen": {
+    "nl": {
+     "woerter": 72,
+     "verhaeltnis": 1.0,
+     "wie_de": false
+    },
+    "fr": {
+     "woerter": 65,
+     "verhaeltnis": 0.9,
+     "wie_de": false
+    },
+    "en": {
+     "woerter": 71,
+     "verhaeltnis": 0.99,
+     "wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/loesungen",
+   "kontext": "nexify",
+   "abschnitte": 2,
+   "woerter_de": 69,
+   "floskeln": {},
+   "sprachen": {
+    "nl": {
+     "woerter": 70,
+     "verhaeltnis": 1.01,
+     "wie_de": false
+    },
+    "fr": {
+     "woerter": 79,
+     "verhaeltnis": 1.14,
+     "wie_de": false
+    },
+    "en": {
+     "woerter": 75,
+     "verhaeltnis": 1.09,
+     "wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/preise-ablauf",
+   "kontext": "nexify",
+   "abschnitte": 2,
+   "woerter_de": 64,
+   "floskeln": {},
+   "sprachen": {
+    "nl": {
+     "woerter": 62,
+     "verhaeltnis": 0.97,
+     "wie_de": false
+    },
+    "fr": {
+     "woerter": 74,
+     "verhaeltnis": 1.16,
+     "wie_de": false
+    },
+    "en": {
+     "woerter": 66,
+     "verhaeltnis": 1.03,
+     "wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/wissen",
+   "kontext": "nexify",
+   "abschnitte": 2,
+   "woerter_de": 65,
+   "floskeln": {},
+   "sprachen": {
+    "nl": {
+     "woerter": 63,
+     "verhaeltnis": 0.97,
+     "wie_de": false
+    },
+    "fr": {
+     "woerter": 73,
+     "verhaeltnis": 1.12,
+     "wie_de": false
+    },
+    "en": {
+     "woerter": 69,
+     "verhaeltnis": 1.06,
+     "wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/wissen/projekt-vorbereiten",
+   "kontext": "nexify",
+   "abschnitte": 2,
+   "woerter_de": 74,
+   "floskeln": {},
+   "sprachen": {
+    "nl": {
+     "woerter": 73,
+     "verhaeltnis": 0.99,
+     "wie_de": false
+    },
+    "fr": {
+     "woerter": 70,
+     "verhaeltnis": 0.95,
+     "wie_de": false
+    },
+    "en": {
+     "woerter": 74,
+     "verhaeltnis": 1.0,
+     "wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/unternehmen",
+   "kontext": "nexify",
+   "abschnitte": 2,
+   "woerter_de": 71,
+   "floskeln": {},
+   "sprachen": {
+    "nl": {
+     "woerter": 72,
+     "verhaeltnis": 1.01,
+     "wie_de": false
+    },
+    "fr": {
+     "woerter": 78,
+     "verhaeltnis": 1.1,
+     "wie_de": false
+    },
+    "en": {
+     "woerter": 78,
+     "verhaeltnis": 1.1,
+     "wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/kontakt",
+   "kontext": "nexify",
+   "abschnitte": 2,
+   "woerter_de": 72,
+   "floskeln": {},
+   "sprachen": {
+    "nl": {
+     "woerter": 68,
+     "verhaeltnis": 0.94,
+     "wie_de": false
+    },
+    "fr": {
+     "woerter": 67,
+     "verhaeltnis": 0.93,
+     "wie_de": false
+    },
+    "en": {
+     "woerter": 75,
+     "verhaeltnis": 1.04,
+     "wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/produkte/nex2fly",
+   "kontext": "nexify",
+   "abschnitte": 4,
+   "woerter_de": 116,
+   "floskeln": {},
+   "sprachen": {
+    "nl": {
+     "woerter": 111,
+     "verhaeltnis": 0.96,
+     "wie_de": false
+    },
+    "fr": {
+     "woerter": 125,
+     "verhaeltnis": 1.08,
+     "wie_de": false
+    },
+    "en": {
+     "woerter": 119,
+     "verhaeltnis": 1.03,
+     "wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/produkte/one",
+   "kontext": "nexify",
+   "abschnitte": 2,
+   "woerter_de": 76,
+   "floskeln": {},
+   "sprachen": {
+    "nl": {
+     "woerter": 74,
+     "verhaeltnis": 0.97,
+     "wie_de": false
+    },
+    "fr": {
+     "woerter": 77,
+     "verhaeltnis": 1.01,
+     "wie_de": false
+    },
+    "en": {
+     "woerter": 76,
+     "verhaeltnis": 1.0,
+     "wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/produkte/api",
+   "kontext": "nexify",
+   "abschnitte": 2,
+   "woerter_de": 67,
+   "floskeln": {},
+   "sprachen": {
+    "nl": {
+     "woerter": 65,
+     "verhaeltnis": 0.97,
+     "wie_de": false
+    },
+    "fr": {
+     "woerter": 74,
+     "verhaeltnis": 1.1,
+     "wie_de": false
+    },
+    "en": {
+     "woerter": 69,
+     "verhaeltnis": 1.03,
+     "wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/produkte/aifly-oracle",
+   "kontext": "nexify",
+   "abschnitte": 3,
+   "woerter_de": 124,
+   "floskeln": {},
+   "sprachen": {
+    "nl": {
+     "woerter": 128,
+     "verhaeltnis": 1.03,
+     "wie_de": false
+    },
+    "fr": {
+     "woerter": 152,
+     "verhaeltnis": 1.23,
+     "wie_de": false
+    },
+    "en": {
+     "woerter": 141,
+     "verhaeltnis": 1.14,
+     "wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/produkte/nex-agentic-aifly",
+   "kontext": "nexify",
+   "abschnitte": 3,
+   "woerter_de": 109,
+   "floskeln": {},
+   "sprachen": {
+    "nl": {
+     "woerter": 115,
+     "verhaeltnis": 1.06,
+     "wie_de": false
+    },
+    "fr": {
+     "woerter": 138,
+     "verhaeltnis": 1.27,
+     "wie_de": false
+    },
+    "en": {
+     "woerter": 115,
+     "verhaeltnis": 1.06,
+     "wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/produkte/skills-mcp",
+   "kontext": "nexify",
+   "abschnitte": 3,
+   "woerter_de": 105,
+   "floskeln": {},
+   "sprachen": {
+    "nl": {
+     "woerter": 108,
+     "verhaeltnis": 1.03,
+     "wie_de": false
+    },
+    "fr": {
+     "woerter": 132,
+     "verhaeltnis": 1.26,
+     "wie_de": false
+    },
+    "en": {
+     "woerter": 120,
+     "verhaeltnis": 1.14,
+     "wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/portale",
+   "kontext": "nexify",
+   "abschnitte": 3,
+   "woerter_de": 100,
+   "floskeln": {},
+   "sprachen": {
+    "nl": {
+     "woerter": 104,
+     "verhaeltnis": 1.04,
+     "wie_de": false
+    },
+    "fr": {
+     "woerter": 107,
+     "verhaeltnis": 1.07,
+     "wie_de": false
+    },
+    "en": {
+     "woerter": 104,
+     "verhaeltnis": 1.04,
+     "wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/impressum",
+   "kontext": "nexify",
+   "abschnitte": 3,
+   "woerter_de": 131,
+   "floskeln": {},
+   "sprachen": {
+    "nl": {
+     "woerter": 134,
+     "verhaeltnis": 1.02,
+     "wie_de": false
+    },
+    "fr": {
+     "woerter": 157,
+     "verhaeltnis": 1.2,
+     "wie_de": false
+    },
+    "en": {
+     "woerter": 145,
+     "verhaeltnis": 1.11,
+     "wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/datenschutz",
+   "kontext": "nexify",
+   "abschnitte": 2,
+   "woerter_de": 76,
+   "floskeln": {},
+   "sprachen": {
+    "nl": {
+     "woerter": 74,
+     "verhaeltnis": 0.97,
+     "wie_de": false
+    },
+    "fr": {
+     "woerter": 93,
+     "verhaeltnis": 1.22,
+     "wie_de": false
+    },
+    "en": {
+     "woerter": 84,
+     "verhaeltnis": 1.11,
+     "wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/vertragsgrundlagen",
+   "kontext": "nexify",
+   "abschnitte": 2,
+   "woerter_de": 77,
+   "floskeln": {},
+   "sprachen": {
+    "nl": {
+     "woerter": 75,
+     "verhaeltnis": 0.97,
+     "wie_de": false
+    },
+    "fr": {
+     "woerter": 96,
+     "verhaeltnis": 1.25,
+     "wie_de": false
+    },
+    "en": {
+     "woerter": 79,
+     "verhaeltnis": 1.03,
+     "wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/ki-hinweise",
+   "kontext": "nexify",
+   "abschnitte": 2,
+   "woerter_de": 89,
+   "floskeln": {},
+   "sprachen": {
+    "nl": {
+     "woerter": 87,
+     "verhaeltnis": 0.98,
+     "wie_de": false
+    },
+    "fr": {
+     "woerter": 113,
+     "verhaeltnis": 1.27,
+     "wie_de": false
+    },
+    "en": {
+     "woerter": 95,
+     "verhaeltnis": 1.07,
+     "wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/barrierefreiheit",
+   "kontext": "nexify",
+   "abschnitte": 2,
+   "woerter_de": 74,
+   "floskeln": {},
+   "sprachen": {
+    "nl": {
+     "woerter": 72,
+     "verhaeltnis": 0.97,
+     "wie_de": false
+    },
+    "fr": {
+     "woerter": 92,
+     "verhaeltnis": 1.24,
+     "wie_de": false
+    },
+    "en": {
+     "woerter": 78,
+     "verhaeltnis": 1.05,
+     "wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/cookies",
+   "kontext": "nexify",
+   "abschnitte": 2,
+   "woerter_de": 71,
+   "floskeln": {},
+   "sprachen": {
+    "nl": {
+     "woerter": 69,
+     "verhaeltnis": 0.97,
+     "wie_de": false
+    },
+    "fr": {
+     "woerter": 82,
+     "verhaeltnis": 1.15,
+     "wie_de": false
+    },
+    "en": {
+     "woerter": 70,
+     "verhaeltnis": 0.99,
+     "wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/anmelden",
+   "kontext": "nexify",
+   "abschnitte": 2,
+   "woerter_de": 73,
+   "floskeln": {},
+   "sprachen": {
+    "nl": {
+     "woerter": 69,
+     "verhaeltnis": 0.95,
+     "wie_de": false
+    },
+    "fr": {
+     "woerter": 83,
+     "verhaeltnis": 1.14,
+     "wie_de": false
+    },
+    "en": {
+     "woerter": 77,
+     "verhaeltnis": 1.05,
+     "wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/registrieren",
+   "kontext": "nexify",
+   "abschnitte": 2,
+   "woerter_de": 82,
+   "floskeln": {},
+   "sprachen": {
+    "nl": {
+     "woerter": 79,
+     "verhaeltnis": 0.96,
+     "wie_de": false
+    },
+    "fr": {
+     "woerter": 103,
+     "verhaeltnis": 1.26,
+     "wie_de": false
+    },
+    "en": {
+     "woerter": 92,
+     "verhaeltnis": 1.12,
+     "wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/teileklar",
+   "kontext": "teileklar",
+   "abschnitte": 2,
+   "woerter_de": 70,
+   "floskeln": {},
+   "sprachen": {
+    "nl": {
+     "woerter": 69,
+     "verhaeltnis": 0.99,
+     "wie_de": false
+    },
+    "fr": {
+     "woerter": 80,
+     "verhaeltnis": 1.14,
+     "wie_de": false
+    },
+    "en": {
+     "woerter": 78,
+     "verhaeltnis": 1.11,
+     "wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/teileklar/suche",
+   "kontext": "teileklar",
+   "abschnitte": 2,
+   "woerter_de": 70,
+   "floskeln": {},
+   "sprachen": {
+    "nl": {
+     "woerter": 66,
+     "verhaeltnis": 0.94,
+     "wie_de": false
+    },
+    "fr": {
+     "woerter": 70,
+     "verhaeltnis": 1.0,
+     "wie_de": false
+    },
+    "en": {
+     "woerter": 75,
+     "verhaeltnis": 1.07,
+     "wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/teileklar/kategorien",
+   "kontext": "teileklar",
+   "abschnitte": 2,
+   "woerter_de": 72,
+   "floskeln": {},
+   "sprachen": {
+    "nl": {
+     "woerter": 67,
+     "verhaeltnis": 0.93,
+     "wie_de": false
+    },
+    "fr": {
+     "woerter": 78,
+     "verhaeltnis": 1.08,
+     "wie_de": false
+    },
+    "en": {
+     "woerter": 77,
+     "verhaeltnis": 1.07,
+     "wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/teileklar/kategorie",
+   "kontext": "teileklar",
+   "abschnitte": 2,
+   "woerter_de": 61,
+   "floskeln": {},
+   "sprachen": {
+    "nl": {
+     "woerter": 65,
+     "verhaeltnis": 1.07,
+     "wie_de": false
+    },
+    "fr": {
+     "woerter": 72,
+     "verhaeltnis": 1.18,
+     "wie_de": false
+    },
+    "en": {
+     "woerter": 68,
+     "verhaeltnis": 1.11,
+     "wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/teileklar/produkt",
+   "kontext": "teileklar",
+   "abschnitte": 2,
+   "woerter_de": 64,
+   "floskeln": {},
+   "sprachen": {
+    "nl": {
+     "woerter": 63,
+     "verhaeltnis": 0.98,
+     "wie_de": false
+    },
+    "fr": {
+     "woerter": 79,
+     "verhaeltnis": 1.23,
+     "wie_de": false
+    },
+    "en": {
+     "woerter": 71,
+     "verhaeltnis": 1.11,
+     "wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/teileklar/warenkorb",
+   "kontext": "teileklar",
+   "abschnitte": 2,
+   "woerter_de": 65,
+   "floskeln": {},
+   "sprachen": {
+    "nl": {
+     "woerter": 61,
+     "verhaeltnis": 0.94,
+     "wie_de": false
+    },
+    "fr": {
+     "woerter": 72,
+     "verhaeltnis": 1.11,
+     "wie_de": false
+    },
+    "en": {
+     "woerter": 70,
+     "verhaeltnis": 1.08,
+     "wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/teileklar/kasse",
+   "kontext": "teileklar",
+   "abschnitte": 2,
+   "woerter_de": 67,
+   "floskeln": {},
+   "sprachen": {
+    "nl": {
+     "woerter": 67,
+     "verhaeltnis": 1.0,
+     "wie_de": false
+    },
+    "fr": {
+     "woerter": 77,
+     "verhaeltnis": 1.15,
+     "wie_de": false
+    },
+    "en": {
+     "woerter": 70,
+     "verhaeltnis": 1.04,
+     "wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/teileklar/fahrzeug-und-passung",
+   "kontext": "teileklar",
+   "abschnitte": 2,
+   "woerter_de": 72,
+   "floskeln": {},
+   "sprachen": {
+    "nl": {
+     "woerter": 66,
+     "verhaeltnis": 0.92,
+     "wie_de": false
+    },
+    "fr": {
+     "woerter": 80,
+     "verhaeltnis": 1.11,
+     "wie_de": false
+    },
+    "en": {
+     "woerter": 74,
+     "verhaeltnis": 1.03,
+     "wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/teileklar/termine",
+   "kontext": "teileklar",
+   "abschnitte": 2,
+   "woerter_de": 67,
+   "floskeln": {},
+   "sprachen": {
+    "nl": {
+     "woerter": 63,
+     "verhaeltnis": 0.94,
+     "wie_de": false
+    },
+    "fr": {
+     "woerter": 72,
+     "verhaeltnis": 1.07,
+     "wie_de": false
+    },
+    "en": {
+     "woerter": 68,
+     "verhaeltnis": 1.01,
+     "wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/teileklar/gutscheine",
+   "kontext": "teileklar",
+   "abschnitte": 2,
+   "woerter_de": 64,
+   "floskeln": {},
+   "sprachen": {
+    "nl": {
+     "woerter": 60,
+     "verhaeltnis": 0.94,
+     "wie_de": false
+    },
+    "fr": {
+     "woerter": 67,
+     "verhaeltnis": 1.05,
+     "wie_de": false
+    },
+    "en": {
+     "woerter": 62,
+     "verhaeltnis": 0.97,
+     "wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/teileklar/partner-werden",
+   "kontext": "teileklar",
+   "abschnitte": 2,
+   "woerter_de": 67,
+   "floskeln": {},
+   "sprachen": {
+    "nl": {
+     "woerter": 62,
+     "verhaeltnis": 0.93,
+     "wie_de": false
+    },
+    "fr": {
+     "woerter": 75,
+     "verhaeltnis": 1.12,
+     "wie_de": false
+    },
+    "en": {
+     "woerter": 70,
+     "verhaeltnis": 1.04,
+     "wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/teileklar/werkstatt",
+   "kontext": "teileklar",
+   "abschnitte": 2,
+   "woerter_de": 69,
+   "floskeln": {},
+   "sprachen": {
+    "nl": {
+     "woerter": 70,
+     "verhaeltnis": 1.01,
+     "wie_de": false
+    },
+    "fr": {
+     "woerter": 73,
+     "verhaeltnis": 1.06,
+     "wie_de": false
+    },
+    "en": {
+     "woerter": 70,
+     "verhaeltnis": 1.01,
+     "wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/teileklar/rechtliches",
+   "kontext": "teileklar",
+   "abschnitte": 2,
+   "woerter_de": 79,
+   "floskeln": {},
+   "sprachen": {
+    "nl": {
+     "woerter": 81,
+     "verhaeltnis": 1.03,
+     "wie_de": false
+    },
+    "fr": {
+     "woerter": 105,
+     "verhaeltnis": 1.33,
+     "wie_de": false
+    },
+    "en": {
+     "woerter": 88,
+     "verhaeltnis": 1.11,
+     "wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/teileklar/shop",
+   "kontext": "teileklar",
+   "abschnitte": 2,
+   "woerter_de": 72,
+   "floskeln": {},
+   "sprachen": {
+    "nl": {
+     "woerter": 70,
+     "verhaeltnis": 0.97,
+     "wie_de": false
+    },
+    "fr": {
+     "woerter": 83,
+     "verhaeltnis": 1.15,
+     "wie_de": false
+    },
+    "en": {
+     "woerter": 70,
+     "verhaeltnis": 0.97,
+     "wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/teileklar/reifenrechner",
+   "kontext": "teileklar",
+   "abschnitte": 2,
+   "woerter_de": 74,
+   "floskeln": {},
+   "sprachen": {
+    "nl": {
+     "woerter": 74,
+     "verhaeltnis": 1.0,
+     "wie_de": false
+    },
+    "fr": {
+     "woerter": 88,
+     "verhaeltnis": 1.19,
+     "wie_de": false
+    },
+    "en": {
+     "woerter": 73,
+     "verhaeltnis": 0.99,
+     "wie_de": false
+    }
+   }
+  },
+  {
+   "pfad": "/teileklar/batterie-berater",
+   "kontext": "teileklar",
+   "abschnitte": 2,
+   "woerter_de": 70,
+   "floskeln": {},
+   "sprachen": {
+    "nl": {
+     "woerter": 69,
+     "verhaeltnis": 0.99,
+     "wie_de": false
+    },
+    "fr": {
+     "woerter": 86,
+     "verhaeltnis": 1.23,
+     "wie_de": false
+    },
+    "en": {
+     "woerter": 74,
+     "verhaeltnis": 1.06,
+     "wie_de": false
+    }
+   }
+  }
+ ],
+ "wiederholte_saetze_de": [],
+ "hinweis": "Floskelliste ist eine Heuristik; Umfang und Wiederholung sind Messwerte, kein Qualitätsurteil."
+}
