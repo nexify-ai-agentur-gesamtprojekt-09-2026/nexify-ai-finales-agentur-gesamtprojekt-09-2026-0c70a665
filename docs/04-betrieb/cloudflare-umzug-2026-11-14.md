@@ -405,6 +405,31 @@ oder in der Adresszeile `dash.cloudflare.com/<Konto-ID>/`). Für Tarif und Zonen
 „Account Settings: Read" und „Zone: Read" nötig, für die Messung „Workers Tail: Read"
 oder „Account Analytics: Read".
 
+### Dritter Versuch mit Konto-ID · 14.11.2026, 18:35 UTC
+
+Der Inhaber hat die Konto-ID genannt (`a112f895c19e0d65f6f64b3e89f747f8`). Das Token
+hat in diesem Konto kein Recht auf Worker-Skripte:
+
+| Abruf | Antwort |
+|---|---|
+| `GET /accounts/<id>/tokens/verify` | 401, Code 1000 „Invalid API Token" (also kein kontogebundenes Token; `/user/tokens/verify` meldet es als aktiv) |
+| `GET /accounts/<id>` | 403, Code 9109 „Unauthorized to access requested resource" |
+| `GET /accounts/<id>/workers/scripts` | 200, **leere Liste**, obwohl das Konto fünf Worker hat |
+| `GET /accounts/<id>/workers/services` | 200, leere Liste |
+| `GET /accounts/<id>/workers/subdomain` | 403, Code 10000 „Authentication error" |
+| `GET /accounts/<id>/subscriptions` | 403, Code 10000 |
+| `GET /accounts/<id>/workers/account-settings` | 403, Code 10000 |
+| `GET /accounts/<id>/workers/scripts/nexify-web-vorschau/deployments` (erster Aufruf von `wrangler deploy`) | 403, ohne Code, „No access to the specified resource." |
+| dieselbe Adresse für einen vorhandenen Worker, `/versions`, `/settings` | 403, dieselbe Meldung |
+| `GET /zones?account.id=<id>` | 200, leere Liste |
+
+`wrangler deploy --name nexify-web-vorschau` (4.161.0, `CLOUDFLARE_API_TOKEN` als
+Platzhalter, `NODE_EXTRA_CA_CERTS` gesetzt, TLS in Ordnung) bricht an diesem ersten
+lesenden Aufruf mit Exit 1 ab. **Es wurde nichts hochgeladen und nichts angelegt.**
+Dem Token fehlt Konto „Workers Scripts: Edit" (schon „Read" fehlt); außerdem
+„Account Settings: Read" (Konto, Tarif, workers.dev-Subdomain), „Zone: Read",
+„Workers Tail: Read" und „Account Analytics: Read". Abgebrochen wie vereinbart.
+
 ### Was offen bleibt (unverändert Abschnitt 12)
 
 Tarif des Kontos (Workers Free oder Paid); ob `nexifyai.de` und `nexifyai.cloud` im
