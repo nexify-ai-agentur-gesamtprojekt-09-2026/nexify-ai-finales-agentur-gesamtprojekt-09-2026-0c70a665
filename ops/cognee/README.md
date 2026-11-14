@@ -8,8 +8,9 @@ Einspielschritte und offene Entscheidungen ist
 
 | Datei | Zweck |
 |---|---|
-| `cognee_client.py` | Client: Zustand, Datensatzliste, Suche, Aufnahme eines Dokuments, Graphbau. Prüft Schalter, Freigabe, Host, Mandant, Datensatz und Geheimnis-Muster, bevor etwas gesendet wird. |
-| `aufnahme.py` | Werkzeug: `plan` (ohne Netz), `senden`, `zustand`. |
+| `cognee_client.py` | Client: Zustand, Datensatzliste, Suche, Aufnahme eines Dokuments, Graphbau. Prüft Schalter, Rolle, Freigaben (auch für lesende Aufrufe), Host, Mandant, Datensatz, Positivliste und Geheimnis-Muster, bevor etwas gesendet wird. |
+| `geheimnis_filter.py` | Musterabgleich auf Geheimniswerte mit Normalisierung. Ein Musterabgleich, kein Schutz: den Schutz trägt die Positivliste der Quellen. |
+| `aufnahme.py` | Werkzeug: `plan` (ohne Netz), `senden`, `zustand`. Verfolgt keine symbolischen Verknüpfungen. |
 | `.env.example` | Variablennamen ohne Werte. |
 
 ```bash

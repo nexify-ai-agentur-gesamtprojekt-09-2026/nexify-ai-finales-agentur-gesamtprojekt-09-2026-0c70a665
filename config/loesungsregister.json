@@ -807,10 +807,10 @@
       "ort": "Repository: `ops/cognee/`, Konfiguration `config/integrations/cognee.json`, Betriebsnotiz `docs/04-betrieb/cognee-integration-2026-11-14.md`; Ziel `brain.nexifyai.cloud`",
       "zustand": {
         "status": "geplant",
-        "beleg": "`docs/04-betrieb/cognee-integration-2026-11-14.md`: gebaut und gegen eine Attrappe geprüft (`tests/test_cognee_adapter.py`), Standard aus, alle Freigaben offen. Messung 14.11.2026 20:59 bis 21:01 UTC: API-Pfade der Instanz antworten 404, `/mcp` 401; Port 33019 ist an 127.0.0.1 gebunden. Es wurde nichts aufgenommen.",
+        "beleg": "`docs/04-betrieb/cognee-integration-2026-11-14.md`: gebaut und gegen eine Attrappe geprüft (`tests/test_cognee_adapter.py`), Standard aus, alle Freigaben offen; nach unabhängiger Prüfung nachgearbeitet (Abschnitt 9 der Notiz). Messung 14.11.2026 20:59 bis 21:01 UTC: API-Pfade der Instanz antworten 404, `/mcp` 401; Port 33019 ist an 127.0.0.1 gebunden. Es wurde nichts aufgenommen.",
         "stand": "2026-11-14"
       },
-      "entscheidung": "keine (Auftrag des Inhabers vom 14.11.2026: vollwertige Integration von cognee-x532; Einspielschritte K0 bis K9 je mit eigener Freigabe)",
+      "entscheidung": "keine (Auftrag des Inhabers vom 14.11.2026: vollwertige Integration von cognee-x532; Einspielschritte K0 bis K10 je mit eigener Freigabe)",
       "rolle_im_plan": {
         "art": "tragend",
         "hinweis": "Einziger vorgesehener Weg aus diesem Repository nach Cognee. Erst nutzbar, wenn die Instanz wiederhergestellt ist und die Freigaben in der Konfiguration gesetzt sind. `tools/cognee.mjs` bleibt als Historie und wird nicht weiterverwendet."
