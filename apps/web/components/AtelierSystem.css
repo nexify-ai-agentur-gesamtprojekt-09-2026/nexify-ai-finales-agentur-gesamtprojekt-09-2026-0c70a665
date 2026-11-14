@@ -831,3 +831,22 @@ html[data-theme='light'] #atelier .brand .brand-word .brand-x{color:var(--as-acc
 #atelier .home-concept .identity-hero .identity-copy h1 .identity-title-accent{background:none;-webkit-background-clip:border-box;background-clip:border-box;-webkit-text-fill-color:currentColor;color:var(--as-accent);filter:none}
 #atelier #aifly-panel .orientation-composer-actions .primary-button svg{display:block;width:20px;height:20px;stroke-width:1.75}
 #atelier #aifly-panel .orientation-composer-actions .primary-button:disabled svg{opacity:.7}
+/* ===== Kopfleiste beim Blaettern: schwebend, links und rechts eingezogen ===== */
+/* Oben volle Inhaltsbreite ohne Flaeche. Ab 24 px zieht sich die Glasleiste je Seite um --kopf-einzug gegenueber der
+   Inhaltskante ein; Logo und letzter Schalter halten 24 bzw. 20 px Abstand zur Glaskante (runde Schalter brauchen optisch weniger). */
+#atelier .site-header{--kopf-einzug:clamp(24px,3cqi,40px);transition:padding var(--as-slow) var(--as-ease)}
+#atelier .site-header::before{inset:12px;transition:inset var(--as-slow) var(--as-ease),transform var(--as-slow) var(--as-ease),background var(--as-slow) var(--as-ease),box-shadow var(--as-slow) var(--as-ease)}
+#atelier[data-scrolled='true'] .site-header{padding-left:calc(var(--layout-page-padding) + var(--kopf-einzug) + 24px);padding-right:calc(var(--layout-page-padding) + var(--kopf-einzug) + 20px)}
+#atelier[data-scrolled='true'] .site-header::before{inset:12px calc(var(--layout-page-padding) + var(--kopf-einzug));background:var(--as-glass-solid);box-shadow:var(--as-lens),var(--as-depth-raised)}
+@container website (max-width:1119px){
+ #atelier[data-scrolled='true'] .site-header .main-navigation{display:none}
+ #atelier[data-scrolled='true'] .site-header .mobile-navigation{display:block;margin-left:auto}
+}
+@container website (max-width:640px){
+ #atelier .site-header{--kopf-einzug:0px}
+ #atelier[data-scrolled='true'] .site-header{padding-left:calc(var(--layout-page-padding) + 8px);padding-right:calc(var(--layout-page-padding) + 4px)}
+ #atelier[data-scrolled='true'] .site-header::before{inset:calc(8px + env(safe-area-inset-top)) calc(var(--layout-page-padding) - 12px) 8px}
+}
+@media(prefers-reduced-motion:reduce){
+ #atelier .site-header,#atelier .site-header::before,#atelier .site-header>*{transition:none}
+}
