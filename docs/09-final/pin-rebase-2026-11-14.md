@@ -1,0 +1,144 @@
+# Neuprüfung der Browser-Belege und Pin-Rebase 14.11.2026
+
+Stand: Zweig `claude/belege-neupruefung`, Basis `origin/main` `ae85910`. Dieses Dokument trennt, was heute gelaufen ist (Abschnitte 1 bis 4), von dem, was daraus geschlossen wird (Abschnitte 5 und 6). Ein Pin belegt nur unveränderte Bytes seit einem bestandenen Lauf oder Test, keine Abnahme der Anforderung. `tools/_update_register_shas.py` wurde nicht benutzt.
+
+## 1. Rahmen der Läufe
+
+- Fester Commit für alle zwölf Läufe: `88fa345` (Harness-Nachführung). Davor frisch gebaut: `pnpm --filter @nexify/site build:standalone`, `pnpm --filter @nexify/site build`, `pnpm --filter @nexify/web build`, alle Exit 0.
+- Node v22.23.4, Chromium 153.0.8010.12, Playwright **1.63.0** aus `/opt/node22/lib/node_modules/playwright`. Das Repository legt 1.65.0 fest (`.github/evidence-runner/package.json`); diese Version war in der Umgebung nicht vorhanden.
+- Protokoll je Lauf mit Abbruchstelle: `evidence/neupruefung-2026-11-14/run-manifest.json`.
+- `browser-consent-ui` startet `next dev` und schreibt `apps/web/next-env.d.ts` um; die Datei wurde danach mit `git checkout` zurückgesetzt.
+
+## 2. Ergebnis je Harness
+
+| Harness | geändert | Begründung mit Beleg | Lauf am 14.11. | Beleg übernommen |
+|---|---|---|---|---|
+| `browser-shop.mjs` | nein | – | bestanden (13 Checks) | ja |
+| `browser-catalog.mjs` | nein | – | bestanden (7 Checks) | ja |
+| `browser-workspace-read.mjs` | nein | – | bestanden (4 Checks, 20 Negativsitzungen) | ja |
+| `browser-consent-ui.mjs` | nein | – | bestanden (18 Checks) | ja |
+| `browser-critical.mjs` | nein (nur das Build-Skript davor) | `build-standalone.mjs` erwartete `/signet.svg`; seit `32616db` (PR 127) liegt die Datei im Archiv, die Figur ist `/brand/nexify-figur.png` (`Logo.tsx`). Skript bettet jetzt die Figur und die neu geladenen Schriften Inter und Jakarta ein. | **nicht bestanden.** Fünf Schritte bestanden, darunter der Standalone-Schritt. Abbruch bei `sdk_guided_preview_works_when_visitor_session_is_404`: Der Chat sendet seit `812abdd` (PR 116, D-010) an `/api/chat`, nicht mehr an `/api/agent-chat`. | nein |
+| `browser-text-spacing.mjs` | ja | Der Hero-Film trägt seit `32616db` eine Untertitelspur. `<track>` und `<source>` in Medienelementen haben keinen berechneten Stil und können keinen Text darstellen; nur diese leeren Elemente werden ausgenommen und gezählt. Jedes andere Element muss weiter messbar sein und verdoppeln. | **nicht bestanden.** Verdopplung auf allen 43 Routen in Ordnung (19 367 Elemente, 1 ausgenommene Spur). 27 Befunde „Überlauf bei 200 % Schrift“, siehe Befund 1. | nein |
+| `browser-identity-hero.mjs` (vite und next) | ja | Umbruchregel mit zusätzlichem `gap` (`f173054`, PR 92): gebunden bleiben Schwelle, Selektor und Einspaltigkeit. Hero-Film und Vorschaubild nach `0ea229c` (PR 104, Zusage des Inhabers vom 13.11.) und `32616db`; der Film zusätzlich gegen die Prüfsumme in `docs/design/scene-videos-2026-11-13.md`. Eine Haupthandlung statt zwei Links (`f173054`, `205b2c2` PR 114): Zielgröße, Tastatur und erreichtes Ziel werden weiter geprüft. Drei Filmschalter einschließlich Untertitel (`32616db`). Untertitelspur wie oben ausgenommen. | **nicht bestanden**, beide Renderer: „200% hero horizontal overflow“, siehe Befund 2. | nein |
+| `browser-public-experience.mjs` | ja | Name des Assistenten aus `Logo.tsx` (`ORACLE_NAME`, `32616db`), beide Zeilen exakt und gegen die Quelle gebunden. Statt „kein Video“ gilt nach `0ea229c`, `32616db` und `e389839` (PR 136): Jedes Video zeigt auf eine vom Inhaber gelieferte Szene mit der protokollierten Prüfsumme, und nur der Hero-Film der Startseite startet von selbst. | **nicht bestanden.** 25 Routen bestanden, Abbruch auf `/anmelden`: Dokumenttitel, siehe Befund 3. | nein |
+| `browser-public-fallbacks.mjs` | nein | Schutzziel entfiele teilweise ersatzlos, siehe offene Entscheidung 2. | **nicht bestanden** (erster Fall: Aktion öffnet das Orientierungsgespräch, keine `.action-card`). | nein |
+| `browser-exception-capture.mjs` (vite und next) | nein | Schutzziel „Fehlergrenze des Chats“ entfiele ersatzlos, siehe offene Entscheidung 3. | **nicht bestanden**, beide Oberflächen, in Schritt 4. | nein |
+
+Zusammen: 4 von 12 Läufen bestanden, 8 nicht. Die vier nachgeführten Skripte prüfen dieselben Schutzziele am heutigen Stand; drei davon melden jetzt echte Befunde der Seite, die vorher hinter der überholten Erwartung verborgen waren.
+
+Ergänzende Diagnose (nicht eingecheckt, nur zur Einordnung): Mit einer Kopie der beiden Skripte, in der allein die jeweils scheiternde Prüfung nur protokolliert statt abbricht, laufen `browser-public-experience` (70 Routen, 10 private Hüllen) und `browser-identity-hero` (33 Ansichten, beide Renderer) bis zum Ende durch. Die Nachführung ist damit vollständig; offen sind nur die Befunde.
+
+## 3. Übernommene Belege
+
+Verfahren wie am 09.11.: alte Fassung unverändert nach `superseded/` (`*.pre-neupruefung-2026-11-14.json`), neue an den Belegpfad, nichts gelöscht.
+
+| Beleg | Prüfer danach |
+|---|---|
+| `evidence/shop-ui-mock-2026-11-09/browser-shop.json` | `check_shop_ui_mock_evidence`: besteht |
+| `evidence/shop-ui-mock-2026-11-09/browser-catalog.json` | `check_catalog_ui_mock_evidence`: besteht |
+| `evidence/workspace-read-2026-10-28/browser-workspace-read.json` | `check_workspace_read`: besteht |
+| `evidence/consent-ui-2026-10-28/browser-consent-ui.json` | eigener Teil gültig (Quellen aktuell, 18 Checks). `check_consent_ui` als Ganzes scheitert weiter am zweiten Beleg `next-public.json` (Public-Experience-Lauf nicht bestanden). |
+
+`python3 tools/check_browser_evidence.py` besteht als Ganzes nicht: Der erste Abschnitt (Critical-Beleg) scheitert, danach bricht das Werkzeug ab. `python3 tools/check_text_resize_evidence.py` besteht nicht (Text-Spacing-Lauf nicht bestanden).
+
+## 4. Nachgezogene Pins (17)
+
+Je Belegart: 4 durch einen heute bestandenen Browserlauf, 12 durch einen heute grünen Test, der die Datei liest oder ausführt, 1 durch einen geprüften Diff ohne Anforderungsinhalt.
+
+| Datei | alter Pin | neuer Pin | Belegart | Beleg |
+|---|---|---|---|---|
+| `apps/web/components/SiteFooter.tsx` | `56a189a3feea…` | `841a2c0dacd2…` | Browserlauf heute | browser-consent-ui.mjs, 14.11.2026, 18 Checks, bestanden; Beleg evidence/consent-ui-2026-10-28/browser-consent-ui.json bindet die aktuellen Bytes |
+| `apps/web/proxy.ts` | `b3981c470e22…` | `c5acf79c8795…` | Browserlauf heute | browser-workspace-read.mjs, 14.11.2026, 4 Checks und 20 Negativsitzungen, bestanden; Beleg evidence/workspace-read-2026-10-28/browser-workspace-read.json bindet die aktuellen Bytes |
+| `evidence/consent-ui-2026-10-28/browser-consent-ui.json` | `526072b3bf9d…` | `211fdb1a68e5…` | Browserlauf heute | heute neu erhobener Consent-UI-Lauf (18 Checks, bestanden); alte Fassung in superseded/ |
+| `evidence/workspace-read-2026-10-28/browser-workspace-read.json` | `c974a0a1e593…` | `8f6e1bdc142d…` | Browserlauf heute | heute neu erhobener Workspace-Read-Lauf (4 Checks, bestanden); alte Fassung in superseded/ |
+| `apps/site/scripts/build-standalone.mjs` | `4cbd29d0f417…` | `4111301d0d2f…` | grüner Test heute | node --test apps/site/tests/standalone.test.mjs: 12 von 12 (führt das Skript aus); realer Standalone-Build Exit 0; Schritt keyboard_skip_link_preserves_standalone_product_hash_route des Critical-Laufs bestanden |
+| `apps/site/tests/standalone.test.mjs` | `71db343e65de…` | `83d15f20906a…` | grüner Test heute | node --test in apps/site: 132 von 132, darin diese Datei 12 von 12 |
+| `apps/site/tests/public-installation.test.mjs` | `5ba8acfc2a5a…` | `58d24504a122…` | grüner Test heute | node --test in apps/site: 132 von 132 |
+| `apps/site/src/public-installation.mjs` | `b2e4c8753a71…` | `b9356fa2927b…` | grüner Test heute | von public-installation.test.mjs importiert und ausgeführt (Status registered_offline_notice geprüft); 132 von 132 |
+| `apps/site/pwa/worker.js` | `2057580e9296…` | `e9c41e62481b…` | grüner Test heute | pwa-offline-worker.test.mjs und tests.test_public_surface_contract lesen und prüfen die Datei (nur install/fetch, kein Cache); beide grün |
+| `apps/web/auth/tests/public-experience.test.mjs` | `bae306a95122…` | `d057cd534279…` | grüner Test heute | node --test apps/web/auth/tests/*.test.mjs: 68 von 68 |
+| `tests/test_public_surface_contract.py` | `6b69cfde2ad8…` | `22e6a7da7cb7…` | grüner Test heute | unittest tests.test_public_surface_contract: OK |
+| `tools/check_text_resize_evidence.py` | `b47f96459d18…` | `c3ab15236117…` | grüner Test heute | tests.test_public_surface_contract importiert und führt check_resize aus (OK); Diff seit Pin: 2 Zeilen, nur der Belegpfad als Konstante |
+| `tests/test_identity_hero.py` | `976035c6fbd2…` | `8bc3926b3c25…` | grüner Test heute | unittest tests.test_identity_hero: OK |
+| `config/page-explainers.json` | `5155527ac0ce…` | `16c308f422bf…` | grüner Test heute | public-video-assets.test.mjs liest die Datei (132 von 132 in apps/site); Inhaltsurteil REC-CONTENT-01 bleibt offen |
+| `config/page-media-registry.json` | `f3fae02c19ba…` | `3613fbbb8c46…` | grüner Test heute | public-video-assets.test.mjs liest die Datei (132 von 132 in apps/site); Inhaltsurteil REC-MEDIA-01 bleibt offen |
+| `apps/agent-gateway/server.py` | `3fa30a1d01d9…` | `31a2715e0dbe…` | grüner Test heute | unittest tests.test_native_chat und tests.test_gateway_integrations starten den Server und prüfen den Idempotency-Key (OK) |
+| `package.json` | `106a40555352…` | `657b2ddf9b9a…` | geprüfter Diff | Diff seit Pin 281c5d4 geprüft: ein npm-Skript export:gesamtprojekt ergänzt (73ae263), sonst nichts; kein Anforderungsinhalt |
+
+
+Zwei Pins (`build-standalone.mjs`, `standalone.test.mjs`) waren vor dieser Arbeit gültig und sind durch die Nachführung neu gesetzt.
+
+## 5. Bewusst nicht nachgezogene Pins (30)
+
+Vorher 42 veraltete Pins, nachher 30. Davon ist einer neu offen (`browser-public-experience.mjs`, heute geändert, Lauf nicht bestanden).
+
+| Datei | Pin (unverändert) | heutige Bytes | Grund |
+|---|---|---|---|
+| `AGENTS.md` | `9e47cdb53b8a…` | `ce618eac3b21…` | Diff seit Pin (0421415) ist eine Führungsentscheidung des Inhabers (Auslieferung nur über Vercel). Das ist Anforderungsinhalt und kein reiner Verweis; kein Test prüft den Text. |
+| `apps/site/src/Auth.tsx` | `7c95609969ff…` | `3158116c240a…` | D-011: nur mit einem bestandenen Lauf, der die Datei heute bindet. Der Critical-Lauf bindet sie und ist nicht bestanden. |
+| `apps/site/tests/browser-pwa.mjs` | `229eef780923…` | `4b8cf39e9711…` | Harness war nicht Teil der zwölf Läufe; kein heutiger Lauf. |
+| `apps/site/tests/browser-text-spacing.mjs` | `bfa4ae535778…` | `2410bd6af797…` | Harness heute nachgeführt, Lauf nicht bestanden (27 Befunde bei 200 % Schrift). |
+| `apps/web/components/HomeContent.tsx` | `adf9b8495833…` | `a68ae947c71f…` | Gebunden nur von nicht bestandenen Läufen (Critical, Identity-Hero, Text-Spacing). tests.test_identity_hero prüft lediglich, was nicht enthalten ist; das trägt keinen Pin. |
+| `apps/web/components/Workspace.tsx` | `b1160ea73b58…` | `fc5001eaa2f3…` | Gebunden nur von nicht bestandenen Läufen (Critical, Public-Fallbacks, Text-Spacing). |
+| `apps/web/components/WorkspaceRebuild.css` | `591308b86d91…` | `94676651dc31…` | Gebunden nur von nicht bestandenen Läufen (Critical, Identity-Hero, Text-Spacing). |
+| `config/design-tokens.json` | `1482e2fa0e40…` | `4c53dbb24c48…` | Gestaltungswerte (478 neue Zeilen seit Pin). Alle Browserläufe, die die Datei binden, sind heute nicht bestanden. Die grünen Tests belegen nur, dass die erzeugten Dateien zur Quelle passen. |
+| `config/presenter-system.json` | `971f562fff93…` | `ef50e53f523c…` | D-011: nur mit einem bestandenen Lauf, der die Datei heute bindet. Keiner der vier bestandenen Läufe bindet sie. |
+| `config/site-map.json` | `6fbbbf4a5365…` | `3a4e4f4c8cfe…` | Seit Pin Produktname (b3d485d), Rechtsform (b403cf2) und Inhalte (f173054) geändert. Gebunden vom nicht bestandenen Critical-Lauf; die grünen Tests prüfen Struktur, nicht diese Inhalte. |
+| `skills-lock.json` | `6ee354fd704b…` | `00ba9ea69b9a…` | Diff seit Pin (276e6e0): neue Fähigkeit eingetragen und bei neun Einträgen die Prüfsumme geleert. Das ist kein Diff ohne Inhalt, siehe Befund 5. |
+| `tests/test_resize_source_binding.py` | `20bbdf26a7ca…` | `4c9f3d648cc8…` | Test ist rot, weil der Text-Spacing-Beleg fehlt. |
+| `requirements-image.txt` | `4d76d84ff2a0…` | `261c2981ef43…` | Diff seit Pin (268fee9): Pillow 12.3.0 auf 13.0.0. Kein Test bindet die Datei; mit 13.0.0 scheitern 59 Tests, siehe Befund 4. |
+| `apps/web/auth/tests/browser-public-experience.mjs` | `17cfd1c25cdc…` | `e47ea46cbdec…` | Harness heute nachgeführt, Lauf nicht bestanden (Titel auf /anmelden und /registrieren). Dieser Pin war vorher gültig und ist durch die Nachführung neu offen. |
+| `apps/web/package.json` | `868230c51557…` | `96eba9a2e9f9…` | Diff seit Pin (fb17a0d): Cloudflare-Skripte und zwei neue Entwicklungsabhängigkeiten. Abhängigkeitswechsel ohne Prüfung der Herkunft; zudem vom nicht bestandenen Ausnahme-Lauf gebunden. |
+| `apps/web/app/layout.tsx` | `4dacaac6a22c…` | `9145770986ae…` | Gebunden vom nicht bestandenen Public-Experience-Lauf. |
+| `apps/web/app/anmelden/[[...sign-in]]/page.tsx` | `ae015545eb91…` | `5ec6891c8e77…` | Trägt den heute gemeldeten Fehler (Titel fest deutsch); gebunden vom nicht bestandenen Public-Experience-Lauf. |
+| `apps/web/app/registrieren/[[...sign-up]]/page.tsx` | `ed41b40219ce…` | `31f2799aa370…` | wie die Anmeldeseite. |
+| `apps/web/components/OracleCompanion.tsx` | `945f8b24097f…` | `a7df5b002b3e…` | Gebunden nur vom nicht bestandenen Critical-Lauf. |
+| `apps/web/components/PublicOrientationChat.tsx` | `8ce9cb97ace8…` | `9b93ced471b0…` | Gebunden nur von nicht bestandenen Läufen (Critical, Ausnahmeerfassung); der Chat ist Gegenstand der offenen Entscheidung 1. |
+| `apps/web/components/PublicRequestFallback.tsx` | `19c334e0ef95…` | `bca6e33f32e4…` | Diff seit Pin (b403cf2) entfernt die Rechtsform „B.V.“ aus dem Hinweistext (de, nl, fr, en); gebunden nur von nicht bestandenen Läufen (Critical, Public-Fallbacks). |
+| `tools/check_browser_evidence.py` | `f6ec11afa854…` | `9bff179fac64…` | Der zugehörige Test tests.test_browser_evidence ist nicht vollständig grün (14 offene Fälle). |
+| `apps/site/tests/browser-critical.mjs` | `0d333f2eb200…` | `0874617adc51…` | Lauf nicht bestanden (SDK-Chat-Prüfungen, offene Entscheidung 1). |
+| `apps/web/components/IdentityHero.css` | `73037a5ff7d5…` | `3e99cd9c9232…` | wie IdentityHero.tsx. |
+| `packages/tokens/tokens.json` | `5b9a4eb32842…` | `d216f3727bd6…` | Aus design-tokens.json erzeugt; bleibt zusammen mit der Quelle offen. |
+| `apps/web/components/IdentityHero.tsx` | `36a88332e22e…` | `6fbfcfc52fe5…` | tests.test_identity_hero ist grün und liest die Datei, aber der zugehörige Browserlauf meldet heute einen Befund genau in diesem Baustein. Bewusst nicht über die schwächere Belegart gezogen. |
+| `packages/tokens/tokens.ts` | `5294aa6ed39b…` | `d39dbab00922…` | Aus design-tokens.json erzeugt; bleibt zusammen mit der Quelle offen. |
+| `apps/site/tests/browser-identity-hero.mjs` | `51ba02a106fe…` | `bba76d40f94b…` | Harness heute nachgeführt, Lauf nicht bestanden (Hero bei 200 % Schrift). |
+| `packages/tokens/tokens.css` | `218355ed5fdd…` | `41037671e1e4…` | Aus design-tokens.json erzeugt; bleibt zusammen mit der Quelle offen. |
+| `apps/shop-api/requirements.txt` | `15e850c9f224…` | `375cc4cefbf2…` | Diff seit Pin (454cd3e): dnspython 2.9.1 auf 2.9.2. Abhängigkeitswechsel ohne Test oder Prüfung der Herkunft. |
+
+## 6. Befunde und offene Entscheidungen
+
+### Befunde der Seite (gemeldet, nicht behoben)
+
+1. **Überlauf bei 200 % Schrift, 1280 px, auf allen 27 NeXify-Seiten.** Gemessen im Text-Spacing-Lauf: Kopfleiste `.site-header` (909 px Platz, 964 px Inhalt), Gesprächsscheibe `.aifly-panel` (359 zu 558) und die Namenszeile `.nx-oracle-name.orientation-host-name` (199 zu 449); auf `/leistungen`, `/leistungsumfang` und `/loesungen` zusätzlich eine `h3`. Kein Überlauf des Dokuments, keine Laufzeitfehler. Die 16 TEILEKLAR-Seiten sind ohne Befund. Berührt WCAG 1.4.4.
+2. **Hero der Startseite bei 200 % Schrift.** Der Lauf bricht beim ersten Zoom-Zustand ab (320 px, de). Im Diagnoselauf ist `scrollWidth` des Hero in allen 24 Zoom-Zuständen und beiden Renderern größer als `clientWidth` (zum Beispiel 365 zu 320 px). Ursache laut Diagnose ist das Lautstärkefeld des Films (`details.atelier-volume > div`, absolut positioniert). Im gemessenen Zustand ist das Feld geschlossen und unsichtbar; geöffnet reicht es bei 320 px über den Bildschirmrand (rechte Kante bei 376 px).
+3. **Titel von `/anmelden` und `/registrieren` fest deutsch.** Seit `32616db` setzen beide Seiten den Titel fest auf „Anmelden · NeXify AI“ und „Konto erstellen · NeXify AI“, auch mit `?lang=nl`. Die Korrektur vom 09.11. (`4b17a64`, KS-015) ist damit rückgängig; der deutsche Titel weicht zudem vom Seitentitel in `config/site-map.json` ab.
+4. **Pillow-Version widerspricht dem Werkzeug.** `requirements-image.txt` verlangt seit `268fee9` (PR 79) Pillow 13.0.0, `tools/product_image_batch.py` akzeptiert ausschließlich 12.3.0 (`unverified_pillow_version`). Mit 13.0.0 scheitern 59 Tests in `test_product_image_batch` und `test_birefnet_onnx`; mit 12.3.0 sind sie grün.
+5. **`skills-lock.json` ohne Prüfsummen.** Seit `276e6e0` ist bei neun Einträgen `computedHash` leer.
+6. **Installationsmanifest des Vite-Builds verweist auf `/signet.svg`.** Die Datei wird seit `32616db` nicht mehr ausgeliefert (`apps/site/pwa/plugin.mjs`); `public-installation.test.mjs` schreibt den Verweis fest.
+7. **Standalone-Vorschau zeigt Markenbilder nicht.** Die Datei verweist auf 18 Bilder unter `/media/…`, die nicht eingebettet sind und unter der Richtlinie `img-src data:` nicht laden. Bestand schon vor dieser Arbeit; das Build-Skript bettet nur die Bilder aus `presenter-artwork.json` und `editorial-art.json` ein.
+
+### Offene Entscheidungen für den Inhaber
+
+1. **Chat-Prüfungen im Critical-Lauf.** Drei Prüfungen laufen gegen `api/agent-chat.ts` (Chat ohne Sitzung, Abweisung unbekannter und privater Seitenbezüge mit erhaltenem Entwurf, Mobilbedienung). Der Chat nutzt seit D-010 `/api/chat`; dort wird der Seitenbezug nur auf seine Form geprüft (`safePagePath` in `apps/web/lib/chat-guidance.ts`), ein unbekannter oder privater Pfad wird nicht mit 422 abgewiesen. Für die zweite Prüfung gibt es heute keinen gleichwertigen Prüfpunkt. Zu entscheiden: Welche Eigenschaften soll der Chat-Beleg künftig sichern, und gegen welche Quellen wird er gebunden (Prüfer und Tests nennen heute die alten)?
+2. **Aktions-Fallback (`browser-public-fallbacks.mjs`).** Im ausgelieferten Next-Stand gibt es seit `32616db` keine Sitzungsabfrage mehr (`gateway` nur im Entwicklungsmodus); die Fälle „Sitzung nicht verfügbar“ und „Funktionen abgeschaltet“ sind dort nicht mehr unterscheidbar, und der dritte Fall (nachgeladener Chat-Teil schlägt fehl) existiert nicht mehr. Der Prüfer verlangt aber genau diese Matrix mit Sitzungsstatus 204, 200 und 404. Beobachtet: Jede Aktion öffnet das Orientierungsgespräch, es entsteht keine Ansicht ohne Funktion. Zu entscheiden: neue Matrix für den Beleg, oder Stilllegung mit Ersatzprüfung.
+3. **Fehlergrenze des Chats (`browser-exception-capture.mjs`).** `DeferredChatBoundary` fängt weiter Fehler beim Rendern des Chats, der Auslöser „Chat-Teil lädt nicht“ ist mit dem festen Import entfallen. Zu entscheiden: Fehlergrenze behalten und mit einem anderen, kontrolliert auslösbaren Fehler belegen, oder Prüfung und Grenze gemeinsam aufgeben. Die übrigen sieben Prüfungen des Skripts (Einwilligung, Schwärzung, Widerruf) hängen am selben Lauf.
+4. **Befund 2 einordnen:** Gilt das unsichtbare, geschlossene Lautstärkefeld als Überlauf (dann Stil korrigieren), oder soll die Messung nur sichtbare Elemente zählen?
+5. **`AGENTS.md`:** Der Pin bindet noch die Fassung vor der Führungsentscheidung vom 13.11. Bitte bestätigen, dann kann er nachgezogen werden.
+6. **Playwright:** Beleg mit der festgelegten Version 1.65.0 wiederholen, sobald sie in der Laufumgebung vorliegt?
+
+## 7. Gates vorher und nachher
+
+| Gate | vorher (`origin/main` `ae85910`) | nachher |
+|---|---|---|
+| `python3 -m unittest discover -s tests` | 839 Tests, 133 Failures, 9 Errors (97 `test_browser_evidence`, 43 `test_requirements_reconciliation`, 2 `test_resize_source_binding`) | 839 Tests, 41 Failures, 6 Errors (14, 31, 2) |
+| `make check` | Exit 0 | Exit 0 |
+| `node tools/ds-audit-cli.js` | 0 Fehler, 0 Warnungen | 0 Fehler, 0 Warnungen |
+| `node tools/lint.mjs` | 0 Diagnosen | 0 Diagnosen |
+| `cd apps/site && node --test` | 132 von 132 | 132 von 132 |
+| `node --test apps/web/auth/tests/*.test.mjs` | nicht erhoben | 68 von 68 |
+
+Die Python-Zahlen gelten mit Pillow 12.3.0 und numpy 2.3.5. Die gemeinsame Testumgebung wurde während der Arbeit von anderer Seite neu aufgebaut und enthielt danach weder Pillow noch numpy; die Nachher-Zahl stammt deshalb aus einer eigenen Umgebung mit denselben Paketen. Mit Pillow 13.0.0 aus `requirements-image.txt` kommen 59 Fehlschläge hinzu (Befund 4).
+
+Was rot bleibt: 14 Fälle in `test_browser_evidence` (Critical-Beleg, Public-Fallbacks, Ausnahmeerfassung, Next-Teil der Consent-Kette), 30 veraltete Pins und die daraus folgende Ansicht in `test_requirements_reconciliation`, 2 Fälle in `test_resize_source_binding`.
+
+`python3 tools/verify_requirements_reconciliation.py --render` meldet weiter 43 Zeilen „Stale implementation source“ und schreibt die Ansicht `docs/contracts/requirements-reconciliation.md` deshalb nicht neu (das Werkzeug rendert nur bei gültigem Register). Die Ansicht ist unverändert.
