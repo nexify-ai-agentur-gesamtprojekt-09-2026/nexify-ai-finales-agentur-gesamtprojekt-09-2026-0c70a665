@@ -868,3 +868,19 @@ html[data-theme='light'] #atelier .brand .brand-word .brand-x{color:var(--as-acc
 #atelier #aifly-panel :is(.orientation-message,.connection-note,.orientation-answer-copy,.request-fallback) a:not(.primary-button):not(.outline-button),#atelier .site-footer :is(.footer-legal-details p,.diagnostic-consent-content p) a{color:var(--as-ink);font-weight:600;transition:color var(--as-move)}
 #atelier #aifly-panel .connection-note a{color:var(--as-ink-2);font-weight:600}
 #atelier #aifly-panel .connection-note a:is(:hover,:focus-visible){color:var(--as-ink)}
+/* ===== Chat: Rueckfall ohne Gespraech ===== */
+/* Vier Arten, vier Behandlungen: Nutzer = getoentes Glas rechts, Oracle = gesetzter Text, Vorschlaege = kompakte Glas-Kacheln,
+   Systemhinweis = ruhige Zeile oben. Der Weg in drei Schritten entfaellt im Rueckfall. */
+#atelier #aifly-panel .public-orientation[data-orientation-mode='fallback'] .orientation-path{display:none}
+#atelier #aifly-panel .orientation-history>div:first-child>.orientation-message.role-assistant>strong,#atelier #aifly-panel .orientation-history>.orientation-message.role-assistant:first-of-type>strong{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+#atelier #aifly-panel .orientation-unavailable{order:-1;display:grid;gap:12px;padding:0;border-radius:0;background:none;box-shadow:none}
+#atelier #aifly-panel .orientation-unavailable p{font-size:15px;line-height:1.5;color:var(--as-ink-2)}
+#atelier #aifly-panel .orientation-unavailable .primary-button{color:var(--as-main-ink);background:var(--as-main-body);box-shadow:var(--as-main-shadow)}
+#atelier #aifly-panel .orientation-unavailable .primary-button:is(:hover,:focus-visible){background:var(--as-main-body-hover);box-shadow:var(--as-main-shadow-hover)}
+#atelier #aifly-panel .orientation-page-results{display:grid;gap:8px;margin-top:16px}
+#atelier #aifly-panel .orientation-page-link{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:start;gap:12px;min-height:48px;padding:12px 16px 12px 20px;text-decoration:none;transition:transform var(--as-move),background var(--as-move)}
+#atelier #aifly-panel .orientation-page-index{padding-top:3px;font:500 12px/1.5 var(--font-mono);font-variant-numeric:tabular-nums;color:var(--as-ink-3)}
+#atelier #aifly-panel .orientation-page-copy{display:grid;gap:2px;min-width:0}
+#atelier #aifly-panel .orientation-page-copy strong{font-size:15px;font-weight:600;line-height:1.35;color:var(--as-ink)}
+#atelier #aifly-panel .orientation-page-copy small{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;font-size:13px;line-height:1.5;color:var(--as-ink-2)}
+#atelier #aifly-panel .orientation-page-arrow{padding-top:1px;color:var(--as-ink-2)}
