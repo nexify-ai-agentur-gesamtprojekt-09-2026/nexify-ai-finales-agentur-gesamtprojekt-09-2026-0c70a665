@@ -126,3 +126,47 @@ Die Suche nach „KI-/Automatisierungsagentur" liefert überwiegend Selbstdarste
 - **Markenware statt No-Name**, Originalfotos, Preise inkl. MwSt., Versand vor Abschluss sichtbar — Vertrauen gegen Marktplatz-Beliebigkeit.
 - **Lokalisierung auf 7 Marktversionen / 3 Sprachen** mit korrekten Steuer-/Versand-/Lieferzeitangaben je Markt — Vorteil gegenüber generischen DE-Shops im Benelux-Raum.
 - **Grenze (offen, nicht behaupten):** Shop-Betrieb in Produktion antwortet derzeit nicht zuverlässig; Terminbuchung, Gutscheine, Batterie-Berater „noch nicht" verfügbar (IST: AGENTS.md 13.11.2026; O-9). Katalog-/Preisanbindung hängt am Lieferantenvertrag.
+
+---
+
+## 3. Bedarf an Library-Bausteinen — priorisierte Roadmap (AKP 3)
+
+Dies ist die **Zuarbeit für `docs/01-konzept/library-erweiterung-2026-11-14.md`** (Schwestersitzung). Jeder Punkt hat eine stabile ID, einen Zielsegment-Bezug und eine Wirkung-×-Aufwand-Einordnung und ist dort referenzierbar.
+
+**Grundlage: was schon da ist (nicht neu bauen).** Aus `config/loesungsregister.json` (Stand 14.11.2026) sind bereits vorhanden: CRM (HubSpot), Transaktionsmail (Resend), Social-Planung (Postiz), Automatisierung (n8n), Integrationen/MCP (Composio For You + Platform), Teile-Großhandel (BigBuy), LLM-Weg (OpenRouter/DeepSeek, 9router, Cloudflare AI Gateway), Gedächtnis/Wissen (Cognee, LightRAG, Graphify, agentmemory), Datenhaltung (Supabase/Postgres), Zahlung (Revolut). Die Bausteine unten **nutzen** diesen Stack, statt ihn zu duplizieren.
+
+**Bewertungslegende:** Wirkung = Beitrag zu Lead/Umsatz/Abschluss; Aufwand = Umsetzungslast; Priorität = Wirkung ÷ Aufwand unter Beachtung der heutigen Belege/Sperren.
+
+### 3.1 NeXify AI — Bausteine
+
+| ID | Baustein (Typ) | Zielsegment | Warum (belegte Begründung) | Wirkung | Aufwand | Priorität |
+|---|---|---|---|---|---|---|
+| **LIB-NX-01** | **Angebotspaket „KI-/Prozess-Audit, 1 Tag, schriftliches Ergebnis"** als Einstiegsprodukt | NX-A, NX-B | Niedrigschwelliger Einstieg; adressiert „81 % messen KI-Return nicht" [Q2] mit einer Vorher-/Nachher-Kennzahl. Im Marketingkonzept bereits als Einstiegsprodukt vorgesehen (MKT-002 §5). | Hoch | Niedrig | **1** |
+| **LIB-NX-02** | **Blaupause „Angebots-/Anfrage-Automatisierung Handwerk"** (Anfrage→Angebot) auf n8n + NeXify API | NX-A | Büroaufgaben (Angebotskalkulation, E-Mail) sind der belegte KI-Einsatzort im Handwerk [Q5]; nutzt vorhandenes n8n. | Hoch | Mittel | **1** |
+| **LIB-NX-03** | **Branchen-/Stadt-Zielseiten-Baukasten** (SEO/GEO, zitierfähige Faktenblöcke) | NX-A, NX-B | „Finden" ist belegter Funnel-Engpass; Markt groß und unterdigitalisiert [Q1][Q2]. Baut auf Klon-Fabrik/`site-map.json`. | Hoch | Mittel | **1** |
+| **LIB-NX-04** | **Belegte Fallkarten / Arbeitsproben-Baustein** („drei Zahlen", anonymisiert) | alle NX | Fehlende Referenzbreite ist die Kernschwäche (Abschnitt 3 Marketing-Gesamtkonzept; O-2). Eigener Auftritt + TEILEKLAR als Arbeitsprobe. | Hoch | Niedrig | **1** |
+| **LIB-NX-05** | **Portal-/App-Blaupause** („ein Ort statt Postfach/Listen") | NX-B | Belegter Schmerz „keiner weiß, wo der Vorgang steht"; TEILEKLAR-Portale als Vorlage. | Mittel | Hoch | 2 |
+| **LIB-NX-06** | **API-/BYOK-Schnellstart + Skills/MCP-Katalog** (Doku, Beispiel-Integrationen) | NX-C | Nachfrage nach Eigentum/offenen Standards/klaren Nutzungskosten [Q7]; nutzt Composio + llm-policy BYOK. | Mittel | Mittel | 2 |
+| **LIB-NX-07** | **NeXify-Care-Betriebspaket** (Monitoring/Tagesbericht, definierter Umfang) | NX-A, NX-B | Differenzierer „bauen UND betreiben"; nutzt Sentry/PostHog/Monitoring. Preis offen (O-1). | Mittel | Mittel | 2 |
+| **LIB-NX-08** | **Wissenshub-Inhaltsserie** („Was kostet…", „Wann lohnt sich…", „Wie lange dauert…") | NX-A, NX-B | GEO/Vertrauen; beantwortet reale Kaufvorfragen; speist LinkedIn-Rhythmus. | Mittel | Niedrig | 2 |
+| **LIB-NX-09** | **Mehrsprach-Paket NL/FR** für Benelux-Marktseiten | NX-A, NX-B | NL-MKB-Nachfrage belegt (Marketing/Verwaltung) [Q6]; Standort Venlo. Muttersprachliche Prüfung offen (O-12). | Mittel | Mittel | 3 |
+
+### 3.2 TEILEKLAR — Bausteine
+
+| ID | Baustein (Typ) | Zielsegment | Warum (belegte Begründung) | Wirkung | Aufwand | Priorität |
+|---|---|---|---|---|---|---|
+| **LIB-TK-01** | **Fahrzeug-Passungs-Assistent** (ehrliche Checkliste → später Katalogabgleich) | TK-1 | Fehlkauf durch unzureichende HSN/TSN-Filterung ist belegter Hauptschmerz [Q10]. Grenze: keine automatische Katalogprüfung behaupten (O-9). | Hoch | Hoch | **1** |
+| **LIB-TK-02** | **Teilenummer-/Suche-Zielseiten-Paket** (SEO, 3-sprachig) | TK-1, TK-3 | Teilenummer ist der sicherste Suchweg [Q10]; interaktive Tools bereits fertig (IST) → ausbauen. | Hoch | Mittel | **1** |
+| **LIB-TK-03** | **Werkstatt-Partner-Onboarding-Baustein** (Auftrag mit Fahrzeug-/Teilebezug) | TK-2 | Schrumpfender, digital ausbaufähiger Werkstattmarkt [Q12]; Verzeichnis (6.875 Betriebe) vorhanden. | Hoch | Mittel | **1** |
+| **LIB-TK-04** | **Lokale Werkstatt-/Umkreis-Suche** (Entfernung, Termin-Anfrage) | TK-1, TK-2 | Verbindet B2C-Teilekauf mit B2B-Vermittlung; Online-Terminbuchung heute „noch nicht" (O-9). | Mittel | Mittel | 2 |
+| **LIB-TK-05** | **Katalog-/Bestands-/Preis-Anbindung** (BigBuy) als wiederverwendbarer Baustein | TK-1, TK-3 | Sortimentstiefe gegen fragmentierten Wettbewerb [Q8]; hängt am Lieferantenvertrag (IST). | Hoch | Hoch | 2 |
+| **LIB-TK-06** | **Vertrauens-/Markenware-Content-Baustein** (Hersteller als Belege) | TK-1, TK-3 | Markenware statt No-Name als Abgrenzung zu Marktplätzen [Q8]; Herstellerlogos mit Nutzungsnachweis vorhanden. | Mittel | Niedrig | 2 |
+| **LIB-TK-07** | **Saison-/Zubehör-Kampagnenvorlagen** (Reifen, Batterie, Pflege) | TK-3 | Saisonauslöser belegt im Kaufverhalten [Q10]; nutzt Postiz. | Mittel | Niedrig | 3 |
+
+### 3.3 Die drei wichtigsten Roadmap-Punkte (Meeting-Empfehlung)
+
+1. **LIB-NX-01 + LIB-NX-04 (Audit-Einstieg + belegte Arbeitsproben):** schließen zugleich den Einstiegs- und den Referenz-Engpass von NeXify — höchste Wirkung bei geringem Aufwand, ohne offene Freigaben zu berühren.
+2. **LIB-NX-03 (Branchen-/Stadt-Zielseiten, SEO/GEO):** adressiert den belegten „Finden"-Engpass in einem großen, unterdigitalisierten Markt [Q1][Q2]; Fundament für alle Leadwege.
+3. **LIB-TK-01 + LIB-TK-03 (Passungs-Assistent + Werkstatt-Partner):** TEILEKLARs zwei einzigartige, belegbar nachgefragte Hebel (Fehlkauf-Schmerz [Q10], schrumpfender Werkstattmarkt [Q12]) — die klarste Abgrenzung zu Autodoc & Marktplätzen.
+
+**Abhängigkeiten/Sperren, die die Reihenfolge beeinflussen:** Preisfreigabe (O-1) begrenzt NX-Angebotskommunikation; Referenzfreigabe (O-2) begrenzt LIB-NX-04-Inhalte; Shop-Betrieb/Lieferantenvertrag begrenzen LIB-TK-01/05. Diese sind Inhaber-Entscheidungen, keine Bau-Blocker für die Vorbereitung.
