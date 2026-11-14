@@ -7,7 +7,8 @@
  * Gesprächsführung und Leitplanken: lib/chat-guidance.ts (versioniert). Die Modellantwort erreicht
  * den Besucher erst nach der Prüfung durch createOutputGuard.
  *
- * Fail-closed: ohne LLM-ENV (ROUTER_URL/ROUTER_KEY) => 503, kein Modellersatz.
+ * Fail-closed: ohne LLM-ENV (ROUTER_URL/ROUTER_KEY) => 503, kein Modellersatz. Das Protokoll nennt
+ * dabei die Namen der fehlenden Variablen (logChatRejected).
  * Störungen: Der Besucher erhält nur den festen Code chat_llm_failed. Die Ursache steht als
  * eine geheimnisfreie JSON-Zeile im Serverprotokoll (siehe logChatFailure).
  * Keine Secrets im Code, keine erfundenen Werte.
@@ -133,9 +134,45 @@ async function loadHistory(conversationId: string): Promise<GuidanceTurn[]> {
   }
 }
 
+/**
+ * Eine JSON-Zeile, wenn die Route eine Anfrage vor dem Modellaufruf abweist und der Chat dadurch
+ * für den Besucher nicht nutzbar ist. Nur feste Kennwörter und Namen von Variablen, niemals deren
+ * Werte, keine Adresse, kein Nutzertext.
+ */
+function logChatRejected(entry: Record<string, string | number | boolean | string[]>): void {
+  console.error(JSON.stringify({ event: 'chat_rejected', route: '/api/chat', ...entry }));
+}
+
+/** Namen der fehlenden Variablen für den Modellaufruf (nur Namen). */
+function missingLlmEnv(): string[] {
+  const missing: string[] = [];
+  if (!process.env.CHAT_COMPLETIONS_URL && !process.env.ROUTER_URL) missing.push('ROUTER_URL/CHAT_COMPLETIONS_URL');
+  if (!process.env.ROUTER_KEY) missing.push('ROUTER_KEY');
+  return missing;
+}
+
+/** Auf welcher Art Stand die Funktion läuft; nur die von der Plattform gesetzte Kennung. */
+function deploymentKind(): string {
+  const value = process.env.VERCEL_ENV;
+  return value === 'production' || value === 'preview' || value === 'development' ? value : 'unset';
+}
+
 export async function POST(request: Request): Promise<Response> {
-  if (crossOrigin(request)) return err('same_origin_required', 403);
-  if (!chatLlmConfigured()) return err('chat_llm_not_configured', 503);
+  if (crossOrigin(request)) {
+    // Ohne Namen der Hosts: nur, woher der Vergleichswert stammt.
+    logChatRejected({
+      status: 403,
+      cause: 'same_origin_required',
+      has_origin: request.headers.has('origin'),
+      host_source: request.headers.get('x-forwarded-host') ? 'x-forwarded-host' : request.headers.get('host') ? 'host' : 'url',
+      deployment: deploymentKind(),
+    });
+    return err('same_origin_required', 403);
+  }
+  if (!chatLlmConfigured()) {
+    logChatRejected({ status: 503, cause: 'not_configured', missing: missingLlmEnv(), deployment: deploymentKind() });
+    return err('chat_llm_not_configured', 503);
+  }
 
   const declared = Number(request.headers.get('content-length') || '0');
   if (declared > MAX_BODY_BYTES) return err('body_too_large', 413);
