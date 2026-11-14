@@ -1189,3 +1189,8 @@ html[data-theme='light'] #atelier{
 }
 /* Raumlicht ragt ueber seine Flaeche hinaus; die Seite schneidet es an ihrer Kante ab, statt waagerecht zu rollen. */
 #atelier .website{overflow-x:clip}
+/* Mobil ist die Front ein Vollbild-Blatt: hinter ihm liegt nichts, was gelesen werden soll - das Blatt deckt, das Glas zeigt sich
+   an Kopfzone, Eingabe und Schaltern. */
+@media(max-width:820px){#atelier #aifly-panel::before{background:var(--as-front-glanz),var(--as-sheet-body),var(--as-ground);-webkit-backdrop-filter:none;backdrop-filter:none}}
+/* Rueckfall: der Hinweis erhaelt den Fokus nur fuer Vorleseprogramme, ohne Rahmen. */
+#atelier #aifly-panel .orientation-unavailable:focus{outline:0;box-shadow:none}
