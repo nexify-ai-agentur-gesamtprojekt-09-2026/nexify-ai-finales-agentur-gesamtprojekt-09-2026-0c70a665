@@ -303,6 +303,28 @@ test('Anmeldung: ohne ausdrückliche Einwilligung, mit falscher Fassung, Sprache
     [{ ...VALID, email: '\ufeffa@unsichtbar.invalid' }, 422, 'invalid_email'],
     [{ ...VALID, email: 'a\u2028b@unsichtbar.invalid' }, 422, 'invalid_email'],
     [{ ...VALID, email: 'a\ue000b@unsichtbar.invalid' }, 422, 'invalid_email'],
+    // Schreibvarianten, die Mailserver wie die Adresse ohne Zusatz zustellen oder die keine Adresse sind.
+    [{ ...VALID, email: 'person@beispiel.invalid.' }, 422, 'invalid_email'],
+    [{ ...VALID, email: 'person@beispiel.invalid:' }, 422, 'invalid_email'],
+    [{ ...VALID, email: 'person@beispiel..invalid' }, 422, 'invalid_email'],
+    [{ ...VALID, email: 'person@.beispiel.invalid' }, 422, 'invalid_email'],
+    [{ ...VALID, email: 'person@a..xx' }, 422, 'invalid_email'],
+    [{ ...VALID, email: 'person@-.xx' }, 422, 'invalid_email'],
+    [{ ...VALID, email: 'person@-beispiel.invalid' }, 422, 'invalid_email'],
+    [{ ...VALID, email: 'person@beispiel-.invalid' }, 422, 'invalid_email'],
+    [{ ...VALID, email: 'person@beispiel.i' }, 422, 'invalid_email'],
+    [{ ...VALID, email: 'person@beispiel.123' }, 422, 'invalid_email'],
+    [{ ...VALID, email: 'person.@beispiel.invalid' }, 422, 'invalid_email'],
+    [{ ...VALID, email: '.person@beispiel.invalid' }, 422, 'invalid_email'],
+    [{ ...VALID, email: 'per..son@beispiel.invalid' }, 422, 'invalid_email'],
+    [{ ...VALID, email: 'person@@beispiel.invalid' }, 422, 'invalid_email'],
+    [{ ...VALID, email: 'x'.repeat(65) + '@beispiel.invalid' }, 422, 'invalid_email'],
+    // Füllzeichen und Variantenwähler, die keine Formatzeichen sind, aber nicht dargestellt werden.
+    [{ ...VALID, email: 'person\u3164@beispiel.invalid' }, 422, 'invalid_email'],
+    [{ ...VALID, email: 'person\u115f@beispiel.invalid' }, 422, 'invalid_email'],
+    [{ ...VALID, email: 'person\ufe0f@beispiel.invalid' }, 422, 'invalid_email'],
+    [{ ...VALID, email: 'person\uffa0@beispiel.invalid' }, 422, 'invalid_email'],
+    [{ ...VALID, email: 'person\u034f@beispiel.invalid' }, 422, 'invalid_email'],
   ];
   for (const [body, status, error] of cases) {
     const { deps, outbox, store } = setup();
@@ -313,6 +335,24 @@ test('Anmeldung: ohne ausdrückliche Einwilligung, mit falscher Fassung, Sprache
     assert.equal(store.events.length, 0);
     assert.equal(store.mails.length, 0);
   }
+});
+
+test('Adresse: genau eine angenommene Schreibweise je Adresse, damit die Grenze je Adresse nicht über Varianten umgangen wird', async () => {
+  // Zulässige Formen bleiben zulässig.
+  for (const email of ['vorname.nachname@beispiel.invalid', 'a+b@sub.beispiel.invalid', 'o_neil-1@beispiel.invalid', 'jürgen@bücher.invalid', 'x@a-b.c-d.invalid', 'A.B@Beispiel.INVALID']) {
+    const { deps, outbox } = setup();
+    assert.equal((await subscribe(deps, { ...VALID, email })).status, 202, email);
+    assert.equal(outbox.length, 1, email);
+  }
+  // Alle Schreibweisen, die angenommen werden, führen auf dieselbe Prüfsumme und teilen sich die Grenze (3 je 168 Stunden).
+  const { deps, outbox, store } = setup();
+  const variants = ['person@beispiel.invalid', ' Person@Beispiel.Invalid ', 'PERSON@BEISPIEL.INVALID', 'person@beispiel.invalid.', 'person@beispiel..invalid', 'person.@beispiel.invalid', 'person\u3164@beispiel.invalid', 'person\ufe0f@beispiel.invalid', 'person@beispiel.invalid:', 'person\u200b@beispiel.invalid'];
+  for (let round = 0; round < 2; round++) for (const email of variants) await subscribe(deps, { ...VALID, email });
+  assert.equal(outbox.length, 3, 'drei Mails an das eine Postfach, nicht drei je Schreibweise');
+  assert.deepEqual([...new Set(outbox.map((mail) => mail.to))], [ADDRESS]);
+  assert.deepEqual([...new Set(store.mails.map((entry) => entry.emailHash))], [emailHash(ADDRESS)]);
+  // Zusammengesetzte und zerlegte Unicode-Form sind dieselbe Adresse.
+  assert.equal(emailHash('ju\u0308rgen@beispiel.invalid'), emailHash('j\u00fcrgen@beispiel.invalid'));
 });
 
 test('Anmeldung: Form der Anfrage wird geprüft (JSON, Größe, Herkunft)', async () => {

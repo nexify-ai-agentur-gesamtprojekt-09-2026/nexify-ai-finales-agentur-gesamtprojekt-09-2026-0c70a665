@@ -209,7 +209,7 @@ test('Speicher: falsche Prüfsumme, Steuerzeichen, unsichtbare Zeichen und Groß
   const { store, mod } = state;
   const failed = (error) => error instanceof mod.MailingConsentStoreError && error.code === 'mailing_store_failed';
   await assert.rejects(store.insertPending({ ...(await pendingInput('eine@adresse.invalid')), email: 'andere@adresse.invalid' }), failed);
-  for (const address of ['steuer\u0007zeichen@adresse.invalid', 'null​breite@adresse.invalid', 'um‮gedreht@adresse.invalid', 'Gross@Adresse.invalid']) {
+  for (const address of ['steuer\u0007zeichen@adresse.invalid', 'null\u200bbreite@adresse.invalid', 'um\u202egedreht@adresse.invalid', 'Gross@Adresse.invalid', 'punkt@adresse.invalid.', 'punkt.@adresse.invalid', 'zwei..punkte@adresse.invalid', 'leer@adresse..invalid', 'strich@-.adresse.invalid', 'fuell\u3164zeichen@adresse.invalid', 'wahl\ufe0f@adresse.invalid']) {
     await assert.rejects(store.insertPending(await pendingInput(address)), failed, JSON.stringify(address));
   }
   assert.equal(sql("select count(*) from mailing.subscriptions where lower(email) like '%adresse.invalid'"), '0');
@@ -363,6 +363,19 @@ test('Aufräumen: verfallene unbestätigte Zeilen gehen, alles andere und jeder 
   await store.purgeExpiredPending(Date.now());
   assert.equal(await store.getSubscription(expired.emailHash), null);
   assert.equal(sql("select count(*) from mailing.subscriptions where status <> 'pending'"), before);
+  // N-A2: Ein Dienst mit weit vorgehender Uhr bietet auch eine noch gültige Anmeldung zum Löschen an. Die Datenbank
+  // lässt sie nach ihrer eigenen Uhr stehen; ihr Bestätigungslink wirkt weiter.
+  const valid = await pendingInput('noch-gueltig@beispiel.invalid');
+  await store.insertPending(valid);
+  await store.purgeExpiredPending(Date.now() + 5000 * HOUR);
+  assert.equal((await store.getSubscription(valid.emailHash))?.status, 'pending', 'die gültige Anmeldung steht noch');
+  assert.ok(await store.confirmByTokenHash(valid.confirmTokenHash, Date.now()));
+  // Die Sperre über den Sperrlink löscht eine gültige, nie bestätigte Anmeldung weiterhin (erst die Sperre, dann die Zeile).
+  const blockable = await pendingInput('gueltig-und-gesperrt@beispiel.invalid');
+  await store.insertPending(blockable);
+  const blockToken = await store.issueUnsubscribeToken(blockable.emailHash, token());
+  await store.unsubscribeByToken(blockToken, Date.now());
+  assert.equal(await store.getSubscription(blockable.emailHash), null);
   const fresh = await store.reserveConfirmationMail(await sha('frisch@beispiel.invalid'), Date.now(), LIMITS);
   ageMails(0);
   owner("update mailing.confirmation_mails set reserved_at = reserved_at - interval '169 hours' where id <> " + fresh.id);

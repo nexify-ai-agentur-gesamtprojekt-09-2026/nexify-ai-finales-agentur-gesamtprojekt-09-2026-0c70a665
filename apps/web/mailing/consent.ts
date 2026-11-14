@@ -81,13 +81,34 @@ const HEX64 = /^[0-9a-f]{64}$/;
 const SOURCE = /^[a-z0-9/_-]{1,64}$/;
 const PAGE = /^\/[a-z0-9/_-]{1,128}$/;
 const VERSION = /^[A-Za-z0-9._-]{1,64}$/;
-const EMAIL = /^[^\s@<>"',;:\\()[\]]+@[^\s@<>"',;:\\()[\]]+\.[^\s@<>"',;:\\()[\]]{2,}$/;
+/**
+ * Form einer Adresse. Streng genug, dass eine Adresse nur EINE angenommene Schreibweise hat: Jede Schreibvariante,
+ * die Mailserver gleich zustellen, hätte sonst eine eigene Prüfsumme und damit eigene Grenzen.
+ *  - lokaler Teil: keine Leerzeichen, Klammern, Anführungs- oder Trennzeichen; kein Punkt am Anfang oder Ende, keine
+ *    zwei Punkte hintereinander; höchstens 64 Zeichen
+ *  - Domain: mindestens zwei Namensteile aus Buchstaben, Ziffern und Bindestrichen, kein Bindestrich am Rand eines
+ *    Teils, kein leerer Teil (also kein Punkt am Anfang oder Ende und keine zwei Punkte hintereinander); die Endung
+ *    besteht aus mindestens zwei Buchstaben
+ * Nicht zusammengefasst werden Varianten, die nur einzelne Anbieter gleich behandeln (Punkte im lokalen Teil,
+ * Zusatzadressen mit +): Das ist je Anbieter verschieden und steht als offener Punkt in der Betriebsnotiz.
+ */
+const LOCAL_PART = /^[^\s@<>"',;:\\()[\].]+(?:\.[^\s@<>"',;:\\()[\].]+)*$/;
+const DOMAIN_LABEL = /^[\p{L}\p{N}](?:[\p{L}\p{N}-]*[\p{L}\p{N}])?$/u;
+const TOP_LEVEL = /^\p{L}{2,}$/u;
+function wellFormedEmail(email: string): boolean {
+  const at = email.indexOf('@');
+  if (at < 1 || at !== email.lastIndexOf('@')) return false;
+  const local = email.slice(0, at);
+  const labels = email.slice(at + 1).split('.');
+  return local.length <= 64 && LOCAL_PART.test(local) && labels.length >= 2 && labels.every((label) => DOMAIN_LABEL.test(label)) && TOP_LEVEL.test(labels[labels.length - 1]);
+}
 /**
  * Steuerzeichen (C0, DEL, C1) und unsichtbare oder umstellende Zeichen (Formatzeichen wie U+200B und U+202E, private
- * und halbe Zeichen). In einer Adresse haben sie nichts zu suchen: Zwei Adressen, die gleich aussehen, hätten sonst
+ * und halbe Zeichen, nicht vergebene Zeichen und alles, was Unicode als "bei der Darstellung zu übergehen" führt,
+ * etwa die Füllzeichen U+3164 und U+115F und die Variantenwähler um U+FE0F). In einer Adresse haben sie nichts zu suchen: Zwei Adressen, die gleich aussehen, hätten sonst
  * verschiedene Prüfsummen und eigene Grenzen. `\s` erfasst nur einen Teil davon.
  */
-const CONTROL = /[\p{Cc}\p{Cf}\p{Co}\p{Cs}\u2028\u2029]/u;
+const CONTROL = /[\p{Cc}\p{Cf}\p{Co}\p{Cs}\p{Cn}\p{Default_Ignorable_Code_Point}\u2028\u2029]/u;
 /** Ein Absender allein darf höchstens diesen Teil der Tagesgrenze für Bestätigungsmails auslösen können. */
 export const SENDER_SHARE_OF_DAILY_LIMIT = 4;
 const MAX_DEADLINE_HOURS = 14 * 24;
@@ -247,8 +268,8 @@ export function consentReadiness(config: MailingConsentConfig, env: MailingEnv =
   return gaps;
 }
 
-/** Schreibweise, unter der eine Adresse geführt und gesperrt wird: ohne Rand, klein. */
-export const normalizeEmail = (value: string): string => value.trim().toLowerCase();
+/** Schreibweise, unter der eine Adresse geführt und gesperrt wird: ohne Rand, in zusammengesetzter Unicode-Form (NFC), klein. */
+export const normalizeEmail = (value: string): string => value.trim().normalize('NFC').toLowerCase();
 export const emailHash = (email: string): string => sha256Hex(normalizeEmail(email));
 const newToken = (): string => randomBytes(32).toString('base64url');
 
@@ -446,7 +467,7 @@ export async function handleSubscribe(request: Request, deps: ConsentDeps = {}):
   // Steuerzeichen werden vor dem Beschneiden geprüft, damit keines am Rand still verschwindet.
   if (typeof body.email !== 'string' || CONTROL.test(body.email)) return reply({ error: 'invalid_email' }, 422);
   const email = normalizeEmail(body.email);
-  if (email.length < 6 || email.length > 254 || !EMAIL.test(email)) return reply({ error: 'invalid_email' }, 422);
+  if (email.length < 6 || email.length > 254 || !wellFormedEmail(email)) return reply({ error: 'invalid_email' }, 422);
 
   const consentVersion = config.einwilligung.fassung as string;
   const hash = sha256Hex(email);

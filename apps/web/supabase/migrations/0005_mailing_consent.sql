@@ -38,7 +38,7 @@ create schema if not exists mailing;
 -- --------------------------------------------------------------------------
 -- Anmeldungen. Schlüssel ist die SHA-256-Prüfsumme der Adresse, wie sie in der Zeile steht (in der Tabelle
 -- erzwungen). Die Adresse steht ohne Rand, ohne Steuer- und unsichtbare Zeichen und ohne ASCII-Großbuchstaben da
--- (ebenfalls erzwungen). Weitergehende Kleinschreibung (Umlaute und andere Schriften) leistet nur der Dienst
+-- und in genau einer Punktschreibweise (ebenfalls erzwungen). Weitergehende Kleinschreibung (Umlaute und andere Schriften) leistet nur der Dienst
 -- (`toLowerCase`); die Datenbank prüft sie nicht, weil ihr Ergebnis von der Sortierung der Instanz abhinge.
 -- pending      = angefragt, Bestätigung steht aus (verfällt zu confirm_expires_at)
 -- confirmed    = per Bestätigungsmail bestätigt; nur diese Zeilen sind eine Einwilligung
@@ -55,7 +55,10 @@ create table if not exists mailing.subscriptions (
   email                text not null check (length(email) between 6 and 254 and email = btrim(email)
                                              and email !~ '[\u0001-\u001f\u007f-\u009f]'
                                              and email !~ '[\u00ad\u061c\u180e\u200b-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff9-\ufffb]'
-                                             and email !~ '[A-Z]'),
+                                             and email !~ '[\u034f\u115f\u1160\u17b4\u17b5\u180b-\u180f\u3164\ufe00-\ufe0f\uffa0]'
+                                             and email !~ '[A-Z]'
+                                             -- genau ein @; kein Punkt am Rand oder doppelt, weder vor noch nach dem @; kein Bindestrich am Rand eines Domainteils
+                                             and email ~ '^[^@.]+(\.[^@.]+)*@[^@.-]([^@.]*[^@.-])?(\.[^@.-]([^@.]*[^@.-])?)+$'),
   lang                 text not null check (lang in ('de','nl','fr','en')),
   status               text not null check (status in ('pending','confirmed','unsubscribed')),
   source               text not null check (source ~ '^[a-z0-9/_-]{1,64}$'),
@@ -224,13 +227,21 @@ drop trigger if exists subscriptions_guard_update on mailing.subscriptions;
 create trigger subscriptions_guard_update before update on mailing.subscriptions
   for each row execute function mailing.guard_subscription_update();
 
--- Gelöscht werden dürfen nur unbestätigte Anmeldungen (Verfall nach der Frist). Ein Nachweis und eine
--- Abmeldung bleiben stehen, bis der Inhaber Aufbewahrungsfristen festgelegt hat.
+-- Gelöscht werden dürfen nur unbestätigte Anmeldungen. Ein Nachweis und eine Abmeldung bleiben stehen, bis der
+-- Inhaber Aufbewahrungsfristen festgelegt hat. Eine unbestätigte Anmeldung wird nur gelöscht, wenn
+--   ihre Frist nach der Uhr der Datenbank abgelaufen ist (Verfall), oder
+--   ihre Adresse auf der Sperrliste steht (Sperre über den Sperrlink: erst die Sperre, dann die Zeile).
+-- Alles andere bleibt beim Aufräumen einfach stehen (kein Fehler): Ein Dienst mit vorgehender Uhr kann so keine
+-- noch gültige Anmeldung samt ihrem Bestätigungslink löschen.
 create or replace function mailing.guard_subscription_delete()
 returns trigger language plpgsql set search_path = pg_catalog as $$
 begin
   if old.status <> 'pending' then
     raise exception 'subscription_delete_only_pending' using errcode = '23514';
+  end if;
+  if old.confirm_expires_at > now()
+     and not exists (select 1 from mailing.suppressions s where s.email_hash = old.email_hash) then
+    return null;
   end if;
   return old;
 end $$;

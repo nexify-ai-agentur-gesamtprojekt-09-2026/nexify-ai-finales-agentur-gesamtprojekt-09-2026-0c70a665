@@ -329,6 +329,78 @@ begin
     raise exception 'Address with upper-case letters accepted';
   exception when check_violation then null;
   end;
+  begin
+    insert into mailing.subscriptions(email_hash, email, lang, status, source, consent_version, consent_text_sha256, requested_at, confirm_expires_at, confirm_token_hashes)
+    values (mailing_fixture.h('v@example.invalid.'), 'v@example.invalid.', 'de', 'pending', 'preise/checkliste', 'v1', repeat('c', 64), t0, t0 + interval '48 hours', array[repeat('d', 64)]);
+    raise exception 'Address with a trailing dot accepted';
+  exception when check_violation then null;
+  end;
+  begin
+    insert into mailing.subscriptions(email_hash, email, lang, status, source, consent_version, consent_text_sha256, requested_at, confirm_expires_at, confirm_token_hashes)
+    values (mailing_fixture.h('v@a..xx'), 'v@a..xx', 'de', 'pending', 'preise/checkliste', 'v1', repeat('c', 64), t0, t0 + interval '48 hours', array[repeat('d', 64)]);
+    raise exception 'Address with an empty domain label accepted';
+  exception when check_violation then null;
+  end;
+  begin
+    insert into mailing.subscriptions(email_hash, email, lang, status, source, consent_version, consent_text_sha256, requested_at, confirm_expires_at, confirm_token_hashes)
+    values (mailing_fixture.h('v@-.xx'), 'v@-.xx', 'de', 'pending', 'preise/checkliste', 'v1', repeat('c', 64), t0, t0 + interval '48 hours', array[repeat('d', 64)]);
+    raise exception 'Address with a bare hyphen label accepted';
+  exception when check_violation then null;
+  end;
+  begin
+    insert into mailing.subscriptions(email_hash, email, lang, status, source, consent_version, consent_text_sha256, requested_at, confirm_expires_at, confirm_token_hashes)
+    values (mailing_fixture.h('v@example-.invalid'), 'v@example-.invalid', 'de', 'pending', 'preise/checkliste', 'v1', repeat('c', 64), t0, t0 + interval '48 hours', array[repeat('d', 64)]);
+    raise exception 'Address with a trailing hyphen label accepted';
+  exception when check_violation then null;
+  end;
+  begin
+    insert into mailing.subscriptions(email_hash, email, lang, status, source, consent_version, consent_text_sha256, requested_at, confirm_expires_at, confirm_token_hashes)
+    values (mailing_fixture.h('v.@example.invalid'), 'v.@example.invalid', 'de', 'pending', 'preise/checkliste', 'v1', repeat('c', 64), t0, t0 + interval '48 hours', array[repeat('d', 64)]);
+    raise exception 'Address with a dot before the at sign accepted';
+  exception when check_violation then null;
+  end;
+  begin
+    insert into mailing.subscriptions(email_hash, email, lang, status, source, consent_version, consent_text_sha256, requested_at, confirm_expires_at, confirm_token_hashes)
+    values (mailing_fixture.h('.v@example.invalid'), '.v@example.invalid', 'de', 'pending', 'preise/checkliste', 'v1', repeat('c', 64), t0, t0 + interval '48 hours', array[repeat('d', 64)]);
+    raise exception 'Address with a leading dot accepted';
+  exception when check_violation then null;
+  end;
+  begin
+    insert into mailing.subscriptions(email_hash, email, lang, status, source, consent_version, consent_text_sha256, requested_at, confirm_expires_at, confirm_token_hashes)
+    values (mailing_fixture.h('v..w@example.invalid'), 'v..w@example.invalid', 'de', 'pending', 'preise/checkliste', 'v1', repeat('c', 64), t0, t0 + interval '48 hours', array[repeat('d', 64)]);
+    raise exception 'Address with two dots in the local part accepted';
+  exception when check_violation then null;
+  end;
+  begin
+    insert into mailing.subscriptions(email_hash, email, lang, status, source, consent_version, consent_text_sha256, requested_at, confirm_expires_at, confirm_token_hashes)
+    values (mailing_fixture.h('v@@example.invalid'), 'v@@example.invalid', 'de', 'pending', 'preise/checkliste', 'v1', repeat('c', 64), t0, t0 + interval '48 hours', array[repeat('d', 64)]);
+    raise exception 'Address with two at signs accepted';
+  exception when check_violation then null;
+  end;
+  begin
+    insert into mailing.subscriptions(email_hash, email, lang, status, source, consent_version, consent_text_sha256, requested_at, confirm_expires_at, confirm_token_hashes)
+    values (mailing_fixture.h('v@example'), 'v@example', 'de', 'pending', 'preise/checkliste', 'v1', repeat('c', 64), t0, t0 + interval '48 hours', array[repeat('d', 64)]);
+    raise exception 'Address without a domain dot accepted';
+  exception when check_violation then null;
+  end;
+  begin
+    insert into mailing.subscriptions(email_hash, email, lang, status, source, consent_version, consent_text_sha256, requested_at, confirm_expires_at, confirm_token_hashes)
+    values (mailing_fixture.h(E'v\u3164@example.invalid'), E'v\u3164@example.invalid', 'de', 'pending', 'preise/checkliste', 'v1', repeat('c', 64), t0, t0 + interval '48 hours', array[repeat('d', 64)]);
+    raise exception 'Address with a Hangul filler accepted';
+  exception when check_violation then null;
+  end;
+  begin
+    insert into mailing.subscriptions(email_hash, email, lang, status, source, consent_version, consent_text_sha256, requested_at, confirm_expires_at, confirm_token_hashes)
+    values (mailing_fixture.h(E'v\u115f@example.invalid'), E'v\u115f@example.invalid', 'de', 'pending', 'preise/checkliste', 'v1', repeat('c', 64), t0, t0 + interval '48 hours', array[repeat('d', 64)]);
+    raise exception 'Address with a Hangul choseong filler accepted';
+  exception when check_violation then null;
+  end;
+  begin
+    insert into mailing.subscriptions(email_hash, email, lang, status, source, consent_version, consent_text_sha256, requested_at, confirm_expires_at, confirm_token_hashes)
+    values (mailing_fixture.h(E'v\ufe0f@example.invalid'), E'v\ufe0f@example.invalid', 'de', 'pending', 'preise/checkliste', 'v1', repeat('c', 64), t0, t0 + interval '48 hours', array[repeat('d', 64)]);
+    raise exception 'Address with a variation selector accepted';
+  exception when check_violation then null;
+  end;
 
   -- Eine Anmeldung entsteht nur unbestätigt. Ein direkt eingefügter "Nachweis" wird abgelehnt.
   begin
@@ -549,7 +621,14 @@ begin
 
   -- Verfall wie purgeExpiredPending: löscht nur unbestätigte Zeilen mit abgelaufener Frist.
   perform mailing_fixture.pending('neu@b.invalid', repeat('b', 64), interval '200 hours');
-  delete from mailing.subscriptions where status = 'pending' and confirm_expires_at < now();
+  -- N-A2: Ein Dienst mit vorgehender Uhr bietet auch die noch gültige Zeile zum Löschen an. Die Datenbank lässt sie
+  -- nach ihrer eigenen Uhr stehen, ohne Fehler, und löscht nur die tatsächlich verfallene.
+  delete from mailing.subscriptions where status = 'pending' and email = 'neu@b.invalid' and confirm_expires_at < now() + interval '5000 hours';
+  get diagnostics n = row_count;
+  if n <> 0 or not exists (select 1 from mailing.subscriptions where email = 'neu@b.invalid') then
+    raise exception 'A still valid pending subscription was deleted by a caller with a fast clock';
+  end if;
+  delete from mailing.subscriptions where status = 'pending' and confirm_expires_at < now() + interval '5000 hours';
   get diagnostics n = row_count;
   if n <> 1 then raise exception 'Purge removed % rows instead of 1', n; end if;
   if (select array_agg(email order by email) from mailing.subscriptions) <> array['a@b.invalid', 'neu@b.invalid'] then
