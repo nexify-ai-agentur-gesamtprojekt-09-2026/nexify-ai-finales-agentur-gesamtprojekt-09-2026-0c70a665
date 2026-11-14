@@ -390,6 +390,19 @@ class Publication(unittest.IsolatedAsyncioTestCase):
         self.assertIs(db.data['products']['bb-12']['buyable'], False)
         self.assertIs(db.data['products']['bb-12']['publishable'], False)
 
+    async def test_imported_product_is_blocked_with_reasons_and_gaps_are_not_filled(self):
+        db = FakeDB(); db.data['products'].pop('bb-12')
+        with patch.object(IMPORT, 'fetch_catalog', AsyncMock(return_value=self.catalog())):
+            await IMPORT.run_import(db, 'production', 'run')
+        product = db.data['products']['bb-12']
+        self.assertEqual(db.data['imports']['run']['status'], 'done')
+        self.assertEqual(product['release']['status'], 'blocked')
+        self.assertEqual(product['release']['checked_by'], 'import')
+        # Every gap the supplier left is a reason; no description, brand or delivery time was invented.
+        self.assertIn('delivery_time_missing', product['release']['blocked_reasons'])
+        self.assertNotIn('delivery_time', product)
+        self.assertEqual(product['description'], '')
+
     async def test_foreign_and_unmarked_category_collisions_abort_without_catalog_mutation(self):
         for existing in ({'_id': 5, 'name': 'Other', 'source': 'other'}, {'_id': 5, 'name': 'Legacy'}):
             db = FakeDB(); db.data['categories'][5] = existing

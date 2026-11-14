@@ -30,11 +30,32 @@ class RequestIn(BaseModel):
     phone: str = Field("", max_length=40)
 
 
+def derive_brand(kind, page_path):
+    """Which brand a public request belongs to: "teileklar" or "nexify".
+
+    Decided on the server from what the form is: the workshop partner kinds and every form on a page below
+    /teileklar belong to TEILEKLAR, everything else to NeXify. Kept free of module state on purpose, so the
+    backfill (shop/brands.py) and the read filters classify legacy records by exactly the same rule.
+    """
+    if kind in ("partner", "workshop_partner"):
+        return "teileklar"
+    path = page_path if isinstance(page_path, str) else ""
+    return "teileklar" if path == "/teileklar" or path.startswith("/teileklar/") else "nexify"
+
+
 async def notify(doc):
-    subject, html, text = mail_templates.internal_request(doc)
     # New records use their unique durable identity; keep the historical outbox key for legacy records.
     event_key = doc["_id"] if doc.get("payload_hash") else "request:" + doc["number"]
-    outbox = await mailer.enqueue(event_key, mailer.setting("MAIL_INTERNAL_TO"), subject, html, text, reply_to=doc["email"])
+    if doc.get("brand") == "teileklar":
+        # TEILEKLAR enquiry: TEILEKLAR text under the shop's own sender.
+        from . import mail_templates_teileklar
+        subject, html, text = mail_templates_teileklar.internal_request(doc)
+        outbox = await mailer.enqueue(event_key, mailer.setting("MAIL_INTERNAL_TO"), subject, html, text, reply_to=doc["email"])
+    else:
+        # NeXify enquiry: NeXify sender when one is configured, otherwise the previous default sender.
+        subject, html, text = mail_templates.internal_request(doc)
+        outbox = await mailer.enqueue(event_key, mailer.setting("MAIL_INTERNAL_TO"), subject, html, text, reply_to=doc["email"],
+                                      sender=mailer.setting("NEXIFY_MAIL_FROM"))
     return (outbox or {}).get("status", "not_configured")
 
 
@@ -48,11 +69,13 @@ class RequestReceipt(BaseModel):
     number: str
     status: str
     notification_status: str
+    brand: str = "nexify"
 
 
 def receipt(doc):
     return RequestReceipt(number=doc["number"], status=doc["status"],
-                          notification_status=doc.get("notify_status", "wartend"))
+                          notification_status=doc.get("notify_status", "wartend"),
+                          brand=doc.get("brand") or derive_brand(doc.get("kind", "contact"), doc.get("page_path", "")))
 
 
 @router.post("", status_code=201, response_model=RequestReceipt)
@@ -83,9 +106,11 @@ async def create_request(body: RequestIn, request: Request, idempotency_key: str
     since = (datetime.now(timezone.utc) - timedelta(hours=1)).isoformat()
     if await db.requests.count_documents({"email": email, "created_at": {"$gte": since}}) >= HOURLY_LIMIT:
         raise HTTPException(429, {"error": "rate_limited", "message": "Zu viele Anfragen. Bitte versuchen Sie es später erneut."})
-    number = "NX-%s-%s" % (datetime.now(timezone.utc).strftime("%Y%m%d"), request_id.split(":", 1)[1][:24].upper())
+    # The brand is not part of the hashed payload, so replays of requests stored before it existed still match.
+    brand = derive_brand(body.kind, body.page_path)
+    number = "%s-%s-%s" % ("TK" if brand == "teileklar" else "NX", datetime.now(timezone.utc).strftime("%Y%m%d"), request_id.split(":", 1)[1][:24].upper())
     # Request and durable notification intent are one atomic Mongo document.
-    doc = {"_id": request_id, **payload, "payload_hash": payload_hash, "number": number,
+    doc = {"_id": request_id, **payload, "payload_hash": payload_hash, "number": number, "brand": brand,
            "status": "eingegangen", "stage": "lead", "user_id": await _requester(request), "created_at": now_iso(), "notify_recovery_pending": True, "notify_status": "wartend"}
     try:
         await db.requests.insert_one(doc)

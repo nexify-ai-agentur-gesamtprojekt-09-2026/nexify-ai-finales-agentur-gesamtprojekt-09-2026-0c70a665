@@ -13,8 +13,8 @@ from . import auth, config
 from .db import db, ensure_indexes
 from . import mailer
 from . import nexify_api
-from . import accounts_api, admin_api, cart_api, catalog_api, checkout_api, requests_api, workshops_api
-from . import verification_api
+from . import accounts_api, admin_api, cart_api, catalog_api, checkout_api, product_release_api, requests_api, workshops_api
+from . import partners_api, teileklar_admin_api, verification_api
 
 NEXT_API = ("/api/agent-chat", "/api/agent-runtime-status", "/api/internal")
 HOP = {"host", "content-length", "connection", "transfer-encoding", "keep-alive"}
@@ -59,7 +59,7 @@ app = FastAPI(title="TEILEKLAR Shop API", version="1.0", lifespan=lifespan, open
 @app.middleware("http")
 async def same_origin_writes(request: Request, call_next):
     origin = request.headers.get("origin")
-    writes = request.method in ("POST", "PUT", "PATCH", "DELETE") and request.url.path.startswith(("/api/shop", "/api/admin", "/api/workshops", "/api/auth", "/api/requests", "/api/portal", "/api/operator", "/api/oracle"))
+    writes = request.method in ("POST", "PUT", "PATCH", "DELETE") and request.url.path.startswith(("/api/shop", "/api/admin", "/api/workshops", "/api/auth", "/api/requests", "/api/partner-applications", "/api/portal", "/api/operator", "/api/oracle"))
     if writes and origin and origin.rstrip("/") != config.PUBLIC_ORIGIN and not request.url.path.startswith("/api/shop/webhooks/"):
         return JSONResponse({"detail": {"error": "origin_rejected"}}, status_code=403)
     response = await call_next(request)
@@ -68,8 +68,8 @@ async def same_origin_writes(request: Request, call_next):
     return response
 
 
-# verification_api answers 404 on both routes unless its switches are on (default off).
-for module in (accounts_api, catalog_api, cart_api, checkout_api, workshops_api, admin_api, requests_api, nexify_api, verification_api):
+# verification_api, teileklar_admin_api and partners_api answer 404 unless their switches are on (default off).
+for module in (accounts_api, catalog_api, cart_api, checkout_api, workshops_api, admin_api, product_release_api, requests_api, nexify_api, verification_api, teileklar_admin_api, partners_api):
     app.include_router(module.router)
 
 

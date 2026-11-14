@@ -25,14 +25,21 @@ class AsyncRows:
 
 
 class CartStockTests(unittest.TestCase):
+    @staticmethod
+    def released_product(product):
+        """The mandatory fields and a stored release, so these tests exercise stock and not the publication gate."""
+        return {'description': 'Fixture product with a description long enough.', 'images': ['https://cdnbigbuy.com/images/fixture.jpg'],
+                'details': {'manufacturer': 'Fixture Maker'}, 'delivery_time': {'min_days': 1, 'max_days': 3},
+                'release': {'status': 'released', 'blocked_reasons': []}, **product}
+
     def setUp(self):
         name = '_cart_stock_subject'
         package = ModuleType(name); package.__path__ = [str(SHOP)]
         modules = {name: package}
         for suffix in ('auth', 'bigbuy_order', 'config', 'pricing', 'db', 'fulfillment', 'mail_templates', 'mailer', 'revolut'):
             module = ModuleType(name + '.' + suffix); modules[module.__name__] = module
-        self.product = {'_id': 'fixture-product', 'name': 'Fixture', 'active': True,
-                        'stock': 4, 'purchase_cents': 100, 'sku': 'fixture'}
+        self.product = self.released_product({'_id': 'fixture-product', 'name': 'Fixture', 'active': True,
+                        'stock': 4, 'purchase_cents': 100, 'sku': 'fixture'})
         self.items = []
         self.revision = None
         self.extra_product = None
@@ -145,7 +152,7 @@ class CartStockTests(unittest.TestCase):
                 self.assertEqual(shown['stock_status'], 'unknown' if expected is None else 'reported')
 
     def test_other_unknown_item_is_checked_before_cart_update(self):
-        self.extra_product = {'_id':'other','name':'Other','active':True,'stock':None,'purchase_cents':100}
+        self.extra_product = self.released_product({'_id':'other','name':'Other','active':True,'stock':None,'purchase_cents':100})
         self.items = [{'product_id':'other','name':'Other','quantity':1,'price_seen_cents':100}]
         result = self.client.post('/api/shop/cart/items', json={'product_id':'fixture-product','quantity':1})
         self.assertEqual(result.status_code, 409)
@@ -163,7 +170,7 @@ class CartStockTests(unittest.TestCase):
 
     def test_two_unknown_stock_items_remain_removable_without_becoming_orderable(self):
         self.product['stock'] = None
-        self.extra_product = {'_id':'other','name':'Other','active':True,'stock':None,'purchase_cents':100}
+        self.extra_product = self.released_product({'_id':'other','name':'Other','active':True,'stock':None,'purchase_cents':100})
         self.items = [{'product_id':'fixture-product','name':'Fixture','quantity':1,'price_seen_cents':100},
                       {'product_id':'other','name':'Other','quantity':1,'price_seen_cents':100}]
         initial = self.client.get('/api/shop/cart')

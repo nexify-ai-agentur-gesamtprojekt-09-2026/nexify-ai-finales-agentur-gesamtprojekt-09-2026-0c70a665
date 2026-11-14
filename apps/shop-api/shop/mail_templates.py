@@ -101,9 +101,9 @@ def password_reset(link):
 
 
 def workshop_receipt(req):
-    rows = [("Anfrage", req["_id"]), ("Werkstatt", req.get("workshop_name") or ""), ("Status", "Anfrage gesendet – noch kein Termin")]
-    html = layout("Werkstattanfrage", "Anfrage gesendet – noch kein Termin", para("Ihre Anfrage ist gespeichert. Ein Termin entsteht erst, wenn die Werkstatt ihn bestätigt. Die Werkstatt ist ein Verzeichnisbetrieb, kein TEILEKLAR-Vertragspartner.") + table(rows), "Anfrage gesendet")
-    return "Ihre Werkstattanfrage %s" % req["_id"], html, "Anfrage gesendet – noch kein Termin\n\n" + "\n".join("%s: %s" % r for r in rows) + text_footer()
+    """Moved: the former text announced a confirmation by the workshop, which never learns of the request."""
+    from . import mail_templates_teileklar
+    return mail_templates_teileklar.workshop_receipt(req)
 
 
 def internal_request(doc):

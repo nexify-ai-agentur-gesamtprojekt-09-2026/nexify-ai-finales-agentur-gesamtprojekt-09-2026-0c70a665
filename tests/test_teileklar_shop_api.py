@@ -48,6 +48,12 @@ def signed(body, secret=SECRET, ts=None):
     return {"Revolut-Signature": sig, "Revolut-Request-Timestamp": ts, "Content-Type": "application/json"}
 
 
+# Mandatory fields plus a stored release (shop/product_release.py), so these fixtures are public products.
+PUBLISHABLE = {"description": "Testartikel mit ausreichend langer Beschreibung.", "images": ["https://cdnbigbuy.com/images/test.jpg"],
+               "details": {"manufacturer": "Testhersteller"}, "delivery_time": {"min_days": 1, "max_days": 3},
+               "release": {"status": "released", "blocked_reasons": []}}
+
+
 class PureFunctions(unittest.TestCase):
     @unittest.skipUnless(DEPS, "fastapi/motor/mongodb not available")
     def test_price_formula_and_signature(self):
@@ -130,8 +136,8 @@ class ShopFlow(unittest.TestCase):
         for name in ("products", "carts", "orders", "webhook_events", "revolut_webhooks", "settings", "imports", "categories", "users", "sessions", "login_failures", "outbox", "requests", "workshop_requests", "password_resets"):
             await db[name].delete_many({})
         await db.products.insert_many([
-            {"_id": "bb-1", "bigbuy_id": 1, "sku": "S1", "ean": "4000000000001", "name": "Testartikel Eins", "purchase_cents": 1000, "stock": 5, "active": True, "images": [], "category_ids": [9], "category_id": 9, "source": "unittest", "imported_at": "2026-01-01T00:00:00+00:00"},
-            {"_id": "bb-2", "bigbuy_id": 2, "sku": "S2", "ean": "4000000000002", "name": "Testartikel Zwei", "purchase_cents": 2000, "stock": 0, "active": True, "images": [], "category_ids": [9], "category_id": 9, "source": "unittest", "imported_at": "2026-01-01T00:00:00+00:00"}])
+            {"_id": "bb-1", "bigbuy_id": 1, "sku": "S1", "ean": "4000000000001", "name": "Testartikel Eins", "purchase_cents": 1000, "stock": 5, "active": True, **PUBLISHABLE, "category_ids": [9], "category_id": 9, "source": "unittest", "imported_at": "2026-01-01T00:00:00+00:00"},
+            {"_id": "bb-2", "bigbuy_id": 2, "sku": "S2", "ean": "4000000000002", "name": "Testartikel Zwei", "purchase_cents": 2000, "stock": 0, "active": True, **PUBLISHABLE, "category_ids": [9], "category_id": 9, "source": "unittest", "imported_at": "2026-01-01T00:00:00+00:00"}])
 
     def checkout(self, headers, key="key-0000000000000001"):
         quote = self.client.post("/api/shop/checkout/quote", headers=headers).json()
@@ -240,7 +246,7 @@ class ShopFlow(unittest.TestCase):
         r = self.client.post("/api/workshops/%s/requests" % workshop["_id"], json={"name": "Erika Muster", "email": "erika@example.org", "phone": "", "message": "Bremsen prüfen bitte.", "consent": True})
         self.assertEqual(r.status_code, 201, r.text)
         receipt = [m for m in self.mails if m["to"] == ["erika@example.org"]][-1]
-        self.assertIn("Anfrage gesendet – noch kein Termin", receipt["text"])
+        self.assertIn("Betrieb nicht benachrichtigt, kein Termin", receipt["text"])
 
     def test_bigbuy_import_paginates_dedupes_and_keeps_catalog_on_failure(self):
         calls = {"fail": False}

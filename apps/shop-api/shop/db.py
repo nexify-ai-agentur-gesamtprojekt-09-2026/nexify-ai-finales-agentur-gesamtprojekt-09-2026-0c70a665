@@ -25,3 +25,5 @@ async def ensure_indexes(database=None):
     await d.webhook_events.create_index("event_key", unique=True)
     await d.workshops.create_index("zip")
     await d.workshops.create_index("city_key")
+    await d.partner_applications.create_index("number", unique=True)
+    await d.partner_applications.create_index("open_key", unique=True)

@@ -1,0 +1,5 @@
+{
+  "version": 1,
+  "hinweis": "Sperrliste: Betriebe, die auf eigenen Wunsch nicht angezeigt werden. Ein Eintrag blendet den Betrieb in Suche, Detail und Anfrage aus; im Datenbestand bleibt er erhalten. Eintrag je Betrieb entweder mit id oder mit name und zip (Schreibweise egal) sowie grund und datum. Ohne Wunsch des Betriebs keinen Eintrag anlegen; Wunsch und Quelle im grund festhalten.",
+  "eintraege": []
+}

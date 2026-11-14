@@ -15,7 +15,8 @@ import secrets
 from typing import Mapping
 from urllib.parse import urlsplit
 
-from vercel_app import BindingError, CLAIM_COLLECTION, COLLECTIONS, INDEXES, PLANNED_NAMESPACE, PROJECT_ID, SCHEMA_MARKER, check_metadata, resolve_binding
+from vercel_app import (BindingError, CLAIM_COLLECTION, COLLECTIONS, INDEXES, OPTIONAL_COLLECTIONS, OPTIONAL_INDEXES, PLANNED_NAMESPACE,
+                        PROJECT_ID, SCHEMA_MARKER, check_metadata, check_project, inspect_metadata, resolve_binding)
 
 MAX_METADATA_COLLECTIONS = 100
 COLLECTION_OPTIONS = {
@@ -46,8 +47,11 @@ def plan_digest():
 
 
 def connection_uri(env: Mapping[str, str]):
-    if env.get("VERCEL_PROJECT_ID") != PROJECT_ID:
-        raise OperatorError("project_binding_unverified")
+    try:
+        # Same explicit allowlist as the runtime (SHOP_API_ALLOWED_PROJECT_IDS); default: original project only.
+        check_project(env)
+    except BindingError as error:
+        raise OperatorError(str(error)) from None
     old, new = env.get("MONGO_URL", ""), env.get("MONGODB_URI", "")
     if old and new and old != new:
         raise OperatorError("database_configuration_conflict")
@@ -85,8 +89,9 @@ async def preflight(database):
               "business_documents_read": False, "runtime_or_provider_accepted": False}
     if not rows:
         result["state"] = "empty_namespace_metadata"
-    elif len(rows) == len(COLLECTIONS) and {r["name"] for r in rows} == set(COLLECTIONS) and await check_metadata(database) is None:
+    elif {r["name"] for r in rows} - set(OPTIONAL_COLLECTIONS) == set(COLLECTIONS) and await check_metadata(database) is None:
         result["state"] = "existing_schema_matches_read_only"
+        result["optional_collections_present"] = sorted({r["name"] for r in rows} & set(OPTIONAL_COLLECTIONS))
     else:
         result["state"] = "existing_namespace_not_initialized_by_this_operation"
     return result
@@ -150,6 +155,50 @@ async def initialize(database, *, confirmed_plan_sha256):
             "seeded_documents": 0, "runtime_or_provider_accepted": False}
 
 
+def extension_plan(name):
+    if name not in OPTIONAL_COLLECTIONS:
+        raise OperatorError("unknown_optional_collection")
+    return {"operation": "extend", "planned_namespace": PLANNED_NAMESPACE, "collection": name, "collection_options": COLLECTION_OPTIONS,
+            "indexes": [{"keys": [[key, 1] for key in keys], "unique": unique, **({"expireAfterSeconds": ttl} if ttl is not None else {})}
+                        for keys, unique, ttl in OPTIONAL_INDEXES.get(name, [])]}
+
+
+def extension_digest(name):
+    return hashlib.sha256(json.dumps(extension_plan(name), sort_keys=True, separators=(",", ":")).encode()).hexdigest()
+
+
+async def extend(database, name, *, confirmed_plan_sha256):
+    """Add ONE optional collection to an initialised namespace. Explicit, confirmed, never automatic.
+
+    Refuses unless the existing schema matches and the collection is absent. No documents are read,
+    written or removed; nothing existing is altered."""
+    if confirmed_plan_sha256 != extension_digest(name):
+        raise OperatorError("plan_confirmation_missing_or_stale")
+    await metadata(database)
+    error, present = await inspect_metadata(database)
+    if error:
+        raise OperatorError("namespace_not_ready_no_changes_allowed")
+    if name in present:
+        return {"operation": "extend", "state": "already_present_and_matching", "collection": name, "metadata_writes": False}
+    index_count = 0
+    try:
+        collection = await database.create_collection(name, check_exists=False, **COLLECTION_OPTIONS)
+        for number, (keys, unique, ttl) in enumerate(OPTIONAL_INDEXES.get(name, [])):
+            options = {"unique": unique, "name": f"nexify_plan_{number}"}
+            if ttl is not None:
+                options["expireAfterSeconds"] = ttl
+            await collection.create_index([(key, 1) for key in keys], **options)
+            index_count += 1
+        error, present = await inspect_metadata(database)
+        if error or name not in present:
+            raise OperatorError("post_extend_metadata_not_ready")
+    except Exception:
+        return {"operation": "extend", "state": "incomplete_readback_required", "collection": name, "writes_may_have_committed": True,
+                "acknowledged_indexes": index_count, "automatic_retry": False, "automatic_rollback": False, "business_documents_read": False}
+    return {"operation": "extend", "state": "optional_collection_added", "collection": name, "plan_sha256": extension_digest(name),
+            "metadata_writes": True, "created_indexes": index_count, "seeded_documents": 0, "runtime_or_provider_accepted": False}
+
+
 class SafeParser(argparse.ArgumentParser):
     def error(self, message):
         raise OperatorError("invalid_operator_arguments")
@@ -157,14 +206,17 @@ class SafeParser(argparse.ArgumentParser):
 
 def arguments(argv=None):
     parser = SafeParser(description="Metadata-only by default; no URI or credential arguments.")
-    parser.add_argument("operation", choices=("preflight", "init", "plan"), nargs="?", default="preflight")
+    parser.add_argument("operation", choices=("preflight", "init", "plan", "extend", "extend-plan"), nargs="?", default="preflight")
     parser.add_argument("--confirm-plan-sha256")
+    parser.add_argument("--collection", choices=OPTIONAL_COLLECTIONS)
     return parser.parse_args(argv)
 
 
 async def operate(env, args, *, client_factory=None):
     uri = connection_uri(env)
     if args.operation == "init" and args.confirm_plan_sha256 != plan_digest():
+        raise OperatorError("plan_confirmation_missing_or_stale")
+    if args.operation == "extend" and (not args.collection or args.confirm_plan_sha256 != extension_digest(args.collection)):
         raise OperatorError("plan_confirmation_missing_or_stale")
     if client_factory is None:
         from motor.motor_asyncio import AsyncIOMotorClient
@@ -177,6 +229,8 @@ async def operate(env, args, *, client_factory=None):
         if args.operation == "init":
             # Fail before any mutation if the explicit plan was not confirmed.
             return await asyncio.wait_for(initialize(database, confirmed_plan_sha256=args.confirm_plan_sha256), timeout=90)
+        if args.operation == "extend":
+            return await asyncio.wait_for(extend(database, args.collection, confirmed_plan_sha256=args.confirm_plan_sha256), timeout=30)
         result = await asyncio.wait_for(preflight(database), timeout=15)
         try:
             resolve_binding(env)
@@ -195,6 +249,11 @@ def main(argv=None):
         args = arguments(argv)
         if args.operation == "plan":
             print(json.dumps({"operation": "plan", "plan_sha256": plan_digest(), "plan": plan()}, sort_keys=True))
+            return 0
+        if args.operation == "extend-plan":
+            if not args.collection:
+                raise OperatorError("invalid_operator_arguments")
+            print(json.dumps({"operation": "extend-plan", "plan_sha256": extension_digest(args.collection), "plan": extension_plan(args.collection)}, sort_keys=True))
             return 0
         result = asyncio.run(operate(dict(os.environ), args))
         print(json.dumps(result, sort_keys=True))

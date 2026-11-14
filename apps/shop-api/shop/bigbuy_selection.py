@@ -7,6 +7,7 @@ The transactional full-catalog importer remains unchanged.
 import asyncio
 import uuid
 from .bigbuy_import import BigBuyClient, BigBuyReadError, find_roots, build_product, stock_total, require_publication_contract
+from . import product_release
 from .db import db, now_iso
 
 
@@ -54,6 +55,7 @@ async def import_selection(actor, max_pages=3, run_id=None):
                     except BigBuyReadError: skipped+=1;continue
                     image_data=row_for(await client.get(f'/rest/catalog/productimages/{pid}.json',{}),pid) or {}
                     product=build_product(row,info,image_data.get('images',[]),quantity,names,scope[row['taxonomy']],stamp,run_id,'production')
+                    product['release']=product_release.import_state(product,stamp)
                     product.update(source_partial=True,source_mode='additive_selection',stock_by_handling=stock['stocks'],shipping_status='calculated_at_checkout')
                     await db.products.update_one({'_id':product['_id']},{'$set':product,'$setOnInsert':{'first_imported_at':stamp}},upsert=True)
                     for cid in product['category_ids']:

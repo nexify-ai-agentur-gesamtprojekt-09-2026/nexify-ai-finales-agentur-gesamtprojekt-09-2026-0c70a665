@@ -21,7 +21,7 @@ from pydantic import BaseModel, Field
 from pymongo import ReturnDocument
 from pymongo.errors import DuplicateKeyError
 
-from . import mailer
+from . import brands, mailer
 from .db import db, now_iso
 
 router = APIRouter()
@@ -271,7 +271,7 @@ async def portal_overview(request: Request):
     offers_open = await db.offers.count_documents({"tenant_id": tid, "status": "sent"})
     invoices_open = await db.invoices.count_documents({"tenant_id": tid, "status": {"$in": ["open", "overdue"]}})
     tickets_open = await db.tickets.count_documents({"tenant_id": tid, "status": {"$ne": "closed"}})
-    reqs = await db.requests.count_documents(own_requests(user))
+    reqs = await db.requests.count_documents(brands.scoped("nexify", own_requests(user)))
     sub = clean(await db.subscriptions.find_one({"tenant_id": tid}))
     next_steps = [s for p in projects for s in p.get("next_steps", [])][:6]
     return {"user": clean(user), "projects": projects[:5], "counts": {"offers_open": offers_open, "invoices_open": invoices_open, "tickets_open": tickets_open, "requests": reqs,
@@ -281,7 +281,7 @@ async def portal_overview(request: Request):
 @router.get("/api/portal/requests")
 async def portal_requests(request: Request):
     user = await need_user(request)
-    items = await db.requests.find(own_requests(user), {"_id": 0, "payload_hash": 0}).sort("created_at", -1).to_list(100)
+    items = await db.requests.find(brands.scoped("nexify", own_requests(user)), {"_id": 0, "payload_hash": 0}).sort("created_at", -1).to_list(100)
     return {"items": items}
 
 
@@ -587,8 +587,8 @@ async def operator_overview(request: Request):
     await db.command("ping")
     mongo_ms = int((time.time() - started) * 1000)
     since = (datetime.now(timezone.utc) - timedelta(days=7)).isoformat()
-    pipeline = {s: await db.requests.count_documents({"stage": s}) for s in STAGES}
-    pipeline["lead"] += await db.requests.count_documents({"stage": {"$exists": False}})
+    pipeline = {s: await db.requests.count_documents(brands.scoped("nexify", {"stage": s})) for s in STAGES}
+    pipeline["lead"] += await db.requests.count_documents(brands.scoped("nexify", {"stage": {"$exists": False}}))
     outbox = {s: await db.mail_outbox.count_documents({"status": s}) for s in ("sent", "pending", "failed", "not_configured")}
     checks = [
         {"name": "Datenbank", "state": "ok", "detail": "Ping %d ms" % mongo_ms},
@@ -600,7 +600,7 @@ async def operator_overview(request: Request):
         {"name": "Täglicher 08:00-Bericht", "state": "not_run", "detail": "Scheduler und Zustellung nicht nachgewiesen"},
     ]
     return {
-        "counts": {"requests_7d": await db.requests.count_documents({"created_at": {"$gte": since}}), "requests": await db.requests.estimated_document_count(),
+        "counts": {"requests_7d": await db.requests.count_documents(brands.scoped("nexify", {"created_at": {"$gte": since}})), "requests": await db.requests.count_documents(brands.scope("nexify")),
                    "customers": await db.users.count_documents({"role": "customer"}), "projects": await db.projects.count_documents({"status": {"$ne": "abgeschlossen"}}),
                    "offers_open": await db.offers.count_documents({"status": "sent"}), "invoices_open": await db.invoices.count_documents({"status": {"$in": ["open", "overdue"]}}),
                    "tickets_open": await db.tickets.count_documents({"status": {"$ne": "closed"}}), "oracle_sessions": len(await db.oracle_messages.distinct("session_id")),
@@ -637,7 +637,7 @@ def request_response(doc):
 @router.get("/api/operator/requests", response_model=OperatorRequests)
 async def operator_requests(request: Request):
     await need_admin(request)
-    docs = await db.requests.find({}, {"payload_hash": 0}).sort("created_at", -1).to_list(300)
+    docs = await db.requests.find(brands.scope("nexify"), {"payload_hash": 0}).sort("created_at", -1).to_list(300)
     return OperatorRequests(items=[request_response(doc) for doc in docs], stages=STAGES)
 
 
@@ -652,11 +652,11 @@ async def operator_request_stage(number: str, body: StageIn, request: Request):
     update = {"$set": {"stage": body.stage, "updated_at": now_iso()}}
     if body.note:
         update["$push"] = {"notes": {"text": body.note, "at": now_iso(), "by": admin["email"]}}
-    res = await db.requests.update_one({"number": number}, update)
+    res = await db.requests.update_one(brands.scoped("nexify", {"number": number}), update)
     if not res.matched_count:
         raise HTTPException(404, {"error": "not_found"})
     await audit(admin, "request_stage", number, body.stage)
-    updated = await db.requests.find_one({"number": number}, {"payload_hash": 0})
+    updated = await db.requests.find_one(brands.scoped("nexify", {"number": number}), {"payload_hash": 0})
     return request_response(updated)
 
 

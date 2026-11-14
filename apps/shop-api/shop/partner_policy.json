@@ -1,0 +1,56 @@
+{
+  "_kennzeichnung": "Arbeitsfassung aus dem Geschäftsmodell TEILEKLAR (Stand 2026-11-14). Nicht veröffentlicht.",
+  "_hinweis": "Nur Definitionen, Statuswerte, Prüfkriterien und die Pilotgrenze. Bewusst ohne Preise, Gebühren, Fristen, Antwortzeiten und ohne jede Kostenaussage: Nichts davon ist freigegeben. Solange freigabe_inhaber false ist, kann kein Antrag freigegeben werden.",
+  "freigabe_inhaber": false,
+  "partnerstufen": [
+    {
+      "id": "verzeichnisbetrieb",
+      "anzeige": "Verzeichniseintrag – kein TEILEKLAR-Partner",
+      "definition": "Kfz-Betrieb, der aus öffentlich zugänglichen Angaben in der Werkstattsuche steht. Keine Vereinbarung mit TEILEKLAR.",
+      "vertrag": false,
+      "kennzeichen": false,
+      "partnerseite": false,
+      "anfrageformular": false,
+      "durch_antrag_erreichbar": false
+    },
+    {
+      "id": "direktpartner",
+      "anzeige": "TEILEKLAR Direktpartner",
+      "definition": "Kfz-Betrieb, der die Partnervereinbarung unmittelbar mit TEILEKLAR geschlossen hat (ohne Kette, Portal oder Vermittler dazwischen), geprüft und freigeschaltet ist.",
+      "vertrag": true,
+      "kennzeichen": true,
+      "partnerseite": true,
+      "anfrageformular": true,
+      "durch_antrag_erreichbar": true
+    }
+  ],
+  "pilot": {"direktpartner_max": 25},
+  "herkunft": ["direkt", "empfehlung", "verzeichnis_uebernommen"],
+  "freischaltkriterien": [
+    {"id": "K1_zulassung_kfz_betrieb", "text": "Betrieb ist für Kfz-Arbeiten zugelassen", "nicht_anwendbar_zulaessig": false},
+    {"id": "K2_anschrift_betriebsstaette", "text": "Anschrift stimmt und ist eine Werkstatt", "nicht_anwendbar_zulaessig": false},
+    {"id": "K3_vertretungsbefugnis", "text": "Antragsteller darf den Betrieb vertreten", "nicht_anwendbar_zulaessig": false},
+    {"id": "K4_rueckruf", "text": "Erreichbarkeit unter der öffentlich bekannten Nummer des Betriebs", "nicht_anwendbar_zulaessig": false},
+    {"id": "K5_ust_id_falls_vorhanden", "text": "USt-IdNr. gültig, falls vorhanden", "nicht_anwendbar_zulaessig": true},
+    {"id": "K6_betriebshaftpflicht_eigenerklaerung", "text": "Betriebshaftpflicht besteht (Eigenerklärung)", "nicht_anwendbar_zulaessig": false},
+    {"id": "K7_vereinbarung_bestaetigt", "text": "Partnervereinbarung und Datenschutzregelung in der geltenden Fassung bestätigt", "nicht_anwendbar_zulaessig": false},
+    {"id": "K8_profil_vollstaendig", "text": "Profil vollständig", "nicht_anwendbar_zulaessig": false}
+  ],
+  "partnerantrag": {
+    "statuswerte": ["eingegangen", "in_pruefung", "rueckfrage", "freigegeben", "abgelehnt", "verfallen", "zurueckgezogen"],
+    "startzustand": "eingegangen",
+    "uebergaenge": {
+      "eingegangen": ["in_pruefung", "zurueckgezogen"],
+      "in_pruefung": ["rueckfrage", "freigegeben", "abgelehnt", "zurueckgezogen"],
+      "rueckfrage": ["in_pruefung", "verfallen", "zurueckgezogen"],
+      "freigegeben": [],
+      "abgelehnt": [],
+      "verfallen": [],
+      "zurueckgezogen": []
+    },
+    "freigabezustand": "freigegeben",
+    "durch_antragsteller": ["zurueckgezogen"],
+    "begruendung_pflicht": ["abgelehnt", "rueckfrage", "verfallen"],
+    "archivierbar": ["abgelehnt", "verfallen", "zurueckgezogen"]
+  }
+}

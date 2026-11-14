@@ -187,8 +187,12 @@ class DispatchTests(unittest.TestCase):
                 loaded.append(True)
                 return [router], Database()
             with TestClient(ADAPTER.create_app(env, loader=loader)) as client:
-                for method, path in [('post', '/api/shop/orders'), ('get', '/api/shop/orders/id'), ('post', '/api/auth/login')]:
-                    self.assertEqual(getattr(client, method)(path).status_code, 503)
+                # Payment-dependent paths stay closed before any router or database is touched.
+                for method, path in [('post', '/api/shop/orders'), ('get', '/api/shop/orders/id'), ('post', '/api/shop/checkout/quote'),
+                                     ('post', '/api/shop/webhooks/revolut'), ('get', '/api/admin/settings'), ('get', '/api/shop/unclassified')]:
+                    result = getattr(client, method)(path)
+                    self.assertEqual(result.status_code, 503)
+                    self.assertEqual(result.json()['detail']['reason'], 'payment_mode_unbound')
                 self.assertEqual(loaded, [])
                 self.assertEqual(client.get('/api/shop/products').status_code, 200)
                 self.assertFalse(client.get('/api/health').json()['payment_mode_configured'])
