@@ -31,7 +31,23 @@ def bind_shop_environment():
 
 
 def _get(doc, key):
-    return doc.get(key)
+    value = doc
+    for part in key.split("."):  # dotted paths, as Mongo reads nested fields
+        if not isinstance(value, dict):
+            return None
+        value = value.get(part)
+    return value
+
+
+def _with(doc, key, value):
+    """Copy of `doc` with the (dotted) field replaced by `value`."""
+    out = copy.deepcopy(doc)
+    node = out
+    *path, last = key.split(".")
+    for part in path:
+        node = node[part]
+    node[last] = value
+    return out
 
 
 def _match_value(actual, expected):
@@ -58,6 +74,9 @@ def _match_value(actual, expected):
             elif op == "$gt":
                 if actual is None or actual <= arg:
                     return False
+            elif op == "$lte":
+                if actual is None or actual > arg:
+                    return False
             elif op == "$lt":
                 if actual is None or actual >= arg:
                     return False
@@ -66,6 +85,8 @@ def _match_value(actual, expected):
             else:
                 raise NotImplementedError(op)
         return True
+    if isinstance(actual, list) and not isinstance(expected, list):
+        return expected in actual  # Mongo: equality against an array field matches any element
     return actual == expected
 
 
@@ -78,7 +99,7 @@ def matches(doc, query):
             if not all(matches(doc, branch) for branch in expected):
                 return False
         elif isinstance(expected, dict) and "$exists" in expected:
-            if (key in doc) is not bool(expected["$exists"]):
+            if (_get(doc, key) is not None or key in doc) is not bool(expected["$exists"]):
                 return False
         elif not _match_value(_get(doc, key), expected):
             return False
@@ -90,7 +111,14 @@ class Cursor:
         self.rows = rows
 
     def sort(self, key, direction=1):
-        self.rows.sort(key=lambda d: (d.get(key) is None, d.get(key) or ""), reverse=direction < 0)
+        # `sort("a", -1)` or `sort([("a", -1), ("b", 1)])`; stable, missing values last when ascending.
+        keys = key if isinstance(key, list) else [(key, direction)]
+        for name, way in reversed(keys):
+            self.rows.sort(key=lambda d: (_get(d, name) is None, _get(d, name) if _get(d, name) is not None else ""), reverse=way < 0)
+        return self
+
+    def skip(self, n):
+        self.rows = self.rows[n:]
         return self
 
     def limit(self, n):
@@ -99,6 +127,12 @@ class Cursor:
 
     async def to_list(self, length=None):
         return self.rows[:length] if length else self.rows
+
+    def __aiter__(self):
+        async def rows():
+            for row in list(self.rows):
+                yield row
+        return rows()
 
 
 class UpdateResult:
@@ -139,6 +173,39 @@ class Collection:
 
     def find(self, query=None, projection=None):
         return Cursor([self._project(r, projection) for r in self.rows if matches(r, query)])
+
+    def aggregate(self, pipeline):
+        """$match, $unwind, $group ({_id: "$field", n: {$sum: 1}, lo/hi: {$min/$max: "$field"}}), $sort on n/_id."""
+        rows = [copy.deepcopy(r) for r in self.rows]
+        for stage in pipeline:
+            (op, arg), = stage.items()
+            if op == "$match":
+                rows = [r for r in rows if matches(r, arg)]
+            elif op == "$unwind":
+                name = arg[1:]
+                rows = [_with(r, name, v) for r in rows for v in (_get(r, name) if isinstance(_get(r, name), list) else [])]
+            elif op == "$group":
+                groups = {}
+                for r in rows:
+                    ident = arg["_id"]
+                    groups.setdefault(_get(r, ident[1:]) if isinstance(ident, str) else None, []).append(r)
+                out = []
+                for ident, members in groups.items():
+                    row = {"_id": ident}
+                    for name, spec in arg.items():
+                        if name == "_id":
+                            continue
+                        (fn, source), = spec.items()
+                        values = [_get(m, source[1:]) for m in members] if isinstance(source, str) else None
+                        row[name] = len(members) if fn == "$sum" else (min(values) if fn == "$min" else max(values))
+                    out.append(row)
+                rows = out
+            elif op == "$sort":
+                for name, way in reversed(list(arg.items())):
+                    rows.sort(key=lambda d: (d.get(name) is None, d.get(name) if d.get(name) is not None else ""), reverse=way < 0)
+            else:
+                raise NotImplementedError(op)
+        return Cursor(rows)
 
     async def estimated_document_count(self):
         return len(self.rows)

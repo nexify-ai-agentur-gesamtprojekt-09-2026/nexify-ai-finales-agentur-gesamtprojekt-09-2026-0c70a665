@@ -4,11 +4,13 @@ from urllib.parse import urlsplit
 from fastapi import APIRouter, HTTPException, Query
 from typing import Literal
 
-from . import pricing
+from . import pricing, product_release
 from .db import db
 
 router = APIRouter(prefix="/api/shop")
-PUBLIC_FIELDS = {"_id": 1, "sku": 1, "ean": 1, "name": 1, "images": 1, "stock": 1, "purchase_cents": 1, "category_id": 1, "category_ids": 1, "imported_at": 1, "source_partial": 1}
+# Only released products are public (product_release): the stored release state is the query, the rules are re-checked per row.
+PUBLIC_BASE = {"active": True, "release.status": product_release.STATUS_RELEASED}
+PUBLIC_FIELDS = {"_id": 1, "sku": 1, "ean": 1, "name": 1, "images": 1, "stock": 1, "purchase_cents": 1, "category_id": 1, "category_ids": 1, "imported_at": 1, "source_partial": 1, "bigbuy_id": 1, "release": 1, "description": 1, "details": 1, "delivery_time": 1, "fitment_status": 1, "fitment_evidence": 1, "active": 1}
 
 # Exact supplier host observed in the read-only catalogue; no wildcard or proxy.
 # Deployment CSP must separately permit this host before images can load.
@@ -33,12 +35,33 @@ def supplier_image(value):
     return value
 
 
+def release_blockers(product):
+    return product_release.blockers(product, vat_percent=pricing.config.VAT_PERCENT, image_ok=supplier_image)
+
+
+def release_state(product, checked_by, stamp):
+    return product_release.state(product, vat_percent=pricing.config.VAT_PERCENT, image_ok=supplier_image, checked_by=checked_by, stamp=stamp)
+
+
+def is_public(product, ignore=()):
+    """Active, stored as released, and every mandatory field still present."""
+    return product_release.is_public(product, vat_percent=pricing.config.VAT_PERCENT, image_ok=supplier_image, ignore=ignore)
+
+
 def present(product, settings, full=False):
     released = settings["price_released"]
     raw_stock = product.get("stock")
     stock = int(raw_stock) if isinstance(raw_stock, int) and not isinstance(raw_stock, bool) and 0 <= raw_stock <= 2**53 - 1 else None
     raw_images = product.get("images")
     images = list(dict.fromkeys(url for value in raw_images if (url := supplier_image(value)))) if isinstance(raw_images, list) else []
+    delivery = product.get("delivery_time")
+    delivery_days = ({"min": delivery["min_days"], "max": delivery["max_days"]} if isinstance(delivery, dict)
+                     and type(delivery.get("min_days")) is int and type(delivery.get("max_days")) is int else None)
+    # Fitment is shown as checked only with a recorded source and date; a bare claim stays "not_checked".
+    evidence = product.get("fitment_evidence")
+    proven = (product.get("fitment_status") == "verified" and isinstance(evidence, dict)
+              and isinstance(evidence.get("source"), str) and evidence["source"].strip()
+              and isinstance(evidence.get("checked_at"), str) and evidence["checked_at"].strip())
     item = {"id": str(product["_id"]), "sku": product.get("sku"), "ean": product.get("ean"), "name": product["name"],
             "image": images[0] if images else None,
             "image_status": "supplier_original" if images else "unavailable",
@@ -47,10 +70,12 @@ def present(product, settings, full=False):
             "price_cents": pricing.sell_cents(product["purchase_cents"], settings["markup_percent"]) if released else None,
             "price_status": "released" if released else "not_released", "currency": "EUR", "vat_included": True,
             "vat_percent": str(pricing.config.VAT_PERCENT), "category_id": product.get("category_id"),
-            "imported_at": product.get("imported_at"), "source_partial": product.get("source_partial", False)}
+            "imported_at": product.get("imported_at"), "source_partial": product.get("source_partial", False),
+            "delivery_days": delivery_days, "fitment_status": "verified" if proven else "not_checked", "fitment_verified": bool(proven),
+            "fitment_source": evidence["source"].strip() if proven else None}
     if full:
         item.update({"images": images, "description": product.get("description") or "",
-                     "details": product.get("details") or {}, "fitment_status": "not_checked",
+                     "details": product.get("details") or {},
                      "source": "BigBuy", "imported_at": product.get("imported_at"), "bigbuy_id": product.get("bigbuy_id")})
     return item
 
@@ -58,19 +83,19 @@ def present(product, settings, full=False):
 @router.get("/status")
 async def catalog_status():
     last = await db.imports.find_one({"status": "done"}, sort=[("finished_at", -1)])
-    return {"products": await db.products.count_documents({"active": True}), "last_import_at": last and last.get("finished_at"), "source": "BigBuy", "partial": bool(last and last.get("partial"))}
+    return {"products": await db.products.count_documents(PUBLIC_BASE), "last_import_at": last and last.get("finished_at"), "source": "BigBuy", "partial": bool(last and last.get("partial"))}
 
 
 @router.get("/categories")
 async def categories():
-    counts = {row["_id"]: row["n"] async for row in db.products.aggregate([{"$match": {"active": True}}, {"$unwind": "$category_ids"}, {"$group": {"_id": "$category_ids", "n": {"$sum": 1}}}])}
+    counts = {row["_id"]: row["n"] async for row in db.products.aggregate([{"$match": PUBLIC_BASE}, {"$unwind": "$category_ids"}, {"$group": {"_id": "$category_ids", "n": {"$sum": 1}}}])}
     rows = [c async for c in db.categories.find({})]
     return {"categories": sorted([{"id": c["_id"], "name": c["name"], "root": c.get("root", False), "count": counts.get(c["_id"], 0)} for c in rows if counts.get(c["_id"])], key=lambda c: (not c["root"], c["name"]))}
 
 
 @router.get("/products")
 async def products(q: str = Query("", max_length=120), category: int | None = None, page: int = Query(1, ge=1, le=10000), page_size: int = Query(24, ge=1, le=60), sort: Literal['availability','price_asc','price_desc','name']='availability', in_stock: bool=False):
-    query = {"active": True}
+    query = dict(PUBLIC_BASE)
     if in_stock:
         query['stock'] = {'$gt': 0}
     term = q.strip()
@@ -83,14 +108,14 @@ async def products(q: str = Query("", max_length=120), category: int | None = No
     settings = await pricing.settings(db)
     ordering={'availability':[("stock", -1), ("name", 1)],'price_asc':[("purchase_cents",1),("name",1)],'price_desc':[("purchase_cents",-1),("name",1)],'name':[("name",1)]}[sort]
     cursor = db.products.find(query, PUBLIC_FIELDS).sort(ordering).skip((page - 1) * page_size).limit(page_size)
-    items = [present(p, settings) async for p in cursor]
+    items = [present(p, settings) async for p in cursor if is_public(p)]
     return {"items": items, "total": total, "page": page, "page_size": page_size, "pages": max(1, -(-total // page_size)), "q": term, "category": category}
 
 
 @router.get("/products/{product_id}")
 async def product(product_id: str):
     doc = await db.products.find_one({"_id": product_id, "active": True})
-    if not doc:
+    if not doc or not is_public(doc):
         raise HTTPException(404, {"error": "product_not_found"})
     category = await db.categories.find_one({"_id": doc.get("category_id")})
     item = present(doc, await pricing.settings(db), full=True)

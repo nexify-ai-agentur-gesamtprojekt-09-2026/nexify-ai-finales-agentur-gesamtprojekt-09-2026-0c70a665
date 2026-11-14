@@ -10,11 +10,13 @@ from pymongo.errors import DocumentTooLarge, DuplicateKeyError, PyMongoError
 from pymongo.read_concern import ReadConcern
 from pymongo.write_concern import WriteConcern
 
-from . import auth, bigbuy_order, config, pricing
+from . import auth, bigbuy_order, catalog_api, config, pricing
 from .db import db, now_iso
 
 router = APIRouter(prefix="/api/shop/cart")
 MAX_QTY = 20
+# Unknown stock keeps its own, more specific answers in this module (stock_unavailable / stock_unknown).
+STOCK_IS_HANDLED_HERE = ("stock_status_unknown",)
 MAX_MERGE_HISTORY = 128
 MAX_CART_BSON_BYTES = 16 * 1024 * 1024 - 1024
 
@@ -161,7 +163,7 @@ async def priced(owner, shipping_cents=None, address=None, items_override=None, 
     lines, changes = [], []
     for item in cart["items"]:
         product = products.get(item["product_id"])
-        if not product or not product.get("active"):
+        if not product or not product.get("active") or not catalog_api.is_public(product, ignore=STOCK_IS_HANDLED_HERE):
             changes.append({"product_id": item["product_id"], "kind": "unavailable", "name": item.get("name")})
             continue
         unit = pricing.sell_cents(product["purchase_cents"], settings["markup_percent"])
@@ -216,7 +218,7 @@ async def read_cart(request: Request, response: Response):
 async def set_item(body: ItemIn, request: Request, response: Response):
     if body.quantity > 0:
         product = await db.products.find_one({"_id": body.product_id, "active": True})
-        if not product:
+        if not product or not catalog_api.is_public(product, ignore=STOCK_IS_HANDLED_HERE):
             raise HTTPException(404, {"error": "product_not_found"})
         stock = verified_stock(product)
         if stock < body.quantity:

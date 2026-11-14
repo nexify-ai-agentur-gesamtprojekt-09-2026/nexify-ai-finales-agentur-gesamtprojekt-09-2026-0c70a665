@@ -20,7 +20,7 @@ from pymongo import UpdateOne
 from pymongo.read_concern import ReadConcern
 from pymongo.write_concern import WriteConcern
 
-from . import bigbuy_ftp, bigbuy_order, config
+from . import bigbuy_ftp, bigbuy_order, config, product_release
 from .db import now_iso
 
 PAGE_SIZE = 1000
@@ -251,8 +251,11 @@ async def run_import(db, environment, run_id):
         else:
             roots, names, collected, manifest = await fetch_catalog(environment)
             products = [build_product(*values[:4], names, values[4], stamp, run_id, environment, shipping_cost_cents=values[5]) for values in collected.values()]
+        # The importer never releases a product and never fills a gap: it records the gaps it sees as blocker
+        # codes (product_release). Release happens only in the shop process after the rules are evaluated.
         products = [{**{key: value for key, value in product.items() if key != "active"},
-                     "buyable": False, "publishable": False} for product in products]
+                     "buyable": False, "publishable": False,
+                     "release": product_release.import_state(product, stamp)} for product in products]
         if not products:
             raise BigBuyReadError("no_products_returned")
         used = {c for p in products for c in p["category_ids"]}

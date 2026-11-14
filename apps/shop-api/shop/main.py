@@ -13,7 +13,7 @@ from . import auth, config
 from .db import db, ensure_indexes
 from . import mailer
 from . import nexify_api
-from . import accounts_api, admin_api, cart_api, catalog_api, checkout_api, requests_api, workshops_api
+from . import accounts_api, admin_api, cart_api, catalog_api, checkout_api, product_release_api, requests_api, workshops_api
 from . import partners_api, teileklar_admin_api, verification_api
 
 NEXT_API = ("/api/agent-chat", "/api/agent-runtime-status", "/api/internal")
@@ -69,7 +69,7 @@ async def same_origin_writes(request: Request, call_next):
 
 
 # verification_api, teileklar_admin_api and partners_api answer 404 unless their switches are on (default off).
-for module in (accounts_api, catalog_api, cart_api, checkout_api, workshops_api, admin_api, requests_api, nexify_api, verification_api, teileklar_admin_api, partners_api):
+for module in (accounts_api, catalog_api, cart_api, checkout_api, workshops_api, admin_api, product_release_api, requests_api, nexify_api, verification_api, teileklar_admin_api, partners_api):
     app.include_router(module.router)
 
 
