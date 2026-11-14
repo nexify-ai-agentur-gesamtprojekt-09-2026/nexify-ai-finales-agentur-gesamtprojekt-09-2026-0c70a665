@@ -9,6 +9,7 @@ import '../../components/HomeConcept.css';
 import '../../components/PageConcept.css';
 import avv from '../../lib/legal/avv.json';
 import {PUBLIC_ORIGIN} from '../../lib/page-seo';
+import {pageRobots} from '../../lib/page-robots';
 
 type Subsection = {id?: string; heading: string; paragraphs?: string[]; bullets?: string[]};
 type Section = Subsection & {subsections?: Subsection[]};
@@ -16,12 +17,15 @@ type Related = {label: string; href: string};
 
 const doc = avv as {slug: string; title: string; intro: string; updated: string; related?: Related[]; sections: Section[]};
 
-export const metadata: Metadata = {
-  title: `${doc.title} · NeXify AI`,
-  description: doc.intro.slice(0, 180),
-  alternates: {canonical: PUBLIC_ORIGIN+'/avv'},
-  robots: {index: true, follow: true},
-};
+// Meta `robots` folgt derselben Regel wie die Kopfzeile X-Robots-Tag (auth/indexing.ts über lib/page-robots.ts), OA-164.
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: `${doc.title} · NeXify AI`,
+    description: doc.intro.slice(0, 180),
+    alternates: {canonical: PUBLIC_ORIGIN+'/avv'},
+    robots: await pageRobots('/avv'),
+  };
+}
 
 function Blocks({node}: {node: Subsection}) {
   return (

@@ -15,7 +15,7 @@ export function seoDescription(text:string,max=160):string{
  const word=cut.lastIndexOf(' ');
  return cut.slice(0,word>=80?word:max-1).replace(/[,;:–-]\s*$/,'')+'…';
 }
-/** Indexierung ist standardmäßig AUS (noindex), bis der Inhaber die Veröffentlichung freigibt. Freigabe = Umgebungsvariable NEXIFY_INDEXING=enabled im Vercel-Projekt, danach neu deployen (Rückweg: Variable entfernen, neu deployen). Keine Codeänderung nötig. */
+/** Indexierung ist standardmäßig AUS (noindex), bis der Inhaber die Veröffentlichung freigibt. Dieser Schalter (NEXIFY_INDEXING=enabled im Vercel-Projekt, danach neu deployen; Rückweg: Variable entfernen, neu deployen) steuert nur das Meta-Tag der Katalogseiten aus pageMetadata. Maßgeblich ist die Regel in auth/indexing.ts: Sie verlangt zusätzlich Produktion, freigegebenen Host, indexierbaren Pfad und für /teileklar NEXIFY_INDEXING_TEILEKLAR=enabled, und proxy.ts setzt sie als Kopfzeile X-Robots-Tag durch. Seiten mit eigener Route übernehmen diese Entscheidung auch ins Meta-Tag (lib/page-robots.ts, OA-164). */
 export const indexingEnabled=():boolean=>process.env.NEXIFY_INDEXING==='enabled';
 export function pageMetadata(page:PublicPage,locale:Locale):Metadata{
  const title=page.localizedTitle[locale]+' · '+(page.site_context==='teileklar'?'TEILEKLAR.shop':'NeXify AI');
@@ -24,12 +24,13 @@ export function pageMetadata(page:PublicPage,locale:Locale):Metadata{
  const description=seoDescription(page.localizedSummary[locale]);
  return {title,description,alternates:{canonical:localizedUrl(page.path,locale),languages},openGraph:{title,description,url:localizedUrl(page.path,locale),type:'website',locale},robots:indexingEnabled()?{index:true,follow:true}:{index:false,follow:false}};
 }
-/** Metadata for dedicated (non-catalog-renderer) routes: same title/description/canonical/hreflang as the catalog page, explicit robots. */
-export function routeMetadata(pageId:string,indexable:boolean,locale:Locale='de'):Metadata{
+/** Metadata for dedicated (non-catalog-renderer) routes: same title/description/canonical/hreflang as the catalog page, explicit robots.
+ * `robots` ist entweder `false` (nie indexiert: Anmeldung, Suche, Warenkorb, Kasse) oder die Entscheidung der Indexierungsregel aus pageRobots(); ein festes `index` gibt es nicht mehr (OA-164). */
+export function routeMetadata(pageId:string,robots:false|{index:boolean;follow:boolean},locale:Locale='de'):Metadata{
  const page=publicPages().find(candidate=>candidate.id===pageId);
  if(!page)throw new Error('Unknown public page: '+pageId);
  const base=pageMetadata(page,locale);
- return {...base,robots:indexable?{index:true,follow:true}:{index:false,follow:true}};
+ return {...base,robots:robots===false?{index:false,follow:true}:{index:robots.index,follow:robots.follow}};
 }
 export function pageStructuredData(page:PublicPage,locale:Locale){
  const url=localizedUrl(page.path,locale),brand=page.site_context==='teileklar'?'TEILEKLAR.shop':'NeXify AI',faq=pageFaq(page,locale);
