@@ -367,7 +367,7 @@ html:has(#atelier){color-scheme:dark;scrollbar-color:var(--color-atelier-raised)
 #atelier .site-header :is(.megamenu-heading,.megamenu-bottom) a{color:var(--as-ink)}
 #atelier .site-header .megamenu-bottom{border:0}
 #atelier .site-header .mobile-navigation>summary{color:var(--as-ink)}
-#atelier .site-header .mobile-navigation-panel>.nexify-control{min-height:48px;padding:0 var(--space-5);border:0;border-radius:var(--as-pill);background:var(--as-glass);box-shadow:var(--as-rest);color:var(--as-ink)}
+#atelier .site-header .mobile-navigation-panel>.nexify-control{min-height:48px;padding:0 var(--space-5);border:0;border-radius:var(--as-pill);box-shadow:var(--as-rest);color:var(--as-ink)}
 #atelier .site-footer .footer-inner,#atelier .site-footer .footer-utilities{box-sizing:border-box;width:100%;max-width:var(--layout-content-max);margin-inline:auto;padding-inline:var(--layout-page-padding)}
 #atelier .site-footer .footer-link-groups h2{display:flex;align-items:flex-end;min-height:3em;margin:0 0 var(--space-3);color:var(--as-ink);word-spacing:normal;letter-spacing:0;background:none;-webkit-text-fill-color:currentColor}
 @container footer (max-width:560px){
@@ -478,3 +478,4 @@ body:has(#atelier) .skip-link:focus{border-radius:999px;background:var(--color-a
 #atelier #aifly-panel .request-fallback p{margin:8px 0 0;font-size:.875rem;line-height:1.55;color:var(--color-text-sekundaer)}
 #atelier #aifly-panel .request-fallback a{font-size:.875rem}
 #atelier .home-concept .hc-rate>strong{background:var(--as-heading);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+#atelier .site-header .mobile-navigation-panel>.nexify-control{position:sticky;bottom:0;z-index:1;background:var(--as-glass-dense);-webkit-backdrop-filter:var(--as-blur);backdrop-filter:var(--as-blur)}
