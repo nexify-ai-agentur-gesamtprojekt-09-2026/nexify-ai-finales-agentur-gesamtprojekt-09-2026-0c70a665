@@ -20,7 +20,7 @@
 }
 #atelier .home-concept .identity-hero .identity-copy h1 span:not(.identity-title-accent){background:var(--gradient-atelier-heading);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;padding-bottom:.12em;margin-bottom:-.12em}
 @keyframes hr-sweep{0%,55%{background-position:120% 0}100%{background-position:-60% 0}}
-#atelier .home-concept :is(.identity-copy .identity-primary-link[data-variant='primary'],.hc-finish-primary){position:relative;overflow:hidden;isolation:isolate;padding:var(--space-3) var(--space-6);border-radius:var(--radius-pille);border-bottom-color:var(--color-marke-lime-gruen);color:var(--color-text-auf-lime);font-size:var(--type-home-reading)}
+#atelier .home-concept :is(.identity-copy .identity-primary-link[data-variant='primary'],.hc-finish-primary){position:relative;overflow:hidden;isolation:isolate;border-radius:var(--radius-pille);border-bottom-color:var(--color-marke-lime-gruen);color:var(--color-text-auf-lime);font-size:var(--type-home-reading)}
 #atelier .home-concept :is(.identity-copy .identity-primary-link[data-variant='primary'],.hc-finish-primary)::after{position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(105deg,transparent 35%,color-mix(in srgb,var(--color-atelier-ink) 60%,transparent) 50%,transparent 65%);background-size:280% 100%;animation:hr-sweep var(--motion-schimmer) infinite}
 #atelier .home-concept :is(.identity-copy .identity-primary-link[data-variant='primary'],.hc-finish-primary):hover{background:linear-gradient(180deg,var(--color-marke-lime-hell),var(--color-marke-lime) 46%,var(--color-marke-lime-dunkel));color:var(--color-text-auf-lime)}
 #atelier .home-concept :is(.identity-copy .identity-primary-link[data-variant='primary'],.hc-finish-primary):active{filter:brightness(.96);opacity:1}
@@ -28,7 +28,6 @@
 #atelier .home-concept :is(.identity-copy .identity-primary-link[data-variant='primary'],.hc-finish-primary):disabled{opacity:var(--control-disabled-opacity);filter:none;transform:none;box-shadow:none}
 #atelier .home-concept :is(.hc-text-link,.atelier-film-controls button,.hc-product-arrow){border:var(--material-border) solid var(--color-linie-fein);border-top-color:var(--material-highlight);background:linear-gradient(180deg,var(--material-veil),transparent 70%),var(--color-atelier-glass);box-shadow:var(--material-shadow-raised);transition:transform var(--motion-feedback),box-shadow var(--motion-feedback),background-color var(--motion-feedback),border-color var(--motion-feedback),color var(--motion-feedback)}
 #atelier .home-concept .hc-text-link{padding:0 var(--space-5);border-radius:var(--radius-pille);gap:var(--space-3);font-weight:500;align-self:flex-start;justify-self:start}
-#atelier .home-concept :is(.hc-gallery-card,.hc-product):is(:hover,:focus-visible) .hc-text-link,#atelier .home-concept :is(.hc-text-link,.atelier-film-controls button):is(:hover,:focus-visible){transform:translateY(var(--fx-lift));border-color:color-mix(in srgb,var(--color-marke-lime) 45%,transparent);box-shadow:var(--material-shadow),0 0 var(--space-5) calc(-1 * var(--space-2)) color-mix(in srgb,var(--color-marke-lime) 40%,transparent);color:var(--color-text-primaer)}
 #atelier .home-concept :is(.hc-text-link,.atelier-film-controls button):active{transform:translateY(var(--material-border));box-shadow:var(--shadow-well);opacity:1}
 #atelier .home-concept :is(.hc-text-link,.atelier-film-controls button):disabled{opacity:var(--control-disabled-opacity);transform:none;box-shadow:none}
 #atelier .home-concept .atelier-film-controls{-webkit-backdrop-filter:blur(var(--material-blur));backdrop-filter:blur(var(--material-blur));border:var(--material-border) solid var(--color-atelier-film-control-edge);box-shadow:var(--material-shadow)}
@@ -58,15 +57,14 @@
 /* ===== Bausteine Startseite · Material ===== */
 #atelier .home-concept{--at-lime:var(--color-marke-lime);--at-silver:var(--color-atelier-platinum);--at-cool:var(--color-marke-cyan);--at-glass:linear-gradient(155deg,color-mix(in srgb,var(--at-silver) 17%,transparent),color-mix(in srgb,var(--at-silver) 4%,transparent) 42%,color-mix(in srgb,var(--at-warm) 6%,transparent) 100%),color-mix(in srgb,var(--color-atelier-raised) 62%,transparent);--at-shadow:inset 0 1px 0 color-mix(in srgb,var(--color-atelier-ink) 30%,transparent),inset 0 -1px 0 color-mix(in srgb,var(--color-atelier-canvas) 60%,transparent),0 1px 2px color-mix(in srgb,var(--color-atelier-canvas) 60%,transparent),0 18px 40px -18px color-mix(in srgb,var(--color-atelier-canvas) 92%,transparent),0 48px 96px -48px color-mix(in srgb,var(--color-atelier-canvas) 96%,transparent);--at-shadow-lit:inset 0 1px 0 color-mix(in srgb,var(--color-atelier-ink) 44%,transparent),0 24px 56px -20px color-mix(in srgb,var(--color-atelier-canvas) 94%,transparent),0 0 0 1px color-mix(in srgb,var(--at-warm) 34%,transparent),0 30px 90px -30px color-mix(in srgb,var(--at-warm) 26%,transparent);--at-spring:cubic-bezier(.2,.9,.25,1.15);--at-warm:var(--as-warm)}
 @keyframes at-beam{from{transform:rotate(-3deg)}to{transform:rotate(4deg)}}
-#atelier .home-concept .identity-hero .identity-copy h1{background:linear-gradient(176deg,var(--color-atelier-ink) 18%,color-mix(in srgb,var(--at-silver) 82%,var(--color-atelier-canvas)) 96%);-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:-.035em;filter:drop-shadow(0 18px 30px color-mix(in srgb,var(--color-atelier-canvas) 80%,transparent))}
+#atelier .home-concept .identity-hero .identity-copy h1{background:linear-gradient(176deg,var(--color-atelier-ink) 18%,color-mix(in srgb,var(--at-silver) 82%,var(--color-atelier-canvas)) 96%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 18px 30px color-mix(in srgb,var(--color-atelier-canvas) 80%,transparent))}
 #atelier .home-concept .identity-hero .identity-copy h1 .identity-title-accent{background:linear-gradient(100deg,var(--color-marke-lime-hell),var(--at-lime) 55%,var(--color-marke-lime-gruen));-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 22px color-mix(in srgb,var(--at-lime) 45%,transparent))}
 #atelier .home-concept .identity-hero .identity-subtitle{color:var(--color-atelier-ink)}
-#atelier .home-concept :is(.identity-copy .identity-primary-link[data-variant='primary'],.hc-finish-primary){min-height:56px;padding-inline:var(--space-6);background:linear-gradient(180deg,var(--color-marke-lime-hell),var(--at-lime) 46%,var(--color-marke-lime-dunkel));box-shadow:inset 0 1px 0 color-mix(in srgb,var(--color-atelier-ink) 85%,transparent),inset 0 -3px 6px color-mix(in srgb,var(--color-marke-lime-gruen) 55%,transparent),0 1px 1px color-mix(in srgb,var(--color-atelier-canvas) 60%,transparent),0 14px 30px -10px color-mix(in srgb,var(--at-lime) 60%,transparent),0 30px 70px -20px color-mix(in srgb,var(--at-lime) 42%,transparent)}
+#atelier .home-concept :is(.identity-copy .identity-primary-link[data-variant='primary'],.hc-finish-primary){padding-inline:var(--space-6);background:linear-gradient(180deg,var(--color-marke-lime-hell),var(--at-lime) 46%,var(--color-marke-lime-dunkel));box-shadow:inset 0 1px 0 color-mix(in srgb,var(--color-atelier-ink) 85%,transparent),inset 0 -3px 6px color-mix(in srgb,var(--color-marke-lime-gruen) 55%,transparent),0 1px 1px color-mix(in srgb,var(--color-atelier-canvas) 60%,transparent),0 14px 30px -10px color-mix(in srgb,var(--at-lime) 60%,transparent),0 30px 70px -20px color-mix(in srgb,var(--at-lime) 42%,transparent)}
 #atelier .home-concept :is(.identity-copy .identity-primary-link[data-variant='primary'],.hc-finish-primary):active{transform:translateY(1px) scale(.97);box-shadow:inset 0 3px 8px color-mix(in srgb,var(--color-marke-lime-gruen) 70%,transparent),0 6px 16px -8px color-mix(in srgb,var(--at-lime) 50%,transparent)}
 #atelier .home-concept :is(.hc-text-link,.hc-anchors){background:var(--at-glass);border-color:var(--at-edge);border-top-color:var(--at-edge-top);box-shadow:var(--at-shadow);-webkit-backdrop-filter:blur(22px) saturate(170%);backdrop-filter:blur(22px) saturate(170%)}
 #atelier .home-concept .hc-text-link{transition:transform .28s var(--at-spring),box-shadow .2s ease-out,border-color .2s ease-out}
-#atelier .home-concept :is(a,button):is(:hover,:focus-visible)>.hc-text-link,#atelier .home-concept .hc-text-link:is(:hover,:focus-visible){transform:translateY(-2px);box-shadow:var(--at-shadow-lit)}
-#atelier .home-concept .hc-text-link:active{transform:translateY(1px) scale(.97)}
+#atelier .home-concept .hc-text-link:is(:hover,:focus-visible){transform:translateY(-2px);box-shadow:var(--at-shadow-lit)}
 #atelier .home-concept :is(.hc-section-heading h2,.hc-intro h2,.hc-finish-heading h2){background:linear-gradient(174deg,var(--color-atelier-ink) 22%,color-mix(in srgb,var(--at-silver) 84%,var(--color-atelier-canvas)));-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:-.025em;padding-bottom:.08em}
 #atelier .home-concept :is(.hc-visibility-grid article,.hc-process li,.hc-service-detail,.hc-product,.hc-costs,.hc-rate){border-top-color:var(--at-edge-top)}
 #atelier .home-concept :is(.hc-visibility-grid article,.hc-process li,.hc-service-detail,.hc-product,.hc-costs,.hc-rate):is(:hover,:focus-within){box-shadow:var(--at-shadow-lit);border-color:color-mix(in srgb,var(--at-warm) 40%,transparent)}
@@ -126,12 +124,12 @@
 #atelier #aifly-panel .orientation-intro .orientation-speaker{display:none}
 #atelier #aifly-panel .orientation-intro h3{letter-spacing:-.035em;background:linear-gradient(176deg,var(--color-atelier-ink) 18%,color-mix(in srgb,var(--ca-silver) 82%,var(--color-atelier-canvas)));-webkit-background-clip:text;background-clip:text;color:transparent;padding-bottom:.1em}
 #atelier #aifly-panel .orientation-intro p{margin:0}
-#atelier #aifly-panel .orientation-starters{display:flex;flex-wrap:wrap;gap:var(--space-2)}
+#atelier #aifly-panel .orientation-starters{display:flex;flex-wrap:wrap}
 #atelier #aifly-panel .orientation-starter{min-height:48px;padding:0 var(--space-4);border-radius:var(--radius-pille);border:1px solid var(--ca-edge);border-top-color:var(--ca-edge-top);background:linear-gradient(160deg,color-mix(in srgb,var(--ca-silver) 18%,transparent),color-mix(in srgb,var(--ca-silver) 5%,transparent));box-shadow:inset 0 1px 0 color-mix(in srgb,var(--color-atelier-ink) 26%,transparent),0 12px 26px -14px color-mix(in srgb,var(--color-atelier-canvas) 96%,transparent);text-decoration:none;color:var(--color-text-primaer);transition:transform .28s var(--ca-spring),border-color .2s ease-out,box-shadow .2s ease-out}
 #atelier #aifly-panel .orientation-starter .orientation-starter-copy{text-decoration:none;border:0}
 #atelier #aifly-panel .orientation-starter:is(:hover,:focus-visible){transform:translateY(-2px);border-color:color-mix(in srgb,var(--ca-warm) 55%,transparent);box-shadow:inset 0 1px 0 color-mix(in srgb,var(--color-atelier-ink) 40%,transparent),0 16px 34px -14px color-mix(in srgb,var(--ca-warm) 30%,transparent)}
 #atelier #aifly-panel .orientation-starter:active{transform:scale(.96)}
-#atelier #aifly-panel .orientation-history{display:flex;flex-direction:column;gap:var(--space-4)}
+#atelier #aifly-panel .orientation-history{display:flex;flex-direction:column}
 #atelier #aifly-panel .orientation-message{max-width:88%;padding:var(--space-3) var(--space-4);border-radius:22px;border:1px solid transparent;background:none;box-shadow:none;animation:ca-in .45s var(--ca-spring) both}
 #atelier #aifly-panel .orientation-message .orientation-speaker{display:block;margin-bottom:var(--space-1);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ca-warm)}
 #atelier #aifly-panel .orientation-message.role-user{align-self:flex-end;margin-left:auto;border-color:var(--ca-edge);border-top-color:var(--ca-edge-top)}
@@ -139,11 +137,11 @@
 #atelier #aifly-panel .orientation-message.role-assistant p{font-size:1rem;line-height:1.55}
 #atelier #aifly-panel .orientation-dots span,#atelier #aifly-panel .orientation-dots i{background:var(--ca-lime)}
 @keyframes ca-in{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:none}}
-#atelier #aifly-panel .orientation-composer{position:relative;display:block;border-radius:28px;border:1px solid var(--ca-edge);border-top-color:var(--ca-edge-top);background:linear-gradient(160deg,color-mix(in srgb,var(--ca-silver) 16%,transparent),color-mix(in srgb,var(--ca-silver) 5%,transparent)),color-mix(in srgb,var(--color-atelier-canvas) 60%,transparent);box-shadow:inset 0 1px 0 color-mix(in srgb,var(--color-atelier-ink) 28%,transparent),0 18px 40px -20px color-mix(in srgb,var(--color-atelier-canvas) 96%,transparent);transition:border-color .2s ease-out,box-shadow .2s ease-out}
+#atelier #aifly-panel .orientation-composer{position:relative;display:block;border-radius:28px;border:1px solid var(--ca-edge);border-top-color:var(--ca-edge-top);background:linear-gradient(160deg,color-mix(in srgb,var(--ca-silver) 16%,transparent),color-mix(in srgb,var(--ca-silver) 5%,transparent)),color-mix(in srgb,var(--color-atelier-canvas) 60%,transparent);box-shadow:inset 0 1px 0 color-mix(in srgb,var(--color-atelier-ink) 28%,transparent),0 18px 40px -20px color-mix(in srgb,var(--color-atelier-canvas) 96%,transparent)}
 #atelier #aifly-panel .orientation-composer>label{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 #atelier #aifly-panel .orientation-composer textarea{display:block;width:100%;border:0;outline:0;background:transparent;box-shadow:none;color:var(--color-text-primaer);font-size:1rem;resize:none}
 #atelier #aifly-panel .orientation-composer-actions{position:absolute;margin:0;padding:0;display:flex;gap:var(--space-2);align-items:center}
-#atelier #aifly-panel .orientation-composer-actions .primary-button{width:48px;height:48px;min-width:48px;padding:0;border-radius:50%;font-size:0;place-items:center;border:0;background:linear-gradient(180deg,var(--color-marke-lime-hell),var(--ca-lime) 46%,var(--color-marke-lime-dunkel));box-shadow:inset 0 1px 0 color-mix(in srgb,var(--color-atelier-ink) 85%,transparent),inset 0 -3px 6px color-mix(in srgb,var(--color-marke-lime-gruen) 55%,transparent),0 10px 24px -8px color-mix(in srgb,var(--ca-lime) 60%,transparent);transition:transform .28s var(--ca-spring),box-shadow .2s ease-out,opacity .2s}
+#atelier #aifly-panel .orientation-composer-actions .primary-button{width:48px;height:48px;min-width:48px;padding:0;border-radius:50%;border:0;background:linear-gradient(180deg,var(--color-marke-lime-hell),var(--ca-lime) 46%,var(--color-marke-lime-dunkel));box-shadow:inset 0 1px 0 color-mix(in srgb,var(--color-atelier-ink) 85%,transparent),inset 0 -3px 6px color-mix(in srgb,var(--color-marke-lime-gruen) 55%,transparent),0 10px 24px -8px color-mix(in srgb,var(--ca-lime) 60%,transparent);transition:transform .28s var(--ca-spring),box-shadow .2s ease-out,opacity .2s}
 #atelier #aifly-panel .orientation-composer-actions .primary-button span{font-size:1.25rem;color:var(--color-text-auf-lime)}
 #atelier #aifly-panel .orientation-composer-actions .primary-button:disabled{transform:none}
 #atelier #aifly-panel .orientation-composer-actions .outline-button{border-top-color:var(--ca-edge-top);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
@@ -155,7 +153,6 @@
 #atelier #aifly-panel :is(.orientation-problem,.orientation-brief) .outline-button{border-radius:var(--radius-pille);min-height:48px;border:1px solid var(--ca-edge);border-top-color:var(--ca-edge-top);background:linear-gradient(160deg,color-mix(in srgb,var(--ca-silver) 18%,transparent),color-mix(in srgb,var(--ca-silver) 5%,transparent))}
 #atelier .reopen-chat{border-radius:var(--radius-pille);border:1px solid color-mix(in srgb,var(--color-atelier-platinum) 28%,transparent);border-top-color:color-mix(in srgb,var(--color-atelier-ink) 44%,transparent);background:linear-gradient(160deg,color-mix(in srgb,var(--color-atelier-platinum) 22%,transparent),color-mix(in srgb,var(--color-atelier-platinum) 6%,transparent)),color-mix(in srgb,var(--color-atelier-canvas) 72%,transparent);-webkit-backdrop-filter:blur(22px) saturate(170%);backdrop-filter:blur(22px) saturate(170%);box-shadow:inset 0 1px 0 color-mix(in srgb,var(--color-atelier-ink) 30%,transparent),0 20px 44px -18px color-mix(in srgb,var(--color-atelier-canvas) 96%,transparent),0 30px 70px -30px color-mix(in srgb,var(--as-warm) 30%,transparent);transition:transform .3s cubic-bezier(.2,.9,.25,1.15)}
 #atelier .reopen-chat:is(:hover,:focus-visible){transform:translateY(-3px)}
-#atelier .reopen-chat:active{transform:scale(.96)}
 @media(prefers-reduced-transparency:reduce){
  #atelier #aifly-panel,#atelier .reopen-chat{-webkit-backdrop-filter:none;backdrop-filter:none;background:var(--color-atelier-surface)}
 }
@@ -172,7 +169,7 @@
 #atelier #aifly-panel .orientation-message.role-assistant{border-left:0;padding-left:0}
 #atelier #aifly-panel .orientation-composer:focus-within{border-color:transparent}
 #atelier #aifly-panel .orientation-composer textarea,#atelier #aifly-panel .orientation-composer textarea:focus{border:0;outline:0;box-shadow:none;background:transparent}
-#atelier #aifly-panel .orientation-composer-actions .primary-button{display:block;line-height:48px;text-align:center}
+#atelier #aifly-panel .orientation-composer-actions .primary-button{text-align:center}
 #atelier #aifly-panel .orientation-composer-actions .primary-button span{display:inline;line-height:48px;vertical-align:middle}
 #atelier .reopen-chat{border-color:transparent}
 #atelier #aifly-panel{background:radial-gradient(ellipse 100% 38% at 82% 0%,color-mix(in srgb,var(--ca-warm) 20%,transparent),transparent 100%),radial-gradient(ellipse 90% 34% at 8% 100%,color-mix(in srgb,var(--ca-lime) 8%,transparent),transparent 100%),linear-gradient(172deg,color-mix(in srgb,var(--ca-silver) 16%,transparent),color-mix(in srgb,var(--ca-silver) 5%,transparent) 44%),color-mix(in srgb,var(--color-atelier-raised) 74%,transparent)}
@@ -190,8 +187,6 @@
 #atelier #aifly-panel .orientation-message p{margin:0;font-size:inherit;line-height:inherit;color:var(--color-text-primaer)}
 #atelier #aifly-panel .orientation-message.role-assistant p+p,#atelier #aifly-panel .orientation-answer-copy>*+*{margin-top:.7em}
 #atelier #aifly-panel .orientation-answer-heading{font-weight:400;font-size:inherit}
-#atelier #aifly-panel .orientation-message :is(ul,ol){margin:.5em 0 0;padding-left:1.2em}
-#atelier #aifly-panel .orientation-message li+li{margin-top:.3em}
 #atelier #aifly-panel .connection-note a{white-space:nowrap}
 #atelier #aifly-panel :is(.orientation-brief,.orientation-brief-actions,.orientation-problem-actions){background:none;box-shadow:none;padding:0;margin:0;border-radius:0}
 #atelier #aifly-panel :is(.orientation-brief,.orientation-brief-actions,.orientation-problem-actions){display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:8px}
@@ -274,7 +269,7 @@ html:has(#atelier){color-scheme:dark;scrollbar-color:var(--color-atelier-raised)
 #atelier .home-concept .identity-hero .atelier-film-hero .atelier-film-controls button:focus-visible,#atelier .home-concept .identity-hero .atelier-film-hero .atelier-volume summary:focus-visible{outline:none;box-shadow:var(--as-focus)}
 #atelier .home-concept .identity-hero .atelier-film-hero .atelier-volume{position:relative;margin:0;display:block;flex:none}
 #atelier .home-concept .identity-hero .atelier-film-hero .atelier-volume>div{position:absolute;inset:auto auto calc(100% + var(--space-3)) 0;box-sizing:border-box;width:232px;min-height:48px;display:flex;align-items:center;padding:0 var(--space-4);border-radius:var(--as-pill);background:var(--as-glass-dense);-webkit-backdrop-filter:var(--as-blur);backdrop-filter:var(--as-blur);box-shadow:var(--as-rest)}
-#atelier .home-concept .identity-hero .atelier-film-hero .atelier-volume label{display:flex;align-items:center;gap:var(--space-3);width:100%;font-size:.8125rem;white-space:nowrap}
+#atelier .home-concept .identity-hero .atelier-film-hero .atelier-volume label{display:flex;align-items:center;gap:var(--space-3);width:100%;white-space:nowrap}
 #atelier .home-concept .identity-hero .atelier-film-hero .atelier-volume input{flex:1;min-width:0;min-height:44px;margin:0;padding:0;border-radius:var(--as-pill);accent-color:var(--as-ink);cursor:pointer}
 @container identity-hero (max-width:560px){
  #atelier .home-concept .identity-hero .atelier-film-hero .atelier-film-controls{inset:auto auto var(--space-2) var(--space-2)}
@@ -311,7 +306,7 @@ html:has(#atelier){color-scheme:dark;scrollbar-color:var(--color-atelier-raised)
 }
 #atelier .home-concept .hc-text-link{box-sizing:border-box;max-width:100%;min-height:48px;white-space:nowrap;border:0}
 @container home (max-width:480px){
- #atelier .home-concept .hc-text-link{padding-inline:var(--space-4);gap:var(--space-2);font-size:.84375rem}
+ #atelier .home-concept .hc-text-link{padding-inline:var(--space-4);gap:var(--space-2)}
 }
 #atelier .home-concept .hc-service-detail summary{align-items:flex-start}
 #atelier .home-concept .hc-service-detail .hc-disclosure-icon{box-sizing:border-box;flex:none;width:48px;height:48px;padding:12px;border-radius:50%;background:var(--as-glass);box-shadow:var(--as-rest);color:var(--as-ink);transition:transform .28s var(--as-spring)}
@@ -342,7 +337,7 @@ html:has(#atelier){color-scheme:dark;scrollbar-color:var(--color-atelier-raised)
  #atelier #aifly-panel{top:var(--chat-viewport-top,0px);margin:0;width:100%;height:var(--chat-viewport-height,100vh);max-height:var(--chat-viewport-height,100vh);border-radius:0;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
  #atelier #aifly-panel .chat-resize-handle{display:none}
 }
-#atelier #aifly-panel .orientation-content{padding:20px var(--ca-pad) 18px;gap:18px;scroll-padding-top:24px;-webkit-mask-image:linear-gradient(180deg,transparent,var(--color-atelier-canvas) 20px,var(--color-atelier-canvas) calc(100% - 18px),transparent);mask-image:linear-gradient(180deg,transparent,var(--color-atelier-canvas) 20px,var(--color-atelier-canvas) calc(100% - 18px),transparent)}
+#atelier #aifly-panel .orientation-content{padding:20px var(--ca-pad) 18px;scroll-padding-top:24px;-webkit-mask-image:linear-gradient(180deg,transparent,var(--color-atelier-canvas) 20px,var(--color-atelier-canvas) calc(100% - 18px),transparent);mask-image:linear-gradient(180deg,transparent,var(--color-atelier-canvas) 20px,var(--color-atelier-canvas) calc(100% - 18px),transparent)}
 #atelier #aifly-panel .orientation-intro h3{font-size:1.75rem;line-height:1.1;margin:0 0 10px;text-wrap:balance}
 #atelier #aifly-panel .orientation-message.role-user{border-radius:var(--as-area);scroll-margin-top:24px}
 #atelier #aifly-panel .orientation-starter[aria-pressed='true']{background:linear-gradient(160deg,color-mix(in srgb,var(--as-cool) 34%,transparent),color-mix(in srgb,var(--as-cool) 14%,transparent));color:var(--as-ink)}
@@ -399,7 +394,6 @@ body:has(#atelier) .skip-link:focus{border-radius:999px;background:var(--color-a
 #atelier #aifly-panel :is(.panel-minimize,.icon-button,.orientation-starter,.orientation-restart,.outline-button),#atelier .site-header :is(.header-cta,.outline-button,select){border:0}
 #atelier .home-concept :is(.hc-gallery-card,.hc-product):is(:hover,:focus-visible){color:var(--color-text-primaer)}
 #atelier .home-concept :is(.hc-gallery-card,.hc-product):is(:hover,:focus-visible) :is(.hc-art,.hc-product-art) img{transform:none}
-#atelier .home-concept :is(.hc-gallery-card,.hc-product):is(:hover,:focus-visible) .hc-text-link,#atelier .home-concept .hc-text-link:is(:hover,:focus-visible){transform:translateY(-2px);box-shadow:var(--as-raised);color:var(--color-text-primaer)}
 #atelier .home-concept :is(.identity-copy .identity-primary-link[data-variant='primary'],.hc-finish-primary){transition:transform .28s var(--as-spring),box-shadow .22s ease-out}
 #atelier .home-concept :is(.identity-copy .identity-primary-link[data-variant='primary'],.hc-finish-primary):hover{transform:translateY(-2px);filter:none}
 #atelier .home-concept :is(.identity-copy .identity-primary-link[data-variant='primary'],.hc-finish-primary)::after{content:none}
@@ -417,9 +411,8 @@ body:has(#atelier) .skip-link:focus{border-radius:999px;background:var(--color-a
  #atelier .home-concept .hc-gallery-card:first-child,#atelier .home-concept .hc-gallery-card:nth-child(2),#atelier .home-concept .hc-gallery-card:nth-child(3){grid-column:span 4;display:flex;flex-direction:column;padding-top:0}
  #atelier .home-concept .hc-gallery-card:nth-child(3) .hc-art{width:100%;margin:0 0 var(--space-4)}
 }
-#atelier .home-concept .hc-finish h2{font-size:clamp(34px,5.2cqi,84px)}
 #atelier #aifly-panel .orientation-content{scrollbar-width:thin;scrollbar-color:color-mix(in srgb,var(--as-cool) 28%,transparent) transparent}
-#atelier #aifly-panel .orientation-history>div{display:flex;flex-direction:column;gap:18px}
+#atelier #aifly-panel .orientation-history>div{display:flex;flex-direction:column}
 #atelier #aifly-panel .orientation-message.role-assistant{align-self:stretch;max-width:100%;padding:0;border:0;border-radius:0;background:none;box-shadow:none}
 #atelier #aifly-panel .orientation-answer-copy{display:grid;gap:.7em}
 #atelier #aifly-panel .orientation-answer-copy .orientation-answer-heading{color:var(--as-ink);font:inherit}
@@ -552,7 +545,7 @@ body:has(#atelier) .skip-link:focus{border-radius:999px;background:var(--color-a
 #atelier .site-header .main-navigation>a:first-child{padding-left:var(--space-5);border-radius:var(--as-pill) 0 0 var(--as-pill)}
 #atelier .site-header .main-navigation>a:last-child{padding-right:var(--space-5);border-radius:0 var(--as-pill) var(--as-pill) 0}
 #atelier #aifly-panel .orientation-content{display:flex;flex-direction:column}
-#atelier #aifly-panel .orientation-content>:first-child{margin-top:auto}
+#atelier #aifly-panel .orientation-content::before{content:'';flex:1 0 0px}
 #atelier #aifly-panel .orientation-content:has(.orientation-message) .orientation-intro{display:none}
 #atelier #aifly-panel .orientation-composer{padding:4px}
 #atelier #aifly-panel .orientation-composer textarea{min-height:48px;padding:12px 60px 12px 16px;line-height:1.5}
@@ -583,7 +576,66 @@ body:has(#atelier) .skip-link:focus{border-radius:999px;background:var(--color-a
 #atelier .aifly-symbol.oracle-companion img{border-radius:0;background:none;box-shadow:none;filter:drop-shadow(0 6px 6px color-mix(in srgb,var(--as-deep) 70%,transparent))}
 #atelier .home-concept .hc-process li::before{display:block;width:auto;height:auto;margin-bottom:var(--space-4);border-radius:0;background:none;box-shadow:none;color:var(--as-warm);font:500 .8125rem/1 var(--font-mono);letter-spacing:.14em}
 #atelier .home-concept .hc-kicker::before{box-shadow:none}
-#atelier #aifly-panel .orientation-composer textarea::placeholder{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#atelier #aifly-panel .orientation-composer textarea{field-sizing:content}
 @media(prefers-reduced-motion:reduce){
  #atelier .site-header :is(a,button,summary),#atelier .home-concept :is(a,button,summary),#atelier .site-footer :is(a,button,summary),#atelier #aifly-panel :is(a,button,summary){transition:none}
 }
+#atelier .home-concept .identity-hero .identity-copy h1{font-size:clamp(36px,4.2cqi,56px);font-weight:500;line-height:1.05;letter-spacing:-.02em}
+#atelier .home-concept .hc-finish h2{font-size:clamp(36px,4.6cqi,48px);line-height:1.05;letter-spacing:-.02em}
+#atelier .home-concept :is(.hc-section-heading h2,.hc-intro h2),#atelier .home-concept .hc-rate>strong{font-size:clamp(24px,3.4cqi,36px);font-weight:500;line-height:1.2;letter-spacing:-.02em}
+#atelier .home-concept :is(.hc-gallery-card h3,.hc-process h3,.hc-product h3,.hc-service-name),#atelier #aifly-panel :is(.orientation-intro h3,.welcome-card>p:not(.welcome-body)){font-size:24px;font-weight:500;line-height:1.35;letter-spacing:-.02em}
+#atelier .home-concept .hc-costs h3,#atelier #aifly-panel .panel-brandline,#atelier #aifly-panel :is(.orientation-brief h4,.request-fallback :is(h2,h3,h4,strong)){font-size:18px;font-weight:500;line-height:1.35;letter-spacing:-.02em}
+#atelier .home-concept .identity-copy .identity-subtitle{font-size:18px;font-weight:500;line-height:1.35;letter-spacing:0}
+#atelier .home-concept :is(.hc-intro>p,.hc-section-heading>p,.hc-section-heading>div+p){font-size:18px;line-height:1.6;letter-spacing:0}
+#atelier .home-concept :is(p,li,.hc-service-lead,.hc-caption,.hc-scene-value),#atelier .home-concept .identity-copy .identity-body,#atelier .home-concept .hc-rate p,#atelier #aifly-panel :is(.orientation-message,.orientation-message p,.orientation-message li,.orientation-intro p,.welcome-body){font-size:16px;line-height:1.6;letter-spacing:0}
+#atelier .home-concept .hc-scene-value{font-weight:500}
+#atelier .home-concept :is(.hc-intro>p,.hc-section-heading>p){font-size:18px}
+#atelier .home-concept .hc-rate>:is(span,small){font-size:13px;line-height:1.5}
+#atelier .home-concept :is(.hc-kicker,.hc-scene-context),#atelier #aifly-panel :is(.panel-identity-subtitle,.orientation-message>strong,.welcome-card .eyebrow,.orientation-path>li>small){font-family:var(--font-mono);font-size:12px;font-weight:500;line-height:1.5;letter-spacing:.14em;text-transform:uppercase}
+#atelier .brand .brand-word{font-size:24px;font-weight:600;line-height:1.05;letter-spacing:-.02em}
+#atelier .brand .brand-word :is(strong,.brand-x,.brand-ai,span){font-weight:inherit;font-size:inherit;line-height:inherit;letter-spacing:inherit}
+#atelier .brand .brand-word .brand-x{font-weight:700}
+#atelier .brand .brand-word small{display:block;font-size:12px;font-weight:500;line-height:1.5;letter-spacing:0}
+#atelier .site-header :is(a,summary,button,select,p,h2,span),#atelier .site-footer :is(a,summary,button,p,h2,h3,span,small),#atelier #aifly-panel :is(.connection-note,.connection-note a,.orientation-path>li,.orientation-brief p,.orientation-problem p,.error-note,.orientation-page-copy strong,.orientation-page-copy small,.orientation-answer-note summary,.orientation-answer-note p,.chat-return span,.chat-return strong,.request-fallback p,.request-fallback a,.status-note){line-height:1.5;letter-spacing:0}
+#atelier .site-header .megamenu-group h2,#atelier .site-header .megamenu-bottom,#atelier .site-header .megamenu-bottom span,#atelier .site-footer :is(.footer-claim,.footer-legal-direct a,.footer-legal-details summary,.footer-legal-details p,.footer-overview-hint,.footer-overview-group a,.diagnostic-consent-content a),#atelier #aifly-panel :is(.connection-note,.connection-note a,.orientation-path>li,.orientation-brief p,.orientation-brief .orientation-brief-hint,.orientation-page-copy small,.orientation-answer-note summary,.orientation-answer-note p,.chat-return span,.orientation-mode-note){font-family:var(--font-text);font-size:13px;font-weight:400}
+#atelier .site-header .megamenu-group h2{font-weight:500;color:var(--color-text-sekundaer)}
+#atelier .site-header :is(.main-navigation>a,.main-navigation>details>summary,.megamenu-group a,.mobile-primary-links a,.megamenu-heading a,.megamenu-bottom a),#atelier .site-footer :is(.footer-link-groups a,.footer-crosslink,.footer-overview>summary,.diagnostic-consent summary,.diagnostic-consent-content p,.footer-brand-block p),#atelier .home-concept .hc-anchors a,#atelier #aifly-panel :is(.orientation-problem p,.error-note,.orientation-page-copy strong,.chat-return strong,.request-fallback p,.request-fallback a,.status-note){font-family:var(--font-text);font-size:15px;font-weight:400}
+#atelier .site-footer .footer-brand-block p,#atelier .site-footer .diagnostic-consent-content p{line-height:1.6}
+#atelier .site-header .megamenu-heading p{font-family:var(--font-display);font-size:18px;font-weight:500;line-height:1.35;letter-spacing:-.02em}
+#atelier .site-footer :is(.footer-link-groups h2,.footer-overview-group h3){font-family:var(--font-text);font-size:15px;font-weight:600;line-height:1.5;letter-spacing:0}
+#atelier .site-footer .footer-overview-marker{font-size:18px;line-height:1.5}
+#atelier #aifly-panel .orientation-page-copy strong,#atelier #aifly-panel .chat-return strong{font-weight:500}
+body:has(#atelier) .skip-link{font-size:15px;font-weight:600;line-height:1.5}
+#atelier .site-header .header-cta,#atelier .site-header .mobile-navigation-panel>.nexify-control,#atelier .home-concept .hc-text-link,#atelier .home-concept :is(.identity-copy .identity-primary-link,.hc-finish-primary),#atelier .site-footer .diagnostic-consent-actions .outline-button,#atelier .site-footer .footer-contact,#atelier #aifly-panel :is(.orientation-starter,.orientation-starter strong,.outline-button,.action-option,.orientation-restart),#atelier #aifly-panel :is(.orientation-problem,.orientation-brief) .primary-button,#atelier .reopen-chat,#atelier .home-concept .identity-hero .atelier-film-hero .atelier-film-controls button,#atelier .site-header .header-actions select{font-family:var(--font-text);font-size:15px;font-weight:600;line-height:1.5;letter-spacing:0;white-space:nowrap}
+#atelier .site-header .header-cta,#atelier .home-concept .hc-text-link,#atelier .site-footer .diagnostic-consent-actions .outline-button,#atelier #aifly-panel :is(.orientation-starter,.action-option),#atelier #aifly-panel :is(.orientation-problem,.orientation-brief,.orientation-followup) :is(.primary-button,.outline-button){box-sizing:border-box;display:inline-flex;align-items:center;height:48px;min-height:48px;padding:0 24px;gap:10px}
+#atelier .home-concept :is(.identity-copy .identity-primary-link[data-variant='primary'],.hc-finish-primary){box-sizing:border-box;height:56px;min-height:56px;padding:0 28px;gap:10px}
+#atelier #aifly-panel .orientation-starters{gap:12px}
+#atelier #aifly-panel :is(.orientation-brief-actions,.orientation-problem-actions,.orientation-followup){gap:12px}
+#atelier .site-footer .diagnostic-consent-actions{gap:12px}
+@container home (max-width:480px){
+ #atelier .home-concept .hc-text-link{padding:0 18px;font-size:15px}
+}
+#atelier #aifly-panel .orientation-composer-actions .primary-button:is(:hover,:focus-visible):not(:disabled),#atelier .home-concept :is(.identity-copy .identity-primary-link[data-variant='primary'],.hc-finish-primary):hover,#atelier .home-concept :is(.hc-gallery-card,.hc-product):is(:hover,:focus-visible) .hc-text-link,#atelier .home-concept .hc-text-link:is(:hover,:focus-visible),#atelier .reopen-chat:is(:hover,:focus-visible),#atelier #aifly-panel .orientation-starter:is(:hover,:focus-visible),#atelier #aifly-panel .panel-minimize:is(:hover,:focus-visible),#atelier .site-header .mobile-navigation>summary:is(:hover,:focus-visible),#atelier .site-header .header-cta:is(:hover,:focus-visible),#atelier .site-footer .diagnostic-consent-actions .outline-button:hover{transform:translateY(-1px)}
+#atelier .reopen-chat:active{transform:translateY(1px);box-shadow:var(--as-pressed)}
+#atelier .site-footer .footer-contact{display:inline-flex;align-items:center;gap:10px;min-height:48px;margin-left:-16px;padding:0 16px;border:0;border-radius:var(--as-pill);background:none;box-shadow:none;transition:background-color var(--as-move)}
+#atelier .site-footer .footer-contact:is(:hover,:focus-visible){background:color-mix(in srgb,var(--as-cool) 12%,transparent)}
+#atelier .site-footer :is(.footer-link-groups a,.footer-overview-group a,.footer-legal-direct a,.footer-crosslink,.diagnostic-consent-content a):hover{text-decoration:underline;text-decoration-color:color-mix(in srgb,var(--as-cool) 60%,transparent);text-underline-offset:4px}
+#atelier .brand{transition:opacity var(--as-move)}
+#atelier .brand:hover{opacity:.78}
+#atelier .site-footer :is(.footer-overview>summary,.footer-legal-details summary,.diagnostic-consent summary):hover{color:var(--as-ink);text-decoration:underline;text-decoration-color:color-mix(in srgb,var(--as-cool) 60%,transparent);text-underline-offset:4px}
+#atelier .home-concept .hc-service-detail summary:hover .hc-service-name{text-decoration:underline;text-decoration-color:color-mix(in srgb,var(--as-cool) 50%,transparent);text-underline-offset:5px}
+#atelier #aifly-panel .orientation-composer{transition:box-shadow var(--as-move)}
+#atelier #aifly-panel .orientation-composer:hover{box-shadow:inset 0 1px 0 color-mix(in srgb,var(--as-ink) 46%,transparent),0 20px 38px -22px color-mix(in srgb,var(--as-deep) 94%,transparent)}
+#atelier .site-header .megamenu-group a:hover span:last-child{transform:translateX(2px)}
+#atelier #aifly-panel .orientation-history{gap:20px}
+#atelier #aifly-panel .orientation-history>div{gap:20px}
+#atelier #aifly-panel .orientation-content{gap:20px}
+#atelier #aifly-panel .orientation-message :is(ul,ol){display:grid;gap:6px;margin:10px 0 0;padding-left:1.25em}
+#atelier #aifly-panel .orientation-message li+li{margin-top:0}
+#atelier #aifly-panel .orientation-composer-actions .primary-button{display:grid;place-items:center;font-size:15px;line-height:1.5}
+#atelier label,#atelier .visually-hidden,#atelier .panel-connection,#atelier .panel-status{line-height:1.5}
+#atelier .home-concept :is(.identity-copy .identity-primary-link,.hc-finish-primary),#atelier .home-concept :is(.identity-copy .identity-primary-link,.hc-finish-primary) span{font-size:15px;font-weight:600;line-height:1.5;letter-spacing:0}
+#atelier .site-header :is(.mobile-primary-links a,.megamenu-group a,.megamenu-group a span),#atelier .home-concept .identity-hero .atelier-film-hero :is(.atelier-volume label,.atelier-volume summary,.atelier-film-controls span){line-height:1.5}
+#atelier .home-concept .identity-hero .atelier-film-hero .atelier-volume label{font-size:13px;font-weight:500}
+#atelier .home-concept :is(.hc-gallery-card,.hc-product):is(:hover,:focus-visible) .hc-text-link,#atelier .home-concept .hc-text-link:is(:hover,:focus-visible){transform:translateY(-1px);background:var(--as-glass-lit);box-shadow:var(--as-raised);color:var(--color-text-primaer)}
+#atelier .home-concept .hc-text-link:active{transform:translateY(1px);box-shadow:var(--as-pressed)}
