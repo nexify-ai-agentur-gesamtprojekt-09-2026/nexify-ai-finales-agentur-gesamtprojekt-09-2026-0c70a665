@@ -21,6 +21,24 @@ Maßgebliches Beispiel für das Verfahren: `docs/09-final/pin-rebase-2026-11-14.
 
 Weitere Listen existieren (zum Beispiel `config/text-resize-sources.json`, `config/ai-enforcement-coverage.json`, `docs/contracts/prototype-pages.json`). Deshalb nie aus dem Gedächtnis urteilen, sondern suchen.
 
+## Ganze Verzeichnisse sind gebunden
+
+Nicht jede Bindung nennt die Datei beim Namen. `config/text-resize-sources.json` bindet unter `directories` vier Verzeichnisse vollständig: `apps/site/src`, `apps/web/components`, `apps/web/lib` und `packages/tokens`, mit allen Dateien der Endungen `.tsx`, `.ts`, `.mjs`, `.css`, `.json`. `tools/check_text_resize_evidence.py` liest sie rekursiv ein und verlangt genau die Datei- und Byte-Menge, die im Beleg `evidence/resize-2026-11-10/text-spacing.json` steht. Die Suche nach dem Dateipfad aus dem nächsten Abschnitt findet eine neue Datei dort deshalb nicht, obwohl sie gebunden ist.
+
+Folgen:
+
+- **Jede neue, geänderte, umbenannte oder gelöschte Datei** in einem dieser Verzeichnisse macht `test_current_report_has_exact_source_binding` und `test_css_script_new_source_and_uncompleted_report_fail_closed` (`tests/test_resize_source_binding.py`) rot. Grün werden sie nur durch einen neuen Lauf von `apps/site/tests/browser-text-spacing.mjs` am festen Commit („Browser-Belege erneuern“ unten). So geschehen bei PR 181 (zwei Dateien geändert, eine neu), nachgeholt mit PR 185; `docs/09-final/pin-rebase-2026-11-14.md`, Abschnitt 11.
+- **Stylesheets des Shops sind doppelt gebunden.** `apps/web/components/shop/shop.css` und `Storefront.css` stehen zusätzlich in `evidence/shop-ui-mock-2026-11-09/browser-catalog.json` und `browser-shop.json`, zusammen mit den Komponenten des Shops in demselben Ordner. Eine Änderung dort verlangt den Resize-Lauf und die beiden Shop-Läufe.
+- **Neue Module an einen ungebundenen Ort legen**, wenn sie nicht in ein gebundenes Verzeichnis gehören. Was keine Komponente und keine von Komponenten gelesene Bibliothek ist (Regeln für Server und Proxy, Zugriff auf Dienste, Versandlogik), liegt neben seinem Verwender, nicht unter `apps/web/lib`. Beispiel auf `main`: `apps/web/auth/indexing.ts` (PR 182). Beispiel aus einem offenen Zweig, Stand 14.11.2026 nicht auf `main`: `apps/web/mailing/` (PR 186). Vorher prüfen, dass der gewählte Ort wirklich frei ist:
+
+  ```bash
+  python3 -c "import json;print(json.load(open('config/text-resize-sources.json'))['directories'])"
+  git grep -n -F '"apps/web/<ordner>/' -- config evidence docs/contracts | head
+  ```
+
+  Das Verlegen hilft nur der neuen Datei. Ändert dieselbe Arbeit auch eine gebundene Datei, ist der neue Lauf trotzdem fällig.
+- **Zwei Zweige, derselbe Beleg.** Erheben zwei Zweige denselben Beleg neu, treffen beim Einholen von `main` zwei Fassungen derselben Belegdatei aufeinander (Bericht vom 14.11.2026, nicht nachgemessen). Der Konflikt wird nicht von Hand aufgelöst, auch nicht durch Wahl einer der beiden Seiten: Keine der beiden Fassungen beschreibt den zusammengeführten Stand. Stattdessen den Quelltext zusammenführen, den Harness am Merge-Stand neu laufen lassen und dessen Ausgabe als Beleg übernehmen; die vorige Fassung von `main` wandert nach `superseded/`. Besser vorher: Die koordinierende Sitzung vergibt die Neuerhebung eines Belegs an genau einen Zweig (`nexify-agenten-koordination`).
+
 ## Vor der Änderung: ist die Datei gebunden?
 
 ```bash
@@ -33,9 +51,13 @@ git grep -n -F '"<pfad>"' -- config evidence docs/contracts
 - Der Pfad wird gefunden, die Prüfsumme nicht: Der Pin ist schon veraltet. Die Änderung macht nichts neu rot, löst aber auch nichts.
 - Nichts gefunden: nicht gebunden.
 
-Stand der Abweichungen und Namen der betroffenen Tests vorher festhalten:
+- Liegt die Datei in einem der vier Verzeichnisse aus „Ganze Verzeichnisse sind gebunden“, ist sie gebunden, auch wenn die Suche nichts findet.
+
+Stand der Abweichungen und Namen der betroffenen Tests vorher festhalten, mit erzeugten Seitendaten und am Stand von `origin/main` (Ablauf und Begründung: `nexify-zweig-und-pr`, Schritt 3):
 
 ```bash
+node apps/site/scripts/generate-public-data.mjs
+node apps/web/scripts/generate-public-data.mjs
 python3 tools/verify_requirements_reconciliation.py | sort | uniq -c
 python3 -m unittest discover -s tests 2>&1 | grep -E '^(FAIL|ERROR): ' | sort > /tmp/vorher.txt
 ```
@@ -78,6 +100,7 @@ Entfällt ein Schutzziel ersatzlos, entscheidet der Inhaber über Ersatzprüfung
 ## Grenzen
 
 - Kein Pin, um einen Test grün zu bekommen. Kein Beleg ohne Lauf. Kein Löschen alter Belege.
+- Kein Konflikt in einer Belegdatei wird von Hand aufgelöst; es entscheidet der neue Lauf am Merge-Stand.
 - Pins und Belege nicht nebenbei in einem Funktions- oder Text-PR umbinden; das ist eine eigene Arbeit mit eigenem PR. Der Funktions-PR nennt nur, was durch ihn neu abweicht.
 - Für die führenden Dokumente gilt zusätzlich `nexify-stand-halten`, Abschnitt „Gebundene Prüfsummen“.
 - `full_requirement_accepted` und `whole_system_accepted` im Register bleiben `false`.
