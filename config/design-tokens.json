@@ -267,6 +267,64 @@
         "$value": "rgba(189,197,201,.055)",
         "$type": "color"
       }
+    },
+    "hell": {
+      "$description": "Helle Fassung der oeffentlichen Seite (Inhaberentscheidung 14.11.2026): warmer heller Grund, Graphit-Schrift, klares Glas. Der dunkle Atelier-Satz bleibt unveraendert als Rueckweg.",
+      "grund": {
+        "$value": "#F4F2EE",
+        "$type": "color",
+        "$description": "Seitengrund, warmes sehr helles Weiss-Grau"
+      },
+      "ebene": {
+        "$value": "#EAE7E1",
+        "$type": "color",
+        "$description": "Zweite Ebene, eine Spur dunkler"
+      },
+      "flaeche": {
+        "$value": "#FBFAF8",
+        "$type": "color",
+        "$description": "Gehobene ruhige Flaeche"
+      },
+      "licht": {
+        "$value": "#FFFFFF",
+        "$type": "color",
+        "$description": "Lichtkante und Glanz auf Glas"
+      },
+      "schrift": {
+        "$value": "#1D2120",
+        "$type": "color",
+        "$description": "Haupttext Graphit; 15,0:1 auf grund"
+      },
+      "schriftNeben": {
+        "$value": "#4F5553",
+        "$type": "color",
+        "$description": "Nebentext; 6,9:1 auf grund"
+      },
+      "schriftLeise": {
+        "$value": "#636967",
+        "$type": "color",
+        "$description": "Hinweise; 5,0:1 auf grund"
+      },
+      "schatten": {
+        "$value": "#1B1E1D",
+        "$type": "color",
+        "$description": "Schattenfarbe, nur in geringer Deckkraft gemischt"
+      },
+      "tagWarm": {
+        "$value": "#F6DDBB",
+        "$type": "color",
+        "$description": "Warmes Tageslicht hinter Glas"
+      },
+      "tagSilber": {
+        "$value": "#CFDAE4",
+        "$type": "color",
+        "$description": "Kuehles Silberlicht hinter Glas"
+      },
+      "tagLime": {
+        "$value": "#DDEFA8",
+        "$type": "color",
+        "$description": "Hauch Lime im Tageslicht"
+      }
     }
   },
   "font": {
