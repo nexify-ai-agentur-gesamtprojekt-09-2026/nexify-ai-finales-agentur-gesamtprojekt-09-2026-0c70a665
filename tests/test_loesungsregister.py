@@ -200,6 +200,21 @@ class KeineGeheimnisse(unittest.TestCase):
         self.assertIn(KONTO_ID, clr.ERLAUBTE_KENNUNGEN)
         self.assertEqual(len(clr.ERLAUBTE_KENNUNGEN), 2)
 
+    def test_account_id_stands_in_exactly_one_place(self):
+        """Die Konto-ID ist kein Geheimnis, steht aber nur im Eintrag cloudflare-konto."""
+        raw = (ROOT / clr.REGISTER).read_text(encoding="utf-8")
+        self.assertEqual(raw.count(KONTO_ID), 1)
+        konto = next(x for x in register()["loesungen"] if x["id"] == "cloudflare-konto")
+        self.assertIn(KONTO_ID, konto["ort"])
+        self.assertEqual((ROOT / clr.MARKDOWN).read_text(encoding="utf-8").count(KONTO_ID), 1)
+
+    def test_no_amounts_for_cloudflare_subscriptions(self):
+        # Der Kontoeintrag nennt Tarif und Abonnements, aber keine Beträge.
+        for item in register()["loesungen"]:
+            if item["id"] == "cloudflare-konto":
+                self.assertIn("Workers Paid", item["zustand"]["beleg"])
+                self.assertIsNone(re.search(r"\d+[,.]?\d*\s*(USD|EUR|\$|€)", json.dumps(item, ensure_ascii=False)), item["id"])
+
     def test_ordinary_text_is_not_flagged(self):
         harmlos = (
             "nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665-ut7r, "

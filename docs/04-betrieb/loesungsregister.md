@@ -19,8 +19,8 @@ Vorgehen, Pflege und Umgang mit Schlüsseln aus dem Chat: `.claude/skills/nexify
 
 | Zustand | Anzahl |
 |---|---|
-| läuft belegt | 29 |
-| läuft unbelegt | 19 |
+| läuft belegt | 30 |
+| läuft unbelegt | 18 |
 | defekt | 6 |
 | geplant | 1 |
 | stillgelegt | 1 |
@@ -38,15 +38,15 @@ Vorgehen, Pflege und Umgang mit Schlüsseln aus dem Chat: `.claude/skills/nexify
 
 | Kennung | Lösung | Kategorie | Zustand | Rolle im Plan | Entscheidung | Tags |
 |---|---|---|---|---|---|---|
-| `vercel` | Vercel | Hosting | läuft belegt | tragend | keine (Führungsentscheidung des Inhabers vom 13.11.2026 in AGENTS.md) | `hosting` `auslieferung` `web` `vorschau` `produktion` |
+| `vercel` | Vercel | Hosting | läuft belegt | tragend | D-021 (Führungsentscheidung des Inhabers vom 13.11.2026 in AGENTS.md gilt bis zur Abnahme des Umzugs weiter) | `hosting` `auslieferung` `web` `vorschau` `produktion` |
 | `cloudflare-konto` | Cloudflare-Konto „NeXify AI Agentur“ | Plattform-Konto | läuft belegt | tragend | keine | `cloudflare` `konto` `plattform` `zugang` `dns` |
 | `cloudflare-r2` | Cloudflare R2 (unser S3-kompatibler Objektspeicher) | Objektspeicher | läuft belegt | tragend | keine (Vorgabe des Inhabers vom 14.11.2026: R2 stets als eigene Lösung im Gesamtsystem führen) | `speicher` `s3` `objektspeicher` `archiv` `backup` `r2` `cloudflare` `dateien` |
-| `cloudflare-workers` | Cloudflare Workers (möglicher Ersatz für Vercel) | Hosting | geplant | unklar | keine (AGENTS.md vom 13.11.2026 sagt „nicht verfolgt“; der Wunsch des Inhabers vom 14.11.2026 ist noch nicht als Entscheidung festgehalten) | `hosting` `auslieferung` `cloudflare` `workers` `umzug` |
+| `cloudflare-workers` | Cloudflare Workers (gewünschtes Zielhosting, in Prüfung) | Hosting | geplant | unklar | D-021 | `hosting` `auslieferung` `cloudflare` `workers` `umzug` |
 | `cloudflare-ai-gateway` | Cloudflare AI Gateway `default` | LLM-Zugang | läuft unbelegt | unklar | keine | `llm-gateway` `llm-router` `cloudflare` `modellweg` `protokollierung` |
 | `cloudflare-mcp-portal` | Cloudflare MCP-Portal | Agenten-Werkzeuge | läuft unbelegt | unklar | keine | `mcp` `werkzeuge` `cloudflare` `portal` `agenten` |
 | `cloudflare-mcp-server` | MCP-Server-Eintrag `nexify-ai-mcp-server-cf` | Agenten-Werkzeuge | defekt | unklar | keine | `mcp` `cloudflare` `werkzeuge` `eigener-server` |
 | `cloudflare-access` | Cloudflare Access und Tunnel | Netz und Zugangsschutz | läuft unbelegt | unklar | keine | `zugangsschutz` `tunnel` `cloudflare` `access` `netz` |
-| `cloudflare-dns` | Cloudflare DNS und Zonen | Netz und Zugangsschutz | läuft unbelegt | tragend | keine | `dns` `domains` `zonen` `cloudflare` `netz` |
+| `cloudflare-dns` | Cloudflare DNS und Zonen | Netz und Zugangsschutz | läuft belegt | tragend | D-021 | `dns` `domains` `zonen` `cloudflare` `netz` |
 | `hostinger-srv1941843` | Hostinger-Server srv1941843 | Server | läuft belegt | tragend | D-016 | `server` `vps` `hosting` `hostinger` `docker` `infrastruktur` |
 | `hostinger-srv1243952` | Hostinger-Server srv1243952 | Server | läuft unbelegt | unklar | D-016 | `server` `vps` `hostinger` `infrastruktur` `unbekannter-bestand` |
 | `traefik` | Traefik (Reverse-Proxy) | Netz und Zugangsschutz | läuft belegt | tragend | D-016 | `reverse-proxy` `tls` `routen` `netz` `server` |
@@ -104,24 +104,24 @@ Vorgehen, Pflege und Umgang mit Schlüsseln aus dem Chat: `.claude/skills/nexify
 | `cloudflare-konto` | tiny-shadow-c5a6 | Konto-API-Token mit R2-S3-Zugangsdaten | Cloudflare-Dashboard (dort nur bei der Erstellung sichtbar) und Passwortmanager des Inhabers | ja | im Chat offengelegt am 14.11.2026 – Erneuerung empfohlen; der Wert liegt dem Register nicht vor |
 | `cloudflare-konto` | jolly-wildflower-3e52 | Konto-API-Token mit R2-S3-Zugangsdaten | Cloudflare-Dashboard (dort nur bei der Erstellung sichtbar) und Passwortmanager des Inhabers | ja | im Chat offengelegt am 14.11.2026 – Erneuerung empfohlen; der Wert liegt dem Register nicht vor |
 | `cloudflare-konto` | NeXify AI CF Auth. Token | Benutzer-API-Token | Cloudflare-Dashboard (dort nur bei der Erstellung sichtbar) und Passwortmanager des Inhabers | ja | im Chat offengelegt am 14.11.2026 – Erneuerung empfohlen; der Wert liegt dem Register nicht vor |
-| `cloudflare-konto` | Cloudflare-Token der Claude-Umgebung für api.cloudflare.com | API-Token als Netzwerk-Geheimnis | Netzwerk-Geheimnisse der Claude-Umgebung (Host api.cloudflare.com) | ja | Genau ein Token ist hinterlegt; welches der oben genannten es ist, ist nicht feststellbar. Der Cloudflare-Umzugsbericht vom 14.11.2026 vermerkt, dass das damals hinterlegte Token als ungültig abgelehnt wurde. Nach der Erneuerung den neuen Wert über das sichere Formular hinterlegen. |
+| `cloudflare-konto` | Cloudflare-Token der Claude-Umgebung für api.cloudflare.com | API-Token als Netzwerk-Geheimnis | Netzwerk-Geheimnisse der Claude-Umgebung (Host api.cloudflare.com) | ja | Genau ein Token ist hinterlegt; welches der oben genannten es ist, ist nicht feststellbar, deshalb als offengelegt geführt. Bericht 14.11., nicht selbst gemessen: seit ca. 18:47 UTC ist es ein Konto-Token mit Worker-Rechten, aber ohne Leserecht für das AI Gateway; das zuvor hinterlegte Token wurde als ungültig abgelehnt. Nach der Erneuerung den neuen Wert über das sichere Formular hinterlegen. |
 | `cloudflare-r2` | R2-S3-Zugangsdaten zu tiny-shadow-c5a6 | S3-Zugangskennung und S3-Geheimschlüssel | Cloudflare-Dashboard (dort nur bei der Erstellung sichtbar) und Passwortmanager des Inhabers | ja | im Chat offengelegt am 14.11.2026 – Erneuerung empfohlen; der Wert liegt dem Register nicht vor |
 | `cloudflare-r2` | R2-S3-Zugangsdaten zu jolly-wildflower-3e52 | S3-Zugangskennung und S3-Geheimschlüssel | Cloudflare-Dashboard (dort nur bei der Erstellung sichtbar) und Passwortmanager des Inhabers | ja | im Chat offengelegt am 14.11.2026 – Erneuerung empfohlen; der Wert liegt dem Register nicht vor |
 | `cloudflare-access` | Access-Dienst-Token | Dienst-Token (Kennung und Geheimnis) | Cloudflare-Dashboard (dort nur bei der Erstellung sichtbar) und Passwortmanager des Inhabers | ja | im Chat offengelegt am 14.11.2026 – Erneuerung empfohlen; der Wert liegt dem Register nicht vor |
-| `hostinger-srv1941843` | 15 SSH-Schlüssel im Hostinger-Konto | SSH-Schlüssel (öffentliche Teile im Konto) | Hostinger-Konto; private Teile auf den Geräten ihrer Besitzer | nein | Sichtung durch den Inhaber fällig: darunter `ignore-this`, `temp-check` und mehrere als vorübergehend bezeichnete Schlüssel (`docs/04-betrieb/server-befund-2026-11-14.md:31`). Laut Register der offenen Arbeiten vom 14.11.2026 (Arbeitsstand, nicht im Repository), OA-014, steht in Mem eine Notiz „SSH Keys“ vom März 2026. |
-| `composio-for-you` | Composio-For-You-Schlüssel | API-Schlüssel | Passwortmanager des Inhabers und Verbindungsverwaltung von claude.ai | ja | Stand laut `PROGRESS.md:85`: Schlüssel standen im Gespräch; Erneuerung nicht belegt (D-017). |
-| `composio-platform` | COMPOSIO_API_KEY, COMPOSIO_AUTH_TOKEN, COMPOSIO_WEBHOOK_SECRET | API-Schlüssel, Zugangstoken, Signaturschlüssel | Vercel-Projektvariablen (Projekt …-ut7r, Team nexify-projekte) | ja | Composio-Schlüssel standen laut PROGRESS.md im Gespräch; welcher der Schlüssel betroffen ist, ist nicht belegt – deshalb alle erneuern. |
-| `bigbuy` | BigBuy-API-Schlüssel | API-Schlüssel | Passwortmanager des Inhabers; Zielablage Vercel-Projektvariablen | ja | Stand im Gespräch (`PROGRESS.md:85`); Erneuerung nicht belegt. |
-| `github` | Zwei ältere GitHub-Tokens | persönliche Zugangstoken | stehen laut Befund im Klartext in Mem-Notizen vom März 2026 | ja | Register der offenen Arbeiten vom 14.11.2026 (Arbeitsstand, nicht im Repository), OA-014: beim Anbieter widerrufen und die Notizen bereinigen (nur Inhaber). Die Werte wurden für dieses Register nicht gelesen. |
-| `n8n` | n8n-Schlüssel | API-Schlüssel | steht laut Befund im Klartext in einer Mem-Notiz vom März 2026 | ja | Register der offenen Arbeiten vom 14.11.2026 (Arbeitsstand, nicht im Repository), OA-014: widerrufen und Notiz bereinigen (nur Inhaber). Der Wert wurde nicht gelesen. |
-| `linear` | Alter Anthropic-API-Schlüssel (Ticket NEX-71) | API-Schlüssel | Ort des Werts nicht belegt; das Ticket führt ihn als weiterhin aktiv | nein | Register der offenen Arbeiten vom 14.11.2026 (Arbeitsstand, nicht im Repository), OA-014: beim Anbieter widerrufen und Ticket mit Beleg schließen (nur Inhaber). |
-| `slack` | Slack-Webhook-Adresse | eingehender Webhook | steht laut Befund offen im Steuerungswiki in Mem | ja | Register der offenen Arbeiten vom 14.11.2026 (Arbeitsstand, nicht im Repository), OA-014: Webhook widerrufen und neu anlegen (nur Inhaber). Die Adresse wurde nicht gelesen. |
-| `postiz` | Postiz-API- und MCP-Zugangsdaten | API-Schlüssel | stehen laut Befund im Klartext in einer Mem-Notiz vom März 2026 | ja | Register der offenen Arbeiten vom 14.11.2026 (Arbeitsstand, nicht im Repository), OA-014: widerrufen und Notiz bereinigen (nur Inhaber). Die Werte wurden nicht gelesen. |
+| `hostinger-srv1941843` | 15 SSH-Schlüssel im Hostinger-Konto | SSH-Schlüssel (öffentliche Teile im Konto) | Hostinger-Konto; private Teile auf den Geräten ihrer Besitzer | nein | Sichtung durch den Inhaber fällig: darunter `ignore-this`, `temp-check` und mehrere als vorübergehend bezeichnete Schlüssel (`docs/04-betrieb/server-befund-2026-11-14.md:31`). Laut Register der offenen Arbeiten (`docs/09-final/offene-arbeiten-2026-11-14.md`), OA-014, steht in Mem eine Notiz „SSH Keys“ vom März 2026. |
+| `composio-for-you` | Composio-For-You-Schlüssel | API-Schlüssel | Passwortmanager des Inhabers und Verbindungsverwaltung von claude.ai | ja | Stand laut `DECISIONS.md:131`: Schlüssel standen im Gespräch; Erneuerung nicht belegt (D-017). |
+| `composio-platform` | COMPOSIO_API_KEY, COMPOSIO_AUTH_TOKEN, COMPOSIO_WEBHOOK_SECRET | API-Schlüssel, Zugangstoken, Signaturschlüssel | Vercel-Projektvariablen (Projekt …-ut7r, Team nexify-projekte) | ja | Composio-Schlüssel standen laut DECISIONS.md (D-017, Offen) im Gespräch; welcher der Schlüssel betroffen ist, ist nicht belegt – deshalb alle erneuern. |
+| `bigbuy` | BigBuy-API-Schlüssel | API-Schlüssel | Passwortmanager des Inhabers; Zielablage Vercel-Projektvariablen | ja | Stand im Gespräch (`DECISIONS.md:131`); Erneuerung nicht belegt. |
+| `github` | Zwei ältere GitHub-Tokens | persönliche Zugangstoken | stehen laut Befund im Klartext in Mem-Notizen vom März 2026 | ja | Register der offenen Arbeiten (`docs/09-final/offene-arbeiten-2026-11-14.md`), OA-014: beim Anbieter widerrufen und die Notizen bereinigen (nur Inhaber). Die Werte wurden für dieses Register nicht gelesen. |
+| `n8n` | n8n-Schlüssel | API-Schlüssel | steht laut Befund im Klartext in einer Mem-Notiz vom März 2026 | ja | Register der offenen Arbeiten (`docs/09-final/offene-arbeiten-2026-11-14.md`), OA-014: widerrufen und Notiz bereinigen (nur Inhaber). Der Wert wurde nicht gelesen. |
+| `linear` | Alter Anthropic-API-Schlüssel (Ticket NEX-71) | API-Schlüssel | Ort des Werts nicht belegt; das Ticket führt ihn als weiterhin aktiv | nein | Register der offenen Arbeiten (`docs/09-final/offene-arbeiten-2026-11-14.md`), OA-014: beim Anbieter widerrufen und Ticket mit Beleg schließen (nur Inhaber). |
+| `slack` | Slack-Webhook-Adresse | eingehender Webhook | steht laut Befund offen im Steuerungswiki in Mem | ja | Register der offenen Arbeiten (`docs/09-final/offene-arbeiten-2026-11-14.md`), OA-014: Webhook widerrufen und neu anlegen (nur Inhaber). Die Adresse wurde nicht gelesen. |
+| `postiz` | Postiz-API- und MCP-Zugangsdaten | API-Schlüssel | stehen laut Befund im Klartext in einer Mem-Notiz vom März 2026 | ja | Register der offenen Arbeiten (`docs/09-final/offene-arbeiten-2026-11-14.md`), OA-014: widerrufen und Notiz bereinigen (nur Inhaber). Die Werte wurden nicht gelesen. |
 | `claude-umgebung` | Netzwerk-Geheimnis für api.cloudflare.com | API-Token | Netzwerk-Geheimnisse der Claude-Umgebung | ja | siehe cloudflare-konto |
 
 ## Offene Fragen an den Inhaber
 
-- `cloudflare-workers` (Cloudflare Workers (möglicher Ersatz für Vercel)): Soll der Umzug von Vercel zu Cloudflare als neue Entscheidung in DECISIONS.md festgehalten werden, obwohl er im heutigen Zuschnitt voraussichtlich den bezahlten Workers-Tarif braucht?
+- `cloudflare-workers` (Cloudflare Workers (gewünschtes Zielhosting, in Prüfung)): Welcher Kostenweg gilt für den Umzug (A kostenlos wie heute, B kostenlos mit fertigen Dateien nach Umbau, C bezahlter Tarif), und wo bleibt der Shop-Dienst?
 - `cloudflare-ai-gateway` (Cloudflare AI Gateway `default`): Soll das Cloudflare AI Gateway der Modellweg werden (statt 9router oder direktem OpenRouter-Zugang), und wer weist nach, dass die Modellregel aus `config/llm-policy.json` dort eingehalten wird?
 - `cloudflare-mcp-portal` (Cloudflare MCP-Portal): Welche MCP-Server sollen über das Portal erreichbar sein, und wer darf sich daran anmelden?
 - `cloudflare-mcp-server` (MCP-Server-Eintrag `nexify-ai-mcp-server-cf`): Unter welcher Adresse soll der eigene MCP-Server laufen (Vorschlag: `mcp.nexifyai.cloud`), und welcher Code steht dahinter (der Entwurf aus PR 124)?
@@ -157,9 +157,9 @@ Vorgehen, Pflege und Umgang mit Schlüsseln aus dem Chat: `.claude/skills/nexify
 - **Kategorie:** Hosting
 - **Zweck:** Liefert `apps/web` und `apps/shop-api` aus `main` aus; einziger Auslieferungsweg der Produktion.
 - **Ort:** Vercel, Team `nexify-projekte`, Projekt `…-ut7r` (`prj_lKQEWQKzjqq4Ifvmwy6dh1XCIgVR`); Domains nexifyai.de und nexifyai.cloud
-- **Zustand:** läuft belegt (Stand 2026-11-14). Beleg: `AGENTS.md:8` (Führungsentscheidung 13.11.2026) und `AGENTS.md:23` (Messung 14.11.2026, 10:37–10:43 UTC: vier Domains antworten mit 200 von Vercel). Laut Standortbestimmung der Arbeitssitzung vom 14.11.2026 (nicht im Repository) ist eine Zahlung über 300,05 USD am 14.11.2026 fehlgeschlagen; nicht nachgeprüft.
-- **Entscheidung:** keine (Führungsentscheidung des Inhabers vom 13.11.2026 in AGENTS.md)
-- **Rolle im Plan:** tragend (Der Inhaber wünscht seit 14.11.2026 den Umzug zu Cloudflare; bis zu einer neuen Entscheidung in DECISIONS.md bleibt Vercel führend. Fünf verwaiste Projekte und ein Schwesterprojekt sind Stilllege-Kandidaten.)
+- **Zustand:** läuft belegt (Stand 2026-11-14). Beleg: `AGENTS.md:8` (Führungsentscheidung 13.11.2026) und `AGENTS.md:30` (Messung 14.11.2026, 10:37–10:43 UTC: vier Domains antworten mit 200 von Vercel). Laut `PROGRESS.md:20` ist eine Zahlung am 14.11.2026 fehlgeschlagen; nicht nachgeprüft.
+- **Entscheidung:** D-021 (Führungsentscheidung des Inhabers vom 13.11.2026 in AGENTS.md gilt bis zur Abnahme des Umzugs weiter)
+- **Rolle im Plan:** tragend (Nach D-021 ist Cloudflare das gewünschte Zielhosting; Vercel bleibt Auslieferungsweg und Rückweg, bis der Umzug gemessen und abgenommen ist. Fünf verwaiste Projekte und ein Schwesterprojekt sind Stilllege-Kandidaten.)
 - **Wann nutzen:** Bei jeder Auslieferung, Vorschau, Domain-Zuordnung oder Laufzeitvariable von `apps/web` und `apps/shop-api`.
 - **Nicht nutzen für:** Dauerhafte Datenhaltung, Hintergrunddienste und alles, was auf den eigenen Servern läuft.
 - **Abhängigkeiten:** `github`
@@ -174,8 +174,8 @@ Vorgehen, Pflege und Umgang mit Schlüsseln aus dem Chat: `.claude/skills/nexify
 - **Tags:** `cloudflare` `konto` `plattform` `zugang` `dns`
 - **Kategorie:** Plattform-Konto
 - **Zweck:** Gemeinsames Konto für R2, Workers, AI Gateway, MCP-Portal, Access und die Zonen; hier hängen die Konto-Tokens.
-- **Ort:** Cloudflare-Konto „NeXify AI Agentur“, Konto-ID `a112f895c19e0d65f6f64b3e89f747f8`
-- **Zustand:** läuft belegt (Stand 2026-11-14). Beleg: Messung 14.11.2026: der Cloudflare-Konnektor der Claude-Umgebung listet in diesem Konto den R2-Bucket (nur lesend). Konto-Name und Konto-ID: Angabe des Inhabers vom 14.11.2026.
+- **Ort:** Cloudflare-Konto „NeXify AI Agentur“, Konto-ID `a112f895c19e0d65f6f64b3e89f747f8` (einzige Stelle im Register; weitere Einträge verweisen hierher)
+- **Zustand:** läuft belegt (Stand 2026-11-14). Beleg: Messung 14.11.2026: der Cloudflare-Konnektor der Claude-Umgebung listet in diesem Konto den R2-Bucket (nur lesend). Konto-Name und Konto-ID: Angabe des Inhabers vom 14.11.2026. Bericht 14.11., nicht selbst gemessen: das Konto hat den Tarif Workers Paid und weitere kostenpflichtige Abonnements (Beträge stehen bewusst nicht im Register).
 - **Entscheidung:** keine
 - **Rolle im Plan:** tragend (Träger für R2 und die Zonen; ob Cloudflare auch Hosting wird, ist eine eigene offene Entscheidung (siehe cloudflare-workers).)
 - **Wann nutzen:** Bevor ein Cloudflare-Dienst eingerichtet oder ein Cloudflare-Zugang gebraucht wird: erst hier nachsehen, welcher Token wofür existiert.
@@ -187,7 +187,7 @@ Vorgehen, Pflege und Umgang mit Schlüsseln aus dem Chat: `.claude/skills/nexify
 | tiny-shadow-c5a6 | Konto-API-Token mit R2-S3-Zugangsdaten | Cloudflare-Dashboard (dort nur bei der Erstellung sichtbar) und Passwortmanager des Inhabers | Konto-Token; genauer Rechteumfang nicht belegt | 2026-11-14 | ja | ja | im Chat offengelegt am 14.11.2026 – Erneuerung empfohlen; der Wert liegt dem Register nicht vor |
 | jolly-wildflower-3e52 | Konto-API-Token mit R2-S3-Zugangsdaten | Cloudflare-Dashboard (dort nur bei der Erstellung sichtbar) und Passwortmanager des Inhabers | Konto-Token; genauer Rechteumfang nicht belegt | 2026-11-14 | ja | ja | im Chat offengelegt am 14.11.2026 – Erneuerung empfohlen; der Wert liegt dem Register nicht vor |
 | NeXify AI CF Auth. Token | Benutzer-API-Token | Cloudflare-Dashboard (dort nur bei der Erstellung sichtbar) und Passwortmanager des Inhabers | Benutzer-Token; Rechteumfang nicht belegt | nicht belegt | ja | ja | im Chat offengelegt am 14.11.2026 – Erneuerung empfohlen; der Wert liegt dem Register nicht vor |
-| Cloudflare-Token der Claude-Umgebung für api.cloudflare.com | API-Token als Netzwerk-Geheimnis | Netzwerk-Geheimnisse der Claude-Umgebung (Host api.cloudflare.com) | nicht belegt | 2026-11-14 | ja | ja | Genau ein Token ist hinterlegt; welches der oben genannten es ist, ist nicht feststellbar. Der Cloudflare-Umzugsbericht vom 14.11.2026 vermerkt, dass das damals hinterlegte Token als ungültig abgelehnt wurde. Nach der Erneuerung den neuen Wert über das sichere Formular hinterlegen. |
+| Cloudflare-Token der Claude-Umgebung für api.cloudflare.com | API-Token als Netzwerk-Geheimnis | Netzwerk-Geheimnisse der Claude-Umgebung (Host api.cloudflare.com) | Konto-Token mit Worker-Rechten, ohne AI-Gateway-Leserecht (Bericht 14.11., nicht selbst gemessen) | 2026-11-14 | ja | ja | Genau ein Token ist hinterlegt; welches der oben genannten es ist, ist nicht feststellbar, deshalb als offengelegt geführt. Bericht 14.11., nicht selbst gemessen: seit ca. 18:47 UTC ist es ein Konto-Token mit Worker-Rechten, aber ohne Leserecht für das AI Gateway; das zuvor hinterlegte Token wurde als ungültig abgelehnt. Nach der Erneuerung den neuen Wert über das sichere Formular hinterlegen. |
 | Cloudflare-Konnektor der Claude-Umgebung | OAuth-Verbindung (MCP, vom Anbieter als veraltet markiert) | Verbindungsverwaltung von claude.ai | liest mindestens die R2-Bucket-Liste; weiterer Umfang nicht geprüft | nicht belegt | nein | nein | – |
 
 ### Cloudflare R2 (unser S3-kompatibler Objektspeicher) · `cloudflare-r2`
@@ -195,7 +195,7 @@ Vorgehen, Pflege und Umgang mit Schlüsseln aus dem Chat: `.claude/skills/nexify
 - **Tags:** `speicher` `s3` `objektspeicher` `archiv` `backup` `r2` `cloudflare` `dateien`
 - **Kategorie:** Objektspeicher
 - **Zweck:** S3-kompatibler Objektspeicher der Agentur für Archive, Sicherungen und große Dateien außerhalb der Server.
-- **Ort:** Endpunkt `https://a112f895c19e0d65f6f64b3e89f747f8.r2.cloudflarestorage.com`, Bucket `nexify-agentur-pucket`
+- **Ort:** Endpunkt `https://<Konto-ID>.r2.cloudflarestorage.com` (Konto-ID siehe `cloudflare-konto`), Bucket `nexify-agentur-pucket`
 - **Zustand:** läuft belegt (Stand 2026-11-14). Beleg: Messung 14.11.2026 über den Cloudflare-Konnektor (nur lesend): Bucket `nexify-agentur-pucket` vorhanden, angelegt am 15.10.2026. Schreibzugriff, Inhalt und Lebenszyklus-Regel sind nicht geprüft. Einordnung als Archivziel: `docs/04-betrieb/aufraeumplan-2026-11-14.md:313`.
 - **Entscheidung:** keine (Vorgabe des Inhabers vom 14.11.2026: R2 stets als eigene Lösung im Gesamtsystem führen)
 - **Rolle im Plan:** tragend (Empfohlenes Archivziel für Paperclip-Läufe, Sicherungen und die Cognee-Volumes; die Freigabe als Archivziel (Kosten rund 1–2 USD je Monat) ist Entscheidung 2 im Aufräumplan und noch offen.)
@@ -209,17 +209,17 @@ Vorgehen, Pflege und Umgang mit Schlüsseln aus dem Chat: `.claude/skills/nexify
 | R2-S3-Zugangsdaten zu jolly-wildflower-3e52 | S3-Zugangskennung und S3-Geheimschlüssel | Cloudflare-Dashboard (dort nur bei der Erstellung sichtbar) und Passwortmanager des Inhabers | R2 des Kontos; Begrenzung auf einen Bucket nicht belegt | 2026-11-14 | ja | ja | im Chat offengelegt am 14.11.2026 – Erneuerung empfohlen; der Wert liegt dem Register nicht vor |
 | Eigener Schlüssel nur für den Archiv-Bucket | S3-Zugangsdaten (noch anzulegen) | noch nicht angelegt; Ziel: Geheimnisspeicher des ausführenden Servers | nur Bucket nexify-agentur-pucket, Lesen und Schreiben von Objekten | noch nicht erstellt | nein | nein | Empfehlung aus dem Aufräumplan, Abschnitt 7.1: ein auf diesen Bucket begrenzter Schlüssel statt eines Konto-Tokens. |
 
-### Cloudflare Workers (möglicher Ersatz für Vercel) · `cloudflare-workers`
+### Cloudflare Workers (gewünschtes Zielhosting, in Prüfung) · `cloudflare-workers`
 
 - **Tags:** `hosting` `auslieferung` `cloudflare` `workers` `umzug`
 - **Kategorie:** Hosting
-- **Zweck:** Möglicher künftiger Auslieferungsweg für `apps/web`; vorbereitet und lokal gemessen, nicht umgeschaltet.
-- **Ort:** Cloudflare-Konto „NeXify AI Agentur“, Konto-ID `a112f895c19e0d65f6f64b3e89f747f8`; Vorbereitung in `apps/web/wrangler.jsonc` und auf dem Zweig `claude/cloudflare-umzug`
-- **Zustand:** geplant (Stand 2026-11-14). Beleg: `AGENTS.md:11` (Stand 13.11.2026: als Hosting nicht verfolgt). Der Umzugsbericht vom 14.11.2026 (Datei cloudflare-umzug-2026-11-14 unter docs/04-betrieb) liegt nur auf dem Zweig `claude/cloudflare-umzug`, nicht auf `main`: lokal gemessen, auf Cloudflare nichts ausgeliefert, kein DNS-Eintrag geändert.
-- **Entscheidung:** keine (AGENTS.md vom 13.11.2026 sagt „nicht verfolgt“; der Wunsch des Inhabers vom 14.11.2026 ist noch nicht als Entscheidung festgehalten)
-- **Rolle im Plan:** unklar → Frage: Soll der Umzug von Vercel zu Cloudflare als neue Entscheidung in DECISIONS.md festgehalten werden, obwohl er im heutigen Zuschnitt voraussichtlich den bezahlten Workers-Tarif braucht? (Laut Umzugsbericht lagen die Seiten lokal bei 46–56 ms Rechenzeit gegen 10 ms im kostenlosen Tarif; die Shop-API zieht nicht mit um.)
+- **Zweck:** Gewünschtes künftiges Hosting für `apps/web`; vorbereitet und lokal gemessen, nicht umgeschaltet.
+- **Ort:** Cloudflare-Konto „NeXify AI Agentur“ (Konto-ID nur im Eintrag `cloudflare-konto`); Vorbereitung in `apps/web/wrangler.jsonc` und auf dem Zweig `claude/cloudflare-umzug`; Vorschau-Worker `nexify-web-vorschau` auf der workers.dev-Subdomain `nexify-login`
+- **Zustand:** geplant (Stand 2026-11-14). Beleg: `DECISIONS.md:156`: in Prüfung, nicht umgeschaltet; lokal 46–56 ms Rechenzeit je Seite gegen 10 ms im kostenlosen Tarif, keine Messung auf Cloudflare. Bericht 14.11., nicht selbst gemessen: der Vorschau-Worker `nexify-web-vorschau` existiert, ohne statische Dateien. Der Umzugsbericht liegt auf dem Zweig `claude/cloudflare-umzug`, nicht auf `main`.
+- **Entscheidung:** D-021
+- **Rolle im Plan:** unklar → Frage: Welcher Kostenweg gilt für den Umzug (A kostenlos wie heute, B kostenlos mit fertigen Dateien nach Umbau, C bezahlter Tarif), und wo bleibt der Shop-Dienst? (Vercel bleibt Auslieferungsweg und Rückweg, bis der Umzug gemessen und vom Inhaber abgenommen ist (D-021). Laut Bericht hat das Konto bereits den Tarif Workers Paid.)
 - **Wann nutzen:** Wenn über den Auslieferungsweg, Hosting-Kosten oder den Umzug von Vercel gesprochen wird.
-- **Nicht nutzen für:** Produktive Auslieferung, solange keine Entscheidung vorliegt; DNS- oder Domain-Änderungen ohne Freigabe.
+- **Nicht nutzen für:** Produktive Auslieferung vor Messung und Abnahme; DNS- oder Domain-Änderungen ohne Freigabe je Schritt (D-016).
 - **Abhängigkeiten:** `cloudflare-konto`, `vercel`
 - **Zugänge:** keine erfasst
 
@@ -229,7 +229,7 @@ Vorgehen, Pflege und Umgang mit Schlüsseln aus dem Chat: `.claude/skills/nexify
 - **Kategorie:** LLM-Zugang
 - **Zweck:** OpenAI-kompatibles Gateway vor Modellanbietern mit Protokollierung und Begrenzung an einer Stelle.
 - **Ort:** Gateway `default`, Adresse `https://gateway.nexifyai.cloud/compat/chat/completions`
-- **Zustand:** läuft unbelegt (Stand 2026-11-14). Beleg: Angabe des Inhabers im Gespräch am 14.11.2026, nicht nachgemessen. Kein Aufruf ausgeführt; ob dort `deepseek/deepseek-v4.1-flash-1017` mit Reasoning `high` ohne Ersatzmodell ankommt, ist nicht belegt.
+- **Zustand:** läuft unbelegt (Stand 2026-11-14). Beleg: Angabe des Inhabers im Gespräch am 14.11.2026, nicht nachgemessen. Kein Aufruf ausgeführt; ob dort `deepseek/deepseek-v4.1-flash-1017` mit Reasoning `high` ohne Ersatzmodell ankommt, ist nicht belegt. Bericht 14.11., nicht selbst gemessen: das hinterlegte Cloudflare-Token hat kein Leserecht für das AI Gateway, eine Prüfung über die API war deshalb nicht möglich.
 - **Entscheidung:** keine
 - **Rolle im Plan:** unklar → Frage: Soll das Cloudflare AI Gateway der Modellweg werden (statt 9router oder direktem OpenRouter-Zugang), und wer weist nach, dass die Modellregel aus `config/llm-policy.json` dort eingehalten wird?
 - **Wann nutzen:** Wenn ein Modellaufruf zentral protokolliert, begrenzt oder zwischengespeichert werden soll und die Frage nach dem Modellweg gestellt wird.
@@ -270,7 +270,7 @@ Vorgehen, Pflege und Umgang mit Schlüsseln aus dem Chat: `.claude/skills/nexify
 - **Tags:** `zugangsschutz` `tunnel` `cloudflare` `access` `netz`
 - **Kategorie:** Netz und Zugangsschutz
 - **Zweck:** Schützt interne Oberflächen mit Anmeldung vor dem Dienst und kann Dienste ohne offenen Port erreichbar machen.
-- **Ort:** Cloudflare-Konto „NeXify AI Agentur“, Konto-ID `a112f895c19e0d65f6f64b3e89f747f8`
+- **Ort:** Cloudflare-Konto „NeXify AI Agentur“ (Konto-ID nur im Eintrag `cloudflare-konto`)
 - **Zustand:** läuft unbelegt (Stand 2026-11-14). Beleg: Angabe des Inhabers im Gespräch am 14.11.2026, nicht nachgemessen: ein Access-Dienst-Token wurde angelegt. Welche Anwendung es schützt und ob ein Tunnel besteht, ist nicht belegt.
 - **Entscheidung:** keine
 - **Rolle im Plan:** unklar → Frage: Sollen die Hermes-Oberfläche und andere interne Oberflächen hinter Cloudflare Access oder einen Tunnel gelegt werden, um D-019 Folge 4 (nicht öffentlich) zu erfüllen? (D-019 nennt bisher SSH-Tunnel oder WireGuard als Weg.)
@@ -287,10 +287,10 @@ Vorgehen, Pflege und Umgang mit Schlüsseln aus dem Chat: `.claude/skills/nexify
 - **Tags:** `dns` `domains` `zonen` `cloudflare` `netz`
 - **Kategorie:** Netz und Zugangsschutz
 - **Zweck:** Verwaltet die Domains und DNS-Einträge der Agentur.
-- **Ort:** Cloudflare-Konto „NeXify AI Agentur“, Konto-ID `a112f895c19e0d65f6f64b3e89f747f8`; Zonen laut Inhaber dort geführt (genannt: nexifyai.cloud mit den Namen gateway und mcp-cf-portal)
-- **Zustand:** läuft unbelegt (Stand 2026-11-14). Beleg: Angabe des Inhabers vom 14.11.2026 („wir haben dort die Domains“), zitiert im Umzugsbericht auf dem Zweig `claude/cloudflare-umzug`. Die Zonenliste wurde nicht abgerufen.
-- **Entscheidung:** keine
-- **Rolle im Plan:** tragend (Jede DNS-Änderung ist eine Hartsperre für Agenten (`config/brain/agents.json`) und braucht die Freigabe des Inhabers.)
+- **Ort:** Cloudflare-Konto „NeXify AI Agentur“ (Konto-ID nur im Eintrag `cloudflare-konto`); Zonen `nexifyai.de` und `nexifyai.cloud` (mit den Namen gateway und mcp-cf-portal)
+- **Zustand:** läuft belegt (Stand 2026-11-14). Beleg: `docs/04-betrieb/mailversand-zustand-2026-11-14.md:61` (DNS-Abfragen am 14.11.2026: die Zone liegt bei Cloudflare). Bericht 14.11., nicht selbst gemessen: die Zonen `nexifyai.de` und `nexifyai.cloud` liegen im Konto. Für den Mailversand fehlen dort Einträge (siehe `resend`).
+- **Entscheidung:** D-021
+- **Rolle im Plan:** tragend (Jede DNS-Änderung ist eine Hartsperre für Agenten (`config/brain/agents.json`) und braucht die Freigabe des Inhabers je Schritt (D-016).)
 - **Wann nutzen:** Wenn eine Domain, Subdomain oder ein DNS-Eintrag gebraucht oder geprüft wird.
 - **Nicht nutzen für:** Änderungen durch Agenten ohne Freigabe; DNS-Änderungen sind gesperrt.
 - **Abhängigkeiten:** `cloudflare-konto`
@@ -312,7 +312,7 @@ Vorgehen, Pflege und Umgang mit Schlüsseln aus dem Chat: `.claude/skills/nexify
 | Zugang (Bezeichnung) | Art | Ablageort des Werts | Rechteumfang | erstellt | offengelegt | Erneuerung fällig | Hinweis |
 |---|---|---|---|---|---|---|---|
 | Hostinger-API-Schlüssel der Claude-Umgebung | API-Schlüssel als Netzwerk-Geheimnis | Netzwerk-Geheimnisse der Claude-Umgebung (Host developers.hostinger.com) | Hostinger-Konto; genutzt lesend, Snapshot und einmalige Mess-Container | nicht belegt | nein | nein | – |
-| 15 SSH-Schlüssel im Hostinger-Konto | SSH-Schlüssel (öffentliche Teile im Konto) | Hostinger-Konto; private Teile auf den Geräten ihrer Besitzer | Root-Zugang, soweit in authorized_keys eingetragen (nicht belegt) | verschieden | nein | ja | Sichtung durch den Inhaber fällig: darunter `ignore-this`, `temp-check` und mehrere als vorübergehend bezeichnete Schlüssel (`docs/04-betrieb/server-befund-2026-11-14.md:31`). Laut Register der offenen Arbeiten vom 14.11.2026 (Arbeitsstand, nicht im Repository), OA-014, steht in Mem eine Notiz „SSH Keys“ vom März 2026. |
+| 15 SSH-Schlüssel im Hostinger-Konto | SSH-Schlüssel (öffentliche Teile im Konto) | Hostinger-Konto; private Teile auf den Geräten ihrer Besitzer | Root-Zugang, soweit in authorized_keys eingetragen (nicht belegt) | verschieden | nein | ja | Sichtung durch den Inhaber fällig: darunter `ignore-this`, `temp-check` und mehrere als vorübergehend bezeichnete Schlüssel (`docs/04-betrieb/server-befund-2026-11-14.md:31`). Laut Register der offenen Arbeiten (`docs/09-final/offene-arbeiten-2026-11-14.md`), OA-014, steht in Mem eine Notiz „SSH Keys“ vom März 2026. |
 
 ### Hostinger-Server srv1243952 · `hostinger-srv1243952`
 
@@ -351,7 +351,7 @@ Vorgehen, Pflege und Umgang mit Schlüsseln aus dem Chat: `.claude/skills/nexify
 - **Kategorie:** Orchestrierung
 - **Zweck:** Laufzeit, in der die Rollen NeX (führt aus) und AIFly ORACLE (koordiniert) arbeiten.
 - **Ort:** srv1941843, Compose-Projekt `docker-hermes`, Container `hermes`; Konfiguration im Repository unter `ops/hermes/`
-- **Zustand:** läuft belegt (Stand 2026-11-14). Beleg: `DECISIONS.md:146`. Der Container läuft; die Konfiguration aus `ops/hermes/` ist auf dem Server nicht eingespielt, ein echter Modellaufruf ist nicht belegt (`docs/04-betrieb/server-befund-2026-11-14.md:28`).
+- **Zustand:** läuft belegt (Stand 2026-11-14). Beleg: `DECISIONS.md:146`. Der Container läuft; die Konfiguration aus `ops/hermes/` ist auf dem Server nicht eingespielt, ein echter Modellaufruf ist nicht belegt (`docs/04-betrieb/server-befund-2026-11-14.md:28`). Kein geplanter Agent läuft: `docs/04-betrieb/bot-team-ist-soll-2026-11-14.md:17`.
 - **Entscheidung:** D-019
 - **Rolle im Plan:** tragend (Funktionsnachweis steht aus; der Docker-Socket im Container ist als Risiko zu führen (D-019 Folge 5).)
 - **Wann nutzen:** Wenn eine Aufgabe von Agenten dauerhaft, wiederkehrend oder koordiniert ausgeführt werden soll.
@@ -399,7 +399,7 @@ Vorgehen, Pflege und Umgang mit Schlüsseln aus dem Chat: `.claude/skills/nexify
 - **Kategorie:** LLM-Zugang
 - **Zweck:** Einziger zulässiger Modellanbieter und einziges Modell für alle verwalteten LLM-Aufrufe.
 - **Ort:** OpenRouter, Modell `deepseek/deepseek-v4.1-flash-1017`, Reasoning `high`
-- **Zustand:** läuft unbelegt (Stand 2026-11-14). Beleg: `AGENTS.md:408`. Die Regel ist belegt; ein echter Aufruf mit dieser Kennung im Providerrequest ist für Hermes und für den öffentlichen Chat nicht belegt (`PROGRESS.md:93`).
+- **Zustand:** läuft unbelegt (Stand 2026-11-14). Beleg: `AGENTS.md:415`. Die Regel ist belegt; ein echter Aufruf mit dieser Kennung im Providerrequest ist für Hermes und für den öffentlichen Chat nicht belegt (`PROGRESS.md:146`).
 - **Entscheidung:** D-019 (Modellregel selbst: `config/llm-policy.json`, Nutzerweisung)
 - **Rolle im Plan:** tragend (Kein stilles Ersatzmodell, kein anderes Reasoning.)
 - **Wann nutzen:** Bei jedem verwalteten LLM-Aufruf: Chat, Agenten, Recherche, Zusammenfassung, CI-Review.
@@ -426,7 +426,7 @@ Vorgehen, Pflege und Umgang mit Schlüsseln aus dem Chat: `.claude/skills/nexify
 
 | Zugang (Bezeichnung) | Art | Ablageort des Werts | Rechteumfang | erstellt | offengelegt | Erneuerung fällig | Hinweis |
 |---|---|---|---|---|---|---|---|
-| ROUTER_URL und ROUTER_KEY | Adresse und API-Schlüssel des Routers | Vercel-Projektvariablen (Projekt …-ut7r, Team nexify-projekte) | Modellaufrufe über den Router | nicht belegt | nein | nein | Für die Agenten nicht übergeben (Register der offenen Arbeiten vom 14.11.2026 (Arbeitsstand, nicht im Repository), OA-145). |
+| ROUTER_URL und ROUTER_KEY | Adresse und API-Schlüssel des Routers | Vercel-Projektvariablen (Projekt …-ut7r, Team nexify-projekte) | Modellaufrufe über den Router | nicht belegt | nein | nein | Für die Agenten nicht übergeben (Register der offenen Arbeiten (`docs/09-final/offene-arbeiten-2026-11-14.md`), OA-145). |
 
 ### Cognee, Server-Instanz `cognee-x532` · `cognee-server`
 
@@ -474,7 +474,7 @@ Vorgehen, Pflege und Umgang mit Schlüsseln aus dem Chat: `.claude/skills/nexify
 
 | Zugang (Bezeichnung) | Art | Ablageort des Werts | Rechteumfang | erstellt | offengelegt | Erneuerung fällig | Hinweis |
 |---|---|---|---|---|---|---|---|
-| Zugang zur LightRAG-API | kein Zugangsschutz belegt | kein Geheimnis belegt | offen, falls von außen erreichbar | nicht belegt | nein | nein | Laut Register der offenen Arbeiten vom 14.11.2026 (Arbeitsstand, nicht im Repository), OA-021, lief LightRAG nach einem Befund vom 09.10.2026 ohne Anmeldung; von außen nicht nachgemessen. |
+| Zugang zur LightRAG-API | kein Zugangsschutz belegt | kein Geheimnis belegt | offen, falls von außen erreichbar | nicht belegt | nein | nein | Laut Register der offenen Arbeiten (`docs/09-final/offene-arbeiten-2026-11-14.md`), OA-021, lief LightRAG nach einem Befund vom 09.10.2026 ohne Anmeldung; von außen nicht nachgemessen. |
 
 ### agentmemory · `agentmemory`
 
@@ -544,7 +544,7 @@ Vorgehen, Pflege und Umgang mit Schlüsseln aus dem Chat: `.claude/skills/nexify
 - **Kategorie:** Gedächtnis und Wissen
 - **Zweck:** Dokumente und Bestandsaufnahmen der Agentur außerhalb des Repositorys.
 - **Ort:** Notion-Arbeitsbereich des Inhabers, über den Notion-Konnektor erreichbar
-- **Zustand:** läuft belegt (Stand 2026-11-14). Beleg: Abruf am 14.11.2026 laut Register der offenen Arbeiten vom 14.11.2026 (Arbeitsstand, nicht im Repository): Seite „Agentur-Wissensmanagement — Bestandsaufnahme und Betriebsstruktur“ (Abgleich 09.11.2026). Laut Standortbestimmung der Arbeitssitzung vom 14.11.2026 (nicht im Repository) blieben Suchen zu Suite und Composio ohne Treffer.
+- **Zustand:** läuft belegt (Stand 2026-11-14). Beleg: Abruf am 14.11.2026 laut Register der offenen Arbeiten (`docs/09-final/offene-arbeiten-2026-11-14.md`): Seite „Agentur-Wissensmanagement — Bestandsaufnahme und Betriebsstruktur“ (Abgleich 09.11.2026). Laut Standortbestimmung der Arbeitssitzung vom 14.11.2026 (nicht im Repository) blieben Suchen zu Suite und Composio ohne Treffer.
 - **Entscheidung:** keine
 - **Rolle im Plan:** unklar → Frage: Welche Rolle hat Notion neben dem Repository und Mem: weiter pflegen, nur lesen oder auslaufen lassen?
 - **Wann nutzen:** Wenn ein älterer Befund oder eine Bestandsaufnahme gesucht wird, die nicht im Repository steht.
@@ -617,7 +617,7 @@ Vorgehen, Pflege und Umgang mit Schlüsseln aus dem Chat: `.claude/skills/nexify
 - **Kategorie:** Datenhaltung
 - **Zweck:** Zielbild für sämtliche Datenhaltung: PostgreSQL mit Row-Level-Security, auch für den Shop.
 - **Ort:** eigene, selbst gehostete Instanz; Adresse im Repository nicht belegt. Migrationen unter `apps/web/supabase/migrations/`
-- **Zustand:** läuft unbelegt (Stand 2026-11-14). Beleg: `DECISIONS.md:105`; `PROGRESS.md:81`.
+- **Zustand:** läuft unbelegt (Stand 2026-11-14). Beleg: `DECISIONS.md:105`; `PROGRESS.md:147`.
 - **Entscheidung:** D-013
 - **Rolle im Plan:** tragend (Adresse, Zugang und Freigabe für Migration und Umschaltung liegen beim Inhaber.)
 - **Wann nutzen:** Bei jeder neuen Tabelle, jedem neuen Datenbestand und jeder Frage „wo speichern wir strukturierte Daten“.
@@ -635,7 +635,7 @@ Vorgehen, Pflege und Umgang mit Schlüsseln aus dem Chat: `.claude/skills/nexify
 - **Kategorie:** Datenhaltung
 - **Zweck:** Heutiger Speicher von `apps/shop-api` (Produkte, Warenkörbe, Bestellungen, Konten).
 - **Ort:** Ort der Produktionsdatenbank nicht belegt (vermutet auf srv1243952)
-- **Zustand:** läuft unbelegt (Stand 2026-11-14). Beleg: `PROGRESS.md:9`: Der Shop-Dienst antwortet mit 503, `MONGODB_URI` fehlt im Projekt; auf srv1941843 wurde kein MongoDB-Container gefunden.
+- **Zustand:** läuft unbelegt (Stand 2026-11-14). Beleg: `PROGRESS.md:40`: Der Shop-Dienst antwortet mit 503, `MONGODB_URI` fehlt im Projekt; auf srv1941843 wurde kein MongoDB-Container gefunden.
 - **Entscheidung:** D-006, D-013
 - **Rolle im Plan:** doppelt → bleibt: Supabase (D-013) (MongoDB bleibt IST, bis der Shop migriert ist; `vsk-mongodb` wird nie destruktiv angefasst (D-016).)
 - **Wann nutzen:** Nur für den bestehenden Shop-Dienst, bis die Zugriffsschicht auf PostgreSQL umgestellt ist.
@@ -703,7 +703,7 @@ Vorgehen, Pflege und Umgang mit Schlüsseln aus dem Chat: `.claude/skills/nexify
 
 | Zugang (Bezeichnung) | Art | Ablageort des Werts | Rechteumfang | erstellt | offengelegt | Erneuerung fällig | Hinweis |
 |---|---|---|---|---|---|---|---|
-| Composio-For-You-Schlüssel | API-Schlüssel | Passwortmanager des Inhabers und Verbindungsverwaltung von claude.ai | alle verbundenen Apps des Inhabers | nicht belegt | ja | ja | Stand laut `PROGRESS.md:85`: Schlüssel standen im Gespräch; Erneuerung nicht belegt (D-017). |
+| Composio-For-You-Schlüssel | API-Schlüssel | Passwortmanager des Inhabers und Verbindungsverwaltung von claude.ai | alle verbundenen Apps des Inhabers | nicht belegt | ja | ja | Stand laut `DECISIONS.md:131`: Schlüssel standen im Gespräch; Erneuerung nicht belegt (D-017). |
 
 ### Composio Platform · `composio-platform`
 
@@ -711,7 +711,7 @@ Vorgehen, Pflege und Umgang mit Schlüsseln aus dem Chat: `.claude/skills/nexify
 - **Kategorie:** Integrationen
 - **Zweck:** Lässt Kunden der Suite ihre eigenen Konten verbinden; Ereignisse kommen per Webhook in die Web-App.
 - **Ort:** Composio-Projekt (Kennungen in `config/integrations/composio.json`); Webhook in `apps/web`
-- **Zustand:** läuft unbelegt (Stand 2026-11-14). Beleg: `config/integrations/composio.json:4`: gebaut hinter Schalter; Freigabelisten leer, Migration `0004` nicht eingespielt. Ob der Webhook in Produktion je ein signiertes Ereignis quittiert hat, ist nicht belegt.
+- **Zustand:** läuft unbelegt (Stand 2026-11-14). Beleg: `config/integrations/composio.json:4`: gebaut hinter Schalter; Freigabelisten leer, Migration `0004` nicht eingespielt. Ob der Webhook in Produktion je ein signiertes Ereignis quittiert hat, ist nicht belegt. Was bis zum ersten Suite-Kunden fehlt: `docs/04-betrieb/werkstattservice-und-suite-ist-soll-2026-11-14.md:163`.
 - **Entscheidung:** keine
 - **Rolle im Plan:** tragend (Für die Suite vorgesehen; hängt an Supabase und an den Entwürfen PR 118 und 123.)
 - **Wann nutzen:** Wenn Kunden der Suite fremde Apps verbinden sollen.
@@ -720,7 +720,7 @@ Vorgehen, Pflege und Umgang mit Schlüsseln aus dem Chat: `.claude/skills/nexify
 
 | Zugang (Bezeichnung) | Art | Ablageort des Werts | Rechteumfang | erstellt | offengelegt | Erneuerung fällig | Hinweis |
 |---|---|---|---|---|---|---|---|
-| COMPOSIO_API_KEY, COMPOSIO_AUTH_TOKEN, COMPOSIO_WEBHOOK_SECRET | API-Schlüssel, Zugangstoken, Signaturschlüssel | Vercel-Projektvariablen (Projekt …-ut7r, Team nexify-projekte) | Composio-Projekt der Suite | nicht belegt | ja | ja | Composio-Schlüssel standen laut PROGRESS.md im Gespräch; welcher der Schlüssel betroffen ist, ist nicht belegt – deshalb alle erneuern. |
+| COMPOSIO_API_KEY, COMPOSIO_AUTH_TOKEN, COMPOSIO_WEBHOOK_SECRET | API-Schlüssel, Zugangstoken, Signaturschlüssel | Vercel-Projektvariablen (Projekt …-ut7r, Team nexify-projekte) | Composio-Projekt der Suite | nicht belegt | ja | ja | Composio-Schlüssel standen laut DECISIONS.md (D-017, Offen) im Gespräch; welcher der Schlüssel betroffen ist, ist nicht belegt – deshalb alle erneuern. |
 
 ### Resend · `resend`
 
@@ -728,12 +728,12 @@ Vorgehen, Pflege und Umgang mit Schlüsseln aus dem Chat: `.claude/skills/nexify
 - **Kategorie:** Mail
 - **Zweck:** Versendet Transaktionsmails: Anfragebestätigungen, interne Benachrichtigungen, Passwort-Reset.
 - **Ort:** Resend-Konto; Absender `angebot@nexifyai.cloud`, Domain nexifyai.cloud verifiziert (eu-west-1)
-- **Zustand:** läuft belegt (Stand 2026-11-14). Beleg: `config/integrations/resend.json:19` (Versand mit Zustellbeleg am 29.10.2026). Laut Register der offenen Arbeiten vom 14.11.2026 (Arbeitsstand, nicht im Repository) am 14.11.2026: 50.000 Mails Kontingent, 0 verbraucht; nexifyai.de als Absenderdomain „failed“.
+- **Zustand:** läuft belegt (Stand 2026-11-14). Beleg: `config/integrations/resend.json:19` (Versand mit Zustellbeleg am 29.10.2026). Stand 14.11.2026: `docs/04-betrieb/mailversand-zustand-2026-11-14.md:37` (verified), `docs/04-betrieb/mailversand-zustand-2026-11-14.md:38` (failed, kein verlangter Eintrag im DNS) und `docs/04-betrieb/mailversand-zustand-2026-11-14.md:60` (Rücklaufpfad von `nexifyai.cloud` im DNS nicht auffindbar).
 - **Entscheidung:** D-007
-- **Rolle im Plan:** tragend (Im selben Konto liegen Domains eines Kundenprojekts; der Absender ist auf nexifyai.cloud begrenzt.)
+- **Rolle im Plan:** tragend (Im selben Konto liegen Domains eines Kundenprojekts; der Absender ist auf nexifyai.cloud begrenzt. Offen: Rücklaufpfad von nexifyai.cloud klären, nexifyai.de einrichten (DNS-Änderung nur mit Freigabe).)
 - **Wann nutzen:** Wenn die Anwendung eine Mail an Kunden oder an die interne Adresse senden soll.
 - **Nicht nutzen für:** Kaltansprache und gekaufte Listen (rechtlich und laut Anbieter unzulässig); Absender fremder Domains.
-- **Abhängigkeiten:** `vercel`
+- **Abhängigkeiten:** `vercel`, `cloudflare-dns`
 
 | Zugang (Bezeichnung) | Art | Ablageort des Werts | Rechteumfang | erstellt | offengelegt | Erneuerung fällig | Hinweis |
 |---|---|---|---|---|---|---|---|
@@ -772,7 +772,7 @@ Vorgehen, Pflege und Umgang mit Schlüsseln aus dem Chat: `.claude/skills/nexify
 
 | Zugang (Bezeichnung) | Art | Ablageort des Werts | Rechteumfang | erstellt | offengelegt | Erneuerung fällig | Hinweis |
 |---|---|---|---|---|---|---|---|
-| BigBuy-API-Schlüssel | API-Schlüssel | Passwortmanager des Inhabers; Zielablage Vercel-Projektvariablen | Katalog und Bestellungen | nicht belegt | ja | ja | Stand im Gespräch (`PROGRESS.md:85`); Erneuerung nicht belegt. |
+| BigBuy-API-Schlüssel | API-Schlüssel | Passwortmanager des Inhabers; Zielablage Vercel-Projektvariablen | Katalog und Bestellungen | nicht belegt | ja | ja | Stand im Gespräch (`DECISIONS.md:131`); Erneuerung nicht belegt. |
 
 ### HubSpot · `hubspot`
 
@@ -780,7 +780,7 @@ Vorgehen, Pflege und Umgang mit Schlüsseln aus dem Chat: `.claude/skills/nexify
 - **Kategorie:** CRM
 - **Zweck:** CRM für Kontakte, Firmen und Geschäfte.
 - **Ort:** HubSpot-Konto, über Composio und den HubSpot-Konnektor verbunden
-- **Zustand:** läuft belegt (Stand 2026-11-14). Beleg: Abruf am 14.11.2026 laut Register der offenen Arbeiten vom 14.11.2026 (Arbeitsstand, nicht im Repository) (nur Zählung): 2 Beispielkontakte, 1 Beispielfirma, 0 Geschäfte. In keinem führenden Dokument genannt.
+- **Zustand:** läuft belegt (Stand 2026-11-14). Beleg: Abruf am 14.11.2026 laut Register der offenen Arbeiten (`docs/09-final/offene-arbeiten-2026-11-14.md`) (nur Zählung): 2 Beispielkontakte, 1 Beispielfirma, 0 Geschäfte. In keinem führenden Dokument genannt.
 - **Entscheidung:** keine
 - **Rolle im Plan:** unklar → Frage: Soll HubSpot das CRM der Agentur werden, oder liegen Leads künftig in der eigenen Supabase-Instanz?
 - **Wann nutzen:** Wenn gefragt wird, wo Leads und Kundenkontakte geführt werden.
@@ -842,7 +842,7 @@ Vorgehen, Pflege und Umgang mit Schlüsseln aus dem Chat: `.claude/skills/nexify
 - **Kategorie:** Code
 - **Zweck:** Kanonische Quelle des Codes; `main` ist führend.
 - **Ort:** Repository `nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665`; `AGENTS.md` und `config/automation.json` nennen den Besitzer `nexifyai-dev`, der Abruf dieser Sitzung lief über die Organisation `nexify-ai-agentur-gesamtprojekt-09-2026` (welcher Name aktuell gilt, ist nicht geprüft)
-- **Zustand:** läuft belegt (Stand 2026-11-14). Beleg: `AGENTS.md:213`; Abruf und Push dieser Sitzung am 14.11.2026.
+- **Zustand:** läuft belegt (Stand 2026-11-14). Beleg: `AGENTS.md:220`; Abruf und Push dieser Sitzung am 14.11.2026.
 - **Entscheidung:** keine (Nutzerbestimmung vom 26.10.2026 in AGENTS.md)
 - **Rolle im Plan:** tragend
 - **Wann nutzen:** Bei jeder Änderung an Code, Konfiguration oder Dokumenten: eigener Zweig, Entwurfs-PR.
@@ -852,7 +852,7 @@ Vorgehen, Pflege und Umgang mit Schlüsseln aus dem Chat: `.claude/skills/nexify
 | Zugang (Bezeichnung) | Art | Ablageort des Werts | Rechteumfang | erstellt | offengelegt | Erneuerung fällig | Hinweis |
 |---|---|---|---|---|---|---|---|
 | GitHub-Verbindung der Claude-Umgebung | App-Verbindung | Verbindungsverwaltung von claude.ai | Lesen und Pushen in freigegebene Repositories | nicht belegt | nein | nein | – |
-| Zwei ältere GitHub-Tokens | persönliche Zugangstoken | stehen laut Befund im Klartext in Mem-Notizen vom März 2026 | nicht belegt | März 2026 oder früher | ja | ja | Register der offenen Arbeiten vom 14.11.2026 (Arbeitsstand, nicht im Repository), OA-014: beim Anbieter widerrufen und die Notizen bereinigen (nur Inhaber). Die Werte wurden für dieses Register nicht gelesen. |
+| Zwei ältere GitHub-Tokens | persönliche Zugangstoken | stehen laut Befund im Klartext in Mem-Notizen vom März 2026 | nicht belegt | März 2026 oder früher | ja | ja | Register der offenen Arbeiten (`docs/09-final/offene-arbeiten-2026-11-14.md`), OA-014: beim Anbieter widerrufen und die Notizen bereinigen (nur Inhaber). Die Werte wurden für dieses Register nicht gelesen. |
 
 ### GitHub Actions · `github-actions`
 
@@ -860,7 +860,7 @@ Vorgehen, Pflege und Umgang mit Schlüsseln aus dem Chat: `.claude/skills/nexify
 - **Kategorie:** Code
 - **Zweck:** Führt Prüfungen und das KI-Review bei Push und Pull Request aus.
 - **Ort:** GitHub-Konto `nexifyai-dev`, Workflows unter `.github/workflows/`
-- **Zustand:** defekt (Stand 2026-11-14). Beleg: `PROGRESS.md:83` (zuletzt belegt am 13.11.2026).
+- **Zustand:** defekt (Stand 2026-11-14). Beleg: `PROGRESS.md:148` (Ausfall seit 13.11.2026).
 - **Entscheidung:** keine
 - **Rolle im Plan:** tragend (Solange Actions nicht startet, sind die lokal ausgeführten Gates der einzige Nachweis.)
 - **Wann nutzen:** Wenn eine Prüfung automatisch bei jedem Push laufen soll.
@@ -891,7 +891,7 @@ Vorgehen, Pflege und Umgang mit Schlüsseln aus dem Chat: `.claude/skills/nexify
 - **Kategorie:** Automatisierung
 - **Zweck:** Workflow-Automatisierung; in keinem führenden Dokument genannt.
 - **Ort:** nicht belegt (weder Adresse noch Server)
-- **Zustand:** läuft unbelegt (Stand 2026-11-14). Beleg: Standortbestimmung der Arbeitssitzung vom 14.11.2026 (nicht im Repository): kommt in keinem führenden Dokument vor. Einziger Hinweis ist ein n8n-Schlüssel in einer Mem-Notiz vom März 2026 (Register der offenen Arbeiten vom 14.11.2026 (Arbeitsstand, nicht im Repository), OA-014). Eine laufende Instanz ist nicht belegt.
+- **Zustand:** läuft unbelegt (Stand 2026-11-14). Beleg: Standortbestimmung der Arbeitssitzung vom 14.11.2026 (nicht im Repository): kommt in keinem führenden Dokument vor. Einziger Hinweis ist ein n8n-Schlüssel in einer Mem-Notiz vom März 2026 (Register der offenen Arbeiten (`docs/09-final/offene-arbeiten-2026-11-14.md`), OA-014). Eine laufende Instanz ist nicht belegt.
 - **Entscheidung:** keine
 - **Rolle im Plan:** unklar → Frage: Gibt es noch eine n8n-Instanz, und wird sie gebraucht? Unabhängig davon ist der Schlüssel aus der Mem-Notiz zu widerrufen.
 - **Wann nutzen:** Nicht nutzen, bis die Rolle geklärt ist; Abläufe laufen über Hermes (D-019).
@@ -900,7 +900,7 @@ Vorgehen, Pflege und Umgang mit Schlüsseln aus dem Chat: `.claude/skills/nexify
 
 | Zugang (Bezeichnung) | Art | Ablageort des Werts | Rechteumfang | erstellt | offengelegt | Erneuerung fällig | Hinweis |
 |---|---|---|---|---|---|---|---|
-| n8n-Schlüssel | API-Schlüssel | steht laut Befund im Klartext in einer Mem-Notiz vom März 2026 | nicht belegt | März 2026 oder früher | ja | ja | Register der offenen Arbeiten vom 14.11.2026 (Arbeitsstand, nicht im Repository), OA-014: widerrufen und Notiz bereinigen (nur Inhaber). Der Wert wurde nicht gelesen. |
+| n8n-Schlüssel | API-Schlüssel | steht laut Befund im Klartext in einer Mem-Notiz vom März 2026 | nicht belegt | März 2026 oder früher | ja | ja | Register der offenen Arbeiten (`docs/09-final/offene-arbeiten-2026-11-14.md`), OA-014: widerrufen und Notiz bereinigen (nur Inhaber). Der Wert wurde nicht gelesen. |
 
 ### SearXNG · `searxng`
 
@@ -995,7 +995,7 @@ Vorgehen, Pflege und Umgang mit Schlüsseln aus dem Chat: `.claude/skills/nexify
 - **Kategorie:** Aufgabenverwaltung
 - **Zweck:** Ticketsystem, Team „Nexifyai“.
 - **Ort:** Linear-Arbeitsbereich, über den Linear-Konnektor erreichbar
-- **Zustand:** läuft belegt (Stand 2026-11-14). Beleg: Abruf am 14.11.2026 laut Register der offenen Arbeiten vom 14.11.2026 (Arbeitsstand, nicht im Repository) (erste 50 Tickets). Dort führt NEX-71 einen alten Anthropic-Schlüssel als weiterhin aktiv.
+- **Zustand:** läuft belegt (Stand 2026-11-14). Beleg: Abruf am 14.11.2026 laut Register der offenen Arbeiten (`docs/09-final/offene-arbeiten-2026-11-14.md`) (erste 50 Tickets). Dort führt NEX-71 einen alten Anthropic-Schlüssel als weiterhin aktiv.
 - **Entscheidung:** keine
 - **Rolle im Plan:** unklar → Frage: Soll Linear weiter gepflegt werden? Führend sind `PROGRESS.md` und das Register in `config/acceptance-coverage.json`; `AGENTS.md` verbietet eine zweite Aufgabenverwaltung.
 - **Wann nutzen:** Wenn ein älteres Ticket nachgesehen werden muss.
@@ -1005,7 +1005,7 @@ Vorgehen, Pflege und Umgang mit Schlüsseln aus dem Chat: `.claude/skills/nexify
 | Zugang (Bezeichnung) | Art | Ablageort des Werts | Rechteumfang | erstellt | offengelegt | Erneuerung fällig | Hinweis |
 |---|---|---|---|---|---|---|---|
 | Linear-Konnektor der Claude-Umgebung | OAuth-Verbindung (MCP) | Verbindungsverwaltung von claude.ai | nicht belegt | nicht belegt | nein | nein | – |
-| Alter Anthropic-API-Schlüssel (Ticket NEX-71) | API-Schlüssel | Ort des Werts nicht belegt; das Ticket führt ihn als weiterhin aktiv | nicht belegt | vor dem 05.09.2026 | nein | ja | Register der offenen Arbeiten vom 14.11.2026 (Arbeitsstand, nicht im Repository), OA-014: beim Anbieter widerrufen und Ticket mit Beleg schließen (nur Inhaber). |
+| Alter Anthropic-API-Schlüssel (Ticket NEX-71) | API-Schlüssel | Ort des Werts nicht belegt; das Ticket führt ihn als weiterhin aktiv | nicht belegt | vor dem 05.09.2026 | nein | ja | Register der offenen Arbeiten (`docs/09-final/offene-arbeiten-2026-11-14.md`), OA-014: beim Anbieter widerrufen und Ticket mit Beleg schließen (nur Inhaber). |
 
 ### Slack · `slack`
 
@@ -1013,7 +1013,7 @@ Vorgehen, Pflege und Umgang mit Schlüsseln aus dem Chat: `.claude/skills/nexify
 - **Kategorie:** Kommunikation
 - **Zweck:** Nachrichtenkanal; der Regelkreis mit ORACLE darüber ist pausiert.
 - **Ort:** Slack-Arbeitsbereich, über den Slack-Konnektor erreichbar
-- **Zustand:** läuft unbelegt (Stand 2026-11-14). Beleg: Register der offenen Arbeiten vom 14.11.2026 (Arbeitsstand, nicht im Repository): der Slack-Regelkreis mit ORACLE ist pausiert; Slack wurde dort nicht ausgewertet. In dieser Sitzung nicht abgerufen.
+- **Zustand:** läuft unbelegt (Stand 2026-11-14). Beleg: Register der offenen Arbeiten (`docs/09-final/offene-arbeiten-2026-11-14.md`): der Slack-Regelkreis mit ORACLE ist pausiert; Slack wurde dort nicht ausgewertet. In dieser Sitzung nicht abgerufen.
 - **Entscheidung:** keine
 - **Rolle im Plan:** unklar → Frage: Soll Slack der Kanal für Meldungen der Agenten an den Inhaber werden? Hermes hat derzeit keinen aktiven Kanal.
 - **Wann nutzen:** Wenn Agenten den Inhaber benachrichtigen sollen und ein Kanal gesucht wird.
@@ -1023,7 +1023,7 @@ Vorgehen, Pflege und Umgang mit Schlüsseln aus dem Chat: `.claude/skills/nexify
 | Zugang (Bezeichnung) | Art | Ablageort des Werts | Rechteumfang | erstellt | offengelegt | Erneuerung fällig | Hinweis |
 |---|---|---|---|---|---|---|---|
 | Slack-Konnektor der Claude-Umgebung | OAuth-Verbindung (MCP) | Verbindungsverwaltung von claude.ai | nicht belegt | nicht belegt | nein | nein | – |
-| Slack-Webhook-Adresse | eingehender Webhook | steht laut Befund offen im Steuerungswiki in Mem | Schreiben in einen Kanal | nicht belegt | ja | ja | Register der offenen Arbeiten vom 14.11.2026 (Arbeitsstand, nicht im Repository), OA-014: Webhook widerrufen und neu anlegen (nur Inhaber). Die Adresse wurde nicht gelesen. |
+| Slack-Webhook-Adresse | eingehender Webhook | steht laut Befund offen im Steuerungswiki in Mem | Schreiben in einen Kanal | nicht belegt | ja | ja | Register der offenen Arbeiten (`docs/09-final/offene-arbeiten-2026-11-14.md`), OA-014: Webhook widerrufen und neu anlegen (nur Inhaber). Die Adresse wurde nicht gelesen. |
 
 ### Google Workspace (Gmail, Kalender, Drive) · `google-workspace`
 
@@ -1031,7 +1031,7 @@ Vorgehen, Pflege und Umgang mit Schlüsseln aus dem Chat: `.claude/skills/nexify
 - **Kategorie:** Mail
 - **Zweck:** Postfach, Kalender und Dateien des Inhabers.
 - **Ort:** Google-Konto des Inhabers, über die Gmail-, Kalender- und Drive-Konnektoren erreichbar
-- **Zustand:** läuft belegt (Stand 2026-11-14). Beleg: Gmail-Abruf am 14.11.2026 laut Register der offenen Arbeiten vom 14.11.2026 (Arbeitsstand, nicht im Repository) (Betreffzeilen und Vorschau). Ob die Adresse `mail@nexifyai.cloud` bei Google oder bei Hostinger liegt, ist nicht belegt.
+- **Zustand:** läuft belegt (Stand 2026-11-14). Beleg: Gmail-Abruf am 14.11.2026 laut Register der offenen Arbeiten (`docs/09-final/offene-arbeiten-2026-11-14.md`) (Betreffzeilen und Vorschau). Ob die Adresse `mail@nexifyai.cloud` bei Google oder bei Hostinger liegt, ist nicht belegt.
 - **Entscheidung:** keine
 - **Rolle im Plan:** unklar → Frage: Welches Postfach ist führend für Kundenkorrespondenz: Google Workspace oder das Hostinger-Postfach?
 - **Wann nutzen:** Wenn eine Mail des Inhabers gesucht, ein Termin geprüft oder eine Datei aus Drive gebraucht wird.
@@ -1048,7 +1048,7 @@ Vorgehen, Pflege und Umgang mit Schlüsseln aus dem Chat: `.claude/skills/nexify
 - **Kategorie:** Marketing
 - **Zweck:** Planung und Veröffentlichung von Beiträgen in sozialen Netzen; Nutzung nicht belegt.
 - **Ort:** nicht belegt
-- **Zustand:** läuft unbelegt (Stand 2026-11-14). Beleg: Register der offenen Arbeiten vom 14.11.2026 (Arbeitsstand, nicht im Repository), OA-014: in Mem steht eine Notiz „Postiz API & MCP Credentials“ vom März 2026 mit Zugangsdaten im Klartext. Eine laufende Nutzung ist nicht belegt.
+- **Zustand:** läuft unbelegt (Stand 2026-11-14). Beleg: Register der offenen Arbeiten (`docs/09-final/offene-arbeiten-2026-11-14.md`), OA-014: in Mem steht eine Notiz „Postiz API & MCP Credentials“ vom März 2026 mit Zugangsdaten im Klartext. Eine laufende Nutzung ist nicht belegt.
 - **Entscheidung:** keine
 - **Rolle im Plan:** unklar → Frage: Wird Postiz genutzt? Unabhängig davon sind die Zugangsdaten aus der Mem-Notiz zu widerrufen.
 - **Wann nutzen:** Nur nach geklärter Rolle.
@@ -1057,7 +1057,7 @@ Vorgehen, Pflege und Umgang mit Schlüsseln aus dem Chat: `.claude/skills/nexify
 
 | Zugang (Bezeichnung) | Art | Ablageort des Werts | Rechteumfang | erstellt | offengelegt | Erneuerung fällig | Hinweis |
 |---|---|---|---|---|---|---|---|
-| Postiz-API- und MCP-Zugangsdaten | API-Schlüssel | stehen laut Befund im Klartext in einer Mem-Notiz vom März 2026 | nicht belegt | März 2026 oder früher | ja | ja | Register der offenen Arbeiten vom 14.11.2026 (Arbeitsstand, nicht im Repository), OA-014: widerrufen und Notiz bereinigen (nur Inhaber). Die Werte wurden nicht gelesen. |
+| Postiz-API- und MCP-Zugangsdaten | API-Schlüssel | stehen laut Befund im Klartext in einer Mem-Notiz vom März 2026 | nicht belegt | März 2026 oder früher | ja | ja | Register der offenen Arbeiten (`docs/09-final/offene-arbeiten-2026-11-14.md`), OA-014: widerrufen und Notiz bereinigen (nur Inhaber). Die Werte wurden nicht gelesen. |
 
 ### Claude-Code-Umgebung (Cloud-Sitzungen) · `claude-umgebung`
 
@@ -1065,7 +1065,7 @@ Vorgehen, Pflege und Umgang mit Schlüsseln aus dem Chat: `.claude/skills/nexify
 - **Kategorie:** Arbeitsumgebung
 - **Zweck:** Arbeitsumgebung der Cloud-Sitzungen mit Netzwerk-Geheimnissen je Host und den verbundenen Konnektoren.
 - **Ort:** claude.ai, Umgebung der Sitzungen; Geheimnisse werden vom Netz-Proxy je Host eingesetzt und sind für die Sitzung nicht lesbar
-- **Zustand:** läuft belegt (Stand 2026-11-14). Beleg: Diese Sitzung am 14.11.2026. Bestand der Plugins: `docs/04-betrieb/aufraeumplan-2026-11-14.md:197` (393 Plugins, zwölf Gedächtnis-Plugins, Hooks kürzen Werkzeug-Ausgaben).
+- **Zustand:** läuft belegt (Stand 2026-11-14). Beleg: Diese Sitzung am 14.11.2026. Bestand der Plugins: `docs/04-betrieb/aufraeumplan-2026-11-14.md:197` (393 Plugins, zwölf Gedächtnis-Plugins, Hooks kürzen Werkzeug-Ausgaben). Stand der geplanten Aufgaben der Umgebung: `docs/04-betrieb/routinen-ist-soll-2026-11-14.md:15`.
 - **Entscheidung:** keine
 - **Rolle im Plan:** tragend (Plugins auf rund 45 kürzen (nur Inhaber); Hooks, die Ausgaben kürzen, sind ein Risiko für Belege.)
 - **Wann nutzen:** Wenn ein Agent einen Schlüssel für einen Dienst braucht: der Inhaber hinterlegt ihn hier über das sichere Formular, nie im Chat.
@@ -1074,5 +1074,5 @@ Vorgehen, Pflege und Umgang mit Schlüsseln aus dem Chat: `.claude/skills/nexify
 
 | Zugang (Bezeichnung) | Art | Ablageort des Werts | Rechteumfang | erstellt | offengelegt | Erneuerung fällig | Hinweis |
 |---|---|---|---|---|---|---|---|
-| Netzwerk-Geheimnis für api.cloudflare.com | API-Token | Netzwerk-Geheimnisse der Claude-Umgebung | nicht belegt | 2026-11-14 | ja | ja | siehe cloudflare-konto |
+| Netzwerk-Geheimnis für api.cloudflare.com | API-Token | Netzwerk-Geheimnisse der Claude-Umgebung | Konto-Token mit Worker-Rechten, ohne AI-Gateway-Leserecht (Bericht 14.11., nicht selbst gemessen) | 2026-11-14 | ja | ja | siehe cloudflare-konto |
 | Netzwerk-Geheimnis für developers.hostinger.com | API-Schlüssel | Netzwerk-Geheimnisse der Claude-Umgebung | Hostinger-Konto | nicht belegt | nein | nein | – |
