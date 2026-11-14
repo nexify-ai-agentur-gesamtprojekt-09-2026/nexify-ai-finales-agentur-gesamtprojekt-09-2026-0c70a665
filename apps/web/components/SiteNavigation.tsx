@@ -1,5 +1,6 @@
 "use client";
 import {useEffect,useId,useRef,useState} from 'react';
+import {Zeichen} from "./Zeichen";
 import {SiteLink} from './Router';
 import type {PublicPage} from '../lib/page-types';
 import type {Locale} from '../lib/i18n';
@@ -41,7 +42,7 @@ export default function SiteNavigation({pages,site,locale,pathname}:{pages:Publi
   document.addEventListener('pointerdown',outside);document.addEventListener('keydown',escape);window.addEventListener('resize',resize);
   return()=>{document.removeEventListener('pointerdown',outside);document.removeEventListener('keydown',escape);window.removeEventListener('resize',resize);};
  },[]);
- const links=(ids:string[],prefix:string)=>ids.flatMap(id=>{const p=page(id);return p?[<SiteLink key={id} href={p.path} aria-current={active(p)} data-testid={`${prefix}-${id}`} onClick={()=>close()}><span>{label(p)}</span><span aria-hidden="true">→</span></SiteLink>]:[];});
+ const links=(ids:string[],prefix:string)=>ids.flatMap(id=>{const p=page(id);return p?[<SiteLink key={id} href={p.path} aria-current={active(p)} data-testid={`${prefix}-${id}`} onClick={()=>close()}><span>{label(p)}</span><Zeichen name="pfeil" groesse={18}/></SiteLink>]:[];});
  const primary=(prefix:string)=>['services','knowledge','contact'].flatMap(id=>{const p=page(id);return p&&p.navigationContexts.includes(site)?[<SiteLink key={id} href={p.path} aria-current={active(p)} data-testid={`${prefix}-${id}`} onClick={()=>close()}>{t[id as 'services'|'knowledge'|'contact']}</SiteLink>]:[];});
  const main=primary('desktop-navigation-link');
  const shop=shopCopy[locale];
@@ -51,9 +52,9 @@ export default function SiteNavigation({pages,site,locale,pathname}:{pages:Publi
  if(site==='teileklar')return <>
   <nav className="main-navigation shop-main-navigation" aria-label={t.nav} data-testid="desktop-navigation">
    {shopMain.map(([id,name])=>shopLink(id,name,'desktop-navigation-link'))}
-   <details className="product-navigation" ref={desktop} onToggle={e=>{const open=e.currentTarget.open;setOpened(v=>({...v,desktop:open}));}}><summary aria-expanded={opened.desktop} aria-controls={`${uid}-shop-more`}>{shop.more}<span className="navigation-chevron" aria-hidden="true">⌄</span></summary><div className="product-navigation-menu shop-navigation-menu" id={`${uid}-shop-more`}><div className="megamenu-group"><h2>{shop.service}</h2>{links(['tk-partner','tk-shop','tk-appointments','tk-vouchers','tk-reifenrechner','tk-batterie','tk-legal'],'desktop-shop-more-link')}</div><SiteLink href="/" onClick={()=>close()}>{shop.back}<span aria-hidden="true">→</span></SiteLink></div></details>
+   <details className="product-navigation" ref={desktop} onToggle={e=>{const open=e.currentTarget.open;setOpened(v=>({...v,desktop:open}));}}><summary aria-expanded={opened.desktop} aria-controls={`${uid}-shop-more`}>{shop.more}<span className="navigation-chevron" aria-hidden="true">⌄</span></summary><div className="product-navigation-menu shop-navigation-menu" id={`${uid}-shop-more`}><div className="megamenu-group"><h2>{shop.service}</h2>{links(['tk-partner','tk-shop','tk-appointments','tk-vouchers','tk-reifenrechner','tk-batterie','tk-legal'],'desktop-shop-more-link')}</div><SiteLink href="/" onClick={()=>close()}>{shop.back}<Zeichen name="pfeil" groesse={18}/></SiteLink></div></details>
   </nav>
-  <details className="mobile-navigation" ref={mobile} data-testid="mobile-navigation" onToggle={e=>{const open=e.currentTarget.open;setOpened(v=>({...v,mobile:open}));}}><summary aria-label={t.menu} aria-expanded={opened.mobile} aria-controls={`${uid}-mobile`} data-testid="mobile-navigation-toggle"><span className="mobile-menu-mark" aria-hidden="true"><i/><i/></span></summary><nav className="mobile-navigation-panel" id={`${uid}-mobile`} aria-label={t.nav} data-testid="mobile-navigation-panel"><div className="megamenu-group"><h2>TEILEKLAR</h2>{shopMobileMain.map(([id,name])=>shopLink(id,name,'mobile-navigation-link'))}</div><div className="megamenu-group"><h2>{shop.service}</h2>{links(['tk-shop','tk-appointments','tk-vouchers','tk-reifenrechner','tk-batterie','tk-legal'],'mobile-shop-link')}</div><div className="megamenu-group"><h2>{t.account}</h2>{links(['login','signup'],'mobile-account-link')}<SiteLink href="/" onClick={()=>close()}>{shop.back}<span aria-hidden="true">→</span></SiteLink></div><ActionButton variant="quiet" data-testid="mobile-navigation-close" onClick={()=>close(true)}>{t.close}</ActionButton></nav></details>
+  <details className="mobile-navigation" ref={mobile} data-testid="mobile-navigation" onToggle={e=>{const open=e.currentTarget.open;setOpened(v=>({...v,mobile:open}));}}><summary aria-label={t.menu} aria-expanded={opened.mobile} aria-controls={`${uid}-mobile`} data-testid="mobile-navigation-toggle"><span className="mobile-menu-mark" aria-hidden="true"><i/><i/></span></summary><nav className="mobile-navigation-panel" id={`${uid}-mobile`} aria-label={t.nav} data-testid="mobile-navigation-panel"><div className="megamenu-group"><h2>TEILEKLAR</h2>{shopMobileMain.map(([id,name])=>shopLink(id,name,'mobile-navigation-link'))}</div><div className="megamenu-group"><h2>{shop.service}</h2>{links(['tk-shop','tk-appointments','tk-vouchers','tk-reifenrechner','tk-batterie','tk-legal'],'mobile-shop-link')}</div><div className="megamenu-group"><h2>{t.account}</h2>{links(['login','signup'],'mobile-account-link')}<SiteLink href="/" onClick={()=>close()}>{shop.back}<Zeichen name="pfeil" groesse={18}/></SiteLink></div><ActionButton variant="quiet" data-testid="mobile-navigation-close" onClick={()=>close(true)}>{t.close}</ActionButton></nav></details>
  </>;
  return <>
   <nav className="main-navigation" aria-label={t.nav} data-testid="desktop-navigation">
@@ -61,9 +62,9 @@ export default function SiteNavigation({pages,site,locale,pathname}:{pages:Publi
    <details className="product-navigation" ref={desktop} onToggle={e=>{const open=e.currentTarget.open;setOpened(v=>({...v,desktop:open}));}} onBlur={e=>{if(e.relatedTarget&&!e.currentTarget.contains(e.relatedTarget as Node))e.currentTarget.open=false;}}>
     <summary aria-expanded={opened.desktop} aria-controls={`${uid}-products`} data-testid="desktop-products-megamenu-toggle">{t.products}<span className="navigation-chevron" aria-hidden="true">⌄</span></summary>
     <div className="product-navigation-menu" id={`${uid}-products`} data-testid="desktop-products-megamenu-panel">
-     <div className="megamenu-heading"><p data-testid="megamenu-intro">{t.intro}</p>{page('services')&&<SiteLink href={page('services')!.path} data-testid="megamenu-overview" onClick={()=>close()}>{t.overview}<span aria-hidden="true">→</span></SiteLink>}</div>
+     <div className="megamenu-heading"><p data-testid="megamenu-intro">{t.intro}</p>{page('services')&&<SiteLink href={page('services')!.path} data-testid="megamenu-overview" onClick={()=>close()}>{t.overview}<Zeichen name="pfeil" groesse={18}/></SiteLink>}</div>
      <div className="megamenu-columns">{groups.map(group=><div key={group.id} className="megamenu-group" data-testid={`megamenu-group-${group.id}`}><h2>{group.title}</h2>{links(group.ids,'desktop-products-megamenu-link')}</div>)}</div>
-     <div className="megamenu-bottom"><span data-testid="megamenu-help">{t.hint}</span><SiteLink href="/leistungsumfang" data-testid="megamenu-project-link" onClick={()=>close()}>{t.talk}<span aria-hidden="true">→</span></SiteLink></div>
+     <div className="megamenu-bottom"><span data-testid="megamenu-help">{t.hint}</span><SiteLink href="/leistungsumfang" data-testid="megamenu-project-link" onClick={()=>close()}>{t.talk}<Zeichen name="pfeil" groesse={18}/></SiteLink></div>
     </div>
    </details>
    {main.slice(1)}

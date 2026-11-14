@@ -2,6 +2,7 @@
    Kein Schriftzeichen ersetzt ein Zeichen (keine „→", „↗", „›"). Der Senden-Pfeil zeigt nach rechts. */
 const pfade={
   'pfeil':'M5 12h14M13 6l6 6-6 6',
+  'pfeil-ab':'M12 5v14M6 13l6 6 6-6',
   'pfeil-aus':'M7 17 17 7M8 7h9v9',
   'winkel':'M6 9l6 6 6-6',
   'abspielen':'M8 5.5v13l10.5-6.5z',

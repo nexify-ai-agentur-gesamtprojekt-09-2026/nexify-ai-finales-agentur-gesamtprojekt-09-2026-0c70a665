@@ -1194,3 +1194,7 @@ html[data-theme='light'] #atelier{
 @media(max-width:820px){#atelier #aifly-panel::before{background:var(--as-front-glanz),var(--as-sheet-body),var(--as-ground);-webkit-backdrop-filter:none;backdrop-filter:none}}
 /* Rueckfall: der Hinweis erhaelt den Fokus nur fuer Vorleseprogramme, ohne Rahmen. */
 #atelier #aifly-panel .orientation-unavailable:focus{outline:0;box-shadow:none}
+/* Zeichen in Schaltern und Textlinks: gleiche Grundlinie, fester Abstand zum Wort. */
+#atelier :is(a,button)>.nx-zeichen{display:inline-block;vertical-align:-.2em;margin-left:var(--as-s-2)}
+#atelier :is(a,button):is([class*='button'],.tk-cta,.nexify-control)>.nx-zeichen{margin-left:0}
+#atelier :is(.scene-loop-controls button,.nx-feld-schalter)>.nx-zeichen{margin:0;vertical-align:0}
