@@ -11,7 +11,7 @@ const json = value => new Response(JSON.stringify(value), { headers: { 'content-
 async function withRoute(run) {
   const saved = Object.fromEntries(ENV_KEYS.map(key => [key, process.env[key]]));
   const oldError = console.error, oldFetch = globalThis.fetch;
-  const server = await createServer({ root: fileURLToPath(new URL('../../../..', import.meta.url)), configFile: false, server: { middlewareMode: true }, appType: 'custom' });
+  const server = await createServer({ root: fileURLToPath(new URL('../../../..', import.meta.url)), configFile: false, server: { middlewareMode: true, hmr: false, ws: false }, appType: 'custom' });
   try {
     for (const key of ENV_KEYS) delete process.env[key];
     Object.assign(process.env, { ROUTER_URL: 'https://router.invalid/v1', ROUTER_KEY: 'fixture-key', SUPABASE_URL: 'https://db.invalid', SUPABASE_SERVICE_ROLE_KEY: 'fixture-service-role' });

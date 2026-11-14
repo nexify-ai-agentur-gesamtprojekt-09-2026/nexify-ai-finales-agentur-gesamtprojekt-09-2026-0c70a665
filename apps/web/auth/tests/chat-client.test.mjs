@@ -17,7 +17,7 @@ const input = { message: 'Ich brauche eine Website.', locale: 'de', pagePath: '/
 const briefing = { data: { vorhaben: 'Website', ziel: 'Anfragen', ausgangslage: '', zielgruppe: '', umfang: [], zeitrahmen: '', budget: '', leistungen: ['websites'], offene_punkte: [] }, text: 'Projektbriefing\n\nVorhaben: Website' };
 
 test('the browser transport turns every server outcome into one clear state for the interface', async () => {
-  const server = await createServer({ root: fileURLToPath(new URL('../../../..', import.meta.url)), configFile: false, server: { middlewareMode: true }, appType: 'custom' });
+  const server = await createServer({ root: fileURLToPath(new URL('../../../..', import.meta.url)), configFile: false, server: { middlewareMode: true, hmr: false, ws: false }, appType: 'custom' });
   try {
     const { streamChat } = await server.ssrLoadModule('/apps/web/lib/chat-client.ts');
     const call = (fetchImpl, handlers = {}, options = {}) => streamChat(input, handlers, { fetch: fetchImpl, ...options });

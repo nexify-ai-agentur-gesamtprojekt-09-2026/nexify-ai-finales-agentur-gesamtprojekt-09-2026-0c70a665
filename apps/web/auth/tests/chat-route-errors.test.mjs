@@ -10,7 +10,7 @@ test('chat JSON and SSE hide provider and transport error details while the serv
   const oldError = console.error;
   const secret = 'synthetic-private-error-detail';
   const server = await createServer({ root: fileURLToPath(new URL('../../../..', import.meta.url)),
-    configFile: false, server: { middlewareMode: true }, appType: 'custom' });
+    configFile: false, server: { middlewareMode: true, hmr: false, ws: false }, appType: 'custom' });
   try {
     process.env.ROUTER_URL = 'https://router.invalid/v1';
     process.env.ROUTER_KEY = 'fixture-key';

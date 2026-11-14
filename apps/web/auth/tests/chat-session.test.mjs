@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { fileURLToPath } from 'node:url';
 import { createServer } from '../../../site/node_modules/vite/dist/node/index.js';
 
-const server = await createServer({ root: fileURLToPath(new URL('../../../..', import.meta.url)), configFile: false, server: { middlewareMode: true }, appType: 'custom' });
+const server = await createServer({ root: fileURLToPath(new URL('../../../..', import.meta.url)), configFile: false, server: { middlewareMode: true, hmr: false, ws: false }, appType: 'custom' });
 const { settleTurn, stopAllowed, STOP_GUARD_MS, serializeChat, parseStoredChat, loadChat, saveChat, chatStoreKey, CHAT_STORE_VERSION } = await server.ssrLoadModule('/apps/web/lib/chat-session.ts');
 test.after(() => server.close());
 

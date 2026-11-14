@@ -10,7 +10,7 @@ async function withRoute(run) {
   const oldError = console.error;
   const oldFetch = globalThis.fetch;
   const server = await createServer({ root: fileURLToPath(new URL('../../../..', import.meta.url)),
-    configFile: false, server: { middlewareMode: true }, appType: 'custom' });
+    configFile: false, server: { middlewareMode: true, hmr: false, ws: false }, appType: 'custom' });
   try {
     for (const key of ENV_KEYS) delete process.env[key];
     const { POST } = await server.ssrLoadModule('/apps/web/app/api/chat/route.ts');
