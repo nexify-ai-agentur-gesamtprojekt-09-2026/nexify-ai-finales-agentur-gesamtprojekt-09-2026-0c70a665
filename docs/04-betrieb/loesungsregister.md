@@ -22,14 +22,14 @@ Vorgehen, Pflege und Umgang mit Schlüsseln aus dem Chat: `.claude/skills/nexify
 | läuft belegt | 30 |
 | läuft unbelegt | 18 |
 | defekt | 6 |
-| geplant | 1 |
+| geplant | 2 |
 | stillgelegt | 1 |
 | nicht verfolgt | 2 |
-| **gesamt** | **58** |
+| **gesamt** | **59** |
 
 | Rolle im Plan | Anzahl |
 |---|---|
-| tragend | 21 |
+| tragend | 22 |
 | doppelt | 8 |
 | abzulösen | 2 |
 | unklar | 27 |
@@ -57,6 +57,7 @@ Vorgehen, Pflege und Umgang mit Schlüsseln aus dem Chat: `.claude/skills/nexify
 | `9router` | 9router (eigener LLM-Router) | LLM-Zugang | läuft belegt | unklar | D-009 (dort für die Produktaufbereitung genannt; kein eigener Entscheid zum Modellweg) | `llm-router` `llm-gateway` `modellweg` `router` `server` |
 | `cognee-server` | Cognee, Server-Instanz `cognee-x532` | Gedächtnis und Wissen | defekt | tragend | keine (in `config/gedaechtnis.json` als episodischer Speicher festgelegt) | `gedaechtnis` `wissen` `graph-rag` `episodisch` `cognee` `brain` |
 | `cognee-plugin-lokal` | Cognee-Plugin in Claude Code (lokale Instanz) | Gedächtnis und Wissen | defekt | unklar | keine | `gedaechtnis` `plugin` `claude-code` `cognee` `fluechtig` |
+| `cognee-adapter-repository` | Cognee-Adapter im Repository (`ops/cognee`, hinter Schalter) | Gedächtnis und Wissen | geplant | tragend | keine (Auftrag des Inhabers vom 14.11.2026: vollwertige Integration von cognee-x532; Einspielschritte K0 bis K10 je mit eigener Freigabe) | `gedaechtnis` `wissen` `cognee` `brain` `adapter` `aufnahme` `integrationen` |
 | `lightrag` | LightRAG | Gedächtnis und Wissen | läuft belegt | abzulösen | keine (in `config/gedaechtnis.json` als semantischer Speicher festgelegt) | `gedaechtnis` `wissen` `graph-rag` `semantisch` `dokumente` |
 | `agentmemory` | agentmemory | Gedächtnis und Wissen | läuft belegt | abzulösen | keine (in `config/gedaechtnis.json` als prozeduraler Speicher festgelegt) | `gedaechtnis` `prozedural` `agenten` `systemd` |
 | `kb-gateway` | kb-gateway | Gedächtnis und Wissen | läuft unbelegt | unklar | keine | `gedaechtnis` `gateway` `wissen` `server` |
@@ -458,6 +459,24 @@ Vorgehen, Pflege und Umgang mit Schlüsseln aus dem Chat: `.claude/skills/nexify
 - **Nicht nutzen für:** Alles, was eine Sitzung überdauern soll: der Speicher ist flüchtig und liefert keine Treffer.
 - **Abhängigkeiten:** `cognee-server`
 - **Zugänge:** keine erfasst
+
+### Cognee-Adapter im Repository (`ops/cognee`, hinter Schalter) · `cognee-adapter-repository`
+
+- **Tags:** `gedaechtnis` `wissen` `cognee` `brain` `adapter` `aufnahme` `integrationen`
+- **Kategorie:** Gedächtnis und Wissen
+- **Zweck:** Kontrollierter Client und Aufnahme-Werkzeug, die Agenturwissen aus diesem Repository in die Cognee-Instanz bringen und dort suchen, getrennt je Mandant.
+- **Ort:** Repository: `ops/cognee/`, Konfiguration `config/integrations/cognee.json`, Betriebsnotiz `docs/04-betrieb/cognee-integration-2026-11-14.md`; Ziel `brain.nexifyai.cloud`
+- **Zustand:** geplant (Stand 2026-11-14). Beleg: `docs/04-betrieb/cognee-integration-2026-11-14.md`: gebaut und gegen eine Attrappe geprüft (`tests/test_cognee_adapter.py`), Standard aus, alle Freigaben offen; nach unabhängiger Prüfung nachgearbeitet (Abschnitt 9 der Notiz). Messung 14.11.2026 20:59 bis 21:01 UTC: API-Pfade der Instanz antworten 404, `/mcp` 401; Port 33019 ist an 127.0.0.1 gebunden. Es wurde nichts aufgenommen.
+- **Entscheidung:** keine (Auftrag des Inhabers vom 14.11.2026: vollwertige Integration von cognee-x532; Einspielschritte K0 bis K10 je mit eigener Freigabe)
+- **Rolle im Plan:** tragend (Einziger vorgesehener Weg aus diesem Repository nach Cognee. Erst nutzbar, wenn die Instanz wiederhergestellt ist und die Freigaben in der Konfiguration gesetzt sind. `tools/cognee.mjs` bleibt als Historie und wird nicht weiterverwendet.)
+- **Wann nutzen:** Wenn Agenturwissen aus diesem Repository nach Cognee aufgenommen oder dort gesucht werden soll – erst nach den freigegebenen Einspielschritten.
+- **Nicht nutzen für:** Kundendaten (eigener Mandant, eigenes Repository); Löschen; Anlegen von Mandanten oder Schlüsseln; Abfragen heute (Instanz antwortet 404).
+- **Abhängigkeiten:** `cognee-server`, `hostinger-srv1941843`, `traefik`, `9router`
+
+| Zugang (Bezeichnung) | Art | Ablageort des Werts | Rechteumfang | erstellt | offengelegt | Erneuerung fällig | Hinweis |
+|---|---|---|---|---|---|---|---|
+| Umgebungsdatei des Hostinger-Projekts `cognee-x532` | Umgebungsdatei mit Zugangsdaten der Instanz (Werte nicht ausgegeben) | Hostinger Docker Manager, Projekt `cognee-x532` auf srv1941843 | Verwalterkonto, Datenbank, Signaturgeheimnisse, Schlüssel für LLM und Embedding, Token des MCP | nicht belegt | nein | nein | Über die Hostinger-API mit dem Schlüssel der Claude-Umgebung im Klartext lesbar; gehört zur Instanz `cognee-server`. |
+| Dienstschlüssel `aufnahme`, `lesen-claude`, `lesen-hermes` (noch nicht angelegt) | API-Schlüssel je Dienstnutzer, Kopf X-Api-Key | vorgesehen: Netzwerk-Geheimnis der Claude-Umgebung für `brain.nexifyai.cloud` und Umgebungsdatei von Hermes | `aufnahme`: Schreiben auf die vier Agentur-Datensätze; die beiden anderen: nur Lesen | nicht angelegt | nein | nein | Schritt K3 der Betriebsnotiz; Variablennamen in `ops/cognee/.env.example`. |
 
 ### LightRAG · `lightrag`
 
