@@ -661,6 +661,18 @@ class Nacharbeit(unittest.TestCase):
             for behauptung in ("nicht geantwortet", "Werkstatt hat", "Kunde hat", "nicht reagiert"):
                 self.assertNotIn(behauptung, text + html)
             self.assertIn("Es besteht kein Termin", text)
+        # Der Wortlaut von N7 ist als Ganzes festgehalten: jede Umformulierung muss hier bewusst nachgezogen werden.
+        kopf = "Frist abgelaufen\n\n%s\n\nVorgang: " + w["nummer"] + "\nStand: Frist abgelaufen – kein Termin\nWerkstatt: Beispielwerkstatt P"
+        wunsch_satz = "Der Terminwunsch wurde bis zum Ablauf der Frist nicht bestätigt. Es besteht kein Termin."
+        vorschlag_satz = "Der Vorschlag für einen anderen Zeitpunkt wurde bis zum Ablauf der Frist nicht angenommen. Es besteht kein Termin."
+        hinweis = "\n\nDen Link zur Verwaltung dieses Vorgangs finden Sie in der ersten Nachricht zu diesem Vorgang."
+        self.assertEqual(M.nachricht("N7", verfallen, K), ("Frist abgelaufen " + w["nummer"], M.nachricht("N7", verfallen, K)[1], kopf % (wunsch_satz + hinweis)))
+        self.assertEqual(M.nachricht("N7", vorschlag_verfallen, K)[2], kopf % (vorschlag_satz + hinweis))
+        self.assertEqual(M.nachricht("N7", vorschlag_verfallen, W)[2], kopf % vorschlag_satz)
+        for termin, empfaenger, satz in ((verfallen, K, wunsch_satz), (vorschlag_verfallen, W, vorschlag_satz)):
+            html = M.nachricht("N7", termin, empfaenger)[1]
+            self.assertEqual(M.klartext(html).count(satz), 1)
+            self.assertEqual(html.count("<p>"), 2 if empfaenger == K else 1, "kein weiterer Absatz")
         abgesagt = schritt(schritt(w, "confirm", W, termin_am="2027-03-10T10:00")[0], "cancel", K)[0]
         for code, termin in (("N2", w), ("N5", schritt(schritt(w, "confirm", W, termin_am="2027-03-10T10:00")[0], "propose", K, vorschlag_am="2027-03-15T10:00")[0]),
                              ("N6", abgesagt), ("N7", vorschlag_verfallen), ("N3", schritt(v, "accept", K)[0])):

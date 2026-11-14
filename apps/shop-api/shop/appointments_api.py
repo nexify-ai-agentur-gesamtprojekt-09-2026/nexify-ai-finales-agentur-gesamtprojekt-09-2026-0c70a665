@@ -225,7 +225,7 @@ def router_fuer(abh):
         kopf = dict(OHNE_CACHE)
         try:
             if abh.einstellung(SCHALTER) != "1":
-                return JSONResponse(NICHT_GEFUNDEN, status_code=404, headers=kopf)
+                return JSONResponse(NICHT_GEFUNDEN, status_code=404)   # ohne eigene Köpfe: wie jeder unbekannte Pfad
             if request.method != methode:
                 return JSONResponse({"detail": "Method Not Allowed"}, status_code=405, headers={**kopf, "Allow": methode})
             herkunft = request.headers.get("origin")
@@ -293,6 +293,13 @@ def router_fuer(abh):
         return [{"schluessel": "appointment:%s:%s:%d:%s" % (termin_id, code, version, rolle), "ereignis": code, "empfaenger": rolle,
                  "version": version, "status": "wartend", "zeit": termine.utc_text(jetzt)} for code, rolle in nachrichten]
 
+    def pruefe_vorlagen(termin, absichten):
+        """Rendert jede fällige Nachricht VOR dem Schreiben. Scheitert eine Vorlage an den Daten, wird nichts gespeichert
+        (503); ein Vorlagenfehler kann so nicht erst nach dem gespeicherten Übergang auffallen."""
+        for absicht in absichten:
+            appointment_mails.nachricht(absicht["ereignis"], termin, absicht["empfaenger"], verwaltungslink="https://beispiel.invalid/#zugriff=x",
+                                        werkstatt_benachrichtigt=True, fuss_html=abh.fuss_html, fuss_text=abh.fuss_text)
+
     async def sende(termin, absichten, zugriff=None):
         """Reiht die Nachrichten eines Übergangs ein. Ein Fehler hier ändert den Termin nie (4.2)."""
         status_je_schluessel, werkstatt_gesendet = {}, False
@@ -318,10 +325,10 @@ def router_fuer(abh):
                 link = ""
                 if rolle == KUNDE and zugriff:
                     link = "%s%s?id=%s#zugriff=%s" % (abh.herkunft, VERWALTUNGSPFAD, termin["id"], zugriff)
-                betreff, html, text = appointment_mails.nachricht(absicht["ereignis"], termin, rolle, verwaltungslink=link,
-                                                                  werkstatt_benachrichtigt=werkstatt_gesendet,
-                                                                  fuss_html=abh.fuss_html, fuss_text=abh.fuss_text)
                 try:
+                    betreff, html, text = appointment_mails.nachricht(absicht["ereignis"], termin, rolle, verwaltungslink=link,
+                                                                      werkstatt_benachrichtigt=werkstatt_gesendet,
+                                                                      fuss_html=abh.fuss_html, fuss_text=abh.fuss_text)
                     status = await abh.post(absicht["schluessel"], an, betreff, html, text) or "nicht_konfiguriert"
                 except Exception:
                     status = "nicht_eingereiht"
@@ -349,11 +356,12 @@ def router_fuer(abh):
         if aenderung is None:
             return termin, False
         absichten = absichten_fuer(termin["id"], termin["version"] + 1, aenderung.nachrichten, jetzt)
+        neu = termine.anwenden(termin, aenderung)
+        neu["benachrichtigungen"] = termin.get("benachrichtigungen", []) + absichten
+        pruefe_vorlagen(neu, absichten)
         if not await abh.speicher.schreibe_uebergang(termin["id"], termin["werkstatt_id"], termin["zustand"], termin["version"],
                                                      aenderung.setze, aenderung.eintrag, absichten):
             return await abh.speicher.hole(termin["id"]) or termin, False   # jemand anderes hat zuerst geschrieben
-        neu = termine.anwenden(termin, aenderung)
-        neu["benachrichtigungen"] = termin.get("benachrichtigungen", []) + absichten
         await sende(neu, absichten)
         return await abh.speicher.hole(termin["id"]) or neu, True
 
@@ -402,6 +410,15 @@ def router_fuer(abh):
             return await rahmen(request, methode, gebunden)
         eingang.__name__ = "termin_" + re.sub(r"[^a-z]+", "_", pfad.lower()).strip("_")
         router.add_api_route(pfad, eingang, methods=list(METHODEN), include_in_schema=False)
+        ohne_umleitung(pfad)
+
+    def ohne_umleitung(pfad):
+        """Der Pfad mit Schrägstrich am Ende antwortet selbst mit dem 404 des Dienstes. Sonst leitete das Routing auf den
+        Pfad ohne Schrägstrich um (307 mit Location) und verriete den Baustein auch bei ausgeschaltetem Schalter."""
+        async def kein_pfad(request: Request):
+            return JSONResponse(NICHT_GEFUNDEN, status_code=404)
+        kein_pfad.__name__ = "termin_kein_pfad_" + re.sub(r"[^a-z]+", "_", pfad.lower()).strip("_")
+        router.add_api_route(pfad + "/", kein_pfad, methods=list(METHODEN), include_in_schema=False)
 
     # ------------------------------------------------------------ U1
     async def anlegen(request, jetzt, fristen):
@@ -452,6 +469,7 @@ def router_fuer(abh):
         # Termin und Absicht der Nachrichten sind ein Datensatz. Mengengrenze und Doppelwunsch sind Bedingungen des
         # Schreibvorgangs selbst (6.1, 6.4): gleichzeitige Aufrufe entscheidet der Speicher, nicht eine Abfrage davor.
         termin["benachrichtigungen"] = absichten_fuer(termin["id"], 1, nachrichten, jetzt)
+        pruefe_vorlagen(termin, termin["benachrichtigungen"])
         try:
             await abh.speicher.lege_an(termin, seit=termine.utc_text(jetzt - timedelta(hours=1)), grenze=abh.stundengrenze, jetzt=termine.utc_text(jetzt))
         except SchonVorhanden:
@@ -498,6 +516,9 @@ def router_fuer(abh):
             if aenderung.setze["zustand"] == "bestaetigt" and eingabe.get("ueberschneidung_bestaetigt") is not True:
                 beginn_frei = aenderung.setze["termin_am"]
             absichten = absichten_fuer(termin["id"], termin["version"] + 1, aenderung.nachrichten, jetzt)
+            neu = termine.anwenden(termin, aenderung)
+            neu["benachrichtigungen"] = termin.get("benachrichtigungen", []) + absichten
+            pruefe_vorlagen(neu, absichten)
             try:
                 geschrieben = await abh.speicher.schreibe_uebergang(termin["id"], termin["werkstatt_id"], termin["zustand"], termin["version"],
                                                                     aenderung.setze, aenderung.eintrag, absichten, beginn_frei=beginn_frei)
@@ -507,8 +528,6 @@ def router_fuer(abh):
                 # Jemand anderes hat zuerst geschrieben. Kein automatisches Wiederholen mit neuer Version (6.2).
                 aktuell = await abh.speicher.hole(termin["id"]) or termin
                 raise Abweisung(409, "appointment_version_conflict", zustand=aktuell["zustand"], version=aktuell["version"])
-            neu = termine.anwenden(termin, aenderung)
-            neu["benachrichtigungen"] = termin.get("benachrichtigungen", []) + absichten
             await sende(neu, absichten)
             return 200, antwort(await abh.speicher.hole(termin["id"]) or neu, rolle, jetzt, fristen)
         return kern
@@ -581,6 +600,7 @@ def router_fuer(abh):
         route("/api/workshops/appointments/{termin_id}/" + aktion, "POST", uebergang_fuer(aktion))
     router.add_api_route("/api/workshops/{werkstatt_id}/appointments", _zwei_methoden(rahmen, {"POST": anlegen, "GET": liste_des_betriebs}),
                          methods=list(METHODEN), include_in_schema=False)
+    ohne_umleitung("/api/workshops/{werkstatt_id}/appointments")
     route("/api/admin/appointments", "GET", liste_des_inhabers)
     return router
 

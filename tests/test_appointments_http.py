@@ -992,15 +992,52 @@ class Nacharbeit(Fall):
             for methode in ("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS", "HEAD"):
                 antwort = await self.client.request(methode, pfad, headers={**kunde, **self.als("inhaber"), "Idempotency-Key": self.schluessel()})
                 self.assertEqual(antwort.status_code, 404, (methode, pfad))
-                self.assertNotIn("allow", antwort.headers)
+                self.assertEqual(dict(antwort.headers), dict(unbekannt.headers), "auch die Köpfe verraten den Baustein nicht")
                 if methode != "HEAD":
                     self.assertEqual(antwort.content, unbekannt.content, (methode, pfad))
+                # Schrägstrich am Ende: keine Umleitung (307 mit Location), sondern derselbe 404.
+                mit_strich = await self.client.request(methode, pfad + "/", headers={**kunde, **self.als("inhaber"), "Idempotency-Key": self.schluessel()})
+                self.assertEqual((mit_strich.status_code, dict(mit_strich.headers)), (404, dict(unbekannt.headers)), (methode, pfad + "/"))
+                if methode != "HEAD":
+                    self.assertEqual(mit_strich.content, unbekannt.content)
         self.assertEqual((self.gespeichert(termin_id)["zustand"], len(self.gespeichert(termin_id)["verlauf"])), ("wunsch", 1))
         self.werte["TEILEKLAR_APPOINTMENTS"] = "1"
         for methode, pfad, erlaubt in (("DELETE", pfade[1], "GET"), ("GET", pfade[3], "POST"), ("POST", pfade[2], "GET"), ("PUT", pfade[0], "POST")):
             antwort = await self.client.request(methode, pfad, headers=kunde)
             self.assertEqual((antwort.status_code, antwort.headers["allow"], antwort.headers["cache-control"]), (405, erlaubt, "no-store"))
+        for pfad in pfade:   # auch eingeschaltet gibt es den Pfad mit Schrägstrich nicht, und nichts leitet um
+            for methode in ("GET", "POST"):
+                mit_strich = await self.client.request(methode, pfad + "/", headers={**kunde, "Idempotency-Key": self.schluessel()})
+                self.assertEqual((mit_strich.status_code, mit_strich.content, "location" in mit_strich.headers), (404, unbekannt.content, False))
         self.assertEqual(self.gespeichert(termin_id)["zustand"], "wunsch")
+
+    async def test_vorlagenfehler_faellt_vor_dem_schreiben_auf_und_nie_danach(self):
+        termin_id, kunde = await self.wunsch()
+        echte = API.appointment_mails.nachricht
+
+        def immer_kaputt(*_, **__):
+            raise KeyError("Vorlage passt nicht zu den Daten")
+        with mock.patch.object(API.appointment_mails, "nachricht", immer_kaputt):
+            antworten = [await self.anlegen(email="otto@example.invalid"), await self.ruf("cancel", termin_id, kunde, 1),
+                         await self.ruf("confirm", termin_id, "p", 1, termin_am="2027-03-10T10:00")]
+            self.uhr.jetzt = JETZT + timedelta(days=30)
+            antworten.append(await self.lies(termin_id, kunde))
+            self.uhr.jetzt = JETZT
+        for antwort in antworten:
+            self.assertEqual((antwort.status_code, antwort.json()), (503, {"detail": {"error": "appointments_unavailable"}}))
+        self.assertEqual((len(self.speicher.zeilen), self.gespeichert(termin_id)["zustand"], self.gespeichert(termin_id)["version"]), (1, "wunsch", 1),
+                         "nichts ist gespeichert, bevor die Vorlagen geprüft sind")
+        aufrufe = []
+
+        def erst_spaeter_kaputt(*a, **k):
+            aufrufe.append(1)
+            if len(aufrufe) > 1:   # die Vorabprüfung gelingt, das Rendern beim Versand scheitert
+                raise KeyError("Vorlage passt nicht zu den Daten")
+            return echte(*a, **k)
+        with mock.patch.object(API.appointment_mails, "nachricht", erst_spaeter_kaputt):
+            absage = await self.ruf("cancel", termin_id, kunde, 1)
+        self.assertEqual((absage.status_code, self.gespeichert(termin_id)["zustand"]), (200, "abgesagt"))
+        self.assertEqual(absage.json()["benachrichtigung"], [{"ereignis": "N6", "empfaenger": "werkstatt", "status": "nicht_eingereiht"}])
 
     # ---- B5: Anschlussstelle für die Begrenzung je Herkunft
     async def test_b5_begrenzung_je_herkunft_ist_als_anschlussstelle_vorgesehen(self):
