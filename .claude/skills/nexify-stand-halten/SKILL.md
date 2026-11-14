@@ -34,13 +34,13 @@ Jede Tatsache steht an genau einer Stelle. Alle anderen Stellen verweisen darauf
 - **ANNAHME**: unbestätigt, mit dem, was sie bestätigen würde.
 - **OFFEN**: fehlt, widersprüchlich oder nicht belegbar. Was sich nicht belegen lässt, bleibt OFFEN.
 
-Angaben aus Notizen oder anderen Sitzungen sind erst IST, wenn sie am Repository oder durch eigene Messung nachgeprüft sind. Sonst als „Notiz, nicht nachgeprüft“ führen.
+Angaben aus Notizen oder anderen Sitzungen sind erst IST, wenn sie am Repository oder durch eigene Messung nachgeprüft sind. Sonst als „Notiz, nicht nachgeprüft“ führen. Automatische Kurzfassungen der Plattform zu einer Sitzung sind nicht einmal eine Notiz: Nachgeführt wird aus dem vollen Bericht (`nexify-agenten-koordination`, „Der Bericht“). Rote Prüfungen an einem PR oder an `main`, deren Job nie gestartet ist, sind kein Prüfstand und werden als Betriebsbefund geführt, nicht als Fehler des Codes (`nexify-zweig-und-pr`, „Bekannte Lage“).
 
 ## Vorgehen
 
 1. `git fetch origin main` und `git log origin/main --since=<letzte Nachführung>` lesen. PR-Nummern und Commits von dort nehmen, nicht aus der Erinnerung.
 2. Führende Dateien von `origin/main` lesen. Behauptungen zu Domains, Projekten, Diensten, Produktnamen, Datenhaltung und Prüfständen gegen Repository und Messung prüfen.
-3. Messen, wo möglich, nur lesend: `node tools/live-check.mjs`, `node tools/gleichmacher.mjs`, `curl -sI` auf die Domains. Uhrzeit in UTC festhalten.
+3. Messen, wo möglich, nur lesend: `node tools/live-check.mjs`, `node tools/gleichmacher.mjs`, `curl -sI` auf die Domains. Uhrzeit in UTC festhalten. Nach einem Merge, der die Website berührt, ist das die Live-Nachprüfung aus `nexify-klon-fabrik` (erst wenn die Auslieferung des Merge-Commits steht); ihr Ergebnis ist IST, die Zahlen aus der PR-Beschreibung bleiben „laut PR“.
 4. Widersprüche als Liste mit Fundstelle (Datei, Abschnitt oder Zeile) führen.
 5. Nachführen in dieser Reihenfolge: `DECISIONS.md`, `PROGRESS.md`, `AGENTS.md`, `GO-LIVE.md`.
 6. Prüfen (siehe Prüfliste), dann ein Commit mit Begründung.

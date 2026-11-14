@@ -66,7 +66,7 @@ Die Liste an das geprüfte Projekt anpassen: die tatsächlichen Wurzeldateien un
 
 - Kein Öffnen der Treffer, kein Klonen über `/.git/`, kein Herunterladen von Sicherungen.
 - Keine Portscans, keine Anmeldeversuche, keine Lastprüfung.
-- Diese Prüfung ersetzt weder `node tools/live-check.mjs` (Funktion der Seite) noch `node tools/exposure-check.mjs` (veröffentlichte Docker-Ports auf einem Server).
+- Diese Prüfung ersetzt weder `node tools/live-check.mjs` (Funktion der Seite) noch `node tools/exposure-check.mjs` (veröffentlichte Docker-Ports auf einem Server). Die Nachprüfung nach einem Merge, einschließlich der Frage, ob ein Formular seinen Empfänger erreicht, steht in `nexify-klon-fabrik`, „Nach dem Merge: Live-Nachprüfung“.
 - Ein Lauf ohne Treffer belegt nur die geprüften Pfade zum geprüften Zeitpunkt.
 
 ## Was als Beleg gilt
