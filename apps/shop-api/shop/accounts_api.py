@@ -214,5 +214,16 @@ async def google_session(body: GoogleIn, response: Response):
                 "email_verified": True, "email_verified_at": now_iso()}
         await db.users.insert_one(user)
         await send_welcome(user)
+    elif user.get("email_verified") is not True:
+        # The address of this account was never proven, so whoever registered it may not be its holder.
+        # The identity provider now proves the holder: the earlier password and every existing session end
+        # here, and open reset/confirmation links stop working. Access continues only through this sign-in
+        # (a new password can be set via "forgot password", which goes to the proven address).
+        await db.users.update_one({"user_id": user["user_id"]}, {"$unset": {"password_hash": ""},
+                                                                 "$set": {"email_verified": True, "email_verified_at": now_iso(), "password_invalidated_at": now_iso()}})
+        await db.sessions.delete_many({"user_id": user["user_id"]})
+        await db.password_resets.update_many({"user_id": user["user_id"], "used": False}, {"$set": {"used": True}})
+        await db.email_verifications.update_many({"user_id": user["user_id"], "used": False}, {"$set": {"used": True, "superseded": True}})
+        user = await db.users.find_one({"user_id": user["user_id"]})
     await db.users.update_one({"user_id": user["user_id"]}, {"$set": {"google_linked": True}})
     return await start_session(response, user)

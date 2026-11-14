@@ -127,6 +127,9 @@ class Collection:
     def find(self, query=None, projection=None):
         return Cursor([self._project(r, projection) for r in self.rows if matches(r, query)])
 
+    async def estimated_document_count(self):
+        return len(self.rows)
+
     async def count_documents(self, query=None):
         return sum(1 for r in self.rows if matches(r, query))
 
@@ -204,3 +207,6 @@ class Database:
 
     def __getitem__(self, name):
         return getattr(self, name)
+
+    async def command(self, name):
+        return {"ok": 1}
