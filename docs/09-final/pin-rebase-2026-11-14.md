@@ -324,3 +324,32 @@ Merge-Stände des Zweigs: `c566216` (mit `main` `aceb6a7`), Arbeitsstand `180866
 Namensvergleich als Mengen: gegenüber `aceb6a7` kein neuer roter Test, 13 behoben. Gegenüber dem Stand vor der Nacharbeit sind die zwei Tests in `test_resize_source_binding` wieder grün; fünf Namen aus `test_recorded_source_hashes_match_actual_bytes` sind wieder rot, genau die fünf zurückgenommenen Pins. `make check`, `make governance-check`, `node tools/ds-audit-cli.js` und `node tools/lint.mjs` enden mit Exit 0; `cd apps/site && node --test` 132 von 132; `cd apps/web && node --test auth/tests/*.test.mjs` 105 von 105.
 
 Nicht geprüft in der Nacharbeit: Public-Experience, PWA, Gleichmacher und Live-Prüfung wurden auf `078bc31` nicht wiederholt; `browser-identity-hero.mjs`, `browser-contrast-scope.mjs`, Critical und Ausnahmeerfassung sind weiter nicht gelaufen bzw. offen.
+
+## 11. Nachtrag fünfte Runde (14.11.2026, Zweig `claude/anfrageweg-bindung`, nach PR 181)
+
+PR 181 (`81b0ae9`, Kontaktformular meldet eine abgewiesene Anfrage ehrlich) hat drei Quellen der Resize-Bindung verändert, ohne den Beleg zu erneuern. `config/text-resize-sources.json` bindet die Verzeichnisse `apps/web/components` und `apps/web/lib` vollständig (Endungen `.tsx`, `.ts`, `.mjs`, `.css`, `.json`); `tools/check_text_resize_evidence.py`, `source_hashes` (Zeilen 25 bis 43) und der Vergleich in Zeile 50 verlangen die genaue Datei- und Byte-Menge.
+
+| Datei | Abweichung durch PR 181 |
+|---|---|
+| `apps/web/components/ContactRequestForm.tsx` | Bytes geändert |
+| `apps/web/lib/contact-copy.ts` | Bytes geändert |
+| `apps/web/lib/contact-outcome.mjs` | neue Datei im gebundenen Verzeichnis |
+
+Folge: `test_current_report_has_exact_source_binding` und `test_css_script_new_source_and_uncompleted_report_fail_closed` (`tests/test_resize_source_binding.py`) waren auf `main` wieder rot. Im Bericht zu PR 181 stand „kein neuer Name“; das war falsch. Die Vorher-Messung lief in einem Arbeitsbaum ohne `apps/site/.generated/public-site.json`, dort scheitern beide Tests schon am fehlenden Bestand, und der Unterschied blieb unsichtbar. Vor jeder Vorher-Messung gehört deshalb `node apps/site/scripts/generate-public-data.mjs` gelaufen.
+
+Ein Verlegen von `contact-outcome.mjs` hätte nicht gereicht, weil auch die beiden geänderten Dateien gebunden sind. Deshalb neu erhoben:
+
+- Lauf von `apps/site/tests/browser-text-spacing.mjs` am festen Commit `81b0ae9` bei sauberem Arbeitsbaum, Playwright 1.65.0, Chromium 158.0.8127.18: 129 Prüfungen, 43 Routen, 0 Befunde, keine Laufzeitfehler.
+- Belegart: Browserlauf. Der Beleg bindet damit alle drei Dateien an ihren heutigen Stand.
+- Vorige Fassung unverändert unter `evidence/resize-2026-11-10/superseded/text-spacing.pre-anfrageweg-2026-11-14.json`.
+
+Python-Suite je Stand (Python 3.13.18, erzeugte Seitendaten vorhanden, ohne `.venv`), Namensvergleich. Die drei Vergleichsstände liefen in Wegwerf-Arbeitsbäumen ohne `node_modules`; dort ist zusätzlich `test_frontend_filters_images_and_shows_error_and_unknown_stock` (`test_product_presentation_integrity`) rot. Mit `node_modules` sind es je Stand ein Name weniger:
+
+| Stand | rote Namen | davon `test_resize_source_binding` |
+|---|---|---|
+| `a8a5d66` | 46 | 0 |
+| `0333c16` (PR 180) | 46 | 0 |
+| `81b0ae9` (PR 181) | 48 | 2 |
+| dieser Zweig (mit `node_modules`) | 45 | 0 |
+
+Bewusst nicht nachgezogen: `apps/web/lib/contact-copy.ts` in `evidence/observability-integration-2026-10-28/browser-exceptions-next.json` und `browser-exceptions-vite.json`. Der zugehörige Lauf scheitert weiter in Schritt 4 (Abschnitt 10); `tools/check_browser_evidence.py` bleibt rot wie zuvor, erster Befund unverändert `apps/site/src/Auth.tsx`.
