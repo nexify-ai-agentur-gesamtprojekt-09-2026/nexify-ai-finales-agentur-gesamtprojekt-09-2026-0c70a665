@@ -1,4 +1,5 @@
 """Google sign-in must not merge into an unverified password account (pre-account takeover), inert doubles only."""
+import copy
 import importlib.util
 import sys
 from pathlib import Path
@@ -56,6 +57,11 @@ class Collection:
             if matches(row, query):
                 row.update(update.get('$set', {}))
                 return
+
+    async def update_many(self, query, update):
+        for row in self.rows:
+            if matches(row, query):
+                row.update(update.get('$set', {}))
 
     async def delete_many(self, query):
         self.rows = [row for row in self.rows if not matches(row, query)]
@@ -169,6 +175,68 @@ class AccountLinkingTests(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json()['user_id'], user_id)
         self.assertIs(self.user('opfer@example.org')['google_linked'], True)
+
+    def snapshot(self):
+        return copy.deepcopy((self.db.users.rows, self.db.sessions.rows))
+
+    def test_already_linked_unverified_password_account_is_refused_without_writes(self):
+        self.add_user(email='alt@example.org', password_hash=self.accounts.hash_password('x' * 12), google_linked=True)
+        before = self.snapshot()
+        client, response = self.google('alt@example.org')
+        self.assertEqual(response.status_code, 409)
+        self.assertEqual(response.json()['detail']['error'], 'account_exists_unverified')
+        self.assertEqual(self.snapshot(), before)
+        self.assertNotIn('tk_session', client.cookies)
+
+    def test_only_boolean_true_counts_as_verified(self):
+        for index, value in enumerate(('true', 1, 'True', None)):
+            with self.subTest(email_verified=value):
+                email = f'v{index}@example.org'
+                self.add_user(email=email, password_hash=self.accounts.hash_password('x' * 12), email_verified=value)
+                before = self.snapshot()
+                _, response = self.google(email, session='s-' + email)
+                self.assertEqual(response.status_code, 409)
+                self.assertEqual(self.snapshot(), before)
+
+    def test_empty_or_none_password_field_still_counts_as_password_account(self):
+        for index, value in enumerate(('', None)):
+            with self.subTest(password_hash=value):
+                email = f'p{index}@example.org'
+                self.add_user(email=email, password_hash=value)
+                before = self.snapshot()
+                client, response = self.google(email, session='s-' + email)
+                self.assertEqual(response.status_code, 409)
+                self.assertEqual(self.snapshot(), before)
+                self.assertNotIn('tk_session', client.cookies)
+
+    def test_role_variants_other_than_customer_are_refused_without_writes(self):
+        for index, role in enumerate((None, '', 'Customer', 'ADMIN')):
+            with self.subTest(role=role):
+                email = f'r{index}@example.org'
+                self.add_user(email=email, role=role, email_verified=True)
+                before = self.snapshot()
+                client, response = self.google(email, session='s-' + email)
+                self.assertEqual(response.status_code, 403)
+                self.assertEqual(self.snapshot(), before)
+                self.assertNotIn('tk_session', client.cookies)
+        row = self.add_user(email='ohne@example.org', password_hash=self.accounts.hash_password('x' * 12))
+        row.pop('role')
+        _, response = self.google('ohne@example.org', session='s-ohne')
+        self.assertEqual(response.status_code, 409)
+
+    def test_password_reset_revokes_api_keys_of_the_account(self):
+        attacker = self.browser()
+        user_id = attacker.post('/api/auth/register', json={'email': 'opfer@example.org', 'password': 'angreifer-passwort-1'}).json()['user_id']
+        self.db.api_keys.rows.extend([
+            {'key_id': 'k1', 'tenant_id': user_id, 'revoked_at': None},
+            {'key_id': 'k2', 'tenant_id': user_id, 'revoked_at': 'earlier'},
+            {'key_id': 'k3', 'tenant_id': 'user_other', 'revoked_at': None},
+        ])
+        self.browser().post('/api/auth/forgot-password', json={'email': 'opfer@example.org'})
+        token = self.reset_links[-1].split('token=', 1)[1]
+        self.assertEqual(self.browser().post('/api/auth/reset-password', json={'token': token, 'password': 'inhaberin-passwort-1'}).status_code, 200)
+        keys = {row['key_id']: row['revoked_at'] for row in self.db.api_keys.rows}
+        self.assertEqual(keys, {'k1': 'fixture-time', 'k2': 'earlier', 'k3': None})
 
     def test_new_google_account_is_verified(self):
         client, response = self.google('neu@example.org')
