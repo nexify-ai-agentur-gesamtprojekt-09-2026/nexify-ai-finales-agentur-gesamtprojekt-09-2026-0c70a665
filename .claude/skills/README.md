@@ -10,6 +10,7 @@ Kommt ein Skill dazu, hier genau eine Zeile ergänzen, im selben Commit.
 |---|---|
 | [`nexify-zweig-und-pr`](nexify-zweig-und-pr/SKILL.md) | Vor jeder Änderung an einer Datei: eigener Worktree, Gates, `main` einholen, Entwurfs-PR. |
 | [`nexify-pr-sichtung`](nexify-pr-sichtung/SKILL.md) | Offene Pull Requests einordnen (mergebar, überholt, braucht Entscheidung), vor jeder Merge-Runde. |
+| [`nexify-server-messung`](nexify-server-messung/SKILL.md) | Server ohne Shell nur lesend vermessen (Hostinger-API, Mess-Container), vor jeder Server-Bereinigung. |
 | [`nexify-agenten-koordination`](nexify-agenten-koordination/SKILL.md) | Als koordinierende Sitzung Fachagenten beauftragen, Berichte nachprüfen, mergen. |
 | [`nexify-stand-halten`](nexify-stand-halten/SKILL.md) | Nach jedem Merge und jeder Inhaberentscheidung die führenden Dokumente nachführen. |
 | [`nexify-belege-und-pins`](nexify-belege-und-pins/SKILL.md) | Vor Änderungen an gebundenen Dateien; wenn Prüfsummen abweichen oder Browser-Belege zu erneuern sind. |
