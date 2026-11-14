@@ -13,7 +13,7 @@ const copy={
  en:{"nav": "Main navigation", "menu": "Menu", "close": "Close menu", "services": "Services", "products": "Products", "knowledge": "Approach", "contact": "Contact", "intro": "The right entry point for your project.", "ai": "NeXify AI", "shop": "TEILEKLAR", "start": "Your starting point", "hint": "Would you like to narrow down your needs?", "talk": "Discuss your project", "overview": "FACTORY services", "account": "Your account"}
 };
 const productNames:Record<string,Partial<Record<Locale,string>>>={
- nex2fly:{de:'NeX2fly Suite',nl:'NeX2fly Suite',fr:'NeX2fly Suite',en:'NeX2fly Suite'},one:{de:'NeX Agentic AI',nl:'NeX Agentic AI',fr:'NeX Agentic AI',en:'NeX Agentic AI'},api:{de:'API & Integrationen',nl:'API & integraties',fr:'API et intégrations',en:'API & integrations'},
+ nex2fly:{de:'NeX AIFly Suite',nl:'NeX AIFly Suite',fr:'NeX AIFly Suite',en:'NeX AIFly Suite'},one:{de:'NeX Agentic AI',nl:'NeX Agentic AI',fr:'NeX Agentic AI',en:'NeX Agentic AI'},api:{de:'API & Integrationen',nl:'API & integraties',fr:'API et intégrations',en:'API & integrations'},
  'tk-home':{de:'TEILEKLAR entdecken',nl:'TEILEKLAR ontdekken',fr:'Découvrir TEILEKLAR',en:'Explore TEILEKLAR'},'tk-workshop':{de:'Werkstattprofile',nl:'Werkplaatsprofielen',fr:'Profils d’ateliers',en:'Workshop profiles'},'tk-partner':{de:'Werkstattpartner werden',nl:'Werkplaatspartner worden',fr:'Devenir atelier partenaire',en:'Become a workshop partner'},
  pricing:{de:'Preise & Ablauf',nl:'Prijzen & aanpak',fr:'Tarifs et étapes',en:'Pricing & process'},scope:{de:'Projektstart',nl:'Een project starten',fr:'Démarrer un projet',en:'Starting a project'},'knowledge-start':{de:'Projekt vorbereiten',nl:'Uw project voorbereiden',fr:'Préparer votre projet',en:'Prepare your project'}
 };
