@@ -38,6 +38,7 @@ import re
 import socket
 import sys
 import tempfile
+import threading
 import time
 from decimal import Decimal, InvalidOperation
 from pathlib import Path
@@ -348,6 +349,20 @@ def endpunkt(basis: str, konfig: dict) -> str:
 
 
 def sende(url: str, schluessel: str, rumpf: dict, zeitlimit: int, max_bytes: int):
+    """Wie _sende_einmal, aber mit harter Gesamtfrist über Verbindungsaufbau, Kopfzeilen und Rumpf.
+
+    Die Socket-Frist gilt nur je Wartezeit; tröpfelnde Kopfzeilen könnten sie beliebig strecken.
+    Deshalb läuft der Aufruf in einem Hilfsfaden, auf den höchstens bis zur Frist gewartet wird.
+    """
+    ergebnis = []
+    faden = threading.Thread(target=lambda: ergebnis.append(_sende_einmal(url, schluessel, rumpf, zeitlimit, max_bytes)),
+                             daemon=True)
+    faden.start()
+    faden.join(zeitlimit + 1)
+    return ergebnis[0] if ergebnis else ("unklar", None, None)
+
+
+def _sende_einmal(url: str, schluessel: str, rumpf: dict, zeitlimit: int, max_bytes: int):
     """Ein Aufruf, keine Weiterleitung, keine Wiederholung. Liefert (art, status, daten).
 
     art: „antwort“ (HTTP 200 mit JSON), „abgelehnt“ (HTTP-Fehlerstatus), „nicht_gesendet“

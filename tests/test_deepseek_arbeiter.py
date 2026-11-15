@@ -382,6 +382,31 @@ class Haertung(Basis):
         self.assertEqual(ergebnis[0], "unklar")
         self.assertLess(time.monotonic() - beginn, 3)
 
+    def test_troepfelnde_kopfzeilen_werden_am_gesamtzeitlimit_abgebrochen(self):
+        import socket, time
+        horcher = socket.socket()
+        horcher.bind(("127.0.0.1", 0))
+        horcher.listen(1)
+        self.addCleanup(horcher.close)
+
+        def bedienen():
+            verbindung, _ = horcher.accept()
+            verbindung.recv(65536)
+            try:
+                verbindung.sendall(b"HTTP/1.1 200 OK\r\n")
+                for nummer in range(40):
+                    verbindung.sendall(f"X-Langsam-{nummer}: 1\r\n".encode())
+                    time.sleep(0.25)
+            except OSError:
+                pass
+            verbindung.close()
+
+        threading.Thread(target=bedienen, daemon=True).start()
+        beginn = time.monotonic()
+        ergebnis = arbeiter.sende(f"http://127.0.0.1:{horcher.getsockname()[1]}/v1/chat/completions", SCHLUESSEL, {}, 1, 10000)
+        self.assertEqual(ergebnis, ("unklar", None, None))
+        self.assertLess(time.monotonic() - beginn, 4)
+
     def test_waehrend_des_aufrufs_entstandene_zieldatei_bleibt_unberuehrt(self):
         original, senden = arbeiter.lade_konfig, arbeiter.sende
         arbeiter.lade_konfig = lambda: self.konfig

@@ -1917,7 +1917,7 @@
     {
       "id": "AI-deepseekarbeiter01",
       "path": "tools/deepseek_arbeiter.py",
-      "sha256": "a5cd7052802610f35d043e2c4d56fc2d626681e9c65f646ac2f1f432b07a0329",
+      "sha256": "5f50cd63c02ea9ffcf10940b4e9793e0c2143693bec86e20087f147eac7f39d4",
       "classification": "owned_new_managed_path",
       "status": "disabled_fail_closed",
       "source_role": "session_delegation_worker",
@@ -1935,7 +1935,7 @@
         "checks": [
           "Modell und Reasoning an config/llm-policy.json gebunden; eine Antwort, deren Feld model nicht auf deepseek-v4.1-flash-1017 endet, wird verworfen (kein Rückfall auf ein anderes Modell).",
           "Wegfolge Router→OpenRouter, dann Router→DeepSeek direkt, nur nach eindeutig gescheitertem Versuch; bei unklarem Ausgang kein zweiter Aufruf.",
-          "Eingangsfilter, Größen-, Zeit-, Auftrags- und Tageslimit, Protokoll ohne Inhalte und Schlüssel; 26 Offline-Tests in tests/test_deepseek_arbeiter.py."
+          "Eingangsfilter, Größen-, Zeit-, Auftrags- und Tageslimit, Protokoll ohne Inhalte und Schlüssel; 27 Offline-Tests in tests/test_deepseek_arbeiter.py."
         ],
         "gaps": [
           "Kein echter Aufruf: Modellname, Antwortfeld model, Kostenmeldung und Reasoning am echten Router sind nicht belegt.",

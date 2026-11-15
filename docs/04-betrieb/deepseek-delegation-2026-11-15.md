@@ -10,7 +10,7 @@ oder an der Claude-Umgebung, keine Kosten.
 
 - **Gebaut:** `tools/deepseek_arbeiter.py` (ein Befehl), `config/deepseek-delegation.json`
   (Wege, Limits, Hosts), Skill `.claude/skills/nexify-deepseek-delegation/SKILL.md`,
-  26 Tests gegen einen nachgebauten Router (`tests/test_deepseek_arbeiter.py`).
+  27 Tests gegen einen nachgebauten Router (`tests/test_deepseek_arbeiter.py`).
 - **Zustand:** ausgeschaltet. Ohne `DEEPSEEK_ARBEITER=ein`, `ROUTER_URL` und `ROUTER_KEY`
   endet jeder Aufruf mit „nicht eingerichtet“ (Exit 3) und sendet nichts.
 - **Modellbindung:** Reasoning `high` wird gesendet; die Antwort muss den Stand
@@ -273,7 +273,7 @@ gelöscht wird nichts.
 
 ## 7. Prüfung
 
-Tests (`python3 -m unittest tests.test_deepseek_arbeiter`, 26 Tests, lokaler Test-Server,
+Tests (`python3 -m unittest tests.test_deepseek_arbeiter`, 27 Tests, lokaler Test-Server,
 kein Netz, kein Schlüssel):
 
 | Fall | Erwartet | Test |
