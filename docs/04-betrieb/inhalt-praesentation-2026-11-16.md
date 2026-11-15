@@ -908,3 +908,114 @@ widerspricht.
 
 Stand dieser Datei: 15.11.2026, 22:30 UTC. Zweig `claude/inhalt-praesentation`.
 Ergänzungen werden an diese Datei angehängt, solange die Frist läuft.
+
+---
+
+# Nachtrag 1 · 15.11.2026, 22:50 UTC
+
+Zwei Punkte, die in Abschnitt 8 als nicht geprüft standen, wurden nachgeholt: der
+tatsächliche Zustand des TEILEKLAR-Schaufensters im Browser und die drei weiteren
+Sprachfassungen. Beides weiterhin nur lesend, ohne Änderung an den Seiten.
+
+## N1 · Befund 02 ist im Browser bestätigt und schlimmer als über die Schnittstelle sichtbar
+
+Messung: Chromium, 1440 × 1000, `https://nexifyai.de/teileklar`, abgewartet bis
+`networkidle` plus sechs Sekunden, 15.11.2026 gegen 22:45 UTC.
+
+Ergebnis:
+
+- Der Text **„Das Schaufenster wird geladen …" bleibt dauerhaft stehen.** Er wird nicht
+  durch Artikel und nicht durch einen Leerzustand ersetzt. Die rechte Hälfte des
+  Seitenkopfs — die Stelle, an der das Sortiment stehen soll — trägt nur diesen einen
+  grauen Satz.
+- Der Abschnitt „AUS DEM SORTIMENT · **Artikel im Schaufenster** · Alle Artikel ansehen"
+  wird vollständig gerendert, **zwischen Überschrift und Link steht kein einziger
+  Artikel**.
+- Dasselbe gilt für „IHR EINSTIEG · Was suchen Sie? · Alle Kategorien".
+- Der Warenkorb in der Kopfzeile zeigt „0".
+- **Keine Konsolenfehler.** Es ist kein technischer Absturz. Die Schnittstelle antwortet
+  sauber mit null Artikeln, und die Oberfläche verlässt den Ladezustand nie.
+
+Was das für das Gespräch bedeutet: Der Satz „Das Schaufenster wird geladen …" ist für
+einen Besucher nicht von einem Defekt zu unterscheiden. Wer die Seite eine Minute offen
+lässt, schließt daraus, dass der Shop kaputt ist — nicht, dass er leer ist. Das ist die
+ungünstigste von drei möglichen Lesarten (leer, in Vorbereitung, defekt), und es ist die,
+die der Auftritt heute anbietet.
+
+Damit steht Abschnitt 7, Punkt 2 unverändert, aber mit schärferer Begründung: Entweder der
+Shop trägt bis 11:00 Uhr, oder er wird nicht gezeigt. Ein ehrlicher, benannter Leerzustand
+mit Datum wäre die dritte, deutlich bessere Variante gegenüber dem heutigen Zustand und
+ist in wenigen Minuten zu formulieren — die Entscheidung darüber ist aber eine
+Inhaberentscheidung, weil sie den Shop öffentlich als „noch ohne Sortiment" bezeichnet.
+
+Bildnachweis dieser Messung liegt in der Arbeitsablage dieser Sitzung und ist nicht Teil
+des Repositorys.
+
+## N2 · Die drei weiteren Sprachfassungen funktionieren, tragen aber drei deutsche Wortbrocken mitten im Satz
+
+Geprüft: `?lang=nl`, `?lang=fr`, `?lang=en` auf `/`, `/leistungen`, `/leistungsumfang`,
+`/preise-ablauf`.
+
+**Positiv:** Die Umschaltung funktioniert, `<html lang>` wird korrekt gesetzt (`nl`, `fr`,
+`en`), und die Übersetzungen sind gut. Die niederländische Startseite lautet „Eén gesprek.
+Een project dat past. · Websites, apps, shops en AI – vanuit wat uw bedrijf echt nodig
+heeft." Das ist sauberes Niederländisch, kein Maschinenton. Auch die Überschriften tragen:
+„U kent de kosten vóór de start." · „Drie pakketten. Een duidelijke omvang."
+
+**Befund 35 · mittel · alle Sprachfassungen · Die drei Paketnamen bleiben deutsch und
+stehen mitten im fremdsprachigen Satz.** Zitate, wörtlich aus der Auslieferung:
+
+- Englisch: „**Markenstart, KI im Betrieb or Wachstum**: your goal becomes an order with
+  named results, optional extras and costs you know before work starts."
+- Französisch: « **Markenstart, KI im Betrieb ou Wachstum** : votre objectif devient une
+  commande avec des résultats définis … »
+- Niederländisch: „**Markenstart, KI im Betrieb of Wachstum**: uw doel wordt een opdracht
+  met benoemde resultaten …"
+
+Dasselbe Muster auf `/leistungen`, `/leistungsumfang` und `/preise-ablauf` in allen drei
+Sprachen, dazu „NeXify Care" auf `/leistungsumfang`.
+
+Was daran nicht überzeugt: „Markenstart" und „Wachstum" kann man als Produktnamen
+verteidigen. „**KI im Betrieb**" ist kein Name, sondern ein deutscher beschreibender
+Halbsatz („KI im Betrieb" = „AI in operation"). In einem englischen Satz mit „or" und in
+einem niederländischen mit „of" liest sich die Aufzählung wie eine unfertige Übersetzung.
+Für den niederländischen Heimatmarkt eines Anbieters mit Sitz in Venlo ist das die
+sichtbarste Stelle, an der Sorgfalt fehlt.
+
+Maßnahme, Entscheidung des Inhabers: Entweder die drei Pakete bekommen echte Namen, die in
+vier Sprachen tragen, oder sie werden je Sprache übersetzt. Eine Mischung aus beidem —
+zwei namenstaugliche Wörter und ein beschreibender Halbsatz — trägt nicht. Die Änderung
+gehört an die Quelle `config/site-map.json` mit gleichem Schlüsselsatz in allen vier
+Sprachen (Skill `nexify-seitentexte`).
+
+**Befund 36 · mittel · alle Seiten · Vier Sprachen ohne eigene Adresse und ohne
+`hreflang`.** Gemessen: Im ausgelieferten HTML der Startseite steht **kein einziges
+`hreflang`-Attribut**. `/nl`, `/fr` und `/en` antworten mit 404; die Umschaltung läuft
+über `?lang=` und über den Sprachumschalter in der Kopfzeile.
+
+Was daran nicht überzeugt, in zwei Punkten:
+
+1. Ein Link lässt sich zwar in der gewünschten Sprache weitergeben (`?lang=nl`
+   funktioniert). Ohne `hreflang` findet eine Suchmaschine die drei anderen Fassungen
+   jedoch nicht als eigenständige Sprachversionen. Für den niederländischen Heimatmarkt
+   ist der Auftritt damit faktisch nur auf Deutsch auffindbar.
+2. Das trifft dieselbe Stelle wie Befund 03 (`/teileklar` auf `noindex`): Eine Agentur, die
+   Sichtbarkeit und „SEO, GEO, lokale Signale" verkauft (Startseite), hat die eigene
+   Mehrsprachigkeit für Suchmaschinen nicht ausgezeichnet und das eigene Vorzeigeobjekt
+   gesperrt. Wenn der Interessent das prüft — und ein Interessent, der Kampagnen einkaufen
+   will, prüft genau das — beschädigt es die verkaufte Leistung.
+
+Maßnahme: `hreflang`-Auszeichnung für die vier Sprachen ergänzen. Das ist eine technische
+Änderung ohne Textarbeit und gehört in die Sitzung, die schreiben darf. Ob zusätzlich
+eigene Sprachadressen eingeführt werden, ist eine größere Entscheidung und für morgen nicht
+nötig.
+
+## N3 · Was aus Abschnitt 8 weiterhin offen bleibt
+
+Unverändert nicht geprüft und damit unbelegt: ob eine echte Anfrage heute ankommt und eine
+Vorgangsnummer erzeugt wird (Befund 08), alles hinter der Anmeldung einschließlich
+24-Stunden-Test und Kundenbereich, das Verhalten des Chats im Dialog (Befund 07), der
+Kaufweg im Shop, die Seiten unterhalb von `/teileklar/`, und die Richtigkeit von
+KvK-Nummer und Umsatzsteuer-Identifikationsnummer gegen die Register.
+
+Stand Nachtrag 1: 15.11.2026, 22:50 UTC.
