@@ -1,5 +1,9 @@
 # Master-Audit · NeXify AI Gesamtlage · 15.11.2026
 
+**Fortgeschrieben 15.11.2026, 11:10 UTC** (Erststand `555a75a`/`aa515be` + Fortschreibung
+am Ende des Dokuments; was sich gegenüber dem Erststand geändert hat, steht in der
+Änderungstabelle direkt unter der Kurzfassung).
+
 Ein konsolidiertes, belegtes Lagebild der gesamten NeXify-Infrastruktur und der
 Projektstände, erstellt von der Audit-Sitzung im Auftrag der koordinierenden Sitzung für
 den Inhaber Pascal Courbois. **Nur gelesen.** Gegen alle Systeme ausschließlich
@@ -42,9 +46,11 @@ einsehbar** (Hostinger-API `[VPS:2044]`); dieser Server bleibt der blinde Fleck
 ## 1. Kurzfassung
 
 1. Die öffentlichen NeXify-Seiten stehen: `nexifyai.de`/`www`, `nexifyai.cloud`/`www`
-   antworten mit 200 von Vercel und tragen `noindex, nofollow` (`.de` eigene Messung M,
-   15.11. 09:19 UTC; alle vier durch die koordinierende Gegenprüfung am 15.11. 10:06 UTC
-   bestätigt, K); Indexierung bleibt eine Inhaberfreigabe.
+   antworten mit 200 von Vercel. **Indexierung inzwischen freigegeben und ausgeliefert
+   (Fortschreibung Nr. 1):** `nexifyai.de/`, `/leistungen`, `/impressum` und
+   `www.nexifyai.cloud/` tragen `index, follow` ohne `x-robots-tag`; `/teileklar` bleibt
+   `noindex, nofollow` (eigene Messung M, 15.11. 11:07 UTC). Der Erststand 09:19/10:06 UTC
+   nannte hier noch `noindex, nofollow`.
 2. Der Shop ist gespalten (Fall A): `teileklar.shop` liefert einen **alten** Dienst auf
    srv1243952 mit **3720 Produkten** (200), kennt aber `/status`, `/categories` und
    `/products/{id}` nicht (404); die neue Vercel-Fassung unter `nexifyai.de/api/shop/*`
@@ -83,6 +89,19 @@ einsehbar** (Hostinger-API `[VPS:2044]`); dieser Server bleibt der blinde Fleck
 12. Ein der Orchestrierung neu übertragenes Kundenprojekt (Kürzel SK) wird in eigener
     Sitzung und eigenem Repository geführt; Kundendaten und Einzelheiten bleiben dort
     (Abschnitt 6a, D-017/D-020).
+
+### Was sich seit dem Erststand (`555a75a`/`aa515be`) geändert hat
+
+| Kurzfassungs-Punkt | Erststand (09:19–10:08 UTC) | Fortschreibung (Stand 11:10 UTC) |
+|---|---|---|
+| 1 Indexierung | `noindex, nofollow` auf allen vier Hauptseiten | **freigegeben:** Hauptseiten `index, follow`, nur `/teileklar` weiter gesperrt (M 11:07) |
+| 9 Platte srv1941843/… | nur srv1941843 mit 97 % genannt | **srv1243952 jetzt mit 96 % belegt** (Inhaber-Konsole; „86 %" überholt), rund 300 GB außerhalb der Docker-Zählung, Ursache offen (Fortschr. Nr. 3) |
+| 10 Actions/Auto-Merge | Auto-Merge bei vielen PRs an | **Auto-Merge für 34 von 36 PRs abgeschaltet** (K, nicht zurückgelesen); Actions weiter ohne Budget (Fortschr. Nr. 7) |
+| L0 Snapshot | Snapshot-Ablauf als einziger Rückweg hervorgehoben | zusätzlich **automatische Sicherungen ohne Ablaufdatum** belegt (Fortschr. Nr. 2) |
+| L12 Cloudflare-Hosting | Kostenweg A/B/C offen | **Inhaber: kein Umzug jetzt** (Fortschr. Nr. 8) |
+| L20 Regelbetrieb | „kein Regelbetrieb ohne offene Sitzung" | **serverseitige Zeitpläne laufen** (zwei Trigger), eigener Dauerdienst fehlt weiter (Fortschr. Nr. 9) |
+
+Einzelheiten und Belege: Abschnitt „Fortschreibung 15.11.2026, Stand 11:10 UTC" am Ende.
 
 ---
 
@@ -286,17 +305,17 @@ Owner, nächster Schritt, Fälligkeit (CLAUDE.md).
 | L4 | Toter Tunnel `nexifyai-contabo` → `agenten`, `librechat` 530 | **I/SZ** | wieder verbinden oder auf `nexifyai-duesseldorf` umhängen (E4) | kurzfristig |
 | L5 | srv1243952 nicht einsehbar (trägt 57 von 126 Adressen) | **I** | Shell oder freigegebener nur-lesender Mess-Weg (E8) — **nur der Inhaber** | Inhaberentscheidung |
 | L6 | Cloudflare-Token mit DNS-Schreibrecht sichten (Zertifikatsdienst + neuer Token 14.11. 18:42) | **I** | Token-Liste und globalen Schlüssel prüfen, auf engste Zone begrenzen (E9) — **nur der Inhaber** | kurzfristig |
-| L7 | GitHub Actions ohne Budget → kein Gate, Merges blockiert | **I** | Actions-Budget/Abrechnung freigeben (OA-022) — **nur der Inhaber**. **Warnung:** danach gehen PRs mit eingeschaltetem Auto-Merge ohne weitere Abnahme nach `main` (OA-027); vorher Auto-Merge dort prüfen | Inhaberentscheidung |
+| L7 | GitHub Actions ohne Budget → kein Gate, Merges blockiert | **I** | Actions-Budget/Abrechnung freigeben (OA-022) — **nur der Inhaber**. **Warnung:** danach gehen PRs mit eingeschaltetem Auto-Merge ohne weitere Abnahme nach `main` (OA-027). Fortschr. Nr. 7: Auto-Merge ist für 34 von 36 PRs abgeschaltet worden (K, nicht zurückgelesen); vor der Budget-Freigabe in der Oberfläche prüfen | Inhaberentscheidung |
 | L8 | SSH für jede Quelle offen; 15 Schlüssel im Konto | **I** | auf feste Quellen/WireGuard begrenzen; Schlüssel aussortieren (OA-020) — **nur der Inhaber** | kurzfristig |
 
 ### Priorität 2 — Verkaufsfähiger Auftritt
 
 | # | Lücke | Owner | Nächster Schritt | Fälligkeit |
 |---|---|---|---|---|
-| L9 | Indexierung aus (`noindex,nofollow`); Rechtsform/Impressum offen | **I** | `NEXIFY_INDEXING=enabled` in Vercel (nach Impressum-Freigabe, OA-031/OA-009) — **nur der Inhaber** | Inhaberentscheidung |
+| L9 | **Teilweise erledigt** (Fortschr. Nr. 1): `NEXIFY_INDEXING=enabled` gesetzt, Hauptseiten `index, follow` (M 11:07). Offen: Rechtsform/Impressum (live „Eenmanszaak", im Code anderswo „B.V.") und Hauptdomain (.de und .cloud beide indexierbar) | **I** | Rechtsform widerspruchsfrei klären (OA-009); Hauptdomain/Canonical festlegen (OA-031) — **nur der Inhaber** | kurzfristig |
 | L10 | Vercel-Zahlung fehlgeschlagen (300,05 $) | **I** | Zahlung/Abrechnung klären — **nur der Inhaber** | dringend |
 | L11 | Verwaiste Vercel-Projekte melden Baufehler | **I** | Projekte trennen/löschen (OA-023) — **nur der Inhaber** | kurzfristig |
-| L12 | Cloudflare-Hosting-Umzug: Kostenweg unklar (lokal 46–56 ms > 10 ms Free-Tarif) | **I** | Kostenweg A/B/C wählen; Messung auf `workers.dev` (Token mit Worker-Recht), D-021 — **nur der Inhaber** | Inhaberentscheidung |
+| L12 | Cloudflare-Hosting-Umzug | **I** | **Inhaberentscheidung 15.11.: kein Umzug jetzt** (Fortschr. Nr. 8, Quelle K); Vercel bleibt. Noch nicht in `DECISIONS.md` nachgetragen | entschieden (kein Umzug) |
 
 ### Priorität 3 — Kundenwege, Leads, Umsatz
 
@@ -319,7 +338,7 @@ Owner, nächster Schritt, Fälligkeit (CLAUDE.md).
 |---|---|---|---|---|
 | L18 | Dokumentation vs. Messung (W1–W13): `hermes-webui`, `hostinger-srv1243952`, `cloudflare-dns` falsch im Lösungsregister | **AA** | eigener additiver PR der koord. Sitzung; Quelle = Netz-Inventur (E7) | kurzfristig |
 | L19 | Supabase-Zielinstanz (D-013) ohne belegte Adresse/Zugang; kein Shop-Schema/RLS/Backup | **I/AA** | Instanz benennen, Schema+RLS bauen, Migrationsplan (`DATA-STORE-001`) | mittelfristig |
-| L20 | Kein Regelbetrieb ohne offene Sitzung (Scheduler feuert in die Sitzung) | **I/AA** | verifiziert laufender externer Hostinger-Scheduler statt Chat-Regel | mittelfristig |
+| L20 | Regelbetrieb: serverseitige Zeitpläne laufen, aber kein eigener Dauerdienst auf eigener Infrastruktur | **I/AA** | Fortschr. Nr. 9: zwei Trigger laufen („Audit-Herzschlag" 2-stündlich, „Regelbetrieb Hauptsitzung" 6×/Tag); der frühere sitzungsunabhängige Regelbetrieb ist seit 14.11. 10:51 UTC aus. Offen: ein von einer offenen Sitzung unabhängiger Dauerdienst | mittelfristig |
 | L21 | Managed-LLM-Aufrufe ohne belegten Schlüssel (9router/Hermes) | **I** | OpenRouter-Schlüssel mit Ausgabenlimit eintragen — **nur der Inhaber** | Inhaberentscheidung |
 | L22 | Entscheidung „welcher Dienst liefert `teileklar.shop` künftig“ (alter srv1243952-Dienst vs. Vercel/Supabase) | **I** | nach L13 entscheiden; bis dahin alten Dienst stehen lassen (N, 10.4) | Inhaberentscheidung |
 | L23 | Zugriffsschutz `ssh.nexifyai.cloud` ungeprüft (200 ohne Access-Anmeldung) | **I** | im Cloudflare-Dashboard prüfen, ob eine Access-Anwendung davor liegt (E10) | kurzfristig |
@@ -334,6 +353,69 @@ Kundendomains, PR-Nummern, Zweignamen und Einzelheiten gehören nicht in dieses 
 zusätzlich D-020 (bestehendes Kundenmaterial einbinden, nur das Hero-Bild neu erzeugen,
 keine neuen Videos). Offene Inhaberentscheidungen und der Grafik-/Veredelungsstand werden
 in der Kundensitzung geführt.
+
+---
+
+## Fortschreibung 15.11.2026, Stand 11:10 UTC
+
+Neue belegte Befunde der koordinierenden Sitzung vom 15.11.2026, 10:34–11:10 UTC. Quelle
+**K** = Mitteilung der koordinierenden Sitzung (nicht öffentlich nachprüfbar, außer wo
+eine eigene Nachmessung **M** genannt ist). Keine Kundeneinzelheiten.
+
+1. **Indexierung freigegeben (BELEGT).** Der Inhaber hat die Sperre aufheben lassen;
+   `NEXIFY_INDEXING=enabled` ist in der Vercel-Produktion gesetzt und ausgeliefert. Eigene
+   Nachmessung (M, 11:07 UTC): `nexifyai.de/`, `/leistungen`, `/impressum` und
+   `www.nexifyai.cloud/` → `index, follow`, kein `x-robots-tag`; `/teileklar` → weiterhin
+   `noindex, nofollow` (zweiter Schalter bewusst aus, Shop 503); Sitemap 28 Adressen, keine
+   `/teileklar`. L9 damit teilweise erledigt. Offen (M 11:07): Impressum nennt live
+   „Eenmanszaak", im Code steht anderswo „B.V." → Rechtsform nicht widerspruchsfrei; sowie
+   die Hauptdomain-Frage (`.de` und `.cloud` beide indexierbar).
+2. **Sicherungen (K, 10:34 UTC).** Je Server ein Snapshot vom 14.11. 11:47 UTC, Ablauf
+   heute 11:47 UTC; **zusätzlich automatische Sicherungen ohne Ablaufdatum**, zuletzt
+   srv1941843 14.11. 16:14 UTC, srv1243952 14.11. 18:41 UTC. Der Snapshot-Ablauf (L0) ist
+   damit nicht der einzige Rückweg.
+3. **Speicher srv1243952 (K, Inhaber-Konsole 11:04 UTC).** 387 G groß, 368 G belegt,
+   16 G frei (**96 %**); Docker zählt nur ~62 GB (Images 53,71 GB, davon 8,42 GB
+   freigebbar; Volumes 7,43 GB; Container 0,65 GB; Build-Cache 0) — **rund 300 GB liegen
+   außerhalb der Docker-Zählung, Ursache offen**. Hostinger-Metrik 385,0 GB (08:15) →
+   394,3 GB (10:46). Swap 87–88 %, 11 Zombie-Prozesse, Neustart ausstehend, 100
+   Aktualisierungen offen. Die frühere Angabe „86 %" (Abschnitt 2) ist überholt.
+4. **Speicher srv1941843 (K).** Hostinger-Metrik 402,7 GB (09:15) → 408,9 GB (10:15) →
+   408,5 GB (10:46). Build-Cache/hängende Images brachten 0 GB (noch in Gebrauch).
+   Inhaberentscheidung: Altläufe verlustfrei archivieren (Archiv → Prüfung → Original
+   entfernen), läuft bei der Speicher-Sitzung; Cognee-Volumes nur lesend sichern, kein
+   Prune (deckt sich mit L1/L2 und dem Sperrvermerk).
+5. **Shop-Dienst (K).** Auf srv1243952 nennt die Inhaber-Konsole nur einen Container mit
+   Shop-Bezug, `shop-tls` (vermutlich ein Weiterleiter); **wo Shop-Dienst und Datenbank
+   tatsächlich laufen, bleibt OFFEN**. Entscheidung: Zielbild Vercel-Fassung, der alte
+   Dienst bleibt Rückweg; parallel wird der Umzug der Datenschicht auf Supabase/Postgres
+   (D-013) als Paket vorbereitet (Entwurf, ausgeschaltet). Betrifft L13/L22.
+6. **Tunnel (K, Cloudflare-Schnittstelle 10:58 UTC).** Vier Tunnel im Konto: einer
+   `healthy` mit Ursprung srv1243952; einer `healthy` mit Ursprung srv1941843 (seit 09.11.
+   09:33 UTC); **`nexifyai-contabo` `down`** ohne Verbindung (deckt sich mit B6/L4, M 09:57
+   UTC → `agenten`/`librechat` 530); ein vierter `healthy` für das Kundenprojekt mit
+   Ursprung auf einem dritten, hier nicht einsehbaren Kundenserver.
+7. **Auto-Merge (K).** `disable_pr_auto_merge` wurde für 34 von 36 offenen PRs aufgerufen
+   (alle außer 193 und 197): 23 Erfolge (alle Nicht-Entwürfe), 11 Fehler (alle Entwürfe).
+   **Nicht zurückgelesen** — das Feld ist mit den verfügbaren Werkzeugen nicht lesbar; vor
+   einer Budget-Freigabe in der Oberfläche prüfen (L7). Offene PRs jetzt: **36** (23 kein
+   Entwurf, 13 Entwurf).
+8. **Inhaberentscheidungen 15.11. (K, noch nicht in `DECISIONS.md`).** KI-Kennzeichnung
+   immer, in allen Projekten, im Footer; Design-Sperre in `make check` verdrahten (läuft
+   auf PR 202); Preise als „ab"-Preise in Textentwürfen, Referenzen nur anonym; **kein
+   Cloudflare-Hosting-Umzug jetzt** (L12); kein zweiter Zeitplan neben dem Regelbetrieb;
+   allgemeine Regel: ein Auftrag gilt zugleich als Freigabe der dafür nötigen Schritte,
+   wobei die Dauergrenzen (keine Zahlungen, nichts ohne Archiv löschen, keine Geheimnisse
+   im Klartext, keine Sicherheitslockerung) bestehen bleiben. **OFFEN:** Nachtrag in
+   `DECISIONS.md` durch die koordinierende Sitzung (von dieser Audit-Sitzung nicht geändert).
+9. **Zeitpläne (K, `list_triggers` 10:33 UTC).** „Audit-Herzschlag" alle 2 Stunden,
+   letzter Lauf 10:31 UTC erfolgreich; „NeXify Regelbetrieb in der Hauptsitzung" sechsmal
+   täglich, letzter Lauf 06:47 UTC erfolgreich; ein früherer sitzungsunabhängiger
+   Regelbetrieb ist seit 14.11. 10:51 UTC abgeschaltet. L20 entsprechend präzisiert:
+   serverseitige Zeitpläne laufen, ein eigener Dauerdienst auf eigener Infrastruktur fehlt.
+10. **Neue Arbeitszweige (K, alle Entwurf, ausgeschaltet):** `claude/prozess-automatisierung`,
+    `claude/shop-supabase-migration`, `claude/speicher-bereinigung`,
+    `claude/seiteninhalte-erweiterung`.
 
 ---
 
