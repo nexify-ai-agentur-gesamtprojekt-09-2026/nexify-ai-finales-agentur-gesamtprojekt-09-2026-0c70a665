@@ -156,7 +156,7 @@ class Collection:
         if any(taken(key) for key in ['_id', *self.unique]):
             raise DuplicateKeyError('duplicate')
         self.docs.append({'_id': doc['_id'], **doc})  # the server stores _id as the first field
-    async def replace_one(self, query, replacement, upsert=False):
+    async def replace_one(self, query, replacement, upsert=False, session=None):
         target = next((d for d in self.docs if matches(d, query)), None)
         if target is not None: self.docs[self.docs.index(target)] = copy.deepcopy(replacement)
         elif upsert: self._insert(copy.deepcopy(replacement))
