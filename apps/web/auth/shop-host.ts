@@ -69,7 +69,13 @@ export const SHOP_SHARED_PATHS: readonly string[] = ['/anmelden', '/registrieren
 export const SHOP_LANDING_TARGETS: Readonly<Record<string, string>> = { '/portal/kunde': '/bestellungen', '/intern/leitstand': '/admin' };
 
 const under = (path: string, prefixes: readonly string[]): boolean => prefixes.some(prefix => path === prefix || path.startsWith(prefix + '/'));
-const isAppInternal = (path: string): boolean => under(path, ['/api', '/_next']);
+/**
+ * Ordner unter public/: Dateien daraus (Bilder, Schriften, Filme) gehören zu beiden Adressräumen und werden auf der Shop-Domain
+ * unverändert ausgeliefert. Dateien direkt an der Wurzel laufen ohnehin nicht durch den Proxy (matcher in proxy.ts).
+ * shop-host.test.mjs hält die Liste mit dem Verzeichnis gleich.
+ */
+export const PUBLIC_ASSET_FOLDERS: readonly string[] = ['/.well-known', '/archiv', '/brand', '/fonts', '/glass', '/media'];
+const isAppInternal = (path: string): boolean => under(path, ['/api', '/_next', ...PUBLIC_ASSET_FOLDERS]);
 export const isShopSharedPath = (path: string): boolean => under(path, SHOP_SHARED_PATHS);
 
 /** /teileklar → /, /teileklar/x → /x. Nur für Pfade unter dem Präfix aufrufen. */
@@ -135,7 +141,7 @@ export function shopHostDecision(input: { hosts: readonly string[]; path: string
   else if (path !== '/' && agencyPaths.includes(path)) decision = { action: 'redirect', status: 308, location: AGENCY_ORIGIN + encoded(path) };
   else decision = { action: 'rewrite', shopHost: true, path: shopInternalPath(path) };
   // www.teileklar.shop liefert nie selbst aus: ein Sprung auf die kanonische Adresse, bereits mit dem endgültigen Pfad.
-  // /api ist ausgenommen (Aufrufe mit Inhalt werden nicht über einen zweiten Host geschickt, sie antworten direkt).
+  // /api und Dateien sind ausgenommen (Aufrufe mit Inhalt werden nicht über einen zweiten Host geschickt, sie antworten direkt).
   if (!onCanonicalHost && decision.action !== 'redirect' && !isAppInternal(path)) return { action: 'redirect', status: 308, location: SHOP_ORIGIN + encoded(path) };
   return decision;
 }

@@ -1,11 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync } from 'node:fs';
 import * as indexing from '../indexing.ts';
 import { APPROVED_INDEX_HOSTS, LEGAL_ROUTE_PATHS, indexablePaths, indexingDecision } from '../indexing.ts';
 import * as shopHost from '../shop-host.ts';
 import {
-  AGENCY_HOSTS, SHOP_CANONICAL_HOST, SHOP_HOST_SWITCH, shopHostOn, AGENCY_ORIGIN, SHOP_HOSTS, SHOP_HOST_HEADER, SHOP_LANDING_TARGETS, SHOP_ORIGIN, SHOP_SHARED_PATHS, agencyPagePaths, hostKind,
+  AGENCY_HOSTS, PUBLIC_ASSET_FOLDERS, SHOP_CANONICAL_HOST, SHOP_HOST_SWITCH, shopHostOn, AGENCY_ORIGIN, SHOP_HOSTS, SHOP_HOST_HEADER, SHOP_LANDING_TARGETS, SHOP_ORIGIN, SHOP_SHARED_PATHS, agencyPagePaths, hostKind,
   publicUrl, shopCanonicalBase, shopHostDecision, shopInternalPath, shopPublicHref, shopRobotsDisallow, stripShopPrefix,
 } from '../shop-host.ts';
 import { canonicalPath, privateRoute } from '../policy.ts';
@@ -84,6 +84,9 @@ const TABLE = [
   ['teileklar.shop', '/api/auth/me', pass('/api/auth/me', true)],
   ['teileklar.shop', '/api/internal/workspace', pass('/api/internal/workspace', true)],
   ['teileklar.shop', '/_next/data/x.json', pass('/_next/data/x.json', true)],
+  ['teileklar.shop', '/brand/nexify-figur.png', pass('/brand/nexify-figur.png', true)],
+  ['teileklar.shop', '/media/atelier/film.mp4', pass('/media/atelier/film.mp4', true)],
+  ['www.teileklar.shop', '/brand/nexify-figur.png', pass('/brand/nexify-figur.png', true)],
   ['teileklar.shop', '/anmelden', pass('/anmelden', true)],
   ['teileklar.shop', '/registrieren', pass('/registrieren', true)],
   ['teileklar.shop', '/passwort-vergessen', pass('/passwort-vergessen', true)],
@@ -294,4 +297,18 @@ test('Die beiden Shop-Seiten mit fester Adresse im Seitenkopf nehmen sie aus der
   assert.equal(publicUrl('/teileklar', {}), 'https://www.nexifyai.de/teileklar');
   assert.equal(publicUrl('/teileklar/shop', {}), 'https://www.nexifyai.de/teileklar/shop');
   assert.equal(publicUrl('/teileklar/shop', ON), 'https://teileklar.shop/shop');
+});
+
+test('Dateien aus public/ werden auf der Shop-Domain unverändert ausgeliefert: die Liste entspricht dem Verzeichnis', () => {
+  const folders = readdirSync(new URL('../../public/', import.meta.url), { withFileTypes: true }).filter(entry => entry.isDirectory()).map(entry => '/' + entry.name).sort();
+  assert.deepEqual([...PUBLIC_ASSET_FOLDERS].sort(), folders);
+  const firstSegments = new Set(shopPagePaths.map(stripShopPrefix).map(path => '/' + path.split('/')[1]));
+  for (const folder of PUBLIC_ASSET_FOLDERS) {
+    assert.equal(firstSegments.has(folder), false, 'Kollision mit Shop-Seite: ' + folder);
+    assert.deepEqual(decide('teileklar.shop', folder + '/datei.png'), pass(folder + '/datei.png', true));
+    // Ohne Schalter und auf den Agentur-Domains wie bisher.
+    assert.deepEqual(decide('www.nexifyai.de', folder + '/datei.png'), pass(folder + '/datei.png'));
+  }
+  // Kein geschützter Pfad liegt in einem dieser Ordner.
+  for (const path of protectedPaths) assert.equal(PUBLIC_ASSET_FOLDERS.some(folder => path === folder || path.startsWith(folder + '/')), false, path);
 });
