@@ -1,0 +1,12 @@
+# VORLAGE, nicht installiert und nicht aktiviert (DECISIONS.md D-016).
+[Unit]
+Description=NeXify Automatisierung anfragen (Zeitplan)
+
+[Timer]
+OnCalendar=Mon..Fri *-*-* 08..18:11:00 Europe/Amsterdam
+Unit=nexify-auto@anfragen.service
+Persistent=false
+RandomizedDelaySec=60
+
+[Install]
+WantedBy=timers.target

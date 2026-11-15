@@ -1,0 +1,5 @@
+[
+  {"ereignis": "anfrage.eingegangen", "anfrage_id": "TEST-0001", "art": "kontakt", "eingegangen": "2026-11-02T09:12:00+00:00"},
+  {"ereignis": "anfrage.eingegangen", "anfrage_id": "TEST-0002", "art": "werkstatt-termin", "eingegangen": "2026-11-03T14:00:00+00:00"},
+  {"ereignis": "anfrage.beantwortet", "anfrage_id": "TEST-0002"}
+]

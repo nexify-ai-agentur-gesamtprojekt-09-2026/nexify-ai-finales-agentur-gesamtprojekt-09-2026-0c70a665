@@ -1,0 +1,12 @@
+# VORLAGE, nicht installiert und nicht aktiviert (DECISIONS.md D-016).
+[Unit]
+Description=NeXify Automatisierung fristen (Zeitplan)
+
+[Timer]
+OnCalendar=*-*-* 07:31:00 Europe/Amsterdam
+Unit=nexify-auto@fristen.service
+Persistent=false
+RandomizedDelaySec=60
+
+[Install]
+WantedBy=timers.target

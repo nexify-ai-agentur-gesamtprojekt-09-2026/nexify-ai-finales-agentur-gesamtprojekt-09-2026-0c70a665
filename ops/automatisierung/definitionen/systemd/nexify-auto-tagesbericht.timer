@@ -1,0 +1,12 @@
+# VORLAGE, nicht installiert und nicht aktiviert (DECISIONS.md D-016).
+[Unit]
+Description=NeXify Automatisierung tagesbericht (Zeitplan)
+
+[Timer]
+OnCalendar=*-*-* 07:47:00 Europe/Amsterdam
+Unit=nexify-auto@tagesbericht.service
+Persistent=false
+RandomizedDelaySec=60
+
+[Install]
+WantedBy=timers.target

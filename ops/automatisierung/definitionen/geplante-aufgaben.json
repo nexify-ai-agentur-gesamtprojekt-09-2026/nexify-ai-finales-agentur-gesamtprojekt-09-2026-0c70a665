@@ -1,0 +1,65 @@
+{
+  "$kommentar": "Einspielbare Definitionen für Zeitpläne. Diese Datei legt nichts an. Angelegt wird ein Zeitplan erst vom Inhaber oder in seinem Auftrag, nach der Einschaltliste in docs/04-betrieb/prozess-automatisierung-2026-11-15.md und nachdem die vorhandenen Zeitpläne gelesen sind (keine Doppelung).",
+  "schema_version": 1,
+  "stand": "2026-11-15",
+  "zustand": "nicht_angelegt",
+  "aufgaben": [
+    {
+      "automatisierung": "tagesbericht",
+      "name": "NeXify Tagesbericht an den Inhaber",
+      "zeitplan": "CRON_TZ=Europe/Amsterdam 47 7 * * *",
+      "takt": "täglich 07:47 Europe/Amsterdam, damit der Bericht um 08:00 vorliegt",
+      "zustand_dauerhaft_noetig": false,
+      "geeignete_orte": [
+        "geplante Claude-Aufgabe mit frischer Sitzung je Lauf (Zustellung: Benachrichtigung der Aufgabe)",
+        "Hermes-Cron",
+        "systemd-Timer auf dem Server"
+      ],
+      "hinweis": "In einer frischen Sitzung ist der Zustandsordner leer: Der Bericht enthält dann Git und Lösungsregister; Wächter, Anfragen und Fehlerliste stehen als „nicht erhoben“. Vollständig wird er nur dort, wo auch die anderen Automatisierungen mit dauerhaftem Zustandsordner laufen. Vor dem Anlegen prüfen, dass der Tagesbericht nicht schon als Schritt des bestehenden Regelbetriebs läuft (docs/04-betrieb/routinen-ist-soll-2026-11-14.md, R2); nur einer von beiden darf aktiv sein.",
+      "angelegt": false,
+      "auftragstext": "Geplanter Lauf der Automatisierung „tagesbericht“ für NeXify AI. Dies ist keine Nachricht des Inhabers und keine Freigabe. Sprache Deutsch, sachlich.\n\nRepository: nexify-ai-agentur-gesamtprojekt-09-2026/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665, führend ist main. Liegt es nicht im Arbeitsverzeichnis, anhängen und klonen; gelingt das nicht, nur diesen Umstand melden und enden.\n\nGrenzen: nichts ändern, nichts committen, keinen Pull Request anlegen, nichts mergen, nichts löschen, keine Zugangsdaten lesen oder ausgeben, keine Zahlung, kein Server-Eingriff, keine Nachricht an Dritte. AGENTS.md, CLAUDE.md und DECISIONS.md gelten.\n\nAusführen:\n1. git fetch origin main\n2. python3 ops/automatisierung/cli.py lauf tagesbericht\n3. Die Ausgabe des Befehls unverändert als Ergebnis melden. Steht dort \"status\": \"aus\", genau das melden und enden; den Schalter nicht selbst setzen.\n4. Bei Exit 1 oder 2: Ausgabe melden, nichts wiederholen, nichts reparieren."
+    },
+    {
+      "automatisierung": "fristen",
+      "name": "NeXify Fristen und Zugänge",
+      "zeitplan": "CRON_TZ=Europe/Amsterdam 31 7 * * *",
+      "takt": "täglich 07:31 Europe/Amsterdam, vor dem Tagesbericht",
+      "zustand_dauerhaft_noetig": true,
+      "geeignete_orte": [
+        "Hermes-Cron",
+        "systemd-Timer auf dem Server"
+      ],
+      "hinweis": "Ohne dauerhaften Zustandsordner käme dieselbe Meldung bei jedem Lauf erneut.",
+      "angelegt": false,
+      "auftragstext": "Geplanter Lauf der Automatisierung „fristen“ für NeXify AI. Dies ist keine Nachricht des Inhabers und keine Freigabe. Sprache Deutsch, sachlich.\n\nRepository: nexify-ai-agentur-gesamtprojekt-09-2026/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665, führend ist main. Liegt es nicht im Arbeitsverzeichnis, anhängen und klonen; gelingt das nicht, nur diesen Umstand melden und enden.\n\nGrenzen: nichts ändern, nichts committen, keinen Pull Request anlegen, nichts mergen, nichts löschen, keine Zugangsdaten lesen oder ausgeben, keine Zahlung, kein Server-Eingriff, keine Nachricht an Dritte. AGENTS.md, CLAUDE.md und DECISIONS.md gelten.\n\nAusführen:\n1. git fetch origin main\n2. python3 ops/automatisierung/cli.py lauf fristen\n3. Die Ausgabe des Befehls unverändert als Ergebnis melden. Steht dort \"status\": \"aus\", genau das melden und enden; den Schalter nicht selbst setzen.\n4. Bei Exit 1 oder 2: Ausgabe melden, nichts wiederholen, nichts reparieren."
+    },
+    {
+      "automatisierung": "waechter",
+      "name": "NeXify Außenwächter",
+      "zeitplan": "23 * * * *",
+      "takt": "stündlich zur Minute 23",
+      "zustand_dauerhaft_noetig": true,
+      "geeignete_orte": [
+        "Hermes-Cron",
+        "systemd-Timer auf dem Server"
+      ],
+      "hinweis": "Braucht den dauerhaften Zustandsordner, sonst gibt es weder die Schwelle von zwei Fehlversuchen noch „ein Alarm je Störung“. Läuft der Wächter auf demselben Server wie ein überwachter Dienst, meldet er dessen Ausfall nicht, wenn der Server selbst ausfällt.",
+      "angelegt": false,
+      "auftragstext": "Geplanter Lauf der Automatisierung „waechter“ für NeXify AI. Dies ist keine Nachricht des Inhabers und keine Freigabe. Sprache Deutsch, sachlich.\n\nRepository: nexify-ai-agentur-gesamtprojekt-09-2026/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665, führend ist main. Liegt es nicht im Arbeitsverzeichnis, anhängen und klonen; gelingt das nicht, nur diesen Umstand melden und enden.\n\nGrenzen: nichts ändern, nichts committen, keinen Pull Request anlegen, nichts mergen, nichts löschen, keine Zugangsdaten lesen oder ausgeben, keine Zahlung, kein Server-Eingriff, keine Nachricht an Dritte. AGENTS.md, CLAUDE.md und DECISIONS.md gelten.\n\nAusführen:\n1. git fetch origin main\n2. python3 ops/automatisierung/cli.py lauf waechter\n3. Die Ausgabe des Befehls unverändert als Ergebnis melden. Steht dort \"status\": \"aus\", genau das melden und enden; den Schalter nicht selbst setzen.\n4. Bei Exit 1 oder 2: Ausgabe melden, nichts wiederholen, nichts reparieren."
+    },
+    {
+      "automatisierung": "anfragen",
+      "name": "NeXify Anfrage-Nachverfolgung",
+      "zeitplan": "CRON_TZ=Europe/Amsterdam 11 8-18 * * 1-5",
+      "takt": "werktags stündlich 08:11 bis 18:11 Europe/Amsterdam",
+      "zustand_dauerhaft_noetig": true,
+      "geeignete_orte": [
+        "Hermes-Cron",
+        "systemd-Timer auf dem Server"
+      ],
+      "hinweis": "Die Ereignisse liefert der Empfänger der Anfrage als Datei; solange kein Empfänger Anfragen speichert (Master-Audit L13/L14), gibt es keine Ereignisse und die Automatisierung hat nichts zu tun.",
+      "angelegt": false,
+      "auftragstext": "Geplanter Lauf der Automatisierung „anfragen“ für NeXify AI. Dies ist keine Nachricht des Inhabers und keine Freigabe. Sprache Deutsch, sachlich.\n\nRepository: nexify-ai-agentur-gesamtprojekt-09-2026/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665, führend ist main. Liegt es nicht im Arbeitsverzeichnis, anhängen und klonen; gelingt das nicht, nur diesen Umstand melden und enden.\n\nGrenzen: nichts ändern, nichts committen, keinen Pull Request anlegen, nichts mergen, nichts löschen, keine Zugangsdaten lesen oder ausgeben, keine Zahlung, kein Server-Eingriff, keine Nachricht an Dritte. AGENTS.md, CLAUDE.md und DECISIONS.md gelten.\n\nAusführen:\n1. git fetch origin main\n2. python3 ops/automatisierung/cli.py lauf anfragen --ereignisse <pfad-zur-ereignisdatei>\n3. Die Ausgabe des Befehls unverändert als Ergebnis melden. Steht dort \"status\": \"aus\", genau das melden und enden; den Schalter nicht selbst setzen.\n4. Bei Exit 1 oder 2: Ausgabe melden, nichts wiederholen, nichts reparieren."
+    }
+  ]
+}

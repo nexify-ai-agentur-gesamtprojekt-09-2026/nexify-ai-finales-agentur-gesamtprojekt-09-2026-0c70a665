@@ -22,17 +22,17 @@ Vorgehen, Pflege und Umgang mit Schlüsseln aus dem Chat: `.claude/skills/nexify
 | läuft belegt | 30 |
 | läuft unbelegt | 18 |
 | defekt | 6 |
-| geplant | 1 |
+| geplant | 2 |
 | stillgelegt | 1 |
 | nicht verfolgt | 2 |
-| **gesamt** | **58** |
+| **gesamt** | **59** |
 
 | Rolle im Plan | Anzahl |
 |---|---|
 | tragend | 21 |
 | doppelt | 8 |
 | abzulösen | 2 |
-| unklar | 27 |
+| unklar | 28 |
 
 ## Übersicht
 
@@ -85,6 +85,7 @@ Vorgehen, Pflege und Umgang mit Schlüsseln aus dem Chat: `.claude/skills/nexify
 | `github-actions` | GitHub Actions | Code | defekt | tragend | keine | `ci` `automatisierung` `pruefung` `code` |
 | `gitlab` | GitLab (selbst gehostet, mit Runner) | Code | läuft belegt | unklar | keine (AGENTS.md: nachgelagerte Spiegelung, keine zweite Schreibquelle) | `code` `ci` `spiegel` `server` `speicherfresser` |
 | `n8n` | n8n | Automatisierung | läuft unbelegt | unklar | keine | `automatisierung` `workflows` `integrationen` |
+| `prozess-automatisierung` | Vorbereitete Prozess-Automatisierungen (Tagesbericht, Außenwächter, Anfrage-Nachverfolgung, Fristen) | Automatisierung | geplant | unklar | keine (Auftrag des Inhabers vom 15.11.2026 zur Vorbereitung; Einschalten ist eine eigene Entscheidung) | `automatisierung` `tagesbericht` `ueberwachung` `alarm` `wiedervorlage` `anfragen` `zeitplan` |
 | `searxng` | SearXNG | Agenten-Werkzeuge | läuft belegt | unklar | keine | `suche` `websuche` `agenten` `server` |
 | `bookstack` | BookStack (Wiki) | Gedächtnis und Wissen | läuft belegt | unklar | keine | `wiki` `dokumentation` `wissen` `server` |
 | `bisheng` | Bisheng (`dsh-enterprise`) | Agenten-Plattform | läuft belegt | unklar | keine | `agenten-plattform` `llm-anwendung` `server` `speicherfresser` |
@@ -139,6 +140,7 @@ Vorgehen, Pflege und Umgang mit Schlüsseln aus dem Chat: `.claude/skills/nexify
 - `posthog` (PostHog): Wird PostHog genutzt und ausgewertet, und ist die Einwilligung der Besucher dafür geregelt?
 - `gitlab` (GitLab (selbst gehostet, mit Runner)): Wird die GitLab-Spiegelung noch gebraucht? Falls ja: Prometheus-Aufbewahrung begrenzen; falls nein: archivieren und stilllegen.
 - `n8n` (n8n): Gibt es noch eine n8n-Instanz, und wird sie gebraucht? Unabhängig davon ist der Schlüssel aus der Mem-Notiz zu widerrufen.
+- `prozess-automatisierung` (Vorbereitete Prozess-Automatisierungen (Tagesbericht, Außenwächter, Anfrage-Nachverfolgung, Fristen)): An welchem dauerhaften Ort sollen die Automatisierungen laufen (Hermes-Cron nach Funktionsnachweis, Zeitgeber auf dem Server oder geplante Claude-Aufgabe nur für den Tagesbericht), und welche werden eingeschaltet?
 - `searxng` (SearXNG): Suchen die Agenten tatsächlich über SearXNG? Falls ja behalten, sonst Stilllege-Kandidat.
 - `bookstack` (BookStack (Wiki)): Wird das Wiki genutzt, oder ist die Dokumentation im Repository führend und das Wiki kann archiviert werden?
 - `bisheng` (Bisheng (`dsh-enterprise`)): Wofür läuft Bisheng, gehört es zu einem Kundenprojekt, und kann es stillgelegt werden?
@@ -901,6 +903,23 @@ Vorgehen, Pflege und Umgang mit Schlüsseln aus dem Chat: `.claude/skills/nexify
 | Zugang (Bezeichnung) | Art | Ablageort des Werts | Rechteumfang | erstellt | offengelegt | Erneuerung fällig | Hinweis |
 |---|---|---|---|---|---|---|---|
 | n8n-Schlüssel | API-Schlüssel | steht laut Befund im Klartext in einer Mem-Notiz vom März 2026 | nicht belegt | März 2026 oder früher | ja | ja | Register der offenen Arbeiten (`docs/09-final/offene-arbeiten-2026-11-14.md`), OA-014: widerrufen und Notiz bereinigen (nur Inhaber). Der Wert wurde nicht gelesen. |
+
+### Vorbereitete Prozess-Automatisierungen (Tagesbericht, Außenwächter, Anfrage-Nachverfolgung, Fristen) · `prozess-automatisierung`
+
+- **Tags:** `automatisierung` `tagesbericht` `ueberwachung` `alarm` `wiedervorlage` `anfragen` `zeitplan`
+- **Kategorie:** Automatisierung
+- **Zweck:** Vier eigene Automatisierungen im Repository, die wiederkehrende Abläufe der Agentur übernehmen, sobald der Inhaber sie einschaltet; ohne neuen Dienst und ohne Modellaufruf.
+- **Ort:** `ops/automatisierung/` (Code, Vorlagen, Zeitplan-Definitionen), `config/prozess-automatisierung.json` (Schalter und Grenzen); ein dauerhafter Laufort ist nicht festgelegt
+- **Zustand:** geplant (Stand 2026-11-15). Beleg: `docs/04-betrieb/prozess-automatisierung-2026-11-15.md`: gebaut und getestet (`tests/test_prozess_automatisierung.py`), alle Schalter aus, kein Zeitplan angelegt, kein Lauf im Betrieb.
+- **Entscheidung:** keine (Auftrag des Inhabers vom 15.11.2026 zur Vorbereitung; Einschalten ist eine eigene Entscheidung)
+- **Rolle im Plan:** unklar → Frage: An welchem dauerhaften Ort sollen die Automatisierungen laufen (Hermes-Cron nach Funktionsnachweis, Zeitgeber auf dem Server oder geplante Claude-Aufgabe nur für den Tagesbericht), und welche werden eingeschaltet?
+- **Wann nutzen:** Wenn ein wiederkehrender Ablauf (Bericht, Erreichbarkeitsprüfung, Erinnerung, Wiedervorlage) automatisiert werden soll: zuerst hier erweitern statt einen neuen Dienst vorzuschlagen.
+- **Nicht nutzen für:** Versand an Kunden oder Dritte, Werbemails (dafür der Einwilligungsweg), Zahlungen, Eingriffe auf Servern, Aufgaben, die ein Modell brauchen.
+- **Abhängigkeiten:** `resend`, `hermes`, `github`
+
+| Zugang (Bezeichnung) | Art | Ablageort des Werts | Rechteumfang | erstellt | offengelegt | Erneuerung fällig | Hinweis |
+|---|---|---|---|---|---|---|---|
+| Schalter und Mail-Variablen der Automatisierungen (Namen in ops/automatisierung/definitionen/umgebung.env.example) | Sammlung von Umgebungsvariablen, darunter der Resend-Schlüssel für die interne Benachrichtigung | noch nirgends angelegt; vorgesehen ist die Umgebung des Laufortes (Umgebungsdatei auf dem Server oder Umgebung der geplanten Aufgabe) | Resend: nur Versand; Empfänger ist ausschließlich die interne Adresse | nicht angelegt | nein | nein | – |
 
 ### SearXNG · `searxng`
 

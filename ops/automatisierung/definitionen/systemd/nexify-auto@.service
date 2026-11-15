@@ -1,0 +1,22 @@
+# VORLAGE, nicht installiert. Einspielen nur mit Freigabe des Inhabers je Schritt (DECISIONS.md D-016).
+# Instanzname = Kennung der Automatisierung: tagesbericht, waechter, anfragen, fristen.
+# <REPO> = Pfad des ausgecheckten Monorepos auf dem Server, <BENUTZER> = Dienstkonto ohne Root-Rechte.
+[Unit]
+Description=NeXify Automatisierung %i (ein Lauf)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=<BENUTZER>
+WorkingDirectory=<REPO>
+# Schalter und Namen der Variablen: definitionen/umgebung.env.example. Die Datei mit den Werten liegt
+# nur auf dem Server (Rechte 600) und nie im Repository.
+EnvironmentFile=/etc/nexify/automatisierung.env
+ExecStart=/usr/bin/python3 ops/automatisierung/cli.py lauf %i
+TimeoutStartSec=180
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/var/lib/nexify/automatisierung
+PrivateTmp=yes
