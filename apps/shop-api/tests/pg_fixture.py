@@ -30,12 +30,14 @@ def admin_dsn():
 
 
 def dsn_for(database, user=None):
+    admin_dsn()  # skips before the driver is needed
     from psycopg.conninfo import make_conninfo
     extra = {'user': user, 'password': FIXTURE_PASSWORD} if user else {}
     return make_conninfo(admin_dsn(), dbname=database, **extra)
 
 
 def run(database, *statements):
+    admin_dsn()
     import psycopg
     with psycopg.connect(dsn_for(database), autocommit=True) as conn:
         for statement in statements:

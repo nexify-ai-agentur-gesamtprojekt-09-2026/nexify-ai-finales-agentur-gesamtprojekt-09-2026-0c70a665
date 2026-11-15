@@ -1120,6 +1120,73 @@ class MongoSpecifics:
             await self.store.carts.in_transaction(work)
 
 
+class PostgresSpecifics:
+    """What only the PostgreSQL stores have to state; not part of the shared contract."""
+    async def test_instants_are_kept_to_the_millisecond_like_the_previous_store(self):
+        fine = NOW + timedelta(microseconds=123987)
+        await self.store.accounts.create_session('1' * 64, 'user_a', 'c', fine)
+        self.assertEqual(instant((await self.store.accounts.session('1' * 64))['expires_at']), NOW + timedelta(microseconds=123000))
+        await self.store.accounts.record_login_failure('a@example.invalid', fine)
+        self.assertEqual(await self.store.accounts.count_login_failures('a@example.invalid', NOW + timedelta(microseconds=123500)), 1)
+        await self.store.accounts.create_password_reset('a' * 64, 'user_a', fine)
+        self.assertIsNone(await self.store.accounts.consume_password_reset('a' * 64, NOW + timedelta(microseconds=123400)), 'expired at its stored instant')
+        await self.seed('outbox', [mail('dated', claimed_at=datetime(2026, 11, 14, 12, 0, 0, 123987))])
+        self.assertEqual((await self.store.outbox.get('dated'))['claimed_at'], datetime(2026, 11, 14, 12, 0, 0, 123000), 'a stored instant comes back without a zone')
+
+    async def test_the_protective_size_limit_and_unstorable_data_are_reported_as_before(self):
+        with self.assertRaises(self.store.ArchiveTooLarge):
+            self.store.carts.check_archivable({'padding': 'x' * (16 * 1024 * 1024)})
+        with self.assertRaises(self.store.StoredDataInvalid):
+            self.store.carts.check_archivable({'value': object()})
+        self.assertIsNone(self.store.carts.check_archivable({'padding': 'x' * 1024}))
+
+    async def test_amounts_that_are_not_whole_cents_never_reach_the_table(self):
+        for field, value in (('total_cents', 19.95), ('total_cents', '1995'), ('subtotal_cents', -1), ('shipping_cents', float('nan')), ('paid_transitions', 2), ('note', 'a\x00b')):
+            with self.subTest(field=field, value=value), self.assertRaises(self.store.StoredDataInvalid):
+                await self.store.orders.add(order('bad', **{field: value}))
+            self.assertIsNone(await self.store.orders.get('bad'))
+        await self.store.orders.add(order('o1'))
+        with self.assertRaises(self.store.StoredDataInvalid):
+            await self.store.orders.change_delivery_state('o1', None, {'total_cents': 0.5})
+        self.assertEqual(await self.store.orders.get('o1'), order('o1'), 'the rejected change left the order as ordered')
+
+    async def test_expired_sessions_tokens_and_old_failures_are_removed_on_request_only(self):
+        await self.store.accounts.create_session('1' * 64, 'user_a', 'c', NOW - timedelta(seconds=1))
+        await self.store.accounts.create_session('2' * 64, 'user_a', 'c', NOW + timedelta(seconds=1))
+        await self.store.accounts.create_password_reset('a' * 64, 'user_a', NOW)
+        await self.store.accounts.create_password_reset('b' * 64, 'user_a', NOW + timedelta(minutes=1))
+        await self.store.accounts.record_login_failure('a@example.invalid', NOW - timedelta(seconds=901))
+        await self.store.accounts.record_login_failure('a@example.invalid', NOW - timedelta(seconds=899))
+        self.assertIsNotNone(await self.store.accounts.session('1' * 64), 'nothing expires by itself; the caller checks the instant')
+        self.assertEqual(await self.store.accounts.purge_expired(NOW, 900), 3)
+        self.assertIsNone(await self.store.accounts.session('1' * 64))
+        self.assertIsNotNone(await self.store.accounts.session('2' * 64))
+        self.assertEqual(await self.store.accounts.count_login_failures('a@example.invalid', NOW - timedelta(days=1)), 1)
+        self.assertEqual((await self.store.accounts.consume_password_reset('b' * 64, NOW))['user_id'], 'user_a')
+        self.assertEqual(await self.store.accounts.purge_expired(NOW, 900), 0)
+
+    async def test_two_concurrent_merges_of_one_cart_take_its_items_exactly_once(self):
+        import asyncio
+        await self.store.carts.replace_items('guest:one', None, [ITEM], create=True)
+        both_have_read, runs = asyncio.Event(), []
+        async def merge(target):
+            async def work(tx):
+                guest = await self.store.carts.get('guest:one', tx=tx)
+                runs.append((target, guest['revision']))
+                if len(runs) >= 2: both_have_read.set()
+                await asyncio.wait_for(both_have_read.wait(), 5)
+                await self.store.carts.replace_items(target, None, guest['items'], create=True, tx=tx)
+                await self.store.carts.replace_items('guest:one', guest['revision'], [], create=False, tx=tx, archive_entry={'id': target, 'taken': len(guest['items'])})
+            await self.store.carts.in_transaction(work)
+        await asyncio.gather(merge('user:two'), merge('user:three'))
+        self.assertEqual(sorted(revision for _, revision in runs), [1, 1, 2], 'both read the same state; the loser was run again on the new one')
+        guest = await self.store.carts.get('guest:one')
+        self.assertEqual((guest['items'], guest['revision']), ([], 3))
+        self.assertEqual([entry['taken'] for entry in guest['merge_history']], [1, 0], 'the second merge found the cart already emptied')
+        taken = sorted([len((await self.store.carts.get(owner))['items']) for owner in ('user:two', 'user:three')])
+        self.assertEqual(taken, [0, 1], 'the position exists once, not in both accounts')
+
+
 class InMemoryCatalog(CatalogContract, InMemoryBinding): pass
 class InMemoryCarts(CartContract, MongoSpecifics, InMemoryBinding): pass
 class InMemoryAccounts(AccountContract, InMemoryBinding): pass
@@ -1147,6 +1214,7 @@ class DisposablePostgresOutbox(OutboxContract, DisposablePostgresBinding): pass
 class DisposablePostgresOrders(OrderContract, DisposablePostgresBinding): pass
 class DisposablePostgresPayments(PaymentContract, DisposablePostgresBinding): pass
 class DisposablePostgresSettings(SettingsContract, DisposablePostgresBinding): pass
+class DisposablePostgresSpecifics(PostgresSpecifics, DisposablePostgresBinding): pass
 
 
 if __name__ == '__main__': unittest.main()
