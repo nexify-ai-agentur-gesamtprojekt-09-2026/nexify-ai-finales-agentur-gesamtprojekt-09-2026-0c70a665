@@ -176,10 +176,14 @@ Dokumentations­korrekturen aus der Netz-Inventur (E7) sind dort noch nicht nach
   DB-Bindung ist also inzwischen vorhanden, der Katalog aber leer (Import gesperrt, V1).
   Zielbild nach D-013 bleibt die eigene Supabase-Instanz (PostgreSQL mit RLS); Adresse und
   Zugang sind im Repository nicht belegt (Konflikt `DATA-STORE-001`, OFFEN).
-- **Einordnung:** Ein Umschalten des DNS auf Vercel würde heute den funktionierenden
-  Katalog (200) durch 503 ersetzen (N, Abschnitt 10.3). Das DNS von `teileklar.shop` wurde
-  zuletzt am 15.09.2026 geändert, in den letzten 14 Tagen nicht (N). OFFEN (Inhaber):
-  welcher Dienst `teileklar.shop` künftig ausliefert (N, Abschnitt 10.4) — L22.
+- **Einordnung (Stand 12:26 UTC):** Ein Umschalten des DNS von `teileklar.shop` auf Vercel
+  würde heute den funktionierenden Katalog (200, `total` 3720) durch den **leeren**
+  Vercel-Katalog ersetzen — Vercel liefert seit ~11:52 UTC 200 mit `products:0` (M 12:26),
+  nicht mehr 503 (so die historische Einordnung in N, Abschnitt 10.3). Das belegte
+  Hindernis ist also jetzt der leere Katalog, nicht mehr der 503. Das DNS von
+  `teileklar.shop` wurde zuletzt am 15.09.2026 geändert, in den letzten 14 Tagen nicht (N).
+  OFFEN (Inhaber): welcher Dienst `teileklar.shop` künftig ausliefert (N, Abschnitt 10.4) —
+  L22; Umschaltbedingungen V2.
 
 ### 3.2 Werkstattservice und Termine
 
@@ -232,7 +236,7 @@ Projekts SK siehe Abschnitt 6a (nicht hier geführt).
 
 | # | Störung | Zeitraum (UTC) | Quelle | Stand / Rückweg |
 |---|---|---|---|---|
-| B1 | `nexifyai.de` von Hostinger-NS auf Cloudflare umgezogen (größte Änderung der 14 Tage) | 13.11. 21:50–21:53 | N | Rückweg: NS bei Hostinger zurück auf `dns-parking.com`; abgehängte Hostinger-Zone als Rückweg behalten (E5) |
+| B1 | `nexifyai.de` von Hostinger-NS auf Cloudflare umgezogen (größte Änderung der 14 Tage) | 13.11. 21:50–21:53 | N | Rückweg: NS bei Hostinger zurück auf `dns-parking.com` — **aber zuerst Zielrecords prüfen/angleichen:** die abgehängte Hostinger-Zone führt die Hauptadresse noch auf srv1243952 (N, E5); ein bloßer NS-Rückwechsel würde die heute funktionierende Vercel-Seite wieder auf den uneinsehbaren Server umleiten. Zone als Rückweg behalten (E5) |
 | B2 | Zielwechsel der Website `nexifyai.de` viermal (Vercel → srv1243952 → Vercel …) | 13.11. 09:34 – 14.11. 05:36 | N, S | seit 14.11. 05:36 Vercel 200; bestätigt M 15.11. 09:19 |
 | B3 | **Clerk-Verlust:** fünf Einträge fehlten öffentlich (NXDOMAIN) | 13.11. 21:53 – 15.11. ~09:25 | N; M (09:19 NXDOMAIN) | **BEHOBEN:** neu angelegt (nur DNS, Quelle K); Gegenprobe M 09:57 UTC: alle fünf lösen auf |
 | B4 | **DKIM-Proxy:** drei `hostingermail-*._domainkey.nexifyai.de` als CNAME mit Proxy → DKIM nicht prüfbar | 13.11. 21:53 – 15.11. ~09:25 | N; M | **BEHOBEN:** auf „nur DNS“ gestellt (Quelle K); Gegenprobe M 09:57 UTC: lösen als CNAME auf Hostinger-DKIM auf |
@@ -298,8 +302,14 @@ Priorisiert nach Wirkung × Aufwand × Risiko. Owner-Typ: **I** = nur Inhaberent
 **SZ** = Serverzugriff (Shell/Freigabe nach D-016), **AA** = Agentenarbeit. Je Punkt
 Owner, nächster Schritt, Fälligkeit (CLAUDE.md).
 
-Fälligkeiten sind Zieltermine dieser Audit-Sitzung; reine Inhaberentscheidungen tragen
-„Inhaber (offen)“, weil ihr Termin nicht von einer Agentensitzung gesetzt werden kann.
+**Keine zweite Wahrheit (nexify-stand-halten):** Dieser Lückenplan ist eine *Befund- und
+Vorschlagsliste* der Audit-Sitzung, **kein** Aufgabenregister. Führend für Aufgaben, Owner
+und Termine bleiben `PROGRESS.md` und die Arbeitsliste `offene-arbeiten-2026-11-14.md`
+(OA-…); die L-Nummern und Fälligkeiten hier sind Zieltermine/Empfehlungen und werden erst
+verbindlich, wenn der zuständige Writer sie als OA-Einträge in das führende Register
+übernimmt. Wo diese Liste vom führenden Register abweicht, gilt das Register. Reine
+Inhaberentscheidungen tragen „Inhaber (offen)“, weil ihr Termin nicht von einer
+Agentensitzung gesetzt werden kann.
 
 ### Priorität 0 — Snapshot heute 11:47 UTC abgelaufen
 
@@ -355,7 +365,7 @@ Fälligkeiten sind Zieltermine dieser Audit-Sitzung; reine Inhaberentscheidungen
 | L22 | Entscheidung „welcher Dienst liefert `teileklar.shop` künftig“ (alter srv1243952-Dienst vs. Vercel/Supabase) | **I** | nach L13 entscheiden; bis dahin alten Dienst stehen lassen (N, 10.4; V2/V4) | nach L13 (Inhaber) |
 | L23 | Zugriffsschutz `ssh.nexifyai.cloud` ungeprüft (200 ohne Access-Anmeldung) | **I** | im Cloudflare-Dashboard prüfen, ob eine Access-Anwendung davor liegt (E10) | bis 18.11. (Inhaber) |
 | L24 | `autoconfig`/`autodiscover.nexifyai.de` hinter Proxy; automatische Mail-Einrichtung ungeprüft | **I/AA** | auf „nur DNS“ stellen und nachmessen (E2) | bis 18.11. |
-| L25 | **Ort und Name der Datenbank des alten Shops unbelegt** und **widersprüchlich**: der Supabase-Migrationsbericht vermutet die Mongo-DB auf srv1941843, dieses Audit verortet den ausliefernden Dienst auf srv1243952 (beide ohne Einblick) | **I/AA** | auf einsehbarem Server feststellen, wo Shop-Dienst und DB wirklich laufen (hängt an L5) | nach L5 |
+| L25 | **Backend-/DB-Zuordnung des alten Shops ungeklärt** (kein Widerspruch): der ausliefernde Dienst/Weiterleiter (`shop-tls`?) sitzt laut Messung auf srv1243952, die Mongo-DB vermutet der Migrationsbericht auf srv1941843 — ein Weiterleiter auf dem einen Server kann eine DB auf dem anderen nutzen; beide ohne Einblick belegt | **I/AA** | auf einsehbarem Server Weiterleitungsziel und DB-Bindung feststellen (hängt an L5) | nach L5 |
 | L26 | **DeepSeek-Delegation** (`claude/deepseek-arbeiter`): Router `ai-router.nexifyai.cloud` bietet laut Zweig keinen datierten Modellstand, der Adapter verlangt die Endung „1017“ (`config/llm-policy.json`); kein Schlüssel hinterlegt | **I/AA** | Modellstand am Router datiert belegen; Schlüssel mit Deckel 5 USD/Tag eintragen (V10, L21) | bis 18.11. |
 | L27 | **Rechtsform OFFEN**: live „Eenmanszaak", im Code „B.V."; Register KvK 90483944 genannt, **Registerauszug nicht belegt** | **I** | Registerauszug beiziehen, Impressum/Code widerspruchsfrei machen (OA-009) — **nur der Inhaber** | Inhaber (offen) |
 | L28 | **Aussortier-Sitzung hat bisher 0 GiB selbst entfernt** (nur das Inhaber-Archivskript wirkt); **Port 8090 ungeklärt** (alter Shop-Dienst auf srv1941843 laut Tunnel-Zuordnung, ohne veröffentlichten Port) | **SZ** | Klasse A/B einzeln nach Freigabe entfernen; 8090 auf dem einsehbaren Server klären | bis 18.11. (Serverzugriff) |
@@ -497,7 +507,7 @@ Anmeldung) und eigene Nachmessungen (**M**, 12:26–12:27 UTC). Unbelegtes als O
    | `claude/rechtstexte-de-nl` (`0fcc5b1`) | Belegtes EU-Rechts-Quellenregister als Grundlage der Rechtstexte (NL-Unternehmen, B2B-Agentur + B2C/B2B-Shop) | WIP; Primärquellen am 15.11. abgerufen (DSGVO, SCC 2021/914, DPF 2023/1795 u. a.); keine Rechtsberatung; nationales Umsetzungsrecht offen | Rechtstexte auf dieser Basis überarbeiten; **Inhaber:** Freigabe der Rechtstexte (D-017), anwaltliche Prüfung, Rechtsform KvK 90483944 (L27) |
    | `claude/shop-eigene-domain` (`33f3cb0`) | TEILEKLAR auf eigener Domain, hinter Schalter `NEXIFY_SHOP_HOST` (Standard AUS) | Code + Tests (`apps/web/auth/shop-host.ts`, `shop-host.test.mjs`), ausgeschaltet | Nach Shop-Live Schalter setzen; **Inhaber:** Domainwahl/Umschaltung (V2) |
    | `claude/server-aussortieren` (`dc6f6a1`, 12:23) | Kandidatenliste + Löschprotokoll beide Server nach 30-Tage-Regel (V9) | WIP vor Ausführung; srv1941843 durch Inhaber-Archivskript von 99 % (2 GiB frei, 11:40) auf 95 % (19,8 GiB frei, 12:19); **Sitzung selbst hat 0 GiB entfernt**; Klasse B klein (~5 GiB), Cognee gesperrt | Klasse A/B einzeln nach Freigabe entfernen; Port 8090 klären (L28); **Inhaber/Serverzugriff** je Schritt (D-016) |
-   | `claude/shop-supabase-migration` (`740d31d`) | Shop-Datenschicht MongoDB → Supabase/PostgreSQL (D-013) | Vorbereitet, getestet, ausgeschaltet (Schalter `SHOP_STORE_BACKEND=mongodb`); Zielschema + RLS lokal einspielbar | Zwingend fehlt: belegter Supabase-Zugang; Import + Vercel-Bindung sprechen noch MongoDB; kein Lauf gegen echtes Mongo/Supabase; Ort der alten DB widersprüchlich (L25). **Inhaber:** Supabase-Instanz/Zugang, Umschaltfreigabe |
+   | `claude/shop-supabase-migration` (`740d31d`) | Shop-Datenschicht MongoDB → Supabase/PostgreSQL (D-013) | Vorbereitet, getestet, ausgeschaltet (Schalter `SHOP_STORE_BACKEND=mongodb`); Zielschema + RLS lokal einspielbar | Zwingend fehlt: belegter Supabase-Zugang; Import + Vercel-Bindung sprechen noch MongoDB; kein Lauf gegen echtes Mongo/Supabase; Backend-/DB-Zuordnung der alten Mongo-DB ungeklärt (L25). **Inhaber:** Supabase-Instanz/Zugang, Umschaltfreigabe |
    | `claude/deepseek-arbeiter` (`c96f1d0`, erster Push 12:28) | DeepSeek-Delegation über 9Router (V10) | Zweig vorhanden; Router `ai-router.nexifyai.cloud` ohne datierten Modellstand, Adapter verlangt Endung „1017"; **kein Schlüssel hinterlegt** | Modellstand datiert belegen; Schlüssel mit Deckel 5 USD/Tag (L26); **Inhaber** |
 
    Noch ohne Push und daher **OFFEN** (kein Zweigstand lesbar): `claude/chat-standard-offen`.
