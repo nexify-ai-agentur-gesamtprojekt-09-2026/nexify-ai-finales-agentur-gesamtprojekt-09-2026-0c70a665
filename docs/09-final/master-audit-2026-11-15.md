@@ -96,7 +96,7 @@ einsehbar** (Hostinger-API `[VPS:2044]`); dieser Server bleibt der blinde Fleck
 |---|---|---|
 | 1 Indexierung | `noindex, nofollow` auf allen vier Hauptseiten | **freigegeben:** Hauptseiten `index, follow`, nur `/teileklar` weiter gesperrt (M 11:07) |
 | 9 Platte srv1941843/… | nur srv1941843 mit 97 % genannt | **srv1243952 jetzt mit 96 % belegt** (Inhaber-Konsole; „86 %" überholt), rund 300 GB außerhalb der Docker-Zählung, Ursache offen (Fortschr. Nr. 3) |
-| 10 Actions/Auto-Merge | Auto-Merge bei vielen PRs an | **Auto-Merge für 34 von 36 PRs abgeschaltet** (K, nicht zurückgelesen); Actions weiter ohne Budget (Fortschr. Nr. 7) |
+| 10 Actions/Auto-Merge | Auto-Merge bei vielen PRs an | **Auto-Merge-Abschaltung für 34 von 36 PRs aufgerufen; nur 23 erfolgreich (Nicht-Entwürfe), 11 Fehler (Entwürfe)** (K, nicht zurückgelesen); Actions weiter ohne Budget (Fortschr. Nr. 7) |
 | L0 Snapshot | Snapshot-Ablauf als einziger Rückweg hervorgehoben | zusätzlich **automatische Sicherungen ohne Ablaufdatum** belegt (Fortschr. Nr. 2) |
 | L12 Cloudflare-Hosting | Kostenweg A/B/C offen | **Inhaber: kein Umzug jetzt** (Fortschr. Nr. 8) |
 | L20 Regelbetrieb | „kein Regelbetrieb ohne offene Sitzung" | **serverseitige Zeitpläne laufen** (zwei Trigger), eigener Dauerdienst fehlt weiter (Fortschr. Nr. 9) |
@@ -305,7 +305,7 @@ Owner, nächster Schritt, Fälligkeit (CLAUDE.md).
 | L4 | Toter Tunnel `nexifyai-contabo` → `agenten`, `librechat` 530 | **I/SZ** | wieder verbinden oder auf `nexifyai-duesseldorf` umhängen (E4) | kurzfristig |
 | L5 | srv1243952 nicht einsehbar (trägt 57 von 126 Adressen) | **I** | Shell oder freigegebener nur-lesender Mess-Weg (E8) — **nur der Inhaber** | Inhaberentscheidung |
 | L6 | Cloudflare-Token mit DNS-Schreibrecht sichten (Zertifikatsdienst + neuer Token 14.11. 18:42) | **I** | Token-Liste und globalen Schlüssel prüfen, auf engste Zone begrenzen (E9) — **nur der Inhaber** | kurzfristig |
-| L7 | GitHub Actions ohne Budget → kein Gate, Merges blockiert | **I** | Actions-Budget/Abrechnung freigeben (OA-022) — **nur der Inhaber**. **Warnung:** danach gehen PRs mit eingeschaltetem Auto-Merge ohne weitere Abnahme nach `main` (OA-027). Fortschr. Nr. 7: Auto-Merge ist für 34 von 36 PRs abgeschaltet worden (K, nicht zurückgelesen); vor der Budget-Freigabe in der Oberfläche prüfen | Inhaberentscheidung |
+| L7 | GitHub Actions ohne Budget → kein Gate, Merges blockiert | **I** | Actions-Budget/Abrechnung freigeben (OA-022) — **nur der Inhaber**. **Warnung:** danach gehen PRs mit eingeschaltetem Auto-Merge ohne weitere Abnahme nach `main` (OA-027). Fortschr. Nr. 7: `disable_pr_auto_merge` wurde für 34 von 36 PRs aufgerufen, davon nur 23 erfolgreich (Nicht-Entwürfe), 11 Fehler (Entwürfe) (K, nicht zurückgelesen) — der belegte Schutz vor automatischem Merge gilt also nur für diese 23; vor der Budget-Freigabe in der Oberfläche prüfen | Inhaberentscheidung |
 | L8 | SSH für jede Quelle offen; 15 Schlüssel im Konto | **I** | auf feste Quellen/WireGuard begrenzen; Schlüssel aussortieren (OA-020) — **nur der Inhaber** | kurzfristig |
 
 ### Priorität 2 — Verkaufsfähiger Auftritt
