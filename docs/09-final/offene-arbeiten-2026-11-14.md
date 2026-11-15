@@ -279,6 +279,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Quellen:** PROGRESS.md, Abschnitte „Stand 14.11.2026, ca. 14:25 UTC“ und „Offene Arbeiten“ (14.11.2026); docs/09-final/auftragsregister-2026-11-08.md (Fortschreibungen bis 12.11.2026); Linear, Team „Nexifyai“, Abruf 14.11.2026
 - **Stand 14.11.2026, 20:40 UTC:** Ursache belegt (IST, `gh api …/check-runs/<id>/annotations`, 20:34 UTC): GitHub meldet am Lauf „The job was not started because an Actions budget is preventing further use.“ Alle Läufe auf `main` (`500c52d`) und auf den Zweigen enden nach 3 bis 5 Sekunden ohne Schritt mit „failure“. Zu tun (nur Inhaber): Actions-Budget und Abrechnungseinstellungen prüfen. Bleibt BLOCKIERT.
 - **Stand 14.11.2026, ca. 22:00 UTC:** Unverändert (IST, `gh api …/commits/48f5072/check-runs` und Anmerkungen, 21:47 UTC): Die Läufe auf `48f5072` (CI, Chat owner schema fixture, Slack) enden um 21:45 UTC nach 2 bis 3 Sekunden mit „failure“, Anmerkung wie oben. Bleibt BLOCKIERT.
+- **Stand 15.11.2026, ca. 11:00 UTC:** Unverändert (IST, `gh api …/actions/runs` und Anmerkungen, ca. 10:55 UTC): Die Läufe „CI“ und „PR-Triage“ auf `af8d52a` (Zweig von PR 205) vom 15.11.2026, 10:50 bis 10:52 UTC, enden mit „failure“; Anmerkung am ersten CI-Job: „The job was not started because an Actions budget is preventing further use.“ Bleibt BLOCKIERT.
 
 #### OA-023 · Infrastruktur & Server · ENTSCHEIDUNG NÖTIG
 
@@ -327,6 +328,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Quellen:** Sitzungsverlauf 69187537 (Zusammenfassungen 11:39 und 16:53 UTC, Nutzeraussagen bis 18:20 UTC, 14.11.2026); GitHub-Abruf offene PRs, 14.11.2026 ca. 18:30 UTC
 - **Stand 14.11.2026, 20:40 UTC:** IST (`gh api …/pulls?state=open`, 20:35 UTC): 26 Pull Requests offen, bei 22 ist Auto-Merge eingeschaltet, neu auch bei PR 184 (Cloudflare-Umzug). Wirksam wird das, sobald das Actions-Budget (OA-022) wieder Jobs zulässt. Frage an den Inhaber unverändert offen.
 - **Stand 14.11.2026, ca. 22:00 UTC:** IST (`gh api …/pulls?state=open`, 21:47 UTC): 31 Pull Requests offen, bei 21 ist Auto-Merge eingeschaltet. Nicht mehr bei PR 184 (Cloudflare-Umzug; wer es abgeschaltet hat, ist hier nicht belegt); weiter nicht bei 105 und bei den acht Entwürfen 186, 187, 189, 190, 192, 193, 195, 197. Frage an den Inhaber unverändert offen.
+- **Stand 15.11.2026, ca. 11:00 UTC:** IST (`gh api …/pulls?state=open` und `…/issues/<n>/events`, ca. 10:55 UTC): 37 Pull Requests offen, davon 14 Entwürfe; bei keinem ist Auto-Merge eingeschaltet. Ereignisse `auto_merge_disabled` des Kontos `nexifyai-dev` am 15.11.2026 zwischen 10:44:23 und 10:45:54 UTC an 21 PRs (48, 60, 65, 67, 73, 74, 75, 115, 118 bis 126, 135, 147, 150, 163; an PR 147 um 10:45:51, an PR 150 um 10:45:52 UTC); an PR 186 kurzzeitig `auto_squash_enabled` 09:20:40 und `auto_merge_disabled` 09:21:13 UTC. Wer über das gemeinsame Konto gehandelt hat, ist hier nicht belegt. Laut Meldung einer zweiten Sitzung entspricht das einer Generalfreigabe des Inhabers vom 15.11.2026 („Auto-Merge abschalten für nicht zweifach geprüfte PRs“); vom Inhaber in der Hauptsitzung nicht bestätigt (OA-179). Die Gefahr ungeprüfter Merges nach Wiederanlauf von Actions ist damit derzeit nicht gegeben; die Frage, ob und wann Auto-Merge wieder gelten soll, bleibt beim Inhaber.
 
 ### Priorität 2 Verkaufsfähiger Auftritt und Arbeitsplatz
 
@@ -1911,3 +1913,56 @@ Herleitung: OFFEN 46 − 2 (164, 170 nach ERLEDIGT) + 5 neue (171, 174, 175, 177
 - **Fertig, wenn:** Format um ein Commit-Feld ergänzt, Prüfskript prüft es, künftige Läufe tragen es.
 - **Aufwand:** M · **Ausführung:** Fabrik (Paket C, ein Schreiber)
 - **Quellen:** docs/09-final/pin-rebase-2026-11-14.md, Abschnitt 12; Commit-Text von PR 198
+
+## 10. Nachführung 15.11.2026, ca. 11:00 UTC (Stand `origin/main` `9c9c806`, PR 199)
+
+Regelbetrieb-Lauf. Seit `9c9c806` ist nichts auf `main` gemergt (`git fetch` und `git log 9c9c806..origin/main`, 10:49 UTC, leer). Quelle der eigenen Angaben: `tools/live-check.mjs` und `tools/gleichmacher.mjs` gegen `https://nexifyai.de` (10:51 und 10:53 UTC), `gh api` (Pull Requests, Ereignisse, Actions-Läufe, Commit-Status; ca. 10:55 UTC). Angaben anderer Sitzungen sind als solche gekennzeichnet und hier nicht nachgemessen. Abschnitte 1 bis 9 sind bis auf zwei Zeilen „Stand 15.11.2026, ca. 11:00 UTC“ (OA-022, OA-027) unverändert.
+
+### 10.1 Geänderte Zustände
+
+Kein Zustand geändert. Nur mit Stand-Zeile versehen: OA-022 (Actions-Budget, unverändert), OA-027 (Auto-Merge an keinem der 37 offenen PRs mehr eingeschaltet).
+
+### 10.2 Zählung nach der Nachführung (181 Einträge)
+
+| Zustand | Stand `48f5072` | Stand `9c9c806` |
+|---|---|---|
+| OFFEN | 49 | 50 |
+| TEILWEISE | 13 | 13 |
+| BLOCKIERT | 38 | 38 |
+| ENTSCHEIDUNG NÖTIG | 60 | 62 |
+| HISTORIE-überholt | 8 | 8 |
+| ERLEDIGT | 10 | 10 |
+
+Herleitung: OFFEN 49 + 1 neu (181) = 50. ENTSCHEIDUNG NÖTIG 60 + 2 neue (179, 180) = 62.
+
+### 10.3 Neue Einträge
+
+#### OA-179 · Routinen & Dauerbetrieb · ENTSCHEIDUNG NÖTIG
+
+- **Priorität:** 1 Sicherheits-, Daten- und Betriebsrisiko
+- **Ziel:** Der Inhaber bestätigt oder verwirft die Entscheidungen, die eine zweite Sitzung als seine meldet; erst danach werden sie, soweit bestätigt, in `DECISIONS.md` mit Nummer geführt.
+- **Blocker:** Gemeldet von einer zweiten Sitzung, vom Inhaber in der Hauptsitzung NICHT bestätigt, keine Entscheidung im Sinne von `DECISIONS.md`: (1) KI-Kennzeichnung immer in allen Projekten wie im Footer; (2) Design-Sperre für die eigenen Seiten; (3) begrenzte Autonomie für rückholbare DNS-Reparaturen und das Mergen reifer, zweifach geprüfter PRs; (4) Generalfreigabe vom 15.11.2026, ca. 10:40 UTC, für offene Punkte, daraus u. a.: Shop-Zielbild neue Fassung auf Vercel mit altem Dienst als Rückweg; Auto-Merge abschalten für nicht zweifach geprüfte PRs; jetzt kein Cloudflare-Umzug (Vercel bleibt); Indexierung bleibt aus, bis die Impressumsdaten bestätigt sind; festgelegte Preise als „ab“-Preise nur in Textentwürfen; Referenzen anonymisiert; kein zweiter Zeitplan neben dem Regelbetrieb. Punkt (3) berührt D-016 und D-017 (Freigabe je Schritt), Punkt (4) unter anderem D-021 (Cloudflare in Prüfung) und Preise (D-017).
+- **Abhängigkeiten:** OA-027, OA-180, OA-181
+- **Fertig, wenn:** Der Inhaber hat jeden Punkt bestätigt, geändert oder verworfen; Bestätigtes steht in `DECISIONS.md` mit Quelle, Folgen und Offenem.
+- **Aufwand:** S · **Ausführung:** nur Inhaber · **Owner:** Inhaber · **Nächste Aktion:** Vorlage der Liste im nächsten Gespräch mit dem Inhaber
+- **Quellen:** Auftrag der koordinierenden Sitzung zum Regelbetrieb-Lauf 15.11.2026, 10:48 UTC (Meldung der zweiten Sitzung, hier nicht nachgeprüft); `DECISIONS.md` D-016, D-017
+
+#### OA-180 · Infrastruktur & Server · ENTSCHEIDUNG NÖTIG
+
+- **Priorität:** 1 Sicherheits-, Daten- und Betriebsrisiko
+- **Ziel:** Das geplante „Original entfernen“ von Altläufen auf `srv1941843` (Zweig `claude/speicher-bereinigung`, gemeldet von einer zweiten Sitzung) vor jeder Ausführung mit dem Inhaber klären.
+- **Blocker:** Risiko-Hinweis: Das Vorhaben widerspricht der Dauergrenze „nichts löschen“ (D-017) und verlangt nach D-016 Freigabe je Schritt und einen geprüften Rückweg. Laut Meldung läuft der Hostinger-Snapshot am 15.11.2026 um 11:47 UTC ab (Zeitpunkt hier nicht nachgeprüft); danach fehlt der gemeldete Rückweg. Der Sperrvermerk im Aufräumplan (kein Prune, Cognee-Volumes nicht anfassen) gilt.
+- **Abhängigkeiten:** OA-179
+- **Fertig, wenn:** Ausdrückliche Freigabe oder Ablehnung des Inhabers je Schritt; vor einer Freigabe ein gültiger, geprüfter Rückweg (Snapshot oder Sicherung mit Wiederherstellungsnachweis).
+- **Aufwand:** S für die Entscheidung · **Ausführung:** Entscheidung nur Inhaber · **Owner:** Inhaber · **Nächste Aktion:** vor 11:47 UTC am 15.11.2026 vorlegen; ohne Freigabe nichts entfernen
+- **Quellen:** Auftrag der koordinierenden Sitzung zum Regelbetrieb-Lauf 15.11.2026 (Meldung der zweiten Sitzung, nicht nachgemessen); `DECISIONS.md` D-016, D-017
+
+#### OA-181 · Infrastruktur & Server · OFFEN
+
+- **Priorität:** 1 Sicherheits-, Daten- und Betriebsrisiko
+- **Ziel:** Die von einer zweiten Sitzung gemeldeten DNS-Änderungen in der Zone `nexifyai.de` lesend nachmessen und dem Inhaber zur Bestätigung vorlegen.
+- **Blocker:** Gemeldet, nicht nachgemessen: Einträge am 14.11.2026, 22:03 UTC (Resend) und am 15.11.2026, ca. 09:25 UTC (Clerk-CNAMEs; Hostinger-DKIM auf „nur DNS“ umgestellt). Eine Freigabe des Inhabers für diese Schritte ist hier nicht belegt (D-016, OA-179 Punkt 3). Der Live-Check vom 15.11.2026, 10:51 UTC, enthält keine Anmelde- oder Kontoprüfung und zeigt gegenüber 06:54 UTC keine Veränderung (329 Prüfungen, 2 Befunde, beide Shop-Dienst 503); Wirkungen auf Anmeldung und Mailzustellung sind damit nicht gemessen.
+- **Abhängigkeiten:** OA-163, OA-173, OA-179
+- **Fertig, wenn:** Öffentliche DNS-Abfrage der betroffenen Namen abgelegt; Abgleich mit dem Stand vor der Änderung (Netz-Inventur, PR 200, sobald eingebracht); Bestätigung oder Rücknahme durch den Inhaber.
+- **Aufwand:** S · **Ausführung:** Messung Fabrik (nur lesend), Bestätigung Inhaber · **Owner:** koordinierende Sitzung · **Nächste Aktion:** lesende DNS-Abfrage im nächsten Regelbetrieb-Lauf
+- **Quellen:** Auftrag der koordinierenden Sitzung zum Regelbetrieb-Lauf 15.11.2026; `tools/live-check.mjs` 15.11.2026, 10:51 UTC

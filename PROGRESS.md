@@ -1,3 +1,39 @@
+## Stand 15.11.2026, ca. 11:00 UTC · Regelbetrieb: Live-Messung, Auto-Merge abgeschaltet, gemeldete Entscheidungen offen
+
+Führt den Abschnitt von ca. 22:00 UTC direkt darunter fort; jener bleibt als Stand von `48f5072`/`9c9c806` stehen. Kennzeichnung: IST (hier gemessen), IST aus der Hauptsitzung (dort gemessen, hier nicht erneut geprüft), Meldung einer zweiten Sitzung (weder hier gemessen noch vom Inhaber bestätigt), OFFEN. Entscheidungen stehen nur in `DECISIONS.md`; neu ist dort keine.
+
+### Selbst geprüft (IST)
+
+- **`main` unverändert.** Kopf `9c9c806` (PR 199); seit dem letzten Stand kein Merge (`git fetch` und `git log 9c9c806..origin/main`, 15.11.2026, 10:49 UTC, leer). Commit-Status an `9c9c806` für `…-ut7r` und `…-s4k5` „success“.
+- **Live-Messung `https://nexifyai.de`.** `node tools/live-check.mjs` (10:51 UTC): 329 Prüfungen, 2 Befunde, beide Shop-Dienst (`/api/shop/status`, `/api/shop/products`) 503 mit Grund `database_binding_missing_or_unsuitable`; Zahl und Inhalt wie um 06:54 UTC. Der Live-Check enthält keine Anmelde- oder Kontoprüfung; eine Wirkung der gemeldeten DNS-Änderungen von ca. 09:25 UTC auf Anmeldung oder Konto ist damit nicht gemessen (OA-181). `node tools/gleichmacher.mjs` (10:53 UTC): 44 Seiten, Breiten 390 und 1440, 0 Abweichungen. Startseite 200 (`curl`, 10:54 UTC).
+- **Pull Requests (`gh api …/pulls?state=open`, ca. 10:55 UTC).** 37 offen, davon 14 Entwürfe; Auto-Merge an keinem eingeschaltet (am 14.11., 21:47 UTC: 21 von 31). Ereignisse `auto_merge_disabled` des Kontos `nexifyai-dev` am 15.11.2026 zwischen 10:44:23 und 10:45:54 UTC an 21 PRs, darunter PR 147 (10:45:51) und PR 150 (10:45:52); wer über das gemeinsame Konto gehandelt hat, ist nicht belegt (OA-027). PR 184 (Cloudflare-Umzug) offen, kein Entwurf, ohne Auto-Merge.
+- **Neue Entwürfe, offen, anderer Owner** (nur geführt, nicht bewertet): 200 „betrieb: Netz-Inventur vom 14.11.2026 (Domains, Zonen, Änderungsverlauf, Widersprüche)“; 201 „Zielkunden- und Marktrecherche NeXify AI + TEILEKLAR (14.11.2026)“; 202 „Markenzeichen-Library: Handschrift dokumentieren, Design-Sperre nachweisen (additiv)“; 203 „master-audit: konsolidiertes belegtes Lagebild (15.11.2026)“; dazu nach 10:00 UTC 204 „Inhaltsentwurf: eigene Seiten deutlich erweitert, belegt, zur Abnahme – keine Seiten-/Designdateien geändert“ und 205 „automatisierung: Prozesslandkarte und vier vorbereitete Automatisierungen (alle ausgeschaltet)“.
+- **GitHub Actions** startet weiter keine Jobs (Läufe auf `af8d52a`, 10:50 bis 10:52 UTC, Anmerkung „Actions budget“; OA-022).
+
+### Aus der Hauptsitzung (IST dort, hier nicht erneut geprüft)
+
+- **Resend:** `nexifyai.de` am 15.11.2026, ca. 10:40 UTC „verified“ (14.11., 23 UTC „partially_verified“, davor „failed“); `nexifyai.cloud` und `deinstudienkolleg.de` „verified“, `studienkollegaachen.de` „failed“. Öffentliches DNS zeigte am 14.11.2026 die drei Resend-Einträge (DKIM, MX und SPF für `send`). Ob damit Mail aus Production zugestellt wird, ist nicht belegt (OA-163, OA-173).
+- **Cloudflare-Vorschau der Agentur:** am 14.11.2026, 22:06 UTC erneut am Asset-Upload gescheitert (401), nichts angelegt; PR 184 unverändert offen.
+- **Kundenprojekt Studienkolleg Aachen:** am 15.11.2026, ca. 09:40 UTC an die Sitzung `session_01HyncR5WyGFuRr9RrQ7w46i` übergeben; die Hauptsitzung schreibt dort nicht mehr. Einzelheiten nur im Kundenrepository.
+
+### OFFEN: gemeldet von einer zweiten Sitzung, vom Inhaber in der Hauptsitzung NICHT bestätigt
+
+Ausdrücklich keine Entscheidung und keine D-Nummer; Vorlage an den Inhaber als OA-179 (Owner Inhaber).
+1. KI-Kennzeichnung immer in allen Projekten wie im Footer.
+2. Design-Sperre für die eigenen Seiten.
+3. Begrenzte Autonomie für rückholbare DNS-Reparaturen und das Mergen reifer, zweifach geprüfter PRs.
+4. Generalfreigabe vom 15.11.2026, ca. 10:40 UTC, für offene Punkte, daraus u. a.: Shop-Zielbild neue Fassung auf Vercel mit altem Dienst als Rückweg; Auto-Merge abschalten für nicht zweifach geprüfte PRs; jetzt kein Cloudflare-Umzug (Vercel bleibt); Indexierung bleibt aus, bis die Impressumsdaten bestätigt sind; festgelegte Preise als „ab“-Preise nur in Textentwürfen; Referenzen anonymisiert; kein zweiter Zeitplan neben dem Regelbetrieb.
+
+Gemeldete, hier nicht nachgemessene Handlungen der zweiten Sitzung: DNS-Einträge in der Zone `nexifyai.de` am 14.11.2026, 22:03 UTC (Resend) und am 15.11.2026, ca. 09:25 UTC (Clerk-CNAMEs, Hostinger-DKIM auf „nur DNS“) (OA-181); Zweig `claude/speicher-bereinigung` für den Server.
+
+**Risiko-Hinweis (OA-180):** Das geplante „Original entfernen“ von Altläufen auf `srv1941843` steht im Widerspruch zur Dauergrenze „nichts löschen“ (D-017) und zu D-016 (Freigabe je Schritt, geprüfter Rückweg). Der Hostinger-Snapshot läuft laut Meldung am 15.11.2026 um 11:47 UTC ab (nicht nachgeprüft). Der Sperrvermerk im Aufräumplan (kein Prune, Cognee-Volumes) gilt.
+
+### Prüfstand und Umfang dieser Nachführung
+
+Prüfstand `main` `9c9c806` lokal (IST, 15.11.2026, ca. 10:55 bis 11:05 UTC, Python 3, ohne `.venv`, ohne `node_modules`, erzeugte Seitendaten beider Anwendungen vorhanden, `apps/web` mit `NEXIFY_PUBLIC_INSTALLATION=public-pwa`): `python3 -m unittest discover -s tests` 844 Tests, 40 Failures, 7 Errors, 19 Skips, 47 rote Namen; nach dieser Nachführung, die nur Dokumente ändert, dieselben 47 Namen, kein neuer, keiner weggefallen (Namensvergleich im selben Arbeitsbaum vor und nach der Änderung). `python3 tools/verify_requirements_reconciliation.py` 41 Zeilen „Stale implementation source“, vorher und nachher gleich. `make governance-check`, `make check` und `node tools/ds-audit-cli.js` (0 Fehler, 0 Warnungen) mit Exit 0. Kein CI-Lauf (OA-022).
+
+Diese Nachführung (Zweig `claude/stand-1115`) ändert nur Dokumente: diesen Abschnitt in `PROGRESS.md` und in `docs/09-final/offene-arbeiten-2026-11-14.md` Abschnitt 10 (OA-179 bis OA-181) sowie zwei Stand-Zeilen (OA-022, OA-027). `DECISIONS.md` und `AGENTS.md` sind unverändert; „Offene Arbeiten“ in `PROGRESS.md` ist in diesem Lauf nicht ersetzt. Keine Prüfsumme und kein Beleg angefasst.
+
 ## Stand 14.11.2026, ca. 22:00 UTC · Abend III: Skills, Kontoverknüpfung im Shop-Dienst, robots-Meta, Belege Runde 3
 
 Führt den Abschnitt von ca. 20:40 UTC direkt darunter fort; jener bleibt als Stand von `500c52d` stehen. Kennzeichnung wie dort (SOLL, IST, „laut PR“, Notiz, OFFEN). Entscheidungen stehen nur in `DECISIONS.md`; neu ist dort keine. Quelle der PR-Angaben: `git log origin/main` bis `48f5072` und `gh api …/pulls/<n>` (Abruf 14.11.2026, 21:47 UTC). Alle drei Merges durch `nexifyai-dev`, Merge-Zeiten laut GitHub in UTC.
