@@ -8,7 +8,7 @@ const tr=value=>Object.fromEntries(locales.map(locale=>[locale,`${locale}: ${val
 function page(id,path,site_context='nexify'){
  return{id,path,site_context,localizedTitle:tr(`title ${id}`),localizedSummary:tr(`summary ${id}`),sections:[],actions:[],privateTestSentinel:'NEVER_DISCLOSE_EXTRA_FIELDS'};
 }
-const pages=[page('home','/'),page('websites','/leistungen/websites'),page('automation','/leistungen/agenten-automatisierung'),page('solutions','/loesungen'),page('pricing','/preise-ablauf'),page('scope','/leistungsumfang'),page('contact','/kontakt'),page('nex2fly','/produkte/nex2fly'),page('api','/produkte/api'),page('one','/produkte/one'),page('tk-home','/teileklar','teileklar'),page('tk-search','/teileklar/suche','teileklar'),page('tk-fitment','/teileklar/fahrzeug-und-passung','teileklar'),page('tk-appointments','/teileklar/termine','teileklar')];
+const pages=[page('home','/'),page('websites','/leistungen/websites'),page('automation','/leistungen/agenten-automatisierung'),page('solutions','/loesungen'),page('pricing','/preise-ablauf'),page('scope','/leistungsumfang'),page('contact','/kontakt'),page('nex2fly','/produkte/aifly-suite'),page('api','/produkte/api'),page('one','/produkte/one'),page('tk-home','/teileklar','teileklar'),page('tk-search','/teileklar/suche','teileklar'),page('tk-fitment','/teileklar/fahrzeug-und-passung','teileklar'),page('tk-appointments','/teileklar/termine','teileklar')];
 const guide=(question,locale='de',pagePath='/',source=pages)=>staticOrientation({question,locale,pagePath,pages:source});
 
 test('a cost and timing follow-up keeps the website context and points to pricing',()=>{

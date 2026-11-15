@@ -2414,7 +2414,7 @@
     },
     {
       "id": "nex2fly",
-      "path": "/produkte/nex2fly",
+      "path": "/produkte/aifly-suite",
       "title": {
         "de": "NeX AIFly Suite. Ihr KI-Arbeitsbereich.",
         "nl": "NeX AIFly Suite. Uw AI-werkruimte.",
@@ -2541,7 +2541,7 @@
           "fr": "Conversations, tâches, documents et connaissances de projet en un seul endroit – dans votre propre espace. Découvrez la Suite lors d’un essai de 24 heures.",
           "en": "Conversations, tasks, documents and project knowledge in one place – in your own area. Get to know the Suite in a 24-hour trial."
         },
-        "canonical_path": "/produkte/nex2fly",
+        "canonical_path": "/produkte/aifly-suite",
         "canonical_origin": null,
         "canonical_status": "development_path_not_production_domain_verification",
         "indexability": "noindex,nofollow",

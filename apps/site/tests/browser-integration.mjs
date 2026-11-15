@@ -38,7 +38,7 @@ const navigate=async(page,path)=>page.evaluate(path=>{history.pushState(null,'',
 const shell=async page=>{await page.locator('.workspace-shell').waitFor();assert.equal(await page.locator('.workspace-shell').count(),1);assert.equal(await page.locator('#locale').count(),1);};
 try{
  await scenario('public deep links refresh navigation back forward and persistent shared shell',async page=>{
-  await page.goto(origin+'/produkte/nex2fly');await shell(page);
+  await page.goto(origin+'/produkte/aifly-suite');await shell(page);
   await page.waitForFunction(()=>!document.querySelector('#chat-message').disabled);
   await page.locator('#chat-message').fill('Synthetic unsent module draft');
   await page.locator('#locale').selectOption('nl');
@@ -46,14 +46,14 @@ try{
   await page.locator('.site-header .main-navigation a[href="/kontakt"]').click();await page.waitForURL('**/kontakt');
   assert.equal(await page.evaluate(()=>window.integrationShell===document.querySelector('.workspace-shell')),true);
   assert.equal(await page.locator('#chat-message').inputValue(),'Synthetic unsent module draft');
-  await page.goBack();await page.waitForURL('**/produkte/nex2fly');
+  await page.goBack();await page.waitForURL('**/produkte/aifly-suite');
   await page.goForward();await page.waitForURL('**/kontakt');
   assert.equal(await page.locator('#locale').inputValue(),'nl');
   await page.reload();await shell(page);await page.waitForFunction(()=>document.documentElement.lang==='nl');
   assert.equal(await page.locator('main h1').count(),1);
  });
  await scenario('DE NL content and canonical design tokens survive module and auth transitions',async page=>{
-  await page.goto(origin+'/produkte/nex2fly');await shell(page);
+  await page.goto(origin+'/produkte/aifly-suite');await shell(page);
   const de=await page.locator('main').innerText();
   const token=await page.evaluate(()=>getComputedStyle(document.documentElement).getPropertyValue('--color-graphit-600').trim());
   assert.ok(token);await page.locator('#locale').selectOption('nl');

@@ -21,6 +21,8 @@ const config: NextConfig = {
     return [
       { source: "/login", destination: "/anmelden", permanent: true },
       { source: "/signup", destination: "/registrieren", permanent: true },
+      // D-011 (14.11.2026): Produktname NeX2fly -> NeX AIFly Suite; alte Produkt-URL bleibt erreichbar.
+      { source: "/produkte/nex2fly", destination: "/produkte/aifly-suite", permanent: true },
     ];
   },
   async headers() {

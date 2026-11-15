@@ -19,7 +19,7 @@ const galleryFilm=['/media/scenes/bemusterung-20261113.mp4','/media/scenes/ferti
 const productArt=['nex2fly','one','api','tk-home'].map(id=>pageImage(id)!);
 const galleries=['/leistungen/websites','/leistungen/agenten-automatisierung','/teileklar'];
 const services=['/leistungen/websites','/leistungen/agenten-automatisierung','/loesungen'];
-const products=['/produkte/nex2fly','/produkte/one','/produkte/api','/teileklar'];
+const products=['/produkte/aifly-suite','/produkte/one','/produkte/api','/teileklar'];
 const projectRates={
  de:{eyebrow:'Klare Kalkulationsbasis',value:'Individuell',unit:'nach vereinbartem Umfang',note:'Konzept, Text, Design und technische Umsetzung werden nach dem vereinbarten Umfang geplant. Externe Kosten weisen wir separat aus.'},
  nl:{eyebrow:'Duidelijke calculatiebasis',value:'Op maat',unit:'volgens afgesproken omvang',note:'Concept, tekst, ontwerp en technische uitvoering worden gepland op basis van de afgesproken omvang. Externe kosten worden apart vermeld.'},

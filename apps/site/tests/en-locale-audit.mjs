@@ -53,7 +53,7 @@ async function auditPage(path,viewport){
 }
 try{
  for(const p of pages){await auditPage(p.path,{width:1440,height:900});}
- for(const path of ['/','/produkte/nex2fly','/teileklar']){await auditPage(path,{width:390,height:844});}
+ for(const path of ['/','/produkte/aifly-suite','/teileklar']){await auditPage(path,{width:390,height:844});}
 }finally{await browser.close();await server.close();await new Promise(r=>backend.close(r));await rm(cache,{recursive:true,force:true});}
 const report={recorded_at:new Date().toISOString(),audited_routes:pages.map(p=>p.path),locale_sequence:['de','nl','fr','en'],pages_with_errors:findings,passed:findings.length===0};
 await writeFile(new URL('../../../.local/diagnostics/en-slice-qa/en-locale-audit-report.json',import.meta.url),JSON.stringify(report,null,2)+'\n');

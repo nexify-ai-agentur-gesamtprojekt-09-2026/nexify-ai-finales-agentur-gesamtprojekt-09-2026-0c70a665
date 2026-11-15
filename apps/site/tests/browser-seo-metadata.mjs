@@ -35,7 +35,7 @@ async function state(){
 }
 
 try{
-  for(const route of ['/leistungen/websites','/produkte/nex2fly','/teileklar/werkstatt']){
+  for(const route of ['/leistungen/websites','/produkte/aifly-suite','/teileklar/werkstatt']){
     const source=data.pages.find(item=>item.path===route);
     await page.goto(origin+route);
     await page.locator('#locale').selectOption('de');

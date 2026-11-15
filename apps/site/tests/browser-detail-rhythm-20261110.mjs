@@ -7,7 +7,7 @@ const origin='http://127.0.0.1:'+server.httpServer.address().port;
 const browser=await chromium.launch({headless:true});
 const results=[];
 try{
- for(const path of ['/leistungen/websites','/produkte/nex2fly']){
+ for(const path of ['/leistungen/websites','/produkte/aifly-suite']){
   for(const width of [375,768,1265]){
    const context=await browser.newContext({viewport:{width,height:900},reducedMotion:'reduce'});
    const page=await context.newPage();

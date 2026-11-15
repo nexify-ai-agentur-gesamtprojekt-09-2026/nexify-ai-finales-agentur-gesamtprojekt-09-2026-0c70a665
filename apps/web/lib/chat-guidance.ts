@@ -56,7 +56,7 @@ export const NEXIFY_GUIDANCE_PAGES: readonly GuidancePage[] = [
   { id: 'solutions', path: '/loesungen', label: 'Wachstum & Kampagnen', fit: 'Sichtbarkeit, Anzeigen, Marketing, Nachfrage gewinnen' },
   { id: 'scope', path: '/leistungsumfang', label: 'Leistungsumfang', fit: 'Pakete und Umfang einordnen' },
   { id: 'pricing', path: '/preise-ablauf', label: 'Preise & Ablauf', fit: 'wie kalkuliert wird und wie ein Projekt abläuft' },
-  { id: 'nex2fly', path: '/produkte/nex2fly', label: 'NeX AIFly Suite', fit: 'eigener Arbeitsbereich für Gespräche, Aufgaben und Projekte' },
+  { id: 'nex2fly', path: '/produkte/aifly-suite', label: 'NeX AIFly Suite', fit: 'eigener Arbeitsbereich für Gespräche, Aufgaben und Projekte' },
   { id: 'api', path: '/produkte/api', label: 'NeXify API', fit: 'NeXify-Funktionen in eigene Anwendungen einbinden' },
   { id: 'knowledge-start', path: '/wissen/projekt-vorbereiten', label: 'Projekt vorbereiten', fit: 'was ein gutes Briefing enthält' },
   { id: 'contact', path: '/kontakt', label: 'Kontakt', fit: 'persönliches Projektgespräch mit Pascal anfragen' },

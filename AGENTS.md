@@ -52,8 +52,9 @@ wiederholt. Für die Arbeit in diesem Repository folgt daraus:
   (PostgreSQL mit RLS), auch für den Shop (D-013). MongoDB-Aussagen in diesem
   Repository beschreiben den IST von `apps/shop-api` und sind als Zielbild überholt.
 - Der sichtbare Produktname ist „NeX AIFly Suite“ (D-011). „NeX2fly“ in älteren
-  Abschnitten und Dokumenten ist Historie; IDs und die Adresse `/produkte/nex2fly`
-  bleiben.
+  Abschnitten und Dokumenten ist Historie; IDs bleiben. Die Produktseite liegt unter
+  `/produkte/aifly-suite`, `/produkte/nex2fly` leitet dauerhaft (308) dorthin um
+  (D-011, Nachtrag Adresse).
 - Führende Dokumente nach jedem Merge und jeder Inhaberentscheidung nachführen:
   `.claude/skills/nexify-stand-halten/SKILL.md`.
 - Der Wissensgraph (Graphify) wird in jedem Projekt eingesetzt, je Projekt getrennt
