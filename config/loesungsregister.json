@@ -1796,6 +1796,50 @@
       "abhaengigkeiten": []
     },
     {
+      "id": "prozess-automatisierung",
+      "name": "Vorbereitete Prozess-Automatisierungen (Tagesbericht, Außenwächter, Anfrage-Nachverfolgung, Fristen)",
+      "tags": [
+        "automatisierung",
+        "tagesbericht",
+        "ueberwachung",
+        "alarm",
+        "wiedervorlage",
+        "anfragen",
+        "zeitplan"
+      ],
+      "kategorie": "Automatisierung",
+      "zweck": "Vier eigene Automatisierungen im Repository, die wiederkehrende Abläufe der Agentur übernehmen, sobald der Inhaber sie einschaltet; ohne neuen Dienst und ohne Modellaufruf.",
+      "ort": "`ops/automatisierung/` (Code, Vorlagen, Zeitplan-Definitionen), `config/prozess-automatisierung.json` (Schalter und Grenzen); ein dauerhafter Laufort ist nicht festgelegt",
+      "zustand": {
+        "status": "geplant",
+        "beleg": "`docs/04-betrieb/prozess-automatisierung-2026-11-15.md`: gebaut und getestet (`tests/test_prozess_automatisierung.py`), alle Schalter aus, kein Zeitplan angelegt, kein Lauf im Betrieb.",
+        "stand": "2026-11-15"
+      },
+      "entscheidung": "keine (Auftrag des Inhabers vom 15.11.2026 zur Vorbereitung; Einschalten ist eine eigene Entscheidung)",
+      "rolle_im_plan": {
+        "art": "unklar",
+        "frage": "An welchem dauerhaften Ort sollen die Automatisierungen laufen (Hermes-Cron nach Funktionsnachweis, Zeitgeber auf dem Server oder geplante Claude-Aufgabe nur für den Tagesbericht), und welche werden eingeschaltet?"
+      },
+      "zugaenge": [
+        {
+          "bezeichnung": "Schalter und Mail-Variablen der Automatisierungen (Namen in ops/automatisierung/definitionen/umgebung.env.example)",
+          "art": "Sammlung von Umgebungsvariablen, darunter der Resend-Schlüssel für die interne Benachrichtigung",
+          "ablageort": "noch nirgends angelegt; vorgesehen ist die Umgebung des Laufortes (Umgebungsdatei auf dem Server oder Umgebung der geplanten Aufgabe)",
+          "rechteumfang": "Resend: nur Versand; Empfänger ist ausschließlich die interne Adresse",
+          "erstellt": "nicht angelegt",
+          "offengelegt": false,
+          "erneuerung_faellig": false
+        }
+      ],
+      "wann_nutzen": "Wenn ein wiederkehrender Ablauf (Bericht, Erreichbarkeitsprüfung, Erinnerung, Wiedervorlage) automatisiert werden soll: zuerst hier erweitern statt einen neuen Dienst vorzuschlagen.",
+      "nicht_nutzen_fuer": "Versand an Kunden oder Dritte, Werbemails (dafür der Einwilligungsweg), Zahlungen, Eingriffe auf Servern, Aufgaben, die ein Modell brauchen.",
+      "abhaengigkeiten": [
+        "resend",
+        "hermes",
+        "github"
+      ]
+    },
+    {
       "id": "searxng",
       "name": "SearXNG",
       "tags": [
