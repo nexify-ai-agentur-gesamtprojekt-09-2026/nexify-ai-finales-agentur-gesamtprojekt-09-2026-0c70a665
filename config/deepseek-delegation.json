@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "id": "NEXIFY-DEEPSEEK-DELEGATION",
+  "status": "ausgeschaltet_bis_schalter_adresse_und_schluessel_gesetzt",
+  "policy": "config/llm-policy.json",
+  "dokument": "docs/04-betrieb/deepseek-delegation-2026-11-15.md",
+  "modell": {
+    "id": "deepseek/deepseek-v4.1-flash-1017",
+    "reasoning_effort": "high"
+  },
+  "umgebung": {
+    "schalter": "DEEPSEEK_ARBEITER",
+    "schalter_wert": "ein",
+    "router_adresse": "ROUTER_URL",
+    "router_schluessel": "ROUTER_KEY",
+    "zustandsordner": "DEEPSEEK_ARBEITER_ZUSTAND"
+  },
+  "router": {
+    "erlaubte_hosts": ["ai-router.nexifyai.cloud"],
+    "pfad": "/v1/chat/completions",
+    "kopfzeile": "Authorization",
+    "praefix": "Bearer"
+  },
+  "wege": [
+    {
+      "id": "router-openrouter",
+      "reihenfolge": 1,
+      "beschreibung": "9Router leitet an OpenRouter weiter",
+      "router_modellname": "openrouter/deepseek-v4.1-flash",
+      "beleg_router_modellname": "apps/web/lib/chat-llm.ts (dort: gemessen 13.11.2026, der Router lehnt die Policy-Kennung mit HTTP 400 ab und bietet keinen datierten Stand an); hier nicht nachgemessen"
+    },
+    {
+      "id": "router-deepseek-direkt",
+      "reihenfolge": 2,
+      "beschreibung": "9Router leitet direkt an die DeepSeek-API weiter (Rückfall)",
+      "router_modellname": null,
+      "beleg_router_modellname": "nicht belegt: der Name des Modells für den direkten DeepSeek-Anbieter im Router ist nicht bekannt; ohne Eintrag bleibt dieser Weg aus"
+    }
+  ],
+  "limits": {
+    "max_auftrag_bytes": 48000,
+    "max_ausgabe_token": 4000,
+    "max_auftrag_token": 30000,
+    "tageslimit_token": 150000,
+    "tageslimit_aufrufe": 40,
+    "tageslimit_betrag_usd": "0.50",
+    "zeitlimit_sekunden": 120,
+    "max_antwort_bytes": 1048576,
+    "versuche_je_weg": 1
+  },
+  "datenklassen_erlaubt": ["oeffentlich", "intern-ohne-personenbezug"],
+  "arten_erlaubt": [
+    "entwurf",
+    "zusammenfassung",
+    "klassifikation",
+    "uebersetzung",
+    "aufbereitung",
+    "code-vorschlag",
+    "rechtstext-entwurf",
+    "preistext-entwurf"
+  ],
+  "arten_nur_entwurf_mit_abnahme": ["rechtstext-entwurf", "preistext-entwurf"]
+}
