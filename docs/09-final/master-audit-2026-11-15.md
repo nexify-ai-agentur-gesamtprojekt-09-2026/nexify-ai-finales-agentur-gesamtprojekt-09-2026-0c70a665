@@ -181,8 +181,15 @@ Dokumentations­korrekturen aus der Netz-Inventur (E7) sind dort noch nicht nach
 - **Einordnung (Stand 12:26 UTC):** Ein Umschalten des DNS von `teileklar.shop` auf Vercel
   würde heute den funktionierenden Katalog (200, `total` 3720) durch den **leeren**
   Vercel-Katalog ersetzen — Vercel liefert seit ~11:52 UTC 200 mit `products:0` (M 12:26),
-  nicht mehr 503 (so die historische Einordnung in N, Abschnitt 10.3). Das belegte
-  Hindernis ist also jetzt der leere Katalog, nicht mehr der 503. Das DNS von
+  nicht mehr 503 (so die historische Einordnung in N, Abschnitt 10.3). **Wichtig
+  (Code-Beleg `apps/shop-api/vercel_app.py:220–224,268–269`):** Der 200 betrifft nur die
+  vom Zahlungs-Gate ausgenommenen Lese-Routen (`provider_independent_read`, u. a.
+  `/api/shop/status`, `/categories`, `/products`). Schreib- und Zahlwege (Warenkorb, Kasse,
+  `POST /api/requests`) laufen weiter über das Gate und liefern bei ungebundenem
+  `REVOLUT_MODE` weiterhin 503 `payment_mode_unbound` (vgl. §3.2); eine eigene Gegenprobe
+  dieser Wege wurde hier **nicht** erhoben → **OFFEN**. Das belegte Hindernis für den
+  Katalog ist also jetzt dessen Leere (nicht mehr die DB-Bindungs-503); die 503-Sperre der
+  Zahl-/Schreibwege bleibt davon unberührt. Das DNS von
   `teileklar.shop` wurde zuletzt am 15.09.2026 geändert, in den letzten 14 Tagen nicht (N).
   OFFEN (Inhaber): welcher Dienst `teileklar.shop` künftig ausliefert (N, Abschnitt 10.4) —
   L22; Umschaltbedingungen V2.
@@ -324,7 +331,7 @@ Agentensitzung gesetzt werden kann.
 | # | Lücke | Owner | Nächster Schritt | Fälligkeit |
 |---|---|---|---|---|
 | L1 | Cognee-Volumes ungesichert, API-Container fehlt; Prune-Sperre aktiv | **SZ** | Shell auf srv1941843: Volumes sichern, Cognee-Container wieder verknüpfen, dann Sperre aufheben (Aufräumplan Phase 0/3) | bis 16.11. (Serverzugriff) |
-| L2 | srv1941843 am 14.11. 97 % (10,2 GiB frei); am 15.11. ~95 % und fallend durch das Archivskript des Inhabers (19,8 GiB frei, 12:19, K); 77,3 GiB Paperclip-Läufe (abgelöst) werden archiviert | **SZ** | Archivlauf fertigstellen und Ergebnis prüfen; GitLab-Prometheus auf 30 Tage (V6) | 15.11. (Archivskript läuft) |
+| L2 | srv1941843 am 14.11. 97 % (10,2 GiB frei); am 15.11. ~95 % und fallend durch das Archivskript des Inhabers (19,8 GiB frei, 12:19, K); 77,3 GiB Paperclip-Läufe (abgelöst) werden archiviert | **SZ** | **Vor weiterem Entfernen aktive Paperclip-Läufe ausnehmen:** laut Zweigbericht `dc6f6a1` lief 11:40–11:50 UTC noch ein Paperclip-Prozess; ob das Archivskript ihn ausnimmt, ist **OFFEN** (Aufräumplan Schritt 2a: „prüfen, dass kein Paperclip-Prozess mehr läuft"). Aktive Läufe kontrolliert übergeben, ihren Endstand erneut archivieren und prüfen (D-016, Rückweg). Erst dann Archivlauf fertigstellen und Ergebnis prüfen; GitLab-Prometheus auf 30 Tage (V6) | 15.11. (Archivskript läuft) |
 | L3 | Hermes-/Agenten-Oberfläche öffentlich erreichbar; Docker-Socket im Container | **I** | **OFFEN:** `unternehmensbot.eu` zeigt auf **srv1243952** (N, W1); die Router `hermes-webui/-api` liegen auf **srv1941843** und werden über diesen Namen **nicht** erreicht — ein Schutz der srv1941843-Router schließt die öffentliche Oberfläche also **nicht**. Erst klären, was auf srv1243952 antwortet (E3), dann je Server schützen. D-019 F4 „nicht öffentlich“ als OFFEN führen (E3, OA-015) | Inhaber (offen) |
 | L4 | Toter Tunnel `nexifyai-contabo` → `agenten`, `librechat` 530 | **I/SZ** | wieder verbinden oder auf `nexifyai-duesseldorf` umhängen (E4) | bis 17.11. |
 | L5 | srv1243952 nicht einsehbar (trägt 57 von 126 Adressen) | **I** | Shell oder freigegebener nur-lesender Mess-Weg (E8) — **nur der Inhaber** | Inhaber (offen) |
