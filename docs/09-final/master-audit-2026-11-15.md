@@ -1,8 +1,9 @@
 # Master-Audit · NeXify AI Gesamtlage · 15.11.2026
 
-**Fortgeschrieben 15.11.2026, 11:10 UTC** (Erststand `555a75a`/`aa515be` + Fortschreibung
-am Ende des Dokuments; was sich gegenüber dem Erststand geändert hat, steht in der
-Änderungstabelle direkt unter der Kurzfassung).
+**Fortgeschrieben 15.11.2026, 12:25 UTC** (Erststand `555a75a`/`aa515be`, dann zwei
+Fortschreibungen am Ende des Dokuments — „Stand 11:10 UTC" und „Stand 12:25 UTC"; was
+sich gegenüber dem Erststand geändert hat, steht in der Änderungstabelle direkt unter der
+Kurzfassung).
 
 Ein konsolidiertes, belegtes Lagebild der gesamten NeXify-Infrastruktur und der
 Projektstände, erstellt von der Audit-Sitzung im Auftrag der koordinierenden Sitzung für
@@ -321,7 +322,7 @@ Owner, nächster Schritt, Fälligkeit (CLAUDE.md).
 
 | # | Lücke | Owner | Nächster Schritt | Fälligkeit |
 |---|---|---|---|---|
-| L13 | Shop-Vercel ohne DB-Bindung (503); `MONGODB_URI` fehlt | **I/AA** | `MONGODB_URI` im Projekt `…-ut7r` setzen (Inhaber, D-017) **oder** Supabase-Migration nach D-013 bauen (AA) | kurzfristig |
+| L13 | Shop-Vercel: DB-Bindung inzwischen vorhanden — `/api/shop/status` **200** mit `products:0`, `last_import_at:null` (M 12:26 UTC), vorher 503; Katalog noch leer (Import gesperrt) | **I/AA** | Katalog nach Entscheidung E1 erstbefüllen (Vertragsnachweis, Mindestzahl, Stichprobe); Supabase-Migration (D-013) liegt vorbereitet und ausgeschaltet auf eigenem Zweig (Stand 12:25, Nr. 6) | kurzfristig |
 | L14 | Anfrageweg erreicht nur per `mailto`, kein eigener Empfänger | **I/AA** | eigener Empfänger in `apps/web` oder Shop-Dienst binden (OA-163) | kurzfristig |
 | L15 | Mailing: 0 Einwilligungen, Rechtsgrundlage je Gruppe offen | **I** | Einwilligungsweg (PR 186) mergen + Rechtsgrundlage je Gruppe (OA-001) — **nur der Inhaber** | Inhaberentscheidung |
 | L16 | Abnahmefähige Entwürfe 186/193/195/197 nicht gemergt | **I** | nach L7 mergen; Freigabe laut K liegt vor, Zweigschutz blockiert. Kopf von PR 186 heute geändert → vor Merge erneut prüfen | nach L7 |
@@ -416,6 +417,55 @@ eine eigene Nachmessung **M** genannt ist). Keine Kundeneinzelheiten.
 10. **Neue Arbeitszweige (K, alle Entwurf, ausgeschaltet):** `claude/prozess-automatisierung`,
     `claude/shop-supabase-migration`, `claude/speicher-bereinigung`,
     `claude/seiteninhalte-erweiterung`.
+
+---
+
+## Fortschreibung 15.11.2026, Stand 12:25 UTC
+
+Weitere Befunde der koordinierenden Sitzung (Quelle **K**, Hostinger-Metrik bzw. HTTP ohne
+Anmeldung) und eigene Nachmessungen (**M**, 12:26–12:27 UTC). Unbelegtes als OFFEN.
+
+1. **Speicher srv1941843 sinkt (K, Hostinger-Metrik):** 11:47 UTC 380,4 GiB belegt →
+   12:15 UTC 363,3 GiB. Ursache: Archivskript für Paperclip-Altläufe, vom Inhaber ~11:55
+   UTC gestartet (`/root/archiv-paperclip.sh`, archiviert → prüft → entfernt Original).
+   Fortschritt im Server-Log nicht gelesen → **OFFEN**. Deckt L1/L2 ab.
+2. **Speicher srv1243952 sinkt (K, Hostinger-Metrik):** 11:15 UTC 367,3 GiB → 11:50 UTC
+   339,8 GiB, 12:19 UTC unverändert 339,8. **Ursache OFFEN** (keine Sitzung hat dort
+   Schreibzugriff; Server bleibt der blinde Fleck, L5).
+3. **Shop (M, 12:26–12:27 UTC):** `nexifyai.de/api/shop/status` → **200** mit
+   `products:0`, `last_import_at:null`, `source:BigBuy` (vorher 503 — die DB-Bindung ist
+   jetzt da, der Katalog aber leer). `teileklar.shop/api/shop/products` → 200, `total`
+   weiterhin **3720** (alter Katalog liefert). Live-Startseite `nexifyai.de/` → 200,
+   Deployment `dpl_CXVZrjQ4jSV88xwLanJXSecGaSa6`. **Herkunft des Deployments:** `git log
+   origin/main` zeigt in den letzten 3 h **keinen neuen Commit**; `origin/main` steht
+   unverändert auf `9c9c806` (14.11. 22:54 CET). Das Live-Deployment ist also kein neuer
+   `main`-Commit, sondern ein Redeploy/Env-Wechsel desselben Stands; der genaue Auslöser
+   (Env-Variable gesetzt / manueller Redeploy) ist ohne Vercel-Zugang **OFFEN** (M, R).
+4. **Indexierung (M, bestätigt 11:07; K: live seit 11:01 UTC):** Agenturseiten `/`,
+   `/leistungen`, `/impressum` `index, follow`; `/teileklar` weiter `noindex` (siehe
+   Fortschreibung 11:10 Nr. 1, L9).
+5. **Inhaberentscheidungen E1–E14 (Quelle K, ~12:15 UTC, Vollmacht des Inhabers; Status je
+   „entschieden, nicht ausgeführt"; noch nicht in `DECISIONS.md` → OFFEN, Nachtrag durch
+   die koordinierende Sitzung):** Katalog übernehmen bei angeschalteter Importsperre;
+   `teileklar.shop` erst umschalten bei ≥ 3720 Produkten + Live-Zahlung + Testbestellung;
+   Shop-Indexierung erst danach; alten Shop 14 Tage später anhalten; R2 nur wenn schon
+   aktiv und < 5 USD/Monat; GitLab-Prometheus auf 30 Tage; Neustart je Server 04:30–05:00
+   UTC mit Snapshot; unbenutzte Images älter 30 Tage entfernen; kein neuer Zeitplan;
+   DeepSeek über 9Router mit Deckel 5 USD/Tag, aus bis Schlüssel hinterlegt; PRs 197, 193,
+   186, 195 mergen sobald Actions grün; `nexifyai.de` kanonisch; Rechtsform nach
+   Handelsregister KvK 90483944. Die Dauergrenzen (keine Zahlungen, nichts ohne Archiv
+   löschen, keine Geheimnisse im Klartext, keine Sicherheitslockerung) bleiben.
+6. **Neue Arbeitszweige (Berichte gelesen, R; alle Entwurf/ausgeschaltet):**
+
+   | Zweig (Kopf) | Ziel | Status | Nächster Schritt / beim Inhaber |
+   |---|---|---|---|
+   | `claude/rechtstexte-de-nl` (`85e77af`, 12:20) | Belegtes EU-Rechts-Quellenregister als Grundlage der Rechtstexte (NL-Unternehmen, B2B-Agentur + B2C/B2B-Shop) | WIP; Primärquellen am 15.11. abgerufen (DSGVO, SCC 2021/914, DPF 2023/1795 u. a.); keine Rechtsberatung; nationales Umsetzungsrecht offen | Rechtstexte auf dieser Basis überarbeiten; **Inhaber:** Freigabe der Rechtstexte (D-017), anwaltliche Prüfung, Rechtsform KvK 90483944 |
+   | `claude/shop-eigene-domain` (`48ebf18`, 12:09) | TEILEKLAR auf eigener Domain, hinter Schalter `NEXIFY_SHOP_HOST` (Standard AUS) | Code + Tests (`apps/web/auth/shop-host.ts`, `shop-host.test.mjs`), ausgeschaltet | Nach Shop-Live Schalter setzen; **Inhaber:** Domainwahl/Umschaltung (E-Entscheidungen) |
+   | `claude/server-aussortieren` (`dc6f6a1`, 12:23) | Kandidatenliste + Löschprotokoll beide Server nach 30-Tage-Regel | WIP vor Ausführung; srv1941843 durch Inhaber-Archivskript von 99 % (2 GiB frei, 11:40) auf 95 % (19,8 GiB frei, 12:19); Klasse B klein (~5 GiB), Cognee gesperrt | Klasse A/B einzeln nach Freigabe entfernen; **Inhaber/Serverzugriff** je Schritt (D-016) |
+   | `claude/shop-supabase-migration` (`940e0da`, 12:25) | Shop-Datenschicht MongoDB → Supabase/PostgreSQL (D-013) | Vorbereitet, getestet, ausgeschaltet (Schalter `SHOP_STORE_BACKEND=mongodb`); Zielschema + RLS lokal einspielbar | Zwingend fehlt: belegter Supabase-Zugang; Import + Vercel-Bindung sprechen noch MongoDB; kein Lauf gegen echtes Mongo/Supabase. **Inhaber:** Supabase-Instanz/Zugang, Umschaltfreigabe |
+
+   Noch ohne Push und daher **OFFEN** (kein Zweigstand lesbar): `claude/deepseek-arbeiter`,
+   `claude/chat-standard-offen`.
 
 ---
 
