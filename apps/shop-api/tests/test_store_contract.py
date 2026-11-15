@@ -234,6 +234,47 @@ class DisposableMongoBinding(unittest.IsolatedAsyncioTestCase):
     async def release_log(self): return [e async for e in self.database.price_releases.find({})]
 
 
+def load_pg_store(dsn):
+    """The PostgreSQL stores under a private package name, with the same inert db module (fixed now_iso)."""
+    name = '_store_contract_' + uuid4().hex
+    package = ModuleType(name); package.__path__ = [str(SHOP)]
+    db_module = ModuleType(name + '.db'); db_module.db = None; db_module.now_iso = lambda: 'contract-time'
+    with patch.dict(sys.modules, {name: package, name + '.db': db_module}), patch.dict(os.environ, {'SHOP_STORE_BACKEND': 'mongodb'}):
+        store = importlib.import_module(name + '.store')
+        pg = importlib.import_module(name + '.store.pg')
+        base = importlib.import_module(name + '.store.pg.base')
+    database = pg.PgDatabase(dsn)
+    errors = {error: getattr(store, error) for error in ('AlreadyExists', 'ArchiveTooLarge', 'RevisionStale', 'StoreUnavailable', 'StoredDataInvalid')}
+    return SimpleNamespace(**vars(pg.bind(database)), **errors), base, database
+
+
+class DisposablePostgresBinding(unittest.IsolatedAsyncioTestCase):
+    """The same contracts against PostgreSQL: a fresh database per test, built from the real migrations,
+    used through a login that only holds the service role (grants and policies are part of what is tested)."""
+    async def asyncSetUp(self):
+        import pg_fixture
+        self.fixture = pg_fixture
+        self.database_name = pg_fixture.create_database()
+        self.addCleanup(pg_fixture.drop_database, self.database_name)
+        self.store, self.base, self.database = load_pg_store(pg_fixture.dsn_for(self.database_name, pg_fixture.SERVICE_LOGIN))
+        self.addAsyncCleanup(self.database.close)
+        await self.store.accounts.ensure_indexes(900)
+
+    async def seed(self, collection, docs):
+        """Stored rows as a data transfer would leave them: the document as given, the id generated when absent."""
+        import psycopg
+        with psycopg.connect(self.fixture.dsn_for(self.database_name), autocommit=True) as conn:
+            for doc in copy.deepcopy(docs):
+                row_id, body = self.base.split(doc)
+                conn.execute(f'insert into shop.{collection} (id, doc) values (%s, %s::json)', (row_id, self.base.encode(body)))
+
+    async def events(self): return await self.store.payments.webhook_events()
+    async def release_log(self):
+        import psycopg
+        with psycopg.connect(self.fixture.dsn_for(self.database_name)) as conn:
+            return [self.base.join(*row) for row in conn.execute('select id, doc::text from shop.price_releases order by seq')]
+
+
 # --- contracts --------------------------------------------------------------------------
 def product(pid, name, **fields):
     return {'_id': pid, 'name': name, 'active': True, 'sku': pid.upper(), 'ean': '', 'stock': 1, 'purchase_cents': 100,
@@ -1091,6 +1132,15 @@ class DisposableMongoOutbox(OutboxContract, DisposableMongoBinding): pass
 class DisposableMongoOrders(OrderContract, DisposableMongoBinding): pass
 class DisposableMongoPayments(PaymentContract, DisposableMongoBinding): pass
 class DisposableMongoSettings(SettingsContract, DisposableMongoBinding): pass
+class DisposablePostgresCatalog(CatalogContract, DisposablePostgresBinding): pass
+class DisposablePostgresCarts(CartContract, DisposablePostgresBinding): pass
+class DisposablePostgresAccounts(AccountContract, DisposablePostgresBinding): pass
+class DisposablePostgresWorkshops(WorkshopContract, DisposablePostgresBinding): pass
+class DisposablePostgresRequests(RequestContract, DisposablePostgresBinding): pass
+class DisposablePostgresOutbox(OutboxContract, DisposablePostgresBinding): pass
+class DisposablePostgresOrders(OrderContract, DisposablePostgresBinding): pass
+class DisposablePostgresPayments(PaymentContract, DisposablePostgresBinding): pass
+class DisposablePostgresSettings(SettingsContract, DisposablePostgresBinding): pass
 
 
 if __name__ == '__main__': unittest.main()
