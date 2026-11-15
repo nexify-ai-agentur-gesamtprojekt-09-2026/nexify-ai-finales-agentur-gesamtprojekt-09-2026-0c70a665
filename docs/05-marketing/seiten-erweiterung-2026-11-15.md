@@ -37,12 +37,14 @@ Der Entwurfstext steht in Zitatblöcken (`>`). Alles außerhalb der Zitatblöcke
 
 ## 1. Befund in Kürze
 
+Nachtrag vom selben Tag: Abschnitt 11 (belegte Preise, Audit-Einstieg, Zielsegmente, Fallkarten, KI-Kennzeichnung). Er ändert einzelne Entwurfsstellen der Abschnitte 4.2, 4.4, 4.8, 4.11 und 4.15.
+
 1. **IST:** Die 21 inhaltlichen NeXify-Seiten tragen in der Seitenliste zusammen 2.794 deutsche Wörter (Titel, Zusammenfassung, Abschnitte), im Mittel 133 je Seite. Die 15 inhaltlichen TEILEKLAR-Seiten tragen zusammen 1.165 Wörter, im Mittel 78. Die Startseite hat zusätzlich 917 Wörter in HC. Zählung: Abschnitt 9.
 2. **IST:** Jede Seite hat zwei bis vier Abschnitte mit je ein bis zwei Absätzen. Es fehlen durchgehend: ein Ablauf in Schritten, „für wen“, Beispiele, „was Sie bekommen und was nicht“, Begriffserklärungen und Antworten auf naheliegende Fragen.
 3. **IST:** Auf zwölf Seiten ist der Abschnittstext der Seitenliste heute nicht sichtbar, weil die Seite einen eigenen Baustein rendert: Startseite, `/anmelden`, `/registrieren` und neun TEILEKLAR-Seiten mit eigener Route (Abschnitt 3, Muster M9). Mehr Text in der Seitenliste erscheint dort nicht von selbst.
 4. **ANNAHME:** Der größte Teil der Erweiterung lässt sich ohne neues Muster einbauen, als weitere Einträge in `pages[<id>].sections` (Muster M2). Sieben Stellen bräuchten ein neues Muster oder eine neue Verdrahtung und sind als Entscheidung des Inhabers gekennzeichnet (Abschnitt 3.3).
 5. **Entwurf:** Dieses Dokument liefert für 33 der 36 Seiten zusätzlichen Text, zusammen 6.142 neue deutsche Wörter (4.876 → 11.018, Startseite einschließlich HC). Umfang vorher und nachher je Seite: Abschnitt 9. Drei Seiten bleiben bewusst ohne Erweiterung: `/teileklar/kasse` (Kassentext), `/anmelden` und `/registrieren` (Formulare arbeiten nicht, Abschnitte nicht sichtbar). `/teileklar/gutscheine` erhält nur einen Satz.
-6. **OFFEN:** 24 Fragen an den Inhaber (Abschnitt 7). Die wichtigsten: Preise öffentlich (O-1 aus MK), Aussagen zu Eigentum an Ergebnissen und zum Ort der Datenhaltung, Kurzvorstellung von Pascal, Zahl und Herkunft des Werkstattverzeichnisses, Anrede bei TEILEKLAR.
+6. **OFFEN:** 24 Fragen an den Inhaber (Abschnitt 7); mit dem Nachtrag (Abschnitt 11) sind es 27, davon 2 beantwortet. Die wichtigsten: Preise öffentlich (O-1 aus MK), Aussagen zu Eigentum an Ergebnissen und zum Ort der Datenhaltung, Kurzvorstellung von Pascal, Zahl und Herkunft des Werkstattverzeichnisses, Anrede bei TEILEKLAR.
 
 ## 2. Bestandsaufnahme je Seite
 
@@ -1504,3 +1506,118 @@ Summen: NeXify AI 3.711 → 8.422 Wörter (21 Seiten, Startseite einschließlich
 - **Übersetzungen** nach nl, fr, en: nicht erstellt (Abschnitt 6).
 - **Die gemiedenen Wörter aus MK (5)** sind im Entwurfstext mit einer Wortsuche geprüft, Ergebnis in der PR-Beschreibung; eine Lektüre durch einen zweiten Leser steht aus.
 - **Rechtstexte, Kassentexte, Preise:** nicht berührt und nicht bewertet.
+
+## 11. Nachtrag vom 15.11.2026: Preise, Fallkarten, Kennzeichnung, Zielsegmente
+
+**Herkunft:** Nachricht der koordinierenden Sitzung `session_01HyncR5WyGFuRr9RrQ7w46i` vom 15.11.2026, 10:42 UTC, gestützt auf eine Freigabe des Inhabers vom selben Tag. Die Freigabe selbst liegt in diesem Repository nicht vor; sie ist hier als **Angabe der koordinierenden Sitzung** geführt, nicht als eigener Beleg. Wirksam wird alles erst mit einem Merge, den der Inhaber abnimmt. Die Abschnitte 1 bis 10 bleiben stehen; wo der Nachtrag sie ändert, steht es dabei.
+
+Die vier Punkte der Nachricht, sinngemäß:
+
+1. Intern festgelegte und im Repository belegte Preise dürfen als „ab“-Preise in den Entwürfen stehen, mit Fundstelle. Kein Preis wird geändert, gerundet oder erfunden.
+2. Referenzen nur als anonymisierte Arbeitsproben oder Fallkarten (Branche, Aufgabe, Vorgehen, Ergebnis), ohne Kundennamen, Logos, Zitate und ohne erfundene Messwerte, bis eine schriftliche Zustimmung des Kunden vorliegt.
+3. KI-Kennzeichnung immer, in allen Projekten, wie im eigenen Footer.
+4. Texte an den Segmenten der Zielkunden-Recherche ausrichten (NX-A, NX-B, NX-C; TK-1 bis TK-3) und am Einstieg „Audit, ein Tag, schriftliches Ergebnis“. Bei TEILEKLAR keine „geprüfte Passung“ versprechen.
+
+### 11.1 Preise
+
+Im Repository belegt und damit verwendbar sind genau zwei Beträge:
+
+| Betrag | Fundstelle | Wortlaut im Entwurf |
+|---|---|---|
+| Tagessatz Entwicklung 449 € netto | `config/fakten.json`, `projekt.tagessatz_eur` (Wert 449; Muster dort: „derzeit 449,00 €“, „449 € netto pro Tag“) | „derzeit 449 € netto pro Tag“ |
+| Mindestaufladung der NeXify API 10 € | `config/api-prepaid.json`, `aufladung.minCent` 1000 (Hinweis dort: „Vorgabe Inhaber 29.09.2026: Mindestaufladung 10 EUR“) | „ab 10 €“ |
+
+Nicht verwendet, weil nicht belegt oder nicht festgelegt: die Abo-Stufen der API (Entwurfsstatus, MK O-1), der Aufschlag der API (`preistabelle`, Status „Entwurf“, Einkaufswerte ungeprüft), das Testguthaben der Suite (steht nicht in den beiden Preisquellen, FL Hinweis zu R4), Preise für Pakete, für NeXify Care, für das Audit und für Partnerwerkstätten. Diese Stellen bleiben ohne Betrag.
+
+Zum Wort „ab“: Die Mindestaufladung ist ein Mindestbetrag, „ab 10 €“ gibt sie genau wieder. Der Tagessatz ist ein Satz, kein Mindestbetrag; „ab 449 €“ würde sagen, dass er auch höher sein kann, und das steht nirgends. Der Entwurf schreibt deshalb „derzeit 449 € netto pro Tag“, wie die Quelle. OFFEN F-25.
+
+**`/preise-ablauf`: ersetzt den Abschnitt „Warum hier kein Betrag steht“ aus 4.8.**
+
+> **Womit wir rechnen**
+>
+> Entwicklung rechnen wir nach Tagen. Der Tagessatz liegt derzeit bei 449 € netto pro Tag.
+>
+> Ein Tagessatz ist kein Gesamtpreis. Wie viele Tage Ihr Vorhaben braucht, welche Fremdkosten anfallen und welche Steuern gelten, steht in Ihrem Angebot. Erst dieser Betrag zählt.
+>
+> Wie eine Kalkulation aufgebaut ist, zeigt das Rechenbeispiel auf der Startseite. Es rechnet mit angenommenen Werten und ist kein Tarif.
+
+Quelle: FK `projekt.tagessatz_eur`; FAQ `pricing` (Grenzen: „Der Tagessatz ist kein Gesamtpreis …“); HC `exampleNote`. Muster: M2. Hinweis: `config/site-map.json` führt `source_policy.numeric_prices_embedded: false`; ein Betrag in der Seitenliste verlangt, dass dieser Schalter und die Prüfung dazu mitgeführt werden (Einbau, nicht dieser Entwurf).
+
+**`/preise-ablauf`: ersetzt im Abschnitt „Kosten der Produkte“ aus 4.8 den Satz zur API.**
+
+> Für die NeXify API gilt ein eigenes Modell: Sie laden Guthaben auf, ab 10 €, und verbrauchen es mit Ihren Aufrufen. Die Tarife je Aufruf stehen noch zur Freigabe.
+
+Quelle: AP `aufladung.minCent`; SM `api` Abschnitt 2. Muster: M2.
+
+**`/produkte/api`: ergänzt den Abschnitt „Guthaben statt Rechnung im Nachhinein“ aus 4.15 um einen Satz.**
+
+> Aufladen können Sie ab 10 €.
+
+Quelle: AP `aufladung.minCent`. Muster: M2.
+
+### 11.2 Einstieg „Audit: ein Tag, ein schriftliches Ergebnis“
+
+Belegt ist das Audit als Einstiegsprodukt in `docs/01-konzept/NeXify-Marketingkonzept.md`, Zeile 55 („KI-/Prozess-Audit, 1 Arbeitstag, schriftliches Ergebnis mit Festpreis-Empfehlung“), und in ZK (LIB-NX-01; Botschaft für NX-A: „ein Tag, ein schriftliches Ergebnis“). In der Seitenliste kommt es heute nicht vor. Was das schriftliche Ergebnis im Einzelnen enthält und was das Audit kostet, ist nicht festgelegt. OFFEN F-27.
+
+**`/leistungen`: neuer Abschnitt, vor „So arbeiten wir“. `/leistungen/agenten-automatisierung`: derselbe Abschnitt, vor „So gehen wir vor“.**
+
+> **Der kleinste Einstieg: ein Tag, ein schriftliches Ergebnis**
+>
+> Sie wissen, dass etwas hakt, aber noch nicht, was sich lohnt? Dann beginnen wir mit einem Audit. Wir sehen uns an einem Arbeitstag einen Ablauf oder Ihren Auftritt an. Danach erhalten Sie ein schriftliches Ergebnis: was wir gesehen haben, was wir empfehlen und was es als Projekt mit festem Umfang bedeuten würde.
+>
+> Sie entscheiden danach, ob daraus ein Auftrag wird. Das Audit verpflichtet Sie zu nichts Weiterem.
+
+Quelle: `docs/01-konzept/NeXify-Marketingkonzept.md`, Zeile 55; ZK 3.1 (LIB-NX-01) und 4.1. „Verpflichtet zu nichts Weiterem“ ist eine Zusage und braucht das Wort des Inhabers (F-27). Muster: M2. Hinweis: Das Marketingkonzept sieht das Audit zusätzlich „als Leiste über jeder Seite“ vor; das wäre ein neues Muster und kollidiert mit der Design-Sperre (E-8, neu).
+
+### 11.3 Ausrichtung an den Zielsegmenten
+
+Die Entwürfe in Abschnitt 4 sprechen die Segmente schon an (Handwerk und kleine Betriebe über „Büroarbeit von Hand“, Dienstleister über „Vorgang zu groß fürs Postfach“, technische Leser auf den Produktseiten). Der Nachtrag macht das auf `/leistungen` ausdrücklich.
+
+**`/leistungen`: neuer Abschnitt, nach „Woran Sie Ihr Feld erkennen“.**
+
+> **Für wen wir arbeiten**
+>
+> Handwerk, Bau und kleine Fertigung: Anfragen, Termine und Angebote laufen von Hand, und die Büroarbeit kostet den Feierabend. Hier beginnen wir meist bei einem Ablauf im Büro oder bei einer Website, die sagt, was der Betrieb kann.
+>
+> Dienstleister, Handel und Bildungsträger: Ein Vorgang ist zu groß für das Postfach geworden, und jeder fragt nach dem Stand. Hier geht es oft um ein Portal, einen Shop oder eine Anwendung.
+>
+> Teams mit eigener Software: Sie wollen KI in Ihre Anwendung einbinden, mit klaren Kosten je Nutzung. Für Sie sind die NeXify API und die Seite zu Skills und MCP gedacht.
+
+Quelle: ZK 1.2 (Segmente NX-A, NX-B, NX-C, je „Schmerzpunkt“); MK (1). Externe Zahlen aus ZK sind nicht übernommen. Muster: M2.
+
+**TEILEKLAR:** Die Entwürfe in Abschnitt 5 folgen den Segmenten schon: TK-1 (Fehlkauf vermeiden) in 5.3, 5.5, 5.6 und 5.9 bis 5.11; TK-2 (Werkstätten) in 5.15; TK-3 (Zubehör und Saison) in 5.4. „Geprüfte Passung“ steht in keinem Entwurfstext; geprüft mit einer Wortsuche nach „geprüft“ in den Zitatblöcken von Abschnitt 5: Treffer nur in „fachlich prüfen“ außerhalb der Zitate und in Wendungen wie „prüfen Sie“. Der Satz aus ES, den 5.15 übernimmt, lautet deshalb „Der Kunde bringt das passende Teil“, nicht „das geprüfte Teil“.
+
+### 11.4 Arbeitsproben als Fallkarten
+
+Freigegebene Kundenprojekte gibt es im Repository nicht (MK O-2). Fallkarten zu Kundenprojekten kann dieser Entwurf deshalb nicht füllen, ohne etwas zu erfinden. Er liefert das Schema und füllt es für die zwei eigenen Arbeitsproben, die MK (3) belegt.
+
+Schema einer Fallkarte: Branche · Aufgabe · Vorgehen · Ergebnis. Kein Kundenname, kein Logo, kein Zitat, kein Messwert, der nicht gemessen ist.
+
+**`/unternehmen`: ersetzt den Abschnitt „Wie wir mit Referenzen umgehen“ aus 4.11.**
+
+> **Zwei Arbeitsproben**
+>
+> Arbeitsprobe 1 · Agentur, eigener Auftritt. Aufgabe: Leistungen, Produkte und Arbeitsweise einer Agentur verständlich zeigen, in vier Sprachen. Vorgehen: ein Konzept für Struktur, Text und Gestaltung; alle Seiten aus denselben Bauteilen; Bedienung am Telefon geprüft. Ergebnis: die Seiten, die Sie gerade lesen.
+>
+> Arbeitsprobe 2 · Handel, eigene Shop-Marke TEILEKLAR. Aufgabe: Zubehör und Teile für Auto und Motorrad so anbieten, dass Käufer die Angaben prüfen können. Vorgehen: Katalog, Suche, Warenkorb, Kasse und ein Werkstattverzeichnis als ein System; dazu eine Checkliste zur Passung. Ergebnis: ein Shop im Aufbau; nicht jede Funktion ist heute in Betrieb.
+>
+> Beides sind eigene Projekte, keine Kundenprojekte. Projekte von Kunden zeigen wir anonymisiert und erst mit deren schriftlicher Zustimmung. Zahlen, Logos und Zitate erfinden wir nicht.
+
+Quelle: MK (3), erste und zweite Zeile der Belegtabelle samt Einschränkung zum Shop; FL Abschnitt 1; Punkt 2 der Nachricht der koordinierenden Sitzung. Muster: M2. F-5 ist damit beantwortet; F-8 (Satz zum Stand des Shops) bleibt offen.
+
+### 11.5 KI-Kennzeichnung
+
+**`/unternehmen`: ergänzt den Abschnitt „Woran wir uns halten“ aus 4.11 um einen Satz.**
+
+> Was mit KI erstellt ist, kennzeichnen wir – auf diesen Seiten und in jedem Projekt.
+
+Quelle: Punkt 3 der Nachricht der koordinierenden Sitzung („Kennzeichnungen immer, alle Projekte, wie bei uns im Footer“). Muster: M2. Einen Kennzeichnungshinweis im Footer hat eine Wortsuche in `apps/web/components/SiteFooter.tsx` nach „KI-“, „künstlich“, „generiert“, „erzeugt“ am 15.11.2026 nicht gefunden; wo der bestehende Hinweis steht, ist hier nicht belegt. OFFEN F-26.
+
+Dieser Entwurf beschreibt an keiner Stelle Bilder oder Filme und gibt nichts als reale Aufnahme aus.
+
+### 11.6 Folgen für die Abschnitte 1 bis 10
+
+- **Fragen:** F-1 (Preise) ist für die zwei belegten Beträge beantwortet, für alle übrigen offen. F-5 (Referenzen) ist beantwortet. Neu: **F-25** Soll der Tagessatz als „ab 449 €“ oder als „derzeit 449 € netto pro Tag“ stehen? **F-26** Wo steht der Kennzeichnungshinweis im Footer, und soll der Satz aus 11.5 auf die Seite? **F-27** Was enthält das schriftliche Ergebnis des Audits, was kostet es, und darf „verpflichtet zu nichts Weiterem“ zugesagt werden? Damit sind es 27 Fragen, davon 2 beantwortet und 25 offen.
+- **Neues Muster:** **E-8** Audit als Leiste über jeder Seite (laut Marketingkonzept); bräuchte einen neuen Baustein.
+- **Umfang:** Der Nachtrag bringt 4 neue Abschnitte (Audit auf zwei Seiten, „Für wen wir arbeiten“, „Womit wir rechnen“ als Ersatz) und ersetzt oder ergänzt 4 vorhandene Entwurfsstellen. Abschnitte nachher: `/leistungen` 11, `/leistungen/agenten-automatisierung` 10. Beide liegen damit weiter über der empfohlenen Obergrenze von sieben (F-24). Die Tabelle in Abschnitt 9 zeigt den Stand vor dem Nachtrag; die Wörter des Nachtrags stehen in der PR-Beschreibung.
+- **Unverändert:** keine Seiten-, Design- oder Textquelle berührt; keine Rechtstexte; Indexierung nicht angefasst.
