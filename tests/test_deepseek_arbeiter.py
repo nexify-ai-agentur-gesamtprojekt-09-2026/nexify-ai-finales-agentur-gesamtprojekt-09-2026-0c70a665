@@ -20,6 +20,7 @@ arbeiter = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(arbeiter)
 
 POLICY = "deepseek/deepseek-v4.1-flash-1017"
+WEG1 = "openrouter/deepseek/deepseek-v4.1-flash-1017"
 SCHLUESSEL = "test-schluessel-nicht-echt"
 AUFTRAG = "---\naufgabe: probe-zusammenfassung\ndatenklasse: oeffentlich\nart: zusammenfassung\n---\nFasse zusammen: Der Himmel ist blau.\n"
 
@@ -100,7 +101,7 @@ class Basis(unittest.TestCase):
 
 class Wege(Basis):
     def test_openrouter_antwortet_weg_eins_wird_protokolliert(self):
-        router = self.router({"openrouter/deepseek-v4.1-flash": antwort(provider="DeepInfra")})
+        router = self.router({WEG1: antwort(provider="DeepInfra")})
         ergebnis = self.lauf(router)
         self.assertEqual((ergebnis["weg"], ergebnis["modell"], ergebnis["umleitung_nach"]), ("router-openrouter", POLICY, []))
         self.assertEqual(len(router.anfragen), 1)
@@ -120,7 +121,7 @@ class Wege(Basis):
         for status in (503, 429, 502):
             with self.subTest(status):
                 self.setUp()
-                router = self.router({"openrouter/deepseek-v4.1-flash": (status, {"error": "x"}),
+                router = self.router({WEG1: (status, {"error": "x"}),
                                       "ds/test-direkt": antwort("DeepSeek-V4.1-Flash-1017")})
                 ergebnis = self.lauf(router)
                 self.assertEqual(ergebnis["weg"], "router-deepseek-direkt")
@@ -132,12 +133,12 @@ class Wege(Basis):
                 self.assertIn("umleitung nach gescheitertem weg: router-openrouter", arbeiter.ausgabe_text(ergebnis))
 
     def test_fehler_im_rumpf_ohne_antwort_gilt_als_gescheiterter_weg(self):
-        router = self.router({"openrouter/deepseek-v4.1-flash": (200, {"error": {"message": "x"}}), "ds/test-direkt": antwort()})
+        router = self.router({WEG1: (200, {"error": {"message": "x"}}), "ds/test-direkt": antwort()})
         self.assertEqual(self.lauf(router)["weg"], "router-deepseek-direkt")
 
     def test_ohne_eingetragenen_zweiten_weg_kein_rueckfall(self):
         self.konfig["wege"][1]["router_modellname"] = None
-        router = self.router({"openrouter/deepseek-v4.1-flash": (503, {})})
+        router = self.router({WEG1: (503, {})})
         self.assertEqual(self.abbruch(router).grund, "alle_wege_gescheitert")
         self.assertEqual(len(router.anfragen), 1)
 
@@ -145,7 +146,7 @@ class Wege(Basis):
         for status in (500, 504, 307):
             with self.subTest(status):
                 self.setUp()
-                router = self.router({"openrouter/deepseek-v4.1-flash": (status, {}), "ds/test-direkt": antwort()})
+                router = self.router({WEG1: (status, {}), "ds/test-direkt": antwort()})
                 abbruch = self.abbruch(router)
                 self.assertEqual((abbruch.grund, abbruch.exit_code), ("unklarer_ausgang", 6))
                 self.assertEqual(len(router.anfragen), 1)
@@ -153,7 +154,7 @@ class Wege(Basis):
                 self.assertGreater(self.zustand.verbrauch()["token"], 0)
 
     def test_abgelehnter_schluessel_bricht_ab(self):
-        router = self.router({"openrouter/deepseek-v4.1-flash": (401, {}), "ds/test-direkt": antwort()})
+        router = self.router({WEG1: (401, {}), "ds/test-direkt": antwort()})
         self.assertEqual(self.abbruch(router).grund, "schluessel_abgelehnt")
         self.assertEqual(len(router.anfragen), 1)
 
@@ -165,7 +166,7 @@ class Modellbindung(Basis):
                        "deepseek/deepseek-v4.1-flash-1017:free", None, 7):
             with self.subTest(modell):
                 self.setUp()
-                router = self.router({"openrouter/deepseek-v4.1-flash": antwort(modell), "ds/test-direkt": antwort()})
+                router = self.router({WEG1: antwort(modell), "ds/test-direkt": antwort()})
                 abbruch = self.abbruch(router)
                 self.assertEqual((abbruch.grund, abbruch.exit_code), ("anderes_modell_in_antwort", 5))
                 self.assertEqual(len(router.anfragen), 1)
@@ -175,7 +176,7 @@ class Modellbindung(Basis):
         for modell in (POLICY, "openrouter/" + POLICY, "DeepSeek-V4.1-Flash-1017"):
             with self.subTest(modell):
                 self.setUp()
-                self.assertEqual(self.lauf(self.router({"openrouter/deepseek-v4.1-flash": antwort(modell)}))["modell"], modell)
+                self.assertEqual(self.lauf(self.router({WEG1: antwort(modell)}))["modell"], modell)
 
     def test_konfiguration_folgt_der_modellregel(self):
         policy = json.loads((ROOT / "config/llm-policy.json").read_text(encoding="utf-8"))
@@ -205,7 +206,7 @@ class Modellbindung(Basis):
 class Limits(Basis):
     def test_tageslimit_token_bricht_vor_dem_aufruf_ab(self):
         self.konfig["limits"]["tageslimit_token"] = 4400
-        router = self.router({"openrouter/deepseek-v4.1-flash": antwort()})
+        router = self.router({WEG1: antwort()})
         self.lauf(router)  # bucht 100 Token
         self.konfig["limits"]["tageslimit_token"] = 4200
         abbruch = self.abbruch(router)
@@ -213,7 +214,7 @@ class Limits(Basis):
         self.assertEqual(len(router.anfragen), 1)
 
     def test_tageslimit_aufrufe_und_betrag(self):
-        router = self.router({"openrouter/deepseek-v4.1-flash": antwort()})
+        router = self.router({WEG1: antwort()})
         self.konfig["limits"]["tageslimit_aufrufe"] = 1
         self.lauf(router)
         self.assertEqual(self.abbruch(router).grund, "tageslimit_aufrufe_erreicht")
@@ -222,7 +223,7 @@ class Limits(Basis):
         self.assertEqual(len(router.anfragen), 1)
 
     def test_auftragslimit_und_groesse(self):
-        router = self.router({"openrouter/deepseek-v4.1-flash": antwort()})
+        router = self.router({WEG1: antwort()})
         self.konfig["limits"]["max_auftrag_token"] = 4000
         self.assertEqual(self.abbruch(router).grund, "auftragslimit_token_ueberschritten")
         self.konfig["limits"]["max_auftrag_bytes"] = 20
@@ -230,13 +231,13 @@ class Limits(Basis):
         self.assertEqual(router.anfragen, [])
 
     def test_fehlende_verbrauchsmeldung_laesst_die_reserve_stehen(self):
-        router = self.router({"openrouter/deepseek-v4.1-flash": antwort(usage=False)})
+        router = self.router({WEG1: antwort(usage=False)})
         self.lauf(router)
         self.assertGreaterEqual(self.zustand.verbrauch()["token"], 4000)
 
     def test_unlesbarer_verbrauchsstand_ist_kein_nullstand(self):
         self.zustand._tagesdatei().write_text("kaputt", encoding="utf-8")
-        router = self.router({"openrouter/deepseek-v4.1-flash": antwort()})
+        router = self.router({WEG1: antwort()})
         self.assertEqual(self.abbruch(router).grund, "verbrauchsstand_unlesbar")
         self.assertEqual(router.anfragen, [])
 
@@ -281,7 +282,7 @@ class Eingangsfilter(Basis):
         self.assertEqual(router.anfragen, [])
 
     def test_rechts_und_preistexte_tragen_den_entwurfsvermerk(self):
-        router = self.router({"openrouter/deepseek-v4.1-flash": antwort()})
+        router = self.router({WEG1: antwort()})
         text = arbeiter.ausgabe_text(self.lauf(router, self.kopf("Entwirf einen Hinweistext.", art="rechtstext-entwurf")))
         self.assertIn("ENTWURF", text)
         self.assertIn("Ungeprüfte Ausgabe", text)
@@ -316,7 +317,7 @@ class Einrichtung(Basis):
             self.assertIs(json.loads(aus.getvalue())["eingerichtet"], False)
 
     def test_schluessel_geht_nur_an_eingetragene_hosts_und_nie_ins_protokoll(self):
-        router = self.router({"openrouter/deepseek-v4.1-flash": antwort()})
+        router = self.router({WEG1: antwort()})
         for adresse in ("https://fremd.example/v1", "http://ai-router.nexifyai.cloud/v1", router.url + "/andere/route",
                         f"http://nutzer:pw@127.0.0.1:{router.server.server_address[1]}/v1"):
             with self.subTest(adresse.split("@")[-1]):
@@ -333,7 +334,7 @@ class Einrichtung(Basis):
                          "https://ai-router.nexifyai.cloud/v1/chat/completions")
 
     def test_befehl_schreibt_ergebnis_und_ueberschreibt_nichts(self):
-        router = self.router({"openrouter/deepseek-v4.1-flash": antwort()})
+        router = self.router({WEG1: antwort()})
         original = arbeiter.lade_konfig
         arbeiter.lade_konfig = lambda: self.konfig
         self.addCleanup(setattr, arbeiter, "lade_konfig", original)

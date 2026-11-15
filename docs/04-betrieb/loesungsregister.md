@@ -22,17 +22,17 @@ Vorgehen, Pflege und Umgang mit Schlüsseln aus dem Chat: `.claude/skills/nexify
 | läuft belegt | 30 |
 | läuft unbelegt | 18 |
 | defekt | 6 |
-| geplant | 1 |
+| geplant | 2 |
 | stillgelegt | 1 |
 | nicht verfolgt | 2 |
-| **gesamt** | **58** |
+| **gesamt** | **59** |
 
 | Rolle im Plan | Anzahl |
 |---|---|
 | tragend | 21 |
 | doppelt | 8 |
 | abzulösen | 2 |
-| unklar | 27 |
+| unklar | 28 |
 
 ## Übersicht
 
@@ -96,6 +96,7 @@ Vorgehen, Pflege und Umgang mit Schlüsseln aus dem Chat: `.claude/skills/nexify
 | `google-workspace` | Google Workspace (Gmail, Kalender, Drive) | Mail | läuft belegt | unklar | keine | `mail` `kalender` `dateien` `postfach` `inhaber` |
 | `postiz` | Postiz | Marketing | läuft unbelegt | unklar | keine | `social-media` `planung` `marketing` |
 | `claude-umgebung` | Claude-Code-Umgebung (Cloud-Sitzungen) | Arbeitsumgebung | läuft belegt | tragend | keine | `agenten` `arbeitsumgebung` `geheimnisspeicher` `netzwerk-geheimnisse` `plugins` |
+| `deepseek-arbeiter` | DeepSeek-Delegationsarbeiter (`tools/deepseek_arbeiter.py`) | LLM-Zugang | geplant | unklar | keine (Auftrag des Inhabers vom 15.11.2026 über die koordinierende Sitzung; ein eigener D-Eintrag steht aus) | `llm` `delegation` `deepseek` `arbeiter` `kosten` |
 
 ## Zugänge mit fälliger Erneuerung
 
@@ -148,6 +149,7 @@ Vorgehen, Pflege und Umgang mit Schlüsseln aus dem Chat: `.claude/skills/nexify
 - `slack` (Slack): Soll Slack der Kanal für Meldungen der Agenten an den Inhaber werden? Hermes hat derzeit keinen aktiven Kanal.
 - `google-workspace` (Google Workspace (Gmail, Kalender, Drive)): Welches Postfach ist führend für Kundenkorrespondenz: Google Workspace oder das Hostinger-Postfach?
 - `postiz` (Postiz): Wird Postiz genutzt? Unabhängig davon sind die Zugangsdaten aus der Mem-Notiz zu widerrufen.
+- `deepseek-arbeiter` (DeepSeek-Delegationsarbeiter (`tools/deepseek_arbeiter.py`)): Schaltet der Inhaber den Arbeiter ein (Schalter, Router-Adresse, Router-Schlüssel), und welcher Modellname gilt im 9router für den direkten DeepSeek-Rückfall?
 
 ## Lösungen im Einzelnen
 
@@ -1076,3 +1078,20 @@ Vorgehen, Pflege und Umgang mit Schlüsseln aus dem Chat: `.claude/skills/nexify
 |---|---|---|---|---|---|---|---|
 | Netzwerk-Geheimnis für api.cloudflare.com | API-Token | Netzwerk-Geheimnisse der Claude-Umgebung | Konto-Token mit Worker-Rechten, ohne AI-Gateway-Leserecht (Bericht 14.11., nicht selbst gemessen) | 2026-11-14 | ja | ja | siehe cloudflare-konto |
 | Netzwerk-Geheimnis für developers.hostinger.com | API-Schlüssel | Netzwerk-Geheimnisse der Claude-Umgebung | Hostinger-Konto | nicht belegt | nein | nein | – |
+
+### DeepSeek-Delegationsarbeiter (`tools/deepseek_arbeiter.py`) · `deepseek-arbeiter`
+
+- **Tags:** `llm` `delegation` `deepseek` `arbeiter` `kosten`
+- **Kategorie:** LLM-Zugang
+- **Zweck:** Klar umrissene Textaufgaben einer Sitzung (Entwurf, Zusammenfassung, Klassifikation, Übersetzung, Aufbereitung, Code-Vorschlag ohne Werkzeugzugriff) an das günstigere Policy-Modell abgeben, mit Eingangsfilter, Limits und Protokoll.
+- **Ort:** Repository: `tools/deepseek_arbeiter.py`, `config/deepseek-delegation.json`, Skill `.claude/skills/nexify-deepseek-delegation/SKILL.md`; ruft ausschließlich den 9router auf
+- **Zustand:** geplant (Stand 2026-11-15). Beleg: `docs/04-betrieb/deepseek-delegation-2026-11-15.md`: gebaut und gegen einen nachgebauten Router getestet (`tests/test_deepseek_arbeiter.py`); ausgeschaltet ausgeliefert, kein echter Modellaufruf, kein Schlüssel hinterlegt.
+- **Entscheidung:** keine (Auftrag des Inhabers vom 15.11.2026 über die koordinierende Sitzung; ein eigener D-Eintrag steht aus)
+- **Rolle im Plan:** unklar → Frage: Schaltet der Inhaber den Arbeiter ein (Schalter, Router-Adresse, Router-Schlüssel), und welcher Modellname gilt im 9router für den direkten DeepSeek-Rückfall?
+- **Wann nutzen:** Wenn eine Sitzung umfangreiche Schreib- oder Aufbereitungsarbeit abgeben will und nach einem günstigeren Modell, nach Delegation oder nach dem Arbeiter gefragt wird.
+- **Nicht nutzen für:** Personenbezogene Daten, Kundenunterlagen, Zugangsdaten, Vertragsinhalte, Entscheidungen und Abnahmen; als Ersatz für das Modell der Sitzung; als Nachweis der Modellregel am echten Router.
+- **Abhängigkeiten:** `9router`, `openrouter-deepseek`, `claude-umgebung`
+
+| Zugang (Bezeichnung) | Art | Ablageort des Werts | Rechteumfang | erstellt | offengelegt | Erneuerung fällig | Hinweis |
+|---|---|---|---|---|---|---|---|
+| ROUTER_URL und ROUTER_KEY für Claude-Sitzungen | Adresse und API-Schlüssel des Routers | Claude-Code-Umgebung des Inhabers (Umgebungsvariablen); noch nicht eingetragen | Modellaufrufe über den Router | noch nicht eingetragen | nein | nein | Derselbe Name wie beim Eintrag 9router. Ohne Schalter `DEEPSEEK_ARBEITER=ein` sendet der Arbeiter auch mit Schlüssel nichts. |

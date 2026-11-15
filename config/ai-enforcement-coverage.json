@@ -1913,6 +1913,40 @@
       "next_action": "Create or continue scoped remediation: inspect the concrete runtime, preserve existing operation, validate replacement and rollback before per-runtime cutover.",
       "runtime_deployment_verified": false,
       "markers": []
+    },
+    {
+      "id": "AI-deepseekarbeiter01",
+      "path": "tools/deepseek_arbeiter.py",
+      "sha256": "e428ded6639f9c24edf42ef9b4327a97956c45c004a4ffbd3a6b57df0c1fe8ae",
+      "classification": "owned_new_managed_path",
+      "status": "disabled_fail_closed",
+      "source_role": "session_delegation_worker",
+      "reviewed_non_inference": false,
+      "execution": {
+        "observation": "Befehlszeilenwerkzeug für Sitzungen; ausgeschaltet ausgeliefert, sendet ohne Schalter DEEPSEEK_ARBEITER=ein, ROUTER_URL und ROUTER_KEY nichts. Nur gegen einen lokalen Test-Server ausgeführt.",
+        "executed_live_by_this_audit": false
+      },
+      "egress": {
+        "observation": "Ein OpenAI-kompatibler Aufruf an den in config/deepseek-delegation.json eingetragenen Router-Host; kein direkter Anbieteraufruf, keine Weiterleitung.",
+        "actual_remote_provider_access_verified": false
+      },
+      "enforcement": {
+        "state": "disabled_fail_closed",
+        "checks": [
+          "Modell und Reasoning an config/llm-policy.json gebunden; eine Antwort, deren Feld model nicht auf deepseek-v4.1-flash-1017 endet, wird verworfen (kein Rückfall auf ein anderes Modell).",
+          "Wegfolge Router→OpenRouter, dann Router→DeepSeek direkt, nur nach eindeutig gescheitertem Versuch; bei unklarem Ausgang kein zweiter Aufruf.",
+          "Eingangsfilter, Größen-, Zeit-, Auftrags- und Tageslimit, Protokoll ohne Inhalte und Schlüssel; 24 Offline-Tests in tests/test_deepseek_arbeiter.py."
+        ],
+        "gaps": [
+          "Kein echter Aufruf: Modellname, Antwortfeld model, Kostenmeldung und Reasoning am echten Router sind nicht belegt.",
+          "Die serialisierte Anfrage nennt den Router-Namen des Modells; ob der Router damit den Stand 1017 beim Anbieter anfragt, zeigt erst die geprüfte Antwort.",
+          "Tageslimit und Protokoll liegen im Container der Sitzung; die verbindliche Ausgabenbremse ist das Limit am Schlüssel beim Anbieter."
+        ]
+      },
+      "owner": "Inhaber (Einschalten), koordinierende Sitzung (Nachführung)",
+      "next_action": "Erst nach Eintrag von Schalter, Adresse und Schlüssel durch den Inhaber den Probelauf aus docs/04-betrieb/deepseek-delegation-2026-11-15.md ausführen und das Ergebnis hier nachtragen.",
+      "runtime_deployment_verified": false,
+      "markers": []
     }
   ],
   "instruction_roots": [

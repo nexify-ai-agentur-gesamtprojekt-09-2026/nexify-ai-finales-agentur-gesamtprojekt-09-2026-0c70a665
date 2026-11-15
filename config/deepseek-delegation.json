@@ -26,8 +26,8 @@
       "id": "router-openrouter",
       "reihenfolge": 1,
       "beschreibung": "9Router leitet an OpenRouter weiter",
-      "router_modellname": "openrouter/deepseek-v4.1-flash",
-      "beleg_router_modellname": "apps/web/lib/chat-llm.ts (dort: gemessen 13.11.2026, der Router lehnt die Policy-Kennung mit HTTP 400 ab und bietet keinen datierten Stand an); hier nicht nachgemessen"
+      "router_modellname": "openrouter/deepseek/deepseek-v4.1-flash-1017",
+      "beleg_router_modellname": "nicht belegt: Anbieterkürzel des Routers plus datierte OpenRouter-Kennung; im Probelauf zu bestätigen. Der undatierte Name openrouter/deepseek-v4.1-flash (apps/web/lib/chat-llm.ts, dort gemessen 13.11.2026) ist bei OpenRouter ein anderer Katalogeintrag als der Stand 1017 (öffentlicher Katalog, gelesen 15.11.2026) und wird deshalb hier nicht verwendet"
     },
     {
       "id": "router-deepseek-direkt",
