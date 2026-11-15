@@ -67,8 +67,13 @@ class PgOutboxStore:
     async def order_mails(self, order_id):
         """Stand, Betreff und Versuche der Bestätigungs- und Statusmails einer Bestellung (Schlüssel ``order_paid:…`` und ``order_status:…``)."""
         pattern = re.compile("^order_(paid|status):[a-z:_]*" + order_id)
+        # Vorauswahl in der Datenbank, damit nicht der ganze Postausgang samt Inhalten gelesen wird: Der Schlüssel
+        # beginnt mit ``order_`` und enthält die Kennung wörtlich (nur wenn sie kein Musterzeichen trägt).
+        where, params = "id like 'order\\_%%'", []
+        if re.fullmatch(r"[A-Za-z0-9_:-]+", order_id):
+            where, params = where + " and position(%s in id) > 0", [order_id]
         async with self.db.cursor() as cur:
-            rows = await base.fetch_all(cur, "outbox", "id like 'order\\_%%'")
+            rows = await base.fetch_all(cur, "outbox", where, params)
         return [base.project(row, only=("status", "subject", "attempts")) for row in rows if pattern.search(row["_id"])]
 
     async def claim(self, event_key, claim_id, at, max_attempts):

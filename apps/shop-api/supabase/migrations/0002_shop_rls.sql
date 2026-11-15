@@ -12,7 +12,8 @@
 --   das Freigabeprotokoll wachsen nur (weder update noch delete).
 -- * "shop_api" ist eine Gruppenrolle ohne Anmeldung. Die Anmelderolle mit Kennwort legt der
 --   Inhaber an und gibt ihr "shop_api" (kein Kennwort in dieser Datei, keins im Repository):
---     create role <name> login password '<nur beim Inhaber>' noinherit in role shop_api;
+--     create role <name> login password '<nur beim Inhaber>' in role shop_api;
+--   (mit Vererbung, also ohne "noinherit": Die Zugriffsschicht wechselt die Rolle nicht selbst.)
 --   Der Dienstschlüssel/die Verbindungsadresse steht ausschließlich serverseitig (Vercel-Variable).
 -- * Mandanten: Der Shop ist ein Mandant (TEILEKLAR). Die Trennung zu anderen Bereichen ist das
 --   eigene Schema; "shop_api" hat keine Rechte außerhalb davon. Welche Bestellung welcher
