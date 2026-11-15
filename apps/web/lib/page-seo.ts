@@ -3,9 +3,11 @@ import type {PublicPage} from './page-types';
 import type {Locale} from './i18n';
 import {pageFaq} from './page-faq';
 import {publicPages} from './catalog';
+import {publicUrl} from '../auth/shop-host';
 export const PUBLIC_ORIGIN='https://www.nexifyai.de';
 export const localeOf=(value:unknown):Locale=>typeof value==='string'&&['de','nl','fr','en'].includes(value)?value as Locale:'de';
-export const localizedUrl=(path:string,locale:Locale)=>PUBLIC_ORIGIN+path+(locale==='de'?'':'?lang='+locale);
+// Adresse je Seite: ohne NEXIFY_SHOP_HOST wie bisher PUBLIC_ORIGIN+Pfad; mit Schalter stehen Shop-Seiten unter der eigenen Domain (auth/shop-host.ts).
+export const localizedUrl=(path:string,locale:Locale)=>publicUrl(path,process.env)+(locale==='de'?'':'?lang='+locale);
 /** Beschreibung für Suchergebnisse: höchstens 160 Zeichen, bevorzugt am Satzende, sonst am Wortende; der Seiteninhalt bleibt unverändert. */
 export function seoDescription(text:string,max=160):string{
  const flat=text.replace(/\s+/g,' ').trim();
@@ -38,7 +40,7 @@ export function pageStructuredData(page:PublicPage,locale:Locale){
  const graph:Record<string,unknown>[]=[provider,{'@type':'WebPage','@id':url+'#webpage',url,name:page.localizedTitle[locale],description:page.localizedSummary[locale],inLanguage:locale,publisher:{'@id':provider['@id']}}];
  if(faq.length)graph.push({'@type':'Service','@id':url+'#service',name:page.localizedTitle[locale],description:page.localizedSummary[locale],url,provider:{'@id':provider['@id']}});
  if(faq.length)graph.push({'@type':'FAQPage','@id':url+'#questions',inLanguage:locale,mainEntity:faq.map(row=>({'@type':'Question',name:row.question,acceptedAnswer:{'@type':'Answer',text:row.answer}}))});
- graph.push({'@type':'BreadcrumbList',itemListElement:[{'@type':'ListItem',position:1,name:brand,item:PUBLIC_ORIGIN+(page.site_context==='teileklar'?'/teileklar':'/')},{'@type':'ListItem',position:2,name:page.localizedTitle[locale],item:url}]});
+ graph.push({'@type':'BreadcrumbList',itemListElement:[{'@type':'ListItem',position:1,name:brand,item:page.site_context==='teileklar'?publicUrl('/teileklar',process.env):PUBLIC_ORIGIN+'/'},{'@type':'ListItem',position:2,name:page.localizedTitle[locale],item:url}]});
  return {'@context':'https://schema.org','@graph':graph};
 }
 export const safeJsonLd=(value:unknown)=>JSON.stringify(value).replace(/</g,'\\u003c');

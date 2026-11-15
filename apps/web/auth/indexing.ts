@@ -24,6 +24,15 @@ export const INDEXING_SWITCH = 'NEXIFY_INDEXING';
 export const TEILEKLAR_INDEXING_SWITCH = 'NEXIFY_INDEXING_TEILEKLAR';
 export const NOINDEX_HEADER_VALUE = 'noindex, nofollow';
 
+/**
+ * TEILEKLAR auf eigener Domain (auth/shop-host.ts, docs/04-betrieb/shop-eigene-domain-2026-11-15.md). Standard AUS.
+ * Mit NEXIFY_SHOP_HOST=enabled ist für Seiten unter /teileklar allein diese Domain die freigegebene Adresse; die übrigen
+ * Bedingungen (Schalter, Produktion, Pfad, NEXIFY_INDEXING_TEILEKLAR) gelten unverändert. Die Konstanten stehen hier,
+ * weil dieses Modul ohne Importe bleibt; die Adressregel selbst steht in auth/shop-host.ts.
+ */
+export const SHOP_HOST_SWITCH = 'NEXIFY_SHOP_HOST';
+export const SHOP_CANONICAL_HOST = 'teileklar.shop';
+
 /** Freigegebene Produktionsdomains. Eine weitere Domain kommt nur durch eine Änderung hier (mit Test) dazu. */
 export const APPROVED_INDEX_HOSTS: readonly string[] = ['nexifyai.de', 'www.nexifyai.de', 'nexifyai.cloud', 'www.nexifyai.cloud'];
 
@@ -56,6 +65,7 @@ export function indexablePaths(catalog: Catalog): string[] {
 export const indexingSwitchOn = (env: IndexingEnvironment): boolean => env[INDEXING_SWITCH] === 'enabled';
 export const teileklarIndexingOn = (env: IndexingEnvironment): boolean => indexingSwitchOn(env) && env[TEILEKLAR_INDEXING_SWITCH] === 'enabled';
 export const isTeileklarPath = (path: string): boolean => path === '/teileklar' || path.startsWith('/teileklar/');
+export const shopHostOn = (env: IndexingEnvironment): boolean => env[SHOP_HOST_SWITCH] === 'enabled';
 
 /** Host ohne Port, klein geschrieben, ohne abschließenden Punkt. Ungültiges ergibt die leere Zeichenkette. */
 export function normalizeHost(value: string): string {
@@ -81,7 +91,10 @@ export function indexingDecision(input: { path: string; hosts: readonly string[]
   if (!indexingSwitchOn(env)) return { index: false, reason: 'switch_off' };
   if (env.VERCEL_ENV !== undefined && env.VERCEL_ENV !== 'production') return { index: false, reason: 'not_production' };
   const named = hosts.map(normalizeHost);
-  if (named.length === 0 || !named.every(host => APPROVED_INDEX_HOSTS.includes(host))) return { index: false, reason: 'host_not_approved' };
+  // Eigene Shop-Domain (nur mit NEXIFY_SHOP_HOST): Shop-Seiten sind dann ausschließlich dort freigegeben, alles andere dort nie.
+  const shopHost = shopHostOn(env) && named.length > 0 && named.every(host => host === SHOP_CANONICAL_HOST);
+  if (shopHostOn(env) && shopHost !== isTeileklarPath(path)) return { index: false, reason: 'host_not_approved' };
+  if (named.length === 0 || (!shopHost && !named.every(host => APPROVED_INDEX_HOSTS.includes(host)))) return { index: false, reason: 'host_not_approved' };
   if (!paths.includes(path) && !TEILEKLAR_DETAIL.test(path)) return { index: false, reason: 'path_not_indexable' };
   if (isTeileklarPath(path) && !teileklarIndexingOn(env)) return { index: false, reason: 'teileklar_switch_off' };
   return { index: true, reason: 'allowed' };
