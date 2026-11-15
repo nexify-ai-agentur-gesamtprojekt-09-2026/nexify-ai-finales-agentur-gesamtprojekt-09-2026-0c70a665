@@ -30,13 +30,10 @@ class PgAccountStore:
     # Konten -------------------------------------------------------------------------------
     async def create_user(self, user):
         """AlreadyExists, wenn E-Mail oder user_id schon vergeben sind."""
-        created = "_id" not in user
         try:
             async with self.db.cursor() as cur:
                 await base.insert(cur, "users", user)
         except psycopg.errors.UniqueViolation:
-            if created:
-                user.pop("_id", None)
             raise AlreadyExists() from None
 
     async def _user(self, column, value):

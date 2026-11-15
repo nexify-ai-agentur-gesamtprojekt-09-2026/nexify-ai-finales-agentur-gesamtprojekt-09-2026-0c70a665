@@ -134,7 +134,7 @@ class PgOrderStore:
 
         Gibt die Bestellung nach der Änderung zurück, sonst None; dann hat sich nichts geändert.
         """
-        done = await self._change(order_id, lambda doc: doc.get("fulfilment") == expected_state and ("fulfilment" in doc or expected_state is None),
+        done = await self._change(order_id, lambda doc: doc.get("fulfilment") == expected_state,
                                   lambda doc: base.change(doc, set=dict(changes)))
         return done[1] if done else None
 

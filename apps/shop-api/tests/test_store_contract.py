@@ -194,7 +194,7 @@ class Database:
                             'workshops': Collection(), 'workshop_requests': Collection(), 'requests': Collection(),
                             'outbox': Collection(), 'orders': Collection(unique=[('owner', 'idempotency_key')]),
                             'webhook_events': Collection(unique=['event_key']), 'revolut_webhooks': Collection(),
-                            'price_releases': Collection()}
+                            'price_releases': Collection(), 'api_keys': Collection()}
         self.client = SimpleNamespace(start_session=lambda: Session(self))
     def __getattr__(self, name): return self.collections[name]
 
@@ -206,6 +206,7 @@ class InMemoryBinding(unittest.IsolatedAsyncioTestCase):
         await self.store.accounts.ensure_indexes(900)
 
     async def seed(self, collection, docs): await getattr(self.database, collection).insert_many(docs)
+    async def rows(self, collection): return [d async for d in getattr(self.database, collection).find({})]
     async def events(self): return [e async for e in self.database.webhook_events.find({})]
     async def release_log(self): return [e async for e in self.database.price_releases.find({})]
 
@@ -236,6 +237,7 @@ class DisposableMongoBinding(unittest.IsolatedAsyncioTestCase):
         await self.store.accounts.ensure_indexes(900)
 
     async def seed(self, collection, docs): await self.database[collection].insert_many(copy.deepcopy(docs))
+    async def rows(self, collection): return [d async for d in self.database[collection].find({})]
     async def events(self): return [e async for e in self.database.webhook_events.find({})]
     async def release_log(self): return [e async for e in self.database.price_releases.find({})]
 
@@ -274,11 +276,13 @@ class DisposablePostgresBinding(unittest.IsolatedAsyncioTestCase):
                 row_id, body = self.base.split(doc)
                 conn.execute(f'insert into shop.{collection} (id, doc) values (%s, %s::json)', (row_id, self.base.encode(body)))
 
-    async def events(self): return await self.store.payments.webhook_events()
-    async def release_log(self):
+    async def rows(self, collection):
         import psycopg
         with psycopg.connect(self.fixture.dsn_for(self.database_name)) as conn:
-            return [self.base.join(*row) for row in conn.execute('select id, doc::text from shop.price_releases order by seq')]
+            return [self.base.join(*row) for row in conn.execute(f'select id, doc::text from shop.{collection} order by seq')]
+
+    async def events(self): return await self.store.payments.webhook_events()
+    async def release_log(self): return await self.rows('price_releases')
 
 
 # --- contracts --------------------------------------------------------------------------
@@ -542,6 +546,25 @@ class AccountContract:
         a, b = await self.store.accounts.user_by_id('user_a'), await self.store.accounts.user_by_id('user_b')
         self.assertEqual((a['password_hash'], a['role'], b['password_hash'], b['role']), ('new-hash', 'customer', 'admin-hash', 'admin'))
         self.assertIsNone(await self.store.accounts.user_by_id('user_missing'), 'changing a missing account creates nothing')
+
+    async def test_redeemed_reset_proves_the_address_and_revokes_only_the_valid_keys_of_that_account(self):
+        await self.store.accounts.create_user(account('user_a', 'a@example.invalid'))
+        await self.store.accounts.create_user(account('user_b', 'b@example.invalid'))
+        await self.store.accounts.set_password_hash_verified('user_a', 'new-hash')
+        await self.store.accounts.set_password_hash_verified('user_missing', 'ignored')
+        a, b = await self.store.accounts.user_by_id('user_a'), await self.store.accounts.user_by_id('user_b')
+        self.assertEqual((a['password_hash'], a['email_verified'], a['role']), ('new-hash', True, 'customer'))
+        self.assertEqual((b['password_hash'], b.get('email_verified')), ('hash-of-user_b', None), 'another account is neither changed nor verified')
+        self.assertIsNone(await self.store.accounts.user_by_id('user_missing'))
+        key = lambda kid, tenant, **fields: {'_id': kid, 'key_id': kid, 'tenant_id': tenant, 'hash': kid * 64, 'calls': 3, **fields}
+        await self.seed('api_keys', [key('1', 'user_a', revoked_at=None), key('2', 'user_a', revoked_at=T0), key('3', 'user_b', revoked_at=None), key('4', 'user_a')])
+        await self.store.accounts.revoke_api_keys_of('user_a', T1)
+        await self.store.accounts.revoke_api_keys_of('user_none', T2)
+        keys = {k['_id']: k for k in await self.rows('api_keys')}
+        self.assertEqual([keys[k].get('revoked_at') for k in '1234'], [T1, T0, None, T1], 'valid keys are revoked now; a revoked key keeps its instant; other accounts keep theirs')
+        self.assertEqual({k['calls'] for k in keys.values()}, {3}, 'nothing else of a key changes')
+        await self.store.accounts.revoke_api_keys_of('user_a', T2)
+        self.assertEqual([k.get('revoked_at') for k in await self.rows('api_keys')], [T1, T0, None, T1], 'revoking twice changes no instant')
 
     async def test_sessions_are_found_by_token_hash_and_deleted_singly_or_per_user(self):
         expires = NOW + timedelta(days=14)
@@ -852,7 +875,7 @@ class OutboxContract:
     async def test_mails_of_an_order_are_its_confirmations_and_status_notices_only(self):
         await self.seed('outbox', [mail('order_paid:customer:o-1', 'gesendet', attempts=1), mail('order_paid:internal:o-1'), mail('order_status:versendet:o-1'),
                                    mail('order_status:in_bearbeitung:o-1'), mail('fulfillment_error:o-1'), mail('order_paid:customer:o-2'), mail('request:o-1'),
-                                   mail('x-order_paid:customer:o-1')])
+                                   mail('x-order_paid:customer:o-1'), mail('order_paid:X-order_status:versendet:o-1')])
         mails = await self.store.outbox.order_mails('o-1')
         self.assertEqual([m['_id'] for m in mails], ['order_paid:customer:o-1', 'order_paid:internal:o-1', 'order_status:versendet:o-1', 'order_status:in_bearbeitung:o-1'])
         self.assertEqual(mails[0], {'_id': 'order_paid:customer:o-1', 'status': 'gesendet', 'subject': 'S', 'attempts': 1}, 'neither recipient nor content')
@@ -1164,6 +1187,28 @@ class PostgresSpecifics:
         self.assertEqual(await self.store.accounts.count_login_failures('a@example.invalid', NOW - timedelta(days=1)), 1)
         self.assertEqual((await self.store.accounts.consume_password_reset('b' * 64, NOW))['user_id'], 'user_a')
         self.assertEqual(await self.store.accounts.purge_expired(NOW, 900), 0)
+
+    async def test_two_state_changes_that_wait_on_the_same_row_have_one_winner(self):
+        # Both callers are held at the row until it is released. Each has to judge the state it finds after the
+        # other one wrote, not the state from before the wait.
+        import asyncio
+        import psycopg
+        await self.store.orders.add(order('o1')); await self.store.outbox.add('k1', 'a@example.invalid', 'S', 'H', 'T', '', T0)
+        holder = await psycopg.AsyncConnection.connect(self.fixture.dsn_for(self.database_name))
+        self.addAsyncCleanup(holder.close)
+        await holder.execute("select 1 from shop.orders where id = 'o1' for update")
+        await holder.execute("select 1 from shop.outbox where id = 'k1' for update")
+        paid = [asyncio.ensure_future(self.store.orders.mark_paid('o1', at)) for at in (T0, T1)]
+        claimed = [asyncio.ensure_future(self.store.outbox.claim('k1', claim, T0, 5)) for claim in ('first', 'second')]
+        await asyncio.sleep(0.5)
+        self.assertFalse(any(task.done() for task in paid + claimed), 'every caller waits for the row')
+        await holder.rollback()
+        self.assertEqual(sorted(await asyncio.gather(*paid)), [False, True])
+        stored = await self.store.orders.get('o1')
+        self.assertEqual((stored['status'], stored['paid_transitions']), ('bezahlt', 1))
+        self.assertIn(stored['paid_at'], (T0, T1))
+        self.assertEqual(sorted(result is not None for result in await asyncio.gather(*claimed)), [False, True])
+        self.assertIn((await self.store.outbox.get('k1'))['claim_id'], ('first', 'second'))
 
     async def test_two_concurrent_merges_of_one_cart_take_its_items_exactly_once(self):
         import asyncio
