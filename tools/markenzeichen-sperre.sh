@@ -17,7 +17,7 @@ if [ ! -f "$MANIFEST" ]; then
   exit 2
 fi
 
-if out="$(sha256sum -c "$MANIFEST" 2>&1)"; then
+if out="$(sha256sum -c --strict "$MANIFEST" 2>&1)"; then
   anzahl="$(printf '%s\n' "$out" | grep -c ': OK$' || true)"
   echo "Markenzeichen-Sperre: Design unveraendert gegen den Normstand (${anzahl} Dateien geprueft, ${MANIFEST})."
   exit 0

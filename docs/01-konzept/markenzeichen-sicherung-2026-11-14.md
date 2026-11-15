@@ -15,12 +15,12 @@ Die maßgeblichen Belege:
 |---|---|
 | `config/design-tokens.json` | einziger Wertespeicher für Farbe, Typo, Raum, Radius, Tiefe, Glas, Bewegung |
 | `packages/tokens/{tokens.css,tokens.json,tokens.ts}` | daraus abgeleitete Token-Ausgaben; `build-tokens.mjs` erzeugt sie |
-| `apps/web/app/globals.css`, `apps/web/components/*.css` | das sichtbare Material der öffentlichen Seite |
-| `apps/web/components/{IdentityHero,HomeContent,AtelierFilm,ActionControl,SiteNavigation,SiteFooter,Workspace}.tsx` | die Bausteine, die der Gleichmacher misst |
+| alle `*.css` unter `apps/web/app/` (inkl. `masterplan-tokens.css`, `globals.css`, `measurement-system.css`) und `apps/web/components/**` rekursiv (inkl. `shop/shop.css`, `shop/Storefront.css`) | das sichtbare Material der öffentlichen Seite und des Shops |
+| `apps/web/components/{IdentityHero,HomeContent,AtelierFilm,ActionControl,SiteNavigation,SiteFooter,Workspace}.tsx` und `apps/web/components/shop/CommerceHeader.tsx` | die Bausteine, die der Gleichmacher misst (NeXify-Kopf/Fuß/Hero und die Shop-Kopfleiste) |
 | `tools/gleichmacher.mjs`, `tools/kopfleiste-regel.mjs` | der Laufzeit-Wächter und seine Kopfleisten-Regel |
 | `config/text-resize-sources.json` | die byte-genaue Bindung der Designverzeichnisse |
 
-Die genauen Prüfsummen (sha256) dieser 45 Dateien stehen in der Schwesterdatei
+Die genauen Prüfsummen (sha256) dieser 48 Dateien stehen in der Schwesterdatei
 `docs/01-konzept/markenzeichen-normstand-2026-11-14.sha256`. Diese Datei ist das
 Normstand-Manifest und zugleich die additive, nur lesende Prüfung „Design
 unverändert gegen den gepinnten Stand".
@@ -32,7 +32,7 @@ Datei einführt. Der zugehörige Stand entspricht `origin/main` am 14.11.2026
 
 ## Die additive Nur-Lese-Prüfung (Design-Sperre festgezogen)
 
-Ein Lauf bestätigt, dass keine der 45 Designdateien seit dem Einfrieren
+Ein Lauf bestätigt, dass keine der 48 Designdateien seit dem Einfrieren
 verändert wurde:
 
 ```bash
@@ -45,14 +45,26 @@ sha256sum -c docs/01-konzept/markenzeichen-normstand-2026-11-14.sha256
   Befund, keine Erlaubnis, das Manifest nachzuziehen. Weiter unten „Rückweg".
 
 Diese Prüfung läuft als Ziel `check-markenzeichen` und ist **Vorbedingung von
-`make check`** (`Makefile`). Da `make check` sowohl in der CI
-(`.github/workflows/ci.yml`: `make check && make test && make check-arch`) als
-auch im Vercel-Deploy-Gate (`.github/workflows/vercel-deploy.yml`:
-`make check && make test`) läuft, blockiert eine abweichende Datei ab jetzt CI
-und Deploy — sie ist kein bloß manuelles Diagnosewerkzeug. Sie misst keine Werte
-neu und schwächt kein bestehendes Gate ab (auf dem heutigen Stand meldet sie
-45 Dateien `OK`, `make check` bleibt grün). Sie ergänzt die bestehenden Wächter,
-ersetzt sie nicht:
+`make check`** (`Makefile`). Sie ist deshalb kein bloß manuelles
+Diagnosewerkzeug, sondern Teil jedes Laufs, der `make check` ausführt:
+
+- **CI** (`.github/workflows/ci.yml`: `make check && make test && make check-arch`)
+  — bei jeder Abweichung rot.
+- **Manueller, opt-in Deploy-Workflow** (`.github/workflows/vercel-deploy.yml`:
+  `make check && make test`) — nur per `workflow_dispatch` und nur bei gesetzter
+  Repo-Variable; nicht der automatische Produktionsweg.
+
+**Grenze (ehrlich):** Die **automatische Produktions-Auslieferung läuft über die
+GitHub-Vercel-Integration** auf `main` und baut direkt
+(`pnpm --filter @nexify/web build`) — **ohne** `make check`. Diese Sperre blockiert
+den Vercel-Integrations-Build daher **nicht**; sie wirkt in CI und im manuellen
+Deploy-Workflow. Eine Produktionssperre im Auslieferungsweg wäre eine
+Serveränderung (D-016) und ist nicht Teil dieses additiven Nachweises.
+
+Sie misst keine Werte neu und schwächt kein bestehendes Gate ab (auf dem heutigen
+Stand meldet sie 48 Dateien `OK`, `make check` bleibt grün) und nutzt
+`sha256sum -c --strict`, sodass auch fehlerhaft formatierte Manifestzeilen als
+Fehler zählen. Sie ergänzt die bestehenden Wächter, ersetzt sie nicht:
 
 1. `tools/gleichmacher.mjs` (Laufzeit, gegen die Startseite);
 2. `config/text-resize-sources.json` + `tools/check_text_resize_evidence.py`
