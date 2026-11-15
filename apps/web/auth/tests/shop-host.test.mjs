@@ -269,11 +269,12 @@ test('Indexierung: die Regel bleibt, die Shop-Domain kommt nur für Shop-Seiten 
 
 test('robots.txt und Sitemap je Host: ohne Schalter die bisherige Datei, mit Schalter die Liste der jeweiligen Domain', () => {
   const robots = read('../../app/robots.ts');
-  const list = JSON.parse('[' + /const disallow=\[([^\]]+)\];/.exec(robots)[1].replaceAll("'", '"') + ']');
+  const list = JSON.parse('[' + /disallow:\[([^\]]+)\]/.exec(robots)[1].replaceAll("'", '"') + ']');
   // Dieselbe Sperrliste wie vor der Änderung.
   assert.deepEqual(list, ['/api/', '/intern/', '/portal/', '/teileklar/kasse', '/teileklar/warenkorb', '/teileklar/bestellung/', '/teileklar/bestellungen', '/teileklar/konto', '/teileklar/partnerportal', '/teileklar/nachbarschaft']);
   assert.deepEqual(shopRobotsDisallow(list), ['/api/', '/kasse', '/warenkorb', '/bestellung/', '/bestellungen', '/konto', '/partnerportal', '/nachbarschaft']);
-  assert.match(robots, /return\{rules:\{userAgent:'\*',allow:'\/',disallow\},sitemap:'https:\/\/www\.nexifyai\.de\/sitemap\.xml'\};/);
+  assert.match(robots, /const AGENCY=\{rules:\{userAgent:'\*',allow:'\/',disallow:\[[^\]]+\]\},sitemap:'https:\/\/www\.nexifyai\.de\/sitemap\.xml'\};/);
+  assert.match(robots, /disallow:shopRobotsDisallow\(AGENCY\.rules\.disallow\)\},sitemap:SHOP_ORIGIN\+'\/sitemap\.xml'\};\n return AGENCY;/);
   // Kopfzeilen werden nur mit Schalter gelesen; ohne Schalter bleiben beide Dateien beim Build erzeugt.
   assert.match(robots, /if\(shopHostOn\(process\.env\)&&hostKind\(requestHosts\(\(await headers\(\)\)/);
   const sitemap = read('../../app/sitemap.ts');
