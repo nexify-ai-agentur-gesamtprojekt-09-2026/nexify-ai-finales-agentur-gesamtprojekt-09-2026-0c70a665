@@ -37,7 +37,7 @@ oder an der Claude-Umgebung, keine Kosten.
 | Auf srv1941843 läuft ein Container `9router` im Compose-Projekt `stack`, laut Compose-Kommentar „abgelöst 03.10.“ | `docs/04-betrieb/aufraeumplan-2026-11-14.md:169` | Bericht vom 14.11., hier nicht nachgemessen |
 | Der öffentliche Chat ruft den Router mit `Authorization: Bearer <ROUTER_KEY>` und dem Modellnamen `openrouter/deepseek-v4.1-flash` auf; die Policy-Kennung lehnt der Router mit 400 ab | `apps/web/lib/chat-llm.ts` (dort: gemessen 13.11.2026) | Bericht, hier nicht nachgemessen |
 | Rückfallketten heißen im 9router „Combos“ und wechseln, „when quota runs out or errors occur“ | README des 9router | IST für die Software |
-| Welche Anbieter, Modelle und Combos im eigenen Router eingetragen sind | nicht lesbar ohne Anmeldung | OFFEN |
+| Welche Anbieter, Modelle und Combos im eigenen Router eingetragen sind | ohne Schlüssel gibt der Router keine Modellkennung preis: `GET /v1/models` und `GET /api/v1/models` antworten mit 401 (eigener Abruf 15.11.2026) | OFFEN |
 | Ob die Antwort des Routers im Feld `model` den Namen des Routers oder die Kennung des Anbieters trägt | README: keine Aussage | OFFEN, klärt der Probelauf |
 | Anthropic-kompatible Schnittstelle (`/v1/messages`) | README nennt Formatübersetzung „OpenAI ↔ Claude“, aber im gelesenen Teil keinen Endpunkt | OFFEN |
 | Ausgabenlimit je Router-Schlüssel | README: keine Aussage | OFFEN |
@@ -155,12 +155,18 @@ direkten DeepSeek-Weg: nicht belegt.
 |---|---|---|
 | teuerster einzelner Auftrag im Auslieferungszustand | etwa 0,013 USD | 26 000 Eingabe-Token × 0,30 USD/Mio. + 4 000 Ausgabe-Token × 1,20 USD/Mio. (Hochpreisfenster) |
 | lokales Tageslimit Token (150 000) | höchstens etwa 0,18 USD | alles als Ausgabe im Hochpreisfenster gerechnet |
-| lokales Tageslimit Betrag | 0,50 USD | greift nur, wenn der Router Kosten in `usage.cost` liefert (nicht belegt) |
+| lokales Tageslimit Betrag | 5,00 USD | Deckel laut Entscheidung E10; greift nur, wenn der Router Kosten in `usage.cost` liefert (nicht belegt) |
 | feste Obergrenze im Code | 5,00 USD am Tag | höher lässt sich die Konfiguration nicht stellen |
 
-Die koordinierende Sitzung berichtet als Entscheidung E10 einen Deckel von 5 USD am Tag
-(Bericht vom 15.11.2026, im Repository nicht belegt). Ausgeliefert ist der niedrigere Wert
-0,50 USD; die Anhebung ist eine Zeile in `config/deepseek-delegation.json` (Abschnitt 6.4).
+**Begründung des Deckels:** 5 USD am Tag ist der Wert der Entscheidung E10 (Vollmacht des
+Inhabers vom 15.11.2026, mitgeteilt von der koordinierenden Sitzung am 15.11.2026; ein
+Eintrag in `DECISIONS.md` steht aus). Er ist als `tageslimit_betrag_usd` eingetragen und
+zugleich die feste Obergrenze im Code. Wirksam begrenzt im Auslieferungszustand zuerst das
+Token-Limit: 150 000 Token am Tag kosten auch im teuersten Preisfenster unter 0,20 USD. Wer
+den Deckel von 5 USD ausschöpfen will, hebt `tageslimit_token` bewusst an (Abschnitt 6.4);
+bei 1,20 USD je 1 Mio. Ausgabe-Token entsprechen 5 USD rund 4,1 Mio. Token. Weil der
+Betrag nur zählt, wenn der Router Kosten meldet, gehört derselbe Deckel als Ausgabenlimit an
+den OpenRouter-Schlüssel (Abschnitt 6.2).
 Ersparnis gegenüber der Arbeit in der Claude-Sitzung: nicht belegt, weil der Verbrauch der
 Sitzungen je Aufgabe nicht gemessen ist.
 
@@ -197,6 +203,14 @@ README des 9router.
    Laufzeitbindung“ vermerkt. Den Router-Namen des Modells in `wege[1].router_modellname`
    eintragen (PR). Solange dort `null` steht, gibt es keinen Rückfall.
 4. **Keine Combo** für diesen Zweck anlegen; die Wegfolge steuert der Arbeiter.
+
+   **Was am Router fehlt, wenn er keinen datierten Stand anbietet:** ein Modelleintrag beim
+   Anbieter OpenRouter mit der Kennung `deepseek/deepseek-v4.1-flash-1017` (Nr. 2) und ein
+   Modelleintrag beim Anbieter DeepSeek, der dem Stand `DeepSeek-V4.1-Flash-1017` entspricht
+   (Nr. 3). Laut `apps/web/lib/chat-llm.ts` bot der Router am 13.11.2026 nur den undatierten
+   Namen an. Beide Einträge setzt der Inhaber in der Router-Oberfläche; eine Sitzung hat dort
+   keinen Zugang. Bis dahin endet der Arbeiter mit Exit 6 (Name unbekannt) oder Exit 5
+   (anderer Stand in der Antwort). Der Adapter wird dafür nicht gelockert.
 5. **Router-Schlüssel:** der vorhandene Standard-Schlüssel genügt. Empfohlen ist ein eigener
    Schlüssel für Claude-Sitzungen, damit er getrennt gesperrt werden kann.
 
@@ -214,13 +228,22 @@ Repo“ laut Bericht der koordinierenden Sitzung).
 | Umgebungsvariable | `ROUTER_KEY` | bei Netzwerk-Geheimnis ein Platzhalter ohne Geheimniswert, zum Beispiel `ueber-netzwerk-geheimnis`; der Proxy der Umgebung ersetzt die Kopfzeile. Ohne Netzwerk-Geheimnis: der Schlüssel selbst (dann liegt er im Klartext in der Umgebung, nicht empfohlen) |
 | Umgebungsvariable | `DEEPSEEK_ARBEITER` | `ein` |
 
-Variablen gelten ab der nächsten Sitzung. Dass der Proxy die Kopfzeile einer
-Python-Anfrage ersetzt, ist nicht gemessen; das zeigt der Probelauf (401 = nicht ersetzt).
+Variablen gelten ab der nächsten Sitzung.
+
+**Läuft der Arbeiter mit Netzwerk-Geheimnis und Platzhalter?** Ja, nach Bauart: Er verlangt
+nur, dass `ROUTER_KEY` nicht leer ist, und sendet den Wert unverändert als
+`Authorization: Bearer <Wert>` an genau diesen Host; er prüft den Wert nicht auf eine Form.
+Gemessen am 15.11.2026, 12:40 UTC: Mit dem Platzhalter und ohne hinterlegtes Geheimnis
+erreicht die Anfrage des Arbeiters den Router durch den Proxy der Sitzung und wird mit 401
+abgelehnt (Leitung und TLS funktionieren, kein Modellaufruf). Nicht gemessen ist, dass der
+Proxy die Kopfzeile ersetzt, weil noch kein Geheimnis hinterlegt ist; das zeigt der
+Probelauf (401 `schluessel_abgelehnt` = nicht ersetzt).
 
 ### 6.4 Limit anheben (optional)
 
-`config/deepseek-delegation.json`, `limits.tageslimit_betrag_usd` (höchstens `"5.00"`) und
-bei Bedarf `tageslimit_token`; als PR, die Tests laufen mit.
+`config/deepseek-delegation.json`, `limits.tageslimit_token` (ausgeliefert 150 000) und bei
+Bedarf `tageslimit_aufrufe` (40); als PR, die Tests laufen mit. `tageslimit_betrag_usd`
+steht bereits auf dem Deckel `"5.00"` und lässt sich nicht höher stellen.
 
 ### 6.5 Probelauf (kostet wenige Zehntel Cent)
 
@@ -273,7 +296,7 @@ echten Routers.
    gilt die Modellregel wörtlich, auch für den öffentlichen Chat), oder gilt die am 13.11.2026
    für den Chat gegebene Freigabe des undatierten Namens weiter? Der Arbeiter folgt der
    wörtlichen Regel und verwirft undatierte Antworten.
-2. **Einschalten** (Abschnitt 6) und Höhe des Tageslimits (0,50 USD ausgeliefert, bis 5 USD).
+2. **Einschalten** (Abschnitt 6) und, falls der Deckel von 5 USD ausgeschöpft werden soll, Anhebung des Token-Limits.
 3. **Datenklassen und Verarbeitungsort:** Welche Inhalte dürfen über OpenRouter, welche über
    den direkten DeepSeek-Zugang gehen? Soll der direkte Weg überhaupt eingetragen werden?
 4. **Eigener Router-Schlüssel** für Claude-Sitzungen statt des Standard-Schlüssels.

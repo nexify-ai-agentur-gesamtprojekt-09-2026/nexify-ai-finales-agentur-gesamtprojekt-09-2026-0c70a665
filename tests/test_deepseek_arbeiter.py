@@ -195,10 +195,12 @@ class Modellbindung(Basis):
             with self.assertRaises(arbeiter.Abbruch):
                 arbeiter.pruefe_konfig(kopie, policy)
 
-    def test_auslieferungszustand_ist_niedrig_und_zweiter_weg_aus(self):
+    def test_auslieferungszustand_deckel_und_zweiter_weg_aus(self):
         konfig = arbeiter.lade_konfig()
         self.assertIsNone(konfig["wege"][1]["router_modellname"])
-        self.assertLessEqual(float(konfig["limits"]["tageslimit_betrag_usd"]), 0.5)
+        self.assertEqual(konfig["limits"]["tageslimit_betrag_usd"], "5.00")
+        # Das Token-Limit greift vor dem Betrag: auch im teuersten Preisfenster unter einem US-Dollar am Tag.
+        self.assertLessEqual(konfig["limits"]["tageslimit_token"] * 1.20 / 1_000_000, 1.0)
         self.assertEqual(konfig["limits"]["versuche_je_weg"], 1)
         self.assertEqual(konfig["router"]["erlaubte_hosts"], ["ai-router.nexifyai.cloud"])
 
@@ -327,6 +329,8 @@ class Einrichtung(Basis):
                 self.assertEqual(gefangen.exception.exit_code, 3)
         self.assertEqual(router.anfragen, [])
         self.lauf(router)
+        # Der Wert der Variable geht unverändert in die Kopfzeile; ein Platzhalter genügt, wenn der Proxy ihn ersetzt.
+        self.assertEqual(router.anfragen[-1]["auth"], "Bearer " + SCHLUESSEL)
         roh = (Path(self.ordner.name) / "protokoll.jsonl").read_text(encoding="utf-8")
         self.assertNotIn(SCHLUESSEL, roh)
         self.assertNotIn("Himmel", roh)
