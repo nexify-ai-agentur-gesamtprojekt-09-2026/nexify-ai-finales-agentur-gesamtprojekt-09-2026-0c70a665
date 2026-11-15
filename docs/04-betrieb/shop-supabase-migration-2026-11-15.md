@@ -207,8 +207,8 @@ Ohne Bestätigung werden sie übersprungen, nicht als grün gezählt.
 
 | Lauf | Tests | bestanden | übersprungen | rot |
 |---|---|---|---|---|
-| mit lokalem PostgreSQL 16.15 und Treiber (Python 3.13) | 293 | 217 | 76 | 0 |
-| ohne Bestätigung, ohne Treiber (Umgebung aus `make test-env`, Python 3.12) | 286 | 114 | 172 | 0 |
+| mit lokalem PostgreSQL 16.15 und Treiber (Python 3.13) | 295 | 219 | 76 | 0 |
+| ohne Bestätigung, ohne Treiber (Umgebung aus `make test-env`, Python 3.12) | 288 | 115 | 173 | 0 |
 
 Die 76 übersprungenen im ersten Lauf brauchen ein echtes MongoDB-Replica-Set: 65 Vertragsaussagen,
 1 Vergleichslauf, 10 Aussagen von `test_cart_merge_replica_contract.py` (vorbestehend).
@@ -219,7 +219,7 @@ Die 76 übersprungenen im ersten Lauf brauchen ein echtes MongoDB-Replica-Set: 6
 | PostgreSQL-Besonderheiten | `test_store_contract.py` (`PostgresSpecifics`) | 9 | zwei Zusammenführungen, die beide den Kontokorb anlegen, enden ohne Fehler und ohne zweiten Korb; das Zeichen U+0000 wird abgewiesen, der gleichlautende Text gespeichert; doppeltes Befüllen des Verzeichnisses ohne Treibertext; Millisekunden wie bisher; Schutzgrenze und nicht ablegbare Daten; Beträge, die keine ganzen Cent sind, erreichen die Tabelle nie; Aufräumen nur auf Aufruf; zwei wartende Zustandswechsel haben einen Gewinner; zwei gleichzeitige Zusammenführungen übernehmen die Positionen genau einmal |
 | Vergleichslauf alt gegen neu | `test_store_parity.py` | 157 Schritte | eine feste Schrittfolge über alle neun Bereiche gegen beide Umsetzungen; jede Rückgabe als Text verglichen (gleiche Felder, gleiche Folge), erzeugte Kennungen maskiert: 157 von 157 gleich |
 | RLS und Rechte | `test_postgres_rls.py` | 8 | jede Tabelle mit erzwungener RLS und genau einer Policy; Anmeldung ohne Rechte erreicht nichts; `anon`/`authenticated` erreichen nichts; Tabellenrecht ohne Policy sieht null Zeilen und schreibt keine; Dienstrolle löscht keine Geschäftsdaten und ändert weder Schema noch Policies noch fremde Schemas; die Datenbank weist falsche Beträge ab; Treibertext verlässt die Schicht nicht |
-| Katalog-Erstbefüllung | `test_catalog_transfer.py` | 15 | je 7 Aussagen gegen Ziel MongoDB (Stellvertreter) und Ziel PostgreSQL, 1 zur Befehlszeile; Abschnitt 12 |
+| Katalog-Erstbefüllung | `test_catalog_transfer.py` | 17 | je 8 Aussagen gegen Ziel MongoDB (Stellvertreter) und Ziel PostgreSQL, 1 zur Befehlszeile; Abschnitt 12 |
 | Datenumzug | `test_postgres_transfer.py` | 11 | ein geschlossenes Ziel wird nie wieder beschrieben; | Trockenlauf lässt das Ziel leer; Zahl und Prüfsumme gleich für alle 19 Sammlungen; zweiter Lauf schreibt keine Zeile (Zeilenversionen unverändert); nur geänderte und neue Dokumente werden geschrieben; Zeile nur im Ziel und geändertes Zahlungsereignis führen zum Abbruch ohne Festschreiben; acht Arten nicht verlustfrei übertragbarer Dokumente brechen ab; Quelle wird nur über `find` gelesen (einmal je Sammlung und Lauf); Protokoll ohne Inhalte; beide Umsetzungen antworten nach dem Umzug gleich (24 Abrufe als Text) |
 | Schalter | `test_store_backend_switch.py` | 4 | ohne Variable MongoDB und der PostgreSQL-Code wird nicht geladen; `postgres` bindet alle Bereiche ohne Verbindungsaufbau; fehlende Adresse und jeder andere Wert stoppen den Start, ohne die Adresse zu nennen |
 
@@ -448,8 +448,9 @@ fehlt ein Weg unter `vercel_app.py` (kleinste Lösung: ein einmaliger Befehlszei
 `apps/shop-api/transfer_catalog.py`; Ziel wahlweise MongoDB (heute) oder PostgreSQL (später), gleiche
 Regeln, gleiche Tests gegen beide Ziele.
 
-- **Trockenlauf ist der Standard.** Festschreiben nur mit `--apply --owner-release "<Verweis>"`; der
-  Verweis steht danach im Lauf-Eintrag (`imports`) des Ziels. Ohne ihn Rückgabewert 3.
+- **Trockenlauf ist der Standard.** Festschreiben nur mit `--apply --publication-contract <Datei>`
+  (Abschnitt 12.4); Prüfsumme und Verweise der Datei stehen danach im Lauf-Eintrag (`imports`) des Ziels.
+  Ohne sie Rückgabewert 3. Jeder Lauf schreibt ein Protokoll (`--log`, Pflicht).
 - Übernimmt nur `products` und `categories`, unverändert. Nicht: Einstellungen, Preisfreigabe,
   Bestellungen, Konten, Warenkörbe.
 - Prüft jedes Produkt auf das, was die neue Fassung braucht; bei Verstößen Abbruch mit Zahl je Grund,
@@ -462,3 +463,56 @@ Regeln, gleiche Tests gegen beide Ziele.
 **Annahme:** Die Dokumentform des alten Dienstes ist aus dem Code abgeleitet, der sie geschrieben hat
 (`build_product`, FTP-Import), nicht aus dessen Daten oder öffentlichen Antworten gelesen. Stimmt sie
 nicht, zeigt das der Trockenlauf.
+
+### 12.4 Entscheidung E1 der koordinierenden Sitzung und der kürzeste zulässige Weg
+
+Eingang 15.11.2026, 12:22 UTC, als Nachricht der koordinierenden Sitzung (dort gestützt auf die Vollmacht
+des Inhabers; diese Sitzung kann die Vollmacht nicht selbst prüfen und gibt die Entscheidung so wieder):
+Der Katalog des alten Shops wird in den neuen Namensraum übernommen. Bedingungen: Quelle nur lesend; die
+Importsperre bleibt an und wird durch einen erfüllten Vertrag passiert, nicht umgangen; Abnahme =
+mindestens 3720 Produkte und eine Stichprobe von 20 Artikeln (Titel, Preis, Bestand, Bild) gleich; jeder
+Lauf wird protokolliert.
+
+**Wie die Bedingungen im Skript abgebildet sind (gebaut und getestet, nichts ausgeführt):**
+
+| Bedingung | Umsetzung | Grenze |
+|---|---|---|
+| Quelle nur lesend | einziger Zugriff ist `find`, getestet | zusätzlich einen Zugang ohne Schreibrecht verwenden |
+| Sperre bleibt an, Vertrag wird erfüllt | `require_publication_contract()` ist **unverändert**. Die Übernahme schreibt nur mit `--publication-contract <Datei>`: Geltungsbereich `catalog_first_fill`, Mandant `teileklar`, Lieferant `bigbuy`, Verweis auf den Lieferantenvertrag, Verweis auf die Lizenz der Katalogdaten, Freigebender, Datum, Mindestzahl. Fehlt oder passt etwas nicht, wird nicht einmal die Quelle gelesen. Prüfsumme und Verweise stehen im Lauf-Eintrag des Ziels. | Die Übernahme läuft nicht durch die Funktion im Importcode, sondern prüft denselben Sachverhalt an eigener Stelle. Das Skript prüft, dass der Nachweis vollständig **benannt** ist, nicht, dass Vertrag und Lizenz tatsächlich bestehen. Ob das „passiert, nicht umgangen“ erfüllt, entscheidet, wer die Datei ausstellt. Der strenge Weg (die Sperre im Importcode durch eine echte Prüfung ersetzen) ist Weg 2 und länger. |
+| mindestens 3720 Produkte | `--expect-min 3720`: Abbruch vor dem Schreiben, wenn die Quelle weniger trägt; die Zahl muss mit der im Vertrag übereinstimmen | – |
+| Stichprobe 20 | der Bericht nennt 20 gleichmäßig verteilte Kennungen, für die das ganze Dokument in Quelle und Ziel gleich ist (Titel, Einkaufspreis, Bestand, Bilder); zusätzlich stimmt die Prüfsumme über **alle** Produkte | **Preis:** verglichen wird der Einkaufspreis. Der öffentliche Verkaufspreis entsteht aus Aufschlag und Preisfreigabe (`settings`), die bewusst nicht übernommen werden; im Ziel steht deshalb „Preis nicht freigegeben“, bis der Inhaber dort freigibt. Eine Stichprobe an der öffentlichen Seite kann beim Preis erst danach gleich sein. |
+| jeder Lauf protokolliert | `--log` ist Pflicht (ohne startet kein Lauf); dazu der Lauf-Eintrag in `imports` | Ablageort des Protokolls legt der Ausführende fest |
+
+**Kürzester zulässiger Weg, Reihenfolge (es fehlt nur noch der Lauf und was beim Inhaber liegt):**
+
+1. Ort und Name der Datenbank des alten Dienstes klären (koordinierende Sitzung, lesend).
+2. Variablen auf der ausführenden Maschine setzen (Inhaber; nicht im Chat, nicht im Repository):
+   `CATALOG_SOURCE_MONGO_URL`, `CATALOG_SOURCE_DB_NAME`, `CATALOG_TARGET_KIND=mongodb`,
+   `CATALOG_TARGET_MONGO_URL`, `CATALOG_TARGET_DB_NAME=nexify_teileklar_shop_v1`.
+3. Trockenlauf: `python apps/shop-api/transfer_catalog.py --log <Datei> --expect-min 3720`. Erwartet:
+   `match: true` für beide Sammlungen, 3720 oder mehr Produkte, Stichprobe 20 von 20. Bricht er ab, nennt
+   er Grund und Zahl; dann ist die angenommene Dokumentform zu berichtigen, bevor irgendetwas geschrieben wird.
+4. Vertragsdatei ausstellen (Inhaber oder in seinem Namen, nur Verweise).
+5. Lauf: derselbe Befehl mit `--apply --publication-contract <Datei>`.
+6. Abnahme: `/api/shop/status` zeigt mindestens 3720 Produkte; Stichprobe aus dem Protokoll; Sichtprüfung
+   von 20 Artikeln an der öffentlichen Seite (Titel, Bestand, Bild; Preis nach Freigabe).
+
+Die ausführende Maschine braucht `motor` aus den gesperrten Abhängigkeiten des Shops und Netz zu beiden
+Datenbanken. Die Vercel-Funktion ist dafür nicht geeignet (30 Sekunden).
+
+**Was beim Inhaber liegt (gesammelt):**
+
+| # | Was | Wofür | Geheimnis? |
+|---|---|---|---|
+| 1 | Lesender Zugang zur Datenbank des alten Dienstes (Adresse, Name) | Quelle | ja, nur als Variable auf der ausführenden Maschine |
+| 2 | Schreibender Zugang zum neuen Namensraum für diesen einen Lauf | Ziel | ja, ebenso |
+| 3 | Vertragsdatei: Verweis auf den Lieferantenvertrag mit BigBuy, Verweis auf das Recht, die Katalogdaten zu veröffentlichen (OA-072), Name des Freigebenden, Datum, Mindestzahl 3720 | Bedingung „Vertrag erfüllt“ | nein, nur Verweise |
+| 4 | Entscheidung zum Preis: Aufschlag und Preisfreigabe im neuen Namensraum neu setzen (empfohlen) oder die Einstellung des alten Dienstes ausdrücklich übernehmen lassen | ohne sie zeigt der Shop Produkte ohne Preis | nein |
+| 5 | Verwaltungskonto im neuen Namensraum (`ADMIN_EMAIL`, `ADMIN_PASSWORD` als Variablen; ein Anlegeweg unter dem Vercel-Einstieg fehlt, Abschnitt 12.2) | Preisfreigabe und Verwaltung | ja |
+| 6 | Wo der Lauf stattfindet (Maschine mit Netz zu beiden Datenbanken) | Ausführung | – |
+| 7 | BigBuy-Produktivzugang, Guthaben | **nicht** für die Erstbefüllung, aber für jeden späteren Abgleich und für Bestellungen (OA-071); ohne ihn veralten Preis und Bestand | ja |
+
+Nicht belegt bleibt: die tatsächliche Dokumentform der alten Datenbank (zeigt der Trockenlauf) und ob die
+Bilder-Adressen der alten Daten von der neuen Fassung angenommen werden (`supplier_image` in
+`catalog_api.py` lässt nur Adressen unter `https://cdnbigbuy.com/` zu; ein abgelehntes Bild erscheint als „nicht verfügbar“,
+nicht als Fehler).

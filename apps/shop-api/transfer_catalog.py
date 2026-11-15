@@ -1,7 +1,7 @@
 """Katalog-Erstbefüllung: vorhandenen Katalog (Produkte, Kategorien) aus der Datenbank des alten Dienstes übernehmen.
 
-  python apps/shop-api/transfer_catalog.py                       # Trockenlauf (Standard): prüfen, vergleichen, nichts schreiben
-  python apps/shop-api/transfer_catalog.py --apply --owner-release "<Verweis auf die Freigabe>"
+  python apps/shop-api/transfer_catalog.py --log lauf.jsonl --expect-min 3720          # Trockenlauf (Standard): nichts schreiben
+  python apps/shop-api/transfer_catalog.py --log lauf.jsonl --expect-min 3720 --apply --publication-contract vertrag.json
 
 Zugänge nur aus der Umgebung, nie ausgegeben (eigene Namen, nicht die des laufenden Dienstes):
   CATALOG_SOURCE_MONGO_URL, CATALOG_SOURCE_DB_NAME
@@ -19,10 +19,15 @@ Regeln:
 * Das Ziel wird in einer Transaktion beschrieben, danach nach Zahl und Prüfsumme mit der Quelle verglichen. Jede
   Abweichung, auch ein Produkt, das es nur im Ziel gibt, bricht ab; nichts bleibt geschrieben. Gelöscht wird nie.
 * Wiederholbar: Ein zweiter Lauf über unveränderte Daten schreibt nichts.
-* Festschreiben verlangt ``--owner-release``. Grund: Der reguläre Import ist gesperrt, bis ein Veröffentlichungsvertrag
-  belegt ist (``require_publication_contract`` in shop/bigbuy_import.py, DECISIONS.md D-008, OA-071). Diese Übernahme
-  veröffentlicht Produkte an dieser Sperre vorbei; das darf nur der Inhaber entscheiden. Der Verweis wird im Ziel
-  im Lauf-Eintrag (``imports``) festgehalten.
+* Festschreiben verlangt ``--publication-contract``: eine Datei, in der der Inhaber den Veröffentlichungsvertrag für
+  genau diese Übernahme belegt (Felder siehe ``check_contract``). Grund: Der reguläre Import ist gesperrt, bis ein
+  solcher Vertrag belegt ist (``require_publication_contract`` in shop/bigbuy_import.py, DECISIONS.md D-008, OA-071).
+  Die Sperre dort bleibt unverändert; diese Übernahme prüft denselben Sachverhalt an eigener Stelle. Die Datei enthält
+  nur Verweise (kein Geheimnis); ihre Prüfsumme und die Verweise stehen danach im Lauf-Eintrag (``imports``) des Ziels.
+  Ob die genannten Nachweise tatsächlich vorliegen, kann das Skript nicht prüfen; das verantwortet, wer die Datei ausstellt.
+* ``--expect-min`` bricht ab, wenn die Quelle weniger Produkte trägt als erwartet. Der Bericht nennt eine Stichprobe
+  (``--sample``, Standard 20): Für diese Kennungen stimmt das ganze Dokument überein (Titel, Einkaufspreis, Bestand, Bilder).
+* Jeder Lauf schreibt ein Protokoll (``--log``, Pflicht): Sammlungen, Zahlen, Prüfsummen, Ergebnis; nie Inhalte.
 """
 import argparse
 import asyncio
@@ -70,6 +75,30 @@ def check_product(doc):
     if "category_ids" in doc and not (isinstance(doc["category_ids"], list) and all(whole(c) for c in doc["category_ids"])):
         reasons.append("Kategorien sind keine Liste ganzer Zahlen")
     return reasons
+
+
+CONTRACT_TEXT = ("supplier_agreement_reference", "data_licence_reference", "approved_by", "approved_at")
+CONTRACT_FIXED = {"scope": "catalog_first_fill", "tenant": "teileklar", "supplier": "bigbuy"}
+
+
+def check_contract(contract, minimum):
+    """Abort, wenn der Vertragsnachweis fehlt, unvollständig ist oder nicht zu dieser Übernahme passt. Gibt den Eintrag fürs Protokoll zurück."""
+    if not isinstance(contract, dict):
+        raise Abort("Festschreiben verlangt den belegten Veröffentlichungsvertrag (--publication-contract); siehe D-008/OA-071")
+    wrong = [k for k, v in CONTRACT_FIXED.items() if contract.get(k) != v]
+    wrong += [k for k in CONTRACT_TEXT if not (isinstance(contract.get(k), str) and contract[k].strip())]
+    if not whole(contract.get("product_count_minimum")) or contract["product_count_minimum"] < 1 or (minimum is not None and contract["product_count_minimum"] != minimum):
+        wrong.append("product_count_minimum")
+    try:
+        datetime.fromisoformat(contract.get("approved_at") or "")
+    except (TypeError, ValueError):
+        wrong.append("approved_at")
+    if set(contract) - {*CONTRACT_FIXED, *CONTRACT_TEXT, "product_count_minimum", "note"}:
+        wrong.append("unbekanntes Feld")
+    if wrong:
+        raise Abort("Veröffentlichungsvertrag unvollständig oder unpassend (D-008/OA-071): " + ", ".join(sorted(set(wrong))))
+    digest = hashlib.sha256(json.dumps(contract, sort_keys=True, ensure_ascii=False, separators=(",", ":")).encode()).hexdigest()
+    return {"sha256": digest, **{k: contract[k] for k in CONTRACT_TEXT}, "product_count_minimum": contract["product_count_minimum"]}
 
 
 def check_category(doc):
@@ -194,12 +223,13 @@ class PostgresTarget:
         return result
 
 
-async def transfer(source, target, *, apply=False, owner_release=None, log=print, now=None):
+async def transfer(source, target, *, apply=False, contract=None, expect_min=None, sample=20, log=print, now=None):
     """Führt die Übernahme aus und gibt den Bericht zurück. Abort bei jeder Abweichung; dann ist nichts geschrieben."""
-    if apply and not (isinstance(owner_release, str) and owner_release.strip()):
-        raise Abort("Festschreiben verlangt die Freigabe des Inhabers (--owner-release); siehe D-008/OA-071")
+    proof = check_contract(contract, expect_min) if apply else None
     base = common.load_base()
     docs, digests = await read_source(base, source)
+    if expect_min is not None and digests["products"].count < expect_min:
+        raise Abort(f"products: Quelle trägt {digests['products'].count} Produkte, erwartet sind mindestens {expect_min}; nichts geschrieben")
     for collection in COLLECTIONS:
         log(json.dumps({"step": "source", "collection": collection, "count": digests[collection].count, "digest": digests[collection].value}))
     stamps = sorted(p["imported_at"] for p in docs["products"] if isinstance(p.get("imported_at"), str))
@@ -207,7 +237,7 @@ async def transfer(source, target, *, apply=False, owner_release=None, log=print
     moment = (now or datetime.now(timezone.utc)).isoformat()
     # Lauf-Eintrag: finished_at ist das Alter der Daten (jüngster Importzeitpunkt der Quelle), nicht der Zeitpunkt der Übernahme.
     run_record = {"_id": "catalog-transfer-" + combined[:32], "status": "done", "mode": "catalog_transfer", "source": "Bestandsübernahme aus dem bisherigen Shop",
-                  "started_at": moment, "finished_at": stamps[-1] if stamps else moment, "transferred_at": moment, "owner_release": owner_release,
+                  "started_at": moment, "finished_at": stamps[-1] if stamps else moment, "transferred_at": moment, "publication_contract": proof,
                   "counts": {c: digests[c].count for c in COLLECTIONS}, "digests": {c: digests[c].value for c in COLLECTIONS}}
     result = await target.run(base, docs, run_record, apply)
     report, mismatches = {}, []
@@ -222,14 +252,22 @@ async def transfer(source, target, *, apply=False, owner_release=None, log=print
             mismatches.append(f"{collection}: Quelle {digests[collection].count} / Ziel {digest.count}, abweichende Kennungen (höchstens 5): {[str(k)[:40] for k in differing[:5]]}")
     if mismatches:
         raise Abort("Abweichung zwischen Quelle und Ziel; nichts festgeschrieben. " + " | ".join(mismatches))
-    return {"outcome": "applied" if apply else "dry_run", "target": target.kind, "collections": report,
+    ids = sorted(digests["products"].rows)
+    step = max(1, len(ids) // sample) if sample else 1
+    chosen = ids[::step][:sample] if sample else []
+    checked = [{"id": str(i)[:40], "equal": result["products"][3].rows.get(i) == digests["products"].rows[i]} for i in chosen]
+    log(json.dumps({"step": "sample", "checked": len(checked), "equal": sum(c["equal"] for c in checked)}))
+    return {"outcome": "applied" if apply else "dry_run", "target": target.kind, "collections": report, "sample": checked,
             "published": sum(1 for p in docs["products"] if p.get("active") is True), "run": run_record["_id"] if apply else None}
 
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description="Katalog des bisherigen Shops in die neue Fassung übernehmen. Ohne --apply wird nichts geschrieben.")
-    parser.add_argument("--apply", action="store_true", help="bei vollständiger Gleichheit festschreiben (verlangt --owner-release)")
-    parser.add_argument("--owner-release", help="Verweis auf die Freigabe des Inhabers (Datum, Entscheidung); wird im Lauf-Eintrag festgehalten")
+    parser.add_argument("--apply", action="store_true", help="bei vollständiger Gleichheit festschreiben (verlangt --publication-contract)")
+    parser.add_argument("--publication-contract", help="Datei mit dem belegten Veröffentlichungsvertrag (JSON, nur Verweise, kein Geheimnis)")
+    parser.add_argument("--expect-min", type=int, help="Abbruch, wenn die Quelle weniger Produkte trägt")
+    parser.add_argument("--sample", type=int, default=20, help="Größe der Stichprobe im Bericht")
+    parser.add_argument("--log", required=True, help="Protokolldatei (JSON je Zeile); jeder Lauf wird angehängt")
     args = parser.parse_args(argv)
     kind = os.environ.get("CATALOG_TARGET_KIND", "")
     needed = ["CATALOG_SOURCE_MONGO_URL", "CATALOG_SOURCE_DB_NAME", "CATALOG_TARGET_KIND"]
@@ -238,12 +276,21 @@ def main(argv=None):
     if missing or kind not in ("mongodb", "postgres"):
         print("Konfiguration fehlt oder ungültig: " + (", ".join(missing) or "CATALOG_TARGET_KIND muss mongodb oder postgres sein"), file=sys.stderr)
         return 3
-    if args.apply and not (args.owner_release or "").strip():
-        print("Festschreiben verlangt --owner-release (Freigabe des Inhabers, D-008/OA-071).", file=sys.stderr)
-        return 3
+    contract = None
+    if args.apply:
+        try:
+            contract = json.loads(Path(args.publication_contract).read_text(encoding="utf-8"))
+        except (TypeError, OSError, ValueError):
+            print("Festschreiben verlangt --publication-contract mit einer lesbaren JSON-Datei (D-008/OA-071).", file=sys.stderr)
+            return 3
     if kind == "mongodb" and (os.environ["CATALOG_TARGET_MONGO_URL"], os.environ["CATALOG_TARGET_DB_NAME"]) == (os.environ["CATALOG_SOURCE_MONGO_URL"], os.environ["CATALOG_SOURCE_DB_NAME"]):
         print("Quelle und Ziel sind dieselbe Datenbank.", file=sys.stderr)
         return 3
+    handle = open(args.log, "a", encoding="utf-8")
+
+    def log(line):
+        print(line)
+        handle.write(line + "\n"); handle.flush()
 
     async def run():
         from motor.motor_asyncio import AsyncIOMotorClient
@@ -254,21 +301,27 @@ def main(argv=None):
                 target = MongoTarget(clients[1][os.environ["CATALOG_TARGET_DB_NAME"]])
             else:
                 target = PostgresTarget(os.environ["CATALOG_TARGET_POSTGRES_DSN"])
-            return await transfer(clients[0][os.environ["CATALOG_SOURCE_DB_NAME"]], target, apply=args.apply, owner_release=args.owner_release)
+            return await transfer(clients[0][os.environ["CATALOG_SOURCE_DB_NAME"]], target, apply=args.apply, contract=contract,
+                                  expect_min=args.expect_min, sample=args.sample, log=log)
         finally:
             for client in clients:
                 client.close()
 
     try:
-        result = asyncio.run(run())
-    except Abort as exc:
-        print(json.dumps({"step": "abort", "reason": str(exc)}, ensure_ascii=False))
-        return 2
-    except Exception as exc:  # Treibertexte können Adressen enthalten; nur die Art nennen.
-        print(json.dumps({"step": "abort", "reason": "Fehler der Art " + type(exc).__name__}))
-        return 2
-    print(json.dumps({"step": "done", "outcome": result["outcome"], "published": result["published"], "run": result["run"]}))
-    return 0
+        log(json.dumps({"step": "start", "mode": "apply" if args.apply else "dry_run", "target": kind, "at": datetime.now(timezone.utc).isoformat()}))
+        try:
+            result = asyncio.run(run())
+        except Abort as exc:
+            log(json.dumps({"step": "abort", "reason": str(exc)}, ensure_ascii=False))
+            return 2
+        except Exception as exc:  # Treibertexte können Adressen enthalten; nur die Art nennen.
+            log(json.dumps({"step": "abort", "reason": "Fehler der Art " + type(exc).__name__}))
+            return 2
+        log(json.dumps({"step": "done", "outcome": result["outcome"], "published": result["published"], "run": result["run"],
+                        "sample_equal": sum(c["equal"] for c in result["sample"]), "sample_checked": len(result["sample"])}))
+        return 0
+    finally:
+        handle.close()
 
 
 if __name__ == "__main__":
