@@ -1,9 +1,9 @@
 # Master-Audit · NeXify AI Gesamtlage · 15.11.2026
 
-**Fortgeschrieben 15.11.2026, 12:25 UTC** (Erststand `555a75a`/`aa515be`, dann zwei
-Fortschreibungen am Ende des Dokuments — „Stand 11:10 UTC" und „Stand 12:25 UTC"; was
-sich gegenüber dem Erststand geändert hat, steht in der Änderungstabelle direkt unter der
-Kurzfassung).
+**Fortgeschrieben 15.11.2026, 12:40 UTC** (Erststand `555a75a`/`aa515be`, dann zwei
+Fortschreibungen am Ende des Dokuments — „Stand 11:10 UTC" und „Stand 12:25 UTC" —, danach
+Korrekturen einer unabhängigen Gegenprüfung um 12:40 UTC; was sich gegenüber dem Erststand
+geändert hat, steht in der Änderungstabelle direkt unter der Kurzfassung).
 
 Ein konsolidiertes, belegtes Lagebild der gesamten NeXify-Infrastruktur und der
 Projektstände, erstellt von der Audit-Sitzung im Auftrag der koordinierenden Sitzung für
@@ -18,18 +18,19 @@ Dokument verweist darauf und verdichtet die Lage; wo es von der Arbeitsliste abw
 gilt die Arbeitsliste für die Aufgabenführung. Die wesentlichen Aussagen tragen eine
 Quelle und sind, wo belegbar, als **BELEGT**, **ANNAHME** oder **OFFEN** gekennzeichnet.
 
-> **Zeitkritisch (BELEGT, N):** Der Hostinger-Snapshot beider Server (angelegt 14.11.
-> 11:47 UTC) **läuft heute, 15.11.2026, 11:47 UTC ab**. Danach fehlt dieser eine
-> Rückweg für serverseitige Eingriffe; als Rückwege bleiben dann die täglichen
-> Hostinger-Sicherungen (je 5, neueste 14.11. 18:41 bzw. 16:14 UTC) und die benannten
-> Schnappschüsse einzelner DNS-Zonen. Vor jedem Server-Eingriff heute zuerst klären,
-> welcher Rückweg gilt (Inhaberentscheidung, D-016).
+> **Rückwege (BELEGT, N/K):** Der Hostinger-Snapshot beider Server (angelegt 14.11.
+> 11:47 UTC) **ist am 15.11.2026, 11:47 UTC abgelaufen**. Als Rückwege bleiben die
+> automatischen Hostinger-Sicherungen **ohne Ablaufdatum** (zuletzt srv1941843 14.11.
+> 16:14 UTC, srv1243952 14.11. 18:41 UTC; K, 10:34 UTC) und die benannten Schnappschüsse
+> einzelner DNS-Zonen. Vor jedem Server-Eingriff zuerst klären, welcher Rückweg gilt und
+> ob vorher ein neuer Snapshot gezogen wird (Inhaberentscheidung, D-016; Neustart-Fenster
+> siehe V7).
 
 ## Messwege und Quellen
 
 | Kürzel | Weg | Zeit (UTC) |
 |---|---|---|
-| M | Eigene Live-Messung dieser Sitzung: je ein `GET` über den Sitzungs-Proxy auf die genannte Adresse; DNS über `dns.google/resolve` | 15.11.2026, 09:19 und 09:57 |
+| M | Eigene Live-Messung dieser Sitzung: je ein `GET` über den Sitzungs-Proxy auf die genannte Adresse; DNS über `dns.google/resolve` | 15.11.2026, 09:19, 09:57, 11:07 und 12:26–12:27 |
 | K | Daten, die die koordinierende Sitzung dieser Sitzung übergeben hat (Resend-Konto, von ihr am 15.11. 09:56 UTC gelesen; von ihr am 15.11. ~09:25 UTC bei Cloudflare ausgeführte, inhaberfreigegebene Änderungen; PR-Reife- und Merge-Angaben). **Nicht öffentlich nachprüfbar, außer wo unten eine eigene DNS-Gegenprobe (M) genannt ist.** | 15.11.2026 |
 | N | `docs/04-betrieb/netz-inventur-2026-11-14.md` (= PR 200, Zweig `claude/netz-inventur` `2fa1480`, nur gelesen), Erhebung 14.11. 22:16–22:40 UTC | 14.11.2026 |
 | S | `docs/04-betrieb/server-befund-2026-11-14.md`, Hostinger-API, 14.11. ~11:45–18:45 UTC | 14.11.2026 |
@@ -54,10 +55,11 @@ einsehbar** (Hostinger-API `[VPS:2044]`); dieser Server bleibt der blinde Fleck
    nannte hier noch `noindex, nofollow`.
 2. Der Shop ist gespalten (Fall A): `teileklar.shop` liefert einen **alten** Dienst auf
    srv1243952 mit **3720 Produkten** (200), kennt aber `/status`, `/categories` und
-   `/products/{id}` nicht (404); die neue Vercel-Fassung unter `nexifyai.de/api/shop/*`
-   antwortet mit **503** `database_binding_missing_or_unsuitable` (M, 15.11. 09:19 UTC);
-   der Zahlungsmodus ist zusätzlich ungebunden (`payment_mode_unbound`, erscheint auf
-   `/health`, N/M).
+   `/products/{id}` nicht (404). Die neue Vercel-Fassung unter `nexifyai.de/api/shop/*`
+   antwortete um 09:19 UTC noch mit **503**, liefert aber **seit ~11:52 UTC 200** mit
+   `products:0` (DB-Bindung jetzt da, Katalog leer; M, 12:26 UTC; Fortschreibung 12:25
+   Nr. 3). Der Zahlungsmodus war zuvor ungebunden (`payment_mode_unbound`, auf `/health`,
+   N/M).
 3. Die größte Netzänderung der letzten Tage ist der Umzug von `nexifyai.de` auf
    Cloudflare am 13.11. 21:53 UTC; dabei gingen fünf Clerk-Einträge und die prüfbare
    DKIM-Signatur des Postfachs verloren (N).
@@ -78,8 +80,10 @@ einsehbar** (Hostinger-API `[VPS:2044]`); dieser Server bleibt der blinde Fleck
 8. `brain.nexifyai.cloud/mcp` → 401 hinter Traefik-Basisschutz (M, 15.11. 09:19 UTC); der
    Cognee-API-Container fehlt, die Daten (2,69 GB) liegen als Docker-Volumes und dürfen
    nicht geprunt werden (S, Aufräumplan).
-9. srv1941843 ist zu **97 % voll** (10,2 GB frei); größter Posten 77,3 GiB
-   Paperclip-Laufverzeichnisse, nach D-019 abgelöst (S).
+9. srv1941843 war am 14.11. zu **97 % voll** (10,2 GiB frei; größter Posten 77,3 GiB
+   Paperclip-Läufe, nach D-019 abgelöst, S); am 15.11. **sinkt** die Belegung durch das
+   Archivskript des Inhabers auf **~95 %** (19,8 GiB frei, 12:19 UTC, K). srv1243952 ist
+   zu **~96 %** belegt und sinkt ebenfalls (K; Fortschreibungen Nr. 3 bzw. 1/2).
 10. GitHub Actions startet kontoweit **keine Jobs** (Ausgabenlimit); dadurch kein
     automatisches Gate vor `main`, und freigegebene PRs gehen trotz Freigabe nicht durch
     (Zweigschutz; P).
@@ -101,8 +105,13 @@ einsehbar** (Hostinger-API `[VPS:2044]`); dieser Server bleibt der blinde Fleck
 | L0 Snapshot | Snapshot-Ablauf als einziger Rückweg hervorgehoben | zusätzlich **automatische Sicherungen ohne Ablaufdatum** belegt (Fortschr. Nr. 2) |
 | L12 Cloudflare-Hosting | Kostenweg A/B/C offen | **Inhaber: kein Umzug jetzt** (Fortschr. Nr. 8) |
 | L20 Regelbetrieb | „kein Regelbetrieb ohne offene Sitzung" | **serverseitige Zeitpläne laufen** (zwei Trigger), eigener Dauerdienst fehlt weiter (Fortschr. Nr. 9) |
+| 2 Shop-Vercel | 503 `database_binding_missing_or_unsuitable` | **seit ~11:52 UTC 200** mit `products:0` (M 12:26; Stand 12:25 Nr. 3) |
+| L0 Snapshot | läuft heute 11:47 UTC ab | **um 11:47 UTC abgelaufen**; automatische Sicherungen ohne Ablaufdatum bleiben (Stand 12:25) |
+| V5 R2 (Cloudflare) | Vorbehalt „< 5 USD" | **Inhaber hat R2 freigegeben, Vorbehalt entfällt**; R2 aktiv, 1 Bucket (K 12:35) |
+| Speicher beide Server | 97 % / „86 %" | **sinkt**: srv1941843 ~95 % (12:19), srv1243952 ~96 % und fallend (K; Stand 12:25 Nr. 1/2) |
 
-Einzelheiten und Belege: Abschnitt „Fortschreibung 15.11.2026, Stand 11:10 UTC" am Ende.
+Einzelheiten und Belege: die Abschnitte „Fortschreibung … Stand 11:10 UTC" und „Stand
+12:25 UTC" am Ende.
 
 ---
 
@@ -110,11 +119,11 @@ Einzelheiten und Belege: Abschnitt „Fortschreibung 15.11.2026, Stand 11:10 UTC
 
 | Domain / Adresse | Nameserver, DNS-Ziel | Antwort (https) | Server / Dienst | Soll / Ist | Quelle · UTC |
 |---|---|---|---|---|---|
-| `nexifyai.de`, `www` | Cloudflare (seit 13.11. 21:53), CNAME → Vercel, nur DNS | 200, `server: Vercel`, `noindex,nofollow` | Vercel-Projekt `…-ut7r` (`apps/web`) | SOLL=IST: Vercel liefert; Indexierung aus (Freigabe offen) | M · 15.11. 09:19 |
-| `nexifyai.cloud`, `www` | Cloudflare (seit 13.05.), CNAME → Vercel, nur DNS | 200, `server: Vercel`, `noindex,nofollow` | Vercel-Projekt `…-ut7r` | SOLL=IST | N · 14.11. 22:19; Gegenprüfung K · 15.11. 10:06 |
-| `nexifyai.de/api/shop/*` | wie oben | **503** `database_binding_missing_or_unsuitable` | Shop-Dienst auf Vercel, ohne DB-Bindung | SOLL: funktionierender Shop. IST: tot | M · 15.11. 09:19 |
-| `teileklar.shop`, `www` | Cloudflare (seit 31.08.), A 72.62.152.47 · Proxy (A-Eintrag: N) | 200 (Startseite), Katalog 200 | **srv1243952**, alter Shop-Dienst | IST (Fall A): alter Stand liefert | Status M · 15.11. 09:19; DNS N |
-| `unternehmensbot.eu`, `www`, `home` | Hostinger (`dns-parking.com`), A 72.62.152.47 | 302 → `/login`; `/health` 200 `status: ok` | **srv1243952**, Agenten-Oberfläche „NeX Agentic AI“ | SOLL (D-019 F4): nicht öffentlich. IST: öffentlich erreichbar | M · 15.11. 09:19 |
+| `nexifyai.de`, `www` | Cloudflare (seit 13.11. 21:53), CNAME → Vercel, nur DNS | 200, `server: Vercel`, **`index, follow`** (seit 11:01 UTC) | Vercel-Projekt `…-ut7r` (`apps/web`) | SOLL=IST: Vercel liefert; Indexierung **an** (seit 11:01) | M · 15.11. 09:19/11:07 |
+| `nexifyai.cloud`, `www` | Cloudflare (seit 13.05.), CNAME → Vercel, nur DNS | 200, `server: Vercel`; `www.cloud` `index, follow` (11:07) | Vercel-Projekt `…-ut7r` | SOLL=IST | N · 14.11. 22:19; M · 15.11. 11:07 |
+| `nexifyai.de/api/shop/*` | wie oben | 09:19 UTC **503**; **seit ~11:52 UTC 200** mit `products:0` | Shop-Dienst auf Vercel, DB-Bindung jetzt da, Katalog leer | SOLL: funktionierender Shop. IST: erreichbar, leer | M · 15.11. 09:19/12:26 |
+| `teileklar.shop`, `www` | Cloudflare (seit 31.08.), A `72.62.x.x` · Proxy (A-Eintrag: N) | 200 (Startseite), Katalog 200 (`total` 3720) | **srv1243952**, alter Shop-Dienst | IST (Fall A): alter Stand liefert | Status M · 15.11. 12:26; DNS N |
+| `unternehmensbot.eu`, `www`, `home` | Hostinger (`dns-parking.com`), A `72.62.x.x` | 302 → `/login`; `/health` 200 `status: ok` | **srv1243952**, Agenten-Oberfläche „NeX Agentic AI“ | SOLL (D-019 F4): nicht öffentlich. IST: öffentlich erreichbar | M · 15.11. 09:19 |
 | `brain.nexifyai.cloud` | Cloudflare, Tunnel `nexifyai-duesseldorf` → srv1941843:443 | `/` 404; `/mcp` 401 (Traefik Basic) | srv1941843, Traefik; Cognee-API-Container fehlt | SOLL: Brain/Cognee-MCP erreichbar. IST: nur Traefik, kein Cognee | M · 15.11. 09:19; S |
 | `agenten.nexifyai.cloud`, `librechat.…` | Cloudflare, Tunnel **`nexifyai-contabo`** (ohne Verbindung) | **530** | kein Server verbunden | IST: tot seit 09.11. 10:40 | M · 15.11. 09:57; N |
 | `teileklar.de/.store/.pro`, `ainexi2fyi.*` | Hostinger | 200 Parkseite | Hostinger-Parkseite | IST: geparkt | N · 14.11. 22:19 |
@@ -124,17 +133,17 @@ Einzelheiten und Belege: Abschnitt „Fortschreibung 15.11.2026, Stand 11:10 UTC
 
 | | srv1243952 | srv1941843 |
 |---|---|---|
-| Adresse | 72.62.152.47 | 179.198.195.91 |
+| Adresse | `72.62.x.x` (gekürzt) | `179.198.x.x` (gekürzt) |
 | System | Ubuntu 26.04, KVM 8 (8 Kerne, 32 GB, 400 GiB) | Ubuntu 24.04, KVM 8 |
-| Platte | 86 % belegt (Hostinger-Metrik, S) | **97 % belegt, 10,2 GB frei** (S, gemessen 14.11. 12:00–12:50) |
+| Platte | 14.11.: „86 %" (S); 15.11. **~96 % und fallend** (K, Stand 12:25 Nr. 3) | 14.11.: **97 %, 10,2 GiB frei** (S); 15.11. **~95 %** (19,8 GiB frei, 12:19, K) |
 | Container laut API | **nicht lesbar (`[VPS:2044]`, N/S)** | 20 Compose-Projekte mit Containern (S) |
 | Tunnel von hier | `nexifyai-agentur-cloudflare-tunnel` (aktiv seit 26.10., N) | `nexifyai-duesseldorf` (aktiv seit 09.11. 09:33, N) |
 | Firewall | `nexifyai-minimal-20260713`, synchron, unverändert seit 13.09. | dieselbe Gruppe |
 
-Firewall-Gruppe (beide, unverändert seit 13.09.2026 10:57 UTC): TCP 22, 80, 443, 2222;
-UDP 443, 51820, 51821; Quelle jeweils beliebig (S, N). **SSH (22 und 2222) für jede
-Quelle offen und 15 SSH-Schlüssel im Hostinger-Konto** (darunter `ignore-this`,
-`temp-check`) — beides OA-020 (S).
+Firewall-Gruppe (beide, unverändert seit 13.09.2026 10:57 UTC): die üblichen Web- und
+SSH-Ports offen für beliebige Quelle (Einzelheiten im Server-Befund, S/N). **SSH für jede
+Quelle offen und 15 SSH-Schlüssel im Hostinger-Konto** (Namen und Ports nur im
+Server-Befund, nicht hier) — beides OA-020 (S).
 
 Compose-Projekte srv1941843 (S): `cherry-dashboard`, `cognee-x532`,
 `convex-selfhosted`, `crit-web-deploy`, `deploy`, `deploy-staging`, `docker-hermes`,
@@ -161,13 +170,12 @@ Dokumentations­korrekturen aus der Netz-Inventur (E7) sind dort noch nicht nach
   `main` nicht (`apps/shop-api/shop/catalog_api.py`) und läuft mit einem älteren Stand; die
   Datenbank dahinter antwortet (BELEGT; welcher Container ausliefert ist OFFEN, srv1243952
   nicht einsehbar).
-- **Vercel-Fassung (`nexifyai.de/api/shop/*`):** `/products` und `/status` → **503**
-  `runtime_binding_unavailable` / `database_binding_missing_or_unsuitable` (M, 15.11.
-  09:19 UTC). Die Routen sind vorhanden (Antwort aus dem Dienst, nicht 404), liefern aber
-  keine Daten: `MONGODB_URI` fehlt im Projekt `…-ut7r`; der Produktionswert im alten
-  Projekt ist als „Sensitive“ gespeichert und nicht auslesbar (P). Zielbild nach D-013 ist
-  die eigene Supabase-Instanz (PostgreSQL mit RLS); Adresse und Zugang sind im Repository
-  nicht belegt (Konflikt `DATA-STORE-001`, OFFEN).
+- **Vercel-Fassung (`nexifyai.de/api/shop/*`):** um 09:19 UTC noch **503**
+  (`runtime_binding_unavailable` / `database_binding_missing_or_unsuitable`); **seit ~11:52
+  UTC 200** mit `products:0`, `last_import_at:null`, `source:BigBuy` (M, 12:26 UTC). Die
+  DB-Bindung ist also inzwischen vorhanden, der Katalog aber leer (Import gesperrt, V1).
+  Zielbild nach D-013 bleibt die eigene Supabase-Instanz (PostgreSQL mit RLS); Adresse und
+  Zugang sind im Repository nicht belegt (Konflikt `DATA-STORE-001`, OFFEN).
 - **Einordnung:** Ein Umschalten des DNS auf Vercel würde heute den funktionierenden
   Katalog (200) durch 503 ersetzen (N, Abschnitt 10.3). Das DNS von `teileklar.shop` wurde
   zuletzt am 15.09.2026 geändert, in den letzten 14 Tagen nicht (N). OFFEN (Inhaber):
@@ -228,7 +236,7 @@ Projekts SK siehe Abschnitt 6a (nicht hier geführt).
 | B2 | Zielwechsel der Website `nexifyai.de` viermal (Vercel → srv1243952 → Vercel …) | 13.11. 09:34 – 14.11. 05:36 | N, S | seit 14.11. 05:36 Vercel 200; bestätigt M 15.11. 09:19 |
 | B3 | **Clerk-Verlust:** fünf Einträge fehlten öffentlich (NXDOMAIN) | 13.11. 21:53 – 15.11. ~09:25 | N; M (09:19 NXDOMAIN) | **BEHOBEN:** neu angelegt (nur DNS, Quelle K); Gegenprobe M 09:57 UTC: alle fünf lösen auf |
 | B4 | **DKIM-Proxy:** drei `hostingermail-*._domainkey.nexifyai.de` als CNAME mit Proxy → DKIM nicht prüfbar | 13.11. 21:53 – 15.11. ~09:25 | N; M | **BEHOBEN:** auf „nur DNS“ gestellt (Quelle K); Gegenprobe M 09:57 UTC: lösen als CNAME auf Hostinger-DKIM auf |
-| B5 | `unternehmensbot.eu` vom Hostinger-Webhosting über CDN auf srv1243952 umgestellt | 01.11. 11:14, 08.11. 09:50 | N, S | Rückweg: Hostinger-Schnappschüsse 193231342, 195196695 |
+| B5 | `unternehmensbot.eu` vom Hostinger-Webhosting über CDN auf srv1243952 umgestellt | 01.11. 11:14, 08.11. 09:50 | N, S | Rückweg: die in der Netz-Inventur benannten Hostinger-Schnappschüsse (Nummern dort) |
 | B6 | **Toter Tunnel `nexifyai-contabo`:** `agenten`, `librechat` → 530 | seit 09.11. 10:40 | N; **M 09:57 UTC weiter 530** | OFFEN. Rückweg: wieder verbinden oder auf `nexifyai-duesseldorf` umhängen (Zuordnung dort schon vorhanden, E4) — L4 |
 | B7 | Tunnel-Zuordnungen am 09.11. neu geschrieben, `gitlab` auf srv1941843 umgehängt | 09.11. 09:30–09:33 | N | — |
 | B8 | Tote Adressen in `nexifyai.cloud`: `demo`/`den` 502, `space` 526, `pad`/`work2work` Zeitüberschreitung, `agentmemory-api` 503 | gemessen 14.11. 22:19 | N | OFFEN; aufräumen erst nach Zonenexport (E6) |
@@ -290,60 +298,68 @@ Priorisiert nach Wirkung × Aufwand × Risiko. Owner-Typ: **I** = nur Inhaberent
 **SZ** = Serverzugriff (Shell/Freigabe nach D-016), **AA** = Agentenarbeit. Je Punkt
 Owner, nächster Schritt, Fälligkeit (CLAUDE.md).
 
-### Priorität 0 — heute, vor Ablauf des Snapshots
+Fälligkeiten sind Zieltermine dieser Audit-Sitzung; reine Inhaberentscheidungen tragen
+„Inhaber (offen)“, weil ihr Termin nicht von einer Agentensitzung gesetzt werden kann.
+
+### Priorität 0 — Snapshot heute 11:47 UTC abgelaufen
 
 | # | Lücke | Owner | Nächster Schritt | Fälligkeit |
 |---|---|---|---|---|
-| L0 | Hostinger-Snapshot beider Server läuft **heute 11:47 UTC** ab | **I** | Entscheiden, ob der Snapshot verlängert/neu angelegt wird, bevor serverseitig etwas angefasst wird; sonst gelten nur die täglichen Sicherungen als Rückweg | **15.11. 11:47 UTC** |
+| L0 | Hostinger-Snapshot beider Server **am 15.11. 11:47 UTC abgelaufen** | **I** | Rückweg sind jetzt die automatischen Sicherungen ohne Ablaufdatum; vor dem nächsten Server-Eingriff neuen Snapshot ziehen (Neustart-Fenster V7 04:30–05:00 UTC) | abgelaufen; vor nächstem Eingriff |
 
 ### Priorität 1 — Sicherheits-, Daten- und Betriebsrisiko
 
 | # | Lücke | Owner | Nächster Schritt | Fälligkeit |
 |---|---|---|---|---|
-| L1 | Cognee-Volumes ungesichert, API-Container fehlt; Prune-Sperre aktiv | **SZ** | Shell auf srv1941843: Volumes sichern, Cognee-Container wieder verknüpfen, dann Sperre aufheben (Aufräumplan Phase 0/3) | sofort, Serverzugriff nötig |
-| L2 | srv1941843 zu 97 % voll (10,2 GB frei); 77,3 GiB Paperclip-Läufe (abgelöst) | **SZ** | Shell: `.paperclip-runtime/runs` sichten und nach Freigabe kürzen; GitLab-Prometheus begrenzen (S, Folgen 2a/2b) | sofort, Serverzugriff nötig |
-| L3 | Hermes-/Agenten-Oberfläche öffentlich erreichbar; Docker-Socket im Container | **I** | **OFFEN:** `unternehmensbot.eu` zeigt auf **srv1243952** (N, W1); die Router `hermes-webui/-api` liegen auf **srv1941843** und werden über diesen Namen **nicht** erreicht — ein Schutz der srv1941843-Router schließt die öffentliche Oberfläche also **nicht**. Erst klären, was auf srv1243952 antwortet (E3), dann je Server schützen. D-019 F4 „nicht öffentlich“ als OFFEN führen (E3, OA-015) | Inhaberentscheidung |
-| L4 | Toter Tunnel `nexifyai-contabo` → `agenten`, `librechat` 530 | **I/SZ** | wieder verbinden oder auf `nexifyai-duesseldorf` umhängen (E4) | kurzfristig |
-| L5 | srv1243952 nicht einsehbar (trägt 57 von 126 Adressen) | **I** | Shell oder freigegebener nur-lesender Mess-Weg (E8) — **nur der Inhaber** | Inhaberentscheidung |
-| L6 | Cloudflare-Token mit DNS-Schreibrecht sichten (Zertifikatsdienst + neuer Token 14.11. 18:42) | **I** | Token-Liste und globalen Schlüssel prüfen, auf engste Zone begrenzen (E9) — **nur der Inhaber** | kurzfristig |
-| L7 | GitHub Actions ohne Budget → kein Gate, Merges blockiert | **I** | Actions-Budget/Abrechnung freigeben (OA-022) — **nur der Inhaber**. **Warnung:** danach gehen PRs mit eingeschaltetem Auto-Merge ohne weitere Abnahme nach `main` (OA-027). Fortschr. Nr. 7: `disable_pr_auto_merge` wurde für 34 von 36 PRs aufgerufen, davon nur 23 erfolgreich (Nicht-Entwürfe), 11 Fehler (Entwürfe) (K, nicht zurückgelesen) — der belegte Schutz vor automatischem Merge gilt also nur für diese 23; vor der Budget-Freigabe in der Oberfläche prüfen | Inhaberentscheidung |
-| L8 | SSH für jede Quelle offen; 15 Schlüssel im Konto | **I** | auf feste Quellen/WireGuard begrenzen; Schlüssel aussortieren (OA-020) — **nur der Inhaber** | kurzfristig |
+| L1 | Cognee-Volumes ungesichert, API-Container fehlt; Prune-Sperre aktiv | **SZ** | Shell auf srv1941843: Volumes sichern, Cognee-Container wieder verknüpfen, dann Sperre aufheben (Aufräumplan Phase 0/3) | bis 16.11. (Serverzugriff) |
+| L2 | srv1941843 am 14.11. 97 % (10,2 GiB frei); am 15.11. ~95 % und fallend durch das Archivskript des Inhabers (19,8 GiB frei, 12:19, K); 77,3 GiB Paperclip-Läufe (abgelöst) werden archiviert | **SZ** | Archivlauf fertigstellen und Ergebnis prüfen; GitLab-Prometheus auf 30 Tage (V6) | 15.11. (Archivskript läuft) |
+| L3 | Hermes-/Agenten-Oberfläche öffentlich erreichbar; Docker-Socket im Container | **I** | **OFFEN:** `unternehmensbot.eu` zeigt auf **srv1243952** (N, W1); die Router `hermes-webui/-api` liegen auf **srv1941843** und werden über diesen Namen **nicht** erreicht — ein Schutz der srv1941843-Router schließt die öffentliche Oberfläche also **nicht**. Erst klären, was auf srv1243952 antwortet (E3), dann je Server schützen. D-019 F4 „nicht öffentlich“ als OFFEN führen (E3, OA-015) | Inhaber (offen) |
+| L4 | Toter Tunnel `nexifyai-contabo` → `agenten`, `librechat` 530 | **I/SZ** | wieder verbinden oder auf `nexifyai-duesseldorf` umhängen (E4) | bis 17.11. |
+| L5 | srv1243952 nicht einsehbar (trägt 57 von 126 Adressen) | **I** | Shell oder freigegebener nur-lesender Mess-Weg (E8) — **nur der Inhaber** | Inhaber (offen) |
+| L6 | Cloudflare-Token mit DNS-Schreibrecht sichten (Zertifikatsdienst + neuer Token 14.11. 18:42) | **I** | Token-Liste und globalen Schlüssel prüfen, auf engste Zone begrenzen (E9) — **nur der Inhaber** | Inhaber (offen) |
+| L7 | GitHub Actions ohne Budget → kein Gate, Merges blockiert | **I** | Actions-Budget/Abrechnung freigeben (OA-022) — **nur der Inhaber**. **Warnung:** danach gehen PRs mit eingeschaltetem Auto-Merge ohne weitere Abnahme nach `main` (OA-027). Fortschr. Nr. 7: `disable_pr_auto_merge` für 34 von 36 PRs aufgerufen, davon nur 23 erfolgreich (Nicht-Entwürfe), 11 Fehler (Entwürfe) (K, nicht zurückgelesen) — der belegte Schutz gilt nur für diese 23; vor der Budget-Freigabe in der Oberfläche prüfen | Inhaber (offen) |
+| L8 | SSH für jede Quelle offen; 15 Schlüssel im Konto | **I** | auf feste Quellen/WireGuard begrenzen; Schlüssel aussortieren (OA-020) — **nur der Inhaber** | Inhaber (offen) |
 
 ### Priorität 2 — Verkaufsfähiger Auftritt
 
 | # | Lücke | Owner | Nächster Schritt | Fälligkeit |
 |---|---|---|---|---|
-| L9 | **Teilweise erledigt** (Fortschr. Nr. 1): `NEXIFY_INDEXING=enabled` gesetzt, Hauptseiten `index, follow` (M 11:07). Offen: Rechtsform/Impressum (live „Eenmanszaak", im Code anderswo „B.V.") und Hauptdomain (.de und .cloud beide indexierbar) | **I** | Rechtsform widerspruchsfrei klären (OA-009); Hauptdomain/Canonical festlegen (OA-031) — **nur der Inhaber** | kurzfristig |
-| L10 | Vercel-Zahlung fehlgeschlagen (300,05 $) | **I** | Zahlung/Abrechnung klären — **nur der Inhaber** | dringend |
-| L11 | Verwaiste Vercel-Projekte melden Baufehler | **I** | Projekte trennen/löschen (OA-023) — **nur der Inhaber** | kurzfristig |
-| L12 | Cloudflare-Hosting-Umzug | **I** | **Inhaberentscheidung 15.11.: kein Umzug jetzt** (Fortschr. Nr. 8, Quelle K); Vercel bleibt. Noch nicht in `DECISIONS.md` nachgetragen | entschieden (kein Umzug) |
+| L9 | **Teilweise erledigt** (Fortschr. Nr. 1): `NEXIFY_INDEXING=enabled` gesetzt, Hauptseiten `index, follow` (M 11:07). Offen: Rechtsform/Impressum (live „Eenmanszaak", im Code anderswo „B.V."; Register KvK 90483944 genannt, Auszug nicht belegt — L27) und Hauptdomain (`.de` ist nach V12 kanonisch, `.cloud` dennoch indexierbar) | **I** | Rechtsform widerspruchsfrei klären (OA-009, L27); Canonical auf `.de` durchsetzen (OA-031, V12) — **nur der Inhaber** | Inhaber (offen) |
+| L10 | Vercel-Zahlung fehlgeschlagen (300,05 $) | **I** | Zahlung/Abrechnung klären — **nur der Inhaber** | 15.11. (Inhaber, dringend) |
+| L11 | Verwaiste Vercel-Projekte melden Baufehler | **I** | Projekte trennen/löschen (OA-023) — **nur der Inhaber** | Inhaber (offen) |
+| L12 | Cloudflare-Hosting-Umzug | **I** | **Inhaberentscheidung 15.11.: kein Umzug jetzt** (V8/Fortschr. Nr. 8, Quelle K); Vercel bleibt. Noch nicht in `DECISIONS.md` nachgetragen | entschieden (kein Umzug) |
 
 ### Priorität 3 — Kundenwege, Leads, Umsatz
 
 | # | Lücke | Owner | Nächster Schritt | Fälligkeit |
 |---|---|---|---|---|
-| L13 | Shop-Vercel: DB-Bindung inzwischen vorhanden — `/api/shop/status` **200** mit `products:0`, `last_import_at:null` (M 12:26 UTC), vorher 503; Katalog noch leer (Import gesperrt) | **I/AA** | Katalog nach Entscheidung E1 erstbefüllen (Vertragsnachweis, Mindestzahl, Stichprobe); Supabase-Migration (D-013) liegt vorbereitet und ausgeschaltet auf eigenem Zweig (Stand 12:25, Nr. 6) | kurzfristig |
-| L14 | Anfrageweg erreicht nur per `mailto`, kein eigener Empfänger | **I/AA** | eigener Empfänger in `apps/web` oder Shop-Dienst binden (OA-163) | kurzfristig |
-| L15 | Mailing: 0 Einwilligungen, Rechtsgrundlage je Gruppe offen | **I** | Einwilligungsweg (PR 186) mergen + Rechtsgrundlage je Gruppe (OA-001) — **nur der Inhaber** | Inhaberentscheidung |
-| L16 | Abnahmefähige Entwürfe 186/193/195/197 nicht gemergt | **I** | nach L7 mergen; Freigabe laut K liegt vor, Zweigschutz blockiert. Kopf von PR 186 heute geändert → vor Merge erneut prüfen | nach L7 |
+| L13 | Shop-Vercel: DB-Bindung inzwischen vorhanden — `/api/shop/status` **200** mit `products:0`, `last_import_at:null` (M 12:26 UTC), vorher 503; Katalog noch leer (Import gesperrt) | **I/AA** | Katalog nach V1 erstbefüllen (Vertragsnachweis, Mindestzahl, Stichprobe); Supabase-Migration (D-013) liegt vorbereitet und ausgeschaltet auf eigenem Zweig (Stand 12:25, Nr. 6) | bis 18.11. |
+| L14 | Anfrageweg erreicht nur per `mailto`, kein eigener Empfänger | **I/AA** | eigener Empfänger in `apps/web` oder Shop-Dienst binden (OA-163) | bis 18.11. |
+| L15 | Mailing: 0 Einwilligungen, Rechtsgrundlage je Gruppe offen | **I** | Einwilligungsweg (PR 186) mergen + Rechtsgrundlage je Gruppe (OA-001) — **nur der Inhaber** | Inhaber (offen) |
+| L16 | Abnahmefähige Entwürfe 186/193/195/197 nicht gemergt | **I** | nach L7 mergen (V11); Freigabe laut K liegt vor, Zweigschutz blockiert. Kopf von PR 186 heute geändert → vor Merge erneut prüfen | nach L7 (Actions grün) |
 
 ### Priorität 4 — Kundenprojekte abnahmefähig
 
 | # | Lücke | Owner | Nächster Schritt | Fälligkeit |
 |---|---|---|---|---|
-| L17 | Kundenprojekt SK: offene Inhaberentscheidungen (Einzelheiten nur im Kundenrepository) | **I** | im Kundenrepository/eigener Sitzung führen (Abschnitt 6a) — **nur der Inhaber** | Inhaberentscheidung |
+| L17 | Kundenprojekt SK: offene Inhaberentscheidungen (Einzelheiten nur im Kundenrepository) | **I** | im Kundenrepository/eigener Sitzung führen (Abschnitt 6a) — **nur der Inhaber** | Inhaber (offen) |
 
 ### Priorität 5 — Betrieb und Skalierung
 
 | # | Lücke | Owner | Nächster Schritt | Fälligkeit |
 |---|---|---|---|---|
-| L18 | Dokumentation vs. Messung (W1–W13): `hermes-webui`, `hostinger-srv1243952`, `cloudflare-dns` falsch im Lösungsregister | **AA** | eigener additiver PR der koord. Sitzung; Quelle = Netz-Inventur (E7) | kurzfristig |
-| L19 | Supabase-Zielinstanz (D-013) ohne belegte Adresse/Zugang; kein Shop-Schema/RLS/Backup | **I/AA** | Instanz benennen, Schema+RLS bauen, Migrationsplan (`DATA-STORE-001`) | mittelfristig |
-| L20 | Regelbetrieb: serverseitige Zeitpläne laufen, aber kein eigener Dauerdienst auf eigener Infrastruktur | **I/AA** | Fortschr. Nr. 9: zwei Trigger laufen („Audit-Herzschlag" 2-stündlich, „Regelbetrieb Hauptsitzung" 6×/Tag); der frühere sitzungsunabhängige Regelbetrieb ist seit 14.11. 10:51 UTC aus. Offen: ein von einer offenen Sitzung unabhängiger Dauerdienst | mittelfristig |
-| L21 | Managed-LLM-Aufrufe ohne belegten Schlüssel (9router/Hermes) | **I** | OpenRouter-Schlüssel mit Ausgabenlimit eintragen — **nur der Inhaber** | Inhaberentscheidung |
-| L22 | Entscheidung „welcher Dienst liefert `teileklar.shop` künftig“ (alter srv1243952-Dienst vs. Vercel/Supabase) | **I** | nach L13 entscheiden; bis dahin alten Dienst stehen lassen (N, 10.4) | Inhaberentscheidung |
-| L23 | Zugriffsschutz `ssh.nexifyai.cloud` ungeprüft (200 ohne Access-Anmeldung) | **I** | im Cloudflare-Dashboard prüfen, ob eine Access-Anwendung davor liegt (E10) | kurzfristig |
-| L24 | `autoconfig`/`autodiscover.nexifyai.de` hinter Proxy; automatische Mail-Einrichtung ungeprüft | **I/AA** | auf „nur DNS“ stellen und nachmessen (E2) | kurzfristig |
+| L18 | Dokumentation vs. Messung (W1–W13): `hermes-webui`, `hostinger-srv1243952`, `cloudflare-dns` falsch im Lösungsregister | **AA** | eigener additiver PR der koord. Sitzung; Quelle = Netz-Inventur (E7) | bis 18.11. |
+| L19 | Supabase-Zielinstanz (D-013) ohne belegte Adresse/Zugang; kein Shop-Schema/RLS/Backup | **I/AA** | Instanz benennen, Schema+RLS bauen, Migrationsplan (`DATA-STORE-001`) | bis 22.11. |
+| L20 | Regelbetrieb: serverseitige Zeitpläne laufen, aber kein eigener Dauerdienst auf eigener Infrastruktur | **I/AA** | Fortschr. Nr. 9: zwei Trigger laufen („Audit-Herzschlag" 2-stündlich, „Regelbetrieb Hauptsitzung" 6×/Tag); der frühere sitzungsunabhängige Regelbetrieb ist seit 14.11. 10:51 UTC aus. Offen: ein von einer offenen Sitzung unabhängiger Dauerdienst | bis 22.11. |
+| L21 | Managed-LLM-Aufrufe ohne belegten Schlüssel (9router/Hermes) | **I** | OpenRouter-Schlüssel mit Ausgabenlimit eintragen (V10, Deckel 5 USD/Tag) — **nur der Inhaber** | Inhaber (offen) |
+| L22 | Entscheidung „welcher Dienst liefert `teileklar.shop` künftig“ (alter srv1243952-Dienst vs. Vercel/Supabase) | **I** | nach L13 entscheiden; bis dahin alten Dienst stehen lassen (N, 10.4; V2/V4) | nach L13 (Inhaber) |
+| L23 | Zugriffsschutz `ssh.nexifyai.cloud` ungeprüft (200 ohne Access-Anmeldung) | **I** | im Cloudflare-Dashboard prüfen, ob eine Access-Anwendung davor liegt (E10) | bis 18.11. (Inhaber) |
+| L24 | `autoconfig`/`autodiscover.nexifyai.de` hinter Proxy; automatische Mail-Einrichtung ungeprüft | **I/AA** | auf „nur DNS“ stellen und nachmessen (E2) | bis 18.11. |
+| L25 | **Ort und Name der Datenbank des alten Shops unbelegt** und **widersprüchlich**: der Supabase-Migrationsbericht vermutet die Mongo-DB auf srv1941843, dieses Audit verortet den ausliefernden Dienst auf srv1243952 (beide ohne Einblick) | **I/AA** | auf einsehbarem Server feststellen, wo Shop-Dienst und DB wirklich laufen (hängt an L5) | nach L5 |
+| L26 | **DeepSeek-Delegation** (`claude/deepseek-arbeiter`): Router `ai-router.nexifyai.cloud` bietet laut Zweig keinen datierten Modellstand, der Adapter verlangt die Endung „1017“ (`config/llm-policy.json`); kein Schlüssel hinterlegt | **I/AA** | Modellstand am Router datiert belegen; Schlüssel mit Deckel 5 USD/Tag eintragen (V10, L21) | bis 18.11. |
+| L27 | **Rechtsform OFFEN**: live „Eenmanszaak", im Code „B.V."; Register KvK 90483944 genannt, **Registerauszug nicht belegt** | **I** | Registerauszug beiziehen, Impressum/Code widerspruchsfrei machen (OA-009) — **nur der Inhaber** | Inhaber (offen) |
+| L28 | **Aussortier-Sitzung hat bisher 0 GiB selbst entfernt** (nur das Inhaber-Archivskript wirkt); **Port 8090 ungeklärt** (alter Shop-Dienst auf srv1941843 laut Tunnel-Zuordnung, ohne veröffentlichten Port) | **SZ** | Klasse A/B einzeln nach Freigabe entfernen; 8090 auf dem einsehbaren Server klären | bis 18.11. (Serverzugriff) |
+| L29 | Ein **Transport-PR eines Kundenprojekts** (SK) ist Rohmaterial, auf Entwurf gestellt — **nicht mergen** (Einzelheiten nur im Kundenrepository, D-017) | **I** | in der Kundensitzung behandeln; nicht nach `main` eines Agenturrepos bringen | Inhaber (offen) |
 
 ### 6a. Kundenprojekt SK (nur Verweis)
 
@@ -381,6 +397,9 @@ eine eigene Nachmessung **M** genannt ist). Keine Kundeneinzelheiten.
    außerhalb der Docker-Zählung, Ursache offen**. Hostinger-Metrik 385,0 GB (08:15) →
    394,3 GB (10:46). Swap 87–88 %, 11 Zombie-Prozesse, Neustart ausstehend, 100
    Aktualisierungen offen. Die frühere Angabe „86 %" (Abschnitt 2) ist überholt.
+   **Einheiten:** Konsolen- und Hostinger-Metrikwerte sind GB (10⁹ B), die `df`-Werte der
+   Fortschreibung 12:25 sind GiB (2³⁰ B); sie stehen hier bewusst nebeneinander, weil sie
+   aus verschiedenen Quellen stammen (1 GiB ≈ 1,074 GB).
 4. **Speicher srv1941843 (K).** Hostinger-Metrik 402,7 GB (09:15) → 408,9 GB (10:15) →
    408,5 GB (10:46). Build-Cache/hängende Images brachten 0 GB (noch in Gebrauch).
    Inhaberentscheidung: Altläufe verlustfrei archivieren (Archiv → Prüfung → Original
@@ -428,44 +447,60 @@ Anmeldung) und eigene Nachmessungen (**M**, 12:26–12:27 UTC). Unbelegtes als O
 1. **Speicher srv1941843 sinkt (K, Hostinger-Metrik):** 11:47 UTC 380,4 GiB belegt →
    12:15 UTC 363,3 GiB. Ursache: Archivskript für Paperclip-Altläufe, vom Inhaber ~11:55
    UTC gestartet (`/root/archiv-paperclip.sh`, archiviert → prüft → entfernt Original).
-   Fortschritt im Server-Log nicht gelesen → **OFFEN**. Deckt L1/L2 ab.
+   Fortschritt im Server-Log nicht gelesen → **OFFEN**. Betrifft **L2** (Platte
+   srv1941843); **L1** (Cognee-Sicherung) bleibt davon unberührt.
 2. **Speicher srv1243952 sinkt (K, Hostinger-Metrik):** 11:15 UTC 367,3 GiB → 11:50 UTC
-   339,8 GiB, 12:19 UTC unverändert 339,8. **Ursache OFFEN** (keine Sitzung hat dort
-   Schreibzugriff; Server bleibt der blinde Fleck, L5).
+   339,8 GiB, 12:19 UTC unverändert 339,8. **Ursache OFFEN** (Angabe der koordinierenden
+   Sitzung: keine der beteiligten Sitzungen hat dort Schreibzugriff; Server bleibt der
+   blinde Fleck, L5).
 3. **Shop (M, 12:26–12:27 UTC):** `nexifyai.de/api/shop/status` → **200** mit
    `products:0`, `last_import_at:null`, `source:BigBuy` (vorher 503 — die DB-Bindung ist
    jetzt da, der Katalog aber leer). `teileklar.shop/api/shop/products` → 200, `total`
    weiterhin **3720** (alter Katalog liefert). Live-Startseite `nexifyai.de/` → 200,
-   Deployment `dpl_CXVZrjQ4jSV88xwLanJXSecGaSa6`. **Herkunft des Deployments:** `git log
+   Deployment `dpl_CXVZrjQ4…` (ID gekürzt). **Herkunft des Deployments:** `git log
    origin/main` zeigt in den letzten 3 h **keinen neuen Commit**; `origin/main` steht
-   unverändert auf `9c9c806` (14.11. 22:54 CET). Das Live-Deployment ist also kein neuer
-   `main`-Commit, sondern ein Redeploy/Env-Wechsel desselben Stands; der genaue Auslöser
-   (Env-Variable gesetzt / manueller Redeploy) ist ohne Vercel-Zugang **OFFEN** (M, R).
+   unverändert auf `9c9c806` (14.11. 22:54 CET). **Belegt** ist daraus nur: das
+   Live-Deployment ist **kein neuer `main`-Commit**. Dass es ein Redeploy oder Env-Wechsel
+   desselben Stands ist, ist **ANNAHME**; der genaue Auslöser (Env-Variable gesetzt /
+   manueller Redeploy) ist ohne Vercel-Zugang **OFFEN** (M, R).
 4. **Indexierung (M, bestätigt 11:07; K: live seit 11:01 UTC):** Agenturseiten `/`,
    `/leistungen`, `/impressum` `index, follow`; `/teileklar` weiter `noindex` (siehe
    Fortschreibung 11:10 Nr. 1, L9).
-5. **Inhaberentscheidungen E1–E14 (Quelle K, ~12:15 UTC, Vollmacht des Inhabers; Status je
-   „entschieden, nicht ausgeführt"; noch nicht in `DECISIONS.md` → OFFEN, Nachtrag durch
-   die koordinierende Sitzung):** Katalog übernehmen bei angeschalteter Importsperre;
-   `teileklar.shop` erst umschalten bei ≥ 3720 Produkten + Live-Zahlung + Testbestellung;
-   Shop-Indexierung erst danach; alten Shop 14 Tage später anhalten; R2 nur wenn schon
-   aktiv und < 5 USD/Monat; GitLab-Prometheus auf 30 Tage; Neustart je Server 04:30–05:00
-   UTC mit Snapshot; unbenutzte Images älter 30 Tage entfernen; kein neuer Zeitplan;
-   DeepSeek über 9Router mit Deckel 5 USD/Tag, aus bis Schlüssel hinterlegt; PRs 197, 193,
-   186, 195 mergen sobald Actions grün; `nexifyai.de` kanonisch; Rechtsform nach
-   Handelsregister KvK 90483944. Die Dauergrenzen (keine Zahlungen, nichts ohne Archiv
-   löschen, keine Geheimnisse im Klartext, keine Sicherheitslockerung) bleiben.
+5. **Inhaberentscheidungen vom 15.11. (Quelle K, ~12:15 UTC, Vollmacht des Inhabers; Status
+   je „entschieden, nicht ausgeführt").** Eigenes Präfix **V**, um Verwechslung mit den
+   „E…"-Nummern der Netz-Inventur zu vermeiden. **In `DECISIONS.md` auf `main` steht dazu
+   noch kein Eintrag → OFFEN, Nachtrag durch die koordinierende Sitzung.**
+
+   | Nr. | Entscheidung |
+   |---|---|
+   | V1 | Katalog übernehmen bei angeschalteter Importsperre |
+   | V2 | `teileklar.shop` erst umschalten bei ≥ 3720 Produkten + Live-Zahlung + Testbestellung |
+   | V3 | Shop-Indexierung erst danach |
+   | V4 | alten Shop 14 Tage später anhalten |
+   | V5 | **R2 ausdrücklich freigegeben** („wenn erweitert werden muss, erweitern, ohne zu fragen"); der frühere Vorbehalt „< 5 USD/Monat" **entfällt**. Gemessen 12:35 UTC (K): R2 im Konto aktiv, 1 Bucket |
+   | V6 | GitLab-Prometheus auf 30 Tage |
+   | V7 | Neustart je Server 04:30–05:00 UTC, vorher Snapshot |
+   | V8 | kein Cloudflare-Hosting-Umzug jetzt (L12) |
+   | V9 | unbenutzte Images älter 30 Tage entfernen |
+   | V10 | DeepSeek über 9Router, Deckel 5 USD/Tag, aus bis Schlüssel hinterlegt (L21/L26) |
+   | V11 | kein neuer Zeitplan |
+   | V12 | `nexifyai.de` kanonisch |
+   | V13 | PRs 197, 193, 186, 195 mergen, sobald Actions grün (L16) |
+   | V14 | Rechtsform nach Handelsregister KvK 90483944 (Auszug nicht belegt, L27) |
+
+   Die Dauergrenzen bleiben: keine Zahlungen, nichts ohne Archiv löschen, keine Geheimnisse
+   im Klartext, keine Sicherheitslockerung.
 6. **Neue Arbeitszweige (Berichte gelesen, R; alle Entwurf/ausgeschaltet):**
 
    | Zweig (Kopf) | Ziel | Status | Nächster Schritt / beim Inhaber |
    |---|---|---|---|
-   | `claude/rechtstexte-de-nl` (`85e77af`, 12:20) | Belegtes EU-Rechts-Quellenregister als Grundlage der Rechtstexte (NL-Unternehmen, B2B-Agentur + B2C/B2B-Shop) | WIP; Primärquellen am 15.11. abgerufen (DSGVO, SCC 2021/914, DPF 2023/1795 u. a.); keine Rechtsberatung; nationales Umsetzungsrecht offen | Rechtstexte auf dieser Basis überarbeiten; **Inhaber:** Freigabe der Rechtstexte (D-017), anwaltliche Prüfung, Rechtsform KvK 90483944 |
-   | `claude/shop-eigene-domain` (`48ebf18`, 12:09) | TEILEKLAR auf eigener Domain, hinter Schalter `NEXIFY_SHOP_HOST` (Standard AUS) | Code + Tests (`apps/web/auth/shop-host.ts`, `shop-host.test.mjs`), ausgeschaltet | Nach Shop-Live Schalter setzen; **Inhaber:** Domainwahl/Umschaltung (E-Entscheidungen) |
-   | `claude/server-aussortieren` (`dc6f6a1`, 12:23) | Kandidatenliste + Löschprotokoll beide Server nach 30-Tage-Regel | WIP vor Ausführung; srv1941843 durch Inhaber-Archivskript von 99 % (2 GiB frei, 11:40) auf 95 % (19,8 GiB frei, 12:19); Klasse B klein (~5 GiB), Cognee gesperrt | Klasse A/B einzeln nach Freigabe entfernen; **Inhaber/Serverzugriff** je Schritt (D-016) |
-   | `claude/shop-supabase-migration` (`940e0da`, 12:25) | Shop-Datenschicht MongoDB → Supabase/PostgreSQL (D-013) | Vorbereitet, getestet, ausgeschaltet (Schalter `SHOP_STORE_BACKEND=mongodb`); Zielschema + RLS lokal einspielbar | Zwingend fehlt: belegter Supabase-Zugang; Import + Vercel-Bindung sprechen noch MongoDB; kein Lauf gegen echtes Mongo/Supabase. **Inhaber:** Supabase-Instanz/Zugang, Umschaltfreigabe |
+   | `claude/rechtstexte-de-nl` (`0fcc5b1`) | Belegtes EU-Rechts-Quellenregister als Grundlage der Rechtstexte (NL-Unternehmen, B2B-Agentur + B2C/B2B-Shop) | WIP; Primärquellen am 15.11. abgerufen (DSGVO, SCC 2021/914, DPF 2023/1795 u. a.); keine Rechtsberatung; nationales Umsetzungsrecht offen | Rechtstexte auf dieser Basis überarbeiten; **Inhaber:** Freigabe der Rechtstexte (D-017), anwaltliche Prüfung, Rechtsform KvK 90483944 (L27) |
+   | `claude/shop-eigene-domain` (`33f3cb0`) | TEILEKLAR auf eigener Domain, hinter Schalter `NEXIFY_SHOP_HOST` (Standard AUS) | Code + Tests (`apps/web/auth/shop-host.ts`, `shop-host.test.mjs`), ausgeschaltet | Nach Shop-Live Schalter setzen; **Inhaber:** Domainwahl/Umschaltung (V2) |
+   | `claude/server-aussortieren` (`dc6f6a1`, 12:23) | Kandidatenliste + Löschprotokoll beide Server nach 30-Tage-Regel (V9) | WIP vor Ausführung; srv1941843 durch Inhaber-Archivskript von 99 % (2 GiB frei, 11:40) auf 95 % (19,8 GiB frei, 12:19); **Sitzung selbst hat 0 GiB entfernt**; Klasse B klein (~5 GiB), Cognee gesperrt | Klasse A/B einzeln nach Freigabe entfernen; Port 8090 klären (L28); **Inhaber/Serverzugriff** je Schritt (D-016) |
+   | `claude/shop-supabase-migration` (`740d31d`) | Shop-Datenschicht MongoDB → Supabase/PostgreSQL (D-013) | Vorbereitet, getestet, ausgeschaltet (Schalter `SHOP_STORE_BACKEND=mongodb`); Zielschema + RLS lokal einspielbar | Zwingend fehlt: belegter Supabase-Zugang; Import + Vercel-Bindung sprechen noch MongoDB; kein Lauf gegen echtes Mongo/Supabase; Ort der alten DB widersprüchlich (L25). **Inhaber:** Supabase-Instanz/Zugang, Umschaltfreigabe |
+   | `claude/deepseek-arbeiter` (`c96f1d0`, erster Push 12:28) | DeepSeek-Delegation über 9Router (V10) | Zweig vorhanden; Router `ai-router.nexifyai.cloud` ohne datierten Modellstand, Adapter verlangt Endung „1017"; **kein Schlüssel hinterlegt** | Modellstand datiert belegen; Schlüssel mit Deckel 5 USD/Tag (L26); **Inhaber** |
 
-   Noch ohne Push und daher **OFFEN** (kein Zweigstand lesbar): `claude/deepseek-arbeiter`,
-   `claude/chat-standard-offen`.
+   Noch ohne Push und daher **OFFEN** (kein Zweigstand lesbar): `claude/chat-standard-offen`.
 
 ---
 
@@ -491,7 +526,7 @@ Anmeldung) und eigene Nachmessungen (**M**, 12:26–12:27 UTC). Unbelegtes als O
 
 ---
 
-*Ende. Quellen: eigene Live-Messungen 15.11.2026 09:19 und 09:57 UTC (M); Übergabe der
+*Ende. Quellen: eigene Live-Messungen 15.11.2026 09:19, 09:57, 11:07 und 12:26–12:27 UTC (M); Übergabe der
 koordinierenden Sitzung (K); `docs/04-betrieb/netz-inventur-2026-11-14.md` (N, PR 200);
 `server-befund-2026-11-14.md` und `aufraeumplan-2026-11-14.md` (S); `PROGRESS.md`,
 `DECISIONS.md`, `config/loesungsregister.json`, `offene-arbeiten-2026-11-14.md` (R, P).
