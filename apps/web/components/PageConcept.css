@@ -36,6 +36,11 @@
 .home-concept .pc-section:focus{outline:none}
 .home-concept .pc-section+.pc-section{padding-top:0}
 .home-concept .pc-section-body{display:grid;gap:var(--space-5);min-width:0}
+/* Inhaberbefund 15.11.2026: Neben der Ueberschrift blieb die linke Spalte ueber die ganze Hoehe leer. Hat ein Abschnitt
+   mehr als einen Absatz, steht der erste als Vorspann unter der Ueberschrift - dieselbe Stapelung wie .hc-budget-story
+   auf der Startseite (Dachzeile, Titel, Text untereinander). Abstand und Breite wie im Textteil daneben. */
+.home-concept .pc-section-head{display:grid;gap:var(--space-5);align-content:start;min-width:0}
+.home-concept .pc-section-lead{max-width:60ch}
 .home-concept .pc-section-body p{margin:0;max-width:60ch}
 .home-concept .pc-section-body .hc-service-detail{margin-top:var(--space-2)}
 .home-concept .pc-section-links{display:flex;flex-wrap:wrap;gap:var(--space-4) var(--space-6)}

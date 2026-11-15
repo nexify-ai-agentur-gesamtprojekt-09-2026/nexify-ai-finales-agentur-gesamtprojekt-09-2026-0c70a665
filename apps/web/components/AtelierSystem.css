@@ -244,8 +244,14 @@ html[data-theme='light'] #atelier{--color-text-primaer:var(--color-hell-schrift)
  #atelier .home-concept :is(.identity-hero,.hc-gallery-card,.nx-konto-szene) .atelier-film-hero .atelier-volume>div{width:200px}
  #atelier .home-concept :is(.identity-hero,.hc-gallery-card,.nx-konto-szene) .atelier-film-hero .atelier-volume label{font-size:0;gap:0}
 }
+/* Befund 15.11.2026: Die Segmente durften schrumpfen (Vorgabe flex-shrink:1) und trugen zugleich white-space:nowrap.
+   Passte die Zeile nicht, lief jede Beschriftung aus ihrem eigenen Feld: auf /produkte/skills-mcp bei 768 px schoben sich
+   drei Beschriftungen ineinander und die letzte lief aus der Pille heraus, auf /produkte/nex2fly bei 1280 px schnitt die
+   Kante den letzten Pfeil ab (820 px Inhalt in 818 px Feld). Die Segmente behalten jetzt ihre Inhaltsbreite und umbrechen
+   Die Leiste bleibt eine Zeile; reicht der Platz nicht, bricht die Beschriftung im eigenen Feld um, statt daraus
+   herauszulaufen. Die Pille waechst dann in der Hoehe - wie im Raster-Fall unter 640 px. */
 #atelier .home-concept .hc-anchors{position:relative;box-sizing:border-box;display:flex;flex-wrap:nowrap;width:fit-content;max-width:calc(100% - 2 * var(--layout-page-padding));margin-inline:var(--layout-page-padding) auto;border:0;border-radius:var(--as-switch-radius);background:var(--as-glass);-webkit-backdrop-filter:var(--as-blur);backdrop-filter:var(--as-blur);box-shadow:var(--as-rest)}
-#atelier .home-concept .hc-anchors a{display:inline-flex;align-items:center;justify-content:space-between;min-height:48px;padding-inline:var(--space-5);gap:var(--space-3);border:0;color:var(--color-text-sekundaer);font-size:.9375rem;white-space:nowrap;text-decoration:none;transition:background-color .2s ease-out,color .2s ease-out,transform .28s var(--as-spring)}
+#atelier .home-concept .hc-anchors a{min-width:0;display:inline-flex;align-items:center;justify-content:space-between;min-height:48px;padding-block:var(--space-2);padding-inline:var(--space-5);gap:var(--space-3);border:0;color:var(--color-text-sekundaer);font-size:.9375rem;white-space:normal;overflow-wrap:break-word;text-decoration:none;transition:background-color .2s ease-out,color .2s ease-out,transform .28s var(--as-spring)}
 #atelier .home-concept .hc-anchors a:is(:hover,:focus-visible){background:color-mix(in srgb,var(--as-cool) 16%,transparent);color:var(--as-ink)}
 #atelier .home-concept .hc-anchors a:focus-visible{outline-offset:-3px}
 #atelier .home-concept .hc-anchors a:active{transform:scale(.97)}
@@ -290,7 +296,10 @@ html[data-theme='light'] #atelier{--color-text-primaer:var(--color-hell-schrift)
 }
 #atelier .home-concept :is(.hc-kicker,.hc-scene-context),#atelier #aifly-panel :is(.panel-identity-subtitle,.orientation-message>strong){font-family:var(--font-mono);font-size:.74rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--as-ink-3)}
 #atelier .site-header,#atelier .home-concept,#atelier .site-footer,#atelier #aifly-panel,#atelier .site-header *,#atelier .home-concept *,#atelier .site-footer *,#atelier #aifly-panel *{-webkit-hyphens:manual;hyphens:manual}
-#atelier .home-concept :is(h1,h2,h3){text-wrap:balance;overflow-wrap:break-word}
+/* Befund 15.11.2026: `break-word` bricht lange Woerter zwar um, verkleinert aber die Mindestbreite der Ueberschrift nicht.
+   Auf /avv stand die H1 bei 390 px deshalb 410 px breit in einer 342 px breiten Spalte und lief rechts aus dem Bild
+   („Auftragsverarbeitungsvert…“). `anywhere` wirkt erst, wenn der Platz nicht reicht, und aendert sonst nichts. */
+#atelier .home-concept :is(h1,h2,h3){text-wrap:balance;overflow-wrap:anywhere}
 #atelier .site-header :focus-visible,#atelier .site-footer :focus-visible,#atelier .home-concept :focus-visible,#atelier #aifly-panel :focus-visible,#atelier .reopen-chat:focus-visible{outline:none;box-shadow:var(--as-focus)}
 #atelier .site-header :is(.header-cta,.outline-button,select):focus-visible,#atelier .home-concept .hc-text-link:focus-visible,#atelier #aifly-panel :is(.orientation-starter,.orientation-restart,.outline-button,.panel-minimize,.icon-button):focus-visible,#atelier .site-footer .outline-button:focus-visible,#atelier .reopen-chat:focus-visible{outline:none;box-shadow:var(--as-focus),var(--as-raised)}
 #atelier .home-concept :is(.identity-copy .identity-primary-link[data-variant='primary'],.hc-finish-primary):focus-visible{outline:none;box-shadow:var(--as-focus),0 14px 30px -10px color-mix(in srgb,var(--as-lime) 58%,transparent)}
@@ -498,6 +507,9 @@ body:has(#atelier) .skip-link:focus{border-radius:var(--as-switch-radius);backgr
  #atelier .site-header :is(a,button,summary),#atelier .home-concept :is(a,button,summary),#atelier .site-footer :is(a,button,summary),#atelier #aifly-panel :is(a,button,summary){transition:none}
 }
 #atelier .home-concept .identity-hero .identity-copy h1{font-size:clamp(36px,4.2cqi,56px);font-weight:500;line-height:var(--as-z-eng);letter-spacing:-.02em;min-width:0;max-width:100%;overflow-wrap:break-word;hyphens:auto}
+/* Befund 15.11.2026: Die Ueberschrift der Dokumentseiten bekommt dieselbe Silbentrennung wie der Hero der Startseite.
+   Ohne sie brach „Auftragsverarbeitungsvertrag“ auf /avv bei 390 px ohne Trennstrich mitten im Wort. */
+#atelier .home-concept .pc-hero .pc-hero-copy :is(h1,h2){-webkit-hyphens:auto;hyphens:auto}
 #atelier .home-concept .hc-finish h2{font-size:clamp(36px,4.6cqi,48px);line-height:var(--as-z-eng);letter-spacing:-.02em}
 #atelier .home-concept :is(.hc-section-heading h2,.hc-intro h2,.tk-partner-intro h2,.tk-portal-preview h2),#atelier .home-concept .hc-rate>strong{font-size:clamp(24px,3.4cqi,36px);font-weight:500;line-height:1.2;letter-spacing:-.02em}
 /* Shop-Seiten: Flaechen-Ueberschriften (h2) und Unterpunkte (h3) laufen ueber dieselben beiden Regeln wie die Startseite. */
@@ -694,7 +706,12 @@ body:has(#atelier) .skip-link{font-size:15px;font-weight:600;line-height:1.5}
 #atelier #aifly-panel .orientation-composer{position:relative;flex:none;display:block;margin:0 var(--ca-pad);padding:4px;min-height:56px;border:0;border-radius:var(--as-area);background:var(--as-glass-dense);box-shadow:var(--as-lens),var(--as-drop);transition:box-shadow var(--as-move),background var(--as-move)}
 #atelier #aifly-panel .orientation-composer:hover{background:var(--as-glass-dense-hover);box-shadow:var(--as-lens),var(--as-drop-hover)}
 #atelier #aifly-panel .orientation-composer:focus-within{background:var(--as-glass-solid);box-shadow:var(--as-lens),var(--as-drop-hover),0 0 0 2px var(--as-ink)}
-#atelier #aifly-panel .orientation-composer textarea{box-sizing:border-box;display:block;width:100%;min-height:48px;max-height:160px;padding:12px 64px 12px 16px;border:0;border-radius:calc(var(--as-area) - 4px);background:none;box-shadow:none;outline:0;color:var(--as-ink);font-size:16px;line-height:1.5;resize:none}
+/* Befund 15.11.2026: Der Platzhalter wurde mitten im Wort abgeschnitten (241 px Text in 223 px Schreibbreite); ein
+   Platzhalter bricht im Textfeld nicht um, deshalb ist er jetzt kurz genug (Text in PublicOrientationChat.tsx).
+   Zweiter Befund: Eine getippte Nachricht war ab der zweiten Zeile nicht mehr zu sehen, weil das Feld nicht mitwaechst.
+   `field-sizing:content` laesst es zwischen 48 und 160 px mitwachsen; wo der Browser das nicht kennt, bleibt alles wie
+   bisher. Die Ruhehoehe von 48 px aendert sich nicht. */
+#atelier #aifly-panel .orientation-composer textarea{box-sizing:border-box;display:block;width:100%;field-sizing:content;min-height:48px;max-height:160px;padding:12px 64px 12px 16px;border:0;border-radius:calc(var(--as-area) - 4px);background:none;box-shadow:none;outline:0;color:var(--as-ink);font-size:16px;line-height:1.5;resize:none}
 #atelier #aifly-panel .orientation-composer textarea:focus,#atelier #aifly-panel .orientation-composer textarea:focus-visible{outline:0;box-shadow:none}
 #atelier #aifly-panel .orientation-composer textarea::placeholder{color:var(--as-ink-3);opacity:1}
 #atelier #aifly-panel .orientation-composer-actions{position:absolute;right:4px;bottom:4px;margin:0;padding:0}
@@ -990,7 +1007,13 @@ html[data-theme='light'] #atelier .nx-logo-x{color:var(--as-accent)}
    nicht die ganze Breite fuellt; darunter unveraendert (gemessen 1000 bis 1835 px: Rahmen und Abstaende identisch). */
 #atelier .site-header{--kopf-einzug:clamp(32px,calc(4.5cqi + max(0px,(100cqi - 1500px) * .1)),96px);--kopf-innen:var(--as-s-8)}
 #atelier[data-scrolled='true'] .site-header{padding-left:calc(var(--layout-page-padding) + var(--kopf-einzug) + var(--kopf-innen));padding-right:calc(var(--layout-page-padding) + var(--kopf-einzug) + var(--as-s-3))}
-#atelier[data-scrolled='true'] .site-header::before{background:var(--as-glass-dense),color-mix(in srgb,var(--as-ground) 34%,transparent);-webkit-backdrop-filter:var(--as-glass-filter-bar);backdrop-filter:var(--as-glass-filter-bar);box-shadow:var(--as-lens),var(--as-volume),var(--as-depth-raised)}
+/* Befund 15.11.2026: `background:var(--as-glass-dense),color-mix(...)` war ungueltig. --as-glass-dense endet selbst auf eine
+   Farbe; eine zweite Farbe dahinter ist in der Kurzform keine gueltige Schicht, deshalb fiel die ganze Angabe aus und die
+   Leiste trug gar keinen Grund. Ueber hellen Filmen blieben Wortmarke, Claim und Projektknopf mit 1,00 bis 1,28:1 stehen
+   (gemessen an echten Bildpunkten bei 390/768/1280/1800). Dieselbe Deckung jetzt gueltig geschrieben: Glasschichten aus dem
+   Token, danach die Grundfarbe als eigene Angabe. 1-(1-0,72)*(1-0,34)=0,815 war die frueher gemeinte Deckung; damit blieb der Claim (12 px, #B4BAB6) bei 768 und
+   1800 px mit 4,12 und 4,24:1 unter den geforderten 4,5:1 (AGENTS.md, WCAG 2.2 AA). 86 % loest genau diesen Rest. */
+#atelier[data-scrolled='true'] .site-header::before{background:var(--as-glass-dense);background-color:color-mix(in srgb,var(--as-ground) 86%,transparent);-webkit-backdrop-filter:var(--as-glass-filter-bar);backdrop-filter:var(--as-glass-filter-bar);box-shadow:var(--as-lens),var(--as-volume),var(--as-depth-raised)}
 /* Abstaende der Glasleiste: Inhalt haelt auf jeder Breite Abstand zur Glaskante (links Desktop 32 px, Telefon 8 px).
    Rechts liegt die Glaskante am Projektknopf an: 12 px, derselbe Abstand wie ueber und unter dem Knopf (Inhaberbefund 14.11.2026).
    Unter 1000 px ist der Einzug klein, sonst ragt der Projektknopf aus dem Glas (768 px: 7 px). Bis 480 px entfaellt der Claim
