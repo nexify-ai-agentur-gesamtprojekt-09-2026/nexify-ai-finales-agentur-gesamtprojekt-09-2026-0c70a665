@@ -336,7 +336,7 @@ Agentensitzung gesetzt werden kann.
 | L4 | Toter Tunnel `nexifyai-contabo` → `agenten`, `librechat` 530 | **I/SZ** | wieder verbinden oder auf `nexifyai-duesseldorf` umhängen (E4) | bis 17.11. |
 | L5 | srv1243952 nicht einsehbar (trägt 57 von 126 Adressen) | **I** | Shell oder freigegebener nur-lesender Mess-Weg (E8) — **nur der Inhaber** | Inhaber (offen) |
 | L6 | Cloudflare-Token mit DNS-Schreibrecht sichten (Zertifikatsdienst + neuer Token 14.11. 18:42) | **I** | Token-Liste und globalen Schlüssel prüfen, auf engste Zone begrenzen (E9) — **nur der Inhaber** | Inhaber (offen) |
-| L7 | GitHub Actions ohne Budget → kein Gate, Merges blockiert | **I** | Actions-Budget/Abrechnung freigeben (OA-022) — **nur der Inhaber**. **Warnung:** danach gehen PRs mit eingeschaltetem Auto-Merge ohne weitere Abnahme nach `main` (OA-027). Fortschr. Nr. 7: `disable_pr_auto_merge` für 34 von 36 PRs aufgerufen, davon nur 23 erfolgreich (Nicht-Entwürfe), 11 Fehler (Entwürfe) (K, nicht zurückgelesen) — der belegte Schutz gilt nur für diese 23; vor der Budget-Freigabe in der Oberfläche prüfen | Inhaber (offen) |
+| L7 | GitHub-Actions-Prüfungen rot, Merges blockiert (früher „ohne Budget → kein Gate"; seit 22:10 UTC starten Jobs wieder, Budgetzustand **OFFEN**, Fortschr. 22:10) | **I/AA** | Actions-Budget/Abrechnung freigeben (OA-022) — **nur der Inhaber**. **Warnung:** danach gehen PRs mit eingeschaltetem Auto-Merge ohne weitere Abnahme nach `main` (OA-027). Fortschr. Nr. 7: `disable_pr_auto_merge` für 34 von 36 PRs aufgerufen, davon nur 23 erfolgreich (Nicht-Entwürfe), 11 Fehler (Entwürfe) (K, nicht zurückgelesen) — der belegte Schutz gilt nur für diese 23; vor der Budget-Freigabe in der Oberfläche prüfen. **Nachtrag 22:10 UTC:** Jobs starten wieder; eine Budgetfreigabe allein genügt nicht — die roten Prüfungen beruhen auf zwei vorbestehenden Jobfehlern (`repository` Pin-Abgleich; `next-web` fehlende generierte Testeingabe, Fortschr. 22:10 Nr. 3/4), die als **AA** auf `main` zu beheben sind | Inhaber (offen) + AA |
 | L8 | SSH für jede Quelle offen; 15 Schlüssel im Konto | **I** | auf feste Quellen/WireGuard begrenzen; Schlüssel aussortieren (OA-020) — **nur der Inhaber** | Inhaber (offen) |
 
 ### Priorität 2 — Verkaufsfähiger Auftritt
@@ -552,12 +552,24 @@ liefert).
    (Mechanik: Skill `nexify-belege-und-pins`); **wer/wann** die Pins gegen die Quellen hat
    auflaufen lassen, ist **OFFEN** und eine Aufgabe der koordinierenden Sitzung bzw. des
    Inhabers, nicht dieses Dokument-PR.
-4. **`next-web`-Check (Job 132974957508):** 138 Tests, 137 pass, **1 fail** in `apps/web`
-   (`pnpm recursive run` exit 1); ebenfalls ohne Bezug zum Dokument.
+4. **`next-web`-Check (Job 132974957508):** 138 Tests, 137 pass, **1 fail**; `pnpm recursive
+   run` scheitert in `apps/web`. **Ursache (lokal gegengeprüft, BELEGT):** der Test „every
+   page the assistant may name exists…" in `apps/web/auth/tests/chat-guidance.test.mjs:56`
+   liest `apps/site/.generated/public-site.json`. Diese Datei ist **generierter, per
+   `.gitignore` ausgeschlossener** Build-Input (`.gitignore:43`, `apps/site/.gitignore:4`)
+   und fehlt im frischen CI-Checkout → **`ENOENT` vor** jeder Inhaltsprüfung. Es ist also
+   **keine inhaltliche Testaussage, sondern eine fehlende Testvoraussetzung**; ohne Bezug
+   zum Dokument. **Behebung (AA):** den Generierungsschritt (Public-Site-Export für
+   `apps/site`) vor dem Web-Test ausführen, dann erneut prüfen.
 5. **Konsequenz für L7 / L16 / V13 (Planauswirkung, ANNAHME bis zur Behebung):** Der
    tatsächliche Merge-Blocker ist nicht allein das frühere Actions-Budget, sondern — sobald
-   Jobs laufen — **rote Inhaltstests auf der Basis**. „Mergen, sobald Actions grün" setzt
-   also zusätzlich das Beheben dieser vorbestehenden Pin-/Testfehler auf `main` voraus.
+   Jobs laufen — **zwei getrennte, vorbestehende Jobfehler auf der Basis**: (a) `repository`
+   = Pin-/Beleg-Abgleich (`test_requirements_reconciliation`, „Stale implementation
+   source", Nr. 3); (b) `next-web` = **fehlende generierte Testeingabe** (Nr. 4), **kein**
+   Inhaltstest. „Mergen, sobald Actions grün" setzt also voraus, dass **beide** als
+   Agentenarbeit (**AA**) auf `main` behoben werden — Pins und Quellen in Einklang bringen
+   **und** den Generierungsschritt vor dem Web-Test sicherstellen —, nicht allein eine
+   Budgetfreigabe. Der aktuelle Budgetzustand selbst ist **OFFEN** (Nr. 1).
 6. **Von dieser Sitzung getan:** nur gelesen (Job-Logs, `git diff`), diese Fortschreibung in
    **derselben** Datei ergänzt. Kein Fix gepusht (außerhalb des eng gefassten Dokument-only-
    Auftrags; die Fehler gehören nicht diesem PR), **kein GitHub-Kommentar gesetzt** (keine
