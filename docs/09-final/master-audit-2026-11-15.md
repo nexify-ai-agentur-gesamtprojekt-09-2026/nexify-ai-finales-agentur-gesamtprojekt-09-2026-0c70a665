@@ -19,12 +19,13 @@ gilt die Arbeitsliste für die Aufgabenführung. Die wesentlichen Aussagen trage
 Quelle und sind, wo belegbar, als **BELEGT**, **ANNAHME** oder **OFFEN** gekennzeichnet.
 
 > **Rückwege (BELEGT, N/K):** Der Hostinger-Snapshot beider Server (angelegt 14.11.
-> 11:47 UTC) **ist am 15.11.2026, 11:47 UTC abgelaufen**. Als Rückwege bleiben die
-> automatischen Hostinger-Sicherungen **ohne Ablaufdatum** (zuletzt srv1941843 14.11.
-> 16:14 UTC, srv1243952 14.11. 18:41 UTC; K, 10:34 UTC) und die benannten Schnappschüsse
-> einzelner DNS-Zonen. Vor jedem Server-Eingriff zuerst klären, welcher Rückweg gilt und
-> ob vorher ein neuer Snapshot gezogen wird (Inhaberentscheidung, D-016; Neustart-Fenster
-> siehe V7).
+> 11:47 UTC) **ist am 15.11.2026, 11:47 UTC abgelaufen**. Es bleiben die automatischen
+> Hostinger-Sicherungen (laut K zuletzt srv1941843 14.11. 16:14 UTC, srv1243952 14.11.
+> 18:41 UTC) und die benannten DNS-Zonen-Schnappschüsse. **Achtung:** die automatischen
+> VPS-Sicherungen **rotieren** (Hostinger entfernt ältere automatisch; ANNAHME nach
+> Anbieter-Doku), die hier datierten Punkte sind also nicht dauerhaft. **Vor jedem
+> Server-Eingriff daher einen frischen, geprüften Snapshot/Export ziehen**, statt sich auf
+> die datierten Sicherungen zu verlassen (Inhaberentscheidung, D-016; Neustart-Fenster V7).
 
 ## Messwege und Quellen
 
@@ -32,7 +33,7 @@ Quelle und sind, wo belegbar, als **BELEGT**, **ANNAHME** oder **OFFEN** gekennz
 |---|---|---|
 | M | Eigene Live-Messung dieser Sitzung: je ein `GET` über den Sitzungs-Proxy auf die genannte Adresse; DNS über `dns.google/resolve` | 15.11.2026, 09:19, 09:57, 11:07 und 12:26–12:27 |
 | K | Daten, die die koordinierende Sitzung dieser Sitzung übergeben hat (Resend-Konto, von ihr am 15.11. 09:56 UTC gelesen; von ihr am 15.11. ~09:25 UTC bei Cloudflare ausgeführte, inhaberfreigegebene Änderungen; PR-Reife- und Merge-Angaben). **Nicht öffentlich nachprüfbar, außer wo unten eine eigene DNS-Gegenprobe (M) genannt ist.** | 15.11.2026 |
-| N | `docs/04-betrieb/netz-inventur-2026-11-14.md` (= PR 200, Zweig `claude/netz-inventur` `2fa1480`, nur gelesen), Erhebung 14.11. 22:16–22:40 UTC | 14.11.2026 |
+| N | `docs/04-betrieb/netz-inventur-2026-11-14.md`, Erhebung 14.11. 22:16–22:40 UTC. **Nicht auf `main`:** die Datei liegt auf PR 200 / Zweig `claude/netz-inventur`, stabiler Commit `2fa1480` (nur gelesen). N-gestützte Aussagen sind über diesen Commit-SHA nachvollziehbar und werden erst mit dem Merge von PR 200 aus `main` reproduzierbar; dieses Audit (Scope: nur diese eine Datei) bündelt die Datei nicht ein. | 14.11.2026 |
 | S | `docs/04-betrieb/server-befund-2026-11-14.md`, Hostinger-API, 14.11. ~11:45–18:45 UTC | 14.11.2026 |
 | R | Repository am Commit `9c9c806` (`main`): `PROGRESS.md`, `DECISIONS.md`, `config/loesungsregister.json`, `offene-arbeiten-2026-11-14.md`, `aufraeumplan-2026-11-14.md` u. a. | 15.11.2026 |
 | P | PR-Stände laut Auftrag der koordinierenden Sitzung und `PROGRESS.md` | 14.–15.11.2026 |
@@ -82,8 +83,9 @@ einsehbar** (Hostinger-API `[VPS:2044]`); dieser Server bleibt der blinde Fleck
    nicht geprunt werden (S, Aufräumplan).
 9. srv1941843 war am 14.11. zu **97 % voll** (10,2 GiB frei; größter Posten 77,3 GiB
    Paperclip-Läufe, nach D-019 abgelöst, S); am 15.11. **sinkt** die Belegung durch das
-   Archivskript des Inhabers auf **~95 %** (19,8 GiB frei, 12:19 UTC, K). srv1243952 ist
-   zu **~96 %** belegt und sinkt ebenfalls (K; Fortschreibungen Nr. 3 bzw. 1/2).
+   Archivskript des Inhabers auf **~95 %** (19,8 GiB frei, 12:19 UTC, K). srv1243952 stand
+   um 11:04 UTC bei **~96 %** und sank bis 11:50 auf **339,8 GiB (≈ 88 % der nutzbaren
+   ~387 GiB)** (K; Fortschreibungen Nr. 3 bzw. 1/2).
 10. GitHub Actions startet kontoweit **keine Jobs** (Ausgabenlimit); dadurch kein
     automatisches Gate vor `main`, und freigegebene PRs gehen trotz Freigabe nicht durch
     (Zweigschutz; P).
@@ -108,7 +110,7 @@ einsehbar** (Hostinger-API `[VPS:2044]`); dieser Server bleibt der blinde Fleck
 | 2 Shop-Vercel | 503 `database_binding_missing_or_unsuitable` | **seit ~11:52 UTC 200** mit `products:0` (M 12:26; Stand 12:25 Nr. 3) |
 | L0 Snapshot | läuft heute 11:47 UTC ab | **um 11:47 UTC abgelaufen**; automatische Sicherungen ohne Ablaufdatum bleiben (Stand 12:25) |
 | V5 R2 (Cloudflare) | Vorbehalt „< 5 USD" | **Inhaber hat R2 freigegeben, Vorbehalt entfällt**; R2 aktiv, 1 Bucket (K 12:35) |
-| Speicher beide Server | 97 % / „86 %" | **sinkt**: srv1941843 ~95 % (12:19), srv1243952 ~96 % und fallend (K; Stand 12:25 Nr. 1/2) |
+| Speicher beide Server | 97 % / „86 %" | **sinkt**: srv1941843 ~95 % (12:19); srv1243952 96 % (11:04) → **~88 %** (339,8 GiB, 11:50) (K; Stand 12:25 Nr. 1/2) |
 
 Einzelheiten und Belege: die Abschnitte „Fortschreibung … Stand 11:10 UTC" und „Stand
 12:25 UTC" am Ende.
@@ -135,7 +137,7 @@ Einzelheiten und Belege: die Abschnitte „Fortschreibung … Stand 11:10 UTC" u
 |---|---|---|
 | Adresse | `72.62.x.x` (gekürzt) | `179.198.x.x` (gekürzt) |
 | System | Ubuntu 26.04, KVM 8 (8 Kerne, 32 GB, 400 GiB) | Ubuntu 24.04, KVM 8 |
-| Platte | 14.11.: „86 %" (S); 15.11. **~96 % und fallend** (K, Stand 12:25 Nr. 3) | 14.11.: **97 %, 10,2 GiB frei** (S); 15.11. **~95 %** (19,8 GiB frei, 12:19, K) |
+| Platte | 14.11.: „86 %" (S); 15.11. 11:04 **~96 %** → 11:50 **~88 %** (339,8 GiB, K) | 14.11.: **97 %, 10,2 GiB frei** (S); 15.11. **~95 %** (19,8 GiB frei, 12:19, K) |
 | Container laut API | **nicht lesbar (`[VPS:2044]`, N/S)** | 20 Compose-Projekte mit Containern (S) |
 | Tunnel von hier | `nexifyai-agentur-cloudflare-tunnel` (aktiv seit 26.10., N) | `nexifyai-duesseldorf` (aktiv seit 09.11. 09:33, N) |
 | Firewall | `nexifyai-minimal-20260713`, synchron, unverändert seit 13.09. | dieselbe Gruppe |
@@ -279,7 +281,7 @@ nicht öffentlich nachprüfbar). Köpfe wie von der koordinierenden Sitzung übe
 | 201 | `a2ce474` | Zielkunden | — | Entwurf | Sichtung |
 | 202 | `10eba3e` | Markenzeichen / Library | — | Entwurf | Sichtung |
 | 203 | `555a75a` | **dieses Dokument** (Master-Audit) | Doc-only | Entwurf | Sichtung |
-| 184 | `1c43325` | Cloudflare-Umzug (Vorbereitung) | — | kein Entwurf, **Auto-Merge aus** (Stand 14.11. 21:47 UTC, P), nicht gemergt | Kostenweg A/B/C (Inhaber, D-021) |
+| 184 | `1c43325` | Cloudflare-Umzug (Vorbereitung) | — | kein Entwurf, **Auto-Merge aus**, nicht gemergt | **Überholt durch V8 (kein Umzug jetzt)** — schließen oder zurückstellen statt auf Kostenweg A/B/C warten (D-021) |
 | 196 | — | Konto-Verknüpfung im Shop-Dienst | zweimal geprüft | **gemergt** `d4f2032` (14.11. 21:26) | Reste OA-171 bis OA-174 |
 | 198 | — | robots-Meta, Ausfallkarten, Belege | geprüft | **gemergt** `48f5072` (14.11. 21:45) | Reste OA-175 bis OA-178 |
 
@@ -346,7 +348,7 @@ Agentensitzung gesetzt werden kann.
 | L13 | Shop-Vercel: DB-Bindung inzwischen vorhanden — `/api/shop/status` **200** mit `products:0`, `last_import_at:null` (M 12:26 UTC), vorher 503; Katalog noch leer (Import gesperrt) | **I/AA** | Katalog nach V1 erstbefüllen (Vertragsnachweis, Mindestzahl, Stichprobe); Supabase-Migration (D-013) liegt vorbereitet und ausgeschaltet auf eigenem Zweig (Stand 12:25, Nr. 6) | bis 18.11. |
 | L14 | Anfrageweg erreicht nur per `mailto`, kein eigener Empfänger | **I/AA** | eigener Empfänger in `apps/web` oder Shop-Dienst binden (OA-163) | bis 18.11. |
 | L15 | Mailing: 0 Einwilligungen, Rechtsgrundlage je Gruppe offen | **I** | Einwilligungsweg (PR 186) mergen + Rechtsgrundlage je Gruppe (OA-001) — **nur der Inhaber** | Inhaber (offen) |
-| L16 | Abnahmefähige Entwürfe 186/193/195/197 nicht gemergt | **I** | nach L7 mergen (V11); Freigabe laut K liegt vor, Zweigschutz blockiert. Kopf von PR 186 heute geändert → vor Merge erneut prüfen | nach L7 (Actions grün) |
+| L16 | Abnahmefähige Entwürfe 186/193/195/197 nicht gemergt | **I** | nach L7 mergen (**V13**); Freigabe laut K liegt vor, Zweigschutz blockiert. Kopf von PR 186 heute geändert → vor Merge erneut prüfen | nach L7 (Actions grün) |
 
 ### Priorität 4 — Kundenprojekte abnahmefähig
 
@@ -398,9 +400,11 @@ eine eigene Nachmessung **M** genannt ist). Keine Kundeneinzelheiten.
    „Eenmanszaak", im Code steht anderswo „B.V." → Rechtsform nicht widerspruchsfrei; sowie
    die Hauptdomain-Frage (`.de` und `.cloud` beide indexierbar).
 2. **Sicherungen (K, 10:34 UTC).** Je Server ein Snapshot vom 14.11. 11:47 UTC, Ablauf
-   heute 11:47 UTC; **zusätzlich automatische Sicherungen ohne Ablaufdatum**, zuletzt
-   srv1941843 14.11. 16:14 UTC, srv1243952 14.11. 18:41 UTC. Der Snapshot-Ablauf (L0) ist
-   damit nicht der einzige Rückweg.
+   heute 11:47 UTC; **zusätzlich automatische Sicherungen** (laut K ohne genanntes
+   Ablaufdatum, zuletzt srv1941843 14.11. 16:14 UTC, srv1243952 14.11. 18:41 UTC). Diese
+   rotieren jedoch (Hostinger entfernt ältere VPS-Sicherungen automatisch; ANNAHME nach
+   Anbieter-Doku) und sind daher keine dauerhaften Wiederherstellungspunkte — vor einem
+   Eingriff einen frischen, geprüften Snapshot ziehen.
 3. **Speicher srv1243952 (K, Inhaber-Konsole 11:04 UTC).** 387 G groß, 368 G belegt,
    16 G frei (**96 %**); Docker zählt nur ~62 GB (Images 53,71 GB, davon 8,42 GB
    freigebbar; Volumes 7,43 GB; Container 0,65 GB; Build-Cache 0) — **rund 300 GB liegen
@@ -423,8 +427,8 @@ eine eigene Nachmessung **M** genannt ist). Keine Kundeneinzelheiten.
 6. **Tunnel (K, Cloudflare-Schnittstelle 10:58 UTC).** Vier Tunnel im Konto: einer
    `healthy` mit Ursprung srv1243952; einer `healthy` mit Ursprung srv1941843 (seit 09.11.
    09:33 UTC); **`nexifyai-contabo` `down`** ohne Verbindung (deckt sich mit B6/L4, M 09:57
-   UTC → `agenten`/`librechat` 530); ein vierter `healthy` für das Kundenprojekt mit
-   Ursprung auf einem dritten, hier nicht einsehbaren Kundenserver.
+   UTC → `agenten`/`librechat` 530). Ein vierter Tunnel gehört einem **getrennten
+   Kundenprojekt**; Einzelheiten (Server, Zustand) bleiben im Kundenrepository (D-017).
 7. **Auto-Merge (K).** `disable_pr_auto_merge` wurde für 34 von 36 offenen PRs aufgerufen
    (alle außer 193 und 197): 23 Erfolge (alle Nicht-Entwürfe), 11 Fehler (alle Entwürfe).
    **Nicht zurückgelesen** — das Feld ist mit den verfügbaren Werkzeugen nicht lesbar; vor
@@ -487,11 +491,11 @@ Anmeldung) und eigene Nachmessungen (**M**, 12:26–12:27 UTC). Unbelegtes als O
    | V2 | `teileklar.shop` erst umschalten bei ≥ 3720 Produkten + Live-Zahlung + Testbestellung |
    | V3 | Shop-Indexierung erst danach |
    | V4 | alten Shop 14 Tage später anhalten |
-   | V5 | **R2 ausdrücklich freigegeben** („wenn erweitert werden muss, erweitern, ohne zu fragen"); der frühere Vorbehalt „< 5 USD/Monat" **entfällt**. Gemessen 12:35 UTC (K): R2 im Konto aktiv, 1 Bucket |
+   | V5 | **R2 ausdrücklich freigegeben** („wenn erweitert werden muss, erweitern, ohne zu fragen"); der frühere Vorbehalt „< 5 USD/Monat" **entfällt**. Gemessen 12:35 UTC (K): R2 im Konto aktiv, 1 Bucket. **Grenze bleibt (OFFEN):** die Dauerregel „keine Zahlungen" gilt fort; eine kostenpflichtige Erweiterung über den Gratis-Rahmen hinaus braucht eine ausdrückliche, betragsgebundene Freigabe und einen benannten Zahler |
    | V6 | GitLab-Prometheus auf 30 Tage |
    | V7 | Neustart je Server 04:30–05:00 UTC, vorher Snapshot |
    | V8 | kein Cloudflare-Hosting-Umzug jetzt (L12) |
-   | V9 | unbenutzte Images älter 30 Tage entfernen |
+   | V9 | unbenutzte Images älter 30 Tage entfernen — **erst nach L1 und unter Ausschluss der Cognee-Abbilder** (Sperrvermerk: kein `docker image prune -a`, bis die Cognee-Volumes gesichert und verknüpft sind; der fehlende Cognee-Container macht sein Abbild sonst fälschlich „unbenutzt") |
    | V10 | DeepSeek über 9Router, Deckel 5 USD/Tag, aus bis Schlüssel hinterlegt (L21/L26) |
    | V11 | kein neuer Zeitplan |
    | V12 | `nexifyai.de` kanonisch |
