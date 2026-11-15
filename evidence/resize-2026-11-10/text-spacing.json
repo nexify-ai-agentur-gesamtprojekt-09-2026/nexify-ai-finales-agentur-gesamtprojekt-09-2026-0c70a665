@@ -2,7 +2,7 @@
   "runtime_error_capture": true,
   "runtime_errors": [],
   "completed": true,
-  "observed_at": "2026-11-14T21:26:08.204Z",
+  "observed_at": "2026-11-15T12:29:50.382Z",
   "source_sha256": {
     "apps/site/.generated/public-site.json": "d5f1f25921cd9e4ba91767ba41badb5b0b95f98f4a243ad358ee263e4c70069e",
     "apps/site/index.html": "a6665b5a14ee18db74d3fcae0c297c7331aa77011412feb762f3c78f9fe2920e",
@@ -84,7 +84,7 @@
     "apps/web/components/TrioScene.tsx": "2100aaafa2327c8867d660d7c2a5699217f8d4bb04c6fad1a3abea33b372e06d",
     "apps/web/components/WorkshopDirectory.css": "005e64cb50757f86342946aabdff95eebb6bb284580e2a190e28fe5eafbc3374",
     "apps/web/components/WorkshopDirectory.tsx": "46da756d96570baff9a7dd78c60b2dd2ed91b7c89f2a8b086211d4b30e2a3d56",
-    "apps/web/components/Workspace.tsx": "37c73178a2b169d8a3cd891af40bcbbff7548a3028ab70af8430e5f3495f19b3",
+    "apps/web/components/Workspace.tsx": "8bbfb3c42eba250ceb7758f213e08acda1aee7663016be30ac87881380ad0384",
     "apps/web/components/WorkspaceCapabilities.ts": "010cc923971b1e6d033ee9f791ca3c0ba5eb28cd5139a1a0c86532eb5ce4189e",
     "apps/web/components/WorkspaceRebuild.css": "94676651dc31bbdb2a930b082a101056fc39f1340f6d84139e5c9f3cca95df3c",
     "apps/web/components/WorkspaceStatusPanel.css": "61950fd457bd69b2f5b89a9556d059c098282cb4333338133af8c5a0eac25fc2",
