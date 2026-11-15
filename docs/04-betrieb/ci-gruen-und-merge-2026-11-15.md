@@ -411,6 +411,27 @@ Zweig behebt — sie ist in echtem CI grün.
   Repository-Bindung in einem Vercel-Projekt nicht verursachen. **Keine
   Vercel-Einstellung und keine Umgebungsvariable wurde angefasst.**
 
+### Nachtrag: zweiter Zweigkopf `327a418` (nur dieser Bericht geändert)
+
+Bestätigt dasselbe Bild, Lauf 43771440934:
+
+| Job | Ergebnis |
+|---|---|
+| `next-web` · `react-site` · `openapi-schema` · `postgres-isolation` | **success** |
+| `repository` | **failure** — `Ran 912 tests in 67.036s`, `FAILED (failures=56, errors=45, skipped=17)`, `make: *** [Makefile:39: test] Error 1` |
+
+`next-web` ist damit auf **zwei** Köpfen grün, die Zahlen des Jobs
+`repository` sind unverändert. Zu diesem Kopf meldeten beide maßgeblichen
+Vercel-Projekte **Ready** (`…-s4k5` und `…-ut7r`), und die fünf verwaisten
+Projekte aus Abschnitt 6 erschienen im Vercel-Kommentar **nicht erneut**.
+Ob das dauerhaft ist, ist nicht gemessen; die Beobachtung aus Abschnitt 6
+bleibt als Befund stehen.
+
+Nach dem Lauf wurde einmalig ein Kommentar an PR 211 gesetzt, der die rote
+Prüfung benennt und begründet, warum sie nicht von diesem Zweig kommt
+(verlangt von den Regeln für einen selbst eröffneten Pull Request). Sonst
+wurde an keinem Pull Request kommentiert.
+
 ## 7. Vorschlag für die Entscheidung des Inhabers
 
 Vier getrennte, je einzeln entscheidbare Punkte. Die ersten drei sind
