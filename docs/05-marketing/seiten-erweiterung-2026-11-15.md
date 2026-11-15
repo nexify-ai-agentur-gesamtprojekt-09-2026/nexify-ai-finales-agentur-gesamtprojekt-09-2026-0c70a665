@@ -37,11 +37,11 @@ Der Entwurfstext steht in Zitatblöcken (`>`). Alles außerhalb der Zitatblöcke
 
 ## 1. Befund in Kürze
 
-1. **IST:** Die 21 inhaltlichen NeXify-Seiten tragen in der Seitenliste zusammen 2.724 deutsche Wörter (Titel, Zusammenfassung, Abschnitte), im Mittel 130 je Seite. Die 18 inhaltlichen TEILEKLAR-Seiten tragen zusammen 1.397 Wörter, im Mittel 78. Die Startseite hat zusätzlich 917 Wörter in HC. Zählung: Abschnitt 9.
+1. **IST:** Die 21 inhaltlichen NeXify-Seiten tragen in der Seitenliste zusammen 2.794 deutsche Wörter (Titel, Zusammenfassung, Abschnitte), im Mittel 133 je Seite. Die 15 inhaltlichen TEILEKLAR-Seiten tragen zusammen 1.165 Wörter, im Mittel 78. Die Startseite hat zusätzlich 917 Wörter in HC. Zählung: Abschnitt 9.
 2. **IST:** Jede Seite hat zwei bis vier Abschnitte mit je ein bis zwei Absätzen. Es fehlen durchgehend: ein Ablauf in Schritten, „für wen“, Beispiele, „was Sie bekommen und was nicht“, Begriffserklärungen und Antworten auf naheliegende Fragen.
-3. **IST:** Auf elf Seiten ist der Abschnittstext der Seitenliste heute nicht sichtbar, weil die Seite einen eigenen Baustein rendert: Startseite, `/anmelden`, `/registrieren` und acht TEILEKLAR-Seiten mit eigener Route (Abschnitt 3, Muster M9). Mehr Text in der Seitenliste erscheint dort nicht von selbst.
+3. **IST:** Auf zwölf Seiten ist der Abschnittstext der Seitenliste heute nicht sichtbar, weil die Seite einen eigenen Baustein rendert: Startseite, `/anmelden`, `/registrieren` und neun TEILEKLAR-Seiten mit eigener Route (Abschnitt 3, Muster M9). Mehr Text in der Seitenliste erscheint dort nicht von selbst.
 4. **ANNAHME:** Der größte Teil der Erweiterung lässt sich ohne neues Muster einbauen, als weitere Einträge in `pages[<id>].sections` (Muster M2). Sieben Stellen bräuchten ein neues Muster oder eine neue Verdrahtung und sind als Entscheidung des Inhabers gekennzeichnet (Abschnitt 3.3).
-5. **Entwurf:** Dieses Dokument liefert für 37 Seiten zusätzlichen Text. Umfang vorher und nachher je Seite: Abschnitt 9. Zwei Seiten bleiben bewusst ohne Erweiterung (`/teileklar/kasse`: Kassentext; `/teileklar/gutscheine`: nur ein Satz).
+5. **Entwurf:** Dieses Dokument liefert für 33 der 36 Seiten zusätzlichen Text, zusammen 6.142 neue deutsche Wörter (4.876 → 11.018, Startseite einschließlich HC). Umfang vorher und nachher je Seite: Abschnitt 9. Drei Seiten bleiben bewusst ohne Erweiterung: `/teileklar/kasse` (Kassentext), `/anmelden` und `/registrieren` (Formulare arbeiten nicht, Abschnitte nicht sichtbar). `/teileklar/gutscheine` erhält nur einen Satz.
 6. **OFFEN:** 24 Fragen an den Inhaber (Abschnitt 7). Die wichtigsten: Preise öffentlich (O-1 aus MK), Aussagen zu Eigentum an Ergebnissen und zum Ort der Datenhaltung, Kurzvorstellung von Pascal, Zahl und Herkunft des Werkstattverzeichnisses, Anrede bei TEILEKLAR.
 
 ## 2. Bestandsaufnahme je Seite
@@ -162,7 +162,7 @@ Quelle: HC `introBody`; Zielgruppe aus MK (1), erste Zeile der Tabelle. Muster: 
 >
 > Marken und Websites, vernetzte Abläufe oder Kampagnen: Wir beginnen bei einer konkreten Aufgabe in Ihrem Unternehmen. Daraus wird ein Auftrag mit benanntem Ergebnis, nicht ein Paket von der Stange.
 >
-> Sie müssen nicht wissen, wie die Lösung heißt. Es genügt, wenn Sie sagen, was sich ändern soll: mehr passende Anfragen, weniger Handarbeit oder ein Auftritt, der zu Ihrem Unternehmen passt.
+> Sie müssen nicht wissen, wie das heißt, was Sie brauchen. Es genügt, wenn Sie sagen, was sich ändern soll: mehr passende Anfragen, weniger Handarbeit oder ein Auftritt, der zu Ihrem Unternehmen passt.
 
 Quelle: HC `serviceBody`; MK (4) Stützbotschaft 1; SM `knowledge-start` (Frage 2). Muster: M7, `serviceBody`.
 
@@ -900,7 +900,7 @@ Quelle: SM `aifly-oracle` Abschnitte 1 und 2. Muster: M2.
 
 > **Warum erst ordnen**
 >
-> Wer sofort handelt, erledigt oft das Falsche zuerst. Ordnung vor der Arbeit heißt: Es ist klar, was als Nächstes dran ist und wer es erledigt.
+> Wer gleich handelt, erledigt oft das Falsche zuerst. Ordnung vor der Arbeit heißt: Es ist klar, was als Nächstes dran ist und wer es erledigt.
 
 Quelle: SM `aifly-oracle` Abschnitt 1 (letzter Satz). Der erste Satz erläutert ihn (ANNAHME). Muster: M2.
 
@@ -1007,3 +1007,500 @@ Quelle: SM `portals` Abschnitt 2; ES (`login` Abschnitt 1: „Vorgesehen ist …
 ### 4.20 `/anmelden` und `/registrieren`
 
 Keine Erweiterung. Die Abschnitte der Seitenliste sind auf beiden Seiten nicht sichtbar (FL 3.2, 3.3; E-6), und beide Formulare arbeiten heute nicht (FL R1, A1). Maßgeblich ist ES. Sobald Anmeldung und Registrierung arbeiten, lohnt ein kurzer Text „Was nach der Anmeldung geschieht“.
+
+## 5. Erweiterungsentwurf TEILEKLAR
+
+Stimme nach MK (5), „Eigene Stimme für TEILEKLAR“: „Sie“, kürzer, alltagsnah, ohne Agentursprache. ZK (2.2, 4.2) schlägt für Endkunden das „du“ vor; das widerspricht MK und den heutigen Seiten. Der Entwurf bleibt beim „Sie“. OFFEN F-16.
+
+Zwei Vorbehalte gelten für den ganzen Abschnitt:
+
+- **Der Shop-Dienst antwortet in der Produktion zurzeit nicht** (FL Abschnitt 1, Satz 2; `AGENTS.md`, 13.11.2026). Der Entwurf beschreibt, wie man ein Teil findet und prüft. Er behauptet an keiner Stelle, dass Sortiment, Suche, Kasse oder Werkstattsuche heute antworten. Ob Kauftexte ausgeliefert werden, solange der Dienst steht, entscheidet der Inhaber (MK O-9). OFFEN F-17.
+- **Fachangaben zum Fahrzeug** stammen aus FC und TC, also aus dem, was die Seite heute schon sagt. Wo der Entwurf darüber hinausgeht, steht „fachlich prüfen“. OFFEN F-18.
+
+Seiten mit Shop-Rahmen zeigen Abschnitte heute nicht (E-1). Der Text für diese Seiten ist trotzdem ausformuliert, damit er nach einer Entscheidung zu E-1 bereitliegt.
+
+### 5.1 `/teileklar` (Startseite der Marke)
+
+> **So kaufen Sie bei TEILEKLAR**
+>
+> 1. Artikel finden: über die Nummer, die Bezeichnung oder die Kategorie.
+>
+> 2. Angaben und Passung prüfen: Nummer, Ausführung, Lieferumfang. Die Checkliste zeigt, worauf es bei Ihrem Teil ankommt.
+>
+> 3. Warenkorb: Artikel und Mengen in Ruhe ansehen. Noch ist nichts bestellt.
+>
+> 4. Kasse: Vor dem Abschluss sehen Sie Artikel, Versand und Gesamtbetrag noch einmal vollständig.
+
+Quelle: MK (7), letzter Absatz (Weg für TEILEKLAR); SM `tk-home`, `tk-cart`, `tk-checkout`. Muster: E-1 (heute `Storefront`, M9).
+
+> **Wohin wir liefern**
+>
+> Nach Deutschland, Österreich, in die Niederlande, nach Belgien und Luxemburg. Preis, Steuer und Versand gelten für Ihr Lieferland; Sie sehen sie vor dem Abschluss.
+
+Quelle: FK `teileklar.lieferlaender`; SM `tk-checkout` Abschnitt 1. Muster: E-1.
+
+> **Was TEILEKLAR nicht tut**
+>
+> Wir prüfen die Passung nicht automatisch gegen einen Fahrzeugkatalog; die Checkliste hilft Ihnen, selbst zu prüfen. Termine buchen Sie nicht online, sondern direkt bei der Werkstatt. Gutscheine gibt es noch nicht. Das sagen wir lieber vorher.
+
+Quelle: SM `tk-fitment` Abschnitt 2, `tk-appointments`, `tk-vouchers`; PN; MK (3). Muster: E-1.
+
+> **Wer hinter TEILEKLAR steht**
+>
+> TEILEKLAR ist die eigene Shop-Marke von NeXify AI. Wer Verkäufer ist und welche Bedingungen gelten, steht unter Rechtliches.
+
+Quelle: SM `company` Abschnitt 2; Verweis auf `/teileklar/rechtliches` (Rechtsseite, unverändert). Die Verkäuferangabe selbst (FK `teileklar.verkaeufer`) gehört in den Rechtstext und wird hier nicht wiederholt (MK O-9). Muster: E-1.
+
+### 5.2 `/teileklar/shop`
+
+> **Zwei Wege zum Artikel**
+>
+> Sie haben eine Nummer? Dann suchen Sie direkt danach. Das ist der genaueste Weg.
+>
+> Sie wissen nur, was Sie vorhaben? Dann beginnen Sie bei den Kategorien und grenzen von dort ein.
+>
+> Beide Wege enden am Artikel. Dort stehen Foto, Preis inklusive Mehrwertsteuer und die Angaben, mit denen Sie prüfen, ob er passt.
+
+Quelle: SM `tk-shop` Abschnitt 1, `tk-search`, `tk-categories`. Muster: E-1.
+
+> **Nach dem Kauf**
+>
+> Für den Einbau können Sie sich an eine Werkstatt wenden. Versand, Widerruf und Bedingungen stehen unter Rechtliches.
+
+Quelle: SM `tk-shop` Abschnitt 2 (bereits vorhanden; hier ohne die Zusage „finden Sie eine Werkstatt“, solange die Suche nicht antwortet, FL W1). Muster: E-1.
+
+### 5.3 `/teileklar/suche`
+
+> **Welche Nummer ist welche?**
+>
+> Herstellernummer: die Nummer, die der Hersteller des Teils vergibt. Sie steht oft auf dem Teil selbst.
+>
+> OE-Nummer: die Nummer, unter der der Fahrzeughersteller das Teil führt.
+>
+> EAN: die Nummer unter dem Strichcode auf der Verpackung.
+>
+> Artikelnummer: die Nummer, unter der ein Shop den Artikel führt.
+
+Quelle: SM `tk-search` (Zusammenfassung: Herstellernummer, EAN, Artikelnummer); FC (`filters`: „Ohne OE-Nummer bleibt ein Risiko“). Die Erklärungen der vier Begriffe sind Allgemeinwissen: fachlich prüfen (F-18). Muster: E-1.
+
+> **Wo Sie die Nummer finden**
+>
+> Auf dem alten Teil, in den Fahrzeugunterlagen oder auf einer früheren Rechnung. Ein Foto des alten Teils hilft beim Vergleich, ersetzt die Nummer aber nicht.
+
+Quelle: SM `tk-search` Abschnitt 1; SM `tk-home` Abschnitt 2 („Ein Produktfoto allein belegt keine Passung“). „Frühere Rechnung“ ist eine Ergänzung: fachlich prüfen (F-18). Muster: E-1.
+
+> **Wenn Sie keine Nummer haben**
+>
+> Suchen Sie nach Bezeichnung oder Marke und grenzen Sie dann mit den Angaben am Artikel ein. Die Checkliste zur Passung zeigt je Teileart, welche Angaben entscheiden.
+
+Quelle: SM `tk-search` (Zusammenfassung, Abschnitt 2), `tk-fitment` Abschnitt 2. Muster: E-1.
+
+### 5.4 `/teileklar/kategorien`
+
+> **Wann die Kategorie der bessere Einstieg ist**
+>
+> Wenn Sie wissen, was Sie brauchen, aber nicht, wie es heißt. Oder wenn Sie sehen möchten, was es zu einem Vorhaben gibt, zum Beispiel zur Pflege oder zum Transport.
+>
+> Haben Sie schon eine Nummer, ist die Suche schneller.
+
+Quelle: SM `tk-categories` (Zusammenfassung, Abschnitt 1), `tk-search`. „Transport“ ist ein Beispiel nach ZK TK-3; ob es die Kategorie gibt, ist nicht geprüft (Katalog nicht erreichbar): vor Einbau prüfen. Muster: E-1.
+
+### 5.5 `/teileklar/kategorie`
+
+> **Drei Angaben, die oft verwechselt werden**
+>
+> Produktmaße: die Maße des Teils selbst.
+>
+> Verpackungsmaße: die Maße des Kartons. Sie sagen nichts darüber, ob das Teil passt.
+>
+> Lieferumfang: was tatsächlich im Karton liegt. Zubehör auf dem Foto gehört nicht automatisch dazu.
+
+Quelle: SM `tk-category` Abschnitt 1, `tk-cart` Abschnitt 1. Muster: E-1.
+
+> **So vergleichen Sie zwei ähnliche Teile**
+>
+> 1. Nummern nebeneinanderlegen.
+>
+> 2. Maße und Ausführung vergleichen, nicht die Bilder.
+>
+> 3. Anschluss und Einbaulage mit Ihrem Fahrzeug abgleichen.
+>
+> Bleibt ein Zweifel, fragen Sie eine Werkstatt, bevor Sie bestellen.
+
+Quelle: SM `tk-category` (beide Abschnitte), `tk-fitment` Abschnitt 2. Muster: E-1.
+
+### 5.6 `/teileklar/produkt`
+
+> **So lesen Sie eine Artikelseite**
+>
+> 1. Nummer und Ausführung. Stimmen sie mit dem überein, was Sie suchen?
+>
+> 2. Technische Daten. Worauf bezieht sich eine Größen- oder Materialangabe?
+>
+> 3. Lieferumfang. Was liegt im Karton, was nicht?
+>
+> 4. Preis und Lieferung. Der Preis steht inklusive Mehrwertsteuer am Artikel, die Versandkosten sehen Sie vor dem Abschluss.
+>
+> Das Foto kommt zuletzt. Es zeigt den Artikel, belegt aber keine Passung.
+
+Quelle: SM `tk-product` (beide Abschnitte), `tk-home` Abschnitt 2. Muster: E-1.
+
+> **Wenn Sie unsicher sind**
+>
+> Klären Sie die Passung vor der Bestellung: mit der Checkliste, mit der Nummer vom alten Teil oder mit einer Werkstatt.
+
+Quelle: SM `tk-product` Abschnitt 2, `tk-fitment`. Muster: E-1.
+
+### 5.7 `/teileklar/warenkorb`
+
+> **Drei Kontrollen vor der Kasse**
+>
+> Stimmt die Artikelnummer? Stimmt die Stückzahl, zum Beispiel bei Teilen, die paarweise gewechselt werden? Ist das Zubehör dabei, das Sie brauchen, oder müssen Sie es einzeln bestellen?
+
+Quelle: SM `tk-cart` Abschnitt 1. „Paarweise gewechselt“ ist ein Beispiel aus dem Allgemeinwissen: fachlich prüfen (F-18). Muster: E-1.
+
+### 5.8 `/teileklar/kasse`
+
+Keine Erweiterung. Kassentexte und Schalter der Bestellung bleiben unberührt (Skill `nexify-seitentexte`, „Nicht anfassen“).
+
+### 5.9 `/teileklar/fahrzeug-und-passung`
+
+Diese Seite zeigt Abschnitte (M2) und trägt die Checkliste und den Reifenrechner (M11). Sie ist der Ort, an dem TEILEKLAR am meisten erklären kann.
+
+> **HSN und TSN: wo sie stehen**
+>
+> Beide Schlüsselnummern stehen im Fahrzeugschein. Die HSN finden Sie in Feld 2.1, die TSN in Feld 2.2. Die HSN benennt den Hersteller, die TSN den Typ.
+>
+> Die beiden Nummern sind ein guter Anfang, aber nicht das Ende der Prüfung. Zwei Fahrzeuge mit denselben Schlüsselnummern können sich in der Ausstattung unterscheiden.
+
+Quelle: FC (Felder „HSN (Feld 2.1)“, „TSN (Feld 2.2)“); SM `tk-fitment` Abschnitt 1. „HSN benennt den Hersteller, TSN den Typ“ ist Allgemeinwissen; der zweite Absatz stützt sich auf ZK 1.3 (dort mit externer Quelle Q10): fachlich prüfen (F-18). Muster: M2.
+
+> **Warum der Modellname nicht reicht**
+>
+> Ein Modell gibt es mit mehreren Motoren und Ausstattungen. Bei stärkeren Motoren ist zum Beispiel oft eine größere Bremsanlage verbaut. Halten Sie deshalb Modell, Motor und Baujahr bereit, und – wenn vorhanden – die Nummer vom alten Teil.
+
+Quelle: SM `tk-fitment` (Zusammenfassung, Abschnitt 1); FC (`brakes`, „Häufigster Irrtum“). Muster: M2.
+
+> **Sechs Teilearten, sechs häufige Irrtümer**
+>
+> Bremsen: Ein passender Scheibendurchmesser reicht nicht. Es zählen auch Dicke, belüftet oder voll, und die Achse.
+>
+> Batterie: Die Kapazität allein reicht nicht. Bei Start-Stopp muss die Technologie stimmen, außerdem Gehäusemaß und Lage der Pole.
+>
+> Beleuchtung: Nicht jede LED-Nachrüstung ist für die Elektronik des Fahrzeugs freigegeben.
+>
+> Filter: Zwei Filter mit gleichen Außenmaßen können unterschiedliche Dichtflächen haben.
+>
+> Fahrwerk: Ein Teil ohne Teilegutachten kann die Betriebserlaubnis erlöschen lassen.
+>
+> Reifen: Die Größe allein reicht nicht. Lastindex und Geschwindigkeitsindex müssen passen.
+
+Quelle: FC, Liste `CATS` (je `points` und `pitfall`), sinngleich gekürzt. Muster: M2. Der Text doppelt die Checkliste bewusst in lesbarer Form; die Checkliste bleibt, wie sie ist.
+
+> **Was die Checkliste leistet – und was nicht**
+>
+> Sie zeigt je Teileart, welche Angaben entscheiden, und fasst sie für Ihr Fahrzeug zusammen. Diese Zusammenfassung können Sie beim Kauf oder in der Werkstatt vorlegen.
+>
+> Sie ist keine Passungsprüfung. Eine automatische Prüfung gegen einen Fahrzeugkatalog gibt es noch nicht.
+
+Quelle: FC (Einleitung, Zusammenfassung: „Keine Passungsprüfung. Fragen Sie beim Kauf oder in der Werkstatt nach“); SM `tk-fitment` Abschnitt 2. Muster: M2.
+
+> **Begriffe kurz erklärt**
+>
+> HSN: Herstellerschlüsselnummer, Feld 2.1 im Fahrzeugschein.
+>
+> TSN: Typschlüsselnummer, Feld 2.2 im Fahrzeugschein.
+>
+> OE-Nummer: die Nummer, unter der der Fahrzeughersteller ein Teil führt.
+>
+> Teilegutachten: ein Dokument, das bei bestimmten Teilen, etwa Sportfahrwerken, zum Teil gehört.
+>
+> Lastindex: eine Kennzahl am Reifen für die zulässige Last.
+
+Quelle: FC (`suspension`, `tires`, `filters`, Felder HSN und TSN). Ausschreibung der Abkürzungen und die Erklärungen: fachlich prüfen (F-18). Muster: M2 (E-5).
+
+### 5.10 `/teileklar/reifenrechner`
+
+> **So lesen Sie eine Reifengröße**
+>
+> Ein Beispiel: 205/55 R16. Die erste Zahl ist die Breite in Millimetern. Die zweite ist die Höhe der Flanke in Prozent der Breite. Die dritte ist der Durchmesser der Felge in Zoll.
+
+Quelle: TC (Auswahlfelder „Breite“, „Höhe (%)“, „Zoll“; Anzeigeformat „w/r Rd“); SM `tk-reifenrechner` Abschnitt 1. Die Beispielgröße ist ein Beispiel. Muster: M2.
+
+> **Was der Rechner zeigt**
+>
+> Er vergleicht zwei Reifengrößen: den Durchmesser, den Abrollumfang und die Abweichung in Prozent. Dazu zeigt er, wie schnell Sie tatsächlich fahren, wenn der Tacho 100 km/h anzeigt.
+
+Quelle: TC (Zeile 33 und Ausgabefelder Abrollumfang, Abweichung, „Tacho zeigt 100 km/h, tatsächlich“). Muster: M2.
+
+> **Wie der Rechner einordnet**
+>
+> Unter 1,5 Prozent Abweichung nennt er unkritisch. Zwischen 1,5 und 2,5 Prozent nennt er grenzwertig und verweist auf Eintragung oder Teilegutachten. Über 2,5 Prozent rät er, vor der Montage prüfen zu lassen.
+>
+> Das ist eine Orientierung des Rechners, keine Freigabe.
+
+Quelle: TC, Zeile 30 (`verdict`). Die Schwellen sind dort gesetzt; ihre fachliche Herkunft ist im Repository nicht belegt. OFFEN F-19. Muster: M2.
+
+> **Was außer der Größe zählt**
+>
+> Lastindex und Geschwindigkeitsindex. Ein Reifen mit passender Größe, aber zu niedrigem Lastindex, ist keine zulässige Ausrüstung. Bei manchen Modellen braucht es außerdem eine Freigabe des Herstellers.
+
+Quelle: FC (`tires`: `points`, `pitfall`). Muster: M2.
+
+### 5.11 `/teileklar/batterie-berater`
+
+> **Die Angaben, die zählen**
+>
+> Kapazität in Amperestunden (Ah) und Kälteprüfstrom in Ampere (A).
+>
+> Technologie: für Start-Stopp eine EFB- oder AGM-Batterie, sonst eine konventionelle.
+>
+> Gehäusemaß und Anordnung der Pole.
+>
+> Die Halterung, passend zum Fahrzeug.
+
+Quelle: FC (`battery`, `points`); SM `tk-batterie`. Muster: M2.
+
+> **Warum die Technologie stimmen muss**
+>
+> Eine Batterie mit passender Kapazität, aber falscher Technologie, kann die Start-Stopp-Funktion abschalten oder vorzeitig altern.
+
+Quelle: FC (`battery`, `pitfall`), fast wörtlich; SM `tk-batterie` Abschnitt 1. Muster: M2.
+
+> **Der Stand heute**
+>
+> Einen Batterie-Berater, der Ihnen eine Batterie vorschlägt, gibt es bei TEILEKLAR noch nicht. Die Checkliste zur Passung zeigt, welche Angaben Sie bereithalten sollten.
+
+Quelle: SM `tk-batterie` Abschnitt 2; PN (`tk-battery`). Muster: M2 oder M10.
+
+### 5.12 `/teileklar/werkstatt`
+
+> **So arbeitet die Suche**
+>
+> Sie geben eine Postleitzahl oder einen Ort ein und wählen einen Umkreis: 10, 25, 50 oder 100 Kilometer. Die Liste ist nach Entfernung sortiert, gemessen in Luftlinie.
+
+Quelle: `apps/web/app/teileklar/werkstatt/page.tsx` (Umkreise `[10, 25, 50, 100]`, Einleitung „sortiert nach Entfernung (Luftlinie)“); SM `tk-workshop`. Die Suche antwortet in der Produktion zurzeit nicht (FL W1). Muster: E-1.
+
+> **Was Sie die Werkstatt fragen**
+>
+> Übernehmen Sie diese Arbeit für mein Fahrzeug? Bauen Sie ein Teil ein, das ich mitbringe? Was kostet der Einbau, und wann geht es?
+>
+> Termin, Umfang und Preis sagt Ihnen die Werkstatt zu, nicht TEILEKLAR.
+
+Quelle: SM `tk-workshop` (beide Abschnitte), `tk-appointments` Abschnitt 2. Die Frage nach mitgebrachten Teilen folgt aus MK (1), Zeile „Werkstätten“ („Kunden bringen Teile mit“). Muster: E-1.
+
+> **Verzeichnis ist nicht Partner**
+>
+> Die Liste zeigt Betriebe aus einem Werkstattverzeichnis. Ein Eintrag heißt nicht, dass der Betrieb Partner von TEILEKLAR ist.
+
+Quelle: SM `tk-workshop` Abschnitt 2; `WorkshopFinder.tsx:32` nach FL 3.8 („zutreffend und unverändert zu lassen“). Muster: E-1.
+
+Nicht entworfen: eine Zahl der Betriebe und Orte. ZK nennt „6.875 Betriebe in 1.104 Orten“ als IST; im Repository findet sich dafür keine Fundstelle (Suche am 15.11.2026: kein Treffer in `docs/`, `config/`, `apps/`), und die Datenbank ist nicht erreichbar. OFFEN F-20.
+
+### 5.13 `/teileklar/termine`
+
+> **So kommen Sie zu einem Termin**
+>
+> 1. Sie wenden sich an eine Werkstatt in Ihrer Nähe.
+>
+> 2. Sie nennen die Arbeit, das Fahrzeug und den Zeitraum. Haben Sie das Teil schon, nennen Sie es mit.
+>
+> 3. Die Werkstatt sagt Ihnen, ob und wann sie die Arbeit übernimmt.
+>
+> Verbindlich ist die Zusage der Werkstatt.
+
+Quelle: SM `tk-appointments` (beide Abschnitte); ES (Zusammenfassung ohne „Sie finden eine Werkstatt“). Muster: M2, nummerierte Absätze.
+
+> **Was in die Anfrage gehört**
+>
+> Welche Arbeit soll gemacht werden? Für welches Fahrzeug: Modell, Motor, Baujahr? In welchem Zeitraum passt es Ihnen? Welches Teil bringen Sie mit, mit welcher Nummer?
+>
+> Je genauer die Anfrage, desto weniger Rückfragen.
+
+Quelle: SM `tk-appointments` Abschnitt 1, `tk-fitment` Abschnitt 1. Muster: M2.
+
+### 5.14 `/teileklar/gutscheine`
+
+Keine Erweiterung über einen Satz hinaus. Die Seite sagt klar „noch nicht“ (FL Abschnitt 4: zutreffend).
+
+> **Was heute geht**
+>
+> Haben Sie eine Frage zu einem Gutschein, schreiben Sie uns. Kaufen oder einlösen können Sie zurzeit keinen.
+
+Quelle: SM `tk-vouchers` (Zusammenfassung); PN (`tk-vouchers`). Muster: M2.
+
+### 5.15 `/teileklar/partner-werden`
+
+Voraussetzung: Die Seite trägt den Baustein `PartnerJourney` (M11). Dessen Text beschreibt heute ein Partnerportal als vorhanden (FL PW3 bis PW10); ES ersetzt ihn durch die ehrliche Fassung. Der Entwurf unten setzt ES voraus.
+
+> **Für welche Betriebe**
+>
+> Für Werkstätten, die Arbeiten an Auto oder Motorrad übernehmen und Aufträge aus ihrer Umgebung suchen. Kunden kaufen das Teil bei TEILEKLAR und brauchen jemanden für den Einbau.
+
+Quelle: SM `tk-partner` (Zusammenfassung); MK (1), Zeile „TEILEKLAR: Werkstätten“. Muster: M2.
+
+> **Der Weg zur Partnerschaft**
+>
+> 1. Sie stellen Ihren Betrieb vor: Leistungen, Standort, Ansprechpartner.
+>
+> 2. Wir sprechen miteinander. Wie Anfragen ankommen, wie Sie zusagen und was abgerechnet wird, legen wir gemeinsam fest.
+>
+> 3. Wir treffen eine Vereinbarung. Erst damit wird Ihr Betrieb Partner, nicht schon durch einen Eintrag im Verzeichnis.
+
+Quelle: SM `tk-partner` (beide Abschnitte); ES (`PartnerJourney`, `STEPS`). Muster: M2, nummerierte Absätze.
+
+> **Der Stand heute**
+>
+> Das Ziel: Der Kunde bringt das passende Teil, Sie bekommen eine Anfrage, in der Fahrzeug und Teil schon geklärt sind.
+>
+> So weit sind wir noch nicht. Die Weitergabe von Anfragen an Werkstätten ist im Aufbau, ein Partnerportal ist noch nicht gebaut. Bis dahin legen wir den Weg mit Ihnen einzeln fest.
+
+Quelle: ES (`PartnerJourney`: „Die Weitergabe von Anfragen an Werkstätten ist noch im Aufbau“, „Das Portal ist noch nicht gebaut“); FL PW2 bis PW4. Muster: M2 oder M10.
+
+> **Was Ihre Anfrage auslöst**
+>
+> Ihre Anfrage ist der Anfang eines Gesprächs, keine Verpflichtung. Sie nennen uns Ihren Betrieb und was Sie anbieten; wir melden uns bei Ihnen.
+
+Quelle: SM `tk-partner` Abschnitt 2 („Ihre Anfrage ist der Anfang dieses Gesprächs“). Hinweis: Das Partnerformular hängt am selben Dienst wie das Kontaktformular (FL PW1). Muster: M2.
+
+Nicht entworfen: Kosten oder Konditionen für Werkstätten (MK O-9: keine Kostenaussage für Partner). OFFEN F-21.
+
+## 6. Mehrsprachigkeit
+
+**Regel (Skill `nexify-seitentexte`):** Deutsch ist Quelle. `nl`, `fr` und `en` tragen denselben Schlüsselsatz; kein Schlüssel fehlt in einer Sprache. Jeder neue Abschnitt in `pages[<id>].sections` braucht deshalb beim Einbau alle vier Sprachen, sonst schlägt die Paritätsprüfung (`node tools/ds-audit-cli.js`) an.
+
+**Was nachzuziehen ist:**
+
+| Bereich | nl / fr / en nötig | Bemerkung |
+|---|---|---|
+| NeXify, Abschnitt 4.2 bis 4.19 (alle neuen Abschnitte) | ja, alle drei | werden in vier Sprachen ausgeliefert |
+| Startseite, Abschnitt 4.1 (HC-Schlüssel) | ja, alle drei | HC führt vier Sprachen mit identischen Schlüsseln |
+| TEILEKLAR, Abschnitt 5 | ja, der Parität wegen | ausgeliefert wird nur Deutsch (`apps/web/proxy.ts`); die Übersetzungen stehen dann in der Seitenliste, erscheinen aber nicht. OFFEN F-22 |
+| Texte in Bausteinen (`PartnerJourney`, `Storefront`, `WorkshopFinder`, `FitmentChecklist`) | nein | tragen heute nur Deutsch (FL Abschnitt 7); dieser Entwurf ändert sie nicht |
+
+**Übersetzungen in diesem Dokument: bewusst keine.** Begründung:
+
+1. Der deutsche Text ist nicht abgenommen. Jede Änderung des Inhabers am Deutschen müsste dreifach nachgezogen werden.
+2. Die muttersprachliche Prüfung von nl, fr und en steht schon für den heutigen Bestand aus (MK O-12). Ungeprüfte Übersetzungen von rund 6.100 neuen Wörtern würden diese Lücke vervielfachen.
+3. Die Beispiele (Malerbetrieb, Ingenieurbüro) und die Fachbegriffe bei TEILEKLAR (HSN, TSN, Fahrzeugschein, Teilegutachten) sind deutsche Sachverhalte. Für nl und fr braucht es je eine Entsprechung (in den Niederlanden zum Beispiel das „kentekenbewijs“), keine wörtliche Übertragung. Das ist ein eigener Arbeitsschritt.
+
+**Offener Schritt (nach Abnahme des Deutschen):** Übertragung nach nl, fr, en von Hand, sinngleich, je Abschnitt; danach Messung der Titel bei 360 px je Sprache (Skill `nexify-seitentexte`, „Prüfung“). Empfohlene Reihenfolge: zuerst die Seiten der ersten Welle aus Abschnitt 8.
+
+## 7. Offene Fragen an den Inhaber
+
+Fragen mit Verweis „MK O-n“ stehen schon im Marketing-Gesamtkonzept und werden hier nur wieder fällig.
+
+1. **F-1 · Preise.** Bleiben `/preise-ablauf` und die Produktseiten ohne Betrag (MK O-1)? Der Abschnitt „Warum hier kein Betrag steht“ (4.8) gilt nur, solange die Antwort ja ist.
+2. **F-2 · Eigentum an Ergebnissen.** Dürfen die Seiten sagen, wem Texte, Gestaltung, Code und Daten nach der Übergabe gehören? ZK (2.1) führt „Eigentum an Code und Daten beim Kunden“ als Abgrenzung; im Repository ist das nicht als Vertragsinhalt belegt. Bis zur Antwort steht dazu nichts im Entwurf.
+3. **F-3 · Ort der Datenhaltung.** Dürfen die Seiten „Hosting in der EU“ oder Ähnliches sagen? ZK (2.1) nennt es; D-013 legt die eigene Supabase-Instanz als Zielbild fest, umgesetzt ist es nicht. Bis zur Antwort steht dazu nichts im Entwurf.
+4. **F-4 · Pascal persönlich.** Soll `/unternehmen` eine Kurzvorstellung tragen (Werdegang, was Sie antreibt)? Dafür braucht es Ihren eigenen Text oder Stichworte; erfunden wird nichts.
+5. **F-5 · Satz zu Referenzen.** Soll der Satz „Kundenreferenzen nennen wir erst, wenn es dafür eine Freigabe gibt“ auf `/unternehmen` und `/leistungen/websites` stehen? Gibt es inzwischen Projekte, die genannt werden dürfen (MK O-2)?
+6. **F-6 · Antwortzeit.** Wollen Sie eine Antwortzeit auf Anfragen nennen (MK O-8)? Ohne Ihre Zusage und einen geprüften Zustellweg bleibt sie weg.
+7. **F-7 · Projektdauer.** Dürfen die Seiten typische Zeiträume nennen (etwa für eine Website)? Heute steht „den Zeitrahmen nennt das Angebot“.
+8. **F-8 · TEILEKLAR als Arbeitsprobe.** Soll auf `/leistungen/apps-portale` stehen, dass der Shop im Aufbau ist und nicht jede Funktion in Betrieb ist? Oder soll der Verweis auf TEILEKLAR entfallen, bis der Shop-Dienst antwortet?
+9. **F-9 · „Ein Portal lohnt sich nicht für alles.“** Ist dieser beratende Satz (4.5) in Ihrem Sinn?
+10. **F-10 · Erfundene Beispiele.** Sind die zwei gekennzeichneten Beispielanfragen (Malerbetrieb in 4.10, Ingenieurbüro in 4.12) gewünscht, oder sollen dort nur die Fragen stehen?
+11. **F-11 · `/portale`.** Die Seite sagt heute „Hier finden Sie Ihren Einstieg“, die Bereiche sind Hüllen. Soll der Abschnitt „Der Stand heute“ (4.19) an die erste Stelle, und soll die Zusammenfassung wie bei `/anmelden` in ES angepasst werden? Das wäre ein Nachtrag zu ES.
+12. **F-12 · Suite: Zeitplan oder Warteliste.** Soll die Suite-Seite einen Zeitraum nennen oder eine Vormerkung anbieten? Ohne Antwort bleibt es bei „Schreiben Sie uns“.
+13. **F-13 · API: Dokumentation und eigene Schlüssel.** Soll die Seite auf eine öffentliche Schnittstellenbeschreibung verweisen, und darf sie eigene Anbieterschlüssel erwähnen? Beides ist heute nicht als nutzbar belegt.
+14. **F-14 · Chat und Daten.** Soll die Produktseite zu AIFly ORACLE sagen, was mit Eingaben im Chat geschieht? Das ist Stoff der Datenschutzerklärung und braucht Ihre rechtliche Freigabe. Der Widerspruch aus MK O-10 (`/ki-hinweise` gegen D-010) besteht fort.
+15. **F-15 · Produktname des Agenten.** „NeX Agentic AI“ (Startseite) oder „NeX Agentic AIFly“ (Produktseite)? (MK O-5.)
+16. **F-16 · Anrede bei TEILEKLAR.** „Sie“ (MK, heutige Seiten, dieser Entwurf) oder „du“ (ZK)? Die Entscheidung gilt für alle TEILEKLAR-Texte.
+17. **F-17 · Kauftexte bei stehendem Shop-Dienst.** Sollen die erklärenden Texte zu Suche, Artikel und Kasse ausgeliefert werden, solange der Dienst nicht antwortet (MK O-9)?
+18. **F-18 · Fachliche Prüfung der Fahrzeugangaben.** Wer prüft die Erklärungen zu HSN/TSN, OE-Nummer, EAN, Teilegutachten, Lastindex und zum paarweisen Wechsel? Empfehlung: eine Kfz-Fachkraft liest Abschnitt 5 einmal gegen.
+19. **F-19 · Schwellen im Reifenrechner.** Woher stammen 1,5 und 2,5 Prozent (`TyreCalculator.tsx`, Zeile 30)? Sollen sie im Fließtext wiederholt werden, oder nur im Rechner stehen?
+20. **F-20 · Zahl des Werkstattverzeichnisses.** Dürfen Betriebe und Orte genannt werden, und woher stammt das Verzeichnis? Im Repository ist die Zahl aus ZK nicht belegt.
+21. **F-21 · Kosten für Partnerwerkstätten.** Bleibt es bei keiner Kostenaussage (MK O-9)?
+22. **F-22 · TEILEKLAR in nl, fr, en.** Sollen die neuen TEILEKLAR-Texte übersetzt werden, obwohl die Seiten nur deutsch ausgeliefert werden? Die Parität der Seitenliste verlangt es; sichtbar wird es nicht.
+23. **F-23 · Design-Sperre und Verdrahtung.** Entscheidungen E-1 bis E-7 (Abschnitt 3.3): Welche davon dürfen umgesetzt werden? Am wirksamsten sind E-1 (Abschnitte auf den Shop-Seiten) und E-2 (Fragenblock).
+24. **F-24 · Obergrenze je Seite.** Sollen alle entworfenen Abschnitte auf die Seite, oder höchstens sieben je Seite (Empfehlung, wegen der Sprungmarken)? Auf fünf Seiten liegt der Entwurf darüber: `/leistungen` (9), `/leistungen/agenten-automatisierung` (9), `/produkte/nex2fly` (9), `/leistungen/websites` (8), `/produkte/skills-mcp` (8).
+
+## 8. Reihenfolge-Empfehlung
+
+Maßstab: Wirkung für die Zielkunden (MK 1, ZK 1.2 und 1.4) und Lage der Seite auf dem Weg zur Anfrage (MK 6). ANNAHME, im Gespräch zu bestätigen.
+
+**Vorab, vor jeder Erweiterung:** ES abnehmen und einbauen. Mehr Text auf Seiten, deren Kernaussage heute nicht stimmt (Suite, Anmeldung, Registrierung, Partnerweg), macht die falsche Aussage nur ausführlicher.
+
+**Welle 1 · die Seiten, auf denen entschieden wird**
+
+1. `/leistungen` – Einstieg für beide Hauptsegmente (ZK NX-A, NX-B); beantwortet „wo fange ich an“.
+2. `/preise-ablauf` – der stärkste Einwand ist der Preis (MK 1, Einwand 1).
+3. `/unternehmen` – der zweitstärkste ist das Gegenüber (MK 1, Einwand 3).
+4. `/kontakt` und `/wissen/projekt-vorbereiten` – senken die Hürde zur Anfrage.
+
+**Welle 2 · die drei Leistungsseiten**
+
+5. `/leistungen/agenten-automatisierung` – der Kontrolleinwand (MK 1, Einwand 2); größter Erklärbedarf.
+6. `/leistungen/websites` – häufigster Einstieg im Segment NX-A.
+7. `/leistungen/apps-portale`, `/leistungsumfang`, `/loesungen`, `/wissen`.
+
+**Welle 3 · Produktseiten**
+
+8. `/produkte/aifly-oracle` und `/produkte/one` – erklären, was im Chat und im Auftrag geschieht.
+9. `/produkte/skills-mcp`, `/produkte/nex-agentic-aifly`, `/produkte/api` – Segment NX-C, kleiner.
+10. `/produkte/nex2fly`, `/portale` – erst nach ES.
+11. Startseite – zuletzt. Sie ist die Norm des Gleichmachers; jede Änderung dort wird an allen Seiten gemessen.
+
+**TEILEKLAR, eigene Reihe**
+
+1. `/teileklar/fahrzeug-und-passung` – der belegte Hauptschmerz ist der Fehlkauf (ZK 1.3); die Seite zeigt Abschnitte schon heute.
+2. `/teileklar/reifenrechner`, `/teileklar/batterie-berater` – ebenfalls ohne neue Verdrahtung einbaubar.
+3. `/teileklar/partner-werden`, `/teileklar/termine` – nach ES.
+4. Die Seiten mit Shop-Rahmen – erst nach der Entscheidung zu E-1 und, soweit sie den Kauf beschreiben, nach der Antwort auf F-17.
+
+## 9. Umfang je Seite, vorher und nachher
+
+Gezählt am 15.11.2026. „Vorher“: deutsche Wörter in `config/site-map.json` (Titel, Zusammenfassung, Abschnitte); bei der Startseite zuzüglich `config/home-concept-copy.json` (`de`). „Nachher“: vorher plus die Wörter der Zitatblöcke dieses Entwurfs (Überschriften eingeschlossen); bei der Startseite abzüglich der ersetzten Schlüsseltexte. Nicht mitgezählt ist der Fragenblock (M4), der auf zehn Seiten zusätzlich steht, und Text in Bausteinen (M9, M11).
+
+| Seite | Wörter vorher | Wörter nachher | Faktor | Neue Abschnitte | Abschnitte nachher |
+|---|---|---|---|---|---|
+| `/` | 1022 | 1269 | 1,2 | 0 (7 vorhandene HC-Schlüssel verlängert) | 2 |
+| `/leistungen` | 156 | 701 | 4,5 | 6 | 9 |
+| `/leistungen/websites` | 132 | 513 | 3,9 | 6 | 8 |
+| `/leistungen/agenten-automatisierung` | 142 | 520 | 3,7 | 7 | 9 |
+| `/leistungen/apps-portale` | 133 | 430 | 3,2 | 5 | 7 |
+| `/leistungsumfang` | 121 | 362 | 3,0 | 5 | 7 |
+| `/loesungen` | 128 | 390 | 3,0 | 5 | 7 |
+| `/preise-ablauf` | 109 | 343 | 3,1 | 5 | 7 |
+| `/wissen` | 125 | 360 | 2,9 | 4 | 6 |
+| `/wissen/projekt-vorbereiten` | 116 | 350 | 3,0 | 4 | 6 |
+| `/unternehmen` | 146 | 389 | 2,7 | 5 | 7 |
+| `/kontakt` | 126 | 295 | 2,3 | 4 | 6 |
+| `/produkte/nex2fly` | 229 | 493 | 2,2 | 5 | 9 |
+| `/produkte/one` | 116 | 303 | 2,6 | 4 | 6 |
+| `/produkte/api` | 133 | 339 | 2,5 | 5 | 7 |
+| `/produkte/aifly-oracle` | 164 | 324 | 2,0 | 4 | 7 |
+| `/produkte/nex-agentic-aifly` | 148 | 291 | 2,0 | 4 | 7 |
+| `/produkte/skills-mcp` | 171 | 357 | 2,1 | 5 | 8 |
+| `/portale` | 116 | 215 | 1,9 | 3 | 6 |
+| `/anmelden` | 82 | 82 | 1,0 | 0 | 2 |
+| `/registrieren` | 96 | 96 | 1,0 | 0 | 2 |
+| `/teileklar` | 79 | 227 | 2,9 | 4 | 6 |
+| `/teileklar/shop` | 74 | 150 | 2,0 | 2 | 4 |
+| `/teileklar/suche` | 86 | 196 | 2,3 | 3 | 5 |
+| `/teileklar/kategorien` | 77 | 122 | 1,6 | 1 | 3 |
+| `/teileklar/kategorie` | 75 | 149 | 2,0 | 2 | 4 |
+| `/teileklar/produkt` | 82 | 171 | 2,1 | 2 | 4 |
+| `/teileklar/warenkorb` | 66 | 98 | 1,5 | 1 | 3 |
+| `/teileklar/kasse` | 66 | 66 | 1,0 | 0 | 2 |
+| `/teileklar/fahrzeug-und-passung` | 84 | 357 | 4,2 | 5 | 7 |
+| `/teileklar/reifenrechner` | 84 | 227 | 2,7 | 4 | 6 |
+| `/teileklar/batterie-berater` | 86 | 165 | 1,9 | 3 | 5 |
+| `/teileklar/werkstatt` | 76 | 168 | 2,2 | 3 | 5 |
+| `/teileklar/termine` | 77 | 167 | 2,2 | 2 | 4 |
+| `/teileklar/gutscheine` | 69 | 89 | 1,3 | 1 | 3 |
+| `/teileklar/partner-werden` | 84 | 244 | 2,9 | 4 | 6 |
+
+Summen: NeXify AI 3.711 → 8.422 Wörter (21 Seiten, Startseite einschließlich HC). TEILEKLAR 1.165 → 2.596 Wörter (15 Seiten). Zusammen 4.876 → 11.018, also 6.142 neue Wörter. Ohne HC gerechnet (nur Seitenliste): 3.959 → 9.854.
+
+## 10. Nicht geprüft
+
+- **Kein Einbau, keine Messung.** Kein Lauf von `tools/gleichmacher.mjs` oder `tools/live-check.mjs`; ob die Sprungmarken bei 390 px bedienbar bleiben und ob neue Überschriften bei 360 px umbrechen, ist nicht gemessen. Die Aussage „bleibt grün“ in Abschnitt 3.2 ist eine Annahme.
+- **Produktion nicht neu gemessen.** Alle Aussagen zum Stand von Formular, Chat, Shop, Suche und Anmeldung stammen aus FL (Messung 14.11.2026, 20:23 bis 20:28 UTC). Ob sich seitdem etwas geändert hat, ist nicht geprüft.
+- **ES ist ein Zwischenstand** (WIP `850d79a`). Wo dieser Entwurf ES voraussetzt, gilt das für die Fassung dieses Commits.
+- **MZ, ZK und FL liegen auf nicht gemergten Zweigen.** Gelesen am 15.11.2026 an den oben genannten Commits.
+- **Externe Marktzahlen aus ZK** (Q1 bis Q12) sind in keinem Seitentext verwendet und hier nicht nachgeprüft.
+- **Fachangaben zu Fahrzeugen** über FC und TC hinaus sind nicht fachlich geprüft (F-18).
+- **Übersetzungen** nach nl, fr, en: nicht erstellt (Abschnitt 6).
+- **Die gemiedenen Wörter aus MK (5)** sind im Entwurfstext mit einer Wortsuche geprüft, Ergebnis in der PR-Beschreibung; eine Lektüre durch einen zweiten Leser steht aus.
+- **Rechtstexte, Kassentexte, Preise:** nicht berührt und nicht bewertet.
