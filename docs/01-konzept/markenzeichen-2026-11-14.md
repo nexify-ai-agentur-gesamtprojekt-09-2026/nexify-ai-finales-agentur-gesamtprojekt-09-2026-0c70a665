@@ -92,9 +92,18 @@ Quelle: `config/design-tokens.json`, Gruppen `font`, `type*`, `atelierSystem.sch
 - **Feste Stufen** (`atelierSystem.schrift`): 12 · 13 · 15 · 16 · 18 · 24 px;
   fünf Zeilenhöhen (`zeileEng 1.12` … `zeileLese 1.6`); drei Gewichte
   (400 · 500 · 600). Keine Zwischengrößen.
-- **Hero-Titel** `typeHero.size clamp(40px, 4.4cqi, 64px)`, Zeilenhöhe `1.08`;
-  mobil `typeHero.mobile`. **Abschnitt** `typeSection clamp(32px, 3.5cqi, 48px)`.
-  Display-Laufweite `typeDisplay.tracking -.04em`.
+- **Token-Basisskala** (`type*` in `config/design-tokens.json`): Hero
+  `typeHero.size clamp(40px, 4.4cqi, 64px)`/`typeHero.mobile`, Abschnitt
+  `typeSection clamp(32px, 3.5cqi, 48px)`, Display-Laufweite
+  `typeDisplay.tracking -.04em`.
+- **Wirksame Werte der öffentlichen Seite** (die Handschrift): `AtelierSystem.css`
+  überschreibt für die gemessenen Bausteine die Basisskala — Hero-Titel
+  (`.identity-hero .identity-copy h1`) `clamp(36px, 4.2cqi, 56px)`, Gewicht 500,
+  Zeilenhöhe `--as-z-eng` (1.12), Laufweite `-.02em` (`AtelierSystem.css:500`);
+  Abschnitts-/Intro-Titel `clamp(24px, 3.4cqi, 36px)`, Gewicht 500, Zeilenhöhe
+  1.2 (`AtelierSystem.css:502`); Abschluss-Titel (`.hc-finish h2`)
+  `clamp(36px, 4.6cqi, 48px)` (`AtelierSystem.css:501`). Maßgeblich für den
+  eingefrorenen Stand sind diese wirksamen Selektoren; der Gleichmacher misst sie.
 - **Zeilenlänge** in `em`, nicht `ch`, damit ein Schriftwechsel den Umbruch nicht
   verschiebt (`atelierSystem.zeilenlaenge.$description`): kurz `21.95em`, Lese
   `29.02em`, breit `37.85em` (entsprechen 34/46/60 Zeichen der Hausschrift).
@@ -175,9 +184,12 @@ Seite — unter `/teileklar` die Shop-Kopfleiste, sonst `.site-header`).
 
 Die NeXify-Gestaltung wird **nicht** ungeprüft auf Kundenmarken übertragen. Für
 das Kundenprojekt **Studienkolleg Aachen** gelten die kundenspezifischen Vorgaben
-und **keine Videos** (`AGENTS.md`; `.claude/skills/nexify-kundenprojekt`). Siehe
-auch die Klon-Blaupausen (`docs/01-konzept/klon-blaupausen-2026-11-14.md`),
-Abschnitt „Grenze".
+(`AGENTS.md`; `.claude/skills/nexify-kundenprojekt`). Zu Medien gilt D-020
+(`DECISIONS.md`): bestehende Bilder und Videos des Kunden werden eingebunden,
+**keine neuen Videos** werden erstellt; einzige Neuerzeugung ist das Hero-Bild
+(Prompt geht dem Inhaber zur Freigabe). Kundenmaterial bleibt im Kundenrepository
+(D-017). Siehe auch die Klon-Blaupausen
+(`docs/01-konzept/klon-blaupausen-2026-11-14.md`), Abschnitt „Grenze".
 
 ## Belege dieses Dokuments
 

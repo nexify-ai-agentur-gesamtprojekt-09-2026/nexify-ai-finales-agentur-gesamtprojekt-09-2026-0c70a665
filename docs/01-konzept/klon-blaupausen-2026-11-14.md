@@ -108,9 +108,12 @@ Reihenfolge und Auswahl sind generisch; Texte kommen aus
 Diese Blaupausen übertragen **Struktur und Ton**, nicht das NeXify-Aussehen. Für
 Kundenprojekte gelten die Kundenvorgaben, nicht die NeXify-Tokens:
 
-- **Studienkolleg Aachen:** kundenspezifische Vorgaben, **keine Videos**
-  (`AGENTS.md`; `.claude/skills/nexify-kundenprojekt`). Die NeXify-Gestaltung
-  wird hier nicht übernommen; Hero-Blaupausen mit Film entfallen.
+- **Studienkolleg Aachen:** kundenspezifische Vorgaben (`AGENTS.md`;
+  `.claude/skills/nexify-kundenprojekt`). Zu Medien gilt D-020 (`DECISIONS.md`):
+  bestehende Bilder und Videos des Kunden werden eingebunden, **keine neuen
+  Videos** erstellt; einzige Neuerzeugung ist das Hero-Bild (Freigabe Inhaber).
+  Die NeXify-Gestaltung wird hier nicht übernommen; eine Hero-Blaupause erzeugt
+  kein neues Video.
 - Kundenarbeit läuft in eigenen Repositories/Sitzungen; Kundendaten und
   Branding gehören nicht in dieses Repository (`AGENTS.md`;
   `config/source-boundaries.json`). Ähnliche Namen begründen keine gemeinsame
