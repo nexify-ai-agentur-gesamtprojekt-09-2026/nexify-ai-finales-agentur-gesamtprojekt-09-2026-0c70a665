@@ -1,5 +1,5 @@
 # NeXify AI Gesamtloesung — ein Befehl pro Repo-Operation (Harness-Standard).
-.PHONY: setup test-env test-py dev build check test e2e audit vcr verify-feature check-arch session-start session-end clean-check contract-check automation-check web-build source-boundaries governance-check governance-status
+.PHONY: setup test-env test-py dev build check check-markenzeichen test e2e audit vcr verify-feature check-arch session-start session-end clean-check contract-check automation-check web-build source-boundaries governance-check governance-status
 
 setup:
 	@node --version >/dev/null && python3 --version >/dev/null && echo "setup: node + python3 vorhanden (keine Paketabhaengigkeiten)"
@@ -30,9 +30,15 @@ build:
 	@cd prototypen && sha256sum -c MANIFEST.sha256
 	@node -e "const fs=require('fs'),p=require('path');(function w(d){for(const f of fs.readdirSync(d)){const x=p.join(d,f);if(fs.statSync(x).isDirectory())w(x);else if(x.endsWith('.json'))JSON.parse(fs.readFileSync(x,'utf8'))}})('config');console.log('config/*.json gueltig')"
 
-check:
+check: check-markenzeichen
 	node tools/ds-audit-cli.js
 	bash tools/gesundheit-selbsttest.sh
+
+# Design-Sperre (additiv, nur lesend): bestaetigt, dass das sichtbare Design
+# unveraendert gegen den eingefrorenen Normstand ist. Siehe
+# docs/01-konzept/markenzeichen-2026-11-14.md und die Sicherung daneben.
+check-markenzeichen:
+	bash tools/markenzeichen-sperre.sh docs/01-konzept/markenzeichen-normstand-2026-11-14.sha256
 
 test:
 	node tools/ds-audit-cli.js
