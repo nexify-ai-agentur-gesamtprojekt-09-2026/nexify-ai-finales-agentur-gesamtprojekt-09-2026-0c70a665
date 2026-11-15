@@ -29,14 +29,15 @@ class Requests:
         self.rows = {}
         self.interrupt_after_insert = False
 
-    async def find_one(self, query):
+    # Stands in for the data-access interface (shop/store/requests.py), not for a database driver.
+    async def get(self, request_id):
         await asyncio.sleep(0)
-        return copy.deepcopy(self.rows.get(query['_id']))
+        return copy.deepcopy(self.rows.get(request_id))
 
-    async def count_documents(self, query):
+    async def count_from_email_since(self, email, since):
         return 0
 
-    async def insert_one(self, doc):
+    async def add(self, doc):
         if doc['_id'] in self.rows:
             raise Duplicate()
         self.rows[doc['_id']] = copy.deepcopy(doc)
@@ -44,23 +45,11 @@ class Requests:
             self.interrupt_after_insert = False
             raise TimeoutError('synthetic acknowledgement loss')
 
-    async def update_one(self, query, update):
-        self.rows[query['_id']].update(update['$set'])
+    async def record_notification(self, request_id, status):
+        self.rows[request_id].update({'notify_status': status, 'notify_recovery_pending': False})
 
-    def find(self, query):
-        rows = [copy.deepcopy(row) for row in self.rows.values() if row.get('notify_recovery_pending') is True]
-        class Cursor:
-            def limit(self, count):
-                self.rows = iter(rows[:count])
-                return self
-            def __aiter__(self):
-                return self
-            async def __anext__(self):
-                try:
-                    return next(self.rows)
-                except StopIteration:
-                    raise StopAsyncIteration
-        return Cursor()
+    async def pending_notifications(self, limit):
+        return [copy.deepcopy(row) for row in self.rows.values() if row.get('notify_recovery_pending') is True][:limit]
 
 
 async def _anonymous_requester(request):
@@ -77,8 +66,8 @@ def actual_functions(database, notification):
         node.args.defaults = []
         for arg in node.args.args:
             arg.annotation = None
-    namespace = {'db': types.SimpleNamespace(requests=database), 'notify': notification,
-                 'HTTPException': ApiFailure, 'DuplicateKeyError': Duplicate, 'hashlib': hashlib,
+    namespace = {'store': types.SimpleNamespace(requests=database, AlreadyExists=Duplicate), 'notify': notification,
+                 'HTTPException': ApiFailure, 'hashlib': hashlib,
                  'json': json, 're': re, 'secrets': secrets, 'datetime': datetime, 'timedelta': timedelta,
                  'timezone': timezone, 'EMAIL': re.compile(r'[^@\s]+@[^@\s]+\.[^@\s]+'),
                  'HOURLY_LIMIT': 5, '_requester': _anonymous_requester, 'RequestReceipt': lambda **fields: fields, 'now_iso': lambda: datetime.now(timezone.utc).isoformat()}

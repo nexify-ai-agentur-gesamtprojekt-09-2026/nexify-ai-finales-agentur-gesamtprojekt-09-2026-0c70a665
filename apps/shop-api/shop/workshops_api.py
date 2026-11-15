@@ -8,8 +8,8 @@ from fastapi import APIRouter, HTTPException, Query
 from pydantic import BaseModel, Field
 
 from . import config
-from . import mail_templates, mailer
-from .db import db, now_iso
+from . import mail_templates, mailer, store
+from .db import now_iso
 
 router = APIRouter(prefix="/api/workshops")
 REQUEST_STATUS = "Anfrage gesendet – noch kein Termin"
@@ -24,8 +24,7 @@ def km(a, b, c, d):
 
 
 async def import_workshops(database=None):
-    d = database if database is not None else db
-    if await d.workshops.estimated_document_count():
+    if await store.workshops.estimated_count(database):
         return 0
     pack = json.loads(config.WORKSHOPS_FILE.read_text(encoding="utf-8"))
     docs, seen = [], set()
@@ -39,7 +38,7 @@ async def import_workshops(database=None):
                         "source": "prototypen/assets/workshops.json"})
             docs.append(doc)
     if docs:
-        await d.workshops.insert_many(docs)
+        await store.workshops.add_many(docs, database)
     return len(docs)
 
 
@@ -53,14 +52,14 @@ def public(doc, distance=None):
 
 async def locate(term):
     if re.fullmatch(r"\d{4,5}", term):
-        for match in ({"zip": term}, {"zip": {"$regex": "^" + term[:3]}}):
-            pts = [d async for d in db.workshops.find({**match, "lat": {"$exists": True}}, {"lat": 1, "lon": 1})]
+        for basis, lookup, value in (("plz", store.workshops.points_by_zip, term), ("plz_bereich", store.workshops.points_by_zip_prefix, term[:3])):
+            pts = await lookup(value)
             if pts:
-                return sum(p["lat"] for p in pts) / len(pts), sum(p["lon"] for p in pts) / len(pts), "plz" if "zip" in match and match["zip"] == term else "plz_bereich"
+                return sum(p["lat"] for p in pts) / len(pts), sum(p["lon"] for p in pts) / len(pts), basis
         return None
-    pts = [d async for d in db.workshops.find({"city_key": term.casefold(), "lat": {"$exists": True}}, {"lat": 1, "lon": 1})]
+    pts = await store.workshops.points_by_city(term.casefold())
     if not pts:
-        pts = [d async for d in db.workshops.find({"city_key": {"$regex": "^" + re.escape(term.casefold())}, "lat": {"$exists": True}}, {"lat": 1, "lon": 1}).limit(500)]
+        pts = await store.workshops.points_by_city_prefix(term.casefold(), 500)
     if pts:
         return sum(p["lat"] for p in pts) / len(pts), sum(p["lon"] for p in pts) / len(pts), "ort"
     return None
@@ -74,18 +73,16 @@ async def search(q: str = Query(..., min_length=2, max_length=80), radius: int =
         return {"q": term, "radius_km": radius, "center": None, "total": 0, "results": [], "unlocated": []}
     lat, lon, basis = center
     dlat, dlon = radius / 111.0, radius / (111.0 * max(0.2, math.cos(lat * math.pi / 180)))
-    box = {"lat": {"$gte": lat - dlat, "$lte": lat + dlat}, "lon": {"$gte": lon - dlon, "$lte": lon + dlon}}
-    hits = sorted([(km(lat, lon, d["lat"], d["lon"]), d) async for d in db.workshops.find(box)], key=lambda x: x[0])
+    hits = sorted([(km(lat, lon, d["lat"], d["lon"]), d) for d in await store.workshops.located_in_box(lat - dlat, lat + dlat, lon - dlon, lon + dlon)], key=lambda x: x[0])
     hits = [(dist, d) for dist, d in hits if dist <= radius]
-    key = {"zip": term} if term.isdigit() else {"city_key": term.casefold()}
-    unlocated = [public(d) async for d in db.workshops.find({**key, "lat": {"$exists": False}}).limit(20)]
+    unlocated = [public(d) for d in (await store.workshops.unlocated_by_zip(term, 20) if term.isdigit() else await store.workshops.unlocated_by_city(term.casefold(), 20))]
     return {"q": term, "radius_km": radius, "center": {"lat": lat, "lon": lon, "basis": basis}, "total": len(hits),
             "results": [public(d, dist) for dist, d in hits[:limit]], "unlocated": unlocated}
 
 
 @router.get("/{workshop_id}")
 async def detail(workshop_id: str):
-    doc = await db.workshops.find_one({"_id": workshop_id})
+    doc = await store.workshops.get(workshop_id)
     if not doc:
         raise HTTPException(404, {"error": "workshop_not_found"})
     return public(doc)
@@ -102,7 +99,7 @@ class RequestIn(BaseModel):
 
 @router.post("/{workshop_id}/requests", status_code=201)
 async def create_request(workshop_id: str, body: RequestIn):
-    doc = await db.workshops.find_one({"_id": workshop_id})
+    doc = await store.workshops.get(workshop_id)
     if not doc:
         raise HTTPException(404, {"error": "workshop_not_found"})
     errors = {}
@@ -117,9 +114,9 @@ async def create_request(workshop_id: str, body: RequestIn):
     if errors:
         raise HTTPException(422, {"error": "request_invalid", "fields": errors})
     request_id = "WA-" + secrets.token_hex(5).upper()
-    await db.workshop_requests.insert_one({"_id": request_id, "workshop_id": workshop_id, "workshop_name": doc.get("name"), **body.model_dump(),
-                                           "status": REQUEST_STATUS, "created_at": now_iso()})
-    stored = await db.workshop_requests.find_one({"_id": request_id})
+    await store.workshops.add_request({"_id": request_id, "workshop_id": workshop_id, "workshop_name": doc.get("name"), **body.model_dump(),
+                                       "status": REQUEST_STATUS, "created_at": now_iso()})
+    stored = await store.workshops.request(request_id)
     subject, html, text = mail_templates.workshop_receipt(stored)
     await mailer.enqueue("workshop_request:" + request_id, body.email.strip(), subject, html, text)
     return {"id": request_id, "status": REQUEST_STATUS, "workshop_id": workshop_id}

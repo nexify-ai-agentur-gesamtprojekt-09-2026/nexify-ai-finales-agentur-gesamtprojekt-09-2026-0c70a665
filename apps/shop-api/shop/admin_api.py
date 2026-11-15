@@ -1,10 +1,8 @@
 from fastapi import APIRouter, Depends, HTTPException, Request
 from pydantic import BaseModel, Field
 
-from pymongo import ReturnDocument
-
-from . import auth, bigbuy_import, config, fulfillment, mail_templates, mailer, pricing, revolut
-from .db import db, now_iso
+from . import auth, bigbuy_import, config, fulfillment, mail_templates, mailer, pricing, revolut, store
+from .db import db, now_iso  # db geht nur noch unverändert an bigbuy_import.start_import, bis der Import umgestellt ist
 
 router = APIRouter(prefix="/api/admin")
 
@@ -20,11 +18,11 @@ class ImportIn(BaseModel):
 
 @router.get("/settings")
 async def read_settings(ident=Depends(auth.require_admin)):
-    s = await pricing.settings(db)
+    s = await pricing.settings()
     return {"markup_percent": str(s["markup_percent"]), "shipping_cents": s["shipping_cents"], "vat_percent": str(config.VAT_PERCENT),
             "updated_at": s["updated_at"], "updated_by": s["updated_by"], "revolut_mode": config.revolut_mode(),
             "price_released": s["price_released"], "price_release": s["price_release"],
-            "webhook_registered": bool(await db.revolut_webhooks.find_one({"_id": config.revolut_mode()}, {"_id": 1}))}
+            "webhook_registered": await store.payments.has_webhook_registration(config.revolut_mode())}
 
 
 @router.put("/settings")
@@ -33,26 +31,25 @@ async def write_settings(body: SettingsIn, ident=Depends(auth.require_admin)):
         markup = pricing.parse_markup(body.markup_percent.replace(",", "."))
     except ValueError:
         raise HTTPException(422, {"error": "markup_invalid", "fields": {"markup_percent": "invalid"}}) from None
-    await db.settings.update_one({"_id": "shop"}, {"$set": {"markup_percent": str(markup), "shipping_cents": body.shipping_cents,
-                                                            "updated_at": now_iso(), "updated_by": ident.user_id}}, upsert=True)
+    await store.settings.save_pricing(str(markup), body.shipping_cents, now_iso(), ident.user_id)
     return await read_settings(ident)
 
 
 @router.post("/price-release")
 async def release_prices(ident=Depends(auth.require_admin)):
-    s = await pricing.settings(db)
+    s = await pricing.settings()
     release = {"markup_percent": str(s["markup_percent"]), "released_at": now_iso(), "released_by": ident.user_id}
-    await db.settings.update_one({"_id": "shop"}, {"$set": {"price_release": release, "markup_percent": str(s["markup_percent"])}}, upsert=True)
-    await db.price_releases.insert_one({**release, "action": "release"})
+    await store.settings.set_price_release(release)
+    await store.settings.log_price_release({**release, "action": "release"})
     return await read_settings(ident)
 
 
 @router.get("/import")
 async def import_status(ident=Depends(auth.require_admin)):
-    runs = [r async for r in db.imports.find({}).sort("started_at", -1).limit(10)]
+    runs = await store.catalog.recent_imports(10)
     for r in runs:
         r["id"] = r.pop("_id")
-    return {"runs": runs, "active_products": await db.products.count_documents({"active": True})}
+    return {"runs": runs, "active_products": await store.catalog.count_published()}
 
 
 @router.post("/import", status_code=202)
@@ -73,7 +70,7 @@ async def start_import(body: ImportIn, ident=Depends(auth.require_admin)):
 @router.post("/revolut/webhook")
 async def register_webhook(ident=Depends(auth.require_admin)):
     try:
-        doc = await revolut.ensure_webhook(db)
+        doc = await revolut.ensure_webhook()
     except revolut.RevolutError as error:
         raise HTTPException(502, {"error": error.code}) from None
     return {"mode": doc["_id"], "webhook_id": doc["webhook_id"], "url": doc["url"]}
@@ -91,10 +88,9 @@ class StatusIn(BaseModel):
 
 @router.get("/orders")
 async def list_orders(ident=Depends(auth.require_admin)):
-    rows = db.orders.find({}, {"lines": 0}).sort("created_at", -1).limit(200)
     orders = []
-    async for o in rows:
-        mails = [m async for m in db.outbox.find({"_id": {"$regex": "^order_(paid|status):[a-z:_]*" + o["_id"]}}, {"status": 1, "subject": 1, "attempts": 1})]
+    for o in await store.orders.recent_without_lines(200):
+        mails = await store.outbox.order_mails(o["_id"])
         orders.append({"id": o["_id"], "number": o["number"], "status": o["status"], "fulfilment": o.get("fulfilment") or ("bezahlt" if o["status"] == "bezahlt" else None),
                        "total_cents": o["total_cents"], "email": o["address"].get("email"), "created_at": o["created_at"], "paid_at": o.get("paid_at"),
                        "tracking_number": o.get("tracking_number"), "carrier": o.get("carrier"), "mails": mails,
@@ -106,7 +102,7 @@ async def list_orders(ident=Depends(auth.require_admin)):
 
 @router.post("/orders/{order_id}/status")
 async def set_order_status(order_id: str, body: StatusIn, ident=Depends(auth.require_admin)):
-    order = await db.orders.find_one({"_id": order_id})
+    order = await store.orders.get(order_id)
     if not order:
         raise HTTPException(404, {"error": "order_not_found"})
     current = order.get("fulfilment") or ("bezahlt" if order["status"] == "bezahlt" else order["status"])
@@ -117,7 +113,7 @@ async def set_order_status(order_id: str, body: StatusIn, ident=Depends(auth.req
     update = {"fulfilment": body.status, STAMP[body.status]: now_iso(), "status_changed_by": ident.user_id}
     if body.status == "versendet":
         update.update(tracking_number=body.tracking_number.strip(), carrier=body.carrier.strip())
-    changed = await db.orders.find_one_and_update({"_id": order_id, "fulfilment": order.get("fulfilment")}, {"$set": update}, return_document=ReturnDocument.AFTER)
+    changed = await store.orders.change_delivery_state(order_id, order.get("fulfilment"), update)
     if not changed:
         raise HTTPException(409, {"error": "concurrent_change"})
     if body.status in ("in_bearbeitung", "versendet"):
@@ -129,19 +125,19 @@ async def set_order_status(order_id: str, body: StatusIn, ident=Depends(auth.req
 @router.post("/orders/{order_id}/tracking-refresh")
 async def refresh_tracking(order_id: str, ident=Depends(auth.require_admin)):
     """Read-only supplier query: pulls BigBuy tracking once; the first number marks the order shipped and mails the customer once."""
-    order = await db.orders.find_one({"_id": order_id})
+    order = await store.orders.get(order_id)
     if not order:
         raise HTTPException(404, {"error": "order_not_found"})
     if not order.get("bigbuy_order_id"):
         raise HTTPException(409, {"error": "not_submitted_to_supplier"})
     await fulfillment.poll_and_update_tracking(order)
-    fresh = await db.orders.find_one({"_id": order_id}) or order
+    fresh = await store.orders.get(order_id) or order
     return {"id": order_id, "fulfilment": fresh.get("fulfilment"), "tracking_number": fresh.get("tracking_number"), "carrier": fresh.get("carrier")}
 
 
 @router.get("/outbox")
 async def outbox(ident=Depends(auth.require_admin)):
-    rows = [m async for m in db.outbox.find({}, {"html": 0, "text": 0}).sort("created_at", -1).limit(100)]
+    rows = await store.outbox.recent_summaries(100)
     for m in rows:
         m["id"] = m.pop("_id")
     return {"mails": rows}
