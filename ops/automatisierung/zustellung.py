@@ -117,9 +117,16 @@ def zustellen(konfig: dict, zustand: kern.Zustand, kennung: str, schluessel: str
             buchname = kennung
         elif kanal == "resend_intern":
             wirkung = lambda: _resend(konfig, umgebung, schluessel, betreff, text, transport)  # noqa: E731
-            # Gemeinsame Tagesgrenze aller Automatisierungen für das geteilte Versandkonto.
-            grenze_tag = min(grenzen["max_wirkungen_je_tag"], int(konfig["zustellung"]["resend_intern"]["max_mails_je_tag"]))
-            buchname = "mail"
+            # Zwei Grenzen, getrennt gezählt: die der Automatisierung (eigenes Buch) und die gemeinsame
+            # Tagesgrenze des geteilten Versandkontos über alle Automatisierungen.
+            grenze_tag = grenzen["max_wirkungen_je_tag"]
+            buchname = f"mail:{kennung}"
+            mail_schluessel = f"{kennung}:{schluessel}:{kanal}"
+            konto_grenze = int(konfig["zustellung"]["resend_intern"]["max_mails_je_tag"])
+            if zustand.status(buchname, mail_schluessel) is None and zustand.wirkungen_heute_mit_vorsatz("mail:") >= konto_grenze:
+                zustand.protokoll(kennung, kern.GEBREMST, schluessel=mail_schluessel, grenze=konto_grenze, grund="Tagesgrenze des Versandkontos")
+                ergebnis[kanal] = {"ergebnis": kern.GEBREMST, "grund": "Tagesgrenze des Versandkontos"}
+                continue
         else:
             ergebnis[kanal] = {"ergebnis": "kanal_aus", "gruende": ["unbekannter Kanal"]}
             continue

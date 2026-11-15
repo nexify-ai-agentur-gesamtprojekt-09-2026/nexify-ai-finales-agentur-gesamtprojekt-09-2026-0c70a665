@@ -219,8 +219,8 @@ Gemessen am 15.11.2026 am Stand dieses Zweigs; Vergleichsbasis ist `origin/main`
 
 | Prüfung | Ergebnis |
 |---|---|
-| `python3 -m unittest tests.test_prozess_automatisierung` | 46 Tests, alle bestanden: Schalter aus = keine Wirkung (6), doppelter Auslöser = eine Wirkung, begrenzte Wiederholung, Fehlerweg, Kostenbremse, Probelauf ohne Netz |
-| Python-Suite gesamt | vorher 844 Tests, 46 rot (39 Fehlschläge, 7 Fehler); nachher 890 Tests, dieselben 46 Namen rot. **Kein neuer Fehlschlag** (Namensvergleich leer). Die 46 bestehen auf `main` (Pins und Belege, fehlende Pakete der Shop-Tests) |
+| `python3 -m unittest tests.test_prozess_automatisierung` | 47 Tests, alle bestanden: Schalter aus = keine Wirkung (6), doppelter Auslöser = eine Wirkung, begrenzte Wiederholung, Fehlerweg, Kostenbremse, Probelauf ohne Netz |
+| Python-Suite gesamt | vorher 844 Tests, 46 rot (39 Fehlschläge, 7 Fehler); nachher 891 Tests, dieselben 46 Namen rot. **Kein neuer Fehlschlag** (Namensvergleich leer). Die 46 bestehen auf `main` (Pins und Belege, fehlende Pakete der Shop-Tests) |
 | `make check` | bestanden |
 | `node tools/ds-audit-cli.js` | bestanden |
 | `make governance-check` (Modellvorgabe, Hermes-Konfiguration, Lösungsregister, Skills, KI-Abdeckung) | bestanden; Lösungsregister: 59 Lösungen, 49 Zugänge, lesbare Fassung stimmt überein |

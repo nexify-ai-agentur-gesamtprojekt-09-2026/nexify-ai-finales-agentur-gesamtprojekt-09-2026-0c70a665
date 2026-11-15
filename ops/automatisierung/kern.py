@@ -212,6 +212,15 @@ class Zustand:
         ).fetchone()
         return int(zeile[0])
 
+    def wirkungen_heute_mit_vorsatz(self, vorsatz: str) -> int:
+        """Erledigte Wirkungen des Tages über alle Bücher, deren Name mit ``vorsatz`` beginnt."""
+        tag = ortstag(self.uhr(), self.zeitzone)
+        zeile = self._verbindung().execute(
+            "SELECT COUNT(*) FROM wirkung WHERE substr(automatisierung, 1, ?) = ? AND tag = ? AND status = ?",
+            (len(vorsatz), vorsatz, tag, ERLEDIGT),
+        ).fetchone()
+        return int(zeile[0])
+
     def status(self, kennung: str, schluessel_: str) -> dict | None:
         zeile = self._verbindung().execute(
             "SELECT status, versuche, hinweis FROM wirkung WHERE automatisierung = ? AND schluessel = ?",

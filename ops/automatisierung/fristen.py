@@ -67,10 +67,15 @@ def lauf(konfig: dict, zustand: kern.Zustand, *, umgebung: dict | None = None, r
     lage_termine = []
 
     for termin in eintrag.get("termine", []):
-        if not isinstance(termin, dict) or not termin.get("id") or not DATUM.match(str(termin.get("faellig", ""))):
-            zustand.protokoll(KENNUNG, "termin_abgelehnt", grund="id oder faellig (JJJJ-MM-TT) fehlt")
+        faellig = None
+        if isinstance(termin, dict) and termin.get("id") and DATUM.match(str(termin.get("faellig", ""))):
+            try:
+                faellig = dt.date.fromisoformat(termin["faellig"])
+            except ValueError:
+                faellig = None   # Form stimmt, den Tag gibt es nicht (zum Beispiel 30. Februar)
+        if faellig is None:
+            zustand.protokoll(KENNUNG, "termin_abgelehnt", grund="id fehlt oder faellig ist kein gültiges Datum (JJJJ-MM-TT)")
             continue
-        faellig = dt.date.fromisoformat(termin["faellig"])
         stufe = stufe_fuer(faellig, heute, vorwarnung)
         lage_termine.append({"id": termin["id"], "faellig": termin["faellig"], "stufe": stufe})
         if stufe is None:

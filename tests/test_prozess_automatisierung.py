@@ -355,6 +355,16 @@ class ZustellungTests(Basis):
             zustellung.zustellen(konfig, self.zustand, kennung, f"m{i}", "Betreff", "Text", umgebung=umgebung, transport=post)
         self.assertEqual(len(post.aufrufe), 2)
 
+    def test_mail_einer_automatisierung_verbraucht_nicht_die_einzelgrenze_einer_anderen(self):
+        konfig, umgebung = aktiv("fristen", "tagesbericht", mail=True)
+        post = Post()
+        zustellung.zustellen(konfig, self.zustand, "fristen", "f1", "Frist", "Text", umgebung=umgebung, transport=post)
+        ergebnis = zustellung.zustellen(konfig, self.zustand, "tagesbericht", "t1", "Bericht", "Text", umgebung=umgebung, transport=post)
+        self.assertEqual(ergebnis["resend_intern"]["ergebnis"], kern.ERLEDIGT, "Grenze 1 des Tagesberichts zählt nur Tagesberichte")
+        zweiter = zustellung.zustellen(konfig, self.zustand, "tagesbericht", "t2", "Bericht", "Text", umgebung=umgebung, transport=post)
+        self.assertEqual(zweiter["resend_intern"]["ergebnis"], kern.GEBREMST)
+        self.assertEqual(len(post.aufrufe), 2)
+
 
 class WaechterTests(Basis):
     def antworten(self, **abweichend):
@@ -534,10 +544,14 @@ class FristenTests(Basis):
 
     def test_ungueltiger_termin_wird_abgelehnt_statt_geraten(self):
         konfig, umgebung = aktiv("fristen")
-        kern.automatisierung(konfig, "fristen")["termine"] = [{"id": "x", "faellig": "bald"}, {"faellig": "2026-11-16"}, "text"]
+        kern.automatisierung(konfig, "fristen")["termine"] = [
+            {"id": "x", "faellig": "bald"}, {"faellig": "2026-11-16"}, "text", {"id": "y", "faellig": "2026-02-30"},
+            {"id": "gut", "titel": "Gültiger Termin danach", "faellig": "2026-11-16"},
+        ]
         ergebnis = fristen.lauf(konfig, self.zustand, umgebung=umgebung, register_pfad=self.register())
-        self.assertEqual((ergebnis["wirkungen"], ergebnis["termine"]), (0, []))
-        self.assertEqual(sum(1 for p in self.protokoll() if p["ereignis"] == "termin_abgelehnt"), 3)
+        self.assertEqual(sum(1 for p in self.protokoll() if p["ereignis"] == "termin_abgelehnt"), 4)
+        # Ein ungültiger Eintrag hält die folgenden nicht auf.
+        self.assertEqual((ergebnis["wirkungen"], [t["id"] for t in ergebnis["termine"]]), (1, ["gut"]))
 
     def test_echtes_register_ist_lesbar_und_nennt_keine_werte(self):
         zugaenge = fristen.faellige_zugaenge()
@@ -618,9 +632,13 @@ class ProbelaufTests(Basis):
                 argumente = ["probe", kennung, "--ausgabe", str(self.ordner)]
                 if eingaben[kennung]:
                     argumente += ["--eingabe", str(beispiele / eingaben[kennung])]
-                with contextlib.redirect_stdout(io.StringIO()):
+                ausgabe = io.StringIO()
+                with contextlib.redirect_stdout(ausgabe):
                     self.assertEqual(cli.main(argumente), 0, kennung)
         netz.assert_not_called()
+        # Die Ausgabe des Tagesberichts trägt den Bericht selbst, nicht nur einen Dateipfad.
+        self.assertIn("--- Bericht ---", ausgabe.getvalue())
+        self.assertIn("## 1. Merges auf main", ausgabe.getvalue())
         self.assertEqual(len(self.dateien("waechter")), 1)
         self.assertEqual(len(self.dateien("anfragen")), 1)
         bericht = self.dateien("tagesbericht")[0].read_text(encoding="utf-8")

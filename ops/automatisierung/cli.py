@@ -7,6 +7,7 @@
   python3 ops/automatisierung/cli.py lauf <kennung> [--ereignisse datei.json] [--pr-liste datei.json]
       Ein Lauf, wie ihn ein Zeitplan auslöst. Ist die Automatisierung aus,
       endet der Lauf ohne Wirkung mit Exit 0 und der Ausgabe "status": "aus".
+      Der Tagesbericht gibt nach der Statusausgabe den Bericht als Text aus.
 
   python3 ops/automatisierung/cli.py probe <kennung> --ausgabe <ordner> [--eingabe datei.json]
       Probelauf mit Testdaten: schreibt ausschließlich in <ordner>, sendet
@@ -115,8 +116,12 @@ def main(argv: list[str] | None = None) -> int:
     except (kern.Konfigurationsfehler, OSError, json.JSONDecodeError) as fehler:
         print(json.dumps({"status": "fehler", "grund": f"{type(fehler).__name__}: {fehler}"}, ensure_ascii=False), file=sys.stderr)
         return 2
-    ergebnis.pop("bericht", None)
+    # Der Bericht steht als Text hinter der Statusausgabe: Wo die Ausgabe des Befehls die Zustellung ist
+    # (geplante Aufgabe ohne Mailkanal), kommt so der Bericht selbst an, nicht nur ein Dateipfad.
+    bericht = ergebnis.pop("bericht", None)
     print(json.dumps(ergebnis, ensure_ascii=False, indent=2))
+    if bericht:
+        print("\n--- Bericht ---\n" + bericht)
     return 1 if _endgueltig(ergebnis) else 0
 
 
