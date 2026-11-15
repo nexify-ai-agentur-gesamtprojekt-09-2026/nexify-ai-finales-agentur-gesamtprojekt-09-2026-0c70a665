@@ -60,6 +60,15 @@ Die Installation gehört in eine eigene virtuelle Umgebung, nicht in die gemeins
 
 Lauf gegen eine echte MongoDB nur gegen ein ausdrücklich bestätigtes Wegwerf-Replica-Set auf der eigenen Maschine (`NEXIFY_MONGO_DISPOSABLE_CONFIRMED=yes`, `NEXIFY_TEST_MONGO_URI` nur Loopback, ohne Zugangsdaten). Nie gegen eine Datenbank mit echten Daten.
 
+## PostgreSQL-Umsetzung (Zweig `claude/shop-supabase-migration`, Stand 15.11.2026)
+
+Vorbereitet und ausgeschaltet; Stand, Schema-Begründung und Umschaltplan: `docs/04-betrieb/shop-supabase-migration-2026-11-15.md`. Solange der Zweig nicht gemergt ist, gilt dasselbe wie oben: dort weiterarbeiten, nicht neu beginnen.
+
+- **Zweite Umsetzung je Bereich** in `shop/store/pg/` (`PgCatalogStore`, …), gewählt über `SHOP_STORE_BACKEND` (`mongodb` ist Standard; `postgres` verlangt `SHOP_POSTGRES_DSN`). Eine neue Methode der Schicht braucht immer beide Umsetzungen und eine Vertragsaussage.
+- **Schema** in `apps/shop-api/supabase/migrations/`. Die Zeile trägt das Dokument als `json` (Feldfolge bleibt), gesucht und erzwungen wird über daraus abgeleitete Spalten. Eine neue Abfrage auf ein Feld heißt: abgeleitete Spalte in einer neuen Migrationsdatei, nicht `doc ->> …` im Fachcode.
+- **Bindung** `DisposablePostgresBinding` in `test_store_contract.py`; dazu `test_store_parity.py` (Vergleichslauf MongoDB gegen PostgreSQL als Text, also mit Feldfolge), `test_postgres_rls.py`, `test_postgres_transfer.py`. Sie laufen nur mit `NEXIFY_POSTGRES_DISPOSABLE_CONFIRMED=yes` und `NEXIFY_TEST_POSTGRES_DSN` (nur Loopback) und brauchen `psycopg[binary,pool]`, das bewusst nicht in `requirements.txt` steht.
+- **Gegenprobe mit Rücksetzen.** Ein Lauf, der Fehler in Quelldateien einbaut, muss bei Abbruch zurücksetzen (Signal abfangen) und danach `git diff --stat -- apps/shop-api/shop/store` leer zeigen. Am 15.11.2026 blieb nach einem Abbruch am Zeitlimit ein eingebauter Fehler in `pg/outbox.py` stehen und fiel nur durch diese Prüfung auf. Während ein solcher Lauf läuft, kein `git add -A`.
+
 ## Grenzen
 
 - **Kasse nur vollständig in einem Zug.** `checkout_api.py` (Bestellung, Bestand, Zahlung, Idempotenz) wird nicht halb umgestellt. Entweder der ganze Bereich mit allen drei Belegen in einem PR, oder gar nicht.

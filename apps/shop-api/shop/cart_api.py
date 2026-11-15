@@ -1,22 +1,15 @@
 """Server-side cart; prices always come from the catalog, never from the client."""
 import hashlib
-import inspect
 
-from bson import BSON
-from bson.errors import InvalidDocument
 from fastapi import APIRouter, Depends, HTTPException, Request, Response
 from pydantic import BaseModel, ConfigDict, Field
-from pymongo.errors import DocumentTooLarge, DuplicateKeyError, PyMongoError
-from pymongo.read_concern import ReadConcern
-from pymongo.write_concern import WriteConcern
 
-from . import auth, bigbuy_order, config, pricing
-from .db import db, now_iso
+from . import auth, bigbuy_order, config, pricing, store
+from .db import now_iso
 
 router = APIRouter(prefix="/api/shop/cart")
 MAX_QTY = 20
 MAX_MERGE_HISTORY = 128
-MAX_CART_BSON_BYTES = 16 * 1024 * 1024 - 1024
 
 
 def cart_revision(cart):
@@ -28,22 +21,13 @@ def cart_revision(cart):
     return int(value)
 
 
-def revision_filter(owner, revision):
-    return {'owner': owner, 'revision': {'$exists': False} if revision is None else revision}
-
-
 async def replace_cart(owner, cart, items, *, session=None, archive_entry=None):
     """Compare-and-set; a concurrent writer must never be silently overwritten."""
-    update = {'$set': {'items': items, 'updated_at': now_iso()}, '$inc': {'revision': 1}}
-    if archive_entry is not None:
-        update['$push'] = {'merge_history': archive_entry}
     try:
-        result = await db.carts.update_one(revision_filter(owner, cart_revision(cart)),
-            update, upsert=cart is None, session=session)
-    except DuplicateKeyError:
+        await store.carts.replace_items(owner, cart_revision(cart), items, create=cart is None,
+            tx=session, archive_entry=archive_entry)
+    except store.RevisionStale:
         raise HTTPException(409, {'error': 'cart_changed'}) from None
-    if not result.matched_count and result.upserted_id is None:
-        raise HTTPException(409, {'error': 'cart_changed'})
 
 
 class ItemIn(BaseModel):
@@ -81,16 +65,16 @@ async def owner_for(request: Request, response: Response, create=True):
 
 async def merge(ident):
     guest_owner = 'guest:' + ident.guest_id
-    guest = await db.carts.find_one({'owner': guest_owner})
+    guest = await store.carts.get(guest_owner)
     if guest is None or guest.get('items') == []:
         return
     async def transfer(session):
-        guest = await db.carts.find_one({'owner': guest_owner}, session=session)
+        guest = await store.carts.get(guest_owner, tx=session)
         if guest is None or guest.get('items') == []:
             return
         if not isinstance(guest.get('items'), list):
             raise HTTPException(409, {'error': 'cart_invalid'})
-        cart = await db.carts.find_one({'owner': ident.owner}, session=session)
+        cart = await store.carts.get(ident.owner, tx=session)
         source = [] if cart is None else cart.get('items')
         if not isinstance(source, list):
             raise HTTPException(409, {'error': 'cart_invalid'})
@@ -126,25 +110,22 @@ async def merge(ident):
         candidate = {**guest, 'items': [], 'merge_history': [*history, receipt],
                      'revision': (revision or 0) + 1, 'updated_at': now_iso()}
         try:
-            if len(BSON.encode(candidate)) > MAX_CART_BSON_BYTES:
-                raise HTTPException(409, {'error': 'cart_merge_archive_limit'})
-        except InvalidDocument:
+            store.carts.check_archivable(candidate)
+        except store.ArchiveTooLarge:
+            raise HTTPException(409, {'error': 'cart_merge_archive_limit'}) from None
+        except store.StoredDataInvalid:
             raise HTTPException(409, {'error': 'cart_invalid'}) from None
         await replace_cart(ident.owner, cart, list(items.values()), session=session)
         await replace_cart(guest_owner, guest, [], session=session, archive_entry=receipt)
     try:
-        session = db.client.start_session()
-        if inspect.isawaitable(session):
-            session = await session
-        async with session:
-            await session.with_transaction(transfer, read_concern=ReadConcern('snapshot'), write_concern=WriteConcern('majority'))
+        await store.carts.in_transaction(transfer)
     except HTTPException:
         raise
-    except DuplicateKeyError:
+    except store.RevisionStale:
         raise HTTPException(409, {'error': 'cart_changed'}) from None
-    except DocumentTooLarge:
+    except store.ArchiveTooLarge:
         raise HTTPException(409, {'error': 'cart_merge_archive_limit'}) from None
-    except PyMongoError:
+    except store.StoreUnavailable:
         raise HTTPException(503, {'error': 'cart_merge_unavailable'}) from None
 
 
@@ -153,11 +134,11 @@ async def priced(owner, shipping_cents=None, address=None, items_override=None, 
     if allow_unknown_stock and (address is not None or shipping_cents is not None):
         raise ValueError("unknown_stock_view_cannot_quote")
     cart = ({"items": items_override} if items_override is not None
-            else await db.carts.find_one({"owner": owner}) or {"items": []})
+            else await store.carts.get(owner) or {"items": []})
     revision = cart_revision(cart)
-    settings = await pricing.settings(db)
+    settings = await pricing.settings()
     ids = [i["product_id"] for i in cart["items"]]
-    products = {p["_id"]: p async for p in db.products.find({"_id": {"$in": ids}})}
+    products = await store.catalog.products_by_id(ids)
     lines, changes = [], []
     for item in cart["items"]:
         product = products.get(item["product_id"])
@@ -215,18 +196,18 @@ async def read_cart(request: Request, response: Response):
 @router.post("/items")
 async def set_item(body: ItemIn, request: Request, response: Response):
     if body.quantity > 0:
-        product = await db.products.find_one({"_id": body.product_id, "active": True})
+        product = await store.catalog.published_product(body.product_id)
         if not product:
             raise HTTPException(404, {"error": "product_not_found"})
         stock = verified_stock(product)
         if stock < body.quantity:
             raise HTTPException(409, {"error": "insufficient_stock", "stock": stock})
-        settings = await pricing.settings(db)
+        settings = await pricing.settings()
         if not settings["price_released"]:
             raise HTTPException(409, {"error": "price_not_released", "message": "Preis noch nicht freigegeben"})
         unit = pricing.sell_cents(product["purchase_cents"], settings["markup_percent"])
     ident = await owner_for(request, response)
-    cart = await db.carts.find_one({"owner": ident.owner})
+    cart = await store.carts.get(ident.owner)
     items = [i for i in (cart or {"items": []})["items"] if i["product_id"] != body.product_id]
     if body.quantity > 0:
         items.append({"product_id": body.product_id, "name": product["name"], "quantity": body.quantity, "price_seen_cents": unit})
@@ -243,7 +224,7 @@ async def confirm_changes(request: Request, response: Response):
     ident = await owner_for(request, response, create=False)
     if not ident.owner:
         raise HTTPException(404, {"error": "cart_not_found"})
-    cart = await db.carts.find_one({"owner": ident.owner})
+    cart = await store.carts.get(ident.owner)
     if cart is None:
         raise HTTPException(404, {"error": "cart_not_found"})
     current = await priced(ident.owner, items_override=cart['items'])

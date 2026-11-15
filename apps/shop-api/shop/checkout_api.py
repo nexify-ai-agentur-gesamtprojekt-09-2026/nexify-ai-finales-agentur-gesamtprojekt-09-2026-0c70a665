@@ -8,12 +8,11 @@ from datetime import datetime, timezone
 
 from fastapi import APIRouter, Header, HTTPException, Request, Response
 from pydantic import BaseModel, Field
-from pymongo.errors import DuplicateKeyError
 
-from . import auth, fulfillment, mail_templates, mailer, pricing, revolut
-from .cart_api import owner_for, priced, revision_filter
+from . import auth, fulfillment, mail_templates, mailer, pricing, revolut, store
+from .cart_api import owner_for, priced
 from .config import PUBLIC_ORIGIN
-from .db import db, now_iso
+from .db import now_iso
 
 router = APIRouter(prefix="/api/shop")
 COUNTRIES = {"DE": r"\d{5}", "AT": r"\d{4}", "NL": r"\d{4} ?[A-Za-z]{2}", "BE": r"\d{4}", "LU": r"(L-)?\d{4}"}
@@ -90,7 +89,7 @@ async def checkout_quote(request: Request, response: Response, body: QuoteIn | N
 
 
 async def require_price_release():
-    if not (await pricing.settings(db))["price_released"]:
+    if not (await pricing.settings())["price_released"]:
         raise HTTPException(409, {"error": "price_not_released", "message": "Preis noch nicht freigegeben"})
 
 
@@ -109,14 +108,14 @@ async def send_paid_mails(order):
         subject, html, text = mail_templates.internal_new_order(order)
         internal = await mailer.enqueue("order_paid:internal:" + order["_id"], mailer.setting("MAIL_INTERNAL_TO"), subject, html, text, reply_to=order["address"].get("email", ""))
         if customer is not None and internal is not None:
-            await db.orders.update_one({"_id": order["_id"], "status": PAID}, {"$set": {"paid_mail_intents_recorded": True, "paid_mail_recovery_pending": False}})
+            await store.orders.mark_paid_mails_recorded(order["_id"])
     except Exception:
         pass  # Leave the marker unset so a later reconciliation can retry safely.
 
 
 async def recover_paid_mail_intents():
     """Recreate missing idempotent outbox intents, including after a process crash."""
-    async for order in db.orders.find({"status": PAID, "paid_mail_recovery_pending": True}):
+    async for order in store.orders.paid_with_pending_mails():
         await send_paid_mails(order)
 
 
@@ -142,14 +141,14 @@ async def create_order(body: CheckoutIn, request: Request, response: Response, i
     # guest-cart merge cannot run; no cart changes are needed for this replay.
     initial = await auth.identity(request)
     if initial.owner:
-        existing = await db.orders.find_one({"owner": initial.owner, "idempotency_key": idempotency_key})
+        existing = await store.orders.by_idempotency_key(initial.owner, idempotency_key)
         if existing:
             validate_order_replay(existing, initial.owner, body)
             return await payment_response(existing)
     ident = await owner_for(request, response, create=False)
     if not ident.owner:
         raise HTTPException(409, {"error": "cart_empty"})
-    existing = await db.orders.find_one({"owner": ident.owner, "idempotency_key": idempotency_key})
+    existing = await store.orders.by_idempotency_key(ident.owner, idempotency_key)
     if existing:
         validate_order_replay(existing, ident.owner, body)
         return await payment_response(existing)
@@ -175,9 +174,9 @@ async def create_order(body: CheckoutIn, request: Request, response: Response, i
              "created_at": now_iso(), "revolut_mode": revolut.config.revolut_mode(), "paid_transitions": 0, "request_hash": hashlib.sha256(body.model_dump_json().encode()).hexdigest(),
              "cart_revision": quote["cart_revision"]}
     try:
-        await db.orders.insert_one(order)
-    except DuplicateKeyError:
-        existing = await db.orders.find_one({"owner": ident.owner, "idempotency_key": idempotency_key})
+        await store.orders.add(order)
+    except store.AlreadyExists:
+        existing = await store.orders.by_idempotency_key(ident.owner, idempotency_key)
         validate_order_replay(existing, ident.owner, body, require_hash=True)
         return await payment_response(existing)
     return await payment_response(order)
@@ -190,15 +189,15 @@ async def payment_response(order):
     # An ambiguous network failure must not produce a new merchant order.
     order_id, number = order['_id'], order['number']
     try:
-        await revolut.ensure_webhook(db)
+        await revolut.ensure_webhook()
         created = await revolut.create_order(order["total_cents"], "EUR", number, "TEILEKLAR Bestellung " + number, order['address']['email'].strip(),
                                              PUBLIC_ORIGIN + "/teileklar/bestellung/" + order_id)
         if not created.get('id') or not created.get('checkout_url'):
             raise revolut.RevolutError('payment_response_incomplete')
     except revolut.RevolutError as error:
-        await db.orders.update_one({"_id": order_id}, {"$set": {"payment_error": error.code}})
+        await store.orders.record_payment_error(order_id, error.code)
         raise HTTPException(502, {"error": "payment_provider_unavailable", "order_id": order_id}) from None
-    await db.orders.update_one({"_id": order_id}, {"$set": {"revolut_order_id": created["id"], "checkout_url": created["checkout_url"], "payment_state": created.get("state")}, "$unset": {"payment_error":""}})
+    await store.orders.record_checkout(order_id, created["id"], created["checkout_url"], created.get("state"))
     return {"order_id": order_id, "number": number, "checkout_url": created["checkout_url"]}
 
 
@@ -217,18 +216,15 @@ async def sync_payment(order):
     if not order.get("revolut_order_id"):
         return order
     state = (await revolut.retrieve_order(order["revolut_order_id"])).get("state")
-    await db.orders.update_one({"_id": order["_id"]}, {"$set": {"payment_state": state}})
+    await store.orders.record_payment_state(order["_id"], state)
     if state == "completed":
-        updated = await db.orders.find_one_and_update({"_id": order["_id"], "status": {"$ne": PAID}},
-                                                      {"$set": {"status": PAID, "paid_at": now_iso(), "paid_mail_recovery_pending": True}, "$inc": {"paid_transitions": 1}})
-        if updated:
+        if await store.orders.mark_paid(order["_id"], now_iso()):
             paid_ids = [l["product_id"] for l in order["lines"]]
             # Never clear a cart changed since this order's quote. Legacy orders
             # without a recorded revision keep their cart for manual recovery.
             if 'cart_revision' in order:
-                await db.carts.update_one(revision_filter(order['owner'], order['cart_revision']),
-                    {"$pull": {"items": {"product_id": {"$in": paid_ids}}}, "$inc": {"revision": 1}})
-        current = await db.orders.find_one({"_id": order["_id"]})
+                await store.carts.remove_products(order['owner'], order['cart_revision'], paid_ids)
+        current = await store.orders.get(order["_id"])
         if current and current.get("status") == PAID and current.get("paid_mail_recovery_pending"):
             await send_paid_mails(current)
         try:
@@ -236,15 +232,15 @@ async def sync_payment(order):
         except Exception:
             pass
     elif state in ("cancelled", "failed") and order.get("status") == OPEN:
-        await db.orders.update_one({"_id": order["_id"], "status": OPEN}, {"$set": {"status": FAILED}})
-    return await db.orders.find_one({"_id": order["_id"]})
+        await store.orders.mark_payment_failed(order["_id"])
+    return await store.orders.get(order["_id"])
 
 
 @router.get("/orders/{order_id}")
 async def read_order(order_id: str, request: Request):
     ident = await auth.identity(request)
     owners = [o for o in (ident.user_id and "user:" + ident.user_id, ident.guest_id and "guest:" + ident.guest_id) if o]
-    order = await db.orders.find_one({"_id": order_id, "owner": {"$in": owners}}) if owners else None
+    order = await store.orders.get_for_owners(order_id, owners) if owners else None
     if not order:
         raise HTTPException(404, {"error": "order_not_found"})
     try:
@@ -259,14 +255,14 @@ async def list_orders(request: Request):
     ident = await auth.identity(request)
     if not ident.user_id:
         raise HTTPException(401, {"error": "authentication_required"})
-    rows = db.orders.find({"owner": "user:" + ident.user_id}).sort("created_at", -1).limit(100)
-    return {"orders": [{k: o.get(k) for k in ("id", "number", "status", "total_cents", "currency", "created_at", "paid_at")} | {"items": sum(l["quantity"] for l in o["lines"])} async for o in rows]}
+    rows = await store.orders.recent_of_owner("user:" + ident.user_id, 100)
+    return {"orders": [{k: o.get(k) for k in ("id", "number", "status", "total_cents", "currency", "created_at", "paid_at")} | {"items": sum(l["quantity"] for l in o["lines"])} for o in rows]}
 
 
 @router.post("/webhooks/revolut")
 async def revolut_webhook(request: Request, signature: str = Header("", alias="Revolut-Signature"), timestamp: str = Header("", alias="Revolut-Request-Timestamp")):
     raw = await request.body()
-    hooks = [h async for h in db.revolut_webhooks.find({})]
+    hooks = await store.payments.webhook_registrations()
     if not any(revolut.verify_signature(raw, timestamp, signature, h.get("signing_secret")) for h in hooks):
         raise HTTPException(401, {"error": "invalid_signature"})
     try:
@@ -275,10 +271,10 @@ async def revolut_webhook(request: Request, signature: str = Header("", alias="R
         raise HTTPException(400, {"error": "invalid_json"}) from None
     key = hashlib.sha256(raw).hexdigest()
     try:
-        await db.webhook_events.insert_one({"event_key": key, "event": event.get("event"), "order_id": event.get("order_id"), "received_at": now_iso()})
-    except DuplicateKeyError:
+        await store.payments.record_webhook_event(key, event.get("event"), event.get("order_id"), now_iso())
+    except store.AlreadyExists:
         pass
-    order = await db.orders.find_one({"revolut_order_id": event.get("order_id")}) if event.get("order_id") else None
+    order = await store.orders.by_provider_order_id(event.get("order_id")) if event.get("order_id") else None
     if order:
         try:
             await sync_payment(order)
