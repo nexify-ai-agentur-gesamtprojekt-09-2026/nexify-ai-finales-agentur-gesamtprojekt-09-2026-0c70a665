@@ -203,7 +203,59 @@ mit ausdrücklicher Bestätigung gegen Loopback (`NEXIFY_POSTGRES_DISPOSABLE_CON
 und über eine Anmeldung, die nur die Dienstrolle hält (Rechte und Policies sind also mitgetestet).
 Ohne Bestätigung werden sie übersprungen, nicht als grün gezählt.
 
-@@TESTZAHLEN@@
+### 6.1 Shop-Suite (`apps/shop-api/tests`)
+
+| Lauf | Tests | bestanden | übersprungen | rot |
+|---|---|---|---|---|
+| mit lokalem PostgreSQL 16.15 und Treiber (Python 3.13) | 274 | 198 | 76 | 0 |
+| ohne Bestätigung, ohne Treiber (Umgebung aus `make test-env`, Python 3.12) | 267 | 106 | 161 | 0 |
+
+Die 76 übersprungenen im ersten Lauf brauchen ein echtes MongoDB-Replica-Set: 65 Vertragsaussagen,
+1 Vergleichslauf, 10 Aussagen von `test_cart_merge_replica_contract.py` (vorbestehend).
+
+| Gruppe | Datei | Zahl | Aussage |
+|---|---|---|---|
+| Vertragstests, gemeinsame Suite | `test_store_contract.py` | 65 Aussagen je Bindung | dieselben Aussagen gegen die MongoDB-Umsetzung (über den Stellvertreter: 65 grün, plus 2 MongoDB-Besonderheiten) und gegen PostgreSQL (65 grün). Keine Aussage wurde für PostgreSQL geändert; hinzugekommen ist eine für die beiden neuen Methoden. |
+| PostgreSQL-Besonderheiten | `test_store_contract.py` (`PostgresSpecifics`) | 6 | Millisekunden wie bisher; Schutzgrenze und nicht ablegbare Daten; Beträge, die keine ganzen Cent sind, erreichen die Tabelle nie; Aufräumen nur auf Aufruf; zwei wartende Zustandswechsel haben einen Gewinner; zwei gleichzeitige Zusammenführungen übernehmen die Positionen genau einmal |
+| Vergleichslauf alt gegen neu | `test_store_parity.py` | 157 Schritte | eine feste Schrittfolge über alle neun Bereiche gegen beide Umsetzungen; jede Rückgabe als Text verglichen (gleiche Felder, gleiche Folge), erzeugte Kennungen maskiert: 157 von 157 gleich |
+| RLS und Rechte | `test_postgres_rls.py` | 8 | jede Tabelle mit erzwungener RLS und genau einer Policy; Anmeldung ohne Rechte erreicht nichts; `anon`/`authenticated` erreichen nichts; Tabellenrecht ohne Policy sieht null Zeilen und schreibt keine; Dienstrolle löscht keine Geschäftsdaten und ändert weder Schema noch Policies noch fremde Schemas; die Datenbank weist falsche Beträge ab; Treibertext verlässt die Schicht nicht |
+| Datenumzug | `test_postgres_transfer.py` | 10 | Trockenlauf lässt das Ziel leer; Zahl und Prüfsumme gleich für alle 19 Sammlungen; zweiter Lauf schreibt keine Zeile (Zeilenversionen unverändert); nur geänderte und neue Dokumente werden geschrieben; Zeile nur im Ziel und geändertes Zahlungsereignis führen zum Abbruch ohne Festschreiben; acht Arten nicht verlustfrei übertragbarer Dokumente brechen ab; Quelle wird nur über `find` gelesen (einmal je Sammlung und Lauf); Protokoll ohne Inhalte; beide Umsetzungen antworten nach dem Umzug gleich (24 Abrufe als Text) |
+| Schalter | `test_store_backend_switch.py` | 4 | ohne Variable MongoDB und der PostgreSQL-Code wird nicht geladen; `postgres` bindet alle Bereiche ohne Verbindungsaufbau; fehlende Adresse und jeder andere Wert stoppen den Start, ohne die Adresse zu nennen |
+
+### 6.2 Gegenprobe (gezielt eingebaute Fehler in `shop/store/pg/`, nicht eingecheckt)
+
+85 Fehler eingebaut (vertauschte Vergleiche, entfernte Bedingungen, falsche Sortierung, entfernte
+Sperre, entfernte Transaktionssicherung). Erster Durchgang: **78 erkannt, 7 nicht.** Von den 7:
+
+- 3 echte Lücken, je mit neuer Prüfzeile geschlossen und erneut gezählt (jetzt erkannt): entfernte
+  Zeilensperre bei bedingten Änderungen; Sperren bereits gesperrter Schlüssel; fehlender
+  Zeilenanfang im Muster der Bestellmails.
+- 4 wirkungsgleich: Zwei fängt die Datenbank selbst ab (doppelter Warenkorb über die
+  Eindeutigkeit, `NaN` über den JSON-Typ), zwei waren doppelte Bedingungen (eine davon ist
+  entfernt, die andere steht zusätzlich in der Abfrage).
+
+Zweiter Durchgang: **81 von 85 erkannt**, die übrigen 4 sind die wirkungsgleichen. Während des
+ersten Laufs brach das Werkzeug am Zeitlimit ab und ließ einen eingebauten Fehler in
+`pg/outbox.py` stehen; er wurde über `git diff` gefunden und zurückgesetzt, der Lauf danach mit
+Rücksetzen bei Abbruch wiederholt. Am Ende zeigte `git diff` nur beabsichtigte Änderungen, die
+Suite war grün.
+
+### 6.3 Gates
+
+Lokal gelaufen am Stand dieses Zweigs; ein CI-Lauf liegt nicht vor (Actions startet in diesem
+Repository derzeit keine Jobs, siehe Skill `nexify-zweig-und-pr`, „Bekannte Lage“).
+
+| Gate | Ergebnis |
+|---|---|
+| `python3 tools/project_skills.py verify` | bestanden (5 Skills) |
+| `make check` | Rückgabewert 0 |
+| `python3 tools/check_loesungsregister.py` | Rückgabewert 0 (58 Lösungen, 48 Zugänge) |
+| `make check-arch` | Rückgabewert 2, **wie auf `main`** (Ausgabe zeilengleich mit `origin/main` 9c9c806; vorbestehend, nicht von diesem Zweig) |
+| `make test-env` | Rückgabewert 0 (Python 3.12.3, pymongo 4.19.0) |
+| Python-Suite `tests/` (852 Tests) | 50 rot, **namensgleich mit `origin/main` 9c9c806** (vorbestehend: veraltete Pins und Belege); neu: keine, behoben: keine. Gemessen in derselben Umgebung vor und nach, beide Seiten ohne erzeugte Seitendaten. |
+| `pnpm --filter @nexify/web test:auth` | 138 von 138 in zwei aufeinanderfolgenden Läufen. Zwei frühere Läufe waren rot: der erste, weil die erzeugten Seitendaten noch fehlten (Reihenfolge des Laufs), der zweite wegen eines Wettlaufs im Vite-Zwischenspeicher (`ENOTEMPTY … node_modules/.vite/deps`). `apps/web` ist in diesem Zweig nicht berührt. |
+| `pnpm typecheck` | Rückgabewert 0 |
+| `pnpm build`, `make build` | Rückgabewert 0 |
 
 **Was die Zahlen belegen und was nicht:** Die MongoDB-Seite des Vergleichs ist der Stellvertreter
 des Treibers aus der Vertragssuite, kein echtes MongoDB (in dieser Umgebung gibt es weder `mongod`
@@ -294,3 +346,23 @@ export NEXIFY_POSTGRES_DISPOSABLE_CONFIRMED=yes
 export NEXIFY_TEST_POSTGRES_DSN='postgresql://<rolle>:<testkennwort>@127.0.0.1:5432/postgres'
 cd apps/shop-api && /tmp/shop-venv/bin/python -m unittest discover -s tests
 ```
+
+## 11. Hinweise für die koordinierende Sitzung
+
+- **Grundlage.** Dieser Zweig enthält die Commits von `claude/shop-zugriffsschicht` (PR 150) und
+  löst dessen Konflikt mit `main` in `accounts_api.py`. Sinnvolle Reihenfolge: PR 150 prüfen und
+  mergen, dann diesen Zweig auf `main` einholen; der Unterschied schrumpft dann auf die
+  PostgreSQL-Vorbereitung.
+- **Commit-Nachrichten.** Die ersten vier eigenen Commits dieses Zweigs enden mit zwei
+  Werkzeugzeilen (Mitautor und Sitzungsverweis), die der Auftrag untersagt. Das ist ein Fehler des
+  Verfassers. Er ist nicht durch Umschreiben der Historie behoben, weil die Regeln des Repositories
+  Force-Push ausschließen; spätere Commits sind ohne diese Zeilen. Beim Squash-Merge bitte eine
+  Nachricht ohne sie verwenden.
+- **Nicht geändert, aber nachzuführen** (Leitdokumente und gebundene Dateien gehören der
+  koordinierenden Sitzung): `docs/deployment/environment-variables.md`, Abschnitt 6, um
+  `SHOP_STORE_BACKEND` und `SHOP_POSTGRES_DSN`; `config/loesungsregister.json`, Eintrag `supabase`,
+  um den Ort der Shop-Migrationen; `DECISIONS.md` D-013 „Offen“ (Schema mit RLS und Plan für die
+  Datenübernahme liegen jetzt als Entwurf vor); `PROGRESS.md`.
+- **Geändert außerhalb von `apps/shop-api`:** nur `.claude/skills/nexify-shop-zugriffsschicht/SKILL.md`
+  (Abschnitt zur PostgreSQL-Umsetzung und die Lehre aus der abgebrochenen Gegenprobe) und dieses
+  Dokument.
