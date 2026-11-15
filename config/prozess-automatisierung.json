@@ -1,0 +1,101 @@
+{
+  "$kommentar": "Vorbereitete Automatisierungen der Agentur (NeXify AI einschließlich TEILEKLAR.shop). Alles steht auf AUS. Eine Automatisierung wirkt nur, wenn hier `aktiv` auf true steht UND die Umgebungsvariable aus `schalter` den Wert `ein` hat UND `NEXIFY_AUTO_NOTAUS` nicht gesetzt ist. Diese Datei legt keinen Zeitplan an und startet nichts; die einspielbaren Zeitplan-Definitionen liegen unter ops/automatisierung/definitionen/. Beschreibung, Einschaltliste und Rückwege: docs/04-betrieb/prozess-automatisierung-2026-11-15.md.",
+  "schema_version": 1,
+  "stand": "2026-11-15",
+  "zustand": "vorbereitet_ausgeschaltet",
+  "notaus": "NEXIFY_AUTO_NOTAUS",
+  "zustandsordner": {
+    "variable": "NEXIFY_AUTO_ZUSTAND",
+    "vorgabe": ".local/automatisierung"
+  },
+  "zeitzone": "Europe/Amsterdam",
+  "llm": {
+    "$kommentar": "Keine der vier Automatisierungen ruft ein Modell auf. Sollte später eine Zusammenfassung per Modell gewünscht sein, gilt ausschließlich diese Bindung über den kontrollierten Adapter (config/llm-policy.json); bis ein Schlüssel belegt ist (Master-Audit L21), bleibt `aufrufe_erlaubt` false.",
+    "modell": "deepseek/deepseek-v4.1-flash-1017",
+    "reasoning": "high",
+    "ersatzmodelle": [],
+    "aufrufe_erlaubt": false
+  },
+  "zustellung": {
+    "$kommentar": "`datei` schreibt in den Zustandsordner und ist der einzige Kanal, der ohne weiteren Schalter arbeitet. `resend_intern` sendet ausschließlich an die interne Adresse aus der genannten Variable (keine Kunden, keine Dritten) und hat einen eigenen Schalter. Werte der Variablen stehen nie in dieser Datei.",
+    "datei": { "aktiv": true },
+    "resend_intern": {
+      "aktiv": false,
+      "schalter": "NEXIFY_AUTO_MAIL_INTERN",
+      "empfaenger_variable": "NEXIFY_AUTO_INTERN_AN",
+      "absender_variable": "RESEND_FROM",
+      "schluessel_variable": "RESEND_API_KEY",
+      "host": "api.resend.com",
+      "max_mails_je_tag": 12
+    }
+  },
+  "automatisierungen": [
+    {
+      "id": "tagesbericht",
+      "name": "Tagesbericht an den Inhaber (08:00 Europe/Amsterdam)",
+      "prozess": "P12",
+      "aktiv": false,
+      "schalter": "NEXIFY_AUTO_TAGESBERICHT",
+      "ausloeser": "Zeitplan täglich 07:47 Europe/Amsterdam (Definition liegt vor, ist nicht angelegt)",
+      "idempotenz": "ein Bericht je Kalendertag (Europe/Amsterdam)",
+      "kanaele": ["datei", "resend_intern"],
+      "grenzen": { "max_versuche": 3, "max_wirkungen_je_tag": 1, "max_zeilen": 60 }
+    },
+    {
+      "id": "waechter",
+      "name": "Außenwächter: Erreichbarkeit mit Alarm je Störung",
+      "prozess": "P13",
+      "aktiv": false,
+      "schalter": "NEXIFY_AUTO_WAECHTER",
+      "ausloeser": "Zeitplan stündlich (Definition liegt vor, ist nicht angelegt)",
+      "idempotenz": "ein Alarm je Ziel und Störungsbeginn, eine Entwarnung je beendeter Störung",
+      "kanaele": ["datei", "resend_intern"],
+      "grenzen": { "max_versuche": 3, "max_wirkungen_je_tag": 8, "zeitlimit_je_abruf_s": 10, "stoerung_ab_fehlversuchen": 2 },
+      "ziele": [
+        { "id": "nexifyai-de-start", "url": "https://nexifyai.de/", "erwartet": [200] },
+        { "id": "nexifyai-de-kontakt", "url": "https://nexifyai.de/kontakt", "erwartet": [200] },
+        { "id": "nexifyai-cloud-start", "url": "https://nexifyai.cloud/", "erwartet": [200] },
+        {
+          "id": "shop-dienst-anfragen",
+          "url": "https://nexifyai.de/api/requests",
+          "erwartet": [200, 405],
+          "nur_bericht": true,
+          "bekannter_befund": "Master-Audit L13/L14: antwortet mit 503, solange der Shop-Dienst nicht gebunden ist; erscheint im Tagesbericht, löst keinen Alarm aus"
+        }
+      ]
+    },
+    {
+      "id": "anfragen",
+      "name": "Anfrage-Nachverfolgung: Vorgang, Antwortfrist und Erinnerung",
+      "prozess": "P01",
+      "aktiv": false,
+      "schalter": "NEXIFY_AUTO_ANFRAGEN",
+      "ausloeser": "Ereignis `anfrage.eingegangen` (Ereignisdatei oder Aufruf durch den Empfänger der Anfrage) und Zeitplan werktags stündlich für die Fristprüfung",
+      "idempotenz": "ein Vorgang je Anfragekennung; je Vorgang und Erinnerungsstufe eine Erinnerung",
+      "kanaele": ["datei", "resend_intern"],
+      "grenzen": { "max_versuche": 3, "max_wirkungen_je_tag": 20 },
+      "fristen": {
+        "$kommentar": "Werktage Montag bis Freitag, ohne Feiertagskalender. Quelle der Antwortfrist: docs/04-betrieb/betriebslogik-und-prozesse.md, Abschnitt 9 (Zielbild, „< 1 Werktag“). Die Werte sind Vorschläge und gelten erst mit dem Einschalten durch den Inhaber.",
+        "antwort_werktage": 1,
+        "erinnerungsstufen_werktage": [1, 3]
+      },
+      "arten": ["kontakt", "erstgespraech", "audit", "werkstatt-termin", "gutschein", "partner-werden"]
+    },
+    {
+      "id": "fristen",
+      "name": "Fristen und Zugänge: Wiedervorlage",
+      "prozess": "P16",
+      "aktiv": false,
+      "schalter": "NEXIFY_AUTO_FRISTEN",
+      "ausloeser": "Zeitplan täglich, vor dem Tagesbericht",
+      "idempotenz": "je Eintrag und Stufe (Vorwarnung, fällig, überfällig je Woche) eine Meldung",
+      "kanaele": ["datei", "resend_intern"],
+      "grenzen": { "max_versuche": 3, "max_wirkungen_je_tag": 10, "vorwarnung_tage": 7 },
+      "quellen": {
+        "zugaenge": "config/loesungsregister.json (Zugänge mit `erneuerung_faellig` oder `offengelegt`)",
+        "termine": "Liste `termine` in dieser Datei"
+      },
+      "termine": []
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+# VORLAGE, nicht installiert und nicht aktiviert (DECISIONS.md D-016).
+[Unit]
+Description=NeXify Automatisierung waechter (Zeitplan)
+
+[Timer]
+OnCalendar=*-*-* *:23:00
+Unit=nexify-auto@waechter.service
+Persistent=false
+RandomizedDelaySec=60
+
+[Install]
+WantedBy=timers.target
