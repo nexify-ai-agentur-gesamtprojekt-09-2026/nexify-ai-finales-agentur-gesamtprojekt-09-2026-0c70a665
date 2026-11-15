@@ -215,7 +215,27 @@ Nicht Teil dieser Liste, aber Voraussetzung für mehr: Actions-Budget (L7), Mode
 
 ## 10. Prüfungen
 
-PRUEFUNGEN_PLATZHALTER
+Gemessen am 15.11.2026 am Stand dieses Zweigs; Vergleichsbasis ist `origin/main` auf `9c9c806`, gemessen in derselben Umgebung nach `generate-public-data`. Geändert sind nur `config/` (zwei Dateien), `docs/04-betrieb/` (zwei Dateien), `ops/automatisierung/` und ein Test; keine Datei unter `apps/`, `packages/`, `tools/` oder `evidence/`, kein führendes Dokument.
+
+| Prüfung | Ergebnis |
+|---|---|
+| `python3 -m unittest tests.test_prozess_automatisierung` | 46 Tests, alle bestanden: Schalter aus = keine Wirkung (6), doppelter Auslöser = eine Wirkung, begrenzte Wiederholung, Fehlerweg, Kostenbremse, Probelauf ohne Netz |
+| Python-Suite gesamt | vorher 844 Tests, 46 rot (39 Fehlschläge, 7 Fehler); nachher 890 Tests, dieselben 46 Namen rot. **Kein neuer Fehlschlag** (Namensvergleich leer). Die 46 bestehen auf `main` (Pins und Belege, fehlende Pakete der Shop-Tests) |
+| `make check` | bestanden |
+| `node tools/ds-audit-cli.js` | bestanden |
+| `make governance-check` (Modellvorgabe, Hermes-Konfiguration, Lösungsregister, Skills, KI-Abdeckung) | bestanden; Lösungsregister: 59 Lösungen, 49 Zugänge, lesbare Fassung stimmt überein |
+| `make source-boundaries`, `make automation-check` | bestanden |
+| `node tools/lint.mjs` | bestanden |
+| `python3 tools/check_text_resize_evidence.py` (Resize-Belege) | bestanden, 43 Routen; kein gebundenes Verzeichnis berührt |
+| `pnpm --filter @nexify/web test:auth` | 138 von 138 |
+| `pnpm typecheck` | bestanden |
+| `pnpm --filter @nexify/web build` | bestanden |
+| `node tools/gleichmacher.mjs` gegen den lokalen Produktions-Build | 44 Seiten, 2 Breiten, 31.497 Vergleiche, **0 Abweichungen** |
+| `make check-arch` | **nicht grün, unverändert gegenüber `main`:** ARCH-010, ARCH-027, ARCH-029 (veraltete Browserbelege und Quellenregister). Dieselben drei sind am unveränderten Stand von `origin/main` verletzt; keiner nennt eine Datei dieses Zweigs |
+| `python3 tools/check_browser_evidence.py` | **nicht grün, unverändert gegenüber `main`:** `stale_source_sha256: apps/site/src/Auth.tsx`, eine Datei, die dieser Zweig nicht berührt |
+| `node tools/live-check.mjs` gegen den lokalen Produktions-Build | 322 von 329 Prüfungen; die 7 Befunde betreffen den Shop-Dienst (2) und die PWA-Dateien (5), die der lokale Start von `apps/web` nicht ausliefert. Gegen die Produktion wurde nicht gemessen |
+
+Nichts wurde abgeschaltet, übersprungen oder nachgezogen: kein Pin, kein Beleg, keine Prüfsumme.
 
 ## 11. Nicht geprüft
 
