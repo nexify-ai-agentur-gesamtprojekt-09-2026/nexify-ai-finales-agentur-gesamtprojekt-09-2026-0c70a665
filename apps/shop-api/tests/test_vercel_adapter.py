@@ -248,6 +248,67 @@ class MetadataTests(unittest.IsolatedAsyncioTestCase):
                 self.assertEqual(db.document_reads, 0)
 
 
+class AdditionalWriteOriginTests(unittest.TestCase):
+    """SHOP_ADDITIONAL_WRITE_ORIGINS: the shop on its own domain next to the agency domain. Default: none."""
+    NAME = 'SHOP_ADDITIONAL_WRITE_ORIGINS'
+    SHOP = 'https://own-shop.example.invalid'
+
+    def app(self, env, calls):
+        router = APIRouter()
+        async def endpoint():
+            calls.append('cart')
+            return {'synthetic': True}
+        router.add_api_route('/api/shop/cart', endpoint, methods=['GET', 'POST'])
+        return ADAPTER.create_app(env, loader=lambda binding: ([router], Database()))
+
+    def test_default_without_variable_is_exactly_the_public_origin(self):
+        self.assertEqual(ADAPTER.ADDITIONAL_WRITE_ORIGINS_ENV, self.NAME)
+        self.assertNotIn(self.NAME, ENV)
+        for env in (ENV, {**ENV, self.NAME: ''}, {**ENV, self.NAME: ' , ,'}):
+            binding = ADAPTER.resolve_binding(env)
+            self.assertEqual(binding.write_origins, frozenset({ENV['PREVIEW_PUBLIC_ORIGIN']}))
+            self.assertEqual(binding.origin, ENV['PREVIEW_PUBLIC_ORIGIN'])
+        calls = []
+        with TestClient(self.app(ENV, calls)) as client:
+            self.assertEqual(client.post('/api/shop/cart', headers={'Origin': ENV['PREVIEW_PUBLIC_ORIGIN']}).status_code, 200)
+            self.assertEqual(client.post('/api/shop/cart', headers={'Origin': self.SHOP}).status_code, 403)
+        self.assertEqual(calls, ['cart'])
+
+    def test_listed_origin_may_write_and_everything_else_stays_rejected(self):
+        env = {**ENV, self.NAME: ' ' + self.SHOP + '/ , https://second.example.invalid'}
+        binding = ADAPTER.resolve_binding(env)
+        self.assertEqual(binding.write_origins, frozenset({ENV['PREVIEW_PUBLIC_ORIGIN'], self.SHOP, 'https://second.example.invalid'}))
+        # Links, payment return, webhook and mail keep the one public origin.
+        self.assertEqual(binding.origin, ENV['PREVIEW_PUBLIC_ORIGIN'])
+        calls = []
+        with TestClient(self.app(env, calls)) as client:
+            for origin in (ENV['PREVIEW_PUBLIC_ORIGIN'], self.SHOP, self.SHOP + '/', 'https://second.example.invalid'):
+                self.assertEqual(client.post('/api/shop/cart', headers={'Origin': origin}).status_code, 200, origin)
+            for origin in ('https://foreign.invalid', 'http://own-shop.example.invalid', 'https://www.own-shop.example.invalid',
+                           'https://own-shop.example.invalid.evil.invalid', 'https://own-shop.example.invalid:8443', 'null'):
+                response = client.post('/api/shop/cart', headers={'Origin': origin})
+                self.assertEqual(response.status_code, 403, origin)
+                self.assertEqual(response.json(), {'detail': {'error': 'origin_rejected'}})
+        self.assertEqual(len(calls), 4)
+
+    def test_malformed_entry_fails_closed_with_a_fixed_code_and_no_value(self):
+        for raw in ('http://own-shop.example.invalid', 'own-shop.example.invalid', 'https://user:secret@own-shop.example.invalid',
+                    'https://own-shop.example.invalid/pfad', 'https://own-shop.example.invalid:8443', '*', 'https://*.example.invalid/x',
+                    self.SHOP + ',http://second.example.invalid', 7):
+            with self.subTest(raw=raw):
+                env = {**ENV, self.NAME: raw}
+                with self.assertRaises(ADAPTER.BindingError) as caught:
+                    ADAPTER.resolve_binding(env)
+                self.assertEqual(str(caught.exception), 'additional_origin_unbound')
+                calls = []
+                with TestClient(self.app(env, calls)) as client:
+                    response = client.get('/api/shop/cart')
+                    self.assertEqual(response.status_code, 503)
+                    self.assertEqual(response.json()['detail']['reason'], 'additional_origin_unbound')
+                    self.assertNotIn('example.invalid', response.text)
+                self.assertEqual(calls, [])
+
+
 class DispatchTests(unittest.TestCase):
     def fake_app(self, db):
         self.calls, self.loaded = [], []

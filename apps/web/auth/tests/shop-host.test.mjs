@@ -1,11 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
+import * as indexing from '../indexing.ts';
+import { APPROVED_INDEX_HOSTS, LEGAL_ROUTE_PATHS, indexablePaths, indexingDecision } from '../indexing.ts';
+import * as shopHost from '../shop-host.ts';
 import {
-  APPROVED_INDEX_HOSTS, LEGAL_ROUTE_PATHS, SHOP_CANONICAL_HOST, SHOP_HOST_SWITCH, indexablePaths, indexingDecision, shopHostOn,
-} from '../indexing.ts';
-import {
-  AGENCY_ORIGIN, SHOP_HOSTS, SHOP_HOST_HEADER, SHOP_LANDING_TARGETS, SHOP_ORIGIN, SHOP_SHARED_PATHS, agencyPagePaths, hostKind,
+  AGENCY_HOSTS, SHOP_CANONICAL_HOST, SHOP_HOST_SWITCH, shopHostOn, AGENCY_ORIGIN, SHOP_HOSTS, SHOP_HOST_HEADER, SHOP_LANDING_TARGETS, SHOP_ORIGIN, SHOP_SHARED_PATHS, agencyPagePaths, hostKind,
   publicUrl, shopCanonicalBase, shopHostDecision, shopInternalPath, shopPublicHref, shopRobotsDisallow, stripShopPrefix,
 } from '../shop-host.ts';
 import { canonicalPath, privateRoute } from '../policy.ts';
@@ -32,6 +32,22 @@ test('Feste Werte: Schalter, Hosts und Adressen', () => {
   // Dieselbe Agenturadresse wie Canonical und Sitemap (lib/page-seo.ts).
   assert.match(read('../../lib/page-seo.ts'), new RegExp("export const PUBLIC_ORIGIN='" + AGENCY_ORIGIN + "';"));
   for (const host of SHOP_HOSTS) assert.equal(APPROVED_INDEX_HOSTS.includes(host), false, host);
+});
+
+test('Die Grundwerte stehen in indexing.ts und shop-host.ts gleich (beide Module bleiben ohne Importe)', () => {
+  assert.doesNotMatch(read('../shop-host.ts'), /^\s*import\s/m);
+  assert.doesNotMatch(read('../indexing.ts'), /^\s*import\s/m);
+  assert.equal(shopHost.SHOP_HOST_SWITCH, indexing.SHOP_HOST_SWITCH);
+  assert.equal(shopHost.SHOP_CANONICAL_HOST, indexing.SHOP_CANONICAL_HOST);
+  assert.deepEqual(AGENCY_HOSTS, APPROVED_INDEX_HOSTS);
+  for (const name of ['normalizeHost', 'requestHosts', 'isTeileklarPath', 'shopHostOn']) {
+    // Gleicher Funktionskörper; nur der Name des Umgebungstyps in der Signatur darf abweichen (wird beim Laden ohnehin entfernt).
+    assert.equal(shopHost[name].toString(), indexing[name].toString(), name);
+  }
+  for (const value of ['teileklar.shop', 'TEILEKLAR.shop:443', 'teileklar.shop.', ' www.nexifyai.de ', '[::1]:3000', 'a b', '', 'x.vercel.app:80.']) {
+    assert.equal(shopHost.normalizeHost(value), indexing.normalizeHost(value), value);
+  }
+  assert.deepEqual(shopHost.requestHosts('a, b', null, undefined, ' c '), indexing.requestHosts('a, b', null, undefined, ' c '));
 });
 
 test('Standard ist AUS: nur der genaue Wert "enabled" schaltet, sonst wird jeder Aufruf unverändert durchgelassen', () => {
@@ -197,7 +213,7 @@ test('Private Bereiche bleiben gesperrt: die Sperre des Proxys greift auf den Ap
   }
   const source = read('../../proxy.ts');
   // Reihenfolge im Proxy: erst die Adressentscheidung, dann mit dem App-Pfad die unveränderte Sperre.
-  assert.match(source, /const shop = shopHostDecision\(\{ path: requested, search: request\.nextUrl\.search, hosts: requestHosts\(request\.headers\.get\('host'\), request\.headers\.get\('x-forwarded-host'\)\), env: process\.env, agencyPaths \}\);\n  if \(shop\.action === 'redirect'\) return NextResponse\.redirect\(new URL\(shop\.location, request\.url\), shop\.status\);\n  const path = shop\.path;\n  if \(privateRoute\(path, protectedPaths\) && path\.startsWith\('\/api\/'\)\) \{/);
+  assert.match(source, /const shop = shopHostDecision\(\{ path: requested, search: request\.nextUrl\.search, hosts: requestHosts\(request\.headers\.get\('host'\), request\.headers\.get\('x-forwarded-host'\)\), env: process\.env, agencyPaths \}\);\n  \/\/ Ziele auf demselben Host[^\n]*\n  if \(shop\.action === 'redirect'\) return NextResponse\.redirect\(new URL\(shop\.location, request\.url\), shop\.status\);\n  const path = shop\.path;\n  if \(privateRoute\(path, protectedPaths\) && path\.startsWith\('\/api\/'\)\) \{/);
   assert.match(source, /if\(shop\.shopHost\)requestHeaders\.set\(SHOP_HOST_HEADER,'1'\);else requestHeaders\.delete\(SHOP_HOST_HEADER\);/);
   assert.match(source, /const response=shop\.action==='rewrite'\?NextResponse\.rewrite\(target,\{request:\{headers:requestHeaders\}\}\):NextResponse\.next\(\{request:\{headers:requestHeaders\}\}\);/);
 });
@@ -220,7 +236,8 @@ test('Verweise der Oberfläche auf der Shop-Domain: Shop ohne Präfix, Konto und
   assert.match(bridge, /const local=\(href:string\)=>shopHost\?shopPublicHref\(localized\(href\)\):localized\(href\);/);
   const layout = read('../../app/layout.tsx');
   assert.match(layout, /const shopHost=\(await headers\(\)\)\.get\(SHOP_HOST_HEADER\)==='1';/);
-  assert.match(layout, /<NextRouterBridge locale=\{locale\} shopHost=\{shopHost\}>/);
+  assert.match(layout, /<NextRouterBridge locale=\{locale\} \{\.\.\.\(shopHost\?\{shopHost:true\}:\{\}\)\}>/);
+  assert.match(layout, /<PublicInstallation enabled=\{installation\.enabled&&!shopHost\}\/>/);
 });
 
 test('Indexierung: die Regel bleibt, die Shop-Domain kommt nur für Shop-Seiten und nur mit beiden Schaltern dazu', () => {
@@ -265,4 +282,16 @@ test('robots.txt und Sitemap je Host: ohne Schalter die bisherige Datei, mit Sch
   assert.match(read('../../lib/shop-server.ts'), /export const SHOP_CANONICAL=shopCanonicalBase\(process\.env\);/);
   assert.equal(shopCanonicalBase(ON), 'https://teileklar.shop');
   assert.equal(publicUrl('/teileklar', ON), 'https://teileklar.shop');
+});
+
+test('Die beiden Shop-Seiten mit fester Adresse im Seitenkopf nehmen sie aus derselben Funktion', () => {
+  const home = read('../../app/teileklar/page.tsx'), shop = read('../../app/teileklar/shop/page.tsx');
+  assert.match(home, /const SHOP_HOME_URL=publicUrl\('\/teileklar',process\.env\);/);
+  assert.match(home, /alternates:\{canonical:SHOP_HOME_URL,languages:\{de:SHOP_HOME_URL,'x-default':SHOP_HOME_URL\}\}/);
+  assert.match(shop, /const SHOP_URL=publicUrl\('\/teileklar\/shop',process\.env\);/);
+  assert.match(shop, /alternates:\{canonical:SHOP_URL,languages:\{de:SHOP_URL,'x-default':SHOP_URL\}\}/);
+  // Keine weitere fest eingetragene Shop-Adresse der Agentur-Domain in Seiten, Komponenten oder Bibliothek.
+  assert.equal(publicUrl('/teileklar', {}), 'https://www.nexifyai.de/teileklar');
+  assert.equal(publicUrl('/teileklar/shop', {}), 'https://www.nexifyai.de/teileklar/shop');
+  assert.equal(publicUrl('/teileklar/shop', ON), 'https://teileklar.shop/shop');
 });

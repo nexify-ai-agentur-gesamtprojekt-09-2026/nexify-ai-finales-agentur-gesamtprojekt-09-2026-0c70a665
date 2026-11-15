@@ -17,6 +17,7 @@ export default function proxy(request: NextRequest) {
   const requested = canonicalPath(request.nextUrl.pathname);
   if (!requested) return NextResponse.json({ error: "invalid_path" }, { status: 400 });
   const shop = shopHostDecision({ path: requested, search: request.nextUrl.search, hosts: requestHosts(request.headers.get('host'), request.headers.get('x-forwarded-host')), env: process.env, agencyPaths });
+  // Ziele auf demselben Host sind Pfade und werden an der Adresse des Aufrufs aufgelöst, Ziele auf einem anderen Host sind vollständig.
   if (shop.action === 'redirect') return NextResponse.redirect(new URL(shop.location, request.url), shop.status);
   const path = shop.path;
   if (privateRoute(path, protectedPaths) && path.startsWith('/api/')) {

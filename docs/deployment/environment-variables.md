@@ -220,3 +220,27 @@ Beide Variablen sind keine Geheimnisse und in Produktion **nicht gesetzt**; setz
 | `NEXIFY_INDEXING` | `enabled` | Vercel-Projekt `…-ut7r`, nur Umgebung Production, danach Redeploy | Agentur- und Rechtsseiten werden auf den freigegebenen Domains indexierbar; jeder andere Wert sperrt |
 | `NEXIFY_INDEXING_TEILEKLAR` | `enabled` | wie oben, erst wenn der Shop-Dienst antwortet | zusätzlich `/teileklar` in Index und Sitemap; wirkt nur zusammen mit `NEXIFY_INDEXING` |
 
+
+## 8. TEILEKLAR auf eigener Domain (Nachtrag 15.11.2026)
+
+Regel, Weiterleitungstabelle und Umschaltplan: `docs/04-betrieb/shop-eigene-domain-2026-11-15.md`, Umsetzung
+`apps/web/auth/shop-host.ts` und `apps/shop-api/vercel_app.py`. Beide Variablen sind keine Geheimnisse und in Produktion
+**nicht gesetzt**; setzen darf sie nur der Inhaber, und erst nach der Vorbedingung des Umschaltplans (Katalog gefüllt und abgenommen).
+
+| Variable | Wert | Wo | Wirkung |
+|---|---|---|---|
+| `NEXIFY_SHOP_HOST` | `enabled` | Vercel-Projekt `…-ut7r`, nur Umgebung Production, danach Redeploy | `teileklar.shop` zeigt den Shop ohne `/teileklar`; `/teileklar/…` auf den Agentur-Domains leitet dauerhaft dorthin; Canonical, Sitemap und `robots.txt` folgen je Host. Jeder andere Wert: Verhalten wie bisher |
+| `SHOP_ADDITIONAL_WRITE_ORIGINS` | `https://teileklar.shop` | wie oben | Schreibaufrufe des Browsers an die Shop-API werden zusätzlich von dieser Herkunft angenommen. Nicht gesetzt: nur `PREVIEW_PUBLIC_ORIGIN`, wie bisher |
+
+Regeln für `SHOP_ADDITIONAL_WRITE_ORIGINS`:
+
+- Format: kommagetrennte Herkünfte, jede genau `https://<host>` ohne Pfad, Port, Zugangsdaten oder Platzhalter. Leerzeichen um einen
+  Eintrag und ein abschließender Schrägstrich werden toleriert, leere Einträge ignoriert.
+- Nicht gesetzt oder leer heißt **keine** zusätzliche Herkunft, niemals „alle".
+- Ein fehlerhafter Eintrag sperrt den ganzen Dienst mit `503` und dem festen Code `additional_origin_unbound`; der Wert erscheint in
+  keiner Antwort.
+- Die Variable erweitert nur die Herkunftsprüfung für Schreibaufrufe. Verweise in E-Mails, der Rücksprung nach der Zahlung und die
+  Adresse des Zahlungs-Webhooks kommen weiter aus `PREVIEW_PUBLIC_ORIGIN`. Sie aktiviert weder Zahlung noch Mailversand.
+
+Prüfung ohne Netzwerk und ohne echte Werte: `pnpm --filter @nexify/web test:auth` (`shop-host.test.mjs`) und
+`python3 -m unittest discover -s apps/shop-api/tests -p 'test_vercel_adapter.py'` (`AdditionalWriteOriginTests`).

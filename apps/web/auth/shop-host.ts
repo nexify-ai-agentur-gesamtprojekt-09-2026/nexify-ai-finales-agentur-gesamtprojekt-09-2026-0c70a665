@@ -20,9 +20,30 @@
  * Liegt neben indexing.ts und nicht unter lib/ (lib/ ist als Verzeichnis an den Text-Resize-Beleg gebunden). Reine
  * Funktionen ohne Laufzeitabhängigkeit: Proxy, Sitemap, Router-Brücke und die Node-Tests verwenden dieselbe Regel.
  */
-import {
-  APPROVED_INDEX_HOSTS, SHOP_CANONICAL_HOST, isTeileklarPath, normalizeHost, shopHostOn, type IndexingEnvironment,
-} from './indexing.ts';
+// Bewusst ohne Importe, wie indexing.ts: Dieses Modul wird auch vom Projekt apps/site mitgeprüft (über lib/), das Importe mit
+// Dateiendung nicht zulässt, und die Node-Tests laden es direkt. Die wenigen Grundwerte, die auch die Indexierungsregel
+// kennt (Schalter, Shop-Host, freigegebene Agentur-Hosts, Host-Schreibweise, Shop-Pfad), stehen deshalb in beiden Modulen;
+// shop-host.test.mjs hält sie gleich.
+export type ShopHostEnvironment = Record<string, string | undefined>;
+type IndexingEnvironment = ShopHostEnvironment;
+export const SHOP_HOST_SWITCH = 'NEXIFY_SHOP_HOST';
+export const SHOP_CANONICAL_HOST = 'teileklar.shop';
+/** Freigegebene Produktionsdomains der Agentur; identisch mit APPROVED_INDEX_HOSTS in indexing.ts. */
+export const AGENCY_HOSTS: readonly string[] = ['nexifyai.de', 'www.nexifyai.de', 'nexifyai.cloud', 'www.nexifyai.cloud'];
+const APPROVED_INDEX_HOSTS = AGENCY_HOSTS;
+export const shopHostOn = (env: ShopHostEnvironment): boolean => env[SHOP_HOST_SWITCH] === 'enabled';
+export const isTeileklarPath = (path: string): boolean => path === '/teileklar' || path.startsWith('/teileklar/');
+/** Host ohne Port, klein geschrieben, ohne abschließenden Punkt. Ungültiges ergibt die leere Zeichenkette. */
+export function normalizeHost(value: string): string {
+  const host = value.trim().toLowerCase().replace(/\.$/, '');
+  if (host.startsWith('[')) return ''; // IPv6-Literal ist nie eine freigegebene Domain
+  const withoutPort = host.replace(/:\d+$/, '');
+  return /^[a-z0-9.-]+$/.test(withoutPort) ? withoutPort.replace(/\.$/, '') : '';
+}
+/** Alle im Aufruf genannten Hosts (Host und X-Forwarded-Host, auch als Kommaliste) einzeln; wie requestHosts in indexing.ts. */
+export function requestHosts(...headerValues: (string | null | undefined)[]): string[] {
+  return headerValues.flatMap(value => (value ?? '').split(',')).map(part => part.trim()).filter(Boolean);
+}
 
 export const SHOP_WWW_HOST = 'www.' + SHOP_CANONICAL_HOST;
 export const SHOP_HOSTS: readonly string[] = [SHOP_CANONICAL_HOST, SHOP_WWW_HOST];

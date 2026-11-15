@@ -28,6 +28,12 @@ PROJECT_ID = "prj_Po7jlB7srMP6sxyMvf5zIwzXzNyh"
 # blank means exactly PROJECT_ID (never "open"). It authorizes the binding check only;
 # database credentials still have to exist in the allowed project's own environment.
 ALLOWED_PROJECT_IDS_ENV = "SHOP_ALLOWED_PROJECT_IDS"
+# Optional, non-secret, comma-separated additional https origins whose browser writes
+# pass the same-origin check (the shop on its own domain next to the agency domain).
+# Unset or blank means none: only PREVIEW_PUBLIC_ORIGIN, as before. It never changes
+# links, payment return addresses, the webhook address or mail content; those keep
+# using PREVIEW_PUBLIC_ORIGIN. A malformed entry fails closed for the whole service.
+ADDITIONAL_WRITE_ORIGINS_ENV = "SHOP_ADDITIONAL_WRITE_ORIGINS"
 # This is a NEW planned namespace, not a statement that it exists in Atlas.
 PLANNED_NAMESPACE = "nexify_teileklar_shop_v1"
 SCHEMA_MARKER = f"nexify/teileklar/shop-v1/{PROJECT_ID}/{PLANNED_NAMESPACE}"
@@ -64,6 +70,7 @@ class Binding:
     namespace: str
     origin: str
     vat: str
+    write_origins: frozenset[str] = frozenset()
 
 
 def allowed_project_ids(env: Mapping[str, str]) -> frozenset[str]:
@@ -86,6 +93,30 @@ def project_binding_verified(env: Mapping[str, str]) -> bool:
     """Shared by the runtime adapter and the operator CLI; returns only a boolean."""
     project = env.get("VERCEL_PROJECT_ID")
     return isinstance(project, str) and project in allowed_project_ids(env)
+
+
+def https_origin(value) -> str:
+    """A bare https origin (scheme and host only) without trailing slash, or ValueError."""
+    if not isinstance(value, str):
+        raise ValueError()
+    origin = value.rstrip("/")
+    public = urlsplit(origin)
+    if public.scheme != "https" or not public.hostname or public.username or public.password or public.port or public.path or public.query or public.fragment:
+        raise ValueError()
+    return origin
+
+
+def additional_write_origins(env: Mapping[str, str]) -> frozenset[str]:
+    """Extra origins for the write check; blank or missing is the empty set, never "any"."""
+    raw = env.get(ADDITIONAL_WRITE_ORIGINS_ENV)
+    if raw is None:
+        return frozenset()
+    if not isinstance(raw, str):
+        raise BindingError("additional_origin_unbound")
+    try:
+        return frozenset(https_origin(part.strip()) for part in raw.split(",") if part.strip())
+    except (ValueError, TypeError):
+        raise BindingError("additional_origin_unbound") from None
 
 
 def resolve_binding(env: Mapping[str, str]) -> Binding:
@@ -113,16 +144,11 @@ def resolve_binding(env: Mapping[str, str]) -> Binding:
     namespace = explicit or uri_name
     if namespace != PLANNED_NAMESPACE:
         raise BindingError("database_namespace_unapproved")
-    raw_origin = env.get("PREVIEW_PUBLIC_ORIGIN", "")
-    if not isinstance(raw_origin, str):
-        raise BindingError("public_origin_unbound")
-    origin = raw_origin.rstrip("/")
     try:
-        public = urlsplit(origin)
-        if public.scheme != "https" or not public.hostname or public.username or public.password or public.port or public.path or public.query or public.fragment:
-            raise ValueError()
+        origin = https_origin(env.get("PREVIEW_PUBLIC_ORIGIN", ""))
     except (ValueError, TypeError):
         raise BindingError("public_origin_unbound") from None
+    write_origins = additional_write_origins(env) | {origin}
     vat = env.get("SHOP_VAT_PERCENT", "")
     try:
         amount = Decimal(vat)
@@ -130,7 +156,7 @@ def resolve_binding(env: Mapping[str, str]) -> Binding:
             raise ValueError()
     except (InvalidOperation, ValueError, TypeError):
         raise BindingError("tax_configuration_unbound") from None
-    return Binding(uri, namespace, origin, vat)
+    return Binding(uri, namespace, origin, vat, write_origins)
 
 
 async def check_metadata(database) -> str | None:
@@ -273,7 +299,7 @@ def create_app(env: Mapping[str, str] | None = None, *, loader=load_existing, pr
         # Preserve the existing same_origin_writes contract, including webhook exception.
         writes = request.method in ("POST", "PUT", "PATCH", "DELETE") and path.startswith(("/api/shop", "/api/admin", "/api/workshops", "/api/auth", "/api/requests"))
         origin = request.headers.get("origin")
-        if writes and origin and origin.rstrip("/") != binding.origin and not path.startswith("/api/shop/webhooks/"):
+        if writes and origin and origin.rstrip("/") not in binding.write_origins and not path.startswith("/api/shop/webhooks/"):
             return JSONResponse({"detail": {"error": "origin_rejected"}}, status_code=403, headers={"Cache-Control": "no-store"})
         response = await call_next(request)
         if path.startswith(PREFIXES) or path == "/api/health":

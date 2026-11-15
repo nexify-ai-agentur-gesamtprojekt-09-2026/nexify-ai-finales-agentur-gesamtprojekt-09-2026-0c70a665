@@ -2,8 +2,8 @@ import type {MetadataRoute} from 'next';
 import {headers} from 'next/headers';
 import {publicPages} from '../lib/catalog';
 import {localizedUrl} from '../lib/page-seo';
-import {teileklarIndexingOn,shopHostOn,requestHosts} from '../auth/indexing';
-import {hostKind} from '../auth/shop-host';
+import {teileklarIndexingOn} from '../auth/indexing';
+import {hostKind,requestHosts,shopHostOn} from '../auth/shop-host';
 // 2026-11-14 16:45 (Europe/Berlin): Rechtsrouten /agb /avv /widerruf fehlten in der Sitemap (G-205 Rest).
 // Sie stehen nicht im Katalog, weil sie seit 14.11. eigene Seiten statt Rewrites sind. Canonical ist DE.
 const legalPages=['/agb','/avv','/widerruf'];

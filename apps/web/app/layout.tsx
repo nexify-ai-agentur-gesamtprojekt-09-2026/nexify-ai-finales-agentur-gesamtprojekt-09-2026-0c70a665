@@ -35,6 +35,7 @@ export default async function RootLayout({children}:{children:ReactNode}) {
   // Aufruf über die eigene Shop-Domain (auth/shop-host.ts; die Kopfzeile setzt allein der Proxy, Standard: nicht gesetzt). Dann zeigt die
   // Router-Brücke Shop-Adressen ohne /teileklar, und das Manifest der Agentur wird wie auf /teileklar-Seiten nicht verlinkt.
   const shopHost=(await headers()).get(SHOP_HOST_HEADER)==='1';
+  // Die Eigenschaft wird nur im Shop-Fall übergeben: ohne Schalter bleibt auch der Datenstrom der Seite derselbe wie bisher.
   const theme=themeOf((await cookies()).get('nx-theme')?.value);
   // Text- und Titelschrift stehen im ersten Bildaufbau: früh laden, damit der Schriftwechsel selten sichtbar wird (Rückfall siehe globals.css).
   for(const font of ['/fonts/inter-latin.woff2','/fonts/jakarta-latin.woff2'])preload(font,{as:'font',type:'font/woff2',crossOrigin:'anonymous'});
@@ -43,7 +44,7 @@ export default async function RootLayout({children}:{children:ReactNode}) {
   const jar=await cookies(),initialChat=initialChatFromCookie(jar.get('nx-chat-open')?.value);
   // Die Projektfunktionen hinter /api (Sitzung, Angebot, Termin) gibt es nur am lokalen Entwicklungs-Gateway (next.config.ts, rewrites).
   const gateway=process.env.NODE_ENV==='development';
-  const content = <NextRouterBridge locale={locale} shopHost={shopHost}><PublicExperienceProvider data={publicExperienceData}><Workspace initialLocale={locale} pages={publicPages()} gateway={gateway} initialChat={initialChat} initialChatWidth={chatWidthFromCookie(jar.get('nx-chat-width')?.value)}>{children}</Workspace></PublicExperienceProvider></NextRouterBridge>;
+  const content = <NextRouterBridge locale={locale} {...(shopHost?{shopHost:true}:{})}><PublicExperienceProvider data={publicExperienceData}><Workspace initialLocale={locale} pages={publicPages()} gateway={gateway} initialChat={initialChat} initialChatWidth={chatWidthFromCookie(jar.get('nx-chat-width')?.value)}>{children}</Workspace></PublicExperienceProvider></NextRouterBridge>;
   // Some browser extensions add attributes to html/body before React runs.
   // Tolerance is deliberately limited to these two roots; page components still hydrate strictly.
   return <html lang={locale} data-theme={theme} style={{colorScheme:theme}} suppressHydrationWarning><body suppressHydrationWarning><PublicInstallation enabled={installation.enabled&&!shopHost}/>{content}</body></html>;
