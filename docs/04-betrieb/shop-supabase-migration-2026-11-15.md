@@ -406,7 +406,7 @@ auf keine Produktivdaten zu):
 | Stelle | Stand |
 |---|---|
 | Neue Fassung (Vercel-Projekt hinter nexifyai.de) | an die Shop-Datenbank gebunden; `/api/shop/status` 200 mit `products: 0`, `last_import_at: null`; `/api/shop/products` 200 mit `total: 0`; `/api/shop/categories` 200, leer. Der Namensraum `nexify_teileklar_shop_v1` ist erreichbar und leer. |
-| Alter Dienst (teileklar.shop) | liefert 3720 Produkte; Ort vermutlich srv1941843, Datenbankname unbekannt |
+| Alter Dienst (teileklar.shop) | liefert 3720 Produkte. Ort berichtigt nach Messung der koordinierenden Sitzung (12:45 UTC, hier nicht nachgemessen): Die Domain zeigt auf den Server **srv1243952**, nicht auf srv1941843; die Tunnel-Regel auf srv1941843 (Port 8090) ist nachrangig, ihr Zweck OFFEN. Auf srv1243952 laufen laut Anzeige des Inhabers ein MongoDB-Container `vsk-mongodb` (Version 8.2) und davor ein TLS-Durchreicher `shop-tls`, der Port 27018 nach außen veröffentlicht. **Datenbankname des alten Shops weiterhin unbelegt.** |
 
 Am Code dieses Zweigs nachgeprüft:
 
@@ -431,7 +431,7 @@ Am Code dieses Zweigs nachgeprüft:
 | | Weg 1: Bestand übernehmen | Weg 2: Import freischalten |
 |---|---|---|
 | Was | Produkte und Kategorien einmalig, unverändert, aus der Datenbank des alten Dienstes in den neuen Namensraum; gebaut als `apps/shop-api/transfer_catalog.py` | Sperre durch einen belegten Veröffentlichungsvertrag ersetzen, Import außerhalb der 30-Sekunden-Grenze, Verwaltungskonto anlegen |
-| Voraussetzungen | lesender Zugang zur alten Datenbank (Ort und Name sind noch unbekannt); schreibender Zugang zum neuen Namensraum; **Freigabe des Inhabers**, weil das die Sperre aus D-008/OA-071 in der Wirkung umgeht | vom Inhaber: gültiger BigBuy-Produktivzugang (heute 401), Lieferantenvertrag und Guthaben (Zahlung, nur Inhaber), Beleg des Mandanten- und Veröffentlichungsvertrags, Lizenz der Katalogdaten (OA-072) |
+| Voraussetzungen | lesender Zugang zur alten Datenbank (Server srv1243952 laut Messung; Datenbankname noch unbelegt); schreibender Zugang zum neuen Namensraum; **Freigabe des Inhabers**, weil das die Sperre aus D-008/OA-071 in der Wirkung umgeht | vom Inhaber: gültiger BigBuy-Produktivzugang (heute 401), Lieferantenvertrag und Guthaben (Zahlung, nur Inhaber), Beleg des Mandanten- und Veröffentlichungsvertrags, Lizenz der Katalogdaten (OA-072) |
 | Aufwand | Skript fertig; Lauf rund 1 h nach Zugang | Import hinter die Schicht und als wiederaufnehmbarer Lauf über die Befehlszeile: 2–3 Tage; dazu die Nachweise des Inhabers (nicht schätzbar) |
 | Risiko | Daten sind so alt wie der letzte Import des alten Dienstes; Preis und Bestand veralten ohne laufenden Abgleich; Veröffentlichung ohne belegten Vertrag; die angenommene Dokumentform kann von der echten abweichen (das Skript bricht dann vor dem Schreiben ab und nennt die Gründe) | keiner für den Bestand; dauert, bis die Nachweise vorliegen |
 | Rückweg | Im Ziel wird nichts gelöscht. Rückweg ist: Produkte unveröffentlicht setzen oder den Namensraum leeren; beides ist ein Eingriff in die Produktionsdatenbank und braucht die Freigabe des Inhabers (D-016) | Sperre wieder einsetzen |
@@ -485,7 +485,11 @@ Lauf wird protokolliert.
 
 **Kürzester zulässiger Weg, Reihenfolge (es fehlt nur noch der Lauf und was beim Inhaber liegt):**
 
-1. Ort und Name der Datenbank des alten Dienstes klären (koordinierende Sitzung, lesend).
+1. Datenbankname des alten Dienstes klären (koordinierende Sitzung, lesend). Der Server ist benannt
+   (srv1243952, Container `vsk-mongodb` hinter `shop-tls`); offen ist, **welche** Datenbank darin der Shop
+   ist. Vor dem Trockenlauf belegen, dass es die des Shops ist: Der Containername deutet auf einen anderen
+   Zweck hin, und in einer MongoDB-Instanz können Daten mehrerer Vorhaben liegen (Mandantentrennung). Der
+   Lesezugang für den Lauf wird auf genau diese eine Datenbank beschränkt.
 2. Variablen auf der ausführenden Maschine setzen (Inhaber; nicht im Chat, nicht im Repository):
    `CATALOG_SOURCE_MONGO_URL`, `CATALOG_SOURCE_DB_NAME`, `CATALOG_TARGET_KIND=mongodb`,
    `CATALOG_TARGET_MONGO_URL`, `CATALOG_TARGET_DB_NAME=nexify_teileklar_shop_v1`.
@@ -504,13 +508,24 @@ Datenbanken. Die Vercel-Funktion ist dafür nicht geeignet (30 Sekunden).
 
 | # | Was | Wofür | Geheimnis? |
 |---|---|---|---|
-| 1 | Lesender Zugang zur Datenbank des alten Dienstes (Adresse, Name) | Quelle | ja, nur als Variable auf der ausführenden Maschine |
+| 1 | Datenbankname des alten Shops in `vsk-mongodb` auf srv1243952 und ein Zugang, der **nur diese Datenbank nur lesen** darf (eigener Nutzer, kein Verwaltungszugang) | Quelle | ja, nur als Variable auf der ausführenden Maschine |
 | 2 | Schreibender Zugang zum neuen Namensraum für diesen einen Lauf | Ziel | ja, ebenso |
 | 3 | Vertragsdatei: Verweis auf den Lieferantenvertrag mit BigBuy, Verweis auf das Recht, die Katalogdaten zu veröffentlichen (OA-072), Name des Freigebenden, Datum, Mindestzahl 3720 | Bedingung „Vertrag erfüllt“ | nein, nur Verweise |
 | 4 | Entscheidung zum Preis: Aufschlag und Preisfreigabe im neuen Namensraum neu setzen (empfohlen) oder die Einstellung des alten Dienstes ausdrücklich übernehmen lassen | ohne sie zeigt der Shop Produkte ohne Preis | nein |
 | 5 | Verwaltungskonto im neuen Namensraum (`ADMIN_EMAIL`, `ADMIN_PASSWORD` als Variablen; ein Anlegeweg unter dem Vercel-Einstieg fehlt, Abschnitt 12.2) | Preisfreigabe und Verwaltung | ja |
 | 6 | Wo der Lauf stattfindet (Maschine mit Netz zu beiden Datenbanken) | Ausführung | – |
 | 7 | BigBuy-Produktivzugang, Guthaben | **nicht** für die Erstbefüllung, aber für jeden späteren Abgleich und für Bestellungen (OA-071); ohne ihn veralten Preis und Bestand | ja |
+
+Hinweise aus dem neuen Beleg (nicht nachgemessen, zur Klärung durch die koordinierende Sitzung):
+
+- **Sicherheit:** Ein nach außen veröffentlichter Datenbank-Port (27018 auf allen Adressen) ist auch mit TLS
+  eine Angriffsfläche. Zu prüfen ist, ob der Zugang eine Anmeldung verlangt und ob eine Firewall den Port auf
+  bekannte Absender begrenzt. Diese Sitzung hat den Port nicht angesprochen und ändert dort nichts.
+- **MongoDB-Version:** Trägt `vsk-mongodb` (8.2) den alten Shop, gilt für die Übernahme die Feldfolge ab
+  Version 5.0, von der dieses Paket ausgeht. Für den Umzug nach PostgreSQL (Abschnitt 8 Punkt 7) zählt die
+  Version der Datenbank, die dann führt, also die des neuen Namensraums; die bleibt unbelegt.
+- Die Auslieferung über einen anderen Server als angenommen ändert am Skript nichts: Es braucht nur
+  Adresse und Namen der Quelle als Variablen.
 
 Nicht belegt bleibt: die tatsächliche Dokumentform der alten Datenbank (zeigt der Trockenlauf) und ob die
 Bilder-Adressen der alten Daten von der neuen Fassung angenommen werden (`supplier_image` in
