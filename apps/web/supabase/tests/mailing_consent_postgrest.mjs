@@ -189,9 +189,10 @@ test('Speicher: anlegen, lesen, weiteres Kennzeichen, bestätigen; der Nachweis 
   assert.equal(await store.findPendingByTokenHash(await sha('fremd'), Date.now()), null);
   await store.removeConfirmToken(input.emailHash, second);
   assert.equal(await store.confirmByTokenHash(second, Date.now()), null, 'zurückgenommenes Kennzeichen');
-  assert.equal(await store.confirmByTokenHash(input.confirmTokenHash, proof.confirmExpiresAt + 1), null, 'nach der Frist (Filter des Dienstes)');
-  // B7: Der Aufrufer datiert die Bestätigung 30 Minuten zurück; eingetragen wird die Uhr der Datenbank.
-  const confirmed = await store.confirmByTokenHash(input.confirmTokenHash, Date.now() - 30 * 60_000 + 31 * 60_000 - 60_000);
+  // Die Frist misst allein die Uhr der Datenbank: Ein Dienst, dessen Uhr über die Frist hinaus vorgeht, findet und
+  // bestätigt die dort noch gültige Anmeldung; eingetragen wird die Uhr der Datenbank (B7).
+  assert.deepEqual(await store.findPendingByTokenHash(input.confirmTokenHash, proof.confirmExpiresAt + HOUR), { emailHash: input.emailHash });
+  const confirmed = await store.confirmByTokenHash(input.confirmTokenHash, proof.confirmExpiresAt + HOUR);
   assert.ok(near(confirmed.confirmedAt, Date.now()), 'Zeitpunkt der Bestätigung ist die Uhr der Datenbank');
   assert.deepEqual(confirmed, { ...proof, status: 'confirmed', confirmedAt: confirmed.confirmedAt });
   assert.equal(await store.confirmByTokenHash(input.confirmTokenHash, Date.now()), null, 'zweite Verwendung');
@@ -201,7 +202,8 @@ test('Speicher: anlegen, lesen, weiteres Kennzeichen, bestätigen; der Nachweis 
   const late = await pendingInput('zu-spaet@beispiel.invalid');
   await store.insertPending(late);
   ageSubscription(late.emailHash, 49);
-  await assert.rejects(store.confirmByTokenHash(late.confirmTokenHash, Date.now() - 72 * HOUR), (error) => error instanceof state.mod.MailingConsentStoreError);
+  // Das ist ein abgelaufenes Kennzeichen (null), keine Störung des Speichers.
+  assert.equal(await store.confirmByTokenHash(late.confirmTokenHash, Date.now() - 72 * HOUR), null);
   assert.equal((await store.getSubscription(late.emailHash)).status, 'pending');
 });
 
@@ -307,6 +309,7 @@ test('Tagesgrenze gleichzeitig: von 30 Adressen entstehen genau so viele, wie di
     const many = await Promise.all(hashes.map((entry) => store.reserveConfirmationMail(entry, Date.now(), LIMITS)));
     assert.equal(many.filter(Boolean).length, 7, 'der Dienst behauptet 10000 je Tag, die Datenbank lässt 7 zu');
     assert.equal(await store.dailyLimitReached(Date.now(), 7), true);
+    assert.equal(await store.dailyLimitReached(Date.now(), LIMITS.perDay), true, 'gemeldet wird die strengere Obergrenze der Datenbank, nicht der höhere Wert des Dienstes');
     assert.equal(await store.dailyLimitReached(Date.now() + 25 * HOUR, 7), false);
     // Der Dienst darf strenger sein als die Obergrenze.
     ageMails(30);
@@ -483,10 +486,10 @@ test('Handler über den echten Weg: Anmeldung, Grenze, Sperrlink (auch nach Verf
   assert.equal((await consent.handleConfirm(post('/api/mailing/confirm', { token: part(to(third)[0], '/b') }), deps)).status, 404);
   assert.equal((await store.getSubscription(consent.emailHash(third))).status, 'pending');
 
-  // M3 und B11 über den Handler: Fehlschläge verbrauchen keine Mail, sind aber begrenzt.
+  // M3 und B11 über den Handler: Sicher nicht versendete Fehlschläge verbrauchen keine Mail, sind aber begrenzt.
   const fourth = 'versand-kaputt@beispiel.invalid';
   let handed = 0;
-  const broken = { ...deps, sendMail: async () => { handed += 1; return { ok: false, error: 'resend_500' }; } };
+  const broken = { ...deps, sendMail: async () => { handed += 1; return { ok: false, skipped: true }; } };
   const quiet = console.error;
   console.error = () => {};
   try {
@@ -500,6 +503,16 @@ test('Handler über den echten Weg: Anmeldung, Grenze, Sperrlink (auch nach Verf
     for (let i = 0; i < 12; i++) statuses.push((await subscribe(fifth, broken)).status);
     assert.deepEqual(statuses, [...Array(9).fill(502), 202, 202, 202]);
     assert.equal(handed, 9, 'nach neun Versuchen geht nichts mehr an den Versanddienst');
+    // Fehlschlag ohne klaren Ausgang (der Anbieter kann die Mail angenommen haben): zählt als Mail, Eintrag bleibt offen.
+    const sixth = 'versand-unklar@beispiel.invalid';
+    handed = 0;
+    const unclear = { ...deps, sendMail: async () => { handed += 1; return { ok: false, error: 'resend_500' }; } };
+    const answers = [];
+    for (let i = 0; i < 5; i++) answers.push((await subscribe(sixth, unclear)).status);
+    assert.deepEqual(answers, [502, 502, 502, 202, 202]);
+    assert.equal(handed, 3, 'höchstens drei Übergaben an den Versand je Adresse, auch wenn jede scheitert');
+    assert.equal(sql(`select string_agg(distinct state, ',') || '/' || count(*) from mailing.confirmation_mails where email_hash = '${consent.emailHash(sixth)}'`), 'reserved/3');
+    assert.equal(sql(`select cardinality(confirm_token_hashes) from mailing.subscriptions where email_hash = '${consent.emailHash(sixth)}'`), '3', 'die Kennzeichen bleiben gültig');
   } finally {
     console.error = quiet;
   }

@@ -88,13 +88,13 @@ const VERSION = /^[A-Za-z0-9._-]{1,64}$/;
  *    zwei Punkte hintereinander; höchstens 64 Zeichen
  *  - Domain: mindestens zwei Namensteile aus Buchstaben, Ziffern und Bindestrichen, kein Bindestrich am Rand eines
  *    Teils, kein leerer Teil (also kein Punkt am Anfang oder Ende und keine zwei Punkte hintereinander); die Endung
- *    besteht aus mindestens zwei Buchstaben
+ *    besteht aus mindestens zwei Buchstaben oder ist eine Endung in ASCII-Schreibweise (xn--…, etwa xn--p1ai)
  * Nicht zusammengefasst werden Varianten, die nur einzelne Anbieter gleich behandeln (Punkte im lokalen Teil,
  * Zusatzadressen mit +): Das ist je Anbieter verschieden und steht als offener Punkt in der Betriebsnotiz.
  */
 const LOCAL_PART = /^[^\s@<>"',;:\\()[\].]+(?:\.[^\s@<>"',;:\\()[\].]+)*$/;
 const DOMAIN_LABEL = /^[\p{L}\p{N}](?:[\p{L}\p{N}-]*[\p{L}\p{N}])?$/u;
-const TOP_LEVEL = /^\p{L}{2,}$/u;
+const TOP_LEVEL = /^(?:\p{L}{2,}|xn--[a-z0-9]+(?:-[a-z0-9]+)*)$/u;
 function wellFormedEmail(email: string): boolean {
   const at = email.indexOf('@');
   if (at < 1 || at !== email.lastIndexOf('@')) return false;
@@ -146,7 +146,7 @@ function filled(value: unknown): value is string {
   return typeof value === 'string' && value.trim().length > 0;
 }
 function mailText(value: ConfirmationMailText | null): value is ConfirmationMailText {
-  return Boolean(value && filled(value.betreff) && filled(value.text) && !/[\r\n]/.test(value.betreff));
+  return Boolean(value && filled(value.betreff) && filled(value.text) && !/[\r\n]/.test(value.betreff) && value.betreff === value.betreff.trim());
 }
 
 /** Öffentliche Basisadresse der Website für Links in Mails. Nur https, nur Ursprung, kein Pfad. */
@@ -254,8 +254,9 @@ export function consentReadiness(config: MailingConsentConfig, env: MailingEnv =
     if (!mail.text.includes(LINK_PLACEHOLDER)) add('confirmation_mail_link_missing');
     // Wer die Mail bekommt, ohne sich angemeldet zu haben, muss seine Adresse aus der Mail heraus sperren können.
     if (!mail.text.includes(BLOCK_LINK_PLACEHOLDER)) add('confirmation_mail_block_link_missing');
-    const rest = (mail.betreff + mail.text).replace(PLACEHOLDERS, '');
-    // Ein übrig gebliebener Platzhalter (zum Beispiel für Anbieterangaben) darf nie in einer Mail landen.
+    // Der Betreff geht Zeichen für Zeichen so hinaus, wie er freigegeben ist: In ihm wird nichts ersetzt, also darf
+    // er gar keinen Platzhalter tragen. Im Text darf kein unbekannter übrig bleiben (zum Beispiel für Anbieterangaben).
+    const rest = mail.betreff + mail.text.replace(PLACEHOLDERS, '');
     if (/\{\{|\}\}|\[[A-ZÄÖÜ_ ]{4,}/.test(rest)) add('confirmation_mail_placeholder_unresolved');
   }
   const hours = config.bestaetigungsfrist_stunden;
@@ -299,7 +300,7 @@ export function buildConfirmationMail(mail: ConfirmationMailText, consentText: s
     .split(/\n{2,}/)
     .map((paragraph) => `<p>${paragraph.replace(/\n/g, '<br>')}</p>`)
     .join('\n');
-  return { subject: fill(mail.betreff, {}).trim(), text, html };
+  return { subject: mail.betreff, text, html };
 }
 
 export type ConsentDeps = {
@@ -429,7 +430,7 @@ const ACCEPTED = { status: 'confirmation_pending' } as const;
  *
  * Grenzen für Bestätigungsmails (dauerhaft in der Datenbank, unabhängig vom Verfall der Anmeldung):
  * `bestaetigungsmails_je_adresse` in `bestaetigungsmails_fenster_stunden` und `bestaetigungsmails_je_tag` insgesamt.
- * Ein gescheiterter Versand verbraucht keine davon.
+ * Ein sicher nicht erfolgter Versand verbraucht keine davon; ein Fehlschlag mit unklarem Ausgang zählt als Mail.
  */
 export async function handleSubscribe(request: Request, deps: ConsentDeps = {}): Promise<Response> {
   const env = deps.env ?? process.env;
@@ -543,6 +544,8 @@ export async function handleSubscribe(request: Request, deps: ConsentDeps = {}):
       const held = reservation;
       await quietly('release_mail_count', () => store.settleConfirmationMail(held, 'failed'));
     }
+    // Ein Kennzeichen, das eingetragen, aber nie versendet wurde, belegt sonst einen der acht Plätze.
+    if (tokenAdded) await quietly('remove_confirm_token', () => store.removeConfirmToken(hash, tokenHash));
     return reply({ error: 'storage_unavailable' }, 503);
   }
   await recordEvent(store, hash, eventType, consentVersion, source, now);
@@ -560,12 +563,17 @@ export async function handleSubscribe(request: Request, deps: ConsentDeps = {}):
   }
   const held = reservation;
   if (!sent.ok) {
-    // Ehrlich melden: Ohne Mail kann niemand bestätigen. Der Fehlschlag zählt nicht als Mail (wohl aber als Versuch),
-    // und das Kennzeichen, das niemand erhalten hat, wird zurückgenommen. Ein neuer Versuch sendet erneut, bis die
-    // Grenze für Versuche erreicht ist; dann antwortet die Anmeldung wie bei jeder erreichten Grenze mit 202.
+    // Ehrlich melden: Ohne Mail kann niemand bestätigen.
     log('error', { event: 'mailing_consent_mail_failed', skipped: Boolean(sent.skipped) });
-    await quietly('release_mail_count', () => store.settleConfirmationMail(held, 'failed'));
-    if (tokenAdded) await quietly('remove_confirm_token', () => store.removeConfirmToken(hash, tokenHash));
+    if (sent.skipped) {
+      // Sicher nicht versendet (Versand nicht eingerichtet): Der Fehlschlag zählt nicht als Mail (wohl aber als
+      // Versuch), und das Kennzeichen, das niemand erhalten hat, wird zurückgenommen.
+      await quietly('release_mail_count', () => store.settleConfirmationMail(held, 'failed'));
+      if (tokenAdded) await quietly('remove_confirm_token', () => store.removeConfirmToken(hash, tokenHash));
+    }
+    // Jeder andere Fehlschlag ist nicht eindeutig: Der Anbieter kann die Mail angenommen haben, bevor die Antwort
+    // verloren ging. Der Eintrag bleibt deshalb offen stehen und zählt weiter als Mail, und das Kennzeichen bleibt
+    // gültig, damit ein doch zugestellter Link bestätigt. Sonst ließe sich die Grenze je Adresse über Fehlschläge umgehen.
     return reply({ error: 'confirmation_mail_failed' }, 502);
   }
   await quietly('settle_mail_count', () => store.settleConfirmationMail(held, 'sent'));

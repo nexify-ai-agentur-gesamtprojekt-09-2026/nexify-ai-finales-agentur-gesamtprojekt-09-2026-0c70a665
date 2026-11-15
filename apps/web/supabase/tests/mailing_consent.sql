@@ -495,11 +495,12 @@ begin
   -- Aufrufer den Filter weglässt und einen Zeitpunkt innerhalb der Frist behauptet (B7).
   if mailing_fixture.pending('alt@b.invalid', repeat('a', 64)) <> 1 then raise exception 'Third address was not inserted'; end if;
   perform mailing_fixture.age_subscription('alt@b.invalid', interval '49 hours');
-  begin
-    update mailing.subscriptions set status = 'confirmed', confirmed_at = now() - interval '2 hours', confirm_token_hashes = '{}' where email = 'alt@b.invalid';
+  -- Die abgelaufene Zeile bleibt ohne Fehler unverändert: Der Aufrufer sieht null geänderte Zeilen und meldet ein
+  -- abgelaufenes Kennzeichen statt einer Störung.
+  update mailing.subscriptions set status = 'confirmed', confirmed_at = now() - interval '2 hours', confirm_token_hashes = '{}' where email = 'alt@b.invalid';
+  if found or (select status || '/' || cardinality(confirm_token_hashes) from mailing.subscriptions where email = 'alt@b.invalid') <> 'pending/1' then
     raise exception 'Confirmation after the deadline accepted';
-  exception when check_violation then null;
-  end;
+  end if;
   -- M1: Eine gesperrte Adresse wird nicht bestätigt, auch mit gültigem Kennzeichen und in der Frist.
   insert into mailing.suppressions(email_hash, reason) values (h2, 'complaint');
   begin

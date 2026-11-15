@@ -193,8 +193,10 @@ begin
   end if;
 
   if old.status = 'pending' and new.status = 'confirmed' then
+    -- Ob die Frist abgelaufen ist, entscheidet allein die Uhr der Datenbank. Eine abgelaufene Anmeldung bleibt ohne
+    -- Fehler unverändert stehen: Der Aufrufer sieht null geänderte Zeilen und meldet ein abgelaufenes Kennzeichen.
     if now() >= old.confirm_expires_at then
-      raise exception 'subscription_confirm_outside_deadline' using errcode = '23514';
+      return null;
     end if;
     -- Erst die Sperre je Prüfsumme, dann der Blick auf die Sperrliste: Eine gleichzeitig eingetragene Sperre ist
     -- dann abgeschlossen und sichtbar.
@@ -297,8 +299,9 @@ on conflict (id) do nothing;
 -- Zeitpunkt mit ihrer eigenen Uhr und entscheidet unter einer Sperre, ob die Zeile entsteht. Von gleichzeitigen
 -- Aufrufen kommen so nie mehr durch, als die Grenze erlaubt. Eine abgelehnte Zeile entsteht nicht (kein Fehler);
 -- der Dienst sendet dann nicht.
---   reserved = vor dem Versand eingetragen     sent = dem Versanddienst übergeben
---   failed   = Versand gescheitert; zählt nicht als Mail, wohl aber als Versuch
+--   reserved = vor dem Versand eingetragen; bleibt so stehen, wenn der Ausgang des Versands unklar ist (zählt als Mail)
+--   sent     = dem Versanddienst übergeben
+--   failed   = sicher nicht versendet; zählt nicht als Mail, wohl aber als Versuch
 -- Enthält weder Adresse noch Kennzeichen.
 -- --------------------------------------------------------------------------
 create table if not exists mailing.confirmation_mails (

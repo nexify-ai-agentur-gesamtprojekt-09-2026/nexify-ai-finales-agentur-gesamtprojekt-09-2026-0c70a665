@@ -137,6 +137,9 @@ test('Bereitschaft: jede fehlende Freigabe oder Festlegung wird einzeln benannt'
     [(c) => { c.bestaetigungsmail.freigabe = null; }, 'confirmation_mail_not_approved'],
     [(c) => { c.bestaetigungsmail.texte.de = null; }, 'confirmation_mail_missing'],
     [(c) => { c.bestaetigungsmail.texte.de.betreff = 'Zeile\nZwei'; }, 'confirmation_mail_missing'],
+    // Die Freigabe bindet den Betreff Zeichen für Zeichen; Leerraum am Rand würde beim Versand nicht so ankommen.
+    [(c) => { c.bestaetigungsmail.texte.de.betreff = ' PRÜFBETREFF'; }, 'confirmation_mail_missing'],
+    [(c) => { c.bestaetigungsmail.texte.de.betreff = 'PRÜFBETREFF '; }, 'confirmation_mail_missing'],
     [(c) => { c.bestaetigungsmail.texte.de.text = 'ohne Link'; }, 'confirmation_mail_link_missing'],
     [(c) => { c.bestaetigungsmail.texte.de.text = 'nur {{BESTAETIGUNGSLINK}}'; }, 'confirmation_mail_block_link_missing'],
     [(c) => { c.seiten.abmeldung = null; }, 'unsubscribe_page_missing'],
@@ -339,7 +342,7 @@ test('Anmeldung: ohne ausdrückliche Einwilligung, mit falscher Fassung, Sprache
 
 test('Adresse: genau eine angenommene Schreibweise je Adresse, damit die Grenze je Adresse nicht über Varianten umgangen wird', async () => {
   // Zulässige Formen bleiben zulässig.
-  for (const email of ['vorname.nachname@beispiel.invalid', 'a+b@sub.beispiel.invalid', 'o_neil-1@beispiel.invalid', 'jürgen@bücher.invalid', 'x@a-b.c-d.invalid', 'A.B@Beispiel.INVALID']) {
+  for (const email of ['vorname.nachname@beispiel.invalid', 'a+b@sub.beispiel.invalid', 'o_neil-1@beispiel.invalid', 'jürgen@bücher.invalid', 'x@a-b.c-d.invalid', 'A.B@Beispiel.INVALID', 'person@beispiel.xn--p1ai', 'person@xn--bcher-kva.xn--vermgensberater-ctb']) {
     const { deps, outbox } = setup();
     assert.equal((await subscribe(deps, { ...VALID, email })).status, 202, email);
     assert.equal(outbox.length, 1, email);
@@ -775,7 +778,8 @@ test('Ein einzelner Absender kann die Tagesgrenze nicht ausschöpfen: Grenze je 
 
 test('Versandversuche sind begrenzt: ein gestörter Versanddienst wird nicht endlos bestürmt', async () => {
   const { deps, outbox, store, state } = setup();
-  state.mailResult = { ok: false, error: 'resend_500' };
+  // Sicher nicht versendet (skipped): Der Fehlschlag gibt den Platz der Mailgrenze frei, zählt aber als Versuch.
+  state.mailResult = { ok: false, skipped: true };
   const { result } = await quiet(async () => {
     const statuses = [];
     for (let i = 0; i < 14; i++) statuses.push((await subscribe(deps)).status);
@@ -793,7 +797,7 @@ test('Versandversuche sind begrenzt: ein gestörter Versanddienst wird nicht end
   const config = clone(FREIGEGEBEN);
   Object.assign(config.grenzen, { versandversuche_je_tag: 50, bestaetigungsmails_je_tag: 50 });
   const day = setup({ config });
-  day.state.mailResult = { ok: false };
+  day.state.mailResult = { ok: false, skipped: true };
   await quiet(async () => { for (let i = 0; i < 60; i++) await subscribe(day.deps, { ...VALID, email: `v${i}@beispiel.invalid` }); });
   assert.equal(day.outbox.length, 50);
   // Versuche schließen gelungene Mails ein; eine Grenze darunter wäre widersprüchlich.
@@ -872,7 +876,9 @@ test('Bestätigung prüft dieselben Freigaben wie die Anmeldung: ohne sie 503, n
   assert.equal((await confirm(deps, token)).status, 200, 'mit Freigaben wirkt dasselbe Kennzeichen');
 });
 
-test('Mailversand scheitert: ehrliche 502, verbraucht keine Mail der Grenze, ein neuer Versuch sendet erneut', async () => {
+test('Mailversand scheitert ohne klaren Ausgang: ehrliche 502, zählt als Mail, das Kennzeichen bleibt gültig', async () => {
+  // Der Anbieter kann die Mail angenommen haben, bevor die Antwort verloren ging. Zählte der Fehlschlag nicht, ließe
+  // sich die Grenze je Adresse (3) bis zur Grenze der Versuche (9) umgehen.
   const { deps, outbox, store, state } = setup();
   state.mailResult = { ok: false, error: 'resend_500' };
   const { result, logs } = await quiet(async () => {
@@ -880,35 +886,77 @@ test('Mailversand scheitert: ehrliche 502, verbraucht keine Mail der Grenze, ein
     for (let i = 0; i < 5; i++) responses.push(await subscribe(deps));
     return responses;
   });
-  for (const res of result) {
-    assert.equal(res.status, 502);
-    assert.deepEqual(await res.json(), { error: 'confirmation_mail_failed' });
-  }
-  assert.equal(outbox.length, 5, 'jeder Versuch wurde dem Versand übergeben; früher endete das nach drei Fehlschlägen still mit 202');
-  assert.deepEqual(store.mails.map((entry) => entry.state), ['failed', 'failed', 'failed', 'failed', 'failed']);
+  assert.deepEqual(result.map((res) => res.status), [502, 502, 502, 202, 202]);
+  assert.deepEqual(await result[0].json(), { error: 'confirmation_mail_failed' });
+  assert.equal(outbox.length, 3, 'höchstens drei Übergaben an den Versand, auch wenn jede scheitert');
+  assert.deepEqual(store.mails.map((entry) => entry.state), ['reserved', 'reserved', 'reserved'], 'offen gelassen: zählt weiter als Mail');
   assert.equal((await store.getSubscription(emailHash(ADDRESS))).status, 'pending');
   assert.ok(!logs.join('\n').includes(ADDRESS) && !logs.join('\n').includes(emailHash(ADDRESS)));
-  // Der Versand geht wieder: Die Grenze je Adresse steht noch vollständig zur Verfügung.
+  // Der Versand geht wieder: Die Grenze je Adresse ist für dieses Fenster verbraucht.
   state.mailResult = { ok: true, id: 'mail_2' };
-  for (let i = 0; i < 5; i++) assert.equal((await subscribe(deps)).status, 202);
-  assert.equal(outbox.length, 8, 'drei zugestellte Mails nach fünf Fehlschlägen');
-  assert.equal(store.mails.filter((entry) => entry.state === 'sent').length, 3);
-  assert.equal((await confirm(deps, tokenFromMail(outbox[5]))).status, 200);
-  // Ein Kennzeichen aus einer gescheiterten Mail (niemand hat es erhalten) wurde zurückgenommen.
-  const other = setup();
-  await subscribe(other.deps);
-  other.state.mailResult = { ok: false };
-  await quiet(() => subscribe(other.deps));
-  other.state.mailResult = { ok: true };
-  assert.equal((await confirm(other.deps, tokenFromMail(other.outbox[1]))).status, 404);
-  assert.equal((await confirm(other.deps, tokenFromMail(other.outbox[0]))).status, 200);
+  assert.equal((await subscribe(deps)).status, 202);
+  assert.equal(outbox.length, 3);
+  // Kam eine der Mails doch an, bestätigt ihr Link: Die Kennzeichen wurden nicht zurückgenommen.
+  assert.equal((await confirm(deps, tokenFromMail(outbox[1]))).status, 200);
 });
 
-test('Mailversand wirft: wie ein Fehlschlag behandelt, kein hängender Platz in der Zählung', async () => {
+test('Mailversand sicher nicht erfolgt (Versand nicht eingerichtet): 502, verbraucht keine Mail der Grenze, Kennzeichen zurückgenommen', async () => {
+  const { deps, outbox, store, state } = setup();
+  await subscribe(deps);
+  state.mailResult = { ok: false, skipped: true };
+  const { result, logs } = await quiet(() => subscribe(deps));
+  assert.equal(result.status, 502);
+  assert.match(logs.join('\n'), /"event":"mailing_consent_mail_failed","skipped":true/);
+  assert.deepEqual(store.mails.map((entry) => entry.state), ['sent', 'failed']);
+  state.mailResult = { ok: true };
+  // Ein Kennzeichen aus der nicht versendeten Mail (niemand hat es erhalten) wirkt nicht, das erste weiterhin.
+  assert.equal((await confirm(deps, tokenFromMail(outbox[1]))).status, 404);
+  // Die Grenze je Adresse steht weiter zur Verfügung: noch zwei Mails.
+  for (let i = 0; i < 4; i++) assert.equal((await subscribe(deps)).status, 202);
+  assert.equal(outbox.length, 4);
+  assert.equal(store.mails.filter((entry) => entry.state === 'sent').length, 3);
+  assert.equal((await confirm(deps, tokenFromMail(outbox[0]))).status, 200);
+});
+
+test('Mailversand wirft: Ausgang unklar, der Platz in der Zählung bleibt belegt', async () => {
   const { deps, store } = setup({ sendMail: async () => { throw new Error('Netz weg'); } });
   const { result } = await quiet(() => subscribe(deps));
   assert.equal(result.status, 502);
-  assert.deepEqual(store.mails.map((entry) => entry.state), ['failed']);
+  assert.deepEqual(store.mails.map((entry) => entry.state), ['reserved']);
+});
+
+test('Speicherfehler nach dem Eintragen eines weiteren Kennzeichens: es wird zurückgenommen und belegt keinen der acht Plätze', async () => {
+  // Mehr Versuche als Plätze für Kennzeichen (acht), damit ein liegen gebliebenes Kennzeichen auffiele.
+  const config = clone(FREIGEGEBEN);
+  config.grenzen.versandversuche_je_adresse = 30;
+  const { deps, outbox, store } = setup({ config });
+  await subscribe(deps);
+  const issue = store.issueUnsubscribeToken;
+  for (const breakStep of ['issueUnsubscribeToken', 'isSuppressed']) {
+    let calls = 0;
+    const original = store[breakStep];
+    store[breakStep] = async (...args) => {
+      calls += 1;
+      // isSuppressed: der erste Aufruf ist die Prüfung am Anfang, der zweite die unmittelbar vor dem Versand.
+      if (breakStep === 'issueUnsubscribeToken' || calls === 2) throw new MailingConsentStoreError('mailing_store_timeout');
+      return original(...args);
+    };
+    for (let i = 0; i < 10; i++) {
+      const { result } = await quiet(() => subscribe(deps));
+      assert.equal(result.status, 503, breakStep);
+      assert.deepEqual(await result.json(), { error: 'storage_unavailable' });
+      calls = 0;
+    }
+    store[breakStep] = original;
+  }
+  assert.equal(store.issueUnsubscribeToken, issue);
+  assert.equal(outbox.length, 1);
+  assert.equal(store.mails.filter((entry) => entry.state === 'sent').length, 1);
+  assert.equal(store.mails.filter((entry) => entry.state === 'failed').length, 20, 'jede Störung gab ihren Platz in der Mailzählung frei');
+  // Kein Kennzeichen blieb liegen: Die nächste Anmeldung bekommt wieder eine Mail, und deren Link bestätigt.
+  assert.equal((await subscribe(deps)).status, 202);
+  assert.equal(outbox.length, 2);
+  assert.equal((await confirm(deps, tokenFromMail(outbox[1]))).status, 200);
 });
 
 test('Speicherfehler: 503 mit festem Code; Protokoll ohne Adresse, Prüfsumme oder Kennzeichen', async () => {
@@ -960,9 +1008,15 @@ test('Bestätigungsmail: Wortlaut nur aus der Konfiguration, HTML maskiert, auch
     '<p><a href="https://seite.invalid/p?a=1&amp;b=&quot;&gt;&lt;script&gt;x&lt;/script&gt;">https://seite.invalid/p?a=1&amp;b=&quot;&gt;&lt;script&gt;x&lt;/script&gt;</a></p>\n<p><a href="https://seite.invalid/s?c=&lt;i&gt;&amp;d=&quot;">https://seite.invalid/s?c=&lt;i&gt;&amp;d=&quot;</a></p>',
   );
   // Ein eingesetzter Wert wird nicht noch einmal nach Platzhaltern durchsucht.
-  const nested = buildConfirmationMail({ betreff: 'B {{SPERRLINK}}', text: '{{EINWILLIGUNGSTEXT}} / {{BESTAETIGUNGSLINK}}' }, 'Text mit {{SPERRLINK}}', 'https://seite.invalid/p', 'https://seite.invalid/s');
+  assert.equal(buildConfirmationMail({ betreff: ' B ', text: 'x' }, '', 'https://seite.invalid/p', 'https://seite.invalid/s').subject, ' B ', 'der Betreff geht unverändert hinaus');
+  const nested = buildConfirmationMail({ betreff: 'B', text: '{{EINWILLIGUNGSTEXT}} / {{BESTAETIGUNGSLINK}}' }, 'Text mit {{SPERRLINK}}', 'https://seite.invalid/p', 'https://seite.invalid/s');
   assert.equal(nested.text, 'Text mit {{SPERRLINK}} / https://seite.invalid/p');
-  assert.equal(nested.subject, 'B', 'im Betreff steht kein Link');
+  assert.equal(nested.subject, 'B');
+  // Im Betreff wird nichts ersetzt; ein Platzhalter dort (auch ein bekannter) sperrt den Weg, statt still zu verschwinden.
+  const subjectPlaceholder = clone(FREIGEGEBEN);
+  subjectPlaceholder.bestaetigungsmail.texte.de.betreff = 'PRÜFBETREFF {{SPERRLINK}}';
+  subjectPlaceholder.bestaetigungsmail.freigabe.sha256.de = confirmationMailDigest(subjectPlaceholder.bestaetigungsmail.texte.de);
+  assert.deepEqual(consentReadiness(subjectPlaceholder, ENV), ['confirmation_mail_placeholder_unresolved']);
 });
 
 test('Abmelde-Kopfzeilen für den späteren Kampagnenweg (RFC 8058)', () => {

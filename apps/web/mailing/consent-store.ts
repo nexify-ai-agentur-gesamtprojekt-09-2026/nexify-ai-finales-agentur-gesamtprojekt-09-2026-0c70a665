@@ -459,7 +459,7 @@ export function createSupabaseMailingConsentStore(): MailingConsentStore {
       if (!HEX64.test(tokenHash)) fail();
       return guarded(async () => {
         const found = rows(
-          await sbSelect(`subscriptions?confirm_token_hashes=cs.${arrayLiteral([tokenHash])}&status=eq.pending&confirm_expires_at=gt.${encodeURIComponent(iso(nowMs))}&select=email_hash&limit=2`, DB),
+          await sbSelect(`subscriptions?confirm_token_hashes=cs.${arrayLiteral([tokenHash])}&status=eq.pending&select=email_hash&limit=2`, DB),
         );
         if (found.length === 0) return null;
         const emailHash = text(found[0], 'email_hash');
@@ -472,7 +472,7 @@ export function createSupabaseMailingConsentStore(): MailingConsentStore {
         const now = iso(nowMs);
         const updated = rows(
           await sbUpdate(
-            `subscriptions?confirm_token_hashes=cs.${arrayLiteral([tokenHash])}&status=eq.pending&confirm_expires_at=gt.${encodeURIComponent(now)}`,
+            `subscriptions?confirm_token_hashes=cs.${arrayLiteral([tokenHash])}&status=eq.pending`,
             { status: 'confirmed', confirmed_at: now, confirm_token_hashes: [], updated_at: now },
             DB,
           ),
@@ -548,8 +548,13 @@ export function createSupabaseMailingConsentStore(): MailingConsentStore {
     async dailyLimitReached(nowMs, perDay) {
       if (!Number.isInteger(perDay) || perDay < 1 || perDay > MAIL_LIMIT_BOUNDS.perDay[1]) fail();
       return guarded(async () => {
+        // Es gilt wie beim Eintragen der strengere Wert aus Aufrufer und mailing.settings.
+        const settings = rows(await sbSelect('settings?select=daily_limit&limit=1', DB));
+        const ceiling = settings.length === 1 ? settings[0].daily_limit : null;
+        if (typeof ceiling !== 'number' || !Number.isInteger(ceiling) || ceiling < 1) fail();
+        const effective = Math.min(perDay, ceiling as number);
         const since = encodeURIComponent(iso(nowMs - 24 * HOUR_MS));
-        return rows(await sbSelect(`confirmation_mails?state=neq.failed&reserved_at=gt.${since}&select=id&limit=${perDay}`, DB)).length >= perDay;
+        return rows(await sbSelect(`confirmation_mails?state=neq.failed&reserved_at=gt.${since}&select=id&limit=${effective}`, DB)).length >= effective;
       });
     },
     async purgeExpiredPending(nowMs) {

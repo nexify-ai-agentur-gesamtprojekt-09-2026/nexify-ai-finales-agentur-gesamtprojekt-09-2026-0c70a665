@@ -45,7 +45,7 @@ async function withEnv(env, fetchImpl, run) {
  */
 function fakePostgrest() {
   const keys = { subscriptions: ['email_hash'], suppressions: ['email_hash'], unsubscribe_tokens: ['email_hash'], consent_events: null, confirmation_mails: null };
-  const tables = { subscriptions: [], suppressions: [], unsubscribe_tokens: [], consent_events: [], confirmation_mails: [] };
+  const tables = { subscriptions: [], suppressions: [], unsubscribe_tokens: [], consent_events: [], confirmation_mails: [], settings: [{ id: true, daily_limit: 10000 }] };
   const db = { tables, calls: [], intercept: null, now: NOW };
   const PROOF = ['email_hash', 'email', 'lang', 'source', 'consent_version', 'consent_text_sha256', 'requested_at', 'confirm_expires_at'];
   const stamp = (value) => (typeof value === 'string' ? value.replace(/Z$/, '+00:00') : value);
@@ -62,6 +62,7 @@ function fakePostgrest() {
     if (actual === null || actual === undefined) return false;
     return operator === 'gt' ? Date.parse(actual) > Date.parse(expected) : Date.parse(actual) < Date.parse(expected);
   };
+  const SKIP = Symbol('unverändert');
   const refuse = (message) => new Response(JSON.stringify({ code: '23514', message }), { status: 400 });
   const guardSubscription = (row, patch) => {
     const next = { ...row, ...patch };
@@ -69,7 +70,8 @@ function fakePostgrest() {
     if (row.status === 'unsubscribed') return 'subscription_unsubscribe_final';
     if ((next.status === 'pending' && row.status !== 'pending') || (row.status === 'pending' && next.status === 'unsubscribed')) return 'subscription_status_forward_only';
     if (row.status === 'pending' && next.status === 'confirmed') {
-      if (!next.confirmed_at || Date.parse(next.confirmed_at) >= Date.parse(row.confirm_expires_at)) return 'subscription_confirm_outside_deadline';
+      // Wie der Trigger: Die Frist misst die Uhr der Datenbank; eine abgelaufene Zeile bleibt ohne Fehler unverändert.
+      if (db.now >= Date.parse(row.confirm_expires_at)) return SKIP;
       if (tables.suppressions.some((entry) => entry.email_hash === row.email_hash)) return 'subscription_confirm_suppressed';
     }
     if (next.status !== 'pending' && next.confirm_token_hashes.length > 0) return 'subscriptions_token_only_pending';
@@ -114,7 +116,8 @@ function fakePostgrest() {
       assert.ok(['subscriptions', 'confirmation_mails'].includes(table), 'geändert wird nur in subscriptions und confirmation_mails');
       assert.ok(filters.length > 0, 'PATCH nur mit Filter');
       assert.match(call.headers.Prefer ?? '', /return=representation/);
-      const hit = tables[table].filter(matches);
+      let hit = tables[table].filter(matches);
+      if (table === 'subscriptions') hit = hit.filter((row) => guardSubscription(row, call.body) !== SKIP);
       for (const row of hit) {
         if (table === 'confirmation_mails') {
           if (row.state !== 'reserved' || !['sent', 'failed'].includes(call.body.state) || Object.keys(call.body).join() !== 'state') return refuse('confirmation_mail_settle_once');
@@ -207,8 +210,13 @@ test('Anlegen, weiteres Kennzeichen, bestätigen: der Nachweis wird nie umgeschr
 
     assert.deepEqual(await store.findPendingByTokenHash(TOKEN_HASH, NOW + 2 * HOUR), { emailHash: HASH });
     assert.equal(await store.findPendingByTokenHash(sha256Hex('fremd'), NOW + 2 * HOUR), null);
-    assert.equal(await store.findPendingByTokenHash(TOKEN_HASH, NOW + 50 * HOUR), null, 'Frist abgelaufen');
-    assert.equal(await store.confirmByTokenHash(second, NOW + 50 * HOUR), null, 'Frist abgelaufen');
+    // Ob die Frist abgelaufen ist, entscheidet die Uhr der Datenbank, nicht die des Aufrufers.
+    assert.deepEqual(await store.findPendingByTokenHash(TOKEN_HASH, NOW + 50 * HOUR), { emailHash: HASH }, 'eine vorgehende Uhr des Aufrufers blendet keine gültige Anmeldung aus');
+    assert.equal(db.calls.at(-1).query.get('confirm_expires_at'), null);
+    db.now = NOW + 50 * HOUR;
+    assert.equal(await store.confirmByTokenHash(second, NOW + 2 * HOUR), null, 'Frist nach der Uhr der Datenbank abgelaufen: abgelaufenes Kennzeichen, kein Fehler');
+    assert.equal(db.tables.subscriptions[0].status, 'pending');
+    db.now = NOW;
     // Das zurückgenommene Kennzeichen einer gescheiterten Mail wirkt nicht mehr, das erste weiterhin.
     await store.removeConfirmToken(HASH, second);
     assert.equal(await store.confirmByTokenHash(second, NOW + 2 * HOUR), null);
@@ -217,7 +225,7 @@ test('Anlegen, weiteres Kennzeichen, bestätigen: der Nachweis wird nie umgeschr
     const confirm = db.calls.filter((call) => call.method === 'PATCH').at(-1);
     assert.equal(confirm.query.get('status'), 'eq.pending');
     assert.equal(confirm.query.get('confirm_token_hashes'), `cs.{${TOKEN_HASH}}`);
-    assert.equal(confirm.query.get('confirm_expires_at'), 'gt.' + new Date(NOW + 2 * HOUR).toISOString());
+    assert.equal(confirm.query.get('confirm_expires_at'), null, 'kein Fristfilter mit der Uhr des Aufrufers');
     assert.deepEqual(Object.keys(confirm.body).sort(), ['confirm_token_hashes', 'confirmed_at', 'status', 'updated_at'], 'die Bestätigung schreibt keinen Teil des Nachweises');
     assert.deepEqual(confirm.body.confirm_token_hashes, [], 'alle Kennzeichen verbraucht');
     assert.equal(await store.confirmByTokenHash(TOKEN_HASH, NOW + 3 * HOUR), null, 'zweite Verwendung');
@@ -287,6 +295,20 @@ test('Mailzählung: Grenze je Adresse und je Tag, Fehlschlag gibt den Platz frei
     assert.ok(await store.reserveConfirmationMail(sha256Hex('b'), NOW + 4 * HOUR, day));
     assert.equal(await store.reserveConfirmationMail(sha256Hex('c'), NOW + 4 * HOUR, day), null, 'fünf zählende Einträge in 24 Stunden');
     assert.equal(await store.dailyLimitReached(NOW + 4 * HOUR, 5), true);
+    // Liegt die Obergrenze der Datenbank unter dem Wert des Aufrufers, gilt sie: Sonst bliebe die Meldung aus,
+    // während die Datenbank schon keine Mail mehr zulässt.
+    assert.equal(await store.dailyLimitReached(NOW + 4 * HOUR, 50), false);
+    db.tables.settings[0].daily_limit = 5;
+    assert.equal(await store.dailyLimitReached(NOW + 4 * HOUR, 50), true, 'strengere Obergrenze aus mailing.settings');
+    db.tables.settings[0].daily_limit = 6;
+    assert.equal(await store.dailyLimitReached(NOW + 4 * HOUR, 50), false);
+    const kept = db.tables.settings;
+    for (const broken of [[], [{ id: true, daily_limit: 0 }], [{ id: true, daily_limit: '5' }], [{ id: true, daily_limit: 2.5 }]]) {
+      db.tables.settings = broken;
+      await assert.rejects(store.dailyLimitReached(NOW + 4 * HOUR, 50), MailingConsentStoreError, JSON.stringify(broken));
+    }
+    db.tables.settings = kept;
+    db.tables.settings[0].daily_limit = 10000;
     assert.ok(await store.reserveConfirmationMail(sha256Hex('c'), NOW + 29 * HOUR, day), 'einen Tag später wieder frei');
 
     // Gleichzeitig: nie mehr als die Grenze.
