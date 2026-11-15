@@ -24,7 +24,7 @@ class PgAccountStore:
     async def purge_expired(self, now, lock_window_seconds):
         """Entfernt abgelaufene Sitzungen, Rücksetz-Token und Fehlversuche außerhalb des Fensters; gibt die Anzahl zurück."""
         async with self.db.cursor() as cur:
-            await cur.execute("select purge_expired(%s, %s)", (base.aware(now), timedelta(seconds=lock_window_seconds)))
+            await cur.execute("select shop.purge_expired(%s, %s)", (base.aware(now), timedelta(seconds=lock_window_seconds)))
             return (await cur.fetchone())[0]
 
     # Konten -------------------------------------------------------------------------------
@@ -93,56 +93,56 @@ class PgAccountStore:
     async def create_session(self, token_hash, user_id, created_at, expires_at):
         try:
             async with self.db.cursor() as cur:
-                await cur.execute("insert into sessions (id, token_hash, user_id, created_at, expires_at) values (%s, %s, %s, %s, %s)",
+                await cur.execute("insert into shop.sessions (id, token_hash, user_id, created_at, expires_at) values (%s, %s, %s, %s, %s)",
                                   (base.new_id(), token_hash, user_id, created_at, base.aware(expires_at)))
         except psycopg.errors.UniqueViolation:
             raise AlreadyExists() from None
 
     async def session(self, token_hash):
         async with self.db.cursor() as cur:
-            await cur.execute("select id, token_hash, user_id, created_at, expires_at from sessions where token_hash = %s", (token_hash,))
+            await cur.execute("select id, token_hash, user_id, created_at, expires_at from shop.sessions where token_hash = %s", (token_hash,))
             row = await cur.fetchone()
         return {"_id": row[0], "token_hash": row[1], "user_id": row[2], "created_at": row[3], "expires_at": base.naive_utc(row[4])} if row else None
 
     async def delete_session(self, token_hash):
         async with self.db.cursor() as cur:
-            await cur.execute("delete from sessions where token_hash = %s", (token_hash,))
+            await cur.execute("delete from shop.sessions where token_hash = %s", (token_hash,))
 
     async def delete_sessions_of(self, user_id):
         async with self.db.cursor() as cur:
-            await cur.execute("delete from sessions where user_id = %s", (user_id,))
+            await cur.execute("delete from shop.sessions where user_id = %s", (user_id,))
 
     # Fehlversuche -------------------------------------------------------------------------
     async def count_login_failures(self, email, since):
         async with self.db.cursor() as cur:
-            await cur.execute("select count(*) from login_failures where email = %s and at >= %s", (email, base.aware(since)))
+            await cur.execute("select count(*) from shop.login_failures where email = %s and at >= %s", (email, base.aware(since)))
             return (await cur.fetchone())[0]
 
     async def record_login_failure(self, email, at):
         async with self.db.cursor() as cur:
-            await cur.execute("insert into login_failures (id, email, at) values (%s, %s, %s)", (base.new_id(), email, base.aware(at)))
+            await cur.execute("insert into shop.login_failures (id, email, at) values (%s, %s, %s)", (base.new_id(), email, base.aware(at)))
 
     async def clear_login_failures(self, email):
         async with self.db.cursor() as cur:
-            await cur.execute("delete from login_failures where email = %s", (email,))
+            await cur.execute("delete from shop.login_failures where email = %s", (email,))
 
     # Passwort zurücksetzen ----------------------------------------------------------------
     async def create_password_reset(self, token_hash, user_id, expires_at):
         try:
             async with self.db.cursor() as cur:
-                await cur.execute("insert into password_resets (id, token_hash, user_id, used, expires_at) values (%s, %s, %s, false, %s)",
+                await cur.execute("insert into shop.password_resets (id, token_hash, user_id, used, expires_at) values (%s, %s, %s, false, %s)",
                                   (base.new_id(), token_hash, user_id, base.aware(expires_at)))
         except psycopg.errors.UniqueViolation:
             raise AlreadyExists() from None
 
     async def set_password_reset_mail_status(self, token_hash, status):
         async with self.db.cursor() as cur:
-            await cur.execute("update password_resets set mail_status = %s where token_hash = %s", (status, token_hash))
+            await cur.execute("update shop.password_resets set mail_status = %s where token_hash = %s", (status, token_hash))
 
     async def consume_password_reset(self, token_hash, now):
         """Löst ein unbenutztes, nicht abgelaufenes Token genau einmal ein; sonst None."""
         async with self.db.cursor() as cur:
-            await cur.execute("update password_resets set used = true where token_hash = %s and not used and expires_at > %s "
+            await cur.execute("update shop.password_resets set used = true where token_hash = %s and not used and expires_at > %s "
                               "returning id, token_hash, user_id, expires_at, mail_status", (token_hash, base.aware(now)))
             row = await cur.fetchone()
         if row is None:

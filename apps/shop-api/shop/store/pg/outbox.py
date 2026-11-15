@@ -89,7 +89,7 @@ class PgOutboxStore:
     async def count_sent_since(self, since):
         """Gesendete Aufträge mit ``sent_at`` ab ``since`` (Textvergleich, Grenze einschließlich)."""
         async with self.db.cursor() as cur:
-            await cur.execute("select count(*) from outbox where status = 'gesendet' and sent_at >= %s", (since,))
+            await cur.execute("select count(*) from shop.outbox where status = 'gesendet' and sent_at >= %s", (since,))
             return (await cur.fetchone())[0]
 
     async def start_sending(self, event_key, claim_id, at):
@@ -141,7 +141,7 @@ class PgOutboxStore:
 
     async def deliverable_keys(self, max_attempts, limit):
         async with self.db.cursor() as cur:
-            await cur.execute(f"select id from outbox where {DELIVERABLE} order by seq limit %s", (max_attempts, limit))
+            await cur.execute(f"select id from shop.outbox where {DELIVERABLE} order by seq limit %s", (max_attempts, limit))
             return [row[0] for row in await cur.fetchall()]
 
     async def record_provider_event(self, event_key, event, checked_at):

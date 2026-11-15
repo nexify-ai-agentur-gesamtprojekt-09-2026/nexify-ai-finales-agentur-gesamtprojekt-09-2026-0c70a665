@@ -12,11 +12,13 @@ from contextlib import asynccontextmanager
 from datetime import datetime, timezone
 import json
 import logging
+import re
 from uuid import uuid4
 
 from ..errors import StoreUnavailable, StoredDataInvalid
 
 SCHEMA = "shop"
+NUL = re.compile(r"(?<!\\)(?:\\\\)*\\u0000")  # das kodierte Zeichen U+0000, nicht der Text \\u0000
 MAX_DOCUMENT_BYTES = 16 * 1024 * 1024 - 1024  # dieselbe Schutzgrenze wie in der MongoDB-Umsetzung
 
 
@@ -44,8 +46,8 @@ def encode(doc):
         text = json.dumps(doc, default=_default, ensure_ascii=False, allow_nan=False, separators=(",", ":"))
     except (TypeError, ValueError, RecursionError):
         raise StoredDataInvalid() from None
-    if "\\u0000" in text:
-        raise StoredDataInvalid()
+    if NUL.search(text):
+        raise StoredDataInvalid()  # PostgreSQL kann das Zeichen U+0000 in Text nicht führen
     return text
 
 
@@ -121,8 +123,11 @@ class PgDatabase:
                 try:
                     from psycopg_pool import AsyncConnectionPool
                     logging.getLogger("psycopg.pool").setLevel(logging.CRITICAL)  # dessen Meldungen nennen Adresse und Rolle
+                    # Keine Startparameter und keine vorbereiteten Anweisungen: Beides vertragen Verbindungsbündler im
+                    # Transaktionsmodus (Supavisor, PgBouncer) nicht. Tabellen sind deshalb überall mit Schema benannt;
+                    # Zeitgrenzen für Anweisungen und Sperren gehören an die Anmelderolle (siehe 0002_shop_rls.sql).
                     pool = AsyncConnectionPool(self._conninfo, min_size=0, max_size=self._max_size, timeout=self._timeout, open=False,
-                                               kwargs={"options": "-c search_path=%s -c statement_timeout=15000 -c lock_timeout=10000" % SCHEMA})
+                                               kwargs={"prepare_threshold": None})
                     await pool.open()
                 except Exception:
                     raise StoreUnavailable() from None
@@ -148,8 +153,12 @@ class PgDatabase:
             async with pool.connection() as conn:
                 async with conn.cursor() as cur:
                     yield cur
-        except (psycopg.errors.UniqueViolation, psycopg.errors.SerializationFailure, psycopg.errors.DeadlockDetected):
+        except psycopg.errors.UniqueViolation:
             raise  # der Aufrufer in dieser Schicht übersetzt sie
+        except (psycopg.errors.SerializationFailure, psycopg.errors.DeadlockDetected):
+            if tx is not None:
+                raise  # die umgebende Transaktion wird wiederholt
+            failure = StoreUnavailable()
         except (psycopg.errors.DataError, psycopg.errors.CheckViolation, psycopg.errors.NotNullViolation):
             failure = StoredDataInvalid()
         except psycopg.Error:
@@ -178,13 +187,13 @@ class PgDatabase:
 
 # --- Bausteine über Dokumenttabellen -----------------------------------------------------
 async def fetch_one(cur, table, row_id):
-    await cur.execute(f"select id, doc::text from {table} where id = %s", (row_id,))
+    await cur.execute(f"select id, doc::text from shop.{table} where id = %s", (row_id,))
     row = await cur.fetchone()
     return join(*row) if row else None
 
 
 async def fetch_all(cur, table, where="true", params=(), order="seq", limit=None, offset=None, lock=False):
-    sql = f"select id, doc::text from {table} where {where} order by {order}"
+    sql = f"select id, doc::text from shop.{table} where {where} order by {order}"
     params = list(params)
     if limit is not None:
         sql += " limit %s"; params.append(limit)
@@ -199,13 +208,13 @@ async def fetch_all(cur, table, where="true", params=(), order="seq", limit=None
 async def insert(cur, table, doc):
     """Legt das Dokument an; ein vergebener Schlüssel kommt als ``UniqueViolation`` des Treibers zurück."""
     row_id, body = split(doc)
-    await cur.execute(f"insert into {table} (id, doc) values (%s, %s::json)", (row_id, encode(body)))
+    await cur.execute(f"insert into shop.{table} (id, doc) values (%s, %s::json)", (row_id, encode(body)))
     return row_id
 
 
 async def write(cur, table, doc):
     row_id, body = split(doc)
-    await cur.execute(f"update {table} set doc = %s::json where id = %s", (encode(body), row_id))
+    await cur.execute(f"update shop.{table} set doc = %s::json where id = %s", (encode(body), row_id))
 
 
 async def compare_and_change(cur, table, row_id, condition, mutate):
@@ -213,7 +222,7 @@ async def compare_and_change(cur, table, row_id, condition, mutate):
 
     Gibt (vorher, nachher) zurück oder None, wenn es die Zeile nicht gibt oder die Bedingung nicht gilt.
     """
-    await cur.execute(f"select id, doc::text from {table} where id = %s for update", (row_id,))
+    await cur.execute(f"select id, doc::text from shop.{table} where id = %s for update", (row_id,))
     row = await cur.fetchone()
     if row is None:
         return None

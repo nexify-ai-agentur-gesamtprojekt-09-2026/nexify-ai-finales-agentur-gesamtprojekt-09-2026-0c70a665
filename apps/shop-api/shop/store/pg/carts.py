@@ -23,13 +23,13 @@ class PgCartStore:
 
     @staticmethod
     async def _locked(cur, owner):
-        await cur.execute("select id, doc::text from carts where owner = %s for update", (owner,))
+        await cur.execute("select id, doc::text from shop.carts where owner = %s for update", (owner,))
         row = await cur.fetchone()
         return base.join(*row) if row else None
 
     async def get(self, owner, *, tx=None):
         async with self.db.cursor(tx) as cur:
-            await cur.execute("select id, doc::text from carts where owner = %s", (owner,))
+            await cur.execute("select id, doc::text from shop.carts where owner = %s", (owner,))
             row = await cur.fetchone()
         return base.join(*row) if row else None
 
@@ -50,6 +50,8 @@ class PgCartStore:
                 fresh = {"owner": owner} if expected_revision is None else {"owner": owner, "revision": expected_revision}
                 await base.insert(cur, "carts", base.change(fresh, set={"items": items, "updated_at": now_iso()}, inc={"revision": 1}, push=push))
         except psycopg.errors.UniqueViolation:
+            if tx is not None:
+                raise  # ein gleichzeitiger Schreiber hat den Warenkorb angelegt: die Transaktion wird wiederholt
             raise RevisionStale() from None
 
     async def remove_products(self, owner, expected_revision, product_ids):
@@ -85,6 +87,7 @@ class PgCartStore:
                 if attempt == RETRIES - 1:
                     raise StoreUnavailable() from None
             except psycopg.errors.UniqueViolation:
-                raise RevisionStale() from None
+                if attempt == RETRIES - 1:
+                    raise RevisionStale() from None
             except psycopg.Error:
                 raise StoreUnavailable() from None

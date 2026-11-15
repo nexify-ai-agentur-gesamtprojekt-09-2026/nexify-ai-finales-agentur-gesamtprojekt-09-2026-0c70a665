@@ -22,14 +22,14 @@ class PgPaymentStore:
     async def has_webhook_registration(self, mode):
         """Ohne das Signaturgeheimnis zu lesen."""
         async with self.db.cursor() as cur:
-            await cur.execute("select 1 from revolut_webhooks where id = %s", (mode,))
+            await cur.execute("select 1 from shop.revolut_webhooks where id = %s", (mode,))
             return bool(await cur.fetchone())
 
     async def save_webhook_registration(self, mode, registration):
         """Genau eine Anmeldung je Betriebsart; eine vorhandene wird vollständig ersetzt."""
         body = base.encode({k: v for k, v in registration.items() if k != "_id"})
         async with self.db.cursor() as cur:
-            await cur.execute("insert into revolut_webhooks (id, doc) values (%s, %s::json) on conflict (id) do update set doc = excluded.doc", (mode, body))
+            await cur.execute("insert into shop.revolut_webhooks (id, doc) values (%s, %s::json) on conflict (id) do update set doc = excluded.doc", (mode, body))
 
     async def webhook_registrations(self):
         async with self.db.cursor() as cur:
@@ -39,7 +39,7 @@ class PgPaymentStore:
         """AlreadyExists, wenn dieses Ereignis (Schlüssel = Hash des Inhalts) schon empfangen wurde."""
         try:
             async with self.db.cursor() as cur:
-                await cur.execute("insert into webhook_events (id, event_key, event, order_id, received_at) values (%s, %s, %s, %s, %s)",
+                await cur.execute("insert into shop.webhook_events (id, event_key, event, order_id, received_at) values (%s, %s, %s, %s, %s)",
                                   (base.new_id(), event_key, event, order_id, received_at))
         except psycopg.errors.UniqueViolation:
             raise AlreadyExists() from None
@@ -47,5 +47,5 @@ class PgPaymentStore:
     async def webhook_events(self):
         """Empfangene Ereignisse in Eingangsfolge; für Prüfung und Datenumzug."""
         async with self.db.cursor() as cur:
-            await cur.execute("select id, event_key, event, order_id, received_at from webhook_events order by seq")
+            await cur.execute("select id, event_key, event, order_id, received_at from shop.webhook_events order by seq")
             return [{"_id": r[0], "event_key": r[1], "event": r[2], "order_id": r[3], "received_at": r[4]} for r in await cur.fetchall()]

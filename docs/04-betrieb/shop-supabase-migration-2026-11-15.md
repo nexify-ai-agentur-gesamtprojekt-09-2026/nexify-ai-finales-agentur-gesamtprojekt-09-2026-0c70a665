@@ -207,8 +207,8 @@ Ohne Bestätigung werden sie übersprungen, nicht als grün gezählt.
 
 | Lauf | Tests | bestanden | übersprungen | rot |
 |---|---|---|---|---|
-| mit lokalem PostgreSQL 16.15 und Treiber (Python 3.13) | 274 | 198 | 76 | 0 |
-| ohne Bestätigung, ohne Treiber (Umgebung aus `make test-env`, Python 3.12) | 267 | 106 | 161 | 0 |
+| mit lokalem PostgreSQL 16.15 und Treiber (Python 3.13) | 293 | 217 | 76 | 0 |
+| ohne Bestätigung, ohne Treiber (Umgebung aus `make test-env`, Python 3.12) | 286 | 114 | 172 | 0 |
 
 Die 76 übersprungenen im ersten Lauf brauchen ein echtes MongoDB-Replica-Set: 65 Vertragsaussagen,
 1 Vergleichslauf, 10 Aussagen von `test_cart_merge_replica_contract.py` (vorbestehend).
@@ -216,10 +216,11 @@ Die 76 übersprungenen im ersten Lauf brauchen ein echtes MongoDB-Replica-Set: 6
 | Gruppe | Datei | Zahl | Aussage |
 |---|---|---|---|
 | Vertragstests, gemeinsame Suite | `test_store_contract.py` | 65 Aussagen je Bindung | dieselben Aussagen gegen die MongoDB-Umsetzung (über den Stellvertreter: 65 grün, plus 2 MongoDB-Besonderheiten) und gegen PostgreSQL (65 grün). Keine Aussage wurde für PostgreSQL geändert; hinzugekommen ist eine für die beiden neuen Methoden. |
-| PostgreSQL-Besonderheiten | `test_store_contract.py` (`PostgresSpecifics`) | 6 | Millisekunden wie bisher; Schutzgrenze und nicht ablegbare Daten; Beträge, die keine ganzen Cent sind, erreichen die Tabelle nie; Aufräumen nur auf Aufruf; zwei wartende Zustandswechsel haben einen Gewinner; zwei gleichzeitige Zusammenführungen übernehmen die Positionen genau einmal |
+| PostgreSQL-Besonderheiten | `test_store_contract.py` (`PostgresSpecifics`) | 9 | zwei Zusammenführungen, die beide den Kontokorb anlegen, enden ohne Fehler und ohne zweiten Korb; das Zeichen U+0000 wird abgewiesen, der gleichlautende Text gespeichert; doppeltes Befüllen des Verzeichnisses ohne Treibertext; Millisekunden wie bisher; Schutzgrenze und nicht ablegbare Daten; Beträge, die keine ganzen Cent sind, erreichen die Tabelle nie; Aufräumen nur auf Aufruf; zwei wartende Zustandswechsel haben einen Gewinner; zwei gleichzeitige Zusammenführungen übernehmen die Positionen genau einmal |
 | Vergleichslauf alt gegen neu | `test_store_parity.py` | 157 Schritte | eine feste Schrittfolge über alle neun Bereiche gegen beide Umsetzungen; jede Rückgabe als Text verglichen (gleiche Felder, gleiche Folge), erzeugte Kennungen maskiert: 157 von 157 gleich |
 | RLS und Rechte | `test_postgres_rls.py` | 8 | jede Tabelle mit erzwungener RLS und genau einer Policy; Anmeldung ohne Rechte erreicht nichts; `anon`/`authenticated` erreichen nichts; Tabellenrecht ohne Policy sieht null Zeilen und schreibt keine; Dienstrolle löscht keine Geschäftsdaten und ändert weder Schema noch Policies noch fremde Schemas; die Datenbank weist falsche Beträge ab; Treibertext verlässt die Schicht nicht |
-| Datenumzug | `test_postgres_transfer.py` | 10 | Trockenlauf lässt das Ziel leer; Zahl und Prüfsumme gleich für alle 19 Sammlungen; zweiter Lauf schreibt keine Zeile (Zeilenversionen unverändert); nur geänderte und neue Dokumente werden geschrieben; Zeile nur im Ziel und geändertes Zahlungsereignis führen zum Abbruch ohne Festschreiben; acht Arten nicht verlustfrei übertragbarer Dokumente brechen ab; Quelle wird nur über `find` gelesen (einmal je Sammlung und Lauf); Protokoll ohne Inhalte; beide Umsetzungen antworten nach dem Umzug gleich (24 Abrufe als Text) |
+| Katalog-Erstbefüllung | `test_catalog_transfer.py` | 15 | je 7 Aussagen gegen Ziel MongoDB (Stellvertreter) und Ziel PostgreSQL, 1 zur Befehlszeile; Abschnitt 12 |
+| Datenumzug | `test_postgres_transfer.py` | 11 | ein geschlossenes Ziel wird nie wieder beschrieben; | Trockenlauf lässt das Ziel leer; Zahl und Prüfsumme gleich für alle 19 Sammlungen; zweiter Lauf schreibt keine Zeile (Zeilenversionen unverändert); nur geänderte und neue Dokumente werden geschrieben; Zeile nur im Ziel und geändertes Zahlungsereignis führen zum Abbruch ohne Festschreiben; acht Arten nicht verlustfrei übertragbarer Dokumente brechen ab; Quelle wird nur über `find` gelesen (einmal je Sammlung und Lauf); Protokoll ohne Inhalte; beide Umsetzungen antworten nach dem Umzug gleich (24 Abrufe als Text) |
 | Schalter | `test_store_backend_switch.py` | 4 | ohne Variable MongoDB und der PostgreSQL-Code wird nicht geladen; `postgres` bindet alle Bereiche ohne Verbindungsaufbau; fehlende Adresse und jeder andere Wert stoppen den Start, ohne die Adresse zu nennen |
 
 ### 6.2 Gegenprobe (gezielt eingebaute Fehler in `shop/store/pg/`, nicht eingecheckt)
@@ -239,6 +240,9 @@ ersten Laufs brach das Werkzeug am Zeitlimit ab und ließ einen eingebauten Fehl
 `pg/outbox.py` stehen; er wurde über `git diff` gefunden und zurückgesetzt, der Lauf danach mit
 Rücksetzen bei Abbruch wiederholt. Am Ende zeigte `git diff` nur beabsichtigte Änderungen, die
 Suite war grün.
+
+Nach der Gegenprobe kamen die Änderungen aus der unabhängigen Prüfung hinzu (6.4); für sie wurde die
+Gegenprobe nicht wiederholt. Für die Katalog-Erstbefüllung: 10 Fehler eingebaut, 9 erkannt, 1 wirkungsgleich.
 
 ### 6.3 Gates
 
@@ -264,6 +268,26 @@ Wegwerf-Replica-Set ist vorhanden (Vertragssuite und Vergleichslauf) und wird ü
 jemand sie auf einer Maschine mit MongoDB ausführt. Das Ziel war ein lokales PostgreSQL 16, keine
 Supabase-Instanz.
 
+### 6.4 Unabhängige Prüfung und automatische Durchsicht
+
+Eine zweite, rein lesende Sitzung hat jede Methode der PostgreSQL-Speicher gegen ihr MongoDB-Gegenstück
+gelesen. Ohne Befund: Bedingungen (null/fehlend), Rückgaben, Feldfolge, Sortierung, Paginierung,
+Sperren, SQL-Injektion, Wiederholbarkeit der Migrationen, „Quelle wird nie beschrieben“, „kein
+Festschreiben bei Abweichung“. Befunde und was daraus wurde:
+
+| Befund | Stand |
+|---|---|
+| Rollen-Hinweis mit `noinherit`: Die Anmelderolle hätte die Rechte von `shop_api` nicht nutzen können (auch von der automatischen Durchsicht am PR gemeldet) | behoben (Hinweis berichtigt; die Tests nutzen eine erbende Anmeldung) |
+| `order_mails` las je Bestellung alle Bestellmails samt Inhalt (auch automatische Durchsicht) | behoben (Vorauswahl nach der Kennung in der Abfrage) |
+| Verbindungsbündler im Transaktionsmodus: Startparameter (`search_path`) und vorbereitete Anweisungen | behoben: alle Tabellen mit Schema benannt, keine Startparameter, keine vorbereiteten Anweisungen; Zeitgrenzen an der Rolle |
+| Zwei gleichzeitige Zusammenführungen, die beide den Kontokorb anlegen: 409 statt stiller Wiederholung wie in MongoDB | behoben und getestet |
+| Wiederholter Umzug nach dem Umschalten überschreibt neuere Daten im Ziel | behoben: Ziel wird mit einer Marke geschlossen, jeder weitere Lauf bricht ab (getestet); Plan Schritt 8 und 9 angepasst |
+| Treiberfehler roh aus `add_many`; Sperrkonflikt außerhalb einer Transaktion | behoben und getestet |
+| NUL-Prüfung wies auch den gewöhnlichen Text `\u0000` ab | behoben und getestet; das Zeichen U+0000 selbst bleibt abgewiesen (PostgreSQL kann es nicht führen, MongoDB schon) |
+| Der Schalter stellt nur die neun Bereiche um; Portal, lokaler Dienst und Import bleiben auf MongoDB | bleibt, Abschnitt 8 Punkt 10 ergänzt |
+| Prüfsumme vergleicht verschachtelte `ObjectId` als Text | bleibt, im Skript benannt |
+| Reihenfolge von `order_mails`: MongoDB könnte nach Schlüssel statt nach Ablage liefern | offen, nur gegen echtes MongoDB klärbar (Abschnitt 8 Punkt 6) |
+
 ## 7. Umschaltplan (nur Plan; nichts davon ist ausgeführt)
 
 Wer: **I** = Inhaber, **A** = Agent. Aufwand ist eine Schätzung reiner Arbeitszeit ohne Wartezeiten.
@@ -278,8 +302,8 @@ Wer: **I** = Inhaber, **A** = Agent. Aufwand ist eine Schätzung reiner Arbeitsz
 | 5 | `--source-report` gegen die Produktionsdaten | A, nach Freigabe I | Zahl je Sammlung plausibel (heute 3720 Produkte laut altem Dienst); kein Abbruch; jede gemeldete Unverträglichkeit ist geklärt | nichts geschrieben | 0,5 h |
 | 6 | Trockenlauf `--dry-run` | A | alle Sammlungen `match: true`; Ziel danach leer | nichts geschrieben | 0,5 h |
 | 7 | Erster Umzug `--apply` (Shop läuft weiter auf MongoDB) | A, nach Freigabe I | Zahl und Prüfsumme je Sammlung gleich; Protokoll abgelegt | `truncate` der Shop-Tabellen durch den Eigentümer des Schemas | 0,5 h |
-| 8 | Parallelbetrieb mit Vergleich: zweite Auslieferung (Vorschau, nicht die Kundendomain) mit `SHOP_STORE_BACKEND=postgres`; lesende Wege (Katalog, Suche, Produkt, Kategorien) gegen den laufenden Dienst vergleichen; Umzug täglich wiederholen | I setzt die Variablen in der Vorschau; A vergleicht | Antworten bytegleich für eine feste Liste von Abrufen; wiederholter Umzug schreibt nur geänderte Zeilen; Kasse im Sandbox-Modus einmal vollständig durchlaufen (Bestellung, Zahlung, Bestätigungsmail im Postausgang) | Vorschau abschalten | 1–2 Tage Beobachtung |
-| 9 | Umschalten: Wartungsfenster; Schreibzugriffe auf den alten Stand anhalten; letzter Umzug `--apply`; Variablen in Produktion setzen; neu ausliefern | I (Variablen, Freigabe); A (Umzug, Prüfung) | Prüfsummen gleich; Gesundheitsabfrage, Katalog, Warenkorb, Anmeldung, eine Sandbox-Bestellung; keine 5xx im Protokoll | Schritt 10 | 1–2 h |
+| 8 | Parallelbetrieb mit Vergleich: zweite Auslieferung (Vorschau, nicht die Kundendomain) mit `SHOP_STORE_BACKEND=postgres`, **nur lesend** gegen das Ziel des Umzugs (Katalog, Suche, Produkt, Kategorien) im Vergleich zum laufenden Dienst; Umzug täglich wiederholen. Schreibwege (Kasse im Sandbox-Modus: Bestellung, Zahlung, Bestätigungsmail im Postausgang) in einer **eigenen** Datenbank mit demselben Schema, weil ein wiederholter Umzug geänderte Zeilen im Ziel überschreibt | I setzt die Variablen in der Vorschau; A vergleicht | Antworten bytegleich für eine feste Liste von Abrufen; wiederholter Umzug schreibt nur geänderte Zeilen; Kasse einmal vollständig durchlaufen | Vorschau abschalten | 1–2 Tage Beobachtung |
+| 9 | Umschalten: Wartungsfenster; Schreibzugriffe auf den alten Stand anhalten; letzter Umzug `--apply`; **Ziel schließen** (Zeile `transfer_closed` in `shop.settings`, danach bricht jeder weitere Umzug ab); Variablen in Produktion setzen; neu ausliefern | I (Variablen, Freigabe); A (Umzug, Prüfung) | Prüfsummen gleich; Gesundheitsabfrage, Katalog, Warenkorb, Anmeldung, eine Sandbox-Bestellung; keine 5xx im Protokoll | Schritt 10 | 1–2 h |
 | 10 | Rückweg auf MongoDB | I (Variable), A | `SHOP_STORE_BACKEND` entfernen oder auf `mongodb` setzen und neu ausliefern; der Shop liest wieder MongoDB | – | 15 min |
 | 11 | Nachlauf: Aufräumzeitplan aktiv, Sicherung der Shop-Tabellen im Sicherungsplan, MongoDB mindestens 30 Tage unverändert behalten, dann Entscheidung über Stilllegung (D-016) | I entscheidet; A bereitet vor | Wiederherstellungsprobe der Shop-Tabellen belegt | – | 0,5 Tag |
 
@@ -312,7 +336,8 @@ bleiben gesetzt, solange Abschnitt 8 Punkt 2 und 3 offen sind und für den Rück
    Verbindungen; nötig ist der Verbindungsbündler der Instanz (bei Supabase: Supavisor) oder eine
    feste Obergrenze. Ob die selbst gehostete Instanz von Vercel aus erreichbar ist (Netz, TLS),
    ist nicht belegt. Messung nötig.
-6. **Lauf gegen echtes MongoDB.** Vertragssuite und Vergleichslauf gegen ein Wegwerf-Replica-Set
+6. **Lauf gegen echtes MongoDB** (klärt auch, in welcher Reihenfolge MongoDB die Mails einer
+   Bestellung liefert; die Vertragssuite nimmt die Ablagefolge an). Vertragssuite und Vergleichslauf gegen ein Wegwerf-Replica-Set
    (Bindung vorhanden, hier übersprungen) und der Umzug gegen eine Kopie echter Daten
    (`--source-report`, dann `--dry-run`). Erst das zeigt, ob Altdaten die strengeren Regeln
    erfüllen (ganze Cent, feste Form der Sitzungen).
@@ -323,7 +348,11 @@ bleiben gesetzt, solange Abschnitt 8 Punkt 2 und 3 offen sind und für den Rück
    Schritt 7); hier hat nur der Verfasser geprüft. Dazu Merge der Grundlage
    `claude/shop-zugriffsschicht`, auf der dieser Zweig aufbaut.
 10. **Lokaler Dienst und Portal** (`main.py`, `nexify_api.py`) bleiben auf MongoDB; für den
-    Vercel-Einstieg des Shops nicht nötig, für das vollständige Zielbild D-013 schon.
+    Vercel-Einstieg des Shops nicht nötig, für das vollständige Zielbild D-013 schon. Wo beides
+    zusammen liefe, wären die Folgen: Schlüssel der Kundenschnittstelle legt das Portal in MongoDB an
+    und prüft sie dort, das Sperren beim Rücksetzen des Passworts träfe aber PostgreSQL; die
+    Gesundheitsabfrage des lokalen Dienstes meldete Zahlen aus MongoDB. Der Schalter ist deshalb nur
+    für den Vercel-Einstieg gedacht, solange das Portal nicht umgestellt ist.
 
 ## 9. Offene Entscheidungen des Inhabers
 
@@ -366,3 +395,70 @@ cd apps/shop-api && /tmp/shop-venv/bin/python -m unittest discover -s tests
 - **Geändert außerhalb von `apps/shop-api`:** nur `.claude/skills/nexify-shop-zugriffsschicht/SKILL.md`
   (Abschnitt zur PostgreSQL-Umsetzung und die Lehre aus der abgebrochenen Gegenprobe) und dieses
   Dokument.
+
+## 12. Katalog-Erstbefüllung (Erweiterung des Auftrags, 15.11.2026)
+
+### 12.1 Was heute live ist und was fehlt
+
+Messwerte der koordinierenden Sitzung von 11:52 UTC, **hier nicht nachgemessen** (diese Sitzung greift
+auf keine Produktivdaten zu):
+
+| Stelle | Stand |
+|---|---|
+| Neue Fassung (Vercel-Projekt hinter nexifyai.de) | an die Shop-Datenbank gebunden; `/api/shop/status` 200 mit `products: 0`, `last_import_at: null`; `/api/shop/products` 200 mit `total: 0`; `/api/shop/categories` 200, leer. Der Namensraum `nexify_teileklar_shop_v1` ist erreichbar und leer. |
+| Alter Dienst (teileklar.shop) | liefert 3720 Produkte; Ort vermutlich srv1941843, Datenbankname unbekannt |
+
+Am Code dieses Zweigs nachgeprüft:
+
+- Der Importweg `POST /api/admin/import` endet immer mit `tenant_publication_contract_unverified`
+  (`shop/bigbuy_import.py:235–243` und `:304`); die Sperre greift vor Anbieter- und Datenbankzugriff.
+- Ein API-Import schriebe Produkte ohne `active` (`:254`), also unsichtbar; nur der FTP-Import
+  (`bigbuy_ftp.py:187`) und die Auswahl setzen `active: True`.
+- Der Import läuft als Aufgabe im Prozess (`:312–314`), nicht wiederaufnehmbar; die Funktion auf Vercel
+  endet nach höchstens 30 s (`vercel.json`).
+- `seed_accounts` läuft nur im lokalen Dienst (`main.py:42`), nicht unter `vercel_app.py`. Im neuen
+  Namensraum gibt es damit vermutlich kein Verwaltungskonto, also auch niemanden, der Preise freigibt.
+- Die Schutzregeln des Namensraums verlangen je Sammlung nur „Dokument ist ein Objekt“ mit der
+  Namensraum-Marke (`vercel_app.py:143–155`). Sie lassen eine Übernahme zu; **keine Änderung nötig**.
+- Zum Anzeigen braucht die neue Fassung je Produkt zwingend `_id`, `name`, `active: true`; zum Rechnen
+  `purchase_cents` als ganze Zahl; für den späteren Import `source: "bigbuy"` und eine eindeutige
+  `bigbuy_id` (eindeutiger Index). Der Einkaufspreis steht in keiner öffentlichen Antwort
+  (`catalog_api.py:34–55`): Aus der öffentlichen Schnittstelle des alten Dienstes lässt sich der
+  Katalog deshalb **nicht** übernehmen, nur aus dessen Datenbank.
+
+### 12.2 Entscheidungsvorlage
+
+| | Weg 1: Bestand übernehmen | Weg 2: Import freischalten |
+|---|---|---|
+| Was | Produkte und Kategorien einmalig, unverändert, aus der Datenbank des alten Dienstes in den neuen Namensraum; gebaut als `apps/shop-api/transfer_catalog.py` | Sperre durch einen belegten Veröffentlichungsvertrag ersetzen, Import außerhalb der 30-Sekunden-Grenze, Verwaltungskonto anlegen |
+| Voraussetzungen | lesender Zugang zur alten Datenbank (Ort und Name sind noch unbekannt); schreibender Zugang zum neuen Namensraum; **Freigabe des Inhabers**, weil das die Sperre aus D-008/OA-071 in der Wirkung umgeht | vom Inhaber: gültiger BigBuy-Produktivzugang (heute 401), Lieferantenvertrag und Guthaben (Zahlung, nur Inhaber), Beleg des Mandanten- und Veröffentlichungsvertrags, Lizenz der Katalogdaten (OA-072) |
+| Aufwand | Skript fertig; Lauf rund 1 h nach Zugang | Import hinter die Schicht und als wiederaufnehmbarer Lauf über die Befehlszeile: 2–3 Tage; dazu die Nachweise des Inhabers (nicht schätzbar) |
+| Risiko | Daten sind so alt wie der letzte Import des alten Dienstes; Preis und Bestand veralten ohne laufenden Abgleich; Veröffentlichung ohne belegten Vertrag; die angenommene Dokumentform kann von der echten abweichen (das Skript bricht dann vor dem Schreiben ab und nennt die Gründe) | keiner für den Bestand; dauert, bis die Nachweise vorliegen |
+| Rückweg | Im Ziel wird nichts gelöscht. Rückweg ist: Produkte unveröffentlicht setzen oder den Namensraum leeren; beides ist ein Eingriff in die Produktionsdatenbank und braucht die Freigabe des Inhabers (D-016) | Sperre wieder einsetzen |
+| Danach offen | Preise bleiben „nicht freigegeben“ (die Freigabe wird bewusst nicht übernommen), bis ein Verwaltungskonto existiert und der Inhaber freigibt; ohne Weg 2 kein Abgleich | – |
+
+Empfehlung: Weg 1 als Überbrückung nur, wenn der Inhaber die Veröffentlichung ausdrücklich freigibt und
+die Daten des alten Dienstes als aktuell genug ansieht; Weg 2 bleibt in jedem Fall nötig, weil sonst
+nichts den Katalog aktuell hält. Beide Wege brauchen ein Verwaltungskonto im neuen Namensraum; dafür
+fehlt ein Weg unter `vercel_app.py` (kleinste Lösung: ein einmaliger Befehlszeilenlauf von
+`seed_accounts` mit den Variablen des Inhabers; nicht gebaut).
+
+### 12.3 Das Übertragungsskript
+
+`apps/shop-api/transfer_catalog.py`; Ziel wahlweise MongoDB (heute) oder PostgreSQL (später), gleiche
+Regeln, gleiche Tests gegen beide Ziele.
+
+- **Trockenlauf ist der Standard.** Festschreiben nur mit `--apply --owner-release "<Verweis>"`; der
+  Verweis steht danach im Lauf-Eintrag (`imports`) des Ziels. Ohne ihn Rückgabewert 3.
+- Übernimmt nur `products` und `categories`, unverändert. Nicht: Einstellungen, Preisfreigabe,
+  Bestellungen, Konten, Warenkörbe.
+- Prüft jedes Produkt auf das, was die neue Fassung braucht; bei Verstößen Abbruch mit Zahl je Grund,
+  ohne Inhalte, vor dem ersten Schreiben.
+- Eine Transaktion; Zahl und Prüfsumme je Sammlung; ein Produkt nur im Ziel ist eine Abweichung;
+  zweiter Lauf schreibt nichts. Die Quelle wird nur über `find` gelesen.
+- Der Lauf-Eintrag trägt als `finished_at` das Alter der Daten (jüngster Importzeitpunkt der Quelle),
+  nicht den Zeitpunkt der Übernahme; `/api/shop/status` zeigt damit kein falsches Aktualitätsdatum.
+
+**Annahme:** Die Dokumentform des alten Dienstes ist aus dem Code abgeleitet, der sie geschrieben hat
+(`build_product`, FTP-Import), nicht aus dessen Daten oder öffentlichen Antworten gelesen. Stimmt sie
+nicht, zeigt das der Trockenlauf.

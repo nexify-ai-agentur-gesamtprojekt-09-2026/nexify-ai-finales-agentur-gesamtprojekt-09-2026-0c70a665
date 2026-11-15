@@ -18,7 +18,7 @@ class PgRequestStore:
     async def count_from_email_since(self, email, since):
         """since und created_at sind ISO-Zeitpunkte in UTC als Text; Grenze einschließlich."""
         async with self.db.cursor() as cur:
-            await cur.execute("select count(*) from requests where email = %s and created_at >= %s", (email, since))
+            await cur.execute("select count(*) from shop.requests where email = %s and created_at >= %s", (email, since))
             return (await cur.fetchone())[0]
 
     async def add(self, request):

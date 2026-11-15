@@ -16,6 +16,12 @@ Regeln:
 * Wiederholbar: Ein zweiter Lauf über unveränderte Daten schreibt keine Zeile neu. Im Ziel wird nie gelöscht;
   eine Zeile, die es nur im Ziel gibt, ist eine Abweichung.
 * Das Protokoll nennt Sammlungen, Zahlen, Prüfsummen und höchstens fünf Kennungen je Abweichung, nie Inhalte.
+* Geänderte Quelldokumente überschreiben die Zeile im Ziel. Das ist richtig, solange MongoDB führt, und falsch, sobald
+  PostgreSQL führt: Nach dem Umschalten wird das Ziel deshalb geschlossen (Zeile ``transfer_closed`` in shop.settings),
+  und jeder weitere Lauf bricht vor dem ersten Schreiben ab. Schreibtests des Parallelbetriebs gehören in eine eigene
+  Datenbank, nicht in das Ziel des Umzugs.
+* Verschachtelte Kennungen der Quelle (ObjectId innerhalb eines Dokuments) werden als Text abgelegt; die Prüfsumme
+  vergleicht in dieser Form.
 * Nur nach Freigabe des Inhabers gegen echte Daten ausführen (DECISIONS.md D-013, D-016).
 """
 import argparse
@@ -45,7 +51,9 @@ TYPED_TABLES = {
 }
 COLLECTIONS = [*DOCUMENT_TABLES, *TYPED_TABLES]
 INTEGER_ID = {"categories"}
-BATCH = 500
+# Nach dem Umschalten ist PostgreSQL der führende Stand. Dann legt der Verantwortliche diese Zeile an
+# (insert into shop.settings (id, doc) values ('transfer_closed', '{"closed_at":"<Zeitpunkt>"}')), und kein Lauf schreibt mehr.
+CLOSED_MARKER = "transfer_closed"
 
 
 class Abort(Exception):
@@ -230,6 +238,10 @@ async def transfer(source, target_dsn, *, apply, log=print, collections=None):
     async with await psycopg.AsyncConnection.connect(target_dsn) as conn:
         try:
             async with conn.cursor() as cur:
+                await cur.execute("select 1 from shop.settings where id = %s", (CLOSED_MARKER,))
+                if await cur.fetchone():
+                    raise Abort("Der Umzug ist für dieses Ziel geschlossen (Marke in shop.settings): Das Ziel ist der führende Stand, "
+                                "ein weiterer Lauf würde neuere Daten überschreiben. Nichts geschrieben.")
                 for collection in wanted:
                     try:
                         inserted, updated, unchanged = await write_target(cur, collection, prepared[collection])

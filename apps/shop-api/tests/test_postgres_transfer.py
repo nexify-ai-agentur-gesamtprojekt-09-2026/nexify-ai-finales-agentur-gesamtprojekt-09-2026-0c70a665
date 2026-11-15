@@ -177,6 +177,21 @@ class TransferContract(unittest.IsolatedAsyncioTestCase):
         self.assertIn('webhook_events', str(caught.exception))
         self.assertEqual(self.rows("select event from shop.webhook_events order by seq limit 1"), [('ORDER_COMPLETED',)], 'a received event is never rewritten')
 
+    async def test_a_closed_target_is_never_written_again_so_newer_data_there_is_not_overwritten(self):
+        await self.run_transfer()
+        store, _, database = contract.load_pg_store(self.target)
+        self.addAsyncCleanup(database.close)
+        self.assertIs(await store.orders.mark_paid('o2', contract.T2), True, 'after the switch the order is paid in PostgreSQL only')
+        pg_fixture.run(self.database_name, "insert into shop.settings (id, doc) values ('transfer_closed', '{\"closed_at\":\"2026-11-15T12:00:00+00:00\"}')")
+        before = self.stored()
+        for options in ({}, {'collections': ['orders']}, {'apply': False}):
+            with self.subTest(options), self.assertRaises(transfer_module.Abort) as caught:
+                await self.run_transfer(**options)
+            self.assertIn('geschlossen', str(caught.exception))
+        self.assertEqual(self.stored(), before)
+        self.assertEqual((await store.orders.get('o2'))['status'], 'bezahlt', 'the payment recorded after the switch stands')
+        self.assertEqual(await store.catalog.shop_settings(), (await contract.load_store(self.mongo).catalog.shop_settings()), 'the marker is no shop setting')
+
     async def test_documents_that_cannot_be_moved_without_loss_abort_before_the_target_is_touched(self):
         cases = {'amount that is not whole cents': ('orders', {**contract.order('bad'), 'total_cents': 19.95}),
                  'amount stored as text': ('orders', {**contract.order('bad'), 'total_cents': '1995'}),

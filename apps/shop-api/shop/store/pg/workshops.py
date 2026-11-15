@@ -16,13 +16,16 @@ class PgWorkshopStore:
 
     async def estimated_count(self, database=None):
         async with self.db.cursor() as cur:
-            await cur.execute("select count(*) from workshops")
+            await cur.execute("select count(*) from shop.workshops")
             return (await cur.fetchone())[0]
 
     async def add_many(self, docs, database=None):
-        async with self.db.cursor() as cur:
-            for doc in docs:
-                await base.insert(cur, "workshops", dict(doc))
+        try:
+            async with self.db.cursor() as cur:
+                for doc in docs:
+                    await base.insert(cur, "workshops", dict(doc))
+        except psycopg.errors.UniqueViolation:
+            raise AlreadyExists() from None
 
     async def _points(self, where, params, limit=None):
         async with self.db.cursor() as cur:

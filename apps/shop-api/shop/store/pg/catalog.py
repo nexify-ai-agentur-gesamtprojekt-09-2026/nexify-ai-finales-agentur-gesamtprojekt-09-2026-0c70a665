@@ -19,7 +19,7 @@ class PgCatalogStore:
 
     async def count_published(self):
         async with self.db.cursor() as cur:
-            await cur.execute("select count(*) from products where active")
+            await cur.execute("select count(*) from shop.products where active")
             return (await cur.fetchone())[0]
 
     async def last_finished_import(self):
@@ -35,7 +35,7 @@ class PgCatalogStore:
     async def published_counts_by_category(self):
         async with self.db.cursor() as cur:
             await cur.execute("""
-                select e.value::text, count(*) from products p
+                select e.value::text, count(*) from shop.products p
                 cross join lateral jsonb_array_elements(case jsonb_typeof(p.category_ids) when 'array' then p.category_ids
                                                          when 'null' then '[]'::jsonb else jsonb_build_array(p.category_ids) end) e(value)
                 where p.active and p.category_ids is not null group by e.value order by min(p.seq)""")
@@ -69,7 +69,7 @@ class PgCatalogStore:
         """Veröffentlichte Produkte: Name enthält term, Artikelnummer beginnt damit oder EAN ist gleich (ohne Groß-/Kleinschreibung)."""
         where, params = self._search(term, category, in_stock)
         async with self.db.cursor() as cur:
-            await cur.execute(f"select count(*) from products where {where}", params)
+            await cur.execute(f"select count(*) from shop.products where {where}", params)
             return (await cur.fetchone())[0]
 
     async def page_search(self, *, term, category, in_stock, sort, page, page_size):

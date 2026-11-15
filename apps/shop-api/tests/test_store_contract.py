@@ -251,9 +251,10 @@ def load_pg_store(dsn):
         store = importlib.import_module(name + '.store')
         pg = importlib.import_module(name + '.store.pg')
         base = importlib.import_module(name + '.store.pg.base')
-    database = pg.PgDatabase(dsn)
+        database = pg.PgDatabase(dsn)
+        bound = pg.bind(database)  # loads the store classes, which needs the private package to be importable
     errors = {error: getattr(store, error) for error in ('AlreadyExists', 'ArchiveTooLarge', 'RevisionStale', 'StoreUnavailable', 'StoredDataInvalid')}
-    return SimpleNamespace(**vars(pg.bind(database)), **errors), base, database
+    return SimpleNamespace(**vars(bound), **errors), base, database
 
 
 class DisposablePostgresBinding(unittest.IsolatedAsyncioTestCase):
@@ -1209,6 +1210,44 @@ class PostgresSpecifics:
         self.assertIn(stored['paid_at'], (T0, T1))
         self.assertEqual(sorted(result is not None for result in await asyncio.gather(*claimed)), [False, True])
         self.assertIn((await self.store.outbox.get('k1'))['claim_id'], ('first', 'second'))
+
+    async def test_two_merges_that_both_create_the_account_cart_end_without_an_error_and_without_a_second_cart(self):
+        # MongoDB reports a write conflict here and runs the second merge again; the visitor must not get an error
+        # because two requests arrived together after signing in.
+        import asyncio
+        await self.store.carts.replace_items('guest:one', None, [ITEM], create=True)
+        both_have_read, runs = asyncio.Event(), []
+        async def merge():
+            async def work(tx):
+                account = await self.store.carts.get('user:two', tx=tx)
+                runs.append(account is None)
+                if len(runs) >= 2: both_have_read.set()
+                await asyncio.wait_for(both_have_read.wait(), 5)
+                if account is None:
+                    await self.store.carts.replace_items('user:two', None, [ITEM], create=True, tx=tx)
+                else:
+                    await self.store.carts.replace_items('user:two', account['revision'], account['items'], create=False, tx=tx)
+            await self.store.carts.in_transaction(work)
+        await asyncio.gather(merge(), merge())
+        self.assertEqual(runs, [True, True, False], 'the loser ran again and found the cart the winner created')
+        account = await self.store.carts.get('user:two')
+        self.assertEqual((account['items'], account['revision']), ([ITEM], 2))
+        self.assertEqual(len(await self.rows('carts')), 2, 'guest and account, no third cart')
+
+    async def test_text_with_the_nul_character_is_rejected_but_the_same_six_characters_as_text_are_stored(self):
+        with self.assertRaises(self.store.StoredDataInvalid):
+            await self.store.requests.add(contact('a', message='vor\x00nach'))
+        self.assertIsNone(await self.store.requests.get(contact('a')['_id']))
+        literal = contact('b', message='Der Text \\u0000 und C:\\\\u0000 sind gewöhnliche Zeichen')
+        await self.store.requests.add(dict(literal))
+        self.assertEqual(await self.store.requests.get(literal['_id']), literal)
+
+    async def test_filling_the_directory_twice_is_reported_as_already_existing_without_driver_text(self):
+        await self.store.workshops.add_many([workshop('w1', zip='10115')])
+        with self.assertRaises(self.store.AlreadyExists) as caught:
+            await self.store.workshops.add_many([workshop('w2', zip='10117'), workshop('w1', zip='10115')])
+        self.assertEqual((str(caught.exception), caught.exception.__suppress_context__), ('', True))
+        self.assertEqual(await self.store.workshops.estimated_count(), 1, 'the second filling left nothing behind')
 
     async def test_two_concurrent_merges_of_one_cart_take_its_items_exactly_once(self):
         import asyncio
