@@ -63,3 +63,20 @@ Die Arbeitsabschnitte stehen nur in der deutschen Fassung; die anderen Sprachfas
 | 14 | `14-werkstatt-partnerbedingungen` | neu |
 | 15 | `15-terminbuchung` | neu (Zweig `claude/werkstatt-termine-stufe1`) |
 | 16 | `16-einwilligungstexte` | neu (Zweig `claude/quirky-gates-r14fnk`) |
+
+## Gemeinsame Festlegungen für alle Entwürfe (damit die Texte einander nicht widersprechen)
+
+Diese Festlegungen sind Arbeitsannahmen der Entwürfe, keine Entscheidungen des Inhabers. Jede steht in der Offene-Punkte-Liste.
+
+1. **Anbieter und Verantwortlicher** ist in allen Texten derselbe Rechtsträger (Agentur und Shop). Rechtsform in zwei Varianten (siehe oben). Der öffentliche Registerstand ließ sich am 15.11.2026 nicht belegen; es wird nichts entschieden.
+2. **Kontakt:** Agentur `hello@nexifyai.cloud`, Telefon +31 6 133 188 56 (Stand Impressum); Shop `mail@teileklar.shop`. Weil im Bestand mehrere Adressen stehen, trägt jede Nennung `[[OFFEN: verbindliche Kontaktadresse bestätigen]]` nur im Impressum, sonst wird auf das Impressum verwiesen.
+3. **Adressen der Angebote:** Agenturseite kanonisch `nexifyai.de`; Shop künftig `teileklar.shop` (Vorgabe der koordinierenden Sitzung vom 15.11.2026), heute unter `/teileklar` der Agenturseite.
+4. **Zielgruppen:** Agentur, Software, Suite, API, Care, KI-Agenten ausschließlich B2B (Unternehmer). TEILEKLAR verkauft an Verbraucher (B2C); Unternehmer können dort ebenfalls kaufen, es gibt aber keinen eigenen B2B-Ablauf (kein USt-ID-Feld). Werkstätten sind gewerbliche Partner.
+5. **Lieferländer des Shops:** Deutschland, Österreich, Niederlande, Belgien, Luxemburg (Stand Kasse). Die Schweiz wird nicht genannt.
+6. **Zahlung im Shop:** über Revolut (Karte, Revolut Pay); weitere Zahlungsarten werden nicht genannt.
+7. **Rechtswahl und Gericht B2B:** niederländisches Recht unter Ausschluss des UN-Kaufrechts; zuständig rechtbank Limburg, zittingsplaats Roermond (für Venlo). Bisheriger Text sagte „Venlo“. Als `[[OFFEN]]` zur Entscheidung, mit Alternative „Sitz des Kunden bei deutschen Kunden“.
+8. **Rechtswahl B2C:** niederländisches Recht; der Verbraucher behält den Schutz der zwingenden Vorschriften des Staates seines gewöhnlichen Aufenthalts; kein Gerichtsstand zulasten des Verbrauchers.
+9. **KI-Kennzeichnung:** immer und sichtbar, im Footer jeder Seite, zusätzlich im Chat und an KI-erzeugten Medien (Vorgabe des Inhabers vom 15.11.2026). D-010 (Kennzeichnung im Chat entfernt) ist dadurch insoweit überholt; die Texte beschreiben den Sollzustand und nennen den Einbau als Voraussetzung.
+10. **Technische Voraussetzungen, die der Text beschreibt, die es im Code aber noch nicht gibt** (elektronische Widerrufsfunktion, harmonisierte Gewährleistungsmitteilung, Einwilligungsverwaltung für Endgerätespeicher, Batteriepfand in der Kasse, Herstellerangaben nach GPSR auf der Produktseite, Benachrichtigung der Werkstatt): im Rechtstext so formulieren, wie es rechtlich nötig ist, und unter „Offene Punkte“ ausdrücklich als „vor Veröffentlichung umzusetzen“ führen. Ein Text darf erst live gehen, wenn die beschriebene Funktion existiert.
+11. **Preise:** unverändert. Tagessatz 449 € netto und KI-Aufschlag 38 % stehen im bisherigen AGB-Text und bleiben wörtlich mit `[[OFFEN]]`-Vermerk (Widerspruch zu 45 % in der API-Preisformel, E1). API: Verweis auf die veröffentlichte Preisliste; Mindestaufladung laut `config/api-prepaid.json` 10 € (Prototyp nannte 50 €) als `[[OFFEN]]`. Care: kein Betrag, keine Reaktionszeit.
+12. **Unterauftragsverarbeiter/Empfänger:** nennen, was das Lösungsregister und der Code belegen: Vercel (Hosting), Hostinger (Server), Cloudflare (DNS, ggf. AI Gateway, R2), Resend (Transaktionsmail), Revolut (Zahlung, eigener Verantwortlicher), BigBuy (Lieferant, Versand, eigener Verantwortlicher für die Lieferung), PostHog EU (Fehlerdiagnose nach Einwilligung), OpenRouter/DeepSeek (KI-Modell des Chats), Emergent (Google-Anmeldung), HubSpot (CRM, Nutzung im Code nicht belegt), Supabase und MongoDB (selbst betrieben bzw. Ort nicht belegt). Vertragsstand (AVV, Standardvertragsklauseln, Sitz) jeweils `[[OFFEN]]`.
