@@ -41,27 +41,40 @@ Nur diese Bausteine verwenden (Vollständige Tabelle: `nexify-klon-fabrik`,
 
 ## Seitentyp-Blaupausen
 
-Jede Blaupause ist eine Reihenfolge von Bausteinen in der Hülle `home-concept`
-(Unterseite zusätzlich `page-concept`). Reihenfolge und Auswahl sind generisch;
-Texte kommen aus `config/site-map.json` / `config/home-concept-copy.json`
+**Kopf- und Fußzeile sind Rahmen der Laufzeit, nicht Teil der Blaupause.**
+`RootLayout` → `Workspace` (`apps/web/components/Workspace.tsx`) umschließt jede
+`apps/web`-Route und rendert genau **eine** Kopfleiste (unter `/teileklar` die
+`CommerceHeader`, sonst `.site-header` mit `SiteNavigation`) vor `<main>` und die
+`SiteFooter` danach. Eine Seitenblaupause komponiert deshalb **nur den Inhalt
+innerhalb von `<main>`** und fügt **keine** eigene Kopf-/Fußzeile ein — das
+verletzte sonst die Ein-Kopfleisten-Regel des Gleichmachers (zwei Kopf-/Fußzeilen).
+
+Jede Blaupause unten ist eine Reihenfolge von Bausteinen in der Hülle
+`home-concept` (Unterseite zusätzlich `page-concept`), eingesetzt in `<main>`.
+Reihenfolge und Auswahl sind generisch; Texte kommen aus
+`config/site-map.json` / `config/home-concept-copy.json`
 (`.claude/skills/nexify-seitentexte`).
 
-1. **Landing / Produktseite.** `SiteNavigation` → `HeroStage` (optional
-   `AtelierFilm` im Hero, nur hier `autostart:true`) → ein bis mehrere
+1. **Landing / Produktseite.** `HeroStage` (optional `AtelierFilm` im Hero, aber
+   **ohne Autostart** — `autostart:false`; nur der Hero-Film der Startseite `/`
+   startet von selbst, `.claude/skills/nexify-klon-fabrik`) → ein bis mehrere
    Abschnitte aus Karten (`.hc-service-detail`, `.hc-process`, `.hc-gallery`) →
    Abschlussbereich `.hc-finish` mit genau einem Hauptschalter
-   (`hc-finish-primary`) → `SiteFooter`.
-2. **Informations-/Leistungsseite.** `SiteNavigation` → `HeroStage` (ohne
-   Autostart-Film) → Textabschnitte mit `.hc-section-heading` und Lese-Zeilenlänge
-   → optional Galerie-Karten → `.hc-finish` → `SiteFooter`.
-3. **Formularseite (Kontakt/Anfrage).** `SiteNavigation` → `HeroStage` →
-   Formular in `pc-supplement` mit `tk-field`-Feldern und Absendeschalter
-   (`ActionButton variant="primary" type="submit"`) → `SiteFooter`. Normseite der
-   Felder ist `/kontakt` (zweite Normseite des Gleichmachers). Empfängerweg
+   (`hc-finish-primary`).
+2. **Informations-/Leistungsseite.** `HeroStage` (ohne Autostart-Film) →
+   Textabschnitte mit `.hc-section-heading` und Lese-Zeilenlänge → optional
+   Galerie-Karten → `.hc-finish`.
+3. **Formularseite (Kontakt/Anfrage).** `HeroStage` → Formular in `pc-supplement`
+   mit `tk-field`-Feldern und Absendeschalter
+   (`ActionButton variant="primary" type="submit"` **mit**
+   `className="hc-finish-primary"` — ohne diese Klasse greifen die geteilten
+   Abschluss-Schalter-Selektoren nicht, und der Gleichmacher misst jeden
+   Formular-Absendeschalter gegen den Abschluss-Schalter der Startseite). Normseite
+   der Felder ist `/kontakt` (zweite Normseite des Gleichmachers). Empfängerweg
    getrennt prüfen (`nexify-klon-fabrik`, „Formular- und Empfängerwege").
-4. **Konto-/Portalblatt.** `SiteNavigation` → `HeroStage` → Inhalt im
-   `nx-konto-blatt` mit `tk-field`; Absendeschalter = Abschluss-Schalter,
-   Zweitschalter = Text-Schalter der Startseite (`nexify-klon-fabrik`, „Stand").
+4. **Konto-/Portalblatt.** `HeroStage` → Inhalt im `nx-konto-blatt` mit
+   `tk-field`; Absendeschalter = Abschluss-Schalter, Zweitschalter = Text-Schalter
+   der Startseite (`nexify-klon-fabrik`, „Stand").
 5. **Film-/Galerieseite.** Jeder Film außerhalb des Startseiten-Heros bekommt
    `autostart:false`. Filmrahmen, -bild, -leiste und -schalter werden gegen den
    Hero-Film der Startseite gemessen.

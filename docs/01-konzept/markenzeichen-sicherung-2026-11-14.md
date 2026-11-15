@@ -20,7 +20,7 @@ Die maßgeblichen Belege:
 | `tools/gleichmacher.mjs`, `tools/kopfleiste-regel.mjs` | der Laufzeit-Wächter und seine Kopfleisten-Regel |
 | `config/text-resize-sources.json` | die byte-genaue Bindung der Designverzeichnisse |
 
-Die genauen Prüfsummen (sha256) dieser 43 Dateien stehen in der Schwesterdatei
+Die genauen Prüfsummen (sha256) dieser 45 Dateien stehen in der Schwesterdatei
 `docs/01-konzept/markenzeichen-normstand-2026-11-14.sha256`. Diese Datei ist das
 Normstand-Manifest und zugleich die additive, nur lesende Prüfung „Design
 unverändert gegen den gepinnten Stand".
@@ -32,7 +32,7 @@ Datei einführt. Der zugehörige Stand entspricht `origin/main` am 14.11.2026
 
 ## Die additive Nur-Lese-Prüfung (Design-Sperre festgezogen)
 
-Ein Lauf bestätigt, dass keine der 43 Designdateien seit dem Einfrieren
+Ein Lauf bestätigt, dass keine der 45 Designdateien seit dem Einfrieren
 verändert wurde:
 
 ```bash
@@ -44,9 +44,15 @@ sha256sum -c docs/01-konzept/markenzeichen-normstand-2026-11-14.sha256
 - **Eine Zeile `FAILED`:** An dieser Datei ist das Design gedriftet. Das ist ein
   Befund, keine Erlaubnis, das Manifest nachzuziehen. Weiter unten „Rückweg".
 
-Diese Prüfung ist **additiv und nicht in `make`/CI verdrahtet**; sie verändert
-kein bestehendes Gate und misst keine Werte neu. Sie ergänzt die bestehenden
-Wächter, ersetzt sie nicht:
+Diese Prüfung läuft als Ziel `check-markenzeichen` und ist **Vorbedingung von
+`make check`** (`Makefile`). Da `make check` sowohl in der CI
+(`.github/workflows/ci.yml`: `make check && make test && make check-arch`) als
+auch im Vercel-Deploy-Gate (`.github/workflows/vercel-deploy.yml`:
+`make check && make test`) läuft, blockiert eine abweichende Datei ab jetzt CI
+und Deploy — sie ist kein bloß manuelles Diagnosewerkzeug. Sie misst keine Werte
+neu und schwächt kein bestehendes Gate ab (auf dem heutigen Stand meldet sie
+45 Dateien `OK`, `make check` bleibt grün). Sie ergänzt die bestehenden Wächter,
+ersetzt sie nicht:
 
 1. `tools/gleichmacher.mjs` (Laufzeit, gegen die Startseite);
 2. `config/text-resize-sources.json` + `tools/check_text_resize_evidence.py`

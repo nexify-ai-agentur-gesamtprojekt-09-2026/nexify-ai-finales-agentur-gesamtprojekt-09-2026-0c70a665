@@ -11,8 +11,16 @@ Die Zielkunden-Grundlage liefert die Schwestersitzung (Zielkunden-Recherche):
 `claude/zielkunden-recherche`, Stand 14.11.2026, Abschnitt 3 ist die Zuarbeit).
 Die Bausteine sind dort über stabile IDs referenzierbar: `LIB-NX-01…09`,
 `LIB-TK-01…07`; Segmente `NX-A/B/C` (NeXify) und `TK-1/2/3` (TEILEKLAR). Unten
-werden nur Zuordnungen geführt, die **beide** Dokumente hergeben. Bis dieser
-Zweig gemergt ist, ist der genannte Pfad die Quelle der IDs.
+werden nur Zuordnungen geführt, die **beide** Dokumente hergeben.
+
+**Provisorisch bis zum Merge der Quelle.** Die Quelldatei und die IDs
+`LIB-NX-*` / `LIB-TK-*` liegen heute nur auf dem Zweig
+`claude/zielkunden-recherche` und sind **noch nicht auf `main`**. Solange sie
+dort nicht gemergt ist, lässt sich die Bedeutung der IDs und die Richtigkeit der
+Zuordnungen/Blocker auf dem kanonischen Stand nicht nachprüfen; diese Roadmap ist
+bis dahin ein provisorisches Gerüst und wird bei Merge der Quelle gegengeprüft
+und nachgezogen. Keine der Zuordnungen wird als belegt behandelt, bevor die
+Quelle auf `main` steht.
 
 ## Prinzipien der Erweiterung
 
