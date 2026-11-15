@@ -152,7 +152,9 @@ du -xc /var/lib/docker/containers/*/*-json.log 2>/dev/null | sort -n | tail -8 |
 docker builder prune                      # Rückfrage mit y beantworten; kein -a
 docker image prune                        # ohne -a; nur Images ohne Tag, die kein Container benutzt
 journalctl --vacuum-time=14d
-diff <(docker ps -a --format '{{.Names}}|{{.Status}}|{{.Image}}' | sort | sed 's/Up [^|(]*/Up /') <(sed 's/Up [^|(]*/Up /' 02-ps.txt) && echo CONTAINER-GLEICH
+docker ps -a --format '{{.Names}}|{{.Status}}|{{.Image}}' | sort | sed 's/Up [^|(]*/Up /' > 21-ps-nachher.txt
+sed 's/Up [^|(]*/Up /' 02-ps.txt > 21-ps-vorher.txt
+diff 21-ps-vorher.txt 21-ps-nachher.txt && echo CONTAINER-GLEICH
 df -h / | tee 20-df-nachher.txt
 
 # D · NICHT ausführen ohne Wort des Inhabers je Schritt:
@@ -160,7 +162,7 @@ df -h / | tee 20-df-nachher.txt
 #   Finger weg von: vsk-mongodb, Traefik und seiner Konfiguration, Shop-Dienst, Kundenseiten
 ```
 
-Geprüft wurde das Blatt auf Syntax (`sh -n`) und daran, dass Block A/B dieselben Befehle nutzt, die auf srv1941843 gelaufen sind (dort in der Busybox-Fassung).
+Geprüft wurde das Blatt auf Syntax (`bash -n` und `dash -n`; es enthält keine Bash-Eigenheiten mehr) und daran, dass Block A/B dieselben Befehle nutzt, die auf srv1941843 gelaufen sind (dort in der Busybox-Fassung).
 **Nicht** geprüft: Lauf auf srv1243952 selbst. Erwartung nach dem Ergebnis auf srv1941843: Block C bringt wenig; entscheidend ist, was Block B zeigt.
 
 ## 5. Entscheidungen des Inhabers (srv1941843), nach Wirkung sortiert
@@ -169,7 +171,7 @@ Alle Befehle für eine Sitzung mit Shell. Nichts davon wurde ausgeführt.
 
 | # | Was | bringt | Risiko | Rückweg | Befehl / Vorgehen |
 |---|---|---|---|---|---|
-| 5.1 | **Paperclip-Läufe** archivieren und entfernen | **bis 77 GiB** | mittel: nur 2 GiB frei, deshalb darf kein Archiv auf dieselbe Platte | Archiv zurückspielen | Voraussetzung: Schreibzugang zum Archivziel (R2 `nexify-agentur-pucket`, eigener Schlüssel) **oder** Zweitplatte. Je Lauf: `tar -C /home/mypad/workspace/.paperclip-runtime/runs -cf - <lauf> \| zstd -T4 \| tee >(sha256sum > <lauf>.sha256) \| rclone rcat r2:nexify-agentur-pucket/paperclip-runs/<lauf>.tar.zst`; Rückhol-Probe des ersten Archivs; erst dann `rm -rf` des einen Laufs. Enthalten die Läufe Kundendaten, vorher verschlüsseln (Aufräumplan 7.1). |
+| 5.1 | **Paperclip-Läufe** archivieren und entfernen | **bis 77 GiB** | mittel: nur 2 GiB frei, deshalb darf kein Archiv auf dieselbe Platte | Archiv zurückspielen | Voraussetzung: Schreibzugang zum Archivziel (R2 `nexify-agentur-pucket`, eigener Schlüssel) **oder** Zweitplatte. In `bash` mit `set -euo pipefail` (sonst endet die Kette auch dann erfolgreich, wenn `tar` oder `zstd` scheitert). Je Lauf: `tar -C /home/mypad/workspace/.paperclip-runtime/runs -cf - <lauf> \| zstd -T4 \| tee >(sha256sum > <lauf>.sha256) \| rclone rcat r2:nexify-agentur-pucket/paperclip-runs/<lauf>.tar.zst`. Danach **eigener Prüfschritt, der unabhängig vom Rückgabewert bestehen muss**: Archiv zurücklesen (`rclone cat … \| sha256sum` gleich der notierten Summe; `rclone cat … \| zstd -dc \| tar -tf - \| wc -l` gleich `find <lauf> \| wc -l`). Rückhol-Probe des ersten Archivs. Erst nach bestandener Prüfung `rm -rf` des einen Laufs; schlägt irgendetwas fehl, bleibt das Original liegen. Enthalten die Läufe Kundendaten, vorher verschlüsseln (Aufräumplan 7.1). |
 | 5.2 | **Auslagerungsdateien** von vier auf eine verkleinern | **16 GiB** (auf 8 GiB) | mittel: 23,6 GiB liegen ausgelagert; `swapoff` holt sie in den Arbeitsspeicher zurück – bei 16 GiB verfügbar nur schrittweise und nach Stoppen eines Speicherfressers möglich, sonst greift der OOM-Killer | `fallocate -l 8G /swapfile4 && chmod 600 /swapfile4 && mkswap /swapfile4 && swapon /swapfile4` | zuerst `swapoff /swapfile` (4 GiB), `free -g` prüfen, dann `/swapfile2`; nur wenn `MemAvailable` danach über 6 GiB bleibt: `/swapfile4`. Danach die Datei entfernen und die Zeile in der Dateisystemtabelle auskommentieren. Zeitfenster abstimmen. |
 | 5.3 | **GitLab-Prometheus** auf 15 Tage begrenzen | 15–20 GiB | gering; kurzer GitLab-Neustart; **GitLab-Daten selbst bleiben unberührt** | `gitlab.rb` zurück, `gitlab-ctl reconfigure` | in `gitlab.rb`: `prometheus['flags'] = { 'storage.tsdb.retention.time' => '15d' }`, dann `docker exec gitlab gitlab-ctl reconfigure` (Aufräumplan 1.2) |
 | 5.4 | **Sicherungen auslagern** und Läufe auf das Archivziel umstellen | 20–28 GiB einmalig; **beendet die nächtliche Spitze von 14 GiB** | gering | zurückkopieren | wie 5.1 für `/opt/backups`, `/opt/nexifyai/backup`, `/opt/nex2fly/ops/backups`, `/opt/gitlab/data/backups`, `/root/backups`, `/var/backups/agentmemory`; Auslöser der fünf Läufe finden (`systemctl list-timers`, `crontab -l`, `/opt/ai-stack/.claude/scheduled_tasks.json`) |
