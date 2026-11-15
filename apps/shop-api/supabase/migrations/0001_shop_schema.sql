@@ -43,6 +43,13 @@ create or replace function shop.j_int(d json, k text) returns bigint
   language sql immutable parallel safe
   as $$ select case when json_typeof(d -> k) = 'number' then (d ->> k)::bigint end $$;
 
+-- Für Beträge und Zähler: fehlt das Feld oder ist es null, bleibt die Spalte leer; steht dort etwas
+-- anderes als eine ganze Zahl (Text, Kommazahl, Wahrheitswert, Liste), ist das ein Fehler.
+create or replace function shop.j_whole(d json, k text) returns bigint
+  language sql immutable parallel safe
+  as $$ select case json_typeof(d -> k) when 'number' then (d ->> k)::bigint when 'null' then null
+               else ((d ->> k) || ' is not a whole number')::bigint end $$;
+
 create or replace function shop.j_true(d json, k text) returns boolean
   language sql immutable parallel safe
   as $$ select coalesce(json_typeof(d -> k) = 'boolean' and (d ->> k) = 'true', false) $$;
@@ -63,7 +70,7 @@ create table if not exists shop.products (
   ean            text collate "C" generated always as (shop.j_text(doc, 'ean')) stored,
   active         boolean not null generated always as (shop.j_true(doc, 'active')) stored,
   stock          numeric generated always as (shop.j_num(doc, 'stock')) stored,
-  purchase_cents bigint generated always as (shop.j_int(doc, 'purchase_cents')) stored check (purchase_cents >= 0),
+  purchase_cents bigint generated always as (shop.j_whole(doc, 'purchase_cents')) stored check (purchase_cents >= 0),
   bigbuy_id      bigint generated always as (shop.j_int(doc, 'bigbuy_id')) stored,
   category_ids   jsonb generated always as ((doc -> 'category_ids')::jsonb) stored,
   row_created_at timestamptz not null default now(),
@@ -115,7 +122,7 @@ create table if not exists shop.settings (
   seq            bigint generated always as identity,
   id             text primary key,
   doc            json not null check (json_typeof(doc) = 'object' and (doc -> '_id') is null),
-  shipping_cents bigint generated always as (shop.j_int(doc, 'shipping_cents')) stored check (shipping_cents >= 0),
+  shipping_cents bigint generated always as (shop.j_whole(doc, 'shipping_cents')) stored check (shipping_cents >= 0),
   row_created_at timestamptz not null default now(),
   row_updated_at timestamptz not null default now()
 );
@@ -227,10 +234,10 @@ create table if not exists shop.orders (
   fulfilment       text collate "C" generated always as (shop.j_text(doc, 'fulfilment')) stored,
   revolut_order_id text collate "C" generated always as (shop.j_text(doc, 'revolut_order_id')) stored,
   created_at       text collate "C" generated always as (shop.j_text(doc, 'created_at')) stored,
-  subtotal_cents   bigint generated always as (shop.j_int(doc, 'subtotal_cents')) stored check (subtotal_cents >= 0),
-  shipping_cents   bigint generated always as (shop.j_int(doc, 'shipping_cents')) stored check (shipping_cents >= 0),
-  total_cents      bigint generated always as (shop.j_int(doc, 'total_cents')) stored check (total_cents >= 0),
-  paid_transitions bigint generated always as (shop.j_int(doc, 'paid_transitions')) stored check (paid_transitions between 0 and 1),
+  subtotal_cents   bigint generated always as (shop.j_whole(doc, 'subtotal_cents')) stored check (subtotal_cents >= 0),
+  shipping_cents   bigint generated always as (shop.j_whole(doc, 'shipping_cents')) stored check (shipping_cents >= 0),
+  total_cents      bigint generated always as (shop.j_whole(doc, 'total_cents')) stored check (total_cents >= 0),
+  paid_transitions bigint generated always as (shop.j_whole(doc, 'paid_transitions')) stored check (paid_transitions between 0 and 1),
   paid_mail_recovery_pending boolean not null generated always as (shop.j_true(doc, 'paid_mail_recovery_pending')) stored,
   row_created_at   timestamptz not null default now(),
   row_updated_at   timestamptz not null default now(),

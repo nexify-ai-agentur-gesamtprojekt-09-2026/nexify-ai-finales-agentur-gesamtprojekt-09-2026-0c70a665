@@ -11,6 +11,7 @@ import asyncio
 from contextlib import asynccontextmanager
 from datetime import datetime, timezone
 import json
+import logging
 from uuid import uuid4
 
 from ..errors import StoreUnavailable, StoredDataInvalid
@@ -119,6 +120,7 @@ class PgDatabase:
             if self._pool is None:
                 try:
                     from psycopg_pool import AsyncConnectionPool
+                    logging.getLogger("psycopg.pool").setLevel(logging.CRITICAL)  # dessen Meldungen nennen Adresse und Rolle
                     pool = AsyncConnectionPool(self._conninfo, min_size=0, max_size=self._max_size, timeout=self._timeout, open=False,
                                                kwargs={"options": "-c search_path=%s -c statement_timeout=15000 -c lock_timeout=10000" % SCHEMA})
                     await pool.open()

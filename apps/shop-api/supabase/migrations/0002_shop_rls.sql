@@ -48,7 +48,7 @@ alter default privileges in schema shop revoke all on tables from public;
 alter default privileges in schema shop revoke all on functions from public;
 
 grant usage on schema shop to shop_api;
-grant execute on function shop.j_text(json, text), shop.j_num(json, text), shop.j_int(json, text), shop.j_true(json, text) to shop_api;
+grant execute on function shop.j_text(json, text), shop.j_num(json, text), shop.j_int(json, text), shop.j_whole(json, text), shop.j_true(json, text) to shop_api;
 grant execute on function shop.purge_expired(timestamptz, interval) to shop_api;
 
 do $$

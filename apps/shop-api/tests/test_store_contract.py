@@ -93,10 +93,16 @@ class Cursor:
 
 
 def apply(target, update):
-    target.update(copy.deepcopy(update.get('$set', {})))
+    # Field order as MongoDB 5.0+ documents it: update operators process fields in lexicographic order,
+    # so an existing field keeps its place and new fields are appended alphabetically, whatever the operator.
     for key in update.get('$unset', {}): target.pop(key, None)
-    for key, amount in update.get('$inc', {}).items(): target[key] = target.get(key, 0) + amount
-    for key, entry in update.get('$push', {}).items(): target.setdefault(key, []).append(copy.deepcopy(entry))
+    changes = {**{k: ('$set', v) for k, v in update.get('$set', {}).items()}, **{k: ('$inc', v) for k, v in update.get('$inc', {}).items()},
+               **{k: ('$push', v) for k, v in update.get('$push', {}).items()}}
+    for key in sorted(changes):
+        operator, value = changes[key]
+        if operator == '$set': target[key] = copy.deepcopy(value)
+        elif operator == '$inc': target[key] = target.get(key, 0) + value
+        else: target.setdefault(key, []).append(copy.deepcopy(value))
     for key, condition in update.get('$pull', {}).items():
         if key in target: target[key] = [entry for entry in target[key] if not matches(entry, condition)]
 
@@ -149,7 +155,7 @@ class Collection:
             return any(f in doc for f in fields) and any(all(d.get(f) == doc.get(f) for f in fields) for d in self.docs)
         if any(taken(key) for key in ['_id', *self.unique]):
             raise DuplicateKeyError('duplicate')
-        self.docs.append(doc)
+        self.docs.append({'_id': doc['_id'], **doc})  # the server stores _id as the first field
     async def replace_one(self, query, replacement, upsert=False):
         target = next((d for d in self.docs if matches(d, query)), None)
         if target is not None: self.docs[self.docs.index(target)] = copy.deepcopy(replacement)
