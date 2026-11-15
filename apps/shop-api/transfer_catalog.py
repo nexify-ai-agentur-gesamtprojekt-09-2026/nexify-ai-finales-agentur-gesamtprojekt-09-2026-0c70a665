@@ -226,6 +226,8 @@ class PostgresTarget:
 async def transfer(source, target, *, apply=False, contract=None, expect_min=None, sample=20, log=print, now=None):
     """Führt die Übernahme aus und gibt den Bericht zurück. Abort bei jeder Abweichung; dann ist nichts geschrieben."""
     proof = check_contract(contract, expect_min) if apply else None
+    if proof is not None:
+        expect_min = proof["product_count_minimum"]  # die Mindestzahl des Vertrags gilt auch ohne --expect-min
     base = common.load_base()
     docs, digests = await read_source(base, source)
     if expect_min is not None and digests["products"].count < expect_min:

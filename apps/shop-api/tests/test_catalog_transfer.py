@@ -94,6 +94,9 @@ class CatalogTransferContract:
         with self.assertRaises(catalog.Abort) as caught:
             await self.run_transfer(apply=True, contract={**CONTRACT, 'product_count_minimum': 5}, expect_min=5)
         self.assertIn('erwartet sind mindestens 5', str(caught.exception))
+        with self.assertRaises(catalog.Abort) as caught:
+            await self.run_transfer(apply=True, contract={**CONTRACT, 'product_count_minimum': 5})
+        self.assertIn('erwartet sind mindestens 5', str(caught.exception), 'the minimum of the contract holds without the option')
         self.assertEqual(await self.target_rows('products'), [])
         report = await self.run_transfer(apply=True, contract=CONTRACT, expect_min=4, sample=3)
         self.assertEqual(report['sample'], [{'id': i, 'equal': True} for i in ('bb-1', 'bb-2', 'bb-3')])
