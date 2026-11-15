@@ -78,8 +78,19 @@ Aufrufzeile und offene Dateien aller Prozesse (809 Pfade, D 12:16); „Konf." = 
 | B7 | `/root/backups/agentmemory-state_store.db.bak-20261014T095656Z-vor-konsolidierung` | 0,15 GiB | 14.10. | B | Sicherungskopie; jüngere Stände: `/root/backups/agentmemory-pre-rea08c-20261026T1032Z`, `/var/backups/agentmemory` (26.10.); Proz. –, Konf. – | Datei leeren |
 | B8 | `/opt/obscura` | 0,15 GiB | 04.10. 19:33 | B | zwei Programmdateien; Einb. –, Proz. –, Konf. – | Inhalt entfernen |
 | B9 | `/root/.docs7` | 0,14 GiB | 04.10. 23:37 | B | ein Ordner `renderer`; Einb. –, Proz. –, Konf. – | Inhalt entfernen |
+| B10 | `/opt/open-design/repo` | 2,52 GiB | 05.10. 17:26 | B | Git-Klon, davon 2,1 GiB `node_modules`; Einb. –, Proz. –, Konf. – | Inhalt entfernen |
+| B11 | `/root/work/aionui-teams-20261014` | 1,55 GiB | 14.10. 20:18 | B | datierte Arbeitskopie; Einb. –, Proz. –, Konf. – | Inhalt entfernen |
+| B12 | `/root/reference/codex-brain-sync-20261011` | 0,58 GiB | 11.10. 14:18 | B | datierte Referenzkopie; Einb. –, Proz. –, Konf. – | Inhalt entfernen |
+| B13 | `/root/reference/cherry-studio-2.1.4` | 0,38 GiB | 11.10. 16:40 | B | Referenz-Download einer fremden Anwendung; Einb. –, Proz. –, Konf. – | Inhalt entfernen |
+| B14 | `/opt/ai-stack/nexify-browser-client` | 0,30 GiB | 15.10. 00:07 | B | fast nur `node_modules`; Einb. –, Proz. –, Konf. – | Inhalt entfernen |
+| B15 | `/root/quarantine/ruflo-20261014` | 0,22 GiB | 14.10. 08:16 | B | Quarantäne-Ablage; Einb. –, Proz. –, Konf. – | Inhalt entfernen |
+| B16 | `/opt/ai-stack/nexify-test-stack` | 0,17 GiB | 14.10. 22:07 | B | nur `node_modules`; Einb. –, Proz. –, Konf. – | Inhalt entfernen |
+| B17 | `/opt/ai-stack/claude-code-templates` | 0,17 GiB | 05.10. 00:02 | B | Git-Klon fremder Vorlagen; Einb. –, Proz. –, Konf. – | Inhalt entfernen |
 
-Erwartung: Klasse A bis rund 15 GiB, Klasse B rund 5,5 GiB.
+B10–B17 stammen aus einer zweiten Messung eine Ebene tiefer (D 12:42, Belege K/D 12:43: 225 Einbindungen, 807 Prozesspfade, 2861 Konfigurationsdateien),
+nachgetragen **vor** ihrer Ausführung. Aus derselben Messung bewusst nicht übernommen: siehe „Unklar".
+
+Erwartung: Klasse A bis rund 15 GiB, Klasse B rund 11 GiB.
 
 Technik: je Posten ein einmaliges Hilfsprojekt, das **nur diesen einen Pfad** schreibend einbindet (dazu die Wurzel nur lesend für die Prüfung
 unmittelbar davor). Ein eingebundenes Verzeichnis kann von innen nicht selbst entfernt werden; es bleibt als **leerer Ordner** stehen.
@@ -106,6 +117,10 @@ Eine eingebundene Datei wird auf 0 Byte gekürzt; der leere Dateiname bleibt ste
 | `/root/archiv/paperclip-laeufe-2026-11-15/` | rund 52 GiB nach Abschluss | Archive des Inhabers, auf derselben Platte. Auslagern (R2) macht sie frei – braucht Schreibzugang zum Archivziel |
 | `/home/mypad/.local/share/opencode` | 8,8 GiB | Datenbestand von opencode, wahrscheinlich Teil von Paperclip (D-019 abgelöst); jünger als 30 Tage; Inhalt nicht gesichtet |
 | `/opt/nexifyai/vendor` | 0,28 GiB | älter als 30 Tage (15.10.) und ohne Verweis, enthält aber `betreiber-sites`, `betreiber-repos`, `dodopayments` – möglicher Kundenbezug |
+| `/opt/rea-tools/ghidra_12.1.4_PUBLIC` | 0,86 GiB | älter als 30 Tage (21.09.), aber installiertes Werkzeug; in einer gespeicherten Shell-Umgebung von Codex genannt |
+| `/opt/nexifyai/workers/cf-dual-trigger` | 0,23 GiB | älter als 30 Tage (15.10.), aber Quelltext eines Cloudflare-Workers ohne Git – möglicherweise die einzige Kopie |
+| `/root/work/teileklar-f2b-20261014` | 0,20 GiB | älter als 30 Tage, ohne Verweis; Arbeitskopie zum Shop, Inhalt nicht gesichtet (mögliche Shop-Daten) |
+| `/opt/ai-stack/cognee-src` | 0,16 GiB | älter als 30 Tage, ohne Verweis; gehört zum Cognee-Umfeld (Sperrvermerk, Phase 3 des Aufräumplans) |
 | `/opt/backups/nexify-scripts-20261016-101718-vor-stempel.tar.gz` | 0,33 GiB | 30 Tage alt, aber kein jüngerer Stand derselben Art |
 | `/root/.claude` 5,2 · `.codex` 3,3 · `.hermes` 3,2 · `.git-ai` 2,1 · `.claude-mem` 1,6 GiB | 15,4 GiB | Arbeitsdaten der Werkzeuge, in Gebrauch; nur die Werkzeuge selbst können gefahrlos kürzen |
 | `/opt/aionui-data` 8,7 GiB, Schreibschicht `aionui` 7,4 GB | 16 GiB | Frage aus dem Speicher-Bericht 5.5: wird AionUI gebraucht? |
