@@ -118,7 +118,7 @@ class Wege(Basis):
         self.assertEqual(self.zustand.verbrauch(), {"aufrufe": 1, "betrag_usd": "0.0002", "token": 100})
 
     def test_openrouter_faellt_aus_weg_zwei_wird_protokolliert(self):
-        for status in (503, 429, 502):
+        for status in (503, 429):
             with self.subTest(status):
                 self.setUp()
                 router = self.router({WEG1: (status, {"error": "x"}),
@@ -143,7 +143,7 @@ class Wege(Basis):
         self.assertEqual(len(router.anfragen), 1)
 
     def test_unklarer_ausgang_loest_keinen_zweiten_aufruf_aus(self):
-        for status in (500, 504, 307):
+        for status in (500, 502, 504, 307):
             with self.subTest(status):
                 self.setUp()
                 router = self.router({WEG1: (status, {}), "ds/test-direkt": antwort()})
@@ -354,6 +354,58 @@ class Einrichtung(Basis):
             with redirect_stderr(io.StringIO()):
                 self.assertEqual(arbeiter.main(["--aufgabe", str(auftrag), "--ausgabe", str(ziel)], environ=umgebung), 2)
             self.assertEqual(len(router.anfragen), 1)
+
+
+class Haertung(Basis):
+    def test_troepfelnde_antwort_wird_am_gesamtzeitlimit_abgebrochen(self):
+        import socket, time
+        horcher = socket.socket()
+        horcher.bind(("127.0.0.1", 0))
+        horcher.listen(1)
+        self.addCleanup(horcher.close)
+
+        def bedienen():
+            verbindung, _ = horcher.accept()
+            verbindung.recv(65536)
+            verbindung.sendall(b"HTTP/1.1 200 OK\r\nContent-Type: application/json\r\nContent-Length: 4000\r\n\r\n")
+            try:
+                for _ in range(40):
+                    verbindung.sendall(b" ")
+                    time.sleep(0.25)
+            except OSError:
+                pass
+            verbindung.close()
+
+        threading.Thread(target=bedienen, daemon=True).start()
+        beginn = time.monotonic()
+        ergebnis = arbeiter.sende(f"http://127.0.0.1:{horcher.getsockname()[1]}/v1/chat/completions", SCHLUESSEL, {}, 1, 10000)
+        self.assertEqual(ergebnis[0], "unklar")
+        self.assertLess(time.monotonic() - beginn, 3)
+
+    def test_waehrend_des_aufrufs_entstandene_zieldatei_bleibt_unberuehrt(self):
+        original, senden = arbeiter.lade_konfig, arbeiter.sende
+        arbeiter.lade_konfig = lambda: self.konfig
+        self.addCleanup(setattr, arbeiter, "lade_konfig", original)
+        self.addCleanup(setattr, arbeiter, "sende", senden)
+        with tempfile.TemporaryDirectory() as ordner:
+            auftrag, ziel = Path(ordner) / "a.md", Path(ordner) / "e.md"
+            auftrag.write_text(AUFTRAG, encoding="utf-8")
+
+            def sende_und_stoere(*args):
+                ziel.write_text("fremde Arbeit", encoding="utf-8")
+                return "antwort", 200, antwort()[1]
+
+            arbeiter.sende = sende_und_stoere
+            umgebung = {"DEEPSEEK_ARBEITER": "ein", "ROUTER_URL": "http://127.0.0.1:9/v1", "ROUTER_KEY": SCHLUESSEL,
+                        "DEEPSEEK_ARBEITER_ZUSTAND": str(Path(ordner) / "zustand")}
+            aus = io.StringIO()
+            with redirect_stdout(aus):
+                self.assertEqual(arbeiter.main(["--aufgabe", str(auftrag), "--ausgabe", str(ziel)], environ=umgebung), 0)
+            self.assertEqual(ziel.read_text(encoding="utf-8"), "fremde Arbeit")
+            bericht = json.loads(aus.getvalue())
+            self.assertNotEqual(bericht["ausgabe"], str(ziel))
+            self.assertIn("Der Himmel ist blau.", Path(bericht["ausgabe"]).read_text(encoding="utf-8"))
+            self.assertTrue(bericht["hinweis"])
 
 
 if __name__ == "__main__":

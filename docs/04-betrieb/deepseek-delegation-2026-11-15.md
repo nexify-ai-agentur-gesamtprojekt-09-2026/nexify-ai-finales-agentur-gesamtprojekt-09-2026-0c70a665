@@ -10,7 +10,7 @@ oder an der Claude-Umgebung, keine Kosten.
 
 - **Gebaut:** `tools/deepseek_arbeiter.py` (ein Befehl), `config/deepseek-delegation.json`
   (Wege, Limits, Hosts), Skill `.claude/skills/nexify-deepseek-delegation/SKILL.md`,
-  24 Tests gegen einen nachgebauten Router (`tests/test_deepseek_arbeiter.py`).
+  26 Tests gegen einen nachgebauten Router (`tests/test_deepseek_arbeiter.py`).
 - **Zustand:** ausgeschaltet. Ohne `DEEPSEEK_ARBEITER=ein`, `ROUTER_URL` und `ROUTER_KEY`
   endet jeder Aufruf mit „nicht eingerichtet“ (Exit 3) und sendet nichts.
 - **Modellbindung:** Reasoning `high` wird gesendet; die Antwort muss den Stand
@@ -100,7 +100,7 @@ Funktionsnachweis von Hermes → b) nur, falls c) nicht reicht, und dann hinter 
 3. Eingangsfilter: Geheimnisse, als Kundendaten markierte Inhalte, E-Mail, IBAN, Telefonnummer → Abweisung, bevor irgendetwas gesendet wird.
 4. Limits prüfen und Reserve buchen (Auftrags- und Tageslimit).
 5. **Weg 1** `router-openrouter`: ein Aufruf an den Router mit dem für OpenRouter eingetragenen Modellnamen.
-6. Nur bei eindeutig gescheitertem Versuch (Verbindung kam nicht zustande, HTTP 400/404/429/502/503, Fehlerrumpf ohne Antwort) **Weg 2** `router-deepseek-direkt`. Bei unklarem Ausgang (Zeitüberschreitung, 500, 504, Weiterleitung) kein zweiter Aufruf; die Reserve bleibt gebucht (`config/llm-policy.json`: `blind_retry_after_unknown_outcome_allowed: false`).
+6. Nur bei eindeutig gescheitertem Versuch (Verbindung kam nicht zustande, HTTP 400/404/429/503, Fehlerrumpf ohne Antwort) **Weg 2** `router-deepseek-direkt`. Bei unklarem Ausgang (Zeitüberschreitung, 500, 502, 504, Weiterleitung) kein zweiter Aufruf; die Reserve bleibt gebucht (`config/llm-policy.json`: `blind_retry_after_unknown_outcome_allowed: false`).
 7. Antwort prüfen: Feld `model` muss auf `deepseek-v4.1-flash-1017` enden (Anbieterpräfix davor erlaubt). Sonst Abbruch ohne Rückfall.
 8. Protokollzeile schreiben, Ergebnis mit Herkunftskopf in die Ausgabedatei.
 
@@ -273,18 +273,18 @@ gelöscht wird nichts.
 
 ## 7. Prüfung
 
-Tests (`python3 -m unittest tests.test_deepseek_arbeiter`, 24 Tests, lokaler Test-Server,
+Tests (`python3 -m unittest tests.test_deepseek_arbeiter`, 26 Tests, lokaler Test-Server,
 kein Netz, kein Schlüssel):
 
 | Fall | Erwartet | Test |
 |---|---|---|
 | OpenRouter antwortet | Weg 1 im Protokoll | `test_openrouter_antwortet_weg_eins_wird_protokolliert` |
-| OpenRouter fällt aus (503, 429, 502) | Weg 2 im Protokoll, Umleitung vermerkt | `test_openrouter_faellt_aus_weg_zwei_wird_protokolliert` |
+| OpenRouter fällt aus (503, 429) | Weg 2 im Protokoll, Umleitung vermerkt | `test_openrouter_faellt_aus_weg_zwei_wird_protokolliert` |
 | Router liefert ein anderes Modell | Abbruch ohne Rückfall | `test_anderes_modell_in_der_antwort_bricht_ab_ohne_rueckfall` |
 | Limit überschritten | Abbruch vor dem Aufruf | `test_tageslimit_token_bricht_vor_dem_aufruf_ab` und drei weitere |
 | Geheimnis im Auftrag | Abweisung, nichts gesendet, nichts protokolliert | `test_geheimnis_im_auftrag_wird_abgewiesen` |
 | ohne Schlüssel | „nicht eingerichtet“ | `test_ohne_schluessel_nicht_eingerichtet` |
-| unklarer Ausgang (500, 504, Weiterleitung) | kein zweiter Aufruf, Reserve bleibt gebucht | `test_unklarer_ausgang_loest_keinen_zweiten_aufruf_aus` |
+| unklarer Ausgang (500, 502, 504, Weiterleitung, tröpfelnde Antwort über das Zeitlimit) | kein zweiter Aufruf, Reserve bleibt gebucht | `test_unklarer_ausgang_loest_keinen_zweiten_aufruf_aus` |
 | Schlüssel nur an eingetragene Hosts, nie im Protokoll | Abbruch bei fremdem Host | `test_schluessel_geht_nur_an_eingetragene_hosts_und_nie_ins_protokoll` |
 
 Die Tests belegen das Verhalten des Adapters gegen eine Attrappe, nicht das Verhalten des

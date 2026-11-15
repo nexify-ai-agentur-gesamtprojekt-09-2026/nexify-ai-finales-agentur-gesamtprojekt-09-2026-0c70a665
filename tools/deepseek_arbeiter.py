@@ -13,7 +13,7 @@ Regeln, die hier im Code stehen und nicht per Umgebung zu lockern sind:
   * Wegfolge: Router→OpenRouter, Rückfall Router→DeepSeek direkt. Der Adapter
     wählt den Weg selbst und protokolliert, welcher geantwortet hat.
   * Rückfall nur nach eindeutig gescheitertem Versuch; bei unklarem Ausgang
-    (Zeitüberschreitung, 5xx ohne klare Ablehnung) Abbruch ohne zweiten Aufruf.
+    (Zeitüberschreitung, 500, 502, 504) Abbruch ohne zweiten Aufruf.
   * Eingangsfilter, Zeit- und Größenlimits, Tages- und Auftragslimit, Protokoll
     ohne Inhalte und ohne Schlüssel.
 
@@ -37,6 +37,7 @@ import os
 import re
 import socket
 import sys
+import tempfile
 import time
 from decimal import Decimal, InvalidOperation
 from pathlib import Path
@@ -68,7 +69,8 @@ NAME_FORM = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._/:\-]{0,119}$")
 KURZ_FORM = re.compile(r"^[a-z0-9]+(-[a-z0-9]+){0,9}$")
 LOOPBACK = frozenset(("127.0.0.1", "localhost", "::1"))
 # Eindeutig gescheitert, keine Antwort entstanden: Rückfall auf den nächsten Weg erlaubt.
-RUECKFALL_STATUS = frozenset((400, 404, 429, 502, 503))
+# 502 gehört nicht dazu: ein Gateway-Fehler kann nach begonnener Verarbeitung beim Anbieter entstehen.
+RUECKFALL_STATUS = frozenset((400, 404, 429, 503))
 SCHLUESSEL_STATUS = frozenset((401, 403))
 
 SYSTEM = (
@@ -355,10 +357,21 @@ def sende(url: str, schluessel: str, rumpf: dict, zeitlimit: int, max_bytes: int
     handler = [_KeineWeiterleitung()] + ([ProxyHandler({})] if host in LOOPBACK else [])
     anfrage = Request(url, data=json.dumps(rumpf).encode("utf-8"), method="POST", headers={
         "Authorization": "Bearer " + schluessel, "Content-Type": "application/json", "Accept": "application/json"})
+    # Das Zeitlimit gilt für den ganzen Aufruf, nicht je Socket-Wartezeit: gelesen wird in Stücken gegen eine Frist.
+    frist = time.monotonic() + zeitlimit
     try:
         with build_opener(*handler).open(anfrage, timeout=zeitlimit) as antwort:
             status = antwort.status
-            roh = antwort.read(max_bytes + 1)
+            teile, gelesen = [], 0
+            while gelesen <= max_bytes:
+                if time.monotonic() > frist:
+                    return "unklar", status, None
+                stueck = antwort.read1(min(65536, max_bytes + 1 - gelesen))
+                if not stueck:
+                    break
+                teile.append(stueck)
+                gelesen += len(stueck)
+            roh = b"".join(teile)
     except HTTPError as fehler:
         fehler.close()
         return "abgelehnt", fehler.code, None
@@ -550,11 +563,21 @@ def main(argv=None, environ=None) -> int:
         ergebnis = ausfuehren(auftrag_text, konfig=konfig, environ=environ,
                               zustand=Zustand(zustandsordner(konfig, environ)),
                               max_ausgabe_token=args.max_ausgabe_token)
-        ziel.write_text(ausgabe_text(ergebnis), encoding="utf-8")
+        # Ausschließlich neu anlegen: entsteht die Zieldatei während des Aufrufs, bleibt sie unberührt
+        # und das bezahlte Ergebnis geht in eine eindeutig benannte Nachbardatei.
+        hinweis = None
+        try:
+            with open(ziel, "x", encoding="utf-8") as datei:
+                datei.write(ausgabe_text(ergebnis))
+        except FileExistsError:
+            nummer, pfad = tempfile.mkstemp(prefix=ziel.name + ".", suffix=".neu", dir=str(ziel.parent))
+            with os.fdopen(nummer, "w", encoding="utf-8") as datei:
+                datei.write(ausgabe_text(ergebnis))
+            ziel, hinweis = Path(pfad), "Zieldatei entstand während des Aufrufs; Ergebnis in Nachbardatei geschrieben"
         print(json.dumps({"ergebnis": "ok", "ausgabe": str(ziel), "weg": ergebnis["weg"], "modell": ergebnis["modell"],
                           "umleitung_nach": ergebnis["umleitung_nach"], "token": ergebnis["token"],
                           "kosten_usd": ergebnis["kosten_usd"], "abgeschnitten": ergebnis["abgeschnitten"],
-                          "pruefpflicht": "Ausgabe vor Verwendung prüfen"}, ensure_ascii=False, sort_keys=True))
+                          "pruefpflicht": "Ausgabe vor Verwendung prüfen", "hinweis": hinweis}, ensure_ascii=False, sort_keys=True))
         return 0
     except Abbruch as abbruch:
         print(json.dumps({"ergebnis": abbruch.grund, "hinweis": abbruch.hinweis}, ensure_ascii=False, sort_keys=True),
