@@ -518,6 +518,47 @@ Anmeldung) und eigene Nachmessungen (**M**, 12:26–12:27 UTC). Unbelegtes als O
 
 ---
 
+## Fortschreibung 15.11.2026, Stand 22:10 UTC — CI auf PR #203
+
+Quelle: GitHub-Job-Logs, nur lesend über `get_job_logs` abgerufen; zwei
+`check_run.completed`-Ereignisse auf **PR #203**, head_sha `f245e7b`, Prüfungen gelaufen
+22:05–22:06 UTC. Anlass: diese Audit-Sitzung betreut PR #203 (der den vorliegenden Bericht
+liefert).
+
+1. **Korrektur zu Kurzfassung Pkt. 10 und §5 (IST):** Die dort belegte Aussage „GitHub
+   Actions startet kontoweit **keine Jobs** (Ausgabenlimit)" ist für diesen Zeitpunkt
+   **überholt**. **BELEGT:** die Workflows `next-web` (Run 43767223921) und `repository`
+   (Run 43767230503) sind auf `f245e7b` tatsächlich **gelaufen** und mit `failure` beendet
+   worden. Warum wieder Jobs starten (Budget aufgefüllt? anderer Auslöser), ist ohne
+   Konto-Oberfläche **OFFEN**. Die Aussage von früher war für ihren Messzeitpunkt (P/K)
+   zutreffend; der Zustand hat sich geändert.
+2. **Die beiden roten Checks sind nicht durch diesen PR verursacht (BELEGT).** `git diff`
+   gegen die Basis (`git merge-base` = `origin/main` `9c9c806`) zeigt als einzige geänderte
+   Datei `docs/09-final/master-audit-2026-11-15.md`. Ein reines Markdown-Dokument ändert
+   weder Quellcode-Hashes noch einen `apps/web`-Test. Die Fehler liegen damit **vorbestehend
+   auf der Basis `9c9c806`**, unabhängig vom Dokument.
+3. **`repository`-Check (Job 132974976932):** 912 Tests, **56 failures / 45 errors**.
+   Belegte Einzelfälle aus dem Log: `test_requirements_reconciliation` — Hash-Abgleich
+   stimmt nicht für `apps/shop-api/requirements.txt` und `apps/web/app/sitemap.ts`;
+   `test_register_and_human_view_match` meldet „Stale implementation source" (u. a.
+   `apps/site/src/Auth.tsx`, +41 weitere). Das ist der bekannte Pin-/Beleg-Abgleich
+   (Mechanik: Skill `nexify-belege-und-pins`); **wer/wann** die Pins gegen die Quellen hat
+   auflaufen lassen, ist **OFFEN** und eine Aufgabe der koordinierenden Sitzung bzw. des
+   Inhabers, nicht dieses Dokument-PR.
+4. **`next-web`-Check (Job 132974957508):** 138 Tests, 137 pass, **1 fail** in `apps/web`
+   (`pnpm recursive run` exit 1); ebenfalls ohne Bezug zum Dokument.
+5. **Konsequenz für L7 / L16 / V13 (Planauswirkung, ANNAHME bis zur Behebung):** Der
+   tatsächliche Merge-Blocker ist nicht allein das frühere Actions-Budget, sondern — sobald
+   Jobs laufen — **rote Inhaltstests auf der Basis**. „Mergen, sobald Actions grün" setzt
+   also zusätzlich das Beheben dieser vorbestehenden Pin-/Testfehler auf `main` voraus.
+6. **Von dieser Sitzung getan:** nur gelesen (Job-Logs, `git diff`), diese Fortschreibung in
+   **derselben** Datei ergänzt. Kein Fix gepusht (außerhalb des eng gefassten Dokument-only-
+   Auftrags; die Fehler gehören nicht diesem PR), **kein GitHub-Kommentar gesetzt** (keine
+   auslösende Weisung des Inhabers; Meldung erfolgt im Sitzungsbericht an die koordinierende
+   Sitzung).
+
+---
+
 ## 7. Blinde Flecken — was nicht gemessen werden konnte
 
 - **srv1243952** ist von innen nicht einsehbar (Hostinger-API `[VPS:2044]`, Docker Manager
