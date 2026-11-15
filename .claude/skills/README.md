@@ -16,6 +16,7 @@ Kommt ein Skill dazu, hier genau eine Zeile ergänzen, im selben Commit.
 | [`nexify-belege-und-pins`](nexify-belege-und-pins/SKILL.md) | Vor Änderungen an gebundenen Dateien und vor jeder neuen Datei in einem gebundenen Verzeichnis; wenn Prüfsummen abweichen oder Browser-Belege zu erneuern sind. |
 | [`nexify-graph`](nexify-graph/SKILL.md) | Vor dem Einzellesen vieler Dateien und vor Änderungen an gemeinsam genutzten Bausteinen. |
 | [`nexify-loesungsregister`](nexify-loesungsregister/SKILL.md) | Bevor eine neue Lösung oder ein Dienst vorgeschlagen wird; „wo speichern wir X“, „welchen Zugang gibt es“; wenn ein Schlüssel im Klartext auftaucht. |
+| [`nexify-deepseek-delegation`](nexify-deepseek-delegation/SKILL.md) | Bevor eine Sitzung umfangreiche Schreib- oder Aufbereitungsarbeit selbst ausführt und bevor Inhalte an ein externes Modell gehen: Auftrag schreiben, über `tools/deepseek_arbeiter.py` abgeben, Ergebnis prüfen. Ausgeschaltet, bis der Inhaber Schalter und Schlüssel einträgt. |
 
 ## Fachliche Arbeiten
 

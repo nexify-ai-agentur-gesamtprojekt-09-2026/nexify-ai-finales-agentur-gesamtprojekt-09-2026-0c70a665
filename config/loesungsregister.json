@@ -2195,6 +2195,49 @@
         "cloudflare-konto",
         "hostinger-srv1941843"
       ]
+    },
+    {
+      "id": "deepseek-arbeiter",
+      "name": "DeepSeek-Delegationsarbeiter (`tools/deepseek_arbeiter.py`)",
+      "tags": [
+        "llm",
+        "delegation",
+        "deepseek",
+        "arbeiter",
+        "kosten"
+      ],
+      "kategorie": "LLM-Zugang",
+      "zweck": "Klar umrissene Textaufgaben einer Sitzung (Entwurf, Zusammenfassung, Klassifikation, Übersetzung, Aufbereitung, Code-Vorschlag ohne Werkzeugzugriff) an das günstigere Policy-Modell abgeben, mit Eingangsfilter, Limits und Protokoll.",
+      "ort": "Repository: `tools/deepseek_arbeiter.py`, `config/deepseek-delegation.json`, Skill `.claude/skills/nexify-deepseek-delegation/SKILL.md`; ruft ausschließlich den 9router auf",
+      "zustand": {
+        "status": "geplant",
+        "beleg": "`docs/04-betrieb/deepseek-delegation-2026-11-15.md`: gebaut und gegen einen nachgebauten Router getestet (`tests/test_deepseek_arbeiter.py`); ausgeschaltet ausgeliefert, kein echter Modellaufruf, kein Schlüssel hinterlegt.",
+        "stand": "2026-11-15"
+      },
+      "entscheidung": "keine (Auftrag des Inhabers vom 15.11.2026 über die koordinierende Sitzung; ein eigener D-Eintrag steht aus)",
+      "rolle_im_plan": {
+        "art": "unklar",
+        "frage": "Schaltet der Inhaber den Arbeiter ein (Schalter, Router-Adresse, Router-Schlüssel), und welcher Modellname gilt im 9router für den direkten DeepSeek-Rückfall?"
+      },
+      "zugaenge": [
+        {
+          "bezeichnung": "ROUTER_URL und ROUTER_KEY für Claude-Sitzungen",
+          "art": "Adresse und API-Schlüssel des Routers",
+          "ablageort": "Claude-Code-Umgebung des Inhabers (Umgebungsvariablen); noch nicht eingetragen",
+          "rechteumfang": "Modellaufrufe über den Router",
+          "erstellt": "noch nicht eingetragen",
+          "offengelegt": false,
+          "erneuerung_faellig": false,
+          "hinweis": "Derselbe Name wie beim Eintrag 9router. Ohne Schalter `DEEPSEEK_ARBEITER=ein` sendet der Arbeiter auch mit Schlüssel nichts."
+        }
+      ],
+      "wann_nutzen": "Wenn eine Sitzung umfangreiche Schreib- oder Aufbereitungsarbeit abgeben will und nach einem günstigeren Modell, nach Delegation oder nach dem Arbeiter gefragt wird.",
+      "nicht_nutzen_fuer": "Personenbezogene Daten, Kundenunterlagen, Zugangsdaten, Vertragsinhalte, Entscheidungen und Abnahmen; als Ersatz für das Modell der Sitzung; als Nachweis der Modellregel am echten Router.",
+      "abhaengigkeiten": [
+        "9router",
+        "openrouter-deepseek",
+        "claude-umgebung"
+      ]
     }
   ]
 }
