@@ -14,7 +14,7 @@ import PublicOrientationChat from "./PublicOrientationChat";
 import {readWorkspaceCapabilities,type WorkspaceCapabilities} from "./WorkspaceCapabilities";
 import {createContext, useCallback, useContext, useEffect, useLayoutEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 import {CommerceHeader} from './shop/CommerceHeader';
-import ChatResizeHandle,{chatWidthStyle,clampChat,readChatWidth,storeChatWidth} from "./ChatResizeHandle";
+import ChatResizeHandle,{CHAT_MIN,chatWidthStyle,clampChat,readChatWidth,storeChatWidth} from "./ChatResizeHandle";
 // Vollflächiges Gespräch: schmale Fenster und Telefone im Querformat (niedrig, Tippgerät). Dieselbe Bedingung steht in AtelierSystem.css
 // (Abschnitt „Chat im Querformat"); beide Stellen gemeinsam ändern.
 const MOBILE_CHAT='(max-width: 820px), (max-height: 500px) and (pointer: coarse)';
@@ -480,7 +480,7 @@ export default function Workspace({children,pages,accountControl,initialLocale='
     read();window.addEventListener('scroll',onScroll,{passive:true});
     return()=>{cancelAnimationFrame(frame);window.removeEventListener('scroll',onScroll);};
   },[]);
-  return <UIContext.Provider value={{locale,t,session:ready?{csrf:csrf.current}:null,chatReady:ready}}><div ref={workspaceRoot} id="atelier" className={`workspace-shell site-${site} ${open?"is-open":"is-closed"}`} data-chat-boot={boot??undefined} data-hero-action-visible={heroAction||launcherCovers?'true':undefined} style={open?chatWidthStyle(chatWidth,mobile):undefined}>
+  return <UIContext.Provider value={{locale,t,session:ready?{csrf:csrf.current}:null,chatReady:ready}}><div ref={workspaceRoot} id="atelier" className={`workspace-shell site-${site} ${open?"is-open":"is-closed"}`} data-chat-boot={boot??undefined} data-hero-action-visible={heroAction||launcherCovers?'true':undefined} style={open?chatWidthStyle(chatWidth??CHAT_MIN,mobile):undefined}>
     {/* Kantenbrechung für das Glas: Verschiebungskarte als Bild, nur dort wirksam, wo der Browser Filter in backdrop-filter kennt. */}
     <svg className="glass-lens-filter" width="0" height="0" aria-hidden="true" focusable="false"><filter id="as-linse" x="0" y="0" width="100%" height="100%" colorInterpolationFilters="sRGB"><feImage href="/glass/linse.svg" x="0" y="0" width="100%" height="100%" preserveAspectRatio="none" result="karte"/><feDisplacementMap in="SourceGraphic" in2="karte" scale="36" xChannelSelector="R" yChannelSelector="G"/></filter><filter id="as-linse-leiste" x="0" y="0" width="100%" height="100%" colorInterpolationFilters="sRGB"><feImage href="/glass/linse-leiste.svg" x="0" y="0" width="100%" height="100%" preserveAspectRatio="none" result="karte"/><feDisplacementMap in="SourceGraphic" in2="karte" scale="30" xChannelSelector="R" yChannelSelector="G"/></filter><filter id="as-linse-front" x="0" y="0" width="100%" height="100%" colorInterpolationFilters="sRGB"><feImage href="/glass/linse-front.svg" x="0" y="0" width="100%" height="100%" preserveAspectRatio="none" result="karte"/><feDisplacementMap in="SourceGraphic" in2="karte" scale="44" xChannelSelector="R" yChannelSelector="G"/></filter></svg>
     <div className="website" inert={mobile&&open?true:undefined} aria-hidden={mobile&&open?true:undefined}>
