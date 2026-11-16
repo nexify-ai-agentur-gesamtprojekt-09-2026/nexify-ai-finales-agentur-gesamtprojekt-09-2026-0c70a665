@@ -145,6 +145,9 @@ async def priced(owner, shipping_cents=None, address=None, items_override=None, 
         if not product or not product.get("active"):
             changes.append({"product_id": item["product_id"], "kind": "unavailable", "name": item.get("name")})
             continue
+        if type(product.get("purchase_cents")) is not int:  # übernommene Katalogartikel ohne Einkaufspreis sind nicht bestellbar
+            changes.append({"product_id": item["product_id"], "kind": "unavailable", "name": item.get("name")})
+            continue
         unit = pricing.sell_cents(product["purchase_cents"], settings["markup_percent"])
         stock = stock_or_none(product)
         if stock is None and not allow_unknown_stock:
@@ -199,6 +202,8 @@ async def set_item(body: ItemIn, request: Request, response: Response):
         product = await store.catalog.published_product(body.product_id)
         if not product:
             raise HTTPException(404, {"error": "product_not_found"})
+        if type(product.get("purchase_cents")) is not int:  # übernommene Katalogartikel ohne Einkaufspreis sind nicht bestellbar
+            raise HTTPException(409, {"error": "product_not_orderable", "message": "Dieser Artikel ist derzeit nicht online bestellbar"})
         stock = verified_stock(product)
         if stock < body.quantity:
             raise HTTPException(409, {"error": "insufficient_stock", "stock": stock})

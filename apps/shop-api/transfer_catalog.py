@@ -81,24 +81,26 @@ CONTRACT_TEXT = ("supplier_agreement_reference", "data_licence_reference", "appr
 CONTRACT_FIXED = {"scope": "catalog_first_fill", "tenant": "teileklar", "supplier": "bigbuy"}
 
 
-def check_contract(contract, minimum):
-    """Abort, wenn der Vertragsnachweis fehlt, unvollständig ist oder nicht zu dieser Übernahme passt. Gibt den Eintrag fürs Protokoll zurück."""
+def check_contract(contract, minimum, fixed=CONTRACT_FIXED, text=CONTRACT_TEXT):
+    """Abort, wenn der Vertragsnachweis fehlt, unvollständig ist oder nicht zu dieser Übernahme passt. Gibt den Eintrag fürs Protokoll zurück.
+
+    ``fixed``/``text``: Pflichtwerte und Pflichttexte der jeweiligen Übernahmeart (Standard: Erstbefüllung aus der BigBuy-Datenbank)."""
     if not isinstance(contract, dict):
         raise Abort("Festschreiben verlangt den belegten Veröffentlichungsvertrag (--publication-contract); siehe D-008/OA-071")
-    wrong = [k for k, v in CONTRACT_FIXED.items() if contract.get(k) != v]
-    wrong += [k for k in CONTRACT_TEXT if not (isinstance(contract.get(k), str) and contract[k].strip())]
+    wrong = [k for k, v in fixed.items() if type(contract.get(k)) is not type(v) or contract.get(k) != v]
+    wrong += [k for k in text if not (isinstance(contract.get(k), str) and contract[k].strip())]
     if not whole(contract.get("product_count_minimum")) or contract["product_count_minimum"] < 1 or (minimum is not None and contract["product_count_minimum"] != minimum):
         wrong.append("product_count_minimum")
     try:
         datetime.fromisoformat(contract.get("approved_at") or "")
     except (TypeError, ValueError):
         wrong.append("approved_at")
-    if set(contract) - {*CONTRACT_FIXED, *CONTRACT_TEXT, "product_count_minimum", "note"}:
+    if set(contract) - {*fixed, *text, "product_count_minimum", "note"}:
         wrong.append("unbekanntes Feld")
     if wrong:
         raise Abort("Veröffentlichungsvertrag unvollständig oder unpassend (D-008/OA-071): " + ", ".join(sorted(set(wrong))))
     digest = hashlib.sha256(json.dumps(contract, sort_keys=True, ensure_ascii=False, separators=(",", ":")).encode()).hexdigest()
-    return {"sha256": digest, **{k: contract[k] for k in CONTRACT_TEXT}, "product_count_minimum": contract["product_count_minimum"]}
+    return {"sha256": digest, **{k: contract[k] for k in text}, "product_count_minimum": contract["product_count_minimum"]}
 
 
 def check_category(doc):
@@ -110,13 +112,14 @@ def check_category(doc):
     return reasons
 
 
-async def read_source(base, source):
+async def read_source(base, source, product_check=None):
     """Liest und prüft die Quelle. Gibt je Sammlung die Dokumente in Ablagefolge und die Prüfsumme zurück."""
+    product_check = product_check or check_product
     docs, digests, problems = {}, {}, {}
     for collection in COLLECTIONS:
         rows, digest = [], Digest()
         async for doc in source[collection].find({}):
-            for reason in (check_product if collection == "products" else check_category)(doc):
+            for reason in (product_check if collection == "products" else check_category)(doc):
                 problems[(collection, reason)] = problems.get((collection, reason), 0) + 1
             try:
                 view = base.join(doc.get("_id"), base.encode({k: v for k, v in doc.items() if k != "_id"}))
@@ -223,13 +226,18 @@ class PostgresTarget:
         return result
 
 
-async def transfer(source, target, *, apply=False, contract=None, expect_min=None, sample=20, log=print, now=None):
-    """Führt die Übernahme aus und gibt den Bericht zurück. Abort bei jeder Abweichung; dann ist nichts geschrieben."""
-    proof = check_contract(contract, expect_min) if apply else None
-    if proof is not None:
+async def transfer(source, target, *, apply=False, contract=None, expect_min=None, sample=20, log=print, now=None, profile=None, probe=False):
+    """Führt die Übernahme aus und gibt den Bericht zurück. Abort bei jeder Abweichung; dann ist nichts geschrieben.
+
+    ``profile``: andere Übernahmeart (Produktprüfung, Vertragsfelder, Bezeichnung); Standard ist die BigBuy-Erstbefüllung.
+    ``probe``: Teillauf gegen eine Probedatenbank; die Mindestzahl des Vertrags gilt dann nicht (der Aufrufer sperrt das Produktivziel)."""
+    profile = profile or {}
+    fixed, text = profile.get("contract_fixed", CONTRACT_FIXED), profile.get("contract_text", CONTRACT_TEXT)
+    proof = check_contract(contract, None if probe else expect_min, fixed, text) if apply else None
+    if proof is not None and not probe:
         expect_min = proof["product_count_minimum"]  # die Mindestzahl des Vertrags gilt auch ohne --expect-min
     base = common.load_base()
-    docs, digests = await read_source(base, source)
+    docs, digests = await read_source(base, source, profile.get("check_product"))
     if expect_min is not None and digests["products"].count < expect_min:
         raise Abort(f"products: Quelle trägt {digests['products'].count} Produkte, erwartet sind mindestens {expect_min}; nichts geschrieben")
     for collection in COLLECTIONS:
@@ -238,7 +246,8 @@ async def transfer(source, target, *, apply=False, contract=None, expect_min=Non
     combined = hashlib.sha256("".join(digests[c].value for c in COLLECTIONS).encode()).hexdigest()
     moment = (now or datetime.now(timezone.utc)).isoformat()
     # Lauf-Eintrag: finished_at ist das Alter der Daten (jüngster Importzeitpunkt der Quelle), nicht der Zeitpunkt der Übernahme.
-    run_record = {"_id": "catalog-transfer-" + combined[:32], "status": "done", "mode": "catalog_transfer", "source": "Bestandsübernahme aus dem bisherigen Shop",
+    run_record = {"_id": profile.get("run_prefix", "catalog-transfer-") + combined[:32], "status": "done", "mode": "catalog_transfer",
+                  "source": profile.get("source", "Bestandsübernahme aus dem bisherigen Shop"), "probe": probe,
                   "started_at": moment, "finished_at": stamps[-1] if stamps else moment, "transferred_at": moment, "publication_contract": proof,
                   "counts": {c: digests[c].count for c in COLLECTIONS}, "digests": {c: digests[c].value for c in COLLECTIONS}}
     result = await target.run(base, docs, run_record, apply)

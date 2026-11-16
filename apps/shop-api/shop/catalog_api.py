@@ -33,6 +33,15 @@ def supplier_image(value):
 
 def present(product, settings, full=False):
     released = settings["price_released"]
+    purchase, listed = product.get("purchase_cents"), product.get("list_price_cents")
+    if released and type(purchase) is int and purchase >= 0:
+        price_cents, price_status = pricing.sell_cents(purchase, settings["markup_percent"]), "released"
+    elif (type(listed) is int and listed > 0 and product.get("list_price_status") == "approved_by_transfer_contract"
+          and product.get("source") == "teileklar_public_catalog"):
+        # Veröffentlichter Bruttopreis des bisherigen Shops, übernommen per Vertragsnachweis (transfer_public_catalog.py); nicht bestellbar.
+        price_cents, price_status = listed, "list_price"
+    else:
+        price_cents, price_status = None, "not_released"
     raw_stock = product.get("stock")
     stock = int(raw_stock) if isinstance(raw_stock, int) and not isinstance(raw_stock, bool) and 0 <= raw_stock <= 2**53 - 1 else None
     raw_images = product.get("images")
@@ -42,14 +51,14 @@ def present(product, settings, full=False):
             "image_status": "supplier_original" if images else "unavailable",
             "stock": stock, "in_stock": stock > 0 if stock is not None else None,
             "stock_status": "reported" if stock is not None else "unknown",
-            "price_cents": pricing.sell_cents(product["purchase_cents"], settings["markup_percent"]) if released else None,
-            "price_status": "released" if released else "not_released", "currency": "EUR", "vat_included": True,
+            "price_cents": price_cents, "price_status": price_status, "currency": "EUR", "vat_included": True,
             "vat_percent": str(pricing.config.VAT_PERCENT), "category_id": product.get("category_id"),
             "imported_at": product.get("imported_at"), "source_partial": product.get("source_partial", False)}
     if full:
         item.update({"images": images, "description": product.get("description") or "",
                      "details": product.get("details") or {}, "fitment_status": "not_checked",
-                     "source": "BigBuy", "imported_at": product.get("imported_at"), "bigbuy_id": product.get("bigbuy_id")})
+                     "source": "BigBuy", "imported_at": product.get("imported_at"), "bigbuy_id": product.get("bigbuy_id"),
+                     "orderable": type(purchase) is int and price_status == "released"})
     return item
 
 

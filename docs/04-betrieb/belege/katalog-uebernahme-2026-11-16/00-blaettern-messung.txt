@@ -1,0 +1,10 @@
+Messung 16.11.2026 ~01:07 UTC, GET https://teileklar.shop/api/shop/products (ohne Anmeldung), je Abruf 1,5 s Pause:
+limit=3&page=1           -> V0103601, S3707335, S3707334   total 3720
+limit=3&page=37          -> V0103601, S3707335, S3707334   (page wird ignoriert: jede "Seite" = Seite 1)
+limit=3&offset=3         -> S3707334, S3707333, S3707331   (offset wirkt)
+limit=3&skip=3 / p=2     -> wie Seite 1 (wirkungslos)
+limit=500&offset=0       -> 500 Artikel, 500 verschiedene
+limit=4000&offset=0      -> 500 Artikel (Obergrenze 500)
+sort=name|id|price_asc   -> Reihenfolge nach Namen, bei gleichen Namen nicht stabil (Reihenfolge der "3-Punkt-Gurt"-Artikel wechselt)
+Erster Trockenlauf mit page=N (Datei 01): Abbruch "Seite 2: Kennung doppelt geliefert" -> Leseweg auf offset-Fenster (500, Schritt 400) umgestellt.
+Danach: 3720 verschiedene Kennungen in einem Durchgang (10 Fenster).

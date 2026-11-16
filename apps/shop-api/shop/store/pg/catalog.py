@@ -4,7 +4,8 @@ import json
 from . import base
 
 # Dieselbe Auswahl wie in der MongoDB-Umsetzung; purchase_cents dient der Preisberechnung im Dienst.
-LIST_FIELDS = {"sku", "ean", "name", "images", "stock", "purchase_cents", "category_id", "category_ids", "imported_at", "source_partial"}
+LIST_FIELDS = {"sku", "ean", "name", "images", "stock", "purchase_cents", "category_id", "category_ids", "imported_at", "source_partial",
+               "list_price_cents", "list_price_status", "source"}
 # MongoDB ordnet fehlende Werte vor alle anderen; Text wird byteweise verglichen (Spalten mit Sortierung "C").
 ORDERINGS = {"availability": "stock desc nulls last, name asc nulls first, seq",
              "price_asc": "purchase_cents asc nulls first, name asc nulls first, seq",
