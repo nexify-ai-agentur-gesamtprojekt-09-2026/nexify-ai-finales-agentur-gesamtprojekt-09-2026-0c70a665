@@ -217,6 +217,13 @@ begin
     raise exception 'subscription_proof_immutable' using errcode = '23514';
   end if;
 
+  -- Eine nach der Uhr der Datenbank abgelaufene Anmeldung bekommt kein weiteres Kennzeichen: Die Änderung bleibt ohne
+  -- Fehler aus. Das Zurücknehmen eines Kennzeichens bleibt möglich.
+  if old.status = 'pending' and new.status = 'pending' and now() >= old.confirm_expires_at
+     and not (new.confirm_token_hashes <@ old.confirm_token_hashes) then
+    return null;
+  end if;
+
   if new.status = 'pending' and new.confirm_token_hashes is distinct from old.confirm_token_hashes
      and exists (select 1 from mailing.subscriptions s
                  where s.email_hash <> old.email_hash and s.confirm_token_hashes && new.confirm_token_hashes) then

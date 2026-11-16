@@ -303,6 +303,9 @@ export function buildConfirmationMail(mail: ConfirmationMailText, consentText: s
   return { subject: mail.betreff, text, html };
 }
 
+/** Längste Wartezeit auf den Versanddienst je Anmeldung. Danach gilt der Ausgang als unklar. */
+export const MAIL_TIMEOUT_MS = 10_000;
+
 export type ConsentDeps = {
   env?: MailingEnv;
   config?: MailingConsentConfig;
@@ -312,6 +315,8 @@ export type ConsentDeps = {
   mailConfigured?: () => boolean;
   nowMs?: () => number;
   newToken?: () => string;
+  /** Zeitgrenze für die Übergabe einer Mail an den Versand in Millisekunden. Ohne Angabe: `MAIL_TIMEOUT_MS`. */
+  mailTimeoutMs?: number;
   /** Mengenbegrenzung der Anmeldung. Ohne Angabe: gemeinsamer Zähler nach `grenzen.anfragen_*`. */
   limiter?: RateLimiter;
   /** Mengenbegrenzung der Bestätigung, getrennt von der Anmeldung. Ohne Angabe: nach `grenzen.bestaetigungen_*`. */
@@ -363,11 +368,31 @@ function crossOrigin(request: Request): boolean {
   }
 }
 
+async function readCapped(request: Request, maxBytes: number): Promise<string | null> {
+  const reader = request.body?.getReader();
+  if (!reader) return '';
+  const chunks: Uint8Array[] = [];
+  let total = 0;
+  for (;;) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    total += value.byteLength;
+    if (total > maxBytes) {
+      await reader.cancel().catch(() => undefined);
+      return null;
+    }
+    chunks.push(value);
+  }
+  return new TextDecoder().decode(Buffer.concat(chunks));
+}
+
 async function readJson(request: Request, maxBytes: number): Promise<{ ok: true; value: Record<string, unknown> } | { ok: false; response: Response }> {
   if (!(request.headers.get('content-type') ?? '').toLowerCase().startsWith('application/json')) return { ok: false, response: reply({ error: 'json_required' }, 415) };
   if (Number(request.headers.get('content-length') ?? '0') > maxBytes) return { ok: false, response: reply({ error: 'payload_too_large' }, 413) };
-  const raw = await request.text();
-  if (Buffer.byteLength(raw, 'utf8') > maxBytes) return { ok: false, response: reply({ error: 'payload_too_large' }, 413) };
+  // Ohne Content-Length (etwa bei stückweiser Übertragung) greift die Prüfung oben nicht. Der Körper wird deshalb
+  // stückweise gelesen und beim Überschreiten der Grenze abgebrochen, statt ihn erst ganz in den Speicher zu holen.
+  const raw = await readCapped(request, maxBytes);
+  if (raw === null) return { ok: false, response: reply({ error: 'payload_too_large' }, 413) };
   try {
     const value: unknown = JSON.parse(raw);
     if (!value || typeof value !== 'object' || Array.isArray(value)) return { ok: false, response: reply({ error: 'invalid_json' }, 400) };
@@ -487,11 +512,13 @@ export async function handleSubscribe(request: Request, deps: ConsentDeps = {}):
     if (await store.isSuppressed(hash)) return reply(ACCEPTED, 202);
     let existing = await store.getSubscription(hash);
     if (existing && existing.status !== 'pending') return reply(ACCEPTED, 202);
-    if (existing && existing.confirmExpiresAt <= now) {
-      // Eine verfallene Zeile, die das Aufräumen noch nicht erreicht hat, gilt als nicht mehr vorhanden: Sie wird
-      // jetzt gelöscht, und die Anmeldung entsteht unten neu.
-      await store.purgeExpiredPending(now + 1);
-      existing = null;
+    if (existing) {
+      // Ob die offene Anmeldung noch gilt, entscheidet der Speicher (im Betrieb: die Uhr der Datenbank), nicht die Uhr
+      // dieses Dienstes. Eine verfallene Zeile wird jetzt gelöscht, und die Anmeldung entsteht unten neu; eine noch
+      // gültige bleibt stehen und bekommt unten ein weiteres Kennzeichen.
+      await store.discardPendingIfExpired(hash, now);
+      existing = await store.getSubscription(hash);
+      if (existing && existing.status !== 'pending') return reply(ACCEPTED, 202);
     }
     if (existing) {
       // Offene Anmeldung: Es gilt, was bei der ersten Anfrage festgehalten wurde. Ist der freigegebene Wortlaut
@@ -556,10 +583,18 @@ export async function handleSubscribe(request: Request, deps: ConsentDeps = {}):
   const blockLink = `${base}${config.seiten.abmeldung}#t=${unsubscribeToken}`;
   const mail = buildConfirmationMail(config.bestaetigungsmail.texte[lang] as ConfirmationMailText, config.einwilligung.texte[lang] as string, link, blockLink);
   let sent: MailResult;
+  let timer: ReturnType<typeof setTimeout> | undefined;
   try {
-    sent = await (deps.sendMail ?? sendMail)({ to: email, subject: mail.subject, text: mail.text, html: mail.html });
+    // Antwortet der Versanddienst nicht, endet die Übergabe nach einer festen Zeit mit einer ehrlichen 502, statt bis
+    // zum Abbruch durch die Plattform zu hängen. Der Ausgang ist dann unklar und zählt wie jeder solche Fehlschlag.
+    sent = await Promise.race([
+      (deps.sendMail ?? sendMail)({ to: email, subject: mail.subject, text: mail.text, html: mail.html }),
+      new Promise<MailResult>((resolve) => { timer = setTimeout(() => resolve({ ok: false, error: 'mail_timeout' }), deps.mailTimeoutMs ?? MAIL_TIMEOUT_MS); }),
+    ]);
   } catch {
     sent = { ok: false };
+  } finally {
+    clearTimeout(timer);
   }
   const held = reservation;
   if (!sent.ok) {

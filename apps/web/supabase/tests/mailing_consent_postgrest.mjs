@@ -205,6 +205,17 @@ test('Speicher: anlegen, lesen, weiteres Kennzeichen, bestätigen; der Nachweis 
   // Das ist ein abgelaufenes Kennzeichen (null), keine Störung des Speichers.
   assert.equal(await store.confirmByTokenHash(late.confirmTokenHash, Date.now() - 72 * HOUR), null);
   assert.equal((await store.getSubscription(late.emailHash)).status, 'pending');
+  // Auch ein weiteres Kennzeichen nimmt die dort abgelaufene Anmeldung nicht an, gleich welche Zeit der Dienst nennt.
+  assert.equal(await store.addConfirmToken(late.emailHash, await sha(token()), Date.now() - 72 * HOUR), false);
+  assert.equal(sql(`select cardinality(confirm_token_hashes) from mailing.subscriptions where email_hash = '${late.emailHash}'`), '1');
+  // Verwerfen einer einzelnen Anmeldung: Die Datenbank löscht nur, was nach ihrer Uhr abgelaufen ist.
+  const fresh = await pendingInput('uhr-geht-vor@beispiel.invalid');
+  await store.insertPending(fresh);
+  await store.discardPendingIfExpired(fresh.emailHash, Date.now() + 500 * HOUR);
+  assert.equal((await store.getSubscription(fresh.emailHash)).status, 'pending', 'gültig nach der Uhr der Datenbank, auch wenn die Uhr des Dienstes weit vorgeht');
+  assert.equal(await store.addConfirmToken(fresh.emailHash, await sha(token()), Date.now() + 500 * HOUR), true, 'und sie nimmt ein weiteres Kennzeichen an');
+  await store.discardPendingIfExpired(late.emailHash, Date.now() - 72 * HOUR);
+  assert.equal(await store.getSubscription(late.emailHash), null, 'abgelaufen nach der Uhr der Datenbank: gelöscht');
 });
 
 test('Speicher: falsche Prüfsumme, Steuerzeichen, unsichtbare Zeichen und Großbuchstaben lehnt die Datenbank ab (B8)', async () => {

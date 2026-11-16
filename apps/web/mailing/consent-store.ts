@@ -129,6 +129,11 @@ export interface MailingConsentStore {
   dailyLimitReached(nowMs: number, perDay: number): Promise<boolean>;
   /** Löscht unbestätigte Anmeldungen, deren Frist abgelaufen ist. Bestätigte und abgemeldete bleiben. */
   purgeExpiredPending(nowMs: number): Promise<void>;
+  /**
+   * Löscht die unbestätigte Anmeldung dieser Adresse, falls ihre Frist abgelaufen ist; eine noch gültige bleibt ohne
+   * Fehler stehen. Im Betrieb entscheidet darüber die Uhr der Datenbank, `nowMs` dient nur dem Test-Speicher.
+   */
+  discardPendingIfExpired(emailHash: string, nowMs: number): Promise<void>;
   /** Löscht Einträge der Mailzählung, die für keine Grenze mehr zählen. */
   purgeSettledMails(nowMs: number, windowHours: number): Promise<void>;
 }
@@ -257,6 +262,10 @@ export function createMemoryMailingConsentStore(): MailingConsentStore & { event
       for (const [key, row] of subscriptions) {
         if (row.status === 'pending' && row.confirmExpiresAt < nowMs) subscriptions.delete(key);
       }
+    },
+    async discardPendingIfExpired(emailHash, nowMs) {
+      const row = subscriptions.get(emailHash);
+      if (row && row.status === 'pending' && row.confirmExpiresAt <= nowMs) subscriptions.delete(emailHash);
     },
     async purgeSettledMails(nowMs, windowHours) {
       const keep = mails.filter((mail) => mail.reservedAt >= nowMs - Math.max(windowHours, mail.limits.windowHours, 24) * HOUR_MS);
@@ -405,9 +414,10 @@ export function createSupabaseMailingConsentStore(): MailingConsentStore {
       // Lesen, dann schreiben mit dem gelesenen Stand im Filter: Von zwei gleichzeitigen Aufrufen ändert genau einer
       // die Zeile, der andere liest neu. Geschrieben wird nur die Liste der Kennzeichen, nie der Nachweis.
       return guarded(async () => {
-        const now = encodeURIComponent(iso(nowMs));
+        // Kein Fristfilter mit der Uhr des Aufrufers: Eine nach der Uhr der Datenbank abgelaufene Anmeldung nimmt kein
+        // weiteres Kennzeichen an (die Änderung bleibt dort ohne Fehler aus), eine noch gültige nimmt es an.
         for (let attempt = 0; attempt < CAS_ATTEMPTS; attempt++) {
-          const found = rows(await sbSelect(`subscriptions?email_hash=${eq(emailHash)}&status=eq.pending&confirm_expires_at=gt.${now}&select=email_hash,confirm_token_hashes&limit=1`, DB));
+          const found = rows(await sbSelect(`subscriptions?email_hash=${eq(emailHash)}&status=eq.pending&select=email_hash,confirm_token_hashes&limit=1`, DB));
           if (found.length === 0) return false;
           if (found[0].email_hash !== emailHash) fail();
           const current = tokenHashes(found[0]);
@@ -415,7 +425,7 @@ export function createSupabaseMailingConsentStore(): MailingConsentStore {
           if (current.length >= MAX_CONFIRM_TOKENS) return false;
           const updated = rows(
             await sbUpdate(
-              `subscriptions?email_hash=${eq(emailHash)}&status=eq.pending&confirm_expires_at=gt.${now}&confirm_token_hashes=eq.${arrayLiteral(current)}`,
+              `subscriptions?email_hash=${eq(emailHash)}&status=eq.pending&confirm_token_hashes=eq.${arrayLiteral(current)}`,
               { confirm_token_hashes: [...current, tokenHash], updated_at: iso(nowMs) },
               DB,
             ),
@@ -560,6 +570,12 @@ export function createSupabaseMailingConsentStore(): MailingConsentStore {
     async purgeExpiredPending(nowMs) {
       // Der Filter nennt den Zustand ausdrücklich; die Datenbank lässt zusätzlich nur das Löschen unbestätigter Zeilen zu.
       await guarded(() => sbDelete(`subscriptions?status=eq.pending&confirm_expires_at=lt.${encodeURIComponent(iso(nowMs))}`, DB));
+    },
+    async discardPendingIfExpired(emailHash) {
+      if (!HEX64.test(emailHash)) fail();
+      // Ohne Fristfilter: Die Datenbank löscht die Zeile nur, wenn ihre Frist nach ihrer eigenen Uhr abgelaufen ist
+      // (oder die Adresse gesperrt ist), und lässt eine noch gültige ohne Fehler stehen.
+      await guarded(() => sbDelete(`subscriptions?email_hash=${eq(emailHash)}&status=eq.pending`, DB));
     },
     async purgeSettledMails(nowMs, windowHours) {
       if (!Number.isInteger(windowHours) || windowHours < 1 || windowHours > MAIL_LIMIT_BOUNDS.windowHours[1]) fail();

@@ -501,6 +501,11 @@ begin
   if found or (select status || '/' || cardinality(confirm_token_hashes) from mailing.subscriptions where email = 'alt@b.invalid') <> 'pending/1' then
     raise exception 'Confirmation after the deadline accepted';
   end if;
+  -- Ebenso bekommt die abgelaufene Anmeldung kein weiteres Kennzeichen (ohne Fehler), auch ohne Fristfilter des Aufrufers.
+  update mailing.subscriptions set confirm_token_hashes = confirm_token_hashes || repeat('7', 64) where email = 'alt@b.invalid';
+  if found or (select cardinality(confirm_token_hashes) from mailing.subscriptions where email = 'alt@b.invalid') <> 1 then
+    raise exception 'Expired subscription accepted another confirmation token';
+  end if;
   -- M1: Eine gesperrte Adresse wird nicht bestätigt, auch mit gültigem Kennzeichen und in der Frist.
   insert into mailing.suppressions(email_hash, reason) values (h2, 'complaint');
   begin

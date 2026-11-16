@@ -3,6 +3,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {
+  MAIL_TIMEOUT_MS,
   MAILING_CONSENT_CONFIG,
   availableLanguages,
   buildConfirmationMail,
@@ -957,6 +958,81 @@ test('Speicherfehler nach dem Eintragen eines weiteren Kennzeichens: es wird zur
   assert.equal((await subscribe(deps)).status, 202);
   assert.equal(outbox.length, 2);
   assert.equal((await confirm(deps, tokenFromMail(outbox[1]))).status, 200);
+});
+
+test('Anfragekörper ohne Längenangabe: wird stückweise gelesen und an der Grenze abgebrochen, nicht erst ganz gepuffert', async () => {
+  const { deps, store } = setup();
+  let pulled = 0;
+  const chunk = new TextEncoder().encode('x'.repeat(1024));
+  // 64 KiB in Stücken von 1 KiB, ohne Längenangabe. (Endlich, damit der Test auch ohne die Grenze endet.)
+  const endless = new ReadableStream({ pull(controller) { pulled += 1; pulled > 64 ? controller.close() : controller.enqueue(chunk); } }, { highWaterMark: 0 });
+  const request = new Request(BASE + '/api/mailing/subscribe', { method: 'POST', headers: { 'content-type': 'application/json', host: 'seite.invalid' }, body: endless, duplex: 'half' });
+  assert.equal(request.headers.get('content-length'), null);
+  const res = await handleSubscribe(request, deps);
+  assert.equal(res.status, 413);
+  assert.deepEqual(await res.json(), { error: 'payload_too_large' });
+  assert.ok(pulled <= 6, `höchstens die Grenze (4096 Bytes) plus ein Stück gelesen, gelesen: ${pulled} KiB`);
+  assert.equal(await store.getSubscription(emailHash(ADDRESS)), null);
+  // Ein gültiger Körper in Stücken ohne Längenangabe wird angenommen, auch wenn ein Zeichen über die Stückgrenze reicht.
+  const bytes = new TextEncoder().encode(JSON.stringify({ ...VALID, email: 'jürgen@bücher.invalid' }));
+  const cut = bytes.indexOf(0xc3) + 1;
+  const parts = [bytes.slice(0, cut), bytes.slice(cut)];
+  const pieces = new ReadableStream({ pull(controller) { parts.length ? controller.enqueue(parts.shift()) : controller.close(); } });
+  const good = await handleSubscribe(new Request(BASE + '/api/mailing/subscribe', { method: 'POST', headers: { 'content-type': 'application/json', host: 'seite.invalid' }, body: pieces, duplex: 'half' }), deps);
+  assert.equal(good.status, 202);
+  assert.equal((await store.getSubscription(emailHash('jürgen@bücher.invalid'))).email, 'jürgen@bücher.invalid');
+  // Ohne Körper: wie bisher ungültiges JSON.
+  assert.equal((await handleSubscribe(new Request(BASE + '/api/mailing/subscribe', { method: 'POST', headers: { 'content-type': 'application/json', host: 'seite.invalid' } }), deps)).status, 400);
+});
+
+test('Versanddienst antwortet nicht: nach der Zeitgrenze ehrliche 502, Ausgang unklar, der Platz in der Zählung bleibt belegt', async () => {
+  let handed = 0;
+  const { deps, store } = setup({ sendMail: () => { handed += 1; return new Promise(() => {}); }, mailTimeoutMs: 20 });
+  const started = Date.now();
+  // Der Test selbst wartet höchstens drei Sekunden: Fehlt die Zeitgrenze, scheitert er, statt zu hängen.
+  let guard;
+  const { result, logs } = await quiet(() => Promise.race([subscribe(deps), new Promise((resolve) => { guard = setTimeout(() => resolve(null), 3000); })]));
+  clearTimeout(guard);
+  assert.ok(result, 'die Anmeldung antwortet, obwohl der Versanddienst schweigt');
+  assert.equal(result.status, 502);
+  assert.deepEqual(await result.json(), { error: 'confirmation_mail_failed' });
+  assert.ok(Date.now() - started < 2000);
+  assert.equal(handed, 1);
+  assert.deepEqual(store.mails.map((entry) => entry.state), ['reserved']);
+  assert.match(logs.join('\n'), /mailing_consent_mail_failed/);
+  assert.equal(MAIL_TIMEOUT_MS, 10_000);
+});
+
+test('Erneute Anfrage: ob die offene Anmeldung noch gilt, entscheidet der Speicher, nicht die Uhr des Dienstes', async () => {
+  // Der Speicher steht hier für die Datenbank mit eigener Uhr: Er hält die Anmeldung für gültig oder verfallen,
+  // gleichgültig, welche Zeit der Dienst nennt.
+  const clocked = (storeNow) => {
+    const inner = createMemoryMailingConsentStore();
+    const store = Object.create(inner);
+    store.addConfirmToken = (hash, tokenHash) => inner.addConfirmToken(hash, tokenHash, storeNow());
+    store.discardPendingIfExpired = (hash) => inner.discardPendingIfExpired(hash, storeNow());
+    store.purgeExpiredPending = () => inner.purgeExpiredPending(storeNow()); // wie der Löschtrigger: gültige Zeilen bleiben
+    return store;
+  };
+  // Uhr des Dienstes geht 50 Stunden vor, die Anmeldung ist nach der Uhr des Speichers noch gültig: Es geht eine
+  // weitere Mail zur bestehenden Anmeldung hinaus. Früher wurde gelöscht versucht, nichts gesendet und 202 geantwortet.
+  let dbNow = NOW;
+  const db = clocked(() => dbNow);
+  const ahead = setup({ store: db });
+  await subscribe(ahead.deps);
+  ahead.state.now = NOW + 50 * HOUR;
+  assert.equal((await subscribe(ahead.deps)).status, 202);
+  assert.equal(ahead.outbox.length, 2, 'weitere Mail zur noch gültigen Anmeldung');
+  assert.deepEqual(db.events.map((event) => event.type), ['requested', 'confirmation_resent']);
+  assert.equal((await db.getSubscription(emailHash(ADDRESS))).requestedAt, NOW, 'dieselbe Anmeldung');
+  // Uhr des Dienstes geht nach, die Anmeldung ist nach der Uhr des Speichers verfallen: Sie entsteht neu, statt ein
+  // Kennzeichen an eine verfallene Zeile zu hängen, dessen Link nur 404 liefern könnte.
+  dbNow = NOW + 50 * HOUR;
+  ahead.state.now = NOW + HOUR;
+  assert.equal((await subscribe(ahead.deps)).status, 202);
+  assert.equal(ahead.outbox.length, 3);
+  assert.equal(db.events.at(-1).type, 'requested', 'neue Anmeldung, keine Wiederholung');
+  assert.equal((await db.getSubscription(emailHash(ADDRESS))).requestedAt, NOW + HOUR);
 });
 
 test('Speicherfehler: 503 mit festem Code; Protokoll ohne Adresse, Prüfsumme oder Kennzeichen', async () => {

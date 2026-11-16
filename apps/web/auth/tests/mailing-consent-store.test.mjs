@@ -74,6 +74,8 @@ function fakePostgrest() {
       if (db.now >= Date.parse(row.confirm_expires_at)) return SKIP;
       if (tables.suppressions.some((entry) => entry.email_hash === row.email_hash)) return 'subscription_confirm_suppressed';
     }
+    // Wie der Trigger: Eine abgelaufene Anmeldung bekommt kein weiteres Kennzeichen; die Änderung bleibt ohne Fehler aus.
+    if (row.status === 'pending' && next.status === 'pending' && db.now >= Date.parse(row.confirm_expires_at) && next.confirm_token_hashes.some((hash) => !row.confirm_token_hashes.includes(hash))) return SKIP;
     if (next.status !== 'pending' && next.confirm_token_hashes.length > 0) return 'subscriptions_token_only_pending';
     if (next.status === 'pending' && (next.confirm_token_hashes.length < 1 || next.confirm_token_hashes.length > 8)) return 'subscriptions_pending_has_token';
     return null;
@@ -109,7 +111,9 @@ function fakePostgrest() {
         return new Response(null, { status: 204 });
       }
       if (tables[table].filter(matches).some((row) => row.status !== 'pending')) return refuse('subscription_delete_only_pending');
-      tables[table] = tables[table].filter((row) => !matches(row));
+      // Wie der Trigger: Eine nach der Uhr der Datenbank noch gültige Anmeldung bleibt ohne Fehler stehen, außer ihre Adresse ist gesperrt.
+      const valid = (row) => Date.parse(row.confirm_expires_at) > db.now && !tables.suppressions.some((entry) => entry.email_hash === row.email_hash);
+      tables[table] = tables[table].filter((row) => !matches(row) || valid(row));
       return new Response(null, { status: 204 });
     }
     if (call.method === 'PATCH') {
@@ -201,11 +205,28 @@ test('Anlegen, weiteres Kennzeichen, bestätigen: der Nachweis wird nie umgeschr
     const patch = db.calls.filter((call) => call.method === 'PATCH').at(-1);
     assert.equal(patch.query.get('status'), 'eq.pending');
     assert.equal(patch.query.get('confirm_token_hashes'), `eq.{${TOKEN_HASH}}`);
-    assert.equal(patch.query.get('confirm_expires_at'), 'gt.' + new Date(NOW + HOUR).toISOString());
+    assert.equal(patch.query.get('confirm_expires_at'), null, 'kein Fristfilter mit der Uhr des Aufrufers');
     assert.deepEqual(Object.keys(patch.body).sort(), ['confirm_token_hashes', 'updated_at']);
     assert.deepEqual(patch.body.confirm_token_hashes, [TOKEN_HASH, second]);
     assert.deepEqual(await store.getSubscription(HASH), proof, 'Nachweis unverändert');
-    assert.equal(await store.addConfirmToken(HASH, sha256Hex('zu-spät'), NOW + 49 * HOUR), false, 'nach der Frist kein weiteres Kennzeichen');
+    // Die Frist misst die Uhr der Datenbank: Eine vorgehende Uhr des Aufrufers verhindert kein weiteres Kennzeichen,
+    // eine nachgehende erzwingt keines an einer dort schon abgelaufenen Anmeldung.
+    const ahead = sha256Hex('uhr-geht-vor');
+    assert.equal(await store.addConfirmToken(HASH, ahead, NOW + 49 * HOUR), true, 'gültig nach der Uhr der Datenbank');
+    await store.removeConfirmToken(HASH, ahead);
+    db.now = NOW + 49 * HOUR;
+    assert.equal(await store.addConfirmToken(HASH, sha256Hex('zu-spät'), NOW), false, 'nach der Frist kein weiteres Kennzeichen');
+    await store.discardPendingIfExpired(HASH, NOW);
+    assert.equal(db.tables.subscriptions.length, 0, 'abgelaufen nach der Uhr der Datenbank: gelöscht');
+    db.now = NOW;
+    await store.insertPending(PENDING);
+    await store.addConfirmToken(HASH, second, NOW + HOUR);
+    await store.discardPendingIfExpired(HASH, NOW + 49 * HOUR);
+    assert.equal(db.calls.at(-1).method, 'DELETE');
+    assert.equal(db.calls.at(-1).query.get('confirm_expires_at'), null);
+    assert.equal(db.calls.at(-1).query.get('status'), 'eq.pending');
+    assert.equal(db.tables.subscriptions.length, 1, 'gültig nach der Uhr der Datenbank: bleibt stehen, auch wenn die Uhr des Aufrufers vorgeht');
+    await assert.rejects(store.discardPendingIfExpired('kein-hash', NOW), MailingConsentStoreError);
     assert.equal(await store.addConfirmToken(sha256Hex('unbekannt'), second, NOW), false);
 
     assert.deepEqual(await store.findPendingByTokenHash(TOKEN_HASH, NOW + 2 * HOUR), { emailHash: HASH });
@@ -555,7 +576,7 @@ test('Schalter aus: die Anmeldung liest und schreibt nichts; sie räumt nur Verf
     const store = createSupabaseMailingConsentStore();
     await store.insertPending(PENDING);
     db.calls.length = 0;
-    db.now = Date.now();
+    db.now = NOW + 49 * HOUR; // die Frist ist auch nach der Uhr der Datenbank abgelaufen
     const res = await handleSubscribe(new Request('https://seite.invalid/api/mailing/subscribe', { method: 'POST', headers: { 'content-type': 'application/json' }, body: '{}' }), { env: {}, nowMs: () => NOW + 49 * HOUR });
     assert.equal(res.status, 503);
     assert.deepEqual(db.calls.map((call) => call.method + ' ' + call.table), ['DELETE subscriptions', 'DELETE confirmation_mails'], 'nur Aufräumen, kein Lesen, kein Einfügen');
