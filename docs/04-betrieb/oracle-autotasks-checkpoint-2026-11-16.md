@@ -241,3 +241,29 @@ zweiten Stelle, kein Verdienst der Workflow-Änderung.
 14.11. so geführt. Die beiden führenden Projekte `…-s4k5` und `…-ut7r` sind an
 diesem Commit **Ready** deployt. Die fünf verwaisten Projekte werden nicht
 angefasst: Entfernen wäre eine Löschung und bleibt beim Inhaber.
+
+## 10. Nachtrag 13:12 UTC · Produktion liegt bei Lovable, MCP-Endpunkt, lokaler Weg
+
+**Hosting (IST, Inhaberangabe und Messung):** Pascal bestätigt im Chat um ca. 13:08 UTC
+„vercel ist auch raus“. Messung 13:05 UTC: `nexifyai.de` → `185.158.133.1`, ausgeliefert vom
+Lovable-Projekt „Nexfiy Ai Studio“. Folge: Die CI-Behebung in `0bd16fb` ist richtig, wirkt aber
+nicht auf die Live-Seite. Die Vercel-Befunde in Abschnitt 9 betreffen keine Produktion mehr.
+
+**`https://nexifyai.de/mcp` (IST, von außen, nur lesend, 13:05 UTC):**
+- `GET /mcp` → 401, `WWW-Authenticate: Bearer realm="mcp", resource_metadata=…` — protokollkonform.
+- `/.well-known/oauth-protected-resource` → 200, Autorisierungsserver
+  `https://nffczuqkhlihimmuzeoz.supabase.co/auth/v1`.
+- AS-Metadaten unter RFC-8414-Einfügung und unter Anhängung → 200; `registration_endpoint`
+  wird beworben; `authorize` mit Fantasie-ID → 400 `oauth_client_not_found` (Server aktiv).
+- Weder dieses Repository noch der Lovable-Quellcode enthält den OAuth-/MCP-Code; der Endpunkt
+  kommt aus der Plattform.
+- **Nicht getestet:** die dynamische Registrierung selbst. Ein Test-POST hätte einen echten
+  OAuth-Client angelegt und wurde vom Schutz der Sitzung gesperrt; nicht umgangen.
+- Auftrag NX-MCP-01 an den Lovable-Projektagenten (Einschaltzustand der dynamischen
+  Registrierung, Zustimmungsseite, Redirect-URIs, Ende-zu-Ende-Nachweis). Läuft seit 13:10 UTC.
+
+**Lokaler Weg (OFFEN, Inhaber):** Remote Control kennt den Rechner „Gasts-MacBook-Pro“ mit sechs
+Ordnern; keiner wird Cloud-Sitzungen angeboten (`not_available`). Eine auf dem Rechner laufende
+Sitzung hätte Zugriff auf die lokale MCP-Lösung der Lovable-Desktop-App **und** auf den eigenen
+SSH-Schlüssel des Inhabers. Damit wäre NX-ORA-02 ohne neuen Schlüssel auf der Produktionsmaschine
+ausführbar. Das ist der empfohlene Weg für den Serverzugang.
