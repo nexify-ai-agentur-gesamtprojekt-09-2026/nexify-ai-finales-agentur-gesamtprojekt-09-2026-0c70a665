@@ -69,5 +69,17 @@
   "config/clerk-dns.json und andere Messprotokolle",
   "DNS",
   "Vercel-Einstellungen"
- ]
+ ],
+ "ausgang": {
+  "status": "zurueckgenommen",
+  "grund": "nexifyai.de ist wieder online; Entscheidung des Inhabers vom 16.11.2026, 06:20 UTC: es bleibt bei .de",
+  "messung_06_3x_utc": {
+   "https://nexifyai.de/": "200 | Websites, Apps und KI-Automatisierung · NeXify AI",
+   "https://www.nexifyai.de/": "200 | Websites, Apps und KI-Automatisierung · NeXify AI",
+   "https://nexifyai.de/teileklar": "200 | TEILEKLAR.shop – Katalog und Teilefragen für Auto und Motorrad",
+   "https://nexifyai.cloud/": "200 | Ein Gespräch. Ein Projekt, das passt. · NeXify AI"
+  },
+  "beobachtung": "Die beiden Adressen liefern unterschiedliche Titel, zeigen also nicht denselben Auftritt. Die kanonische Adresse verweist damit auf eine Seite, die dieses Repository nicht baut. Inhaberentscheidung, nicht von mir geaendert.",
+  "ruecknahme": "Die fuenf Quellen stehen wieder auf https://www.nexifyai.de; nach dem Neubau gemessen: canonical / und /teileklar auf www.nexifyai.de, robots.txt und sitemap.xml ebenfalls. E13 gilt unveraendert."
+ }
 }

@@ -503,10 +503,34 @@ behoben und gemessen: Befunde 12 und 13 in Abschnitt 2.
 
 ---
 
-## 11. Kanonische Adresse: `www.nexifyai.de` → `nexifyai.cloud`
+## 11. Kanonische Adresse: umgestellt und wieder zurückgenommen
 
-Nachgereichter Auftrag vom 16.11.2026, 05:10 UTC, über die koordinierende Sitzung. Ich habe
-die Begründung nicht übernommen, sondern selbst gemessen, bevor ich etwas geändert habe.
+> **Ausgang: Es bleibt bei `www.nexifyai.de`.** Der Ausfall der Domain war vorübergehend.
+> Commit `99f4783` hat die kanonische Adresse auf `nexifyai.cloud` umgestellt, Commit
+> `ba3bd19` nimmt genau das zurück. Der Abschnitt bleibt stehen, weil beides gemessen und
+> begründet war und die Entscheidungslage sonst nicht nachvollziehbar ist.
+>
+> **Zeitleiste, jeweils eigene Messung:**
+>
+> | Zeit (UTC) | Lage |
+> |---|---|
+> | 03:36 | `nexifyai.de` liefert 404 („No published build"), weil die Domain an ein Lovable-Projekt gegeben wurde |
+> | 05:3x | Ich messe: `.de` 404, `www.de` 302 → 404, `nexifyai.cloud` 200, `www.nexifyai.cloud` 200 |
+> | 06:0x | Umstellung auf `nexifyai.cloud` (`99f4783`), Abnahmekriterien erfüllt |
+> | 06:20 | `nexifyai.de` ist wieder online; Entscheidung des Inhabers: „Shop und alles ist online auf .de — das bleibt auch." |
+> | 06:3x | Ich messe nach: `https://nexifyai.de/` 200 („Websites, Apps und KI-Automatisierung · NeXify AI"), `https://www.nexifyai.de/` 200, `https://nexifyai.de/teileklar` 200 („TEILEKLAR.shop – Katalog und Teilefragen für Auto und Motorrad") |
+> | 06:4x | Rücknahme (`ba3bd19`): die fünf Quellen stehen wieder auf `https://www.nexifyai.de`, Entscheidung **E13 gilt unverändert** |
+>
+> **Beobachtung, die jemand bewerten sollte** (ich ändere daran nichts): Die laufende
+> Auslieferung auf `nexifyai.de` trägt den Titel „Websites, Apps und KI-Automatisierung ·
+> NeXify AI". Unsere eigene Anwendung liefert auf `nexifyai.cloud` den Titel „Ein Gespräch.
+> Ein Projekt, das passt. · NeXify AI". Die beiden Adressen zeigen also gerade **nicht
+> denselben Auftritt**. Unsere kanonische Adresse verweist damit auf eine Seite, die dieses
+> Repository nicht baut. Das ist eine Inhaberentscheidung, keine Messfrage — aber es gehört
+> gesehen, bevor jemand sich auf `canonical` verlässt.
+
+Der folgende Teil beschreibt den Stand von 06:0x, also die inzwischen zurückgenommene
+Umstellung. Ich habe die Begründung damals nicht übernommen, sondern selbst gemessen.
 
 **Messung um 05:3x UTC, eigene Abrufe:**
 

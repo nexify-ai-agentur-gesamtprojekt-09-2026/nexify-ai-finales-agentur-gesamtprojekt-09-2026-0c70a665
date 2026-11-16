@@ -1,7 +1,6 @@
 import {cache} from 'react';
 import type {ProductDetail} from '../components/shop/api';
-// Kanonische Adresse: siehe PUBLIC_ORIGIN in lib/page-seo.ts (nexifyai.de liefert seit 16.11.2026 404).
-export const SHOP_CANONICAL='https://nexifyai.cloud/teileklar';
+export const SHOP_CANONICAL='https://www.nexifyai.de/teileklar';
 export const getProduct=cache(async(id:string):Promise<ProductDetail|null>=>{
  const origin=process.env.SHOP_API_BASE_URL||process.env.REACT_APP_BACKEND_URL||'http://127.0.0.1:8001';
  const response=await fetch(origin.replace(/\/$/,'')+'/api/shop/products/'+encodeURIComponent(id),{cache:'no-store',signal:AbortSignal.timeout(10000)});
