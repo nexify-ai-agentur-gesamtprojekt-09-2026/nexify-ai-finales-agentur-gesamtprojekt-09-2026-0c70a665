@@ -97,6 +97,16 @@ class SourceReading(unittest.TestCase):
             pub.fetch_source(get=growing, sleep=lambda s: None)
 
 
+class StableSnapshot(unittest.TestCase):
+    def test_source_changing_between_two_passes_aborts(self):
+        first = [item(n) for n in range(1, 4)]
+        second = [item(1), item(2), item(4)]
+        results = iter([(first, {"total": 3, "windows": [], "fetched": 3, "passes": 1}),
+                        (second, {"total": 3, "windows": [], "fetched": 3, "passes": 1})])
+        with patch.object(pub, "fetch_source", side_effect=lambda **kw: next(results)), self.assertRaises(pub.Abort):
+            run(pub.run(None, apply=False, contract=None, limit=None, pause=0, log=lambda line: None, image_check=lambda u: True))
+
+
 class Mapping(unittest.TestCase):
     def test_price_spellings_measured_at_the_source(self):
         self.assertEqual(pub.shown_cents("7.06 €"), 706)
@@ -190,14 +200,22 @@ class Writing(unittest.TestCase):
         self.assertEqual(report["published"], 2)
         self.assertTrue(all(r["equal"] for r in sample))
 
-    def test_image_check_retries_network_errors_and_never_counts_them_as_loading(self):
+    def test_image_check_retries_unclear_results_and_never_decides_them(self):
         calls = []
 
         def flaky(url):
             calls.append(url)
-            raise OSError("netz")
-        self.assertEqual(pub.verify_images(["https://cdnbigbuy.com/images/a.jpg"], flaky, sleep=lambda s: None), {"https://cdnbigbuy.com/images/a.jpg": False})
+            raise pub.ProbeUnclear("HTTP 429")
+        self.assertEqual(pub.verify_images(["https://cdnbigbuy.com/images/a.jpg"], flaky, sleep=lambda s: None), {"https://cdnbigbuy.com/images/a.jpg": None})
         self.assertEqual(len(calls), 3)
+
+    def test_unclear_image_probes_abort_before_any_write(self):
+        def outage(url):
+            raise pub.ProbeUnclear("HTTP 503")
+        with patch.object(pub.time, "sleep", lambda s: None), self.assertRaises(pub.Abort):
+            run(pub.run(self.db(), apply=True, contract=CONTRACT, limit=None, pause=0, log=lambda line: None,
+                        items=[item(1), item(2), item(3)], image_check=outage))
+        self.assertEqual(self.database.collections.get("products", contract.Collection()).docs, [])
 
     def test_contract_minimum_applies_to_full_runs(self):
         items = [item(1), item(2)]

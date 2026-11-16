@@ -200,19 +200,30 @@ def image_url(item):
 def head_image(url, timeout=20):
     """True nur, wenn der Lieferant unter genau dieser Adresse ein nicht leeres Bild ausliefert (HEAD: 200, image/*, Länge > 0).
 
-    Gemessen am 16.11.2026: ein großer Teil der Adressen der Quelle antwortet 404 oder mit einer 0-Byte-Datei."""
+    Gemessen am 16.11.2026: ein großer Teil der Adressen der Quelle antwortet 404 oder mit einer 0-Byte-Datei.
+    Nur eindeutige Antworten werden entschieden: 200 mit Bild und Länge > 0 = True; 404/410 oder 200 mit Länge 0 = False.
+    Alles andere (429, 5xx, Netzfehler, unklare Antwort) wirft ProbeUnclear; der Lauf bricht dann ab statt Artikel zu verstecken."""
     request = urllib.request.Request(url, method="HEAD", headers={"User-Agent": USER_AGENT, "Referer": "https://nexifyai.de/"})
     try:
         with urllib.request.urlopen(request, timeout=timeout) as response:
             length = response.headers.get("Content-Length")
-            return (response.status == 200 and (response.headers.get("Content-Type") or "").startswith("image/")
-                    and length is not None and length.isdigit() and int(length) > 0)
-    except urllib.error.HTTPError:
-        return False
+            image = (response.headers.get("Content-Type") or "").startswith("image/")
+            if response.status == 200 and image and length is not None and length.isdigit():
+                return int(length) > 0
+            raise ProbeUnclear(f"Antwort {response.status}")
+    except urllib.error.HTTPError as error:
+        if error.code in (404, 410):
+            return False
+        raise ProbeUnclear(f"HTTP {error.code}") from None
+
+
+class ProbeUnclear(Exception):
+    """Bildprobe ohne eindeutiges Ergebnis (Ratenbegrenzung, Serverfehler, Netz)."""
 
 
 def verify_images(urls, check=head_image, workers=4, sleep=time.sleep):
-    """Prüft jede Adresse höchstens dreimal (nur bei Netzfehlern erneut). Gibt {Adresse: True/False} zurück."""
+    """Prüft jede Adresse höchstens dreimal (nur bei unklarem Ergebnis erneut). Gibt {Adresse: True/False/None} zurück;
+    None = auch nach drei Versuchen unklar (der Lauf bricht dann ab, siehe ``run``)."""
     import concurrent.futures
 
     def one(url):
@@ -221,8 +232,8 @@ def verify_images(urls, check=head_image, workers=4, sleep=time.sleep):
                 return url, bool(check(url))
             except Exception:
                 if attempt == 2:
-                    return url, False
-                sleep(1 + attempt)
+                    return url, None
+                sleep(2 * (attempt + 1))
     with concurrent.futures.ThreadPoolExecutor(workers) as pool:
         return dict(pool.map(one, sorted(set(urls))))
 
@@ -371,12 +382,23 @@ async def run(target_db, *, apply, contract, limit, pause, log, items=None, expe
         tc.check_contract(contract, None if limit is not None else expect_min, CONTRACT_FIXED, CONTRACT_TEXT)
     if items is None:
         items, meta = fetch_source(pause=pause, limit=limit, log=log)
+        if limit is None:
+            # Zweiter, unabhängiger Durchgang: nur ein in beiden Durchgängen identischer Katalog (Kennungen und Inhalte) wird übernommen.
+            second, _ = fetch_source(pause=pause, log=log)
+            if second != items:
+                changed = len({i["id"] for i in items} ^ {i["id"] for i in second}) + sum(1 for a, b in zip(items, second) if a != b)
+                raise Abort(f"Quelle zwischen zwei Durchgängen verändert ({changed} Abweichungen); kein stabiler Stand, nichts geschrieben")
+            log(json.dumps({"step": "source_stable", "passes": 2, "items": len(items)}))
     else:
         meta = {"total": len(items), "windows": [], "fetched": len(items), "passes": 0}
     log(json.dumps({"step": "source", "total_announced": meta["total"], "fetched": meta["fetched"], "windows": len(meta["windows"]), "passes": meta["passes"]}))
     urls = [u for i in items if not is_placeholder(i) and (u := image_url(i))]
     verified = await asyncio.to_thread(verify_images, urls, image_check)
-    log(json.dumps({"step": "images", "unique": len(verified), "loading": sum(verified.values()), "not_loading": sum(not v for v in verified.values())}))
+    unclear = sum(1 for v in verified.values() if v is None)
+    log(json.dumps({"step": "images", "unique": len(verified), "loading": sum(1 for v in verified.values() if v is True),
+                    "not_loading": sum(1 for v in verified.values() if v is False), "unclear": unclear}))
+    if unclear:
+        raise Abort(f"{unclear} Bildadressen ohne eindeutiges Ergebnis (Ratenbegrenzung, Serverfehler oder Netz); nichts geschrieben, später erneut versuchen")
     docs = build_documents(items, log, verified)
     report = await tc.transfer(MemorySource(docs), tc.MongoTarget(target_db), apply=apply, contract=contract,
                                expect_min=expect_min, sample=20, log=log, profile=PROFILE, probe=limit is not None)

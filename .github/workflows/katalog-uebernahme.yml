@@ -57,7 +57,9 @@ jobs:
       - name: Abnahme an nexifyai.de
         run: |
           published=$(python -c "import json;print(json.load(open('lauf-bericht.json'))['report']['published'])")
-          python apps/shop-api/tools_accept_public_catalog.py --base https://nexifyai.de --snapshot quelle.json --report abnahme.json --min-published "$published"
+          # Mindestens so viele sichtbare Artikel wie in der Messung vom 16.11.2026; weniger heißt: Bildlage verschlechtert, prüfen.
+          if [ "$published" -lt 273 ]; then echo "::error::nur $published sichtbare Artikel (erwartet mindestens 273)"; exit 1; fi
+          python apps/shop-api/tools_accept_public_catalog.py --base https://nexifyai.de --snapshot quelle.json --report abnahme.json --min-published "$published" --expect-prices
       - name: Belege sichern
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
