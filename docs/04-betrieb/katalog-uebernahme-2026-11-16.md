@@ -96,10 +96,11 @@ Lokale MongoDB 8.0.4 als Ein-Knoten-Replikat (Transaktionen), Quelle immer die *
 | Probe 20 Artikel, echt (Probedatenbank) | 20 geschrieben, Stichprobe Feld für Feld 20/20 | `04-probe20-echt.jsonl`, `04-probe20-echt-bericht.json` |
 | Probe 20, Wiederholung | 0 geschrieben, 20 unverändert | `05-probe20-wiederholung.jsonl` |
 | Voll, produktionsgleicher Namensraum, trocken | 3713 / 7, Prüfsummen gleich, 273 sichtbar, Stichprobe 40/40 | `final/1-trocken.jsonl` |
-| Voll, echt | siehe Abschnitt 6a | `final/2-echt.jsonl`, `final/2-echt-bericht.json` |
-| Voll, Wiederholung | siehe Abschnitt 6a | `final/3-wiederholung.jsonl` |
-| Namensraum-Prüfung der App vorher/nachher | siehe Abschnitt 6a | `final/ns-before.txt`, `final/ns-after.txt` |
-| Shop-Schnittstelle lokal (Katalog- und Warenkorb-Router des Dienstes auf dieser Datenbank) | siehe Abschnitt 6a | `final/api-check.json` |
+| Voll, echt | 3713 / 7 geschrieben, Prüfsummen gleich, 273 sichtbar, Stichprobe 40/40 | `final/2-echt.jsonl`, `final/2-echt-bericht.json` |
+| Voll, Wiederholung | 0 geschrieben, alles unverändert | `final/3-wiederholung.jsonl` |
+| Namensraum-Prüfung der App vorher/nachher | `ok` / `ok` | `final/ns-before.txt`, `final/ns-after.txt` |
+| Shop-Schnittstelle lokal (Katalog- und Warenkorb-Router des Dienstes auf dieser Datenbank) | 273 gelistet, 0 ohne Preis/Bild, Detail 20/20, Warenkorb 409 | `final/api-check.json`, `final/abnahme-lokal.json` |
+| Frühere Läufe ohne Bildprüfung bzw. ohne `bigbuy_id` (überholt, nur zur Nachvollziehbarkeit) | 3713 sichtbar – dabei 3440 mit totem Bild; im Produktivnamensraum wäre der Lauf am Index gescheitert | `06-…`, `07-…` |
 
 **Stichprobe Feld für Feld:** Je Artikel werden alle 23–24 Felder des Quelldatensatzes mit `legacy` im Ziel verglichen und
 die abgeleiteten Felder (Name, Preis in Cent, Bild, Bestand, Kategorie) neu berechnet und verglichen; 20 gleichmäßig verteilt
@@ -116,14 +117,25 @@ installiert) und ist ohne meine Änderung genauso rot. CI am Zweig: Jobs laufen;
 
 ### 6a. Endstand der Läufe im produktionsgleichen Namensraum
 
-_wird nach Abschluss eingetragen_
+Lokale MongoDB 8.0.4, Namensraum `nexify_teileklar_shop_v1` mit Validator-Marke und genau den Indizes aus
+`vercel_app.INDEXES` (u. a. `bigbuy_id` eindeutig), angelegt mit `tools_local_namespace_probe.py`. Quelle: lebende Schnittstelle.
+
+| Schritt (UTC) | Ergebnis |
+|---|---|
+| Namensraumprüfung der App vorher | `ok`, 0 Produkte (`ns-before.txt`) |
+| 01:28 Trockenlauf | Bilder 3604: 267 laden, 3337 nicht; 7 Platzhalter ausgelassen; Kategorien 7 = 7, Produkte 3713 = 3713, Prüfsumme `208e035b…` beidseitig; 273 sichtbar; Stichprobe 40/40; nichts geschrieben |
+| 01:33 echter Lauf | 3713 + 7 eingefügt, Prüfsummen gleich, Lauf-Eintrag `catalog-public-transfer-2ce8366c…` mit Vertragsprüfsumme; 273 sichtbar; Stichprobe 40/40 |
+| 01:37 Wiederholung | 0 eingefügt, 0 geändert, 3713 + 7 unverändert; gleicher Lauf-Eintrag |
+| Namensraumprüfung der App nachher | `ok`, 3713 Produkte, 273 sichtbar (`ns-after.txt`) – die App würde den Namensraum nach dem Lauf weiter bedienen |
+| Shop-Schnittstelle (Router des Dienstes, ASGI) | `/status` 273; 6 Kategorien; 273 gelistet, 0 ohne Preis, 0 ohne Bild; Detail-Stichprobe 20/20 (Name, Preis, Bild, Bestand, Artikelnummer, EAN, Kategorie); Warenkorb-Hinzufügen eines übernommenen Artikels → 409 (`api-check.json`) |
+| Abnahmewerkzeug über HTTP (uvicorn, dieselben Router) mit `--expect-prices` | Fehlerliste leer, Stichprobe 20/20 (`abnahme-lokal.json`) |
 
 ### 6b. Abnahmeprüfung
 
 | Kriterium | Ergebnis |
 |---|---|
 | mindestens 3720 Artikel | **nicht erfüllt.** 3720 in der Quelle; 7 davon Platzhalter → 3713 übernommen; davon **273 sichtbar** (nur diese haben ein ladendes Bild). |
-| Stichprobe 20 identisch zur Quelle | erfüllt (20/20 über alle, 20/20 über die sichtbaren, 20/20 über die Detailseite) – lokal; an nexifyai.de erst nach dem Produktivlauf |
+| Stichprobe 20 identisch zur Quelle | erfüllt lokal: 20/20 über alle, 20/20 über die sichtbaren (alle Quellfelder), 20/20 über die Detailseite inkl. Preis. An nexifyai.de prüft das der Workflow nach dem Produktivlauf (ohne Preis, solange der Patch nicht auf `main` ist). |
 | Kategorienliste nicht leer | erfüllt: 7 Kategorien im Namensraum, 6 mit sichtbaren Artikeln |
 | keine Artikel ohne Preis oder Bild | erfüllt für alle sichtbaren Artikel (Bild lädt nachweislich, Preis vorhanden). Preis **wird auf nexifyai.de erst angezeigt**, wenn der Patch auf `main` ist. |
 
