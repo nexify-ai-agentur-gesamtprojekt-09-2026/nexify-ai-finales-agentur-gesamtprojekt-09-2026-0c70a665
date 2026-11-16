@@ -1,0 +1,111 @@
+{
+ "checked_at": "2026-11-16T01:21:21Z",
+ "method": "GET mit Range 0-1023, Referer nexifyai.de, je Adresse bis 3 Versuche, 4 parallel",
+ "unique_urls": 3604,
+ "ok": 267,
+ "not_ok": 3337,
+ "not_ok_by_status": {
+  "416": 405,
+  "404": 2932
+ },
+ "ok_content_types": [
+  "image/jpeg"
+ ],
+ "ok_jpeg_magic": [
+  "ffd8ffe0",
+  "ffd8ffe1"
+ ],
+ "note": "416 = Datei hat 0 Byte (direkt ohne Range: 200, L\u00e4nge 0). 404 = Datei fehlt beim Lieferanten; der Bild-Proxy von teileklar.shop leitet per 302 auf dieselbe Adresse um.",
+ "not_ok_examples": [
+  [
+   "https://cdnbigbuy.com/images/0012844761092_S3701608_P03.jpg",
+   416,
+   null,
+   null
+  ],
+  [
+   "https://cdnbigbuy.com/images/0012844781076_S3701609_P02.jpg",
+   416,
+   null,
+   null
+  ],
+  [
+   "https://cdnbigbuy.com/images/0012844791174_S3701605_P02.jpg",
+   416,
+   null,
+   null
+  ],
+  [
+   "https://cdnbigbuy.com/images/0012844791181_S3701607_P02.jpg",
+   416,
+   null,
+   null
+  ],
+  [
+   "https://cdnbigbuy.com/images/0012844791198_S3701606_P03.jpg",
+   416,
+   null,
+   null
+  ],
+  [
+   "https://cdnbigbuy.com/images/0024844001634_S3736574_P00.jpg",
+   404,
+   null,
+   null
+  ],
+  [
+   "https://cdnbigbuy.com/images/0024844002129_S3736290_P00.jpg",
+   404,
+   null,
+   null
+  ],
+  [
+   "https://cdnbigbuy.com/images/0024844003430_S3736630_P00.jpg",
+   404,
+   null,
+   null
+  ],
+  [
+   "https://cdnbigbuy.com/images/0024844007582_S3737157_P00.jpg",
+   404,
+   null,
+   null
+  ],
+  [
+   "https://cdnbigbuy.com/images/0024844007605_S3737164_P02.jpg",
+   404,
+   null,
+   null
+  ],
+  [
+   "https://cdnbigbuy.com/images/0024844007957_S3737158_P02.jpg",
+   404,
+   null,
+   null
+  ],
+  [
+   "https://cdnbigbuy.com/images/0024844010964_S3737828_P00.jpg",
+   404,
+   null,
+   null
+  ],
+  [
+   "https://cdnbigbuy.com/images/0024844011497_S3736190_P00.jpg",
+   404,
+   null,
+   null
+  ],
+  [
+   "https://cdnbigbuy.com/images/0024844013187_S3735792_P00.jpg",
+   404,
+   null,
+   null
+  ],
+  [
+   "https://cdnbigbuy.com/images/0024844013293_S3736579_P00.jpg",
+   404,
+   null,
+   null
+  ]
+ ]
+}

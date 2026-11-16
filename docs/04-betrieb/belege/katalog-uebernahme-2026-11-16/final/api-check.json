@@ -1,0 +1,440 @@
+{
+ "status": {
+  "products": 273,
+  "last_import_at": "2026-10-11T16:29:45.547923+00:00",
+  "source": "BigBuy",
+  "partial": false
+ },
+ "categories": [
+  {
+   "id": 213943860,
+   "name": "Autozubehör",
+   "root": true,
+   "count": 189
+  },
+  {
+   "id": 121293415,
+   "name": "Nachsuche",
+   "root": true,
+   "count": 2
+  },
+  {
+   "id": 62321894,
+   "name": "Reinigungs- & Pflegemittel",
+   "root": true,
+   "count": 16
+  },
+  {
+   "id": 217598221,
+   "name": "Schutzgläser",
+   "root": true,
+   "count": 4
+  },
+  {
+   "id": 202111332,
+   "name": "Sicherheitswesten & -gurte",
+   "root": true,
+   "count": 59
+  },
+  {
+   "id": 217157507,
+   "name": "Ziele & Zubehör",
+   "root": true,
+   "count": 3
+  }
+ ],
+ "products_first_page": {
+  "total": 273,
+  "pages": 5,
+  "count": 60,
+  "without_price": 0,
+  "without_image": 0,
+  "price_status": [
+   "list_price"
+  ],
+  "in_stock_first": [
+   "V0103468",
+   "V0104017",
+   "V0103250",
+   "S3722898",
+   "V3401521"
+  ]
+ },
+ "all_pages": {
+  "listed": 273,
+  "without_price": [],
+  "without_image": []
+ },
+ "detail_sample": [
+  {
+   "id": "H2500129",
+   "name": "Hülle España (2 uds) Rückspiegel",
+   "price_source": ".71 €",
+   "price_cents_shop": 71,
+   "stock": 0,
+   "image": "https://cdnbigbuy.com/images/H2500129_2757691.jpg",
+   "checks": {
+    "name": true,
+    "price": true,
+    "image": true,
+    "stock": true,
+    "sku": true,
+    "ean": true,
+    "category": true
+   },
+   "equal": true
+  },
+  {
+   "id": "M1200836",
+   "name": "Kugelgelenk-Auszieher KUKKO",
+   "price_source": "110.17 €",
+   "price_cents_shop": 11017,
+   "stock": 0,
+   "image": "https://cdnbigbuy.com/images/4021176024771_M1200836_P00.jpg",
+   "checks": {
+    "name": true,
+    "price": true,
+    "image": true,
+    "stock": true,
+    "sku": true,
+    "ean": true,
+    "category": true
+   },
+   "equal": true
+  },
+  {
+   "id": "M1203141",
+   "name": "Lagergehäuse RUKO DIN 225",
+   "price_source": "30.29 €",
+   "price_cents_shop": 3029,
+   "stock": 0,
+   "image": "https://cdnbigbuy.com/images/4007140026019_M1203141_P00.jpg",
+   "checks": {
+    "name": true,
+    "price": true,
+    "image": true,
+    "stock": true,
+    "sku": true,
+    "ean": true,
+    "category": true
+   },
+   "equal": true
+  },
+  {
+   "id": "M1204246",
+   "name": "Ölpumpe UMETA 43/H",
+   "price_source": "12.26 €",
+   "price_cents_shop": 1226,
+   "stock": 0,
+   "image": "https://cdnbigbuy.com/images/4016532001404_M1204246_P00.jpg",
+   "checks": {
+    "name": true,
+    "price": true,
+    "image": true,
+    "stock": true,
+    "sku": true,
+    "ean": true,
+    "category": true
+   },
+   "equal": true
+  },
+  {
+   "id": "M1204278",
+   "name": "Hydraulischer Schmierer UMETA 71412 100 Stücke",
+   "price_source": "39.05 €",
+   "price_cents_shop": 3905,
+   "stock": 0,
+   "image": "https://cdnbigbuy.com/images/4016532200463_M1204278_P00.jpg",
+   "checks": {
+    "name": true,
+    "price": true,
+    "image": true,
+    "stock": true,
+    "sku": true,
+    "ean": true,
+    "category": true
+   },
+   "equal": true
+  },
+  {
+   "id": "M1204295",
+   "name": "Hydraulischer Schmierer UMETA",
+   "price_source": "48.52 €",
+   "price_cents_shop": 4852,
+   "stock": 0,
+   "image": "https://cdnbigbuy.com/images/4016532001138_M1204295_P00.jpg",
+   "checks": {
+    "name": true,
+    "price": true,
+    "image": true,
+    "stock": true,
+    "sku": true,
+    "ean": true,
+    "category": true
+   },
+   "equal": true
+  },
+  {
+   "id": "M1205668",
+   "name": "Ersatzklinge für Messer KUKKO 54-3 Mutternsprenger",
+   "price_source": "50.00 €",
+   "price_cents_shop": 5000,
+   "stock": 0,
+   "image": "https://cdnbigbuy.com/images/4021176253126_M1205668_P00.jpg",
+   "checks": {
+    "name": true,
+    "price": true,
+    "image": true,
+    "stock": true,
+    "sku": true,
+    "ean": true,
+    "category": true
+   },
+   "equal": true
+  },
+  {
+   "id": "M1206866",
+   "name": "Hydraulischer Schmierer UMETA 71412 (25 Stück)",
+   "price_source": "15.36 €",
+   "price_cents_shop": 1536,
+   "stock": 0,
+   "image": "https://cdnbigbuy.com/images/4016532207646_M1206866_P00.jpg",
+   "checks": {
+    "name": true,
+    "price": true,
+    "image": true,
+    "stock": true,
+    "sku": true,
+    "ean": true,
+    "category": true
+   },
+   "equal": true
+  },
+  {
+   "id": "M1206886",
+   "name": "Hydraulischer Schmierer UMETA 71412 (25 Stück)",
+   "price_source": "48.38 €",
+   "price_cents_shop": 4838,
+   "stock": 0,
+   "image": "https://cdnbigbuy.com/images/4016532207868_M1206886_P00.jpg",
+   "checks": {
+    "name": true,
+    "price": true,
+    "image": true,
+    "stock": true,
+    "sku": true,
+    "ean": true,
+    "category": true
+   },
+   "equal": true
+  },
+  {
+   "id": "M1206901",
+   "name": "Hydraulischer Schmierer UMETA 71412 (25 Stück)",
+   "price_source": "51.91 €",
+   "price_cents_shop": 5191,
+   "stock": 0,
+   "image": "https://cdnbigbuy.com/images/4016532208063_M1206901_P00.jpg",
+   "checks": {
+    "name": true,
+    "price": true,
+    "image": true,
+    "stock": true,
+    "sku": true,
+    "ean": true,
+    "category": true
+   },
+   "equal": true
+  },
+  {
+   "id": "M1206925",
+   "name": "Hydraulischer Schmierer UMETA 71412 (25 Stück)",
+   "price_source": "43.40 €",
+   "price_cents_shop": 4340,
+   "stock": 0,
+   "image": "https://cdnbigbuy.com/images/4016532208261_M1206925_P00.jpg",
+   "checks": {
+    "name": true,
+    "price": true,
+    "image": true,
+    "stock": true,
+    "sku": true,
+    "ean": true,
+    "category": true
+   },
+   "equal": true
+  },
+  {
+   "id": "M1206934",
+   "name": "Hydraulischer Schmierer UMETA 71412 (25 Stück)",
+   "price_source": "54.09 €",
+   "price_cents_shop": 5409,
+   "stock": 0,
+   "image": "https://cdnbigbuy.com/images/4016532208353_M1206934_P00.jpg",
+   "checks": {
+    "name": true,
+    "price": true,
+    "image": true,
+    "stock": true,
+    "sku": true,
+    "ean": true,
+    "category": true
+   },
+   "equal": true
+  },
+  {
+   "id": "M1206942",
+   "name": "Hydraulischer Schmierer UMETA 71412 (25 Stück)",
+   "price_source": "34.28 €",
+   "price_cents_shop": 3428,
+   "stock": 0,
+   "image": "https://cdnbigbuy.com/images/4016532208438_M1206942_P00.jpg",
+   "checks": {
+    "name": true,
+    "price": true,
+    "image": true,
+    "stock": true,
+    "sku": true,
+    "ean": true,
+    "category": true
+   },
+   "equal": true
+  },
+  {
+   "id": "M1206959",
+   "name": "Konkave Schmierstelle UMETA 3405",
+   "price_source": "13.84 €",
+   "price_cents_shop": 1384,
+   "stock": 0,
+   "image": "https://cdnbigbuy.com/images/4016532208667_M1206959_P00.jpg",
+   "checks": {
+    "name": true,
+    "price": true,
+    "image": true,
+    "stock": true,
+    "sku": true,
+    "ean": true,
+    "category": true
+   },
+   "equal": true
+  },
+  {
+   "id": "M1206974",
+   "name": "Gerader Schmiernippel mit flachem Kopf UMETA 3404",
+   "price_source": "57.70 €",
+   "price_cents_shop": 5770,
+   "stock": 0,
+   "image": "https://cdnbigbuy.com/images/4016532208810_M1206974_P00.jpg",
+   "checks": {
+    "name": true,
+    "price": true,
+    "image": true,
+    "stock": true,
+    "sku": true,
+    "ean": true,
+    "category": true
+   },
+   "equal": true
+  },
+  {
+   "id": "S3702684",
+   "name": "LED Leicht M-Tech WLC44",
+   "price_source": "17.11 €",
+   "price_cents_shop": 1711,
+   "stock": 0,
+   "image": "https://cdnbigbuy.com/images/5901508536426_S3702684_P00.jpg",
+   "checks": {
+    "name": true,
+    "price": true,
+    "image": true,
+    "stock": true,
+    "sku": true,
+    "ean": true,
+    "category": true
+   },
+   "equal": true
+  },
+  {
+   "id": "S37115008",
+   "name": "Handschuhe OMP IB/702/R/M Rot M",
+   "price_source": "58.40 €",
+   "price_cents_shop": 5840,
+   "stock": 0,
+   "image": "https://cdnbigbuy.com/images/8027280009112_S37115008_P00.jpg",
+   "checks": {
+    "name": true,
+    "price": true,
+    "image": true,
+    "stock": true,
+    "sku": true,
+    "ean": true,
+    "category": true
+   },
+   "equal": true
+  },
+  {
+   "id": "S3713097",
+   "name": "Abstandsrohr Remus AD0154",
+   "price_source": "21.67 €",
+   "price_cents_shop": 2167,
+   "stock": 0,
+   "image": "https://cdnbigbuy.com/images/9029200239554_S3713097_P0-v_1.jpg",
+   "checks": {
+    "name": true,
+    "price": true,
+    "image": true,
+    "stock": true,
+    "sku": true,
+    "ean": true,
+    "category": true
+   },
+   "equal": true
+  },
+  {
+   "id": "S3721861",
+   "name": "Oberflächenreparatur-Wachs Autosol 1 L",
+   "price_source": "9.11 €",
+   "price_cents_shop": 911,
+   "stock": 0,
+   "image": "https://cdnbigbuy.com/images/4004982904307_S3721861_P01.jpg",
+   "checks": {
+    "name": true,
+    "price": true,
+    "image": true,
+    "stock": true,
+    "sku": true,
+    "ean": true,
+    "category": true
+   },
+   "equal": true
+  },
+  {
+   "id": "S6500943",
+   "name": "Anti-Diebstahl-Kabel Ferrestock 22 mm",
+   "price_source": "8.99 €",
+   "price_cents_shop": 899,
+   "stock": 0,
+   "image": "https://cdnbigbuy.com/images/8436034262886_S6500943_P0_WBG3.jpg",
+   "checks": {
+    "name": true,
+    "price": true,
+    "image": true,
+    "stock": true,
+    "sku": true,
+    "ean": true,
+    "category": true
+   },
+   "equal": true
+  }
+ ],
+ "cart_add_imported": {
+  "product": "S3554477",
+  "status": 409,
+  "body": {
+   "detail": {
+    "error": "product_not_orderable",
+    "message": "Dieser Artikel ist derzeit nicht online bestellbar"
+   }
+  }
+ }
+}

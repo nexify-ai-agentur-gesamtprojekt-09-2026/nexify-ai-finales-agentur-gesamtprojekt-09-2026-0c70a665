@@ -1,0 +1,13 @@
+{
+  "scope": "catalog_public_api_transfer",
+  "tenant": "teileklar",
+  "source_url": "https://teileklar.shop/api/shop/products",
+  "target_namespace": "nexify_teileklar_shop_v1",
+  "list_prices_approved": true,
+  "product_count_minimum": 3713,
+  "data_licence_reference": "Eigene Katalogdaten des Inhabers aus seinem laufenden Shop teileklar.shop, dort bereits öffentlich veröffentlicht (Artikeltexte und Lieferantenbilder von cdnbigbuy.com); Auftrag der koordinierenden Sitzung vom 16.11.2026, docs/04-betrieb/katalog-uebernahme-2026-11-16.md Abschnitt 1",
+  "list_price_reference": "Unveränderte Bruttopreise (Feld value) der öffentlichen Schnittstelle von teileklar.shop zum Lesezeitpunkt; nur Anzeige, nicht bestellbar (kein Einkaufspreis, Warenkorb weist ab)",
+  "approved_by": "Pascal Courbois (Inhaber), Generalfreigabe übermittelt durch die koordinierende Sitzung am 16.11.2026; Bestätigung durch Auslösen des Produktivlaufs (Freigabe der GitHub-Umgebung katalog-produktion)",
+  "approved_at": "2026-11-16T00:54:00+00:00",
+  "note": "Ausgelassen: 7 Schauartikel mit Platzhalterbildern (assets/…) – airfilter, brake, brake-pads-front, brake-rear, exhaust, oil, shock. Daher 3713 statt 3720."
+}

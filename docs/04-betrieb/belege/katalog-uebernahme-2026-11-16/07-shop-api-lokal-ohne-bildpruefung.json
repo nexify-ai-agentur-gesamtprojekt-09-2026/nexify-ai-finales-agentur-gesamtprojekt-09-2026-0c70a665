@@ -1,0 +1,446 @@
+{
+ "status": {
+  "products": 3713,
+  "last_import_at": "2026-10-11T16:29:45.547923+00:00",
+  "source": "BigBuy",
+  "partial": false
+ },
+ "categories": [
+  {
+   "id": 213943860,
+   "name": "Autozubehör",
+   "root": true,
+   "count": 1953
+  },
+  {
+   "id": 121293415,
+   "name": "Nachsuche",
+   "root": true,
+   "count": 44
+  },
+  {
+   "id": 143309139,
+   "name": "Ohrenstöpsel",
+   "root": true,
+   "count": 15
+  },
+  {
+   "id": 62321894,
+   "name": "Reinigungs- & Pflegemittel",
+   "root": true,
+   "count": 283
+  },
+  {
+   "id": 217598221,
+   "name": "Schutzgläser",
+   "root": true,
+   "count": 120
+  },
+  {
+   "id": 202111332,
+   "name": "Sicherheitswesten & -gurte",
+   "root": true,
+   "count": 1236
+  },
+  {
+   "id": 217157507,
+   "name": "Ziele & Zubehör",
+   "root": true,
+   "count": 62
+  }
+ ],
+ "products_first_page": {
+  "total": 3713,
+  "pages": 62,
+  "count": 60,
+  "without_price": 0,
+  "without_image": 0,
+  "price_status": [
+   "list_price"
+  ],
+  "in_stock_first": [
+   "V0103468",
+   "V0104017",
+   "V0103250",
+   "S3722898",
+   "V3401521"
+  ]
+ },
+ "all_pages": {
+  "listed": 3713,
+  "without_price": [],
+  "without_image": []
+ },
+ "detail_sample": [
+  {
+   "id": "D1401770",
+   "name": "Seitlicher Sonnenschutz Marbueno",
+   "price_source": "4.17 €",
+   "price_cents_shop": 417,
+   "stock": 0,
+   "image": "https://cdnbigbuy.com/images/8435631905578_D1401770_P00.jpg",
+   "checks": {
+    "name": true,
+    "price": true,
+    "image": true,
+    "stock": true,
+    "sku": true,
+    "ean": true,
+    "category": true
+   },
+   "equal": true
+  },
+  {
+   "id": "M1206925",
+   "name": "Hydraulischer Schmierer UMETA 71412 (25 Stück)",
+   "price_source": "43.40 €",
+   "price_cents_shop": 4340,
+   "stock": 0,
+   "image": "https://cdnbigbuy.com/images/4016532208261_M1206925_P00.jpg",
+   "checks": {
+    "name": true,
+    "price": true,
+    "image": true,
+    "stock": true,
+    "sku": true,
+    "ean": true,
+    "category": true
+   },
+   "equal": true
+  },
+  {
+   "id": "S3701020",
+   "name": "Sitzbezug BC Corona R1 Universal",
+   "price_source": "49.18 €",
+   "price_cents_shop": 4918,
+   "stock": 0,
+   "image": "https://cdnbigbuy.com/images/8430046133073_S3701020_P02.jpg",
+   "checks": {
+    "name": true,
+    "price": true,
+    "image": true,
+    "stock": true,
+    "sku": true,
+    "ean": true,
+    "category": true
+   },
+   "equal": true
+  },
+  {
+   "id": "S3702143",
+   "name": "Glühbirne M-Tech Z55",
+   "price_source": "2.72 €",
+   "price_cents_shop": 272,
+   "stock": 0,
+   "image": "https://cdnbigbuy.com/images/5901508510365_A00.jpg",
+   "checks": {
+    "name": true,
+    "price": true,
+    "image": true,
+    "stock": true,
+    "sku": true,
+    "ean": true,
+    "category": true
+   },
+   "equal": true
+  },
+  {
+   "id": "S3707332",
+   "name": "3-Punkt-Gurt Sparco Lap Rein",
+   "price_source": "67.02 €",
+   "price_cents_shop": 6702,
+   "stock": 0,
+   "image": "https://cdnbigbuy.com/images/8033280282127_S3707332_P01.jpg",
+   "checks": {
+    "name": true,
+    "price": true,
+    "image": true,
+    "stock": true,
+    "sku": true,
+    "ean": true,
+    "category": true
+   },
+   "equal": true
+  },
+  {
+   "id": "S37112530",
+   "name": "Mikrofaser-Reinigungstuch Polierer",
+   "price_source": "5.56 €",
+   "price_cents_shop": 556,
+   "stock": 0,
+   "image": "https://cdnbigbuy.com/images/5018857002592_S37112530_P03.jpg",
+   "checks": {
+    "name": true,
+    "price": true,
+    "image": true,
+    "stock": true,
+    "sku": true,
+    "ean": true,
+    "category": true
+   },
+   "equal": true
+  },
+  {
+   "id": "S37114443",
+   "name": "Auto-Fußmatte OCC Motorsport OCCVW0062",
+   "price_source": "22.25 €",
+   "price_cents_shop": 2225,
+   "stock": 0,
+   "image": "https://cdnbigbuy.com/images/8434596082737_S37114443_P10.jpg",
+   "checks": {
+    "name": true,
+    "price": true,
+    "image": true,
+    "stock": true,
+    "sku": true,
+    "ean": true,
+    "category": true
+   },
+   "equal": true
+  },
+  {
+   "id": "S37115151",
+   "name": "Sitzgestell OMP HC/666 Stahl 6 Stücke Side",
+   "price_source": "99.69 €",
+   "price_cents_shop": 9969,
+   "stock": 0,
+   "image": "https://cdnbigbuy.com/images/8027280005619_S37115151_P00.jpg",
+   "checks": {
+    "name": true,
+    "price": true,
+    "image": true,
+    "stock": true,
+    "sku": true,
+    "ean": true,
+    "category": true
+   },
+   "equal": true
+  },
+  {
+   "id": "S37115816",
+   "name": "Lenkradabdeckung MOMO MOMLSWC0PROBY Ø 38-39 cm",
+   "price_source": "12.38 €",
+   "price_cents_shop": 1238,
+   "stock": 0,
+   "image": "https://cdnbigbuy.com/images/8051380006443_S37115816_P00.jpg",
+   "checks": {
+    "name": true,
+    "price": true,
+    "image": true,
+    "stock": true,
+    "sku": true,
+    "ean": true,
+    "category": true
+   },
+   "equal": true
+  },
+  {
+   "id": "S3711640",
+   "name": "Windschutzscheiben-Reparatur Quixx",
+   "price_source": "12.11 €",
+   "price_cents_shop": 1211,
+   "stock": 0,
+   "image": "https://cdnbigbuy.com/images/4028778004750_S3711640_P01.jpg",
+   "checks": {
+    "name": true,
+    "price": true,
+    "image": true,
+    "stock": true,
+    "sku": true,
+    "ean": true,
+    "category": true
+   },
+   "equal": true
+  },
+  {
+   "id": "S37117297",
+   "name": "Auto Lufterfrischer Dr Marcus Deluxe Neues Auto 50 ml Kunsts",
+   "price_source": "6.65 €",
+   "price_cents_shop": 665,
+   "stock": 0,
+   "image": "https://cdnbigbuy.com/images/5900950765743_S37117297_P00.jpg",
+   "checks": {
+    "name": true,
+    "price": true,
+    "image": true,
+    "stock": true,
+    "sku": true,
+    "ean": true,
+    "category": true
+   },
+   "equal": true
+  },
+  {
+   "id": "S37117734",
+   "name": "Auto Lufterfrischer Dr Marcus COSMIC DOG BLACK black Kunstst",
+   "price_source": "3.85 €",
+   "price_cents_shop": 385,
+   "stock": 0,
+   "image": "https://cdnbigbuy.com/images/5903686500237_S37117734_P00.jpg",
+   "checks": {
+    "name": true,
+    "price": true,
+    "image": true,
+    "stock": true,
+    "sku": true,
+    "ean": true,
+    "category": true
+   },
+   "equal": true
+  },
+  {
+   "id": "S3712937",
+   "name": "Scheibenbremsen Black Diamond KBD1266G12 Belüftung Rückseite",
+   "price_source": "202.07 €",
+   "price_cents_shop": 20207,
+   "stock": 0,
+   "image": "https://cdnbigbuy.com/images/8434207852865_S3712937_P0-v_11.jpg",
+   "checks": {
+    "name": true,
+    "price": true,
+    "image": true,
+    "stock": true,
+    "sku": true,
+    "ean": true,
+    "category": true
+   },
+   "equal": true
+  },
+  {
+   "id": "S3713645",
+   "name": "Windabweiser HEKO 29380 4 Stücke Frontal Rückseite",
+   "price_source": "40.65 €",
+   "price_cents_shop": 4065,
+   "stock": 0,
+   "image": "https://cdnbigbuy.com/images/5905784864365_S3713645_P0-v_11.jpg",
+   "checks": {
+    "name": true,
+    "price": true,
+    "image": true,
+    "stock": true,
+    "sku": true,
+    "ean": true,
+    "category": true
+   },
+   "equal": true
+  },
+  {
+   "id": "S3721791",
+   "name": "Metall-Polierer Autosol 01 001831 750 ml",
+   "price_source": "19.08 €",
+   "price_cents_shop": 1908,
+   "stock": 0,
+   "image": "https://cdnbigbuy.com/images/4004982018318_S3721791_P00.jpg",
+   "checks": {
+    "name": true,
+    "price": true,
+    "image": true,
+    "stock": true,
+    "sku": true,
+    "ean": true,
+    "category": true
+   },
+   "equal": true
+  },
+  {
+   "id": "S3724286",
+   "name": "Hans Simpson Hybrid Sport Standardkupplung",
+   "price_source": "520.43 €",
+   "price_cents_shop": 52043,
+   "stock": 0,
+   "image": "https://cdnbigbuy.com/images/8434207024385_S3724286_P02.jpg",
+   "checks": {
+    "name": true,
+    "price": true,
+    "image": true,
+    "stock": true,
+    "sku": true,
+    "ean": true,
+    "category": true
+   },
+   "equal": true
+  },
+  {
+   "id": "S3735634",
+   "name": "Luftfilter K&N KNHD-1499",
+   "price_source": "48.00 €",
+   "price_cents_shop": 4800,
+   "stock": 0,
+   "image": "https://cdnbigbuy.com/images/0024844071781_S3735634_P200.jpg",
+   "checks": {
+    "name": true,
+    "price": true,
+    "image": true,
+    "stock": true,
+    "sku": true,
+    "ean": true,
+    "category": true
+   },
+   "equal": true
+  },
+  {
+   "id": "S3778392",
+   "name": "Silentblock Powerflex PFR16-515",
+   "price_source": "48.20 €",
+   "price_cents_shop": 4820,
+   "stock": 0,
+   "image": "https://cdnbigbuy.com/images/5055676532268_S3778392_P00.jpg",
+   "checks": {
+    "name": true,
+    "price": true,
+    "image": true,
+    "stock": true,
+    "sku": true,
+    "ean": true,
+    "category": true
+   },
+   "equal": true
+  },
+  {
+   "id": "S7117524",
+   "name": "Auto-Motoröl Total QUARTZ INEO ECS 1 L 5W30",
+   "price_source": "25.33 €",
+   "price_cents_shop": 2533,
+   "stock": 0,
+   "image": "https://cdnbigbuy.com/images/3425901107899_S7117524_P02.jpg",
+   "checks": {
+    "name": true,
+    "price": true,
+    "image": true,
+    "stock": true,
+    "sku": true,
+    "ean": true,
+    "category": true
+   },
+   "equal": true
+  },
+  {
+   "id": "S7912057",
+   "name": "Hüftgurt Rubi",
+   "price_source": "22.94 €",
+   "price_cents_shop": 2294,
+   "stock": 0,
+   "image": "https://cdnbigbuy.com/images/8413797809145_S7912057_P01.jpg",
+   "checks": {
+    "name": true,
+    "price": true,
+    "image": true,
+    "stock": true,
+    "sku": true,
+    "ean": true,
+    "category": true
+   },
+   "equal": true
+  }
+ ],
+ "cart_add_imported": {
+  "product": "S3554477",
+  "status": 409,
+  "body": {
+   "detail": {
+    "error": "product_not_orderable",
+    "message": "Dieser Artikel ist derzeit nicht online bestellbar"
+   }
+  }
+ }
+}

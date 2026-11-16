@@ -2,9 +2,10 @@
 import re
 
 # Nur diese Felder verlassen den Speicher für Listen; purchase_cents dient der Preisberechnung im Dienst.
-LIST_FIELDS = {"_id": 1, "sku": 1, "ean": 1, "name": 1, "images": 1, "stock": 1, "purchase_cents": 1, "category_id": 1, "category_ids": 1, "imported_at": 1, "source_partial": 1}
-ORDERINGS = {"availability": [("stock", -1), ("name", 1)], "price_asc": [("purchase_cents", 1), ("name", 1)],
-             "price_desc": [("purchase_cents", -1), ("name", 1)], "name": [("name", 1)]}
+LIST_FIELDS = {"_id": 1, "sku": 1, "ean": 1, "name": 1, "images": 1, "stock": 1, "purchase_cents": 1, "category_id": 1, "category_ids": 1, "imported_at": 1, "source_partial": 1,
+               "list_price_cents": 1, "list_price_status": 1, "source": 1}
+ORDERINGS = {"availability": [("stock", -1), ("name", 1)], "price_asc": [("purchase_cents", 1), ("list_price_cents", 1), ("name", 1)],
+             "price_desc": [("purchase_cents", -1), ("list_price_cents", -1), ("name", 1)], "name": [("name", 1)]}
 
 
 class MongoCatalogStore:
