@@ -146,9 +146,10 @@ ist bewusst ohne Import- und Schreibwege gebaut (`vercel_app.py`: „No seeds, m
 und ein Verwaltungskonto gibt es im Namensraum nicht. Der Lauf findet deshalb in GitHub Actions statt, in einer Umgebung,
 die nur der Inhaber freigeben kann.
 
-1. **Umgebung anlegen** – GitHub, Repository `nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665` → *Settings* →
-   *Environments* → *New environment* → Name genau `katalog-produktion` → *Configure* → bei *Deployment protection rules*
-   „Required reviewers“ anhaken und das eigene Konto eintragen → *Save protection rules*.
+1. **Umgebung absichern** – GitHub, Repository `nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665` → *Settings* →
+   *Environments* → `katalog-produktion` anklicken (GitHub hat sie beim ersten Lauf um 01:36 UTC **ohne** Schutz angelegt) →
+   bei *Deployment protection rules* „Required reviewers“ anhaken und das eigene Konto eintragen → *Save protection rules*.
+   Ohne diesen Schritt würde Schritt 4 sofort und ohne Rückfrage schreiben.
 2. **Zugang hinterlegen** – in derselben Umgebung → *Environment secrets* → *Add environment secret* → Name genau
    `CATALOG_TARGET_MONGO_URL`, Wert = derselbe Wert wie die Variable `MONGODB_URI` im Vercel-Projekt hinter nexifyai.de
    (Vercel → Projekt → *Settings* → *Environment Variables* → `MONGODB_URI`, Umgebung *Production*). Ist sie dort als
@@ -157,8 +158,10 @@ die nur der Inhaber freigeben kann.
 3. **Netzzugang prüfen** – MongoDB Atlas → *Network Access*: Steht dort `0.0.0.0/0` (üblich bei der Vercel-Anbindung), ist
    nichts zu tun. Stehen nur feste Adressen, kommen GitHub-Runner nicht hinein; dann den Lauf stattdessen vom eigenen
    Rechner starten (Abschnitt 7a) – keine Freigabe weiter öffnen.
-4. **Lauf auslösen und freigeben** – GitHub → *Actions* → Workflow „Katalog-Übernahme teileklar.shop“ → den obersten Lauf
-   auf `claude/katalog-uebernahme` öffnen (er ist ohne Zugang mit „Ziel hinterlegt?“ beendet) → *Re-run all jobs* → bei
+4. **Lauf auslösen und freigeben** – GitHub → *Actions* → Workflow „Katalog-Übernahme teileklar.shop“ → Lauf #2
+   (https://github.com/nexify-ai-agentur-gesamtprojekt-09-2026/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/actions/runs/43787223794,
+   Stand `cdb1ea3`, enthält den endgültigen Code; ohne Zugang wie vorgesehen bei „Ziel hinterlegt?“ beendet, Installation auf
+   dem Runner grün) → *Re-run all jobs* → bei
    „Waiting“ *Review deployments* → `katalog-produktion` anhaken → *Approve and deploy*. Dauer rund 15 Minuten (zweimal
    Bildprüfung). Grün heißt: geschrieben **und** an nexifyai.de abgenommen (mindestens 273 sichtbar, alle mit Bild,
    Stichprobe 20/20). Die Belege hängen als Artefakt am Lauf.
