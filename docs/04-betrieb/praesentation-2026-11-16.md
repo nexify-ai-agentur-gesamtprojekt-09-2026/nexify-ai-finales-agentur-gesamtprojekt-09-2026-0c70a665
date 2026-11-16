@@ -500,3 +500,70 @@ einzeln zurückverfolgt; die Zuordnung steht hier, damit niemand sie neu suchen 
 
 Der Prüfbot von Vercel hat zwei inhaltliche Befunde gemeldet; beide waren echt, beide sind
 behoben und gemessen: Befunde 12 und 13 in Abschnitt 2.
+
+---
+
+## 11. Kanonische Adresse: `www.nexifyai.de` → `nexifyai.cloud`
+
+Nachgereichter Auftrag vom 16.11.2026, 05:10 UTC, über die koordinierende Sitzung. Ich habe
+die Begründung nicht übernommen, sondern selbst gemessen, bevor ich etwas geändert habe.
+
+**Messung um 05:3x UTC, eigene Abrufe:**
+
+| Adresse | Antwort |
+|---|---|
+| `https://nexifyai.de/` | **404** |
+| `https://www.nexifyai.de/` | 302 → `https://nexifyai.de/` (also ebenfalls 404) |
+| `https://nexifyai.cloud/` | **200**, `server: Vercel`, `x-matched-path: /` |
+| `https://www.nexifyai.cloud/` | **200**, `server: Vercel` |
+
+Im ausgelieferten HTML von `https://nexifyai.cloud/` stand
+`<link rel="canonical" href="https://www.nexifyai.de/">` und dieselbe Adresse als `og:url`,
+dazu **28 Vorkommen** von `nexifyai.de`. Ein Besucher auf der laufenden Adresse, der im
+Gespräch auf einen solchen Verweis klickt, landet auf einer 404-Seite. Das ist das konkrete
+Risiko für den Termin.
+
+**Welcher `.cloud`-Host.** Beide antworten mit 200, keiner leitet auf den anderen um. Ich
+habe nicht geraten, sondern genommen, was das Projekt selbst erklärt:
+`config/site-map.json` → `site_contexts.nexify.requested_production_domain = nexifyai.cloud`
+und `config/deployment-topology.json` → `primary.domain = nexifyai.cloud`. Also **ohne
+`www`**.
+
+**Geändert (fünf Stellen, alle leiten sich aus einer Konstanten ab):**
+`apps/web/lib/page-seo.ts` (`PUBLIC_ORIGIN`, davon hängen Canonical, `og:url`, hreflang,
+JSON-LD und die Sitemap ab), `apps/web/lib/shop-server.ts` (`SHOP_CANONICAL`),
+`apps/web/app/robots.ts` (Sitemap-Zeile) und die zwei hart verdrahteten Canonicals in
+`apps/web/app/teileklar/page.tsx` und `apps/web/app/teileklar/shop/page.tsx`.
+
+**Nicht geändert:** `APPROVED_INDEX_HOSTS` in `apps/web/auth/indexing.ts` — `nexifyai.de`
+bleibt dort erlaubt, die Domain gehört weiter uns, sie ist nur nicht mehr die kanonische
+Adresse. Ebenfalls unangetastet: DNS, Vercel-Einstellungen, Design, Aufbau, Texte und die
+Messprotokolle, in denen `nexifyai.de` als damals gemessener Zustand steht
+(`config/clerk-dns.json`, `config/known-solutions.json`, `config/integrationen.json`,
+`tools/site_audit_register.py`).
+
+**Nachher gemessen** (lokaler Produktionsbau, `kanonische-adresse-runde-5.json`):
+
+| Seite | `canonical` | `og:url` | Treffer `nexifyai.de` im HTML |
+|---|---|---|---|
+| `/` | `https://nexifyai.cloud/` | dito | **0** |
+| `/leistungen` | `https://nexifyai.cloud/leistungen` | dito | **0** |
+| `/preise-ablauf` | `https://nexifyai.cloud/preise-ablauf` | dito | **0** |
+| `/kontakt` | `https://nexifyai.cloud/kontakt` | dito | **0** |
+| `/produkte/nex2fly` | `https://nexifyai.cloud/produkte/nex2fly` | dito | **0** |
+| `/teileklar` | `https://nexifyai.cloud/teileklar` | (keine) | **0** |
+
+`sitemap.xml`: 28 Adressen, alle auf `nexifyai.cloud`, 0 Treffer `nexifyai.de`, hreflang
+für de/nl/fr/en ebenfalls auf `.cloud`. `robots.txt`: `Sitemap: https://nexifyai.cloud/sitemap.xml`.
+
+**Beobachtet, nicht geändert:** `/teileklar` trägt kein `og:url` — die Seite hat eine eigene
+`metadata` ohne `openGraph`. Das ist älter als dieser Auftrag und steht nicht in den
+Abnahmekriterien; es gehört in einen eigenen Befund.
+
+**Folge für die Entscheidungen:** E13 („`nexifyai.de` kanonisch") ist damit überholt. Ich
+habe keine zweite Master-Datei angelegt; die Meldung an die koordinierende Sitzung zur
+Aufnahme in `PROGRESS.md` ist raus.
+
+**Was ich nicht geprüft habe:** Ob die Auslieferung nach dem Merge tatsächlich die neuen
+Adressen zeigt — dafür muss der Zweig erst live sein. Die Messung oben ist der lokale
+Produktionsbau dieses Zweigs, nicht `https://nexifyai.cloud/`.

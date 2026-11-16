@@ -1,0 +1,73 @@
+{
+ "zweck": "Umstellung der kanonischen Adresse von www.nexifyai.de auf nexifyai.cloud",
+ "gemessen_am": "2026-11-16T05:43:52+00:00",
+ "messung_live_hosts": {
+  "https://nexifyai.de/": "404",
+  "https://www.nexifyai.de/": "302 https://nexifyai.de/",
+  "https://nexifyai.cloud/": "200",
+  "https://www.nexifyai.cloud/": "200"
+ },
+ "vorher_live_nexifyai_cloud": {
+  "canonical": "https://www.nexifyai.de/",
+  "og_url": "https://www.nexifyai.de/",
+  "treffer_nexifyai_de_im_html": 28,
+  "quelle": "curl https://nexifyai.cloud/ am 16.11.2026 um 05:3x UTC, vor der Aenderung"
+ },
+ "nachher_lokaler_produktionsbau": {
+  "/": {
+   "canonical": "https://nexifyai.cloud/",
+   "og_url": "https://nexifyai.cloud/",
+   "treffer_nexifyai_de": 0
+  },
+  "/leistungen": {
+   "canonical": "https://nexifyai.cloud/leistungen",
+   "og_url": "https://nexifyai.cloud/leistungen",
+   "treffer_nexifyai_de": 0
+  },
+  "/preise-ablauf": {
+   "canonical": "https://nexifyai.cloud/preise-ablauf",
+   "og_url": "https://nexifyai.cloud/preise-ablauf",
+   "treffer_nexifyai_de": 0
+  },
+  "/kontakt": {
+   "canonical": "https://nexifyai.cloud/kontakt",
+   "og_url": "https://nexifyai.cloud/kontakt",
+   "treffer_nexifyai_de": 0
+  },
+  "/produkte/nex2fly": {
+   "canonical": "https://nexifyai.cloud/produkte/nex2fly",
+   "og_url": "https://nexifyai.cloud/produkte/nex2fly",
+   "treffer_nexifyai_de": 0
+  },
+  "/teileklar": {
+   "canonical": "https://nexifyai.cloud/teileklar",
+   "og_url": null,
+   "treffer_nexifyai_de": 0
+  }
+ },
+ "sitemap": {
+  "erste_adressen": [
+   "https://nexifyai.cloud/</loc>\n<xhtml:link rel=\"alternate\" hreflang=\"de\" href=\"https://nexifyai.cloud/\" />\n<xhtml:link rel=\"alternate\" hreflang=\"nl\" href=\"https://nexifyai.cloud/?lang=nl\" />\n<xhtml:link rel=\"alternate\" hreflang=\"fr\" href=\"https://nexifyai.cloud/?lang=fr\" />\n<xhtml:link rel=\"alternate\" hreflang=\"en\" href=\"https://nexifyai.cloud/?lang=en\" />\n</url>\n<url>\n",
+   "https://nexifyai.cloud/leistungen</loc>\n<xhtml:link rel=\"alternate\" hreflang=\"de\" href=\"https://nexifyai.cloud/leistungen\" />\n<xhtml:link rel=\"alternate\" hreflang=\"nl\" href=\"https://nexifyai.cloud/leistungen?lang=nl\" />\n<xhtml:link rel=\"alternate\" hreflang=\"fr\" href=\"https://nexifyai.cloud/leistungen?lang=fr\" />\n<xhtml:link rel=\"alternate\" hreflang=\"en\" href=\"https://nexifyai.cloud/leistungen?lang=en\" />\n</url>\n<url>\n",
+   "https://nexifyai.cloud/leistungen/websites</loc>\n<xhtml:link rel=\"alternate\" hreflang=\"de\" href=\"https://nexifyai.cloud/leistungen/websites\" />\n<xhtml:link rel=\"alternate\" hreflang=\"nl\" href=\"https://nexifyai.cloud/leistungen/websites?lang=nl\" />\n<xhtml:link rel=\"alternate\" hreflang=\"fr\" href=\"https://nexifyai.cloud/leistungen/websites?lang=fr\" />\n<xhtml:link rel=\"alternate\" hreflang=\"en\" href=\"https://nexifyai.cloud/leistungen/websites?lang=en\" />\n</url>\n<url>\n"
+  ],
+  "treffer_nexifyai_de": 0,
+  "adressen_gesamt": 28
+ },
+ "robots_sitemap_zeile": [
+  "Sitemap: https://nexifyai.cloud/sitemap.xml"
+ ],
+ "geaenderte_quellen": [
+  "apps/web/lib/page-seo.ts (PUBLIC_ORIGIN)",
+  "apps/web/lib/shop-server.ts (SHOP_CANONICAL)",
+  "apps/web/app/robots.ts (sitemap)",
+  "apps/web/app/teileklar/page.tsx",
+  "apps/web/app/teileklar/shop/page.tsx"
+ ],
+ "nicht_geaendert": [
+  "apps/web/auth/indexing.ts APPROVED_INDEX_HOSTS (nexifyai.de bleibt erlaubt)",
+  "config/clerk-dns.json und andere Messprotokolle",
+  "DNS",
+  "Vercel-Einstellungen"
+ ]
+}

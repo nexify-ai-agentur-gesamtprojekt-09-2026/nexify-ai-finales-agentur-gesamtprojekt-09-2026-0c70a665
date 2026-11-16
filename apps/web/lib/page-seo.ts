@@ -3,7 +3,14 @@ import type {PublicPage} from './page-types';
 import type {Locale} from './i18n';
 import {pageFaq} from './page-faq';
 import {publicPages} from './catalog';
-export const PUBLIC_ORIGIN='https://www.nexifyai.de';
+// Kanonische Adresse der eigenen Seiten. Gemessen am 16.11.2026, 05:3x UTC: nexifyai.de antwortet mit 404
+// ("No published build"), www.nexifyai.de mit 302 dorthin; nexifyai.cloud und www.nexifyai.cloud antworten
+// beide mit 200 ueber Vercel. nexifyai.cloud (ohne www) ist die vom Projekt selbst erklaerte Produktionsadresse:
+// config/site-map.json -> site_contexts.nexify.requested_production_domain und
+// config/deployment-topology.json -> primary.domain. Darum steht sie hier und nicht mehr www.nexifyai.de.
+// nexifyai.de bleibt in APPROVED_INDEX_HOSTS (auth/indexing.ts): die Domain gehoert weiter uns, ist aber
+// nicht mehr die kanonische Adresse.
+export const PUBLIC_ORIGIN='https://nexifyai.cloud';
 export const localeOf=(value:unknown):Locale=>typeof value==='string'&&['de','nl','fr','en'].includes(value)?value as Locale:'de';
 export const localizedUrl=(path:string,locale:Locale)=>PUBLIC_ORIGIN+path+(locale==='de'?'':'?lang='+locale);
 /** Beschreibung für Suchergebnisse: höchstens 160 Zeichen, bevorzugt am Satzende, sonst am Wortende; der Seiteninhalt bleibt unverändert. */
