@@ -34,6 +34,10 @@ const RECHTSSEITEN=["/impressum","/datenschutz","/vertragsgrundlagen","/ki-hinwe
 // Befund 15.11.2026 (Inhaltspruefung, Befund 05): /agb, /avv und /widerruf antworten mit 200, standen aber in keinem
 // Seitenplan und waren von keiner Seite aus erreichbar. Sie haben eigene Routen (apps/web/app/agb|avv|widerruf),
 // deshalb hier als feste Verweise in der Gruppe „Rechtliches“. Die Dokumente selbst bleiben unveraendert.
+// Folgebefund 16.11.2026 (Pruefbot am PR, nachgeprueft): Diese Fussleiste traegt auch die tragbare Ausgabe
+// (apps/site/src/main.tsx laedt dasselbe Workspace). Dort gibt es nur die Adressen aus dem Seitenplan, also
+// liefen die drei Verweise in die Seite „Seite nicht verfuegbar“. Sie erscheinen jetzt nur, wo die Dokumente
+// wirklich als eigene Route liegen: documentRoutes wird allein von apps/web/app/layout.tsx gesetzt.
 const RECHTSDOKUMENTE:{href:string;label:Record<Locale,string>}[]=[
  {href:"/agb",label:{de:"AGB",nl:"Algemene voorwaarden",fr:"Conditions g\u00e9n\u00e9rales",en:"Terms and conditions"}},
  {href:"/avv",label:{de:"Auftragsverarbeitung (AVV)",nl:"Verwerkersovereenkomst",fr:"Contrat de sous-traitance",en:"Data processing agreement"}},
@@ -41,7 +45,7 @@ const RECHTSDOKUMENTE:{href:string;label:Record<Locale,string>}[]=[
 ];
 const isPlacePage=(page:PublicPage)=>page.id.startsWith("tk-city")||page.id.startsWith("tk-stadt")||page.path.startsWith("/teileklar/staedte")||page.path.startsWith("/teileklar/stadt/");
 
-export default function SiteFooter({pages,site,locale,pathname}:{pages:PublicPage[];site:string;locale:Locale;pathname?:string}){
+export default function SiteFooter({pages,site,locale,pathname,documentRoutes=false}:{pages:PublicPage[];site:string;locale:Locale;pathname?:string;documentRoutes?:boolean}){
  const text=copy[locale];
  const labels=interfaceCopy.footerLinks[locale] as Record<string,string>;
  const invitation={de:['Lassen Sie uns über Ihr Vorhaben sprechen.','Erzählen Sie uns, was Sie verändern möchten. Wir klären gemeinsam den passenden nächsten Schritt.','Projekt besprechen'],nl:['Laten we uw plan bespreken.','Vertel ons wat u wilt veranderen. Samen bepalen we de passende volgende stap.','Project bespreken'],fr:['Parlons de votre projet.','Dites-nous ce que vous souhaitez changer. Nous définirons ensemble la prochaine étape.','Parler de mon projet'],en:['Let’s talk about your project.','Tell us what you would like to change. We will work out the next step together.','Discuss your project']}[locale];
@@ -60,7 +64,7 @@ export default function SiteFooter({pages,site,locale,pathname}:{pages:PublicPag
   {title:text.products,ids:site==="teileklar"?["tk-home","tk-search","tk-fitment","tk-appointments","tk-partner","tk-workshop"]:["nex2fly","one","api","tk-home","tk-partner"]},
   {title:text.orientation,ids:site==="teileklar"?["tk-categories","tk-vouchers","tk-cart"]:["websites","automation","apps-portals","solutions","pricing"]},
   {title:text.company,ids:["company","contact","login","signup"]},
-  {title:text.legal,ids:site==="teileklar"?["tk-legal","ai-notice","accessibility","cookies"]:["imprint","privacy","terms","ai-notice","accessibility","cookies"],zusatz:site==="teileklar"?[]:RECHTSDOKUMENTE}
+  {title:text.legal,ids:site==="teileklar"?["tk-legal","ai-notice","accessibility","cookies"]:["imprint","privacy","terms","ai-notice","accessibility","cookies"],zusatz:site==="teileklar"||!documentRoutes?[]:RECHTSDOKUMENTE}
  ];
  // Seitenübersicht: alle Seiten des Bereichs, thematisch gebündelt (kompakte Spalten statt Endlosliste)
  const sitePages=pages.filter(page=>page.site_context===site);

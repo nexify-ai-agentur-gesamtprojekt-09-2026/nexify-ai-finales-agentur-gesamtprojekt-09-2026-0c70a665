@@ -1,0 +1,3 @@
+Pruefumfang: HTML-Referenzprototypen; kein React-, Live- oder WCAG-Vollnachweis.
+
+Ergebnis: 0 Fehler, 0 Warnungen (dokumentierte Ausnahmen aus design-rules.json abgezogen)

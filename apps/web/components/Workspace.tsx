@@ -171,7 +171,10 @@ export function StartAction({intent,children,variant='primary'}:{intent:Intent;c
  * nicht – dort entfällt die Sitzungsabfrage und das Gespräch ist von Beginn an die sichtbare Ansicht.
  * initialChat/initialChatWidth: vom Server aus Cookies gelesen, damit die Scheibe ohne Sprung erscheint.
  */
-export default function Workspace({children,pages,accountControl,initialLocale='de',gateway=true,initialChat,initialChatWidth=null}:{children:ReactNode;pages:PublicPage[];accountControl?:ReactNode;initialLocale?:Locale;gateway?:boolean;initialChat?:InitialChat;initialChatWidth?:number|null}) {
+// documentRoutes: Diese Installation liefert die Rechtsdokumente /agb, /avv und /widerruf als eigene Routen aus.
+// Nur die Next-Anwendung tut das (apps/web/app/agb|avv|widerruf); die tragbare Ausgabe kennt allein den Seitenplan.
+// Die Fussleiste zeigt die drei Verweise deshalb nur, wenn sie hier ausdruecklich gesetzt sind.
+export default function Workspace({children,pages,accountControl,initialLocale='de',gateway=true,initialChat,initialChatWidth=null,documentRoutes=false}:{children:ReactNode;pages:PublicPage[];accountControl?:ReactNode;initialLocale?:Locale;gateway?:boolean;initialChat?:InitialChat;initialChatWidth?:number|null;documentRoutes?:boolean}) {
   const [hydrated,setHydrated]=useState(false);
   useEffect(()=>setHydrated(true),[]);
   const [locale,setLocale] = useState<Locale>(initialLocale);
@@ -497,7 +500,7 @@ export default function Workspace({children,pages,accountControl,initialLocale='
             if(next!==locale)goToLocale(next);}}><option value="de" data-testid="locale-option-de">DE</option><option value="nl" data-testid="locale-option-nl">NL</option><option value="fr" data-testid="locale-option-fr">FR</option><option value="en" data-testid="locale-option-en">EN</option></select><span id="locale-hint" className="visually-hidden">{localeHint[locale]}</span><button type="button" className="theme-switch" role="switch" aria-checked={theme==='light'} aria-label={themeLabel} title={themeLabel} data-testid="theme-switch" onClick={toggleTheme}><svg className="theme-sun" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 3v2m0 14v2M3 12h2m14 0h2M5.6 5.6 7 7m10 10 1.4 1.4M5.6 18.4 7 17M17 7l1.4-1.4"/></svg><svg className="theme-moon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg></button><Link className="header-cta" data-testid="header-cta" href={headerCta.href}><span aria-hidden="true"/>{headerCta.label}</Link>{(!open||boot)&&<button className="outline-button compact" aria-expanded="false" aria-controls="aifly-panel" onClick={openChat}>{t.open}</button>}</div>
       </header>}
       <main id="page-content" tabIndex={-1}>{children}</main>
-      <SiteFooter pages={pages} site={site} locale={locale} pathname={pathname}/>
+      <SiteFooter pages={pages} site={site} locale={locale} pathname={pathname} documentRoutes={documentRoutes}/>
     </div>
     {(!open||boot) && <ActionButton variant="secondary" className="reopen-chat" data-testid="chat-launcher" onClick={()=>{orientationFocusRequested.current=true;setOrientationLoaded(true);setChatMode('orientation');changePanel(true);}} aria-expanded="false" aria-controls="aifly-panel"><OracleCompanion/>{launcherLabel}</ActionButton>}
     {mobile&&open&&<div className="chat-backdrop" aria-hidden="true"/>}

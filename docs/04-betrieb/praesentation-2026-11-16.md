@@ -248,6 +248,46 @@ Freigabe“), die sechs Rechtsseiten selbst (dort gehört er hin) und `/teilekla
 laufenden Shop, wenn die Variante aus Abschnitt 3 aktiviert ist. Kein toter Verweis mehr,
 keine zweite Sortimentsseite zu pflegen.
 
+### 12 · schwer · Die drei Rechtsdokumente in der Fußzeile · in der tragbaren Ausgabe ins Leere
+
+**Woher der Befund kommt.** Der Prüfbot am Pull Request hat ihn gemeldet; ich habe ihn im
+Browser nachgestellt und bestätigt. Es ist ein Folgefehler von Befund 09.
+
+**Befund.** Die Fußzeile gehört `apps/web`, wird aber auch von der tragbaren Ausgabe
+benutzt: `apps/site/src/main.tsx` lädt dasselbe `Workspace`. Diese Ausgabe kennt nur die
+Adressen aus dem Seitenplan; `/agb`, `/avv` und `/widerruf` sind handgeschriebene
+Next-Routen und stehen dort nicht. Gemessen in der gebauten tragbaren Ausgabe
+(`vite preview`): `/agb`, `/avv` und `/widerruf` zeigen je die Seite **„Seite nicht
+verfügbar“**. Die drei neuen Verweise der Fußzeile führten dort also genau dorthin —
+auf jeder Seite der tragbaren Ausgabe.
+
+**Behebung.** Die drei Verweise erscheinen nur, wo die Dokumente wirklich als eigene Route
+liegen. `Workspace` und `SiteFooter` haben dafür den Schalter `documentRoutes`; gesetzt
+wird er allein in `apps/web/app/layout.tsx`. Keine Änderung an den Dokumenten, keine
+Änderung am Seitenplan, keine neue Gestaltung.
+
+**Nachher gemessen** (`fussleiste-ausgaben-runde-4.json`): Next-Ausgabe 58 Verweise in der
+Fußzeile, darunter alle drei — `/agb` → „Allgemeine Geschäftsbedingungen (B2B)“, `/avv` →
+„Auftragsverarbeitungsvertrag (AVV / DPA)“, `/widerruf` → „Widerrufsrecht“. Tragbare
+Ausgabe 55 Verweise, davon keiner der drei; die übrigen Rechtsverweise (Impressum,
+Datenschutz, KI-Hinweise, Barrierefreiheit, Cookies) stehen in beiden Ausgaben gleich.
+
+### 13 · mittel · `/teileklar` ohne Artikel · Der Hinweis konnte unwahr sein
+
+**Woher der Befund kommt.** Ebenfalls vom Prüfbot, ebenfalls nachgeprüft. Folgefehler von
+Befund 08.
+
+**Befund.** Die Abfrage lautet `/api/shop/products?page_size=12&in_stock=true`. Eine leere
+Antwort heißt also entweder „kein Artikel vorhanden“ **oder** „kein Artikel auf Lager“.
+Mein Wortlaut behauptete das erste: „Zurzeit sind keine Artikel eingestellt. Das Sortiment
+wird gerade aufgebaut.“ Lägen Artikel ohne Bestand im Katalog, wäre dieser Satz falsch —
+und er erfindet dazu einen Grund.
+
+**Behebung.** Ein Satz, der in beiden Fällen stimmt und keinen Grund erfindet: **„Zurzeit
+ist kein Artikel im Schaufenster verfügbar.“** Gleicher Baustein, gleiche Stelle.
+Nachgestellt im Browser mit abgefangener Antwort (200, `items: []`), 1280 px, Bild
+`docs/design/belege/praesentation-2026-11-16/08-teileklar-leeres-sortiment-wortlaut-1280-nachher.jpg`.
+
 ---
 
 ## 3. Vorbereitet, aber nicht aktiviert: TEILEKLAR auf den laufenden Shop
@@ -443,3 +483,20 @@ Bildschirmhöhe angesehen.
 - **Barrierefreiheit über das Gemessene hinaus.** Kein Screenreader, keine vollständige
   WCAG-Begutachtung. Geprüft wurden Kontrast, Trefferfläche, Fokus, Überschriftenstufen und
   `alt`-Texte.
+
+---
+
+## 10. Die roten CI-Prüfungen am Pull Request 213
+
+Stand 16.11.2026, 03:4x UTC, Kopf `9019584`. Vier Prüfungen sind rot. Ich habe jede
+einzeln zurückverfolgt; die Zuordnung steht hier, damit niemand sie neu suchen muss.
+
+| Prüfung | Ursache | Von diesem Zweig verursacht? | Was ich getan habe |
+|---|---|---|---|
+| `next-web` | `apps/web/auth/tests/chat-guidance.test.mjs` liest `apps/site/.generated/public-site.json`. Diese Datei wird erzeugt, nicht eingecheckt — und der Auftrag `next-web` erzeugte sie nie. Fehler: `ENOENT`, 137 von 138 Prüfungen bestanden. | **Nein.** Test und `ci.yml` sind auf `main` zeichengleich (`git diff origin/main..HEAD` ist für beide leer). | Ursache behoben: der Auftrag `next-web` führt jetzt dieselbe Zeile aus wie die Aufträge `repository` und `react-site`. Nachgestellt: ohne die Datei 137/138 mit genau diesem `ENOENT`, mit ihr 138/138. |
+| `repository` | `make test`: 912 Prüfungen, 56 Fehlschläge und 45 Fehler, überwiegend `test_requirements_reconciliation` (41 veraltete Quellbindungen, darunter `apps/web/app/sitemap.ts`). | **Nein.** Lokal gemessen, gleiche Umgebung, gleicher Zeitpunkt: Zweig 15 rote Namen, `main` 16; kein Name nur auf dem Zweig rot, einer neu grün. `verify_requirements_reconciliation`: 41 auf dem Zweig, 41 auf `main`. | Nichts. Der Rückstand liegt auf `main` und ist keine Arbeit dieses Auftrags. Solange er besteht, wird der eingeschaltete Auto-Merge nicht auslösen. Das ist eine Entscheidung des Inhabers, keine Messfrage. |
+| `hero` | `apps/site/tests/browser-hero-release-20261112.mjs` wartet vergeblich darauf, dass das Hero-Video `readyState >= 2` erreicht, und läuft in den Zeitablauf. Das Video selbst antwortet im Lauf mit HTTP 200 und `video/mp4`. | **Nein.** Dieser Zweig fasst `apps/site` nicht an — kein einziger Pfad unter `apps/site/` steht im Diff gegen `main`. Der Lauf misst ausschließlich die Vite-Ausgabe von `apps/site`. | Nichts. Der Verdacht liegt auf der Codec-Ausstattung des Prüfbrowsers (`channel:'chrome'`), nicht auf dem Quelltext. Das gehört in einen eigenen Auftrag. |
+| `review` (ai-review) | Läuft 12–14 Sekunden und endet mit Fehlschlag, auf jedem Kopf dieses Zweigs. | Nicht geprüft. | Offen und hier als offen benannt. |
+
+Der Prüfbot von Vercel hat zwei inhaltliche Befunde gemeldet; beide waren echt, beide sind
+behoben und gemessen: Befunde 12 und 13 in Abschnitt 2.

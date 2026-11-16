@@ -1,0 +1,21 @@
+{
+ "tragbareAusgabe": [
+  {
+   "pfad": "/agb",
+   "h1": "Seite nicht verfügbar"
+  },
+  {
+   "pfad": "/avv",
+   "h1": "Seite nicht verfügbar"
+  },
+  {
+   "pfad": "/widerruf",
+   "h1": "Seite nicht verfügbar"
+  }
+ ],
+ "schaufensterLeer": {
+  "text": "Zurzeit ist kein Artikel im Schaufenster verfügbar.",
+  "fenster": "Zurzeit sind keine Artikel im Schaufenster.",
+  "kategorien": "Zurzeit sind keine Kategorien eingestellt."
+ }
+}
