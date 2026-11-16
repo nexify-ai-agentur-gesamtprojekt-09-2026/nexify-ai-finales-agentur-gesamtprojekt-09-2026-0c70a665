@@ -135,7 +135,7 @@ unterscheidet sich von `main` nur um die zwei Dateien dieses Zweigs
 
 ### 3.1 Veraltete Pins im führenden Register (29 Fälle)
 
-`config/acceptance-coverage.json` führt 362 Pins; **27** stimmen nicht mehr mit
+`config/acceptance-coverage.json` führt 362 Pins; **28** stimmen nicht mehr mit
 den heutigen Bytes überein. `test_recorded_source_hashes_match_actual_bytes`
 verlangt Übereinstimmung **aller** Pins (ein Subtest je Quelle, 28 davon rot),
 `test_register_and_human_view_match` meldet zusätzlich 41 Fundstellen
@@ -211,7 +211,7 @@ ausdrücklich als Inhaberentscheidung geführt:
 | Messung | Ergebnis |
 |---|---|
 | Anteil von OA-053 am roten Job `repository` | **59 von 101** roten Fällen — der größte Einzelposten |
-| Weg B probeweise gesetzt (drei Versionsprüfungen auf 13.0.0, **verworfen**) | `test_product_image_batch` 54/54 und `test_birefnet_onnx` 5/5 grün; Gesamtzahl 101 → 44 |
+| Weg B probeweise **zur Hälfte** gesetzt (**zwei** Versionsprüfungen auf 13.0.0: `tools/product_image_batch.py` und `tools/birefnet_onnx.py`; `tools/birefnet_rembg_batch.py` blieb unverändert), **verworfen** | `test_product_image_batch` 54/54 und `test_birefnet_onnx` 5/5 grün; Gesamtzahl 101 → 44. Die Messung gilt also für zwei geänderte Prüfungen, nicht für Weg B vollständig; `tests/test_birefnet_rembg_batch.py` war weder vorher noch nachher rot |
 | davon neu abweichend | genau 2: die bis dahin **gültigen** Pins von `tools/product_image_batch.py` und `tools/birefnet_onnx.py` |
 | Rest nach Weg B | **42** Fälle (13 `test_browser_evidence`, 29 `test_requirements_reconciliation`) |
 
@@ -285,10 +285,11 @@ Begründung in Abschnitt 5.
 Nach `nexify-belege-und-pins` darf ein Pin nur mit Browserlauf, grünem Test
 oder geprüftem Diff nachgezogen werden, Belegdateien werden **nie von Hand**
 geschrieben, und „die schwächere Belegart ersetzt nicht die stärkere": bindet
-ein Browserlauf die Datei, trägt ein grüner Test den Pin nicht. Für die 13
+ein Browserlauf die Datei, trägt ein grüner Test den Pin nicht. Für die 14
 Dateien, die zugleich im Register und in einem der drei roten
 Browser-Beleg-Prüfer stehen, ist der Browserlauf damit die **verlangte**
-Belegart.
+Belegart. Die 28 veralteten Pins teilen sich damit in **14 so gebundene** und
+**14 nicht so gebundene** Dateien.
 
 Die drei zugehörigen Harnesse laufen am heutigen Stand **nicht** durch. In
 allen drei Fällen ist die Ursache keine Umgebungsfrage, sondern dass der
@@ -432,6 +433,37 @@ Prüfung benennt und begründet, warum sie nicht von diesem Zweig kommt
 (verlangt von den Regeln für einen selbst eröffneten Pull Request). Sonst
 wurde an keinem Pull Request kommentiert.
 
+### Nachtrag 16.11.2026, 03:06 bis 03:12 UTC · PR 211 von außen geändert
+
+Nicht von dieser Sitzung veranlasst: Das Konto `nexifyai-dev` hat PR 211 auf
+**„bereit"** gesetzt (`draft: false`) und **Auto-Merge (squash) aktiviert**.
+Frisch nachgesehen um 03:07 UTC: `mergeable_state: "blocked"`,
+`merged: false`, Basis weiter `9c9c806` — **es ist nichts gemergt**, und der
+rote Job `repository` hält den Merge zurück.
+
+**Hinweis, keine Änderung:** Auto-Merge ist damit an einem Pull Request
+bewaffnet, dessen Prüfkette rot ist. Heute blockiert; würde die Sperre aber
+durch eine zustimmende Prüfung statt durch grünes CI aufgehoben, würde
+gemergt, während `repository` rot ist. Das widerspricht „nur bei grün mergen"
+und dem in PR 206 dokumentierten Stand „Auto-Merge abgeschaltet". Diese
+Sitzung hat die Einstellung **nicht** verändert; die Entscheidung liegt beim
+Inhaber.
+
+Dazu gemessen (präzisiert Abschnitt 6): Der kombinierte Commit-Status zu
+`797c776` ist **success** mit genau **zwei** Einträgen, beide maßgeblichen
+Vercel-Projekte. Die fünf verwaisten Projekte melden zu diesem Kopf **gar
+nichts**. Sie sind also nicht bei jedem Push rot, sondern zeitweise; der
+Befund in Abschnitt 6 und Punkt 4 in Abschnitt 7 sind entsprechend enger zu
+lesen.
+
+Codex hat zu `797c776` geprüft: **Sicherheitsprüfung abgeschlossen ohne
+Befund**, Code-Review abgeschlossen mit **drei P2-Befunden**, alle drei an
+diesem Bericht und alle drei **zutreffend**. Sie sind in dieser Fassung
+behoben: die Zahl der veralteten Pins (27 → **28**, nachgerechnet über alle
+362 Pins), die Aufteilung 14 gebunden / 14 nicht gebunden, die Zahl der im
+Probeeingriff geänderten Versionsprüfungen (drei → **zwei**) und die Aussage
+in Abschnitt 8 zum Kommentar an PR 211.
+
 ## 7. Vorschlag für die Entscheidung des Inhabers
 
 Vier getrennte, je einzeln entscheidbare Punkte. Die ersten drei sind
@@ -462,8 +494,12 @@ Voraussetzung dafür, dass `main` wieder grün werden kann.
 
 ## 8. Merge-Strecke
 
-**Nicht begonnen**, weil Stufe 3 nicht grün ist (Abschnitt 5). Kein Pull
-Request wurde gemergt, kommentiert oder auf „bereit" gesetzt.
+**Nicht begonnen**, weil Stufe 3 nicht grün ist (Abschnitt 5). **Kein fremder
+Pull Request wurde gemergt, kommentiert oder auf „bereit" gesetzt.** Die eine
+Ausnahme betrifft nur den eigenen PR 211: dort wurde einmalig ein Kommentar
+gesetzt, der die rote Prüfung benennt und begründet (verlangt von den Regeln
+für einen selbst eröffneten Pull Request, siehe Nachtrag in Abschnitt 6).
+Gemergt wurde nichts, auch PR 211 nicht.
 
 Beobachtung, die vom Auftrag abweicht: `list_pull_requests` zeigt **42** offene
 Pull Requests, und **keiner** von ihnen ist ein Entwurf (`draft: false` bei
