@@ -1911,3 +1911,16 @@ Herleitung: OFFEN 46 − 2 (164, 170 nach ERLEDIGT) + 5 neue (171, 174, 175, 177
 - **Fertig, wenn:** Format um ein Commit-Feld ergänzt, Prüfskript prüft es, künftige Läufe tragen es.
 - **Aufwand:** M · **Ausführung:** Fabrik (Paket C, ein Schreiber)
 - **Quellen:** docs/09-final/pin-rebase-2026-11-14.md, Abschnitt 12; Commit-Text von PR 198
+
+## 10. Nachführung 16.11.2026 (Auftrag des Inhabers vom 16.11.2026, 06:30 UTC)
+
+#### OA-179 · Infrastruktur & Server · ENTSCHEIDUNG NÖTIG
+
+- **Priorität:** 1 Sicherheit und Betrieb (ein MCP-Server ohne nutzbaren Anmeldeweg; heute keine Mandantentrennung hinter `brain.nexifyai.cloud/mcp`)
+- **Ziel:** brain wird der eine MCP-Server von NeXify AI mit Browser-Anmeldung (OAuth 2.1, PKCE S256, Selbstregistrierung nach RFC 7591, Metadaten nach RFC 9728/8414, Widerruf, „überall abmelden“, RLS, Audit).
+- **Stand:** Stufe 0 (Bestand, `docs/04-betrieb/brain-befund-2026-11-16.md`) und Stufe 1 (Entwurf, `docs/architecture/0021-brain-mcp-oauth.md`) liegen auf Zweig `claude/brain-mcp-auth`. Nichts gebaut, nichts auf dem Server geändert.
+- **Blocker:** Entscheidungen E1 bis E8 des Inhabers (ADR-0021, Abschnitt 13); Cognee-Dienst ohne Container (OA-144, Aufräumplan Entscheidung 1).
+- **Abhängigkeiten:** OA-144
+- **Fertig, wenn:** Stufen 2 bis 5 nach ADR-0021 bestanden, darunter eine protokollierte echte Verbindung aus einem echten Client per Browser-Anmeldung (Stufe 4) und die Umschaltung nach Freigabe.
+- **Aufwand:** L · **Ausführung:** Sitzung `claude/brain-mcp-auth` (ein Schreiber)
+- **Quellen:** Auftrag des Inhabers 16.11.2026; ADR-0021; Befund 16.11.2026
