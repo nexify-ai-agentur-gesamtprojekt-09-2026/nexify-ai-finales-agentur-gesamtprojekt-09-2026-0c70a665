@@ -13,6 +13,14 @@ nicht verfolgt; `apps/web/wrangler.jsonc` und `docs/deployment/cloudflare-worker
 sind eine ungenutzte Vorbereitung und kein Auftrag. Die Führungsentscheidung vom
 04.11.2026 (ChatGPT-Sites-Stand) ist im widersprechenden Umfang historisch.
 
+Stand 16.11.2026, 13:10 UTC (Inhaberangabe im Chat, Pascal Courbois: „vercel ist auch raus“;
+gemessen 13:05 UTC): `nexifyai.de` löst auf `185.158.133.1` auf und wird vom Lovable-Projekt
+„Nexfiy Ai Studio“ (`dcb47f25-0aec-4b03-88b7-4b67f07d4a09`) ausgeliefert; `/.well-known/oauth-protected-resource`
+nennt `resource_name: "Nexfiy Ai Studio"`. Die Aussage „ausgeliefert wird **ausschließlich über Vercel**“
+und die Vercel-Angaben in diesem Abschnitt sind damit **HISTORIE**. Was `main` dieses Repositorys heute
+noch für die Produktion bedeutet, ist OFFEN und vom Inhaber festzulegen; ein Eintrag in `DECISIONS.md`
+steht aus. Nachweis: `docs/04-betrieb/oracle-autotasks-checkpoint-2026-11-16.md`, Abschnitt 10.
+
 Stand 14.11.2026, 17:42 UTC: Der Satz „Cloudflare wird als Hosting nicht verfolgt“ und
 die Einordnung „kein Auftrag“ sind HISTORIE, überholt durch D-021 in `DECISIONS.md`.
 Vercel ist der heutige Auslieferungsweg und bleibt es, bis ein Umzug gemessen und vom
