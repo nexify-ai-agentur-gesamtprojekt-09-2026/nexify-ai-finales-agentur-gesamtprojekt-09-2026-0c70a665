@@ -1,0 +1,159 @@
+# ORACLE-Autotasks · Checkpoint und Wiederanlauf
+
+Stand 16.11.2026, 12:45 UTC · `NEXIFY-RUN-FINALIZER-20261110` · Tenant: NeXify AI (Agentur)
+
+Zweck: Den Stillstand der Jeff-Arbeitsschleife (Autotasks), seine belegte Ursache, die
+vorbereitete Lösung und den tatsächlichen Wiederanlaufweg so sichern, dass sie eine
+beendete Sitzung und einen neu gebauten Container überleben. Dieses Dokument legt kein
+zweites Aufgabenregister an; führend bleiben `PROGRESS.md` und
+`docs/09-final/offene-arbeiten-2026-11-14.md`.
+
+Kundenprojekt Studienkolleg Aachen: nach `AGENTS.md` nur als Verweis geführt, keine
+Einzelheiten in diesem Repository. Es ist von diesem Vorgang nicht betroffen und hat
+keinen ORACLE-Kanal.
+
+## 1. Lauf- und Auftragszustand (Finalizer §1)
+
+| Feld | Wert |
+|---|---|
+| `goal_id` | ORACLE-Autotasks wiederherstellen (Dauerbetrieb Agentur) |
+| `task_id` | NX-ORA-01 (erledigt), NX-ORA-02 (nicht ausgeführt, blockiert) |
+| `tenant` | NeXify AI, Agentur; kein Kundenmandant berührt |
+| Writer/Lease | Ein Writer: Lovable-Projektagent „NeXify AI Studio". Keine zweite Sitzung auf demselben Scope. |
+| Letzte Revision | Server 1 unverändert gegenüber dem Stand vor NX-ORA-01 |
+| Readback | Erfolgt: Protokolle und Dienstzustand nach jedem Schritt zurückgelesen |
+| Unklare Seitenwirkungen | Keine. Es wurde ausschließlich gelesen. |
+
+Unterschied Statusmeldung und fachlicher Fortschritt: Die Ursache ist belegt
+(fachlicher Fortschritt). Die Schleife läuft nicht (kein Betriebsfortschritt). Die
+Meldung „NeXify (Jeff) nicht erreichbar" ist nachweislich irreführend und darf nicht
+als Netz- oder Modellausfall gelesen werden.
+
+## 2. Ursache des Autotask-Stillstands (IST, belegt)
+
+Konfigurations- und Datenproblem. Kein Netzweg-, Authentifizierungs- oder
+Modellproblem.
+
+`/usr/local/bin/nx-jeff-workloop` Zeile 695 stellt dem Orakel **jede** offene Aufgabe
+als Auswahloption. In `/opt/nexifyai/state/jeff-workloop/aufgaben.json` stehen 3.638
+Aufgaben, davon 3.442 offen. Der Router nimmt höchstens 255 Optionen an.
+
+- Beleg `/var/log/nexifyai/jeff-orakel.jsonl`, 2026-11-16T12:19:54Z: HTTP 422,
+  Modell `openrouter/typesafe/jev-1.13`, Dauer 0,94 s,
+  `"Dictionary should have at most 255 items after validation, not 3444"`,
+  loc `questions.naechste.choice.criteria`.
+- `frage()` wertet jedes Nicht-200 als „nicht verfügbar"; `jeff()` liefert `None`;
+  Zeile 718 schreibt „nicht erreichbar -> idle".
+- Gegenprobe im selben Protokoll: Health-Aufrufe 12:19:21Z und 12:24:27Z gegen
+  denselben Endpunkt `127.0.0.1:20128/v1/systemone` und dasselbe Modell: HTTP 200.
+- Letzte 600 Einträge: 157 Schleifenaufrufe, alle 422; 210 Health-Aufrufe, alle 200.
+- Beginn der Störung: **2026-11-14T18:14:48Z** (erste „nicht erreichbar"-Zeile im
+  Journal). Die zuvor berichtete Zeit „15.11., 12:18" war Ortszeit und falsch
+  zugeordnet.
+
+Abgleich mit dem Repository (eigener Abruf 16.11.2026, Hauptstand `9c9c806`):
+`docs/JEFF-INTEGRATION.md` nennt unverändert denselben Endpunkt und dasselbe Modell.
+Eine dokumentierte Umstellung als Ursache ist damit ausgeschlossen. Dasselbe Dokument
+beschreibt das Gate in einer GitLab-CI, während der führende Stand auf GitHub mit
+GitHub-Actions-Runnern liegt; als Quelle für den heutigen Bauablauf ist es insoweit
+nicht belastbar (OFFEN).
+
+## 3. Start der Lösung (vorbereitet, NICHT ausgeführt)
+
+Ablagestelle des ausführbaren Starts: `ops/server1/nx-ora-02-schritt3.sh` im
+Lovable-Projekt „NeXify AI Studio" (Syntax geprüft, nie ausgeführt).
+
+Inhalt der Korrektur, Datei `/usr/local/bin/nx-jeff-workloop`, Zeile 695:
+
+```python
+# alt
+choices = {t["id"]: f"{t['id']}: {t['titel']}" for t in offen}
+# neu
+choices = {t["id"]: f"{t['id']}: {t['titel']}" for t in [x for x in offen if not x["id"].startswith("MAIL-")][:240]}
+```
+
+240 Optionen plus vier Sonderoptionen bleiben unter der Grenze von 255.
+`aufgaben.json` wird **nicht** verändert; nichts wird gelöscht. Die MAIL-Aufgaben
+bleiben vollständig erhalten und werden lediglich nicht zur Auswahl gestellt.
+
+Ablauf des Skripts: Stufenbegrenzung suchen, Sicherung
+`nx-jeff-workloop.bak-20261116-choices` anlegen, Zeile nur bei exaktem Wortlaut
+ersetzen, `python3 -m py_compile`, bei Fehler sofortiger Rücksetzer, Dienst neu
+starten, erste Wahl abwarten, Dienst anhalten, Belegzeilen ausgeben.
+
+Rückweg: `cp -a nx-jeff-workloop.bak-20261116-choices nx-jeff-workloop && systemctl restart nx-jeff-workloop`.
+
+## 4. Blocker (OFFEN, nur vom Inhaber lösbar)
+
+Die Arbeitsumgebung des ausführenden Agenten wurde am 16.11.2026 um 12:30 UTC neu
+gestartet. Dabei gingen die temporäre Kopie des privaten SSH-Schlüssels und die
+bestätigten Hostschlüssel für Server 1 verloren. Ein Ersatzschlüssel über die
+Hostinger-Verbindung wäre eine Rechteänderung und wurde deshalb **nicht** vorgenommen
+(`AGENTS.md`, „Keine eigenmächtige Rechte-/Passwortänderung").
+
+Zwei zulässige Wege, Owner Inhaber:
+1. Privaten Schlüssel als Secret `SERVER1_SSH_KEY` im Projekt hinterlegen.
+2. Das Skript selbst in der Hostinger-Webkonsole ausführen und die Ausgabe zurückgeben.
+
+## 5. Risiko vor dem Wiederanlauf (hoch, ungeprüft)
+
+Von den 3.442 offenen Aufgaben tragen **3.517 von 3.638** das Präfix `MAIL-`.
+Ob sie echte Empfängeradressen Dritter enthalten und ob bei Ausführung Post
+rausgegangen wäre, ist **nicht geprüft**. Der Serverzugang dafür fehlt.
+
+ANNAHME des ausführenden Agenten: Herkunft `nexifyai-drip-campaign.py`. Im
+Repository ist kein solches Skript vorhanden (eigene Codesuche 16.11.2026,
+0 Treffer); es liegt ausschließlich auf dem Server. Gefunden wurde
+`docs/contracts/local-mail-workspace.md`: Der dort beschriebene lokale
+Mail-Arbeitsplatz hat ausdrücklich **keinen Dispatcher** und keine implementierten
+Versandzustände. Ob die `MAIL-`-Aufgaben dazu gehören, ist OFFEN.
+
+**Betriebsfolge:** Der heutige Stillstand ist derzeit der sichere Zustand. Die
+Korrektur darf erst nach lesender Klärung dieser Aufgaben wirksam werden. Ein
+Wiederanlauf vor dieser Klärung ist ein eigenes Risiko und nicht freigegeben.
+
+## 6. Nächste Aktivierung (Finalizer §2 bis §4)
+
+| Feld | Wert |
+|---|---|
+| `next_action` | Lesende Klärung der `MAIL-`-Aufgaben, danach NX-ORA-02 |
+| Vorbedingung | Serverzugang nach Abschnitt 4 |
+| `next_run_target` | 2026-11-17T07:00:00Z (08:00 Europe/Amsterdam) |
+| Trigger | Weckpunkt `trig_019NZHgrhm9MuhFjmTWRs8rR`, gebunden an die koordinierende Sitzung; beim Anlegen mit `fire_at` bestätigt |
+| Executor | Koordinierende Claude-Sitzung; Ausführung auf Server 1 durch den Lovable-Projektagenten „NeXify AI Studio" |
+| Fallback | Inhaber führt `ops/server1/nx-ora-02-schritt3.sh` selbst aus |
+| Eskalation | Inhaber Pascal Courbois |
+| Kostenrahmen | Keine neuen kostenpflichtigen Verpflichtungen. Bisher 11,7 Lovable-Credits für NX-ORA-01 und SKA-01. |
+
+Zusätzlich vor dem Neustart zu klären (Auftrag ist im Weckpunkt hinterlegt): Der
+Programmtext ab Zeile 718 von `nx-jeff-workloop` ist daraufhin zu lesen, ob die
+Schleife nach der Wahl sofort ausführt. Das Skript erkennt die erste Wahl nur alle
+zwei Sekunden; ein sicheres Anhalten vor der Ausführung ist bis dahin **nicht**
+zugesichert.
+
+## 7. Was ausdrücklich nicht nachgewiesen ist
+
+- **Kein laufender Autotask-Betrieb.** Die Schleife ruht seit 14.11.2026, 18:14 UTC.
+- **Kein 24/7-Betrieb und kein externer Scheduler.** Der Weckpunkt aus Abschnitt 6
+  weckt eine Chatsitzung. Er ist kein verifiziert laufender Hostinger-Scheduler und
+  ersetzt ihn nicht (`AGENTS.md`, Abschnitt „Dauerhafte GOAL-Bindung").
+- **Keine Wirkung auf Server 1.** Weder Sicherung noch Änderung noch Neustart.
+  `aufgaben.json` unberührt, BigBuy unberührt.
+- **Kein Beleg zum Inhalt der MAIL-Aufgaben.**
+- **Kein Nachweis des letzten erfolgreichen Abrufs der Slack-Brücke.** Erfolgreiche
+  Abrufe werden nicht protokolliert; die letzte verarbeitete Nachricht stammt vom
+  09.11.2026, 00:47 UTC, Kanal `D0C0XB8K9PH` nach ORACLE `127.0.0.1:8891`.
+- **agentmemory:** `/agentmemory/` auf `127.0.0.1:3111` mit Bearer-Anmeldung
+  beantwortet `health`, `actions` und `memories` mit 200. `search` lässt kein GET zu
+  (405); die Aufrufform ist OFFEN.
+
+## 8. Verweise
+
+- Ursachenbericht und Korrekturskript: Lovable-Projekt „NeXify AI Studio",
+  `ops/server1/jeff-ursache-2026-11-16.md` und `ops/server1/nx-ora-02-schritt3.sh`
+- Wiederherstellungsplan mit den Phasen 1 bis 5:
+  `ops/oracle-wiederherstellungsplan-2026-11-16.md` (ebendort)
+- Jeff als Pflicht-Gate: `docs/JEFF-INTEGRATION.md`
+- Brain-Zielbild mit den Freigabestufen A/B/C:
+  `docs/09-final/06-brain-ki-team-pipeline-orakel-wissen.md`
+- Lokaler Mail-Arbeitsplatz ohne Versand: `docs/contracts/local-mail-workspace.md`
