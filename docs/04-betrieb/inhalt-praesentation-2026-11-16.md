@@ -158,6 +158,12 @@ ein Defekt wirkt.
 
 ### 03 · schwer · `/teileklar` · Der Schaufenster-Shop ist für Suchmaschinen gesperrt
 
+> **Korrigiert am 16.11.2026, siehe Nachtrag 3, K3:** Die Sperre ist ein bewusstes,
+> dokumentiertes Gate (`apps/web/auth/indexing.ts`), kein Versäumnis. Die Frage, ob sie
+> beabsichtigt sei, und der Hinweis, sie nach dem Füllen des Sortiments zu entfernen,
+> sind zurückgenommen. Es bleibt der Widerspruch, dass die Seiten auf `/teileklar` als
+> Beweis verweisen, obwohl das Gate die Seite noch nicht freigibt.
+
 Zitat aus dem ausgelieferten HTML: `<meta name="robots" content="noindex, nofollow">`.
 
 `/teileklar` ist die **einzige** der 29 Seiten mit `noindex, nofollow`. Alle 28 anderen
@@ -455,6 +461,10 @@ Seiten für einen aufmerksamen Leser sichtbar ist.
 
 ### 13 · mittel · `/loesungen` · Die Adresse verspricht Lösungen, die Seite liefert eine Kampagnenseite
 
+> **Korrigiert am 16.11.2026, siehe Nachtrag 3, K4:** Dass `/loesungen` der Kampagnenweg
+> ist, ist eine Inhaberentscheidung vom 02.11.2026. Der Vorschlag, die Adresse
+> umzubenennen, ist als Maßnahme zurückgenommen; es bleibt eine Frage an den Inhaber.
+
 Zitate. Adresse `/loesungen`, Titel und H1: „**Kampagne und Zielseite aus einem Guss.**"
 Erster Abschnitt: „[H2] **Was das Paket Wachstum enthält**". Im Hauptmenü und in der
 Fußzeile erscheint die Seite unter „Landingpages & Kampagnen".
@@ -562,6 +572,11 @@ kein Wort.
 Dazu ein formaler Bruch: `/portale` ist die einzige Seite dieser Familie **ohne** den
 Block „Acht Fragen zu Ihrem Vorhaben", der auf zehn anderen Seiten steht.
 
+> **Korrigiert am 16.11.2026, siehe Nachtrag 3, K7:** Der unten stehende
+> Formulierungsvorschlag behauptet Verfügbarkeit, die nicht geprüft wurde, und ist
+> **zurückgezogen**. Vor einer „Heute nutzbar“-Aussage muss der angemeldete Bereich
+> geöffnet und Zustand für Zustand zurückgelesen werden.
+
 Maßnahme: Entweder konkret beschreiben, was im Kundenbereich heute vorhanden ist
 (Projektstand, Dokumente, Anfragen, Tagesberichte — und zwar in dieser Aufzählung, mit
 Kennzeichnung dessen, was vorbereitet ist), oder die Seite bis dahin aus dem öffentlichen
@@ -665,6 +680,10 @@ Kalendertage**. Erfolgt innerhalb der Prüffrist keine Rüge in Textform, gilt d
 als abgenommen." Für den Leser ist unklar, welche Frist gilt. Rechtsfrage, Abschnitt 6.
 
 ### 23 · leicht · `/agb` § 2 · Ein „Angebots-Generator", den es auf der Website nicht gibt
+
+> **Korrigiert am 16.11.2026, siehe Nachtrag 3, K6:** Die Funktion kommt im Repository vor;
+> der angemeldete Bereich wurde nicht geprüft. Der Vorschlag, die Klausel zu streichen, ist
+> zurückgenommen — er wäre zudem eine Änderung an einem Rechtstext gewesen.
 
 Zitat: „**KI-gestützte Angebotskalkulationen (Angebots-Generator)** sind unverbindliche
 Richtwerte und stellen kein bindendes Angebot dar." Ein Angebots-Generator kommt auf keiner
@@ -979,8 +998,13 @@ Een project dat past. · Websites, apps, shops en AI – vanuit wat uw bedrijf e
 heeft." Das ist sauberes Niederländisch, kein Maschinenton. Auch die Überschriften tragen:
 „U kent de kosten vóór de start." · „Drie pakketten. Een duidelijke omvang."
 
-**Befund 35 · mittel · alle Sprachfassungen · Die drei Paketnamen bleiben deutsch und
-stehen mitten im fremdsprachigen Satz.** Zitate, wörtlich aus der Auslieferung:
+**Befund 35 · Beobachtung · alle Sprachfassungen · Die drei Paketnamen bleiben deutsch.**
+
+> **Korrigiert am 16.11.2026, siehe Nachtrag 3, K5:** Die drei Namen sind kanonische
+> Paketnamen laut Entscheidung vom 02.11.2026, keine unfertige Übersetzung. Der
+> Vorschlag, sie je Sprache zu übersetzen, ist zurückgenommen. Es bleibt allein die
+> Markenfrage zu „KI im Betrieb“.
+ Zitate, wörtlich aus der Auslieferung:
 
 - Englisch: „**Markenstart, KI im Betrieb or Wachstum**: your goal becomes an order with
   named results, optional extras and costs you know before work starts."
@@ -1005,8 +1029,13 @@ zwei namenstaugliche Wörter und ein beschreibender Halbsatz — trägt nicht. D
 gehört an die Quelle `config/site-map.json` mit gleichem Schlüsselsatz in allen vier
 Sprachen (Skill `nexify-seitentexte`).
 
-**Befund 36 · mittel · alle Seiten · Vier Sprachen ohne eigene Adresse und ohne
-`hreflang`.** Gemessen: Im ausgelieferten HTML der Startseite steht **kein einziges
+**Befund 36 · ZURÜCKGEZOGEN · Die Sprachfassungen sind korrekt ausgezeichnet.**
+
+> **Dieser Befund ist am 16.11.2026 vollständig zurückgezogen, siehe Nachtrag 3, K2.**
+> `hreflang` ist vorhanden (`x-default`, de, nl, fr, en). Mein Suchmuster war
+> case-sensitiv, ausgeliefert wird `hrefLang`. Es gibt hier keinen Mangel und keine
+> Maßnahme. Der folgende Text ist nur zur Nachvollziehbarkeit erhalten und **gilt nicht**.
+ Gemessen: Im ausgelieferten HTML der Startseite steht **kein einziges
 `hreflang`-Attribut**. `/nl`, `/fr` und `/en` antworten mit 404; die Umschaltung läuft
 über `?lang=` und über den Sprachumschalter in der Kopfzeile.
 
@@ -1246,3 +1275,212 @@ Sichtbarmachen, nicht aus Neuschreiben. Die drei Maßnahmen in Abschnitt 7 und d
 in Befund 37 und 38 decken ihn fast vollständig ab.
 
 Stand Nachtrag 2: 16.11.2026, 03:20 UTC.
+
+---
+
+# Nachtrag 3 · 16.11.2026, 03:45 UTC · Sechs Korrekturen nach Gegenprüfung
+
+Der automatische Prüfer auf PR 212 hat sieben Einwände gegen diesen Bericht erhoben. Ich
+habe jeden an der Primärquelle nachgeprüft, statt ihn zu übernehmen oder abzutun. **Sechs
+treffen zu.** Sie sind unten einzeln korrigiert. Einer davon ist ein echter Messfehler von
+mir, die übrigen sind Fälle, in denen ich eine dokumentierte Entscheidung des Hauses für
+ein Versehen gehalten habe.
+
+Das ändert die drei Maßnahmen vor dem Gespräch (Abschnitt 7) **nicht**. Es entlastet aber
+die Arbeitsliste erheblich: Zwei Befunde entfallen ganz, drei werden zu Entscheidungsfragen
+statt zu Mängeln, und ein Vorschlag von mir war selbst ein Verstoß gegen die eigene
+Belegregel.
+
+## K2 · Befund 36 ist falsch und wird zurückgezogen · `hreflang` ist vorhanden
+
+Ich hatte geschrieben, im ausgelieferten HTML stehe „kein einziges `hreflang`-Attribut".
+**Das ist falsch.** Mein Suchmuster war auf Kleinschreibung festgelegt; ausgeliefert wird
+`hrefLang` in gemischter Schreibweise. Erneut gemessen, Startseite:
+
+```
+<link rel="alternate" hrefLang="x-default" href="https://www.nexifyai.de/"/>
+<link rel="alternate" hrefLang="de"  href="https://www.nexifyai.de/"/>
+<link rel="alternate" hrefLang="nl"  href="https://www.nexifyai.de/?lang=nl"/>
+<link rel="alternate" hrefLang="fr"  href="https://www.nexifyai.de/?lang=fr"/>
+<link rel="alternate" hrefLang="en"  href="https://www.nexifyai.de/?lang=en"/>
+```
+
+Die Auszeichnung ist vollständig: `x-default` plus alle vier Sprachen. Erzeugt wird sie in
+`apps/web/lib/page-seo.ts` (Zeilen 22 bis 25), und zwar nur für Sprachen, in denen Titel,
+Zusammenfassung und **alle** Abschnitte übersetzt sind — eine sauber gebaute Bedingung.
+
+**Befund 36 entfällt ersatzlos.** Es gibt kein Sichtbarkeitsproblem der Sprachfassungen
+und keine Maßnahme. Die Mehrsprachigkeit ist richtig umgesetzt. Mein Vorwurf, eine Agentur
+mit Sichtbarkeitsangebot habe die eigene Mehrsprachigkeit nicht ausgezeichnet, war
+unbegründet und wird zurückgenommen.
+
+Was von der Messung bleibt, ohne Wertung: `/nl`, `/fr` und `/en` antworten mit 404; die
+Sprachwahl läuft über `?lang=`, und genau diese Adressen stehen auch in der Auszeichnung.
+Das ist in sich stimmig.
+
+## K3 · Befund 03 war falsch eingeordnet · Die Indexierungssperre auf `/teileklar` ist ein bewusstes Gate
+
+Ich hatte gefragt, ob die Sperre beabsichtigt sei. Sie ist es, und zwar dokumentiert.
+`apps/web/auth/indexing.ts` sagt im Kopfkommentar: „5. für `/teileklar` zusätzlich
+`NEXIFY_INDEXING_TEILEKLAR=enabled` (**der Shop-Dienst antwortet in Produktion mit 503**)."
+Der Schalter ist eigens implementiert (`TEILEKLAR_INDEXING_SWITCH`, `teileklarIndexingOn`,
+Ablehnungsgrund `teileklar_switch_off`), und `docs/04-betrieb/indexierung-freigabe-2026-11-14.md`
+hält fest, dass TEILEKLAR bis zum Bestehen der shop-eigenen und der allgemeinen
+Freigabe gesperrt bleibt.
+
+**Damit ist die Sperre kein Versäumnis, sondern ein funktionierendes Schutzgate — und es
+tut genau das Richtige**, solange der Shop kein Sortiment führt. Meine Formulierung
+„Entscheidung des Inhabers einholen, ob die Sperre beabsichtigt ist" war falsch, und der
+Hinweis, sie gehöre nach dem Füllen des Sortiments entfernt, war gefährlich: Das Gate hängt
+nicht am Sortiment, sondern an der Freigabe.
+
+**Was als Befund bleibt, und es bleibt schwer:** Nicht die Sperre ist das Problem, sondern
+dass die öffentlichen Seiten eine Seite sechsmal verlinken und als Qualitätsbeweis
+anbieten, die nach eigener Betriebsentscheidung noch nicht öffentlich tragfähig ist. Der
+Widerspruch liegt zwischen `/unternehmen` („Dort zeigen wir im eigenen Shop, was wir für
+Kunden bauen") und dem Gate, nicht im Gate selbst.
+
+Die Maßnahme ändert sich entsprechend: **nicht** die Sperre lösen, sondern die Verweise und
+den Beweissatz zurücknehmen, bis das bestehende Gate von sich aus öffnet. Abschnitt 7
+Punkt 2 bleibt gültig, aber die Reihenfolge ist umgekehrt: erst Freigabe nach den
+vorhandenen Regeln, dann zeigen — nie umgekehrt.
+
+## K4 · Befund 13 ist keine Mängelmeldung, sondern eine Entscheidungsfrage · `/loesungen`
+
+`docs/design/factory-brand-revision-2026-11-02.md` hält als Nutzerweisung vom 02.11.2026
+fest: „**`/loesungen` ist der Kampagnenweg und führt zu Projektumfang/Kontakt.**"
+
+Die Adresse trägt also bewusst den Kampagneninhalt. Mein Vorschlag, sie nach
+`/leistungen/kampagnen` umzubenennen, würde eine Inhaberentscheidung aufheben, nicht einen
+Umsetzungsfehler beheben. **Zurückgenommen als Maßnahme.**
+
+Was als Beobachtung bleibt: Für einen Besucher, der „Lösungen" anklickt, ist eine
+Kampagnenseite überraschend, und dem Auftritt fehlt dadurch die Übersicht, die diese
+Adresse verspricht. Das ist eine Frage an den Inhaber, ob er die Entscheidung vom
+02.11.2026 fortschreiben oder ablösen will — keine Aufgabe für die Umsetzung. Die
+Einordnung in der Brotkrumenzeile („Produkte und Lösungen" auch für `/preise-ablauf`)
+bleibt davon unberührt und bleibt ein kleiner Mangel.
+
+## K5 · Befund 35 ist keine unfertige Übersetzung · Die drei Paketnamen sind gesetzt
+
+Dieselbe Quelle: „**Markenstart, KI im Betrieb und Wachstum sind Projektpakete mit
+vereinbartem Lieferumfang**; zusätzliche Inhalte, Sprachen, Integrationen und NeXify Care
+sind einzeln zugeordnete Optionen."
+
+Die drei Namen sind also kanonische Produktbezeichnungen, die über alle vier Sprachen
+gleich bleiben sollen — nicht drei vergessene deutsche Wortbrocken. **Mein Vorschlag, sie je
+Sprache zu übersetzen, hätte die sprachübergreifende Paketidentität zerstört und wird
+zurückgenommen.**
+
+Was als Beobachtung bleibt, und sie ist schwächer als zuvor behauptet: „Markenstart" und
+„Wachstum" funktionieren als Namen. „KI im Betrieb" ist ein beschreibender deutscher
+Halbsatz, und in „Markenstart, KI im Betrieb **or** Wachstum" liest ein englischsprachiger
+Leser ihn nicht als Namen. Ob das hingenommen wird, ist eine Markenfrage für den Inhaber,
+keine Korrektur. Wenn er sie je aufgreift, betrifft sie nur diesen einen Namen.
+
+## K6 · Befund 23 geht zu weit · Den Angebots-Generator nicht aus den AGB streichen
+
+Ich hatte vorgeschlagen, die AGB-Klausel zum „Angebots-Generator" zu streichen, weil die
+Funktion auf den 29 öffentlichen Seiten nicht vorkommt. Nachgeprüft: Sie kommt im
+Repository durchaus vor, unter anderem in `prototypen/i18n/cloud-v12.de.json` und
+`reference/handoff-n2/dokumentation/gesamtkonzept-2026-plattform-shop-one.md`
+(„Chat-Agent · Terminbuchung · E-Mail-Triage · **Angebots-Generator**").
+
+Mein Prüfumfang waren die öffentlichen Seiten; den angemeldeten Bereich habe ich
+ausdrücklich nicht geprüft (Abschnitt 8). Aus „kommt öffentlich nicht vor" folgt nicht
+„existiert nicht". **Zudem widerspricht der Vorschlag meiner eigenen Zusage, keine
+Rechtstexte zu ändern** — eine AGB-Klausel zu streichen ist genau das.
+
+Korrigierte Maßnahme: Prüfen, ob die Funktion im angemeldeten Produkt existiert. Wenn ja,
+ist die Klausel richtig und es fehlt höchstens der öffentliche Hinweis. Wenn nein, gehört
+die Klausel über die Rechtsprüfung, nicht über diesen Bericht. Der Befund bleibt als
+Beobachtung bestehen: Ein Leser der AGB findet eine Funktion geregelt, die er auf den
+Seiten nicht sieht.
+
+## K7 · Mein eigener Formulierungsvorschlag zu `/portale` war unbelegt
+
+In Befund 17 hatte ich vorgeschlagen zu schreiben: „Heute nutzbar: Projektstand und
+Dokumente zu Ihrem Auftrag. In Vorbereitung: Tagesberichte und Anfragen im Portal; bis
+dahin erhalten Sie den Tagesbericht per E-Mail."
+
+Das behauptet Verfügbarkeit, die ich **nicht geprüft habe** — Abschnitt 8 sagt ausdrücklich,
+dass hinter der Anmeldung nichts geprüft wurde. Damit hätte mein Vorschlag eine offene
+Frage in eine Kundenzusage verwandelt, also genau den Fehler wiederholt, den dieser Bericht
+an anderen Stellen rügt. **Der Vorschlag ist zurückgezogen.**
+
+Was stehen bleibt: `/portale` zeigt einem Interessenten nichts (Befund 17 im Kern
+unverändert). Bevor dort steht, was heute nutzbar ist, muss jemand den angemeldeten Bereich
+tatsächlich öffnen und Zustand für Zustand zurücklesen. Erst danach darf eine
+„Heute nutzbar"-Formulierung entstehen, und zwar aus dem, was zurückgelesen wurde.
+
+## K8 · Abschnitt 7 Punkt 3 wird präzisiert · Die AGB-Verlinkung hängt an der ganzen Freigabe
+
+Ich hatte geschrieben, `/agb`, `/avv` und `/widerruf` gehörten in die Fußzeile, „nach
+Klärung von Befund 06". Das greift zu kurz: In denselben AGB stehen nach diesem Bericht
+noch die offenen Punkte R2 bis R8 (Zahlungsziel, zwei Abnahmefiktionen, Verbraucherfrage,
+Transparenzwiderspruch, Rechtswahl). Würden die Dokumente prominent verlinkt, solange sie
+als Entwürfe gelten und einander widersprechen, könnte ein Interessent sie für die
+geltende Vertragsgrundlage halten.
+
+Präzisierte Maßnahme: Die Verlinkung ist richtig und nötig, aber sie gehört an **das
+vorhandene Freigabegate für die Rechtstexte** (R11), nicht an die Einzelklärung von Befund
+06. Vor dem Gespräch bleibt davon der Teil, der ohne Freigabe geht: dem Inhaber ist
+bewusst zu machen, dass sein bestes Argument — Tagessatz, Tagesbericht, tägliche
+Beendbarkeit — heute in einem Dokument liegt, das kein Besucher findet, und dass er es im
+Gespräch deshalb **selbst** vortragen muss.
+
+## Ein Fund aus der Gegenprüfung, der dem Inhaber hilft
+
+Beim Nachsehen zu K6 ist Material aufgetaucht, das für Befund 37 und 38 unmittelbar
+brauchbar ist. In `prototypen/i18n/cloud-v12.de.json` stehen bereits ausformulierte Texte
+des Hauses, die genau die Lücken füllen, die dieser Bericht benennt:
+
+- Zum Tagesbericht: „**TAGESBERICHT · 20:00 UHR**" und „Der Bericht liegt jeden Abend im
+  Kundenportal. Er ist der Leistungsnachweis zur Rechnung – nicht mehr, nicht weniger."
+- Zur Erfahrung, ganz ohne Kundennennung: „**ERFAHRUNGSBASIS · 20 JAHRE** · Kaufmännisch
+  gerundete, aggregierte Erfahrungswerte (Websites seit 2006, KI seit 2022)."
+- Und, bemerkenswert nah an der Weisung des Inhabers von heute Nacht: „**Kundennamen nennen
+  wir im Gespräch, nicht auf der Website – das ist Absicht, nicht Mangel.**"
+
+Der letzte Satz ist die beste Antwort auf die Frage, die ein empfohlener Interessent sich
+sonst stillschweigend stellt: Warum sehe ich hier keine Referenzen? Heute steht diese
+Antwort nirgends auf den 29 Seiten, und der Interessent bleibt mit der Frage allein.
+
+**Wichtige Einschränkung:** Diese Texte stammen aus Prototypenmaterial, sind nicht
+freigegeben, und Teile davon sind überholt (sie verwenden „NeXify AI one/one+", was nach
+D-011 Historie ist, und sie nennen Preise und eine BAFA-Förderung, die beide einer eigenen
+Prüfung bedürfen). Sie sind hier **kein Übernahmevorschlag**, sondern der Hinweis, dass die
+fehlenden Inhalte nicht neu erdacht werden müssen. Welche Sätze davon heute zutreffen,
+weiß nur der Inhaber.
+
+## Der siebte Einwand, dem ich nicht folge
+
+Zu `/produkte/api` hält der Prüfer mir entgegen, Projektbereitstellung und Prepaid-Guthaben
+seien miteinander vereinbar und kein Widerspruch. **Das stimmt**, und Befund 18 ist
+insoweit überzogen formuliert: „Den Zugang erhalten Sie im Rahmen eines Projekts" und
+„genutzt wird über ein Guthaben, das Sie vorab aufladen" können beide zutreffen — erst
+Einrichtung, dann verbrauchsabhängige Nutzung. Den Punkt nehme ich zurück.
+
+Nicht zurück nehme ich den Rest des Befunds, und er ist der eigentliche: Auf derselben
+Seite stehen „Die Tarife stehen noch zur Freigabe" und „**Die öffentliche Produktseite ist
+kein Nachweis, dass jede beschriebene Funktion bereits als API verfügbar ist.**" Der zweite
+Satz bleibt für einen empfohlenen Interessenten der schädlichste des Auftritts, unabhängig
+vom Abrechnungsmodell. Eine Produktseite, die ihre eigene Verbindlichkeit bestreitet,
+nimmt dem Leser die Grundlage, auf der er entscheiden könnte. Die Maßnahme bleibt: sagen,
+was heute steht, statt zu bestreiten, was nicht belegt ist.
+
+## Was diese Korrekturen für die Bewertung bedeuten
+
+Die 90-Prozent-Einschätzung in Nachtrag 2 ändert sich nur in einem Punkt: Die Station
+`/ki-hinweise` und die Sprachfassungen fallen als Verlustquellen weg. Kipppunkt bleibt
+`/preise-ablauf`, Bruch bleibt `/teileklar`. Beide sind von diesen Korrekturen nicht
+berührt und beide sind belegt.
+
+Und eine Einordnung, die nach der Gegenprüfung deutlicher ist als vorher: **In fünf von
+sechs Fällen habe ich eine bewusste, dokumentierte Entscheidung des Hauses für einen Mangel
+gehalten.** Das spricht für das Haus, nicht gegen es — hier ist mehr durchdacht und
+festgehalten, als von außen sichtbar wird. Es verschiebt den Schwerpunkt dieses Berichts:
+Das Problem ist seltener, dass etwas falsch entschieden wurde, und häufiger, dass eine
+richtige Entscheidung auf den Seiten nicht erkennbar wird.
+
+Stand Nachtrag 3: 16.11.2026, 03:45 UTC.
