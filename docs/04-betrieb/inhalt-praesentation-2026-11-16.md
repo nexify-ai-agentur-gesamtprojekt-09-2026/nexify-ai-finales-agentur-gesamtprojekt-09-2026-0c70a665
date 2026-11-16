@@ -411,9 +411,11 @@ Was daran nicht überzeugt, in drei Punkten:
    Kostenblock aufgehoben: Anbieter und Modelle werden ausdrücklich **nicht** genannt, und
    es kommt ein Aufschlag von 38 % hinzu. Wer beides liest, hält das Transparenzversprechen
    für Werbung.
-2. Die AGB sagen, Anbieternamen würden nicht genannt — der AVV auf derselben Website nennt
-   den vollständigen Stack einschließlich des Modellanbieters. Die beiden Dokumente
-   widersprechen sich direkt.
+2. **Korrigiert am 16.11.2026, siehe Nachtrag 2, Punkt K1:** Hier stand, die AGB und der
+   AVV widersprächen einander, weil der AVV den vollständigen Stack nennt. Das trifft
+   nicht zu. § 4.7 (1) regelt ausdrücklich nur, wie Posten **in der Rechnung**
+   bezeichnet werden; der AVV nennt Unterauftragsverarbeiter im datenschutzrechtlichen
+   Zusammenhang. Zwei verschiedene Sachverhalte, kein Widerspruch. Der Punkt entfällt.
 3. Der Aufschlag von 38 % ist für sich völlig vertretbar und begründet („Bereitstellung,
    Betrieb, Orchestrierung und Betreuung der KI-Infrastruktur"). Problematisch ist nur,
    dass er neben einem Versprechen steht, das das Gegenteil behauptet.
@@ -760,11 +762,21 @@ ein mitlesender Jurist des Interessenten hier zuerst hinsieht.
 
 ### 33 · leicht · `/avv` § 3 · Der vollständige technische Stack steht öffentlich
 
+**Dieser Befund ist am 16.11.2026 abgeschwächt worden, siehe Nachtrag 2, Punkt K1.**
+
 Zitat: „Cloudflare Inc., Supabase Inc., Resend Inc., **DeepSeek (über OpenRouter/9Router)**,
-Nscale (Embeddings), Hostinger (VPS Frankfurt/DE)." Die Nennung von Unterauftragsverarbeitern
-ist datenschutzrechtlich geboten. Festgehalten wird nur: Sie steht im Widerspruch zu `/agb`
-§ 4.7 (1) (Befund 11), und zusammen mit dem dort genannten Aufschlag von 38 % kann ein
-Leser die Kostenbasis abschätzen. Ob das gewollt ist, entscheidet der Inhaber.
+Nscale (Embeddings), Hostinger (VPS Frankfurt/DE)." Die Nennung von
+Unterauftragsverarbeitern ist datenschutzrechtlich geboten und hier richtig.
+
+Ein Widerspruch zu `/agb` § 4.7 (1) besteht **nicht**: Jene Klausel regelt nur die
+Bezeichnung von Posten **in der Rechnung**, nicht die Veröffentlichung von
+Unterauftragsverarbeitern. Die ursprüngliche Einordnung als Widerspruch war falsch.
+
+Es bleibt eine reine Beobachtung ohne Handlungsbedarf: Wer `/avv` und `/agb` § 4.7 (2)
+zusammen liest, kennt die eingesetzten Dienste und den Aufschlag von 38 % und kann die
+Kostenbasis grob abschätzen. Das ist eine Folge zutreffender Offenlegung, kein Fehler. Ob
+der Inhaber damit einverstanden ist, mag er entscheiden; eine Rechtsprüfung braucht es
+dafür nicht.
 
 ### 34 · leicht · Zehn Seiten · Derselbe Fragenblock mit wortgleichen Antworten
 
@@ -818,7 +830,7 @@ vorgeschlagen; die Entscheidung liegt beim Inhaber, bei Rechtsfragen nach Prüfu
 | R6 | `/agb` § 4.7 | 38 % Aufschlag und Nichtnennung von Anbieternamen gegen das öffentliche Transparenzversprechen (Befund 11). |
 | R7 | `/agb`, `/widerruf` gegen `/teileklar` | B2B-Ausschluss gegen Verbrauchershop mit Kasse, MwSt.-Preisen und Rückgabehinweis (Befund 12). |
 | R8 | `/agb` § 12 | Deutsche Vorschriften bei vereinbartem niederländischem Recht, „analog"-Verweise (Befund 32). |
-| R9 | `/avv` § 3 gegen `/agb` § 4.7 (1) | Öffentlich genannter Stack gegen Zusage der Nichtnennung (Befund 33). |
+| ~~R9~~ | ~~`/avv` § 3 gegen `/agb` § 4.7 (1)~~ | **Zurückgezogen am 16.11.2026** (Nachtrag 2, K1). Es liegt kein Widerspruch vor; § 4.7 (1) betrifft nur die Rechnung. Keine Rechtsprüfung nötig. |
 | R10 | `/preise-ablauf` | Entscheidung, ob der Tagessatz 449,00 € öffentlich genannt wird (Befund 04, 05). Rein kaufmännisch. |
 | R11 | Fußzeile aller Seiten | Freigabe von Impressum, Datenschutz, Vertragsgrundlagen, Cookies, damit der Unfertigkeitshinweis entfallen kann (Befund 01). |
 | R12 | `/teileklar` | Freigabe der Angaben zu Anbieter, Datenschutz und Verbraucherrechten im Shop (Befund 02, 12). |
@@ -827,6 +839,11 @@ vorgeschlagen; die Entscheidung liegt beim Inhaber, bei Rechtsfragen nach Prüfu
 ---
 
 ## 7. Die drei Dinge, die vor dem Gespräch unbedingt noch passieren müssen
+
+> **Ergänzt am 16.11.2026:** Nachtrag 2 nennt eine vierte Maßnahme, die billiger ist als
+> alle drei hier und fast ebenso viel bewirkt — das bereits vorhandene Abrechnungsmodell
+> und den Tagesbericht aus den AGB auf `/preise-ablauf` und `/wissen` sichtbar machen
+> (Befund 37 und 38). Sie braucht keine Inhaberentscheidung und keine Rechtsprüfung.
 
 **Erstens: Den Unfertigkeitshinweis aus der globalen Fußzeile und aus den Teaserkarten
 nehmen.** (Befund 01) Das ist die einzige Maßnahme, die den Gesamteindruck in einer Nacht
@@ -1019,3 +1036,213 @@ Kaufweg im Shop, die Seiten unterhalb von `/teileklar/`, und die Richtigkeit von
 KvK-Nummer und Umsatzsteuer-Identifikationsnummer gegen die Register.
 
 Stand Nachtrag 1: 15.11.2026, 22:50 UTC.
+
+---
+
+# Nachtrag 2 · 16.11.2026, 03:20 UTC · Geschärfter Maßstab, eine Korrektur, die 90-Prozent-Frage
+
+## Der Maßstab, den der Inhaber in der Nacht ergänzt hat
+
+Der Inhaber hat die vollständige Verkaufskette beschrieben. Sie ersetzt jede allgemeine
+Vorstellung davon, wofür die Seiten da sind. Wörtlich: „Wenn dann der erste Eindruck durch
+den Besuch auf unseren Webseiten des Interessenten, dem wir empfohlen wurden, passt, dann
+ist dieser Interessent schon zu 90 Prozent ein sicherer Kunde." Und: „nur wenn er das
+Gefühl durch alles das bekommt, dass er bei uns als Kunde wirklich das bekommt, was er
+sucht, hochwertige Lösungen und ausgeführte Arbeiten in hoher Qualität und das zu fairen
+Preisen, wird er auch unser Kunde, denn ohne dem wird er das niemals."
+
+Daraus folgt für die Bewertung: **Der Besucher ist kein kalter Zufallsgast, sondern ein
+Interessent mit Vertrauensvorschuss, der Bestätigung sucht.** Jede Stelle, die diesen
+Eindruck schwächt, ist Umsatzverlust, nicht Geschmacksfrage.
+
+Dieser Maßstab ändert die Bewertung der bereits erhobenen Befunde an einer Stelle
+grundlegend, und zwar zum Schlechteren: Ein kalter Besucher, der auf eine unfertige Stelle
+stößt, verliert wenig, weil er wenig erwartet hat. Ein empfohlener Interessent verliert
+viel, weil die Stelle der Empfehlung widerspricht, die ihn hergebracht hat. Er denkt nicht
+„das ist noch nicht fertig", sondern „offenbar ist hier nicht alles so, wie man mir gesagt
+hat". **Die Fallhöhe ist das Problem, nicht der Mangel an sich.**
+
+## K1 · Korrektur eines eigenen Befunds
+
+Der automatische Prüfer auf PR 212 hat zu Recht beanstandet, dass ich in Befund 11 (Punkt
+2), Befund 33 und dem Prüfauftrag R9 einen Widerspruch zwischen `/agb` § 4.7 (1) und
+`/avv` § 3 behauptet habe.
+
+Nachgelesen: § 4.7 (1) lautet „Die Kosten werden **in der Rechnung** einheitlich als
+‚NeXify AI Kosten' ausgewiesen; Drittanbieter-, Anbieter- oder Modellnamen werden nicht
+genannt." Die Klausel regelt die Bezeichnung von Rechnungsposten. Der AVV nennt
+Unterauftragsverarbeiter im datenschutzrechtlichen Zusammenhang. Zwei verschiedene
+Sachverhalte. **Es liegt kein Widerspruch vor; meine Einordnung war falsch.** Befund 11
+Punkt 2 ist gestrichen, Befund 33 abgeschwächt, R9 zurückgezogen. Damit entfällt ein
+Prüfauftrag an die Rechtsprüfung, der Zeit und Geld gekostet hätte.
+
+**Unberührt bleibt der Kern von Befund 11**, und er bleibt schwer: Startseite und
+`/preise-ablauf` versprechen, externe Kosten würden „offen ausgewiesen statt im
+Projektpreis versteckt"; § 4.7 fasst genau diese Kosten in der Rechnung unter einer
+einzigen Zeile „NeXify AI Kosten" zusammen, ohne Anbieternamen, zuzüglich 38 % Aufschlag,
+von dem auf den Seiten nichts steht. Gleicher Sachverhalt, gegenteilige Aussage.
+
+## Befund 37 · schwer · Startseite · Der faire Preis wird einmal versprochen und nie belegt
+
+Gemessen: Das Wort „fair" kommt auf allen 29 Seiten **genau einmal** vor, im gesprochenen
+Text des Startseitenfilms: „Guten Tag, ich bin Pascal. Wir bauen Websites, Shops und
+KI-Lösungen in **höchster Qualität und zu einem fairen Preis**. Erzählen Sie mir, woran Sie
+gerade arbeiten."
+
+Was daran nicht überzeugt: Der Inhaber nennt faire Preise ausdrücklich als Kaufgrund, und
+der Auftritt nennt sie auch — einmal, gesprochen, in der ersten Minute. Danach folgt auf
+28 Seiten keine einzige Zahl, keine Spanne, kein Abrechnungsmodell, keine Größenordnung
+(Befund 04, 05). Fairness ist aber nichts, was man behaupten kann; sie entsteht beim
+Leser erst, wenn er etwas nachrechnen oder einordnen kann. Ein Preisversprechen ohne jede
+Bezugsgröße ist für einen Geschäftsführer eine Werbefloskel — und zwar die eine Floskel,
+die ihm am meisten auffällt, weil er den Preis wissen will.
+
+Besonders bitter: Das Modell, das Fairness tatsächlich belegen würde, existiert bereits
+und ist ungewöhnlich gut — Tagessatz, täglicher Leistungsnachweis, Zahlung nur für
+dokumentierte Arbeit, tägliche Beendbarkeit, kein Mindestzeitraum, Mehraufwand nur nach
+schriftlicher Freigabe („Niemals nach der Ausführung", `/agb` § 4.6 (3)). Es steht
+vollständig in den AGB, und die AGB sind von keiner Seite aus erreichbar (Befund 05).
+
+**Der Auftritt behauptet Fairness an der einen Stelle, wo sie unbelegbar ist, und
+verschweigt sie an der einen Stelle, wo sie beweisbar wäre.**
+
+Maßnahme: Das Abrechnungsmodell auf `/preise-ablauf` in eigenen Worten darstellen — ohne
+Zahl ist es schon ein starkes Argument, mit Zahl ein sehr starkes. Formulierungsvorschlag
+ohne Preisangabe, falls der Inhaber die Zahl nicht öffentlich nennen will: „Wir rechnen
+nach Arbeitstagen ab. Jeden Abend erhalten Sie einen Tagesbericht mit dem, was an diesem
+Tag entstanden ist, und der Rechnung dazu. Sie zahlen nur für dokumentierte Arbeit. Mehr
+Aufwand als vereinbart stimmen wir vorher mit Ihnen ab, nie hinterher. Und Sie können das
+Projekt mit jedem Arbeitstag beenden." Die Entscheidung über die Nennung des Tagessatzes
+bleibt R10.
+
+## Befund 38 · schwer · Alle Seiten · „Beste Betreuung und stets informierte Kunden" ist auf den Seiten unsichtbar
+
+Gemessen: „Tagesbericht" kommt auf allen 29 Seiten **nur in `/agb`** vor. „auf dem
+Laufenden" kommt **nirgends** vor. Die Betreuung nach der Übergabe heißt an drei Stellen
+„NeXify Care" und ist nirgends beschrieben (Befund 24).
+
+Was auf den Seiten zur Betreuung steht, ist allgemein: „Pflege, Weiterentwicklung und
+persönliche Unterstützung werden als eigener, nachvollziehbarer Baustein vereinbart."
+(Startseite) · „Wir prüfen, übergeben und bleiben erreichbar." (Startseite) · „Pflege und
+Aktualisierung übernehmen Sie selbst oder vereinbaren sie mit NeXify Care." (`/wissen`)
+
+Was daran nicht überzeugt: Der Inhaber zählt „beste Betreuung und stets informierte
+Kunden" zum Angebot. Ein empfohlener Interessent, der wöchentlich Aufträge vergeben will,
+hat genau dazu die konkreteste Frage: Woher weiß ich jeden Tag, woran gearbeitet wird und
+was es kostet? Darauf gibt es eine sehr gute Antwort — den Tagesbericht bis 20:00 Uhr mit
+Zusammenfassung, Projektstand, nächsten Schritten und offenen Entscheidungen (`/agb`
+§ 4.1 (1)). Diese Antwort steht ausschließlich im unauffindbaren Vertragstext. Auf den
+Seiten, die der Interessent liest, ist von ihr keine Spur.
+
+Maßnahme: Den Tagesbericht als Leistungsmerkmal auf `/wissen` („So arbeiten wir.") und auf
+`/preise-ablauf` beschreiben, und NeXify Care mit Inhalt füllen oder den Namen weglassen.
+Das kostet keine Entscheidung des Inhabers und keine Rechtsprüfung — der Inhalt existiert
+bereits und muss nur dorthin, wo er gelesen wird.
+
+## Befund 39 · schwer · FACTORY als Versprechen · Was gezeigt wird, hält nicht, was es ankündigt
+
+Der Inhaber sagt, Lösungen, Suite, Portale, Marketing und alle Darstellungen zeigen vorab,
+was den Kunden erwartet. Gemessen an diesem Maßstab, Stück für Stück:
+
+| Was gezeigt wird | Was ein Interessent daraus schließt | Was er tatsächlich vorfindet |
+|---|---|---|
+| „die FACTORY" im Hauptmenü, „Leistungen der FACTORY" | Ein Leistungssystem mit Namen | Der Begriff wird im Menü verwendet und erst auf `/unternehmen` erklärt (Befund 16) |
+| NeX AIFly Suite, „24 Stunden testen", „Konto erstellen" | Ein Produkt, das er heute ausprobieren kann | Vier Einschränkungen auf einer Seite: Konto öffnet keinen Bereich, Aktivierung nötig, Bestätigung nötig, „die Tarife stehen noch zur Freigabe" (Befund 18-Logik, `/produkte/nex2fly`) |
+| `/portale` „Hier finden Sie Ihren Einstieg." | Ein Blick in den Kundenbereich | Nur ein Anmeldeknopf, keine einzige Ansicht, kein Funktionsumfang (Befund 17) |
+| NeXify API, „Guthaben, das Sie vorab aufladen" | Ein Prepaid-Produkt | „Den Zugang erhalten Sie im Rahmen eines Projekts, nicht über diese Seite", Tarife offen, und die Seite bestreitet selbst ihre Verbindlichkeit (Befund 18) |
+| AIFly ORACLE im Chat auf jeder Seite | Die KI der KI-Agentur, vorgeführt am eigenen Haus | Nach eigener Angabe auf `/ki-hinweise` ohne Live-KI-Modell (Befund 07) |
+| TEILEKLAR, sechsmal von der Startseite verlinkt, „Dort zeigen wir im eigenen Shop, was wir für Kunden bauen" | Der Beweis, ein fertiges Werk | Null Artikel, dauerhaft „Das Schaufenster wird geladen …", nicht von einem Defekt zu unterscheiden (Befund 02, N1) |
+
+Was daran nicht überzeugt: Für einen kalten Besucher wäre jede Zeile dieser Tabelle ein
+kleiner Mangel. Für einen empfohlenen Interessenten ist die Tabelle als Ganzes das
+Gegenteil der Empfehlung. Sechs von sechs Vorführungen bleiben hinter ihrer Ankündigung
+zurück — und es sind genau die sechs, die laut Inhaber zeigen sollen, was den Kunden
+erwartet. **Die FACTORY ist heute kein Versprechen, das vorab eingelöst wird, sondern eine
+Ankündigungsliste.**
+
+Maßnahme: Für jede Zeile entscheiden, ob sie heute gezeigt oder bis zur Tragfähigkeit
+zurückgestellt wird. Ein ehrlich gekennzeichnetes „in Vorbereitung" neben zwei tragenden
+Vorführungen wirkt stärker als sechs Ankündigungen, von denen keine hält. Die Reihenfolge
+ergibt sich aus Abschnitt 7.
+
+## Die 90-Prozent-Frage: Bleibt der empfohlene Interessent bei seinen 90 Prozent?
+
+Kurz: **Nein.** Er steigt in den ersten Minuten sogar noch, verliert dann ab der Preisseite
+stetig, und bricht bei TEILEKLAR ein. Nach Einschätzung dieser Prüfung kommt er am Ende
+nicht als 90-Prozent-Kunde beim Kontaktformular an, sondern als jemand, der das Gespräch
+führen will, um herauszufinden, was denn nun stimmt — also mit genau der Unsicherheit, die
+die Empfehlung ihm eigentlich erspart hatte.
+
+Das ist eine Einschätzung aus dem Textbefund, keine Messung. Hier ist der Weg, Station für
+Station:
+
+**Startseite — der Vorschuss hält, er wächst sogar.** „Ein Gespräch. Ein Projekt, das
+passt." sagt in zehn Sekunden, was er wissen muss. Der gesprochene Satz von Pascal, die
+Zusammenarbeitsstrecke von „Wir verstehen, was Sie erreichen möchten" bis „Wir prüfen,
+übergeben und bleiben erreichbar", der Ton ohne Angeberei: Das bestätigt, was ihm erzählt
+wurde. Hier ist der Auftritt stark. Einzige Delle: der Hinweis in der Fußzeile, dass
+Pflichtangaben und Rechtstexte noch zur Prüfung stehen — ein kleiner Stich, den er noch
+wegsteckt.
+
+**Leistungen und die drei Leistungsseiten — hält.** Konkret, ohne Floskeln, mit sauber
+benannten Grenzen („Ein bestimmtes Suchmaschinenranking wird nicht zugesagt"). Ein
+Geschäftsführer liest hier Handwerk. Er ist weiter bei seinen 90 Prozent.
+
+**Erster Verlust: `/leistungsumfang`.** Er klickt „Pakete vergleichen", weil er genau das
+jetzt will. Er findet drei Pakete mit je einem Satz und nichts zu vergleichen. Er merkt
+sich: Die Frage nach dem Umfang bleibt offen.
+
+**Zweiter und größter Verlust: `/preise-ablauf`.** Die Seite heißt „Sie kennen die Kosten
+vor dem Start." und enthält keine Zahl. Dann liest er „Der Tagessatz ist kein
+Gesamtpreis" — und kennt keinen Tagessatz. In diesem Moment kippt etwas: Nicht, weil der
+Preis fehlt, sondern weil die Seite ihn ankündigt und dann nicht liefert. Das ist der
+Punkt, an dem aus Vertrauensvorschuss Prüfhaltung wird. Ab hier liest er anders.
+
+**Dritter Verlust: die Produkt- und Portalseiten.** Jetzt, in Prüfhaltung, fallen ihm die
+Sätze auf, über die er vorher hinweggelesen hätte: „Die Tarife stehen noch zur Freigabe"
+dreimal, „Die öffentliche Produktseite ist kein Nachweis, dass jede beschriebene Funktion
+bereits als API verfügbar ist", `/portale` ohne einen einzigen Einblick. Er beginnt zu
+zählen, wie oft hier etwas noch nicht fertig ist.
+
+**Der Bruch: TEILEKLAR.** Er klickt, weil `/unternehmen` ihm sagt, dort werde gezeigt, was
+NeXify für Kunden baut. Er findet einen Shop mit Suche, Kategorien, Warenkorb, Kasse und
+Zahlungsanbieter — und „Das Schaufenster wird geladen …", das stehen bleibt. Er kann nicht
+unterscheiden, ob der Shop leer oder kaputt ist. Für ihn ist beides dasselbe Signal, und
+es ist das schwerste, das es gibt: **Das eigene Werk, das als Beweis angeboten wird,
+funktioniert nicht.** Hier verliert die Empfehlung ihre Deckung. Wer ihm NeXify empfohlen
+hat, hat von hoher Qualität gesprochen; was er sieht, sieht nach dem Gegenteil aus.
+
+**Der Rest: `/kontakt`.** Eine Überschrift ohne Einleitungssatz, keine Telefonnummer, eine
+Zustimmung zu einer Datenschutzerklärung, die die Seite selbst „noch in Prüfung" nennt,
+und die Zusage einer Vorgangsnummer, die seit dem 14.11.2026 nicht neu belegt ist. Der
+letzte Schritt ist der unsicherste des ganzen Weges.
+
+**Wo genau er Vertrauen verliert, in einem Satz je Station:**
+
+| Station | Wirkung | Befund |
+|---|---|---|
+| Startseite | hält, baut auf | — |
+| `/leistungen`, `/leistungen/*` | hält | — |
+| `/leistungsumfang` | erste Enttäuschung: angekündigter Vergleich fehlt | 04 |
+| `/preise-ablauf` | Kipppunkt: Preis angekündigt, nicht geliefert; Tagessatz ohne Zahl | 04, 05, 37 |
+| Produktseiten | Zweifel verfestigt sich: dreimal „Tarife noch zur Freigabe", Seite bestreitet sich selbst | 18, 39 |
+| `/portale` | nichts zu sehen, nur Anmeldung | 17 |
+| **`/teileklar`** | **Bruch: der angebotene Beweis wirkt defekt** | **02, 03, N1, 39** |
+| `/ki-hinweise` | nachträglicher Stich: der KI-Assistent der KI-Agentur läuft ohne Modell | 07 |
+| `/kontakt` | unsicherer Abschluss: kein Telefon, kein Einstiegssatz, unbelegte Zusage | 08, 09, 20 |
+| alle Seiten, durchgehend | Grundrauschen: mindestens zweimal je Seite „noch nicht fertig" | 01 |
+
+**Die gute Nachricht, und sie ist größer als die Befundliste vermuten lässt:** Keiner
+dieser Verluste entsteht aus schwacher Arbeit, schlechtem Text oder fehlender Substanz.
+Die Texte sind gut, das Vorgehen ist durchdacht, das Abrechnungsmodell ist überdurchschnittlich
+fair und der Ton stimmt. Die Verluste entstehen fast durchweg daraus, dass **Vorhandenes
+nicht gezeigt** und **Angekündigtes nicht eingelöst** wird. Das Abrechnungsmodell liegt in
+unauffindbaren AGB. Der Tagesbericht steht nur im Vertragstext. Der Shop hat eine fertige
+Oberfläche und keine Artikel. Die Rechtstexte sind geschrieben und nicht freigegeben.
+
+Das heißt: Der Abstand zwischen dem heutigen Eindruck und dem, den der Inhaber braucht,
+ist **kleiner, als er aussieht** — er besteht überwiegend aus Umhängen, Freigeben und
+Sichtbarmachen, nicht aus Neuschreiben. Die drei Maßnahmen in Abschnitt 7 und die beiden
+in Befund 37 und 38 decken ihn fast vollständig ab.
+
+Stand Nachtrag 2: 16.11.2026, 03:20 UTC.
