@@ -140,6 +140,7 @@ class Mapping(unittest.TestCase):
         self.assertIs(product["active"], True)
         self.assertIs(product["buyable"], False)
         self.assertNotIn("purchase_cents", product)
+        self.assertEqual(product["bigbuy_id"], "S0000012")  # eindeutiger Index des Namensraums, Wert aus der Quelle
 
 
 class Writing(unittest.TestCase):

@@ -258,7 +258,9 @@ def map_item(item, verified=None):
     specs = item.get("specs") if isinstance(item.get("specs"), list) else []
     details = {s["label"]: s["value"] for s in specs if isinstance(s, dict) and isinstance(s.get("label"), str) and isinstance(s.get("value"), str)}
     cid = category_id(category.strip())
-    product = {"_id": pid, "name": name.strip(), "sku": str(item.get("sku") or ""), "ean": str(item.get("ean") or ""),
+    # bigbuy_id: der Namensraum verlangt einen eindeutigen, nicht lückenhaften Index auf diesem Feld (vercel_app.INDEXES). Die Quelle
+    # führt die numerische BigBuy-Kennung nicht; eingetragen wird ihre BigBuy-Artikelnummer (Kennung = sku, gemessen 3713/3713) als Text.
+    product = {"_id": pid, "bigbuy_id": pid, "name": name.strip(), "sku": str(item.get("sku") or ""), "ean": str(item.get("ean") or ""),
                "brand": item.get("brand"), "maker": item.get("maker"), "images": [image], "category_id": cid, "category_ids": [cid],
                "stock": stock, "list_price_cents": cents, "list_price_status": LIST_PRICE_APPROVED, "details": details,
                "description": "", "active": bool(verified and verified.get(image)), "image_verified": bool(verified and verified.get(image)),
@@ -303,6 +305,8 @@ def check_product(doc):
     reasons = []
     if not isinstance(doc.get("_id"), str) or not ID_PATTERN.fullmatch(doc["_id"]):
         reasons.append("Kennung ist kein Text")
+    elif doc.get("bigbuy_id") != doc["_id"]:
+        reasons.append("Lieferantenkennung (bigbuy_id) fehlt")
     if not isinstance(doc.get("name"), str) or not doc["name"].strip():
         reasons.append("Name fehlt")
     if type(doc.get("list_price_cents")) is not int or doc["list_price_cents"] <= 0:

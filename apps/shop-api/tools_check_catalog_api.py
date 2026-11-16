@@ -39,11 +39,12 @@ async def main(snapshot_path, report_path):
                                       "price_status": sorted({p["price_status"] for p in first["items"]}),
                                       "in_stock_first": [p["id"] for p in first["items"][:5]]}
         # Alle Seiten: jeder gelistete Artikel hat Preis und Bild
-        seen, missing_price, missing_image, page = 0, [], [], 1
+        seen, missing_price, missing_image, page, listed_ids = 0, [], [], 1, []
         while True:
             body = (await client.get("/api/shop/products", params={"page_size": 60, "page": page})).json()
             for p in body["items"]:
                 seen += 1
+                listed_ids.append(p["id"])
                 if p["price_cents"] is None:
                     missing_price.append(p["id"])
                 if not p["image"]:
@@ -53,7 +54,7 @@ async def main(snapshot_path, report_path):
             page += 1
         out["all_pages"] = {"listed": seen, "without_price": missing_price[:20], "without_image": missing_image[:20]}
         # Stichprobe 20 über die Detailseite gegen die Quelle
-        ids = sorted(items)
+        ids = sorted(listed_ids)
         chosen = ids[::max(1, len(ids) // 20)][:20]
         rows = []
         for pid in chosen:
@@ -71,7 +72,7 @@ async def main(snapshot_path, report_path):
                          "stock": detail.get("stock"), "image": detail.get("image"), "checks": checks, "equal": all(checks.values())})
         out["detail_sample"] = rows
         # Warenkorb: übernommener Artikel ist nicht bestellbar
-        some = next(p for p in ids if items[p]["stock"] and items[p]["stock"] > 0)
+        some = next((p for p in ids if items[p]["stock"] and items[p]["stock"] > 0), ids[0])
         resp = await client.post("/api/shop/cart/items", json={"product_id": some, "quantity": 1}, headers={"origin": "https://nexifyai.de"})
         out["cart_add_imported"] = {"product": some, "status": resp.status_code, "body": resp.json()}
     Path(report_path).write_text(json.dumps(out, ensure_ascii=False, indent=1), encoding="utf-8")
