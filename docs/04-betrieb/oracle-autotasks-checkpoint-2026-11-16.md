@@ -271,3 +271,14 @@ Ordnern; keiner wird Cloud-Sitzungen angeboten (`not_available`). Eine auf dem R
 Sitzung hätte Zugriff auf die lokale MCP-Lösung der Lovable-Desktop-App **und** auf den eigenen
 SSH-Schlüssel des Inhabers. Damit wäre NX-ORA-02 ohne neuen Schlüssel auf der Produktionsmaschine
 ausführbar. Das ist der empfohlene Weg für den Serverzugang.
+
+## 11. Nachtrag 16.11.2026, ca. 15:20 UTC
+
+- **NX-MCP-01 abgeschlossen:** Inhaber bestätigt um ca. 15:18 UTC, dass `https://nexifyai.de/mcp` als
+  Connector „Nexfiy Ai Studio“ verbunden ist. Technische Messung 15:03 UTC: `POST /mcp` ohne Token → 401
+  mit `WWW-Authenticate … resource_metadata`, Protected-Resource-Metadata 200, Authorization-Server-Metadata
+  200 (Registrierung, PKCE S256). Ein Aufruf im Browser zeigt erwartungsgemäß 401.
+- **Inhaber-Delegation 15:03 UTC („Eigenständig. entscheide“):** Planfreigabe NX-LEAD-01 erteilt; Admin-UPDATE
+  nur auf Statusspalte(n) der Anfragen beschlossen; Chat-Modell der Website bleibt vorerst
+  `openai/gpt-6-astra`, Umstellung auf DeepSeek nur bei vorhandenem 9router-Zugang im Website-Projekt;
+  Prüfsperren in PR #216 bleiben aktiv (kein Hash-Refresh ohne neuen Nachweis, BigBuy unberührt).
