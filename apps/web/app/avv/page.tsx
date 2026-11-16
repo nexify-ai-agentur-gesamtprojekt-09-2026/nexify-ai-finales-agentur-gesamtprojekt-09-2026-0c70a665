@@ -62,11 +62,11 @@ export default function AvvPage() {
             </section>
           ))}
         </article>
-        <footer className="pc-hero-actions">
+        <div className="pc-hero-actions">
           {(doc.related ?? []).map(link => (
             <Link key={link.href} className="hc-text-link" href={link.href}>{link.label}<HcArrow/></Link>
           ))}
-        </footer>
+        </div>
       </section>
     </div>
   );

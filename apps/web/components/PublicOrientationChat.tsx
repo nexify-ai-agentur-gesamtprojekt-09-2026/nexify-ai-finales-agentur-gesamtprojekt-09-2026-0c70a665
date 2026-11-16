@@ -19,7 +19,7 @@ const copy={
     "mode": "Leistungen finden",
     "intro": "Erzählen Sie mir von Ihrem Unternehmen und Ihrem Vorhaben. Ich helfe Ihnen, passende Leistungen zu finden und Ihr Gespräch mit Pascal vorzubereiten.",
     "label": "Wobei können wir Ihnen helfen?",
-    "placeholder": "Zum Beispiel: Ich möchte meine Website erneuern …",
+    "placeholder": "Ihre Nachricht …",
     "send": "Nachricht senden",
     "stop": "Antwort anhalten",
     "waiting": "Passende Informationen werden geladen …",
@@ -35,7 +35,7 @@ const copy={
     "mode": "Diensten vinden",
     "intro": "Vertel me over uw bedrijf en uw plannen. Ik help u passende diensten te vinden en uw gesprek met Pascal voor te bereiden.",
     "label": "Waarmee kunnen we u helpen?",
-    "placeholder": "Bijvoorbeeld: Ik wil mijn website vernieuwen …",
+    "placeholder": "Uw bericht …",
     "send": "Bericht versturen",
     "stop": "Antwoord onderbreken",
     "waiting": "Passende informatie wordt geladen …",
@@ -51,7 +51,7 @@ const copy={
     "mode": "Trouver une prestation",
     "intro": "Parlez-moi de votre entreprise et de votre projet. Je vous aide à trouver les services adaptés et à préparer votre échange avec Pascal.",
     "label": "Comment pouvons-nous vous aider ?",
-    "placeholder": "Par exemple : je souhaite refaire mon site …",
+    "placeholder": "Votre message …",
     "send": "Envoyer le message",
     "stop": "Suspendre la réponse",
     "waiting": "Chargement des informations pertinentes…",
@@ -67,7 +67,7 @@ const copy={
     "mode": "Find a service",
     "intro": "Tell me about your business and what you have in mind. I can help you find relevant services and prepare your conversation with Pascal.",
     "label": "How can we help?",
-    "placeholder": "For example: I would like to update my website …",
+    "placeholder": "Your message …",
     "send": "Send message",
     "stop": "Pause response",
     "waiting": "Loading relevant information …",
@@ -98,10 +98,10 @@ function ComposerNote({locale,site,pages,children}:{locale:Locale;site:"nexify"|
 
 // TEILEKLAR-specific overrides for the default-visible orientation chat (vehicle/part/workshop context).
 const tkCopy={
- de:{title:"Willkommen bei TEILEKLAR",intro:"Willkommen bei TEILEKLAR. Worum geht es bei Ihnen: ein Ersatzteil, ein Werkstattbesuch oder eine Zusammenarbeit? Bei einer Teile- oder Werkstattfrage nennen Sie bitte Ihr Fahrzeug und beschreiben Sie Ihr Anliegen. Eine vorhandene Teilenummer hilft bei der Zuordnung.",label:"Ihr Fahrzeug-/Teile-Anliegen",placeholder:"Fahrzeug und gesuchtes Teil nennen …"},
- nl:{title:"Welkom bij TEILEKLAR",intro:"Welkom bij TEILEKLAR. Waar gaat het bij u om: een onderdeel, een werkplaatsbezoek of een samenwerking? Bij een onderdeel- of werkplaatsvraag: noem uw voertuig en beschrijf uw vraag. Een bestaand onderdeelnummer helpt bij de toewijzing. Online bestellen is momenteel niet mogelijk.",label:"Uw voertuig-/onderdeelvraag",placeholder:"Voertuig en gezocht onderdeel noemen …"},
- fr:{title:"Bienvenue chez TEILEKLAR",intro:"Bienvenue chez TEILEKLAR. Que recherchez-vous : une pièce, une visite en atelier ou une collaboration ? Pour une demande de pièce ou d’atelier, indiquez votre véhicule et décrivez votre demande. Un numéro de pièce existant facilite l’affectation. La commande en ligne n’est pas possible actuellement.",label:"Votre demande véhicule/pièce",placeholder:"Indiquez le véhicule et la pièce recherchée …"},
- en:{"title": "Welcome to TEILEKLAR", "intro": "Welcome to TEILEKLAR. What is it about for you: a spare part, a workshop visit or a partnership? For a parts or workshop question, please name your vehicle and describe your request. An existing part number helps with the assignment. Online ordering is currently not possible.", "label": "Your vehicle/part request", "placeholder": "Enter the vehicle and the part you need …"}
+ de:{title:"Willkommen bei TEILEKLAR",intro:"Willkommen bei TEILEKLAR. Worum geht es bei Ihnen: ein Ersatzteil, ein Werkstattbesuch oder eine Zusammenarbeit? Bei einer Teile- oder Werkstattfrage nennen Sie bitte Ihr Fahrzeug und beschreiben Sie Ihr Anliegen. Eine vorhandene Teilenummer hilft bei der Zuordnung.",label:"Ihr Fahrzeug-/Teile-Anliegen",placeholder:"Ihre Anfrage …"},
+ nl:{title:"Welkom bij TEILEKLAR",intro:"Welkom bij TEILEKLAR. Waar gaat het bij u om: een onderdeel, een werkplaatsbezoek of een samenwerking? Bij een onderdeel- of werkplaatsvraag: noem uw voertuig en beschrijf uw vraag. Een bestaand onderdeelnummer helpt bij de toewijzing. Online bestellen is momenteel niet mogelijk.",label:"Uw voertuig-/onderdeelvraag",placeholder:"Uw aanvraag …"},
+ fr:{title:"Bienvenue chez TEILEKLAR",intro:"Bienvenue chez TEILEKLAR. Que recherchez-vous : une pièce, une visite en atelier ou une collaboration ? Pour une demande de pièce ou d’atelier, indiquez votre véhicule et décrivez votre demande. Un numéro de pièce existant facilite l’affectation. La commande en ligne n’est pas possible actuellement.",label:"Votre demande véhicule/pièce",placeholder:"Votre demande …"},
+ en:{"title": "Welcome to TEILEKLAR", "intro": "Welcome to TEILEKLAR. What is it about for you: a spare part, a workshop visit or a partnership? For a parts or workshop question, please name your vehicle and describe your request. An existing part number helps with the assignment. Online ordering is currently not possible.", "label": "Your vehicle/part request", "placeholder": "Your request …"}
 };
 const staticModeLabel:Record<Locale,string>={de:'Orientierung anhand der Website · ohne Live-KI',nl:'Oriëntatie op basis van de website · zonder live AI',fr:'Orientation selon le site · sans IA en direct',en:'Website-based guidance · no live AI'};
 const starters={
@@ -486,7 +486,7 @@ function ServerOrientationChat({locale,pagePath,pages,onActivityChange,onUnavail
   {turns.length===0&&!busy&&<OrientationJourney locale={locale} site={site} step={-1} quiet/>}
   {turns.length>0&&!busy&&<div className="orientation-followup">{site==="nexify"&&!latestBriefing&&users.length>=2&&!problem&&<button type="button" className="outline-button" onClick={()=>void send(state.briefRequest)}>{state.brief}</button>}<button type="button" className="text-button orientation-restart" onClick={restart}>{state.restart}</button></div>}
   </div>
-  <form className="orientation-composer" onSubmit={submit}><label htmlFor="orientation-message">{text.label}</label><textarea ref={composerInput} id="orientation-message" maxLength={MESSAGE_LIMIT} rows={1} value={draft} onChange={event=>setDraft(event.target.value)} onKeyDown={onKeyDown} placeholder={turns.length?state.reply:text.label} aria-describedby="orientation-keys" enterKeyHint="send" required/><span id="orientation-keys" className="visually-hidden">{state.keys}</span><div className="orientation-composer-actions">{draft.length>=MESSAGE_LIMIT-100&&<span className="orientation-counter" aria-live="polite">{draft.length}/{MESSAGE_LIMIT} <span className="visually-hidden">{state.counter}</span></span>}{busy?<button key="stop" type="button" className="outline-button" data-testid="chat-stop" onClick={stop}>{text.stop}</button>:<button key="send" className="primary-button" data-testid="chat-send" disabled={!draft.trim()||(phase==="limited"&&waiting)} aria-label={text.send}><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><path d="M4 12h16m-7-7 7 7-7 7"/></svg></button>}</div></form>
+  <form className="orientation-composer" onSubmit={submit}><label htmlFor="orientation-message">{text.label}</label><textarea ref={composerInput} id="orientation-message" maxLength={MESSAGE_LIMIT} rows={1} value={draft} onChange={event=>setDraft(event.target.value)} onKeyDown={onKeyDown} placeholder={turns.length?state.reply:text.placeholder} aria-describedby="orientation-keys" enterKeyHint="send" required/><span id="orientation-keys" className="visually-hidden">{state.keys}</span><div className="orientation-composer-actions">{draft.length>=MESSAGE_LIMIT-100&&<span className="orientation-counter" aria-live="polite">{draft.length}/{MESSAGE_LIMIT} <span className="visually-hidden">{state.counter}</span></span>}{busy?<button key="stop" type="button" className="outline-button" data-testid="chat-stop" onClick={stop}>{text.stop}</button>:<button key="send" className="primary-button" data-testid="chat-send" disabled={!draft.trim()||(phase==="limited"&&waiting)} aria-label={text.send}><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><path d="M4 12h16m-7-7 7 7-7 7"/></svg></button>}</div></form>
   <p className="connection-note orientation-status" role="status">{busy?state.thinking:""}</p><p className="connection-note"><ComposerNote locale={locale} site={site} pages={pages}>{text.privacy}</ComposerNote></p>
  </section>;
 }
@@ -544,7 +544,7 @@ function StaticOrientationChat({locale,pagePath,pages,onActivityChange,unavailab
   {messages.length===0&&<OrientationStarters locale={locale} site={site} label={text.label} chosen={draft} onChoose={seed=>{setDraft(seed);input.current?.focus();}}/>}
   {messages.length===0&&<OrientationJourney locale={locale} site={site} step={-1} quiet/>}
   </div>
-  <form className="orientation-composer" onSubmit={submit}><label htmlFor="orientation-message">{text.label}</label><textarea ref={input} id="orientation-message" maxLength={1000} rows={1} value={draft} onChange={event=>setDraft(event.target.value)} placeholder={text.label} required/><div className="orientation-composer-actions"><button className="primary-button" disabled={!draft.trim()} aria-label={text.send}><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><path d="M4 12h16m-7-7 7 7-7 7"/></svg></button></div></form>
+  <form className="orientation-composer" onSubmit={submit}><label htmlFor="orientation-message">{text.label}</label><textarea ref={input} id="orientation-message" maxLength={1000} rows={1} value={draft} onChange={event=>setDraft(event.target.value)} placeholder={text.placeholder} required/><div className="orientation-composer-actions"><button className="primary-button" disabled={!draft.trim()} aria-label={text.send}><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><path d="M4 12h16m-7-7 7 7-7 7"/></svg></button></div></form>
   <p className="connection-note">{site==='nexify'&&<span className="orientation-mode-note">{staticModeLabel[locale]}</span>}<ComposerNote locale={locale} site={site} pages={pages}>{text.privacy}</ComposerNote></p>
  </section>;
 }

@@ -1,0 +1,14 @@
+{
+ "seiten": 29,
+ "breiten": [
+  390,
+  768,
+  1280,
+  1800
+ ],
+ "befunde": 7,
+ "nachArt": {
+  "ueberlauf": 3,
+  "konsole": 4
+ }
+}

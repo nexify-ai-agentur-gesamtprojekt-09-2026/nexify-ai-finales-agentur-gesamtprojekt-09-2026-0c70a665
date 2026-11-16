@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "zweck": "Woher das Schaufenster von /teileklar seine Artikel nimmt. Ein Wort umstellen genügt.",
+  "quelle": "eigen",
+  "werte": {
+    "eigen": "Artikel kommen aus dem eigenen Shop-Dienst (/api/shop). Ist er leer oder nicht erreichbar, sagt die Seite das.",
+    "extern": "Das Sortiment liegt im laufenden Shop unter der eigenen Adresse teileklar.shop. /teileklar verweist sichtbar dorthin, statt ein leeres Schaufenster zu zeigen."
+  },
+  "externer_shop": {
+    "adresse": "https://teileklar.shop/de/",
+    "name": "teileklar.shop",
+    "beleg": "15.11.2026, 00:4x UTC: HTTP 200, Titel „Autoteile online kaufen – passgenau für dein Fahrzeug | TEILEKLAR“, Preisangaben und Warenkorb im ausgelieferten HTML. Die Adresse steht als requested_production_domain in config/site-map.json."
+  },
+  "entscheidung_offen": "Ob umgestellt wird, entscheidet der Inhaber. Steht das eigene Sortiment, bleibt „eigen“."
+}
