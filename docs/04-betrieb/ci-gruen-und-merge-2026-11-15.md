@@ -464,17 +464,69 @@ behoben: die Zahl der veralteten Pins (27 → **28**, nachgerechnet über alle
 Probeeingriff geänderten Versionsprüfungen (drei → **zwei**) und die Aussage
 in Abschnitt 8 zum Kommentar an PR 211.
 
+### Nachtrag 16.11.2026, 05:45 UTC · Weg B ist hier nicht belegbar (gemessen)
+
+Anlass: Die koordinierende Sitzung hat die Entscheidung über OA-053 an diese
+Sitzung weitergegeben, mit dem Grundsatz „kleinste Änderung, die den echten
+Mangel behebt, mit Testbeleg" und der harten Grenze „Wenn ein Pin veraltet
+ist, erneuere den Beleg, lies ihn nicht heraus."
+
+Daraufhin geprüft, ob der für Weg B verlangte **Lauf mit Modell** in diesem
+Container überhaupt erzeugbar ist. Ergebnis: **nein**, aus drei voneinander
+unabhängigen Gründen.
+
+| Voraussetzung | Zustand hier | Beleg |
+|---|---|---|
+| Modellgewichte | **fehlen vollständig** (keine `*.onnx`-Datei im Repository); Quelle ist eine 444.473.596 Byte große Datei bei Hugging Face mit gepinnter sha256 | `config/integrations/birefnet-onnx.json`: `source_weights_bytes`, `weights_identity_evidence: "official HF LFS metadata only; no weight bytes downloaded or locally hashed"` |
+| `onnx` 1.23.2 | **nicht installiert** | `import onnx` → nicht vorhanden |
+| `onnxruntime` 1.31.1 | installiert ist **1.29.0** | `onnxruntime.__version__` |
+
+Die Versionen sind nicht weich: `tools/birefnet_onnx.py:126` verlangt für
+jedes gepinnte Modul exakte Gleichheit
+(`require(getattr(modules[name],'__version__',None) == RUNTIME[name],
+name+'_version_not_verified')`), `tools/birefnet_rembg_batch.py:59-60` ebenso
+für `numpy`, `onnx`, `onnxruntime` und Pillow. Die Konfiguration hält den
+Zustand selbst fest: `onnx_and_ort_installed_here: false`.
+
+**Folge für die Entscheidung — die Lage ist nicht symmetrisch:**
+
+- **Weg B** (Werkzeuge auf 13.0.0) ist die sicherheitstechnisch richtige
+  Richtung, **kann hier aber nicht belegt werden**. Ihn ohne den Lauf mit
+  Modell zu gehen, wäre genau das, was die Grenze verbietet: ein Pin ohne
+  Beleg. Der Lauf braucht eine Umgebung mit Zugang zu Hugging Face, den
+  444 MB Gewichten und den exakt gepinnten `onnx`/`onnxruntime`-Fassungen —
+  also einen CI-Job oder den Server, nicht diesen Container.
+- **Weg A** (Datei zurück auf Pillow 12.3.0) braucht **keinen neuen Beleg**:
+  er stellt genau die Bytes des heute im Register und in
+  `evidence/birefnet-onnx-2026-10-27/verification.json` gepinnten Stands
+  wieder her, den der bestehende Beleg deckt, und macht die 59 Tests grün.
+  Er schreibt aber eine Pillow-Fassung fest, für die OSV 62 Meldungen führt
+  (fünf kritisch, darunter Pufferüberläufe beim Dekodieren von JPEG), in ein
+  Werkzeug, das Katalogbilder dekodiert.
+
+Deshalb ist in dieser Sitzung **keine der beiden Wege ausgeführt** worden. Weg
+B nicht, weil der verlangte Beleg hier nicht erzeugbar ist; Weg A nicht, weil
+er eine Sicherheitsverschlechterung festschreibt und das eine
+Inhaberentscheidung bleibt (D-017, OA-053). Die sachlich beste Reihenfolge ist
+**Weg B mit dem Lauf in einer geeigneten Umgebung**: erst den Beleg erzeugen,
+dann die drei Versionsprüfungen und die zwei Pins in einem Zug nachziehen.
+
 ## 7. Vorschlag für die Entscheidung des Inhabers
 
 Vier getrennte, je einzeln entscheidbare Punkte. Die ersten drei sind
 Voraussetzung dafür, dass `main` wieder grün werden kann.
 
 1. **Pillow / OA-053** (Abschnitt 3.3, größter Einzelposten mit 59 von 101):
-   Weg A (zurück auf 12.3.0, 62 gemeldete Schwachstellen) oder Weg B
-   (drei Werkzeuge auf 13.0.0, Empfehlung der bestehenden Analyse). Bei Weg B
-   zusätzlich nötig: ein Lauf des Bild-Batches und des BiRefNet-Adapters mit
-   Pillow 13.0.0 als Beleg für die Erhaltung der Produktpixel, und
-   `tools/birefnet_rembg_batch.py` mitändern.
+   Nach dem Nachtrag 05:45 UTC ist die Frage **nicht** „A oder B nach
+   Vorliebe". Weg B ist die richtige Richtung, sein verlangter Beleg (Lauf mit
+   Modell) ist in diesem Container aber **nicht erzeugbar**: Gewichte fehlen
+   (444 MB bei Hugging Face), `onnx` ist nicht installiert, `onnxruntime` ist
+   1.29.0 statt der exakt gepinnten 1.31.1. Weg A braucht keinen neuen Beleg,
+   schreibt aber 62 gemeldete Schwachstellen fest.
+   **Empfehlung: Weg B, aber den Lauf in einer Umgebung mit Hugging-Face-Zugang
+   und den gepinnten `onnx`/`onnxruntime`-Fassungen erzeugen** (CI-Job oder
+   Server), danach die **drei** Versionsprüfungen und die **zwei** Pins in
+   einem Zug nachziehen. `tools/birefnet_rembg_batch.py` gehört dazu.
 2. **Chat-Weg der SDK-Prüfungen** (Befund (i)): Soll
    `apps/site/tests/browser-critical.mjs` künftig
    `apps/web/app/api/chat/route.ts` mit einem Stellvertreter-Router messen (so
