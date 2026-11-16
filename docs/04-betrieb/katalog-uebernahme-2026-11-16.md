@@ -158,13 +158,13 @@ die nur der Inhaber freigeben kann.
 3. **Netzzugang prüfen** – MongoDB Atlas → *Network Access*: Steht dort `0.0.0.0/0` (üblich bei der Vercel-Anbindung), ist
    nichts zu tun. Stehen nur feste Adressen, kommen GitHub-Runner nicht hinein; dann den Lauf stattdessen vom eigenen
    Rechner starten (Abschnitt 7a) – keine Freigabe weiter öffnen.
-4. **Lauf auslösen und freigeben** – GitHub → *Actions* → Workflow „Katalog-Übernahme teileklar.shop“ → Lauf #2
-   (https://github.com/nexify-ai-agentur-gesamtprojekt-09-2026/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665/actions/runs/43787223794,
-   Stand `cdb1ea3`, enthält den endgültigen Code; ohne Zugang wie vorgesehen bei „Ziel hinterlegt?“ beendet, Installation auf
-   dem Runner grün) → *Re-run all jobs* → bei
-   „Waiting“ *Review deployments* → `katalog-produktion` anhaken → *Approve and deploy*. Dauer rund 15 Minuten (zweimal
-   Bildprüfung). Grün heißt: geschrieben **und** an nexifyai.de abgenommen (mindestens 273 sichtbar, alle mit Bild,
-   Stichprobe 20/20). Die Belege hängen als Artefakt am Lauf.
+4. **Lauf auslösen und freigeben** – **Gesperrt seit 02:05 UTC (Produktions-Gate, Kommentar am PR #214).** Lauf #2
+   **nicht** erneut starten: Er stammt aus dem alten Workflow-Stand mit Auslöser auf dem Feature-Zweig. Der Workflow startet
+   jetzt nur noch manuell (*Actions* → „Katalog-Übernahme teileklar.shop“ → *Run workflow*) und der Job nur auf `main`.
+   Voraussetzung ist also, dass der geprüfte Stand auf `main` ist, mit APPROVED-Review und grüner CI. Danach *Run workflow*
+   auf `main` → bei „Waiting“ *Review deployments* → `katalog-produktion` → *Approve and deploy*. Dauer rund 15 Minuten.
+   Grün heißt: geschrieben **und** an nexifyai.de abgenommen (mindestens 273 sichtbar, alle mit Bild, Stichprobe 20/20).
+   Offen laut Gate: vorgelagerter Staging-/Smoke-Lauf und ein ausführbarer Rückweg (Abschnitt 10).
 
 **Damit auch Preise erscheinen (eigene Entscheidung, unabhängig von 1–4):** Den Patch
 `docs/04-betrieb/belege/katalog-uebernahme-2026-11-16/main-preisanzeige.patch` (2 Dateien, +20/−5, nur `apps/shop-api`) auf
@@ -210,3 +210,24 @@ Danach `.env.katalog` löschen. Ist `MONGODB_URI` als „Sensitive“ markiert, 
 | `bigbuy_id` als Text | Ein späterer BigBuy-Import (Zahlen-Kennungen) legt dieselben Artikel ein zweites Mal an; der Supabase-Umzug erwartet hier eine Zahl (`shop.j_int`) | Vor BigBuy-Import oder Supabase-Umzug: Abgleich über `sku`, übernommene Artikel dann ersetzen |
 | Daten vom 11.10.2026, kein Abgleich | Preise und Bestand veralten | Abgleich erst mit BigBuy-Zugang (OA-071) oder erneuter Lauf |
 | Listenpreis ≠ freigegebener Verkaufspreis | Anzeige ja, Bestellung nein | Preisfreigabe im neuen Namensraum (Verwaltungskonto fehlt, PR #208 Abschnitt 12) |
+
+## 10. Produktions-Gate (Kommentar am PR #214, 16.11.2026 02:05 UTC)
+
+Befund: Der Workflow startete bei jedem Push auf `claude/katalog-uebernahme`, und die Umgebung `katalog-produktion` war
+ohne Schutzregeln angelegt. Sobald ein Geheimnis hinterlegt ist, hätte ein Push die Produktion ohne Freigabe verändern können.
+Der Befund ist berechtigt.
+
+Umgesetzt (dieser Zweig): Push-Auslöser entfernt. Start nur manuell (`workflow_dispatch`), und der Job läuft nur, wenn
+`github.ref == refs/heads/main`. Ein Feature-Zweig kann den schreibenden Pfad damit nicht mehr erreichen.
+
+Noch offen, als Vorschlag (nicht gebaut):
+- **Staging-/Smoke-Lauf vorab:** derselbe Workflow mit einem zweiten Ziel `nexify_teileklar_shop_staging` (eigene Umgebung
+  und eigenes Geheimnis) und einer Abnahme gegen eine Vorschau-Adresse. Der Produktionsjob hängt per `needs:` daran.
+- **Ausführbarer Rückweg:** `transfer_public_catalog.py --withdraw` setzt bei allen Dokumenten mit
+  `source = teileklar_public_catalog` `active: false`. Es löscht nichts, protokolliert und wird mit eigenem Vertragsnachweis
+  ausgelöst. Getestet würde er im Staging-Ziel.
+- **Technisch erzwungene Freigabe:** „Required reviewers“ in `katalog-produktion` (Inhaber, Schritt 1). Die Sitzung kann das
+  nicht selbst setzen.
+
+Folge für den Termin am 16.11., 11:00: Bis diese Punkte erfüllt, geprüft und auf `main` sind, gibt es **keinen** Produktivlauf.
+Der Shop auf nexifyai.de bleibt bis dahin bei 0 Produkten.

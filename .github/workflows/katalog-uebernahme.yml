@@ -3,12 +3,13 @@ name: Katalog-Übernahme teileklar.shop
 # nexify_teileklar_shop_v1 der bestehenden Shop-Datenbank (apps/shop-api/transfer_public_catalog.py).
 # Läuft nur in der GitHub-Umgebung "katalog-produktion": Dort liegt das einzige Geheimnis
 # (CATALOG_TARGET_MONGO_URL = derselbe Wert wie MONGODB_URI im Vercel-Projekt), und dort gibt der Inhaber
-# jeden Lauf per "Review deployments" frei. Ohne Geheimnis endet der Lauf vor jedem Lesen und Schreiben.
+# jeden Lauf per "Review deployments" frei (Required reviewers muss gesetzt sein). Ohne Geheimnis endet der Lauf vor
+# jedem Lesen und Schreiben.
 # Bericht: docs/04-betrieb/katalog-uebernahme-2026-11-16.md
+# Kein automatischer Auslöser: nur manueller Start, und der Job läuft nur auf main (geschützter, geprüfter Stand).
+# Ein Push auf einen Feature-Zweig kann die Produktion damit nie verändern (Befund PR #214, 16.11.2026).
 on:
-  push:
-    branches: [claude/katalog-uebernahme]
-    paths: ['.github/workflows/katalog-uebernahme.yml']
+  workflow_dispatch: {}
 permissions:
   contents: read
 concurrency:
@@ -16,7 +17,9 @@ concurrency:
   cancel-in-progress: false
 jobs:
   uebernahme:
-    if: github.repository == 'nexify-ai-agentur-gesamtprojekt-09-2026/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665'
+    if: >-
+      github.repository == 'nexify-ai-agentur-gesamtprojekt-09-2026/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665' &&
+      github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
     timeout-minutes: 45
     environment: katalog-produktion
