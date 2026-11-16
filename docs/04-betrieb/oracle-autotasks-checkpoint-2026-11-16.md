@@ -187,21 +187,53 @@ Process completed with exit code 2
 `OPENROUTER_API_KEY` nicht gebunden ist. Das ist kein Codefehler, sondern eine
 fehlende Bindung; ein automatischer Neuversuch ist ausdrücklich ausgeschlossen.
 
-**Folge, die über diesen PR hinausgeht:** Nach `AGENTS.md` und
+~~**Folge, die über diesen PR hinausgeht:** Nach `AGENTS.md` und
 `docs/JEFF-INTEGRATION.md` ist das Orakel-Gate Pflicht; ohne grünes Gate wird nicht
-auf `main` übernommen. Solange das Secret fehlt, ist **kein Pull Request
-abschließbar** — auch die am 14.11. gezählten offenen Entwürfe nicht. Das ist der
-zweite Engpass neben dem Serverzugang und hat denselben Charakter: eine Eingabe, die
-nur der Inhaber machen kann. Nicht selbst gesetzt, weil das Hinterlegen eines Secrets
-eine Rechteänderung ist.
+auf `main` übernommen. Solange das Secret fehlt, ist kein Pull Request
+abschließbar.~~ **Berichtigt 12:58 UTC, dieser Absatz war falsch.** Er bleibt zur
+Nachvollziehbarkeit stehen.
 
-### `next-web` · ein Test von 138 rot · geerbt von `main`
+**Berichtigung, belegt am Quellstand `9c9c806`:** `review` ist nicht das Orakel-Gate,
+sondern ein **beratender** Reviewer. `tools/automation/ai_review.py` Zeile 2:
+„Bounded **advisory** review through one exact OpenRouter model, never a shell agent";
+Zeile 44: „No findings is an advisory observation, **never Jeff go, a merge decision
+or operator acceptance**"; `.github/workflows/ai-review.yml` Schritt 48: „Store
+**advisory** result". Das fehlende Secret kostet die beratende Prüfung und blockiert
+**keinen** Merge. Die Verdrahtung ist korrekt: `config/automation.json` deklariert
+`api_key_env: OPENROUTER_API_KEY`, der Workflow übergibt `secrets.OPENROUTER_API_KEY`.
+Das Secret bleibt beim Inhaber, weil das Hinterlegen eine Rechteänderung ist, aber es
+ist kein Engpass des Gesamtplans.
+
+**Dabei sichtbar gewordene Lücke zwischen Regel und Wirklichkeit (OFFEN, Inhaber):**
+Das als Pflicht beschriebene Gate ist `tools/jeff-gate.py`, verdrahtet in
+`.gitlab-ci.yml`. In `.github/workflows/` kommt „jeff" **nicht vor**. Nach `AGENTS.md`
+ist GitHub die kanonische Quelle und eine GitLab-Anbindung nachgelagerte Spiegelung.
+Die Regel „kein Merge ohne grünen jeff-gate" wird im führenden Auslieferungsweg damit
+nicht durchgesetzt. Nicht eigenmächtig geschlossen: Ein Merge-Gate einzurichten ist
+eine Freigabeentscheidung.
+
+### `next-web` · ein Test von 138 rot · Ursache gefunden und behoben
 
 Lauf `43868878297`, Job `133304446286`: `# tests 138 · # pass 137 · # fail 1`,
 `ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL` in `apps/web`. Der Diff dieses PR berührt
-`apps/web` nicht; der Fehlschlag liegt am Stand `9c9c806` selbst. Der Name des
-roten Tests ist aus dem Protokollende nicht ablesbar und bleibt OFFEN; lokal nicht
-nachstellbar, weil die Abhängigkeiten im Container nicht installiert sind.
+`apps/web` nicht; der Fehlschlag lag am Stand `9c9c806` selbst.
+
+**Ursache (IST, lokal nachgestellt mit Node 22.23.4 wie in CI):** Der rote Test ist
+`every page the assistant may name exists as a public page of the right brand` in
+`apps/web/auth/tests/chat-guidance.test.mjs`. Er liest
+`apps/site/.generated/public-site.json` und scheiterte mit `ENOENT`. Der Job
+`next-web` lief nur `npm install`, `pnpm install` und `test:auth` und erzeugte die
+Datei nie, während die Jobs `repository` (Zeile 40) und `site` (Zeile 109) derselben
+Workflow-Datei `node apps/site/scripts/generate-public-data.mjs` längst aufrufen.
+Kein Sachfehler, ein ausgelassener Schritt.
+
+**Behoben in `0bd16fb`:** `next-web` erhält denselben Schritt vor `test:auth`. Beleg
+vorher 12 pass / 1 fail, nach `generate-public-data.mjs` (43 Seiten) 13 pass / 0 fail.
+Namensvergleich der Python-Suite gegen `origin/main`: 49 rote Namen auf `main`, 47 im
+Arbeitsbaum, **kein neuer**. Die zwei weggefallenen sind `test_resize_source_binding`;
+sie scheitern laut Commit zu PR 185 ohne erzeugte Seitendaten am fehlenden Bestand und
+sind hier nur grün, weil der Arbeitsbaum die Daten enthält — dieselbe Ursache an einer
+zweiten Stelle, kein Verdienst der Workflow-Änderung.
 
 ### Vercel · fünf Projekte melden „repository can't be found" · bekannt
 
