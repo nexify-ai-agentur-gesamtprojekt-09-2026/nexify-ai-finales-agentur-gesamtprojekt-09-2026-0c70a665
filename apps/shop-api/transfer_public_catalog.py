@@ -16,7 +16,9 @@ Regeln:
   kodierten Lieferantenadresse, nur wenn sie die Bildregel der neuen Fassung (``supplier_image``) erfüllt. Der vollständige
   Quelldatensatz bleibt unverändert unter ``legacy`` erhalten.
 * Artikel ohne Preis, ohne zulässiges Bild, ohne Namen oder mit unklarer Kategorie brechen den Lauf vor dem ersten Schreiben ab
-  (Zahl je Grund, keine Inhalte).
+  (Zahl je Grund, keine Inhalte). Ausgenommen und mit Kennung protokolliert: Schauartikel mit Platzhalterbild (``is_placeholder``).
+* Jede Bildadresse wird beim Lauf beim Lieferanten geprüft (``head_image``). Sichtbar wird nur ein Artikel, dessen Bild lädt; alle
+  anderen werden unverändert, aber unsichtbar (``active: false``) übernommen – keine leeren Bildkacheln, nichts geht verloren.
 * Geschrieben wird über dieselbe Transaktions- und Prüfsummenlogik wie ``transfer_catalog.py`` (Zahl und Prüfsumme je Sammlung,
   Abweichung = nichts geschrieben, gelöscht wird nie, zweiter Lauf schreibt nichts).
 * Festschreiben verlangt ``--publication-contract`` nach ``check_contract`` mit Geltungsbereich ``catalog_public_api_transfer``.
@@ -38,6 +40,7 @@ import re
 import sys
 import time
 from urllib.parse import parse_qs, urlsplit
+import urllib.error
 import urllib.request
 
 HERE = Path(__file__).resolve().parent
@@ -194,8 +197,41 @@ def image_url(item):
     return supplier_image(values[0]) if len(values) == 1 else None
 
 
-def map_item(item):
-    """Gibt (Produkt, Gründe) zurück. Gründe nicht leer = nicht übernehmbar."""
+def head_image(url, timeout=20):
+    """True nur, wenn der Lieferant unter genau dieser Adresse ein nicht leeres Bild ausliefert (HEAD: 200, image/*, Länge > 0).
+
+    Gemessen am 16.11.2026: ein großer Teil der Adressen der Quelle antwortet 404 oder mit einer 0-Byte-Datei."""
+    request = urllib.request.Request(url, method="HEAD", headers={"User-Agent": USER_AGENT, "Referer": "https://nexifyai.de/"})
+    try:
+        with urllib.request.urlopen(request, timeout=timeout) as response:
+            length = response.headers.get("Content-Length")
+            return (response.status == 200 and (response.headers.get("Content-Type") or "").startswith("image/")
+                    and length is not None and length.isdigit() and int(length) > 0)
+    except urllib.error.HTTPError:
+        return False
+
+
+def verify_images(urls, check=head_image, workers=4, sleep=time.sleep):
+    """Prüft jede Adresse höchstens dreimal (nur bei Netzfehlern erneut). Gibt {Adresse: True/False} zurück."""
+    import concurrent.futures
+
+    def one(url):
+        for attempt in range(3):
+            try:
+                return url, bool(check(url))
+            except Exception:
+                if attempt == 2:
+                    return url, False
+                sleep(1 + attempt)
+    with concurrent.futures.ThreadPoolExecutor(workers) as pool:
+        return dict(pool.map(one, sorted(set(urls))))
+
+
+def map_item(item, verified=None):
+    """Gibt (Produkt, Gründe) zurück. Gründe nicht leer = nicht übernehmbar.
+
+    ``verified``: Ergebnis von ``verify_images``. Sichtbar (``active``) wird nur ein Artikel, dessen Bild beim Lauf nachweislich lädt;
+    die übrigen werden unverändert, aber unsichtbar übernommen (keine leeren Bildkacheln, nichts geht verloren)."""
     reasons = []
     if not isinstance(item, dict):
         return None, ["Datensatz ist kein Objekt"]
@@ -225,7 +261,8 @@ def map_item(item):
     product = {"_id": pid, "name": name.strip(), "sku": str(item.get("sku") or ""), "ean": str(item.get("ean") or ""),
                "brand": item.get("brand"), "maker": item.get("maker"), "images": [image], "category_id": cid, "category_ids": [cid],
                "stock": stock, "list_price_cents": cents, "list_price_status": LIST_PRICE_APPROVED, "details": details,
-               "description": "", "active": True, "buyable": False, "publishable": False, "source": SOURCE_TAG,
+               "description": "", "active": bool(verified and verified.get(image)), "image_verified": bool(verified and verified.get(image)),
+               "buyable": False, "publishable": False, "source": SOURCE_TAG,
                "imported_at": item.get("created_at") if isinstance(item.get("created_at"), str) else None, "legacy": item}
     return product, []
 
@@ -238,7 +275,7 @@ def is_placeholder(item):
     return isinstance(item, dict) and isinstance(item.get("image"), str) and item["image"].startswith("assets/")
 
 
-def build_documents(items, log=lambda line: None):
+def build_documents(items, log=lambda line: None, verified=None):
     """Alle Produkte und Kategorien oder Abort mit Zahl je Grund. Platzhalter-Schauartikel werden benannt und ausgelassen."""
     problems, products, names = {}, [], {}
     skipped = sorted(str(i.get("id"))[:40] for i in items if is_placeholder(i))
@@ -247,7 +284,7 @@ def build_documents(items, log=lambda line: None):
     for item in items:
         if is_placeholder(item):
             continue
-        product, reasons = map_item(item)
+        product, reasons = map_item(item, verified)
         for reason in reasons:
             problems[reason] = problems.get(reason, 0) + 1
         if product:
@@ -272,7 +309,8 @@ def check_product(doc):
         reasons.append("Preis fehlt")
     if not (isinstance(doc.get("images"), list) and doc["images"] and all(supplier_image(u) == u for u in doc["images"])):
         reasons.append("Bild fehlt")
-    if doc.get("active") is not True or doc.get("source") != SOURCE_TAG or doc.get("buyable") is not False:
+    if (type(doc.get("active")) is not bool or doc["active"] is not doc.get("image_verified")
+            or doc.get("source") != SOURCE_TAG or doc.get("buyable") is not False):
         reasons.append("Veröffentlichungsstand unpassend")
     if not (isinstance(doc.get("category_ids"), list) and doc["category_ids"] and all(type(c) is int for c in doc["category_ids"])):
         reasons.append("Kategorien sind keine Liste ganzer Zahlen")
@@ -303,9 +341,9 @@ PROFILE = {"check_product": check_product, "contract_fixed": CONTRACT_FIXED, "co
 
 # ---------------------------------------------------------------- Vergleich mit der Quelle
 
-def compare_sample(items, stored_by_id, size=20):
+def compare_sample(items, stored_by_id, size=20, published_only=False):
     """Feld-für-Feld-Vergleich: jeder Quelldatensatz gegen ``legacy`` im Ziel und gegen die abgeleiteten Felder."""
-    ids = sorted(i["id"] for i in items if not is_placeholder(i))
+    ids = sorted(i["id"] for i in items if not is_placeholder(i) and (not published_only or (stored_by_id.get(i["id"]) or {}).get("active") is True))
     step = max(1, len(ids) // size)
     chosen = ids[::step][:size]
     by_id = {i["id"]: i for i in items}
@@ -324,7 +362,7 @@ def compare_sample(items, stored_by_id, size=20):
 
 # ---------------------------------------------------------------- Ablauf
 
-async def run(target_db, *, apply, contract, limit, pause, log, items=None, expect_min=None):
+async def run(target_db, *, apply, contract, limit, pause, log, items=None, expect_min=None, image_check=head_image):
     if apply:  # vor jedem Lesen der Quelle: ohne passenden Vertrag kein Lauf
         tc.check_contract(contract, None if limit is not None else expect_min, CONTRACT_FIXED, CONTRACT_TEXT)
     if items is None:
@@ -332,12 +370,15 @@ async def run(target_db, *, apply, contract, limit, pause, log, items=None, expe
     else:
         meta = {"total": len(items), "windows": [], "fetched": len(items), "passes": 0}
     log(json.dumps({"step": "source", "total_announced": meta["total"], "fetched": meta["fetched"], "windows": len(meta["windows"]), "passes": meta["passes"]}))
-    docs = build_documents(items, log)
+    urls = [u for i in items if not is_placeholder(i) and (u := image_url(i))]
+    verified = await asyncio.to_thread(verify_images, urls, image_check)
+    log(json.dumps({"step": "images", "unique": len(verified), "loading": sum(verified.values()), "not_loading": sum(not v for v in verified.values())}))
+    docs = build_documents(items, log, verified)
     report = await tc.transfer(MemorySource(docs), tc.MongoTarget(target_db), apply=apply, contract=contract,
                                expect_min=expect_min, sample=20, log=log, profile=PROFILE, probe=limit is not None)
     stored = {d["_id"]: d async for d in target_db.products.find({"_id": {"$in": [i["id"] for i in items]}})} if apply else \
         {d["_id"]: d for d in docs["products"]}
-    sample = compare_sample(items, stored)
+    sample = compare_sample(items, stored) + compare_sample(items, stored, published_only=True)
     log(json.dumps({"step": "field_sample", "checked": len(sample), "equal": sum(r["equal"] for r in sample)}))
     return report, sample, meta, docs
 

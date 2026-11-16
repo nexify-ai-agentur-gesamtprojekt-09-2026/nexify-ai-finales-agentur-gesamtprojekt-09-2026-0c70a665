@@ -160,6 +160,10 @@ class Collection:
         target = next((d for d in self.docs if matches(d, query)), None)
         if target is not None: self.docs[self.docs.index(target)] = copy.deepcopy(replacement)
         elif upsert: self._insert(copy.deepcopy(replacement))
+    async def bulk_write(self, requests, ordered=True, session=None):
+        # Nur ReplaceOne (Katalog-Übernahme); pymongo legt Filter, Ersatz und upsert in diesen Attributen ab.
+        for request in requests:
+            await self.replace_one(request._filter, request._doc, upsert=request._upsert, session=session)
     async def update_one(self, query, update, upsert=False, session=None):
         target = next((d for d in self.docs if matches(d, query)), None)
         created = target is None and upsert

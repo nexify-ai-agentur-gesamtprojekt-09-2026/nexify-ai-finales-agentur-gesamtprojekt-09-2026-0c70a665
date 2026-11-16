@@ -154,6 +154,8 @@ class MongoTarget:
         self.db = database
 
     async def run(self, base, docs, run_record, apply):
+        from pymongo import ReplaceOne
+
         class Discard(Exception):
             pass
         result = {}
@@ -162,6 +164,7 @@ class MongoTarget:
             for collection in COLLECTIONS:
                 existing = {d["_id"]: d async for d in self.db[collection].find({}, session=session)}
                 inserted = updated = 0
+                writes = []
                 for doc in docs[collection]:
                     current = existing.get(doc["_id"])
                     if current is None:
@@ -170,7 +173,10 @@ class MongoTarget:
                         updated += 1
                     else:
                         continue
-                    await self.db[collection].replace_one({"_id": doc["_id"]}, dict(doc), upsert=True, session=session)
+                    writes.append(ReplaceOne({"_id": doc["_id"]}, dict(doc), upsert=True))
+                # Sammelschreiben in Blöcken: hält die Transaktion auch gegen eine entfernte Datenbank unter deren Zeitgrenze.
+                for start in range(0, len(writes), 500):
+                    await self.db[collection].bulk_write(writes[start:start + 500], ordered=True, session=session)
                 digest = Digest()
                 async for stored in self.db[collection].find({}, session=session):
                     digest.add(stored["_id"], base.join(stored["_id"], base.encode({k: v for k, v in stored.items() if k != "_id"})))
