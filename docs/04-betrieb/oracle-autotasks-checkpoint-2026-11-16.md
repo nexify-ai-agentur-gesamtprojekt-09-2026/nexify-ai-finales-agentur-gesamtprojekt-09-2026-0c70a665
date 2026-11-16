@@ -255,8 +255,12 @@ nicht auf die Live-Seite. Die Vercel-Befunde in Abschnitt 9 betreffen keine Prod
   `https://nffczuqkhlihimmuzeoz.supabase.co/auth/v1`.
 - AS-Metadaten unter RFC-8414-Einfügung und unter Anhängung → 200; `registration_endpoint`
   wird beworben; `authorize` mit Fantasie-ID → 400 `oauth_client_not_found` (Server aktiv).
-- Weder dieses Repository noch der Lovable-Quellcode enthält den OAuth-/MCP-Code; der Endpunkt
-  kommt aus der Plattform.
+- Korrektur (16.11.2026, ca. 13:45 UTC): Der Lovable-Quellcode enthält den MCP-Teil sehr wohl —
+  Werkzeuge in `src/lib/mcp/index.ts` plus vier Werkzeugdateien (`list_pages`, `search_pages`,
+  `get_contact`, `list_inquiries`, nur lesend, RLS-geschützt) und die Zustimmungsseite
+  `src/routes/[.]lovable.oauth.consent.tsx`. Nur Transport und OAuth-Metadaten erzeugt das
+  Lovable-SDK. Dieses Agentur-Repository enthält keinen MCP-Code. Die frühere Aussage
+  „kein OAuth-/MCP-Code im Lovable-Quellcode“ war falsch und ist hiermit ersetzt.
 - **Nicht getestet:** die dynamische Registrierung selbst. Ein Test-POST hätte einen echten
   OAuth-Client angelegt und wurde vom Schutz der Sitzung gesperrt; nicht umgangen.
 - Auftrag NX-MCP-01 an den Lovable-Projektagenten (Einschaltzustand der dynamischen
