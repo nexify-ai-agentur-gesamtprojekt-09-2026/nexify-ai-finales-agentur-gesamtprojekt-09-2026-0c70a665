@@ -157,3 +157,55 @@ zugesichert.
 - Brain-Zielbild mit den Freigabestufen A/B/C:
   `docs/09-final/06-brain-ki-team-pipeline-orakel-wissen.md`
 - Lokaler Mail-Arbeitsplatz ohne Versand: `docs/contracts/local-mail-workspace.md`
+
+## 9. Nachtrag 12:50 UTC · CI-Befund aus PR 216 (eigener Abruf)
+
+Der Entwurfs-PR 216 trägt nur zwei Markdown-Dateien auf `origin/main` (`9c9c806`)
+auf. `git rev-parse HEAD~1` ist identisch mit `origin/main`, der Commit ändert
+171 Zeilen in `PROGRESS.md` und `docs/04-betrieb/…`. Keine Quelldatei, keine
+Konfiguration. Die folgenden Fehlschläge stammen daher nicht aus diesem PR.
+
+### GitHub Actions läuft wieder (Änderung gegenüber dem 14.11.)
+
+OA-022 beschrieb am 14.11., 21:47 UTC: „The job was not started because an Actions
+budget is preventing further use." Am 16.11., 12:41 bis 12:42 UTC starten die Jobs und
+laufen durch (`next-web` 16,7 s Testlaufzeit). Das Actions-Budget blockiert derzeit
+nicht mehr. OA-022 ist daraufhin zu prüfen und gegebenenfalls zu schließen.
+
+### `review` (AI-Review-Gate) schlägt fail-closed fehl · Owner Inhaber
+
+Lauf `43868878059`, Job `133304445133`, 12:41:55Z:
+
+```
+OPENROUTER_API_KEY:        (leer)
+{"status": "blocked_not_reviewed", "reason": "api_key_binding_missing",
+ "automatic_retry_allowed": false}
+Process completed with exit code 2
+```
+
+`tools/automation/ai_review.py` bricht ab, weil das Repository-Secret
+`OPENROUTER_API_KEY` nicht gebunden ist. Das ist kein Codefehler, sondern eine
+fehlende Bindung; ein automatischer Neuversuch ist ausdrücklich ausgeschlossen.
+
+**Folge, die über diesen PR hinausgeht:** Nach `AGENTS.md` und
+`docs/JEFF-INTEGRATION.md` ist das Orakel-Gate Pflicht; ohne grünes Gate wird nicht
+auf `main` übernommen. Solange das Secret fehlt, ist **kein Pull Request
+abschließbar** — auch die am 14.11. gezählten offenen Entwürfe nicht. Das ist der
+zweite Engpass neben dem Serverzugang und hat denselben Charakter: eine Eingabe, die
+nur der Inhaber machen kann. Nicht selbst gesetzt, weil das Hinterlegen eines Secrets
+eine Rechteänderung ist.
+
+### `next-web` · ein Test von 138 rot · geerbt von `main`
+
+Lauf `43868878297`, Job `133304446286`: `# tests 138 · # pass 137 · # fail 1`,
+`ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL` in `apps/web`. Der Diff dieses PR berührt
+`apps/web` nicht; der Fehlschlag liegt am Stand `9c9c806` selbst. Der Name des
+roten Tests ist aus dem Protokollende nicht ablesbar und bleibt OFFEN; lokal nicht
+nachstellbar, weil die Abhängigkeiten im Container nicht installiert sind.
+
+### Vercel · fünf Projekte melden „repository can't be found" · bekannt
+
+`web`, `web-2kby`, `site`, `site-gjp7`, `site-k23m`. Unverändert OA-023, seit dem
+14.11. so geführt. Die beiden führenden Projekte `…-s4k5` und `…-ut7r` sind an
+diesem Commit **Ready** deployt. Die fünf verwaisten Projekte werden nicht
+angefasst: Entfernen wäre eine Löschung und bleibt beim Inhaber.
