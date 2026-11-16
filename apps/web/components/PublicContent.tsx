@@ -72,7 +72,7 @@ export default function PublicContent({page,pages,children,sectionContent={},exp
  const heroAction=(action:PublicPage["actions"][number],index:number)=>{
   const primary=index===0;const variant=primary?"primary":"secondary";const className=primary?"identity-primary-link":"identity-secondary-link";
   // Befund 15.11.2026: Der zweite Schalter im Kopfbereich war reiner Text - gleiche Farbe wie der Fliesstext
-  // (#CDD3CF), keine Unterstreichung, kein Rahmen, kein Grund. Er bekommt denselben Pfeil wie jeder andere Verweis
+  // (Token --color-text-sekundaer), keine Unterstreichung, kein Rahmen, kein Grund. Er bekommt denselben Pfeil wie jeder andere Verweis
   // auf diesen Seiten (HcArrow), damit erkennbar ist, dass er zu etwas fuehrt.
   const inner=primary?<><span>{action.label[locale]}</span><span aria-hidden="true" className="identity-primary-arrow">→</span></>:<>{action.label[locale]}<HcArrow/></>;
   if(action.type==="chat"&&action.chat_intent)return <ActionButton key={index} variant={variant} className={className} onClick={()=>startIntent(action.chat_intent)} data-testid={"page-action-"+index}>{inner}</ActionButton>;

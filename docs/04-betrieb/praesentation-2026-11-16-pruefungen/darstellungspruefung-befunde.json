@@ -1,0 +1,44 @@
+[
+ {
+  "seite": "/teileklar",
+  "breite": 390,
+  "art": "ueberlauf",
+  "text": "a. links=331 rechts=449 \"Fahrzeugpassung\""
+ },
+ {
+  "seite": "/teileklar",
+  "breite": 390,
+  "art": "ueberlauf",
+  "text": "a. links=473 rechts=553 \"Werkstätten\""
+ },
+ {
+  "seite": "/teileklar",
+  "breite": 390,
+  "art": "ueberlauf",
+  "text": "a. links=577 rechts=707 \"Meine Bestellungen\""
+ },
+ {
+  "seite": "/teileklar",
+  "breite": 390,
+  "art": "konsole",
+  "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+ },
+ {
+  "seite": "/teileklar",
+  "breite": 768,
+  "art": "konsole",
+  "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+ },
+ {
+  "seite": "/teileklar",
+  "breite": 1280,
+  "art": "konsole",
+  "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+ },
+ {
+  "seite": "/teileklar",
+  "breite": 1800,
+  "art": "konsole",
+  "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+ }
+]

@@ -29,13 +29,27 @@ const legalCopy={
 };
 
 const LEGAL_IDS=new Set(["imprint","privacy","terms","ai-notice","accessibility","cookies","tk-legal","licenses"]);
+// Adressen, auf denen der Hinweis zum Freigabestand steht (Rechts- und Pflichtseiten beider Marken).
+const RECHTSSEITEN=["/impressum","/datenschutz","/vertragsgrundlagen","/ki-hinweise","/barrierefreiheit","/cookies","/agb","/avv","/widerruf","/teileklar/rechtliches"];
+// Befund 15.11.2026 (Inhaltspruefung, Befund 05): /agb, /avv und /widerruf antworten mit 200, standen aber in keinem
+// Seitenplan und waren von keiner Seite aus erreichbar. Sie haben eigene Routen (apps/web/app/agb|avv|widerruf),
+// deshalb hier als feste Verweise in der Gruppe „Rechtliches“. Die Dokumente selbst bleiben unveraendert.
+const RECHTSDOKUMENTE:{href:string;label:Record<Locale,string>}[]=[
+ {href:"/agb",label:{de:"AGB",nl:"Algemene voorwaarden",fr:"Conditions g\u00e9n\u00e9rales",en:"Terms and conditions"}},
+ {href:"/avv",label:{de:"Auftragsverarbeitung (AVV)",nl:"Verwerkersovereenkomst",fr:"Contrat de sous-traitance",en:"Data processing agreement"}},
+ {href:"/widerruf",label:{de:"Widerruf",nl:"Herroeping",fr:"R\u00e9tractation",en:"Right of withdrawal"}}
+];
 const isPlacePage=(page:PublicPage)=>page.id.startsWith("tk-city")||page.id.startsWith("tk-stadt")||page.path.startsWith("/teileklar/staedte")||page.path.startsWith("/teileklar/stadt/");
 
-export default function SiteFooter({pages,site,locale}:{pages:PublicPage[];site:string;locale:Locale}){
+export default function SiteFooter({pages,site,locale,pathname}:{pages:PublicPage[];site:string;locale:Locale;pathname?:string}){
  const text=copy[locale];
  const labels=interfaceCopy.footerLinks[locale] as Record<string,string>;
  const invitation={de:['Lassen Sie uns über Ihr Vorhaben sprechen.','Erzählen Sie uns, was Sie verändern möchten. Wir klären gemeinsam den passenden nächsten Schritt.','Projekt besprechen'],nl:['Laten we uw plan bespreken.','Vertel ons wat u wilt veranderen. Samen bepalen we de passende volgende stap.','Project bespreken'],fr:['Parlons de votre projet.','Dites-nous ce que vous souhaitez changer. Nous définirons ensemble la prochaine étape.','Parler de mon projet'],en:['Let’s talk about your project.','Tell us what you would like to change. We will work out the next step together.','Discuss your project']}[locale];
  const legal=legalCopy[locale],noticeId=useId(),overviewId=useId();
+ // Inhaberbefund 15.11.2026 (Inhaltspruefung, Befund 01): Der Hinweis auf den Freigabestand der Rechtstexte stand im
+ // Fussbereich jeder Seite. Er gehoert auf die Rechtsseiten selbst und nur dorthin; auf einer Leistungs- oder
+ // Produktseite sagt er nichts ueber diese Seite aus. Sichtbar bleibt er unveraendert, nur eben an seiner Stelle.
+ const aufRechtsseite=RECHTSSEITEN.some(pfad=>pathname===pfad);
  const [legalExpanded,setLegalExpanded]=useState(false);
  const [overviewOpen,setOverviewOpen]=useState(false);
  const legalPages=(site==="teileklar"?[{id:"tk-legal",label:legal.shopLegal}]:[{id:"imprint",label:legal.imprint},{id:"privacy",label:legal.privacy},{id:"licenses",label:legal.licenses}]).flatMap(item=>{const page=pages.find(page=>page.id===item.id&&page.site_context===site);return page?[{...item,path:page.path}]:[];});
@@ -46,7 +60,7 @@ export default function SiteFooter({pages,site,locale}:{pages:PublicPage[];site:
   {title:text.products,ids:site==="teileklar"?["tk-home","tk-search","tk-fitment","tk-appointments","tk-partner","tk-workshop"]:["nex2fly","one","api","tk-home","tk-partner"]},
   {title:text.orientation,ids:site==="teileklar"?["tk-categories","tk-vouchers","tk-cart"]:["websites","automation","apps-portals","solutions","pricing"]},
   {title:text.company,ids:["company","contact","login","signup"]},
-  {title:text.legal,ids:site==="teileklar"?["tk-legal","ai-notice","accessibility","cookies"]:["imprint","privacy","terms","ai-notice","accessibility","cookies"]}
+  {title:text.legal,ids:site==="teileklar"?["tk-legal","ai-notice","accessibility","cookies"]:["imprint","privacy","terms","ai-notice","accessibility","cookies"],zusatz:site==="teileklar"?[]:RECHTSDOKUMENTE}
  ];
  // Seitenübersicht: alle Seiten des Bereichs, thematisch gebündelt (kompakte Spalten statt Endlosliste)
  const sitePages=pages.filter(page=>page.site_context===site);
@@ -68,7 +82,7 @@ export default function SiteFooter({pages,site,locale}:{pages:PublicPage[];site:
  return <footer className="site-footer structured-footer footer-refined" data-testid="site-footer">
   <div className="footer-inner"><div className="footer-invitation"><div><h2>{invitation[0]}</h2><p>{invitation[1]}</p></div><ActionLink variant="primary" href="/kontakt">{invitation[2]}<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></ActionLink></div><div className="footer-main"><div className="footer-brand-block"><SiteLink href={site==="teileklar"?"/teileklar":"/"} aria-label={text.home} className="brand">{site==="teileklar"?<Logo variante="wort" groesse="s" wort={<>TEILE<span className="nx-logo-x">KLAR</span></>} claim={text.claim}/>:<Logo groesse="s" claim={text.claim}/>}</SiteLink><p data-testid="footer-intro">{site==="teileklar"?interfaceCopy.shopFooter[locale].intro:{de:"Websites, digitale Abläufe und Kampagnen für Ihr Unternehmen. Persönlich begleitet von Pascal Courbois.",nl:"Websites, digitale processen en campagnes voor uw bedrijf. Persoonlijk begeleid door Pascal Courbois.",fr:"Sites, processus numériques et campagnes pour votre entreprise. Avec l’accompagnement de Pascal Courbois.",en:"Websites, digital workflows and campaigns for your business. Personally guided by Pascal Courbois."}[locale]}</p><ActionLink variant="text" href="/kontakt" className="footer-contact" data-testid="footer-contact-link">{site==="teileklar"?interfaceCopy.shopFooter[locale].contact:text.contact} <span aria-hidden="true">→</span></ActionLink></div>
   <div className={`footer-link-groups ${placePages.length?'has-places':''}`}>
-   {groups.map((group,groupIndex)=><nav key={group.title} aria-label={group.title} data-testid={`footer-group-${groupIndex}`}><h2 data-testid={`footer-group-title-${groupIndex}`}>{group.title}</h2>{group.ids.flatMap(id=>{const page=pages.find(item=>item.id===id);return page?[<SiteLink key={id} href={page.path} data-testid={`footer-group-${groupIndex}-link-${id}`}>{labels[page.id]||page.localizedTitle[locale]}</SiteLink>]:[];})}</nav>)}
+   {groups.map((group,groupIndex)=><nav key={group.title} aria-label={group.title} data-testid={`footer-group-${groupIndex}`}><h2 data-testid={`footer-group-title-${groupIndex}`}>{group.title}</h2>{group.ids.flatMap(id=>{const page=pages.find(item=>item.id===id);return page?[<SiteLink key={id} href={page.path} data-testid={`footer-group-${groupIndex}-link-${id}`}>{labels[page.id]||page.localizedTitle[locale]}</SiteLink>]:[];})}{(group.zusatz||[]).map(item=><SiteLink key={item.href} href={item.href} data-testid={`footer-group-${groupIndex}-link-${item.href.slice(1)}`}>{item.label[locale]}</SiteLink>)}</nav>)}
    {placePages.length>0&&<nav aria-label={text.places} data-testid="footer-places"><h2>{text.places}</h2>{placePages.slice(0,8).map(page=><SiteLink key={page.id} href={page.path}>{page.localizedTitle[locale]}</SiteLink>)}</nav>}
   </div>
   </div><div className="footer-bottom">
@@ -85,10 +99,10 @@ export default function SiteFooter({pages,site,locale}:{pages:PublicPage[];site:
   </div>
  <div className="footer-legal">
   <nav className="footer-legal-direct" aria-label={legal.links} data-testid="footer-legal-direct">{legalPages.map(page=><SiteLink key={page.id} href={page.path} data-testid={`footer-legal-link-${page.id}`}>{page.label}</SiteLink>)}</nav>{aiNotice&&<p className="footer-ai-note" data-testid="footer-ai-note"><SiteLink href={aiNotice.path} data-testid="footer-ai-note-link">{sceneWords[(locale in sceneWords?locale:"de") as keyof typeof sceneWords].label}</SiteLink></p>}
-  <details className="footer-legal-details" onToggle={event=>setLegalExpanded(event.currentTarget.open)}>
+  {aufRechtsseite&&<details className="footer-legal-details" onToggle={event=>setLegalExpanded(event.currentTarget.open)}>
    <summary data-testid="footer-legal-details-toggle" aria-expanded={legalExpanded} aria-controls={noticeId}>{legal.summary}</summary>
    <div id={noticeId}><p>{site==="teileklar"?legal.shopNotice:legal.notice}</p><p>{hasLicenses?legal.licenseNotice:legal.missingLicenses}</p></div>
-  </details>
+  </details>}
  </div>
  </div><div className="footer-utilities"><InstallInvitation locale={locale}/>
  <DiagnosticConsent locale={locale}/></div>

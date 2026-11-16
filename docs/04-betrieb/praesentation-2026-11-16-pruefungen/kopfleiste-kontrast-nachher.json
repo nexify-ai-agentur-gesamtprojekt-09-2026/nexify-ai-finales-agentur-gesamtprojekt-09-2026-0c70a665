@@ -1,0 +1,230 @@
+{
+ "390": {
+  "leistengrundHellste": {
+   "y": 400,
+   "grund": [
+    48,
+    52,
+    51
+   ],
+   "hell": 0.03323377697746554
+  },
+  "text": {
+   "Wortmarke": {
+    "farbe": [
+     236,
+     239,
+     236
+    ],
+    "px": 18.4,
+    "gewicht": "600",
+    "soll": 4.5,
+    "ist": 10.89
+   },
+   "Claim": {
+    "farbe": [
+     180,
+     186,
+     182
+    ],
+    "px": 12,
+    "gewicht": "500",
+    "soll": 4.5,
+    "ist": 6.39
+   },
+   "Hauptschalter": {
+    "farbe": [
+     236,
+     239,
+     236
+    ],
+    "px": 15,
+    "gewicht": "600",
+    "soll": 4.5,
+    "ist": 10.89
+   },
+   "Navigation": {
+    "farbe": [
+     205,
+     211,
+     207
+    ],
+    "px": 15,
+    "gewicht": "500",
+    "soll": 4.5,
+    "ist": 8.3
+   }
+  }
+ },
+ "768": {
+  "leistengrundHellste": {
+   "y": 4000,
+   "grund": [
+    69,
+    72,
+    69
+   ],
+   "hell": 0.06329609696758326
+  },
+  "text": {
+   "Wortmarke": {
+    "farbe": [
+     236,
+     239,
+     236
+    ],
+    "px": 23.92,
+    "gewicht": "600",
+    "soll": 4.5,
+    "ist": 8
+   },
+   "Claim": {
+    "farbe": [
+     180,
+     186,
+     182
+    ],
+    "px": 12,
+    "gewicht": "500",
+    "soll": 4.5,
+    "ist": 4.7
+   },
+   "Hauptschalter": {
+    "farbe": [
+     236,
+     239,
+     236
+    ],
+    "px": 15,
+    "gewicht": "600",
+    "soll": 4.5,
+    "ist": 8
+   },
+   "Navigation": {
+    "farbe": [
+     205,
+     211,
+     207
+    ],
+    "px": 15,
+    "gewicht": "500",
+    "soll": 4.5,
+    "ist": 6.1
+   }
+  }
+ },
+ "1280": {
+  "leistengrundHellste": {
+   "y": 2950,
+   "grund": [
+    64,
+    66,
+    64
+   ],
+   "hell": 0.053565835456562294
+  },
+  "text": {
+   "Wortmarke": {
+    "farbe": [
+     236,
+     239,
+     236
+    ],
+    "px": 23.92,
+    "gewicht": "600",
+    "soll": 4.5,
+    "ist": 8.75
+   },
+   "Claim": {
+    "farbe": [
+     180,
+     186,
+     182
+    ],
+    "px": 12,
+    "gewicht": "500",
+    "soll": 4.5,
+    "ist": 5.14
+   },
+   "Hauptschalter": {
+    "farbe": [
+     236,
+     239,
+     236
+    ],
+    "px": 15,
+    "gewicht": "600",
+    "soll": 4.5,
+    "ist": 8.75
+   },
+   "Navigation": {
+    "farbe": [
+     205,
+     211,
+     207
+    ],
+    "px": 15,
+    "gewicht": "500",
+    "soll": 4.5,
+    "ist": 6.67
+   }
+  }
+ },
+ "1800": {
+  "leistengrundHellste": {
+   "y": 1600,
+   "grund": [
+    68,
+    70,
+    69
+   ],
+   "hell": 0.060389323840441045
+  },
+  "text": {
+   "Wortmarke": {
+    "farbe": [
+     236,
+     239,
+     236
+    ],
+    "px": 23.92,
+    "gewicht": "600",
+    "soll": 4.5,
+    "ist": 8.21
+   },
+   "Claim": {
+    "farbe": [
+     180,
+     186,
+     182
+    ],
+    "px": 12,
+    "gewicht": "500",
+    "soll": 4.5,
+    "ist": 4.82
+   },
+   "Hauptschalter": {
+    "farbe": [
+     236,
+     239,
+     236
+    ],
+    "px": 15,
+    "gewicht": "600",
+    "soll": 4.5,
+    "ist": 8.21
+   },
+   "Navigation": {
+    "farbe": [
+     205,
+     211,
+     207
+    ],
+    "px": 15,
+    "gewicht": "500",
+    "soll": 4.5,
+    "ist": 6.26
+   }
+  }
+ }
+}

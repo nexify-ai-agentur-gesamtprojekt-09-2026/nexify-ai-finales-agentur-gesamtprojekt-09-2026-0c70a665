@@ -1,0 +1,4 @@
+tsconfig.json: 9 files, 0 diagnostics
+apps/site/tsconfig.json: 91 files, 0 diagnostics
+apps/web/tsconfig.json: 170 files, 0 diagnostics
+exit=0

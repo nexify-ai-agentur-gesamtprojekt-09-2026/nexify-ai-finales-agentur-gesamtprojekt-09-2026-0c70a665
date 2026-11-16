@@ -385,7 +385,7 @@
     "apps/web/app/registrieren/[[...sign-up]]/page.tsx": "fe10ab376d7296983cd6b8ba8f3c29844a9826e7cb8e189ef3b89ef85bec60ec",
     "apps/web/components/DiagnosticConsent.tsx": "ab8246950574ffd6c9e4404513c30edd70d23028aea92920057413cfe4aeb023",
     "apps/web/components/DiagnosticConsent.css": "a57940d16dac5b4c5c202b561b12b07b4036274505b7711f9d59214d86a74f59",
-    "apps/web/components/SiteFooter.tsx": "841a2c0dacd2d77e5738950452ae3c442330ba2894fd325b8ffa2a8087de0b47",
+    "apps/web/components/SiteFooter.tsx": "c6d8be814900f46a3fde6f3fc7f8e5146732e9933a443541d49f723e35dbec90",
     "apps/web/auth/tests/browser-public-experience.mjs": "a2a87a07ee3f2b9d30b2ea6c265bb3d9a970a410ec6523eac2061b5e56a63fbf",
     "apps/web/app/page.tsx": "80197fa46cf354bc398f22b3f14d03b48d6d72cfd74afb73ae091734eef991ae",
     "apps/web/app/[...slug]/page.tsx": "4b8a636c0410a8155c8aa4c20120d543cdd70a0a818f79bda6aa06a1fde44ba1",
@@ -823,7 +823,7 @@
         },
         {
           "label": "Untertitel",
-          "width": 123,
+          "width": 124,
           "height": 47
         },
         {
@@ -901,7 +901,7 @@
       "controls": [
         {
           "label": "Film abspielen",
-          "width": 136,
+          "width": 137,
           "height": 48
         },
         {
@@ -932,7 +932,7 @@
         },
         {
           "label": "Film mit Ton starten",
-          "width": 102,
+          "width": 101,
           "height": 46
         },
         {
@@ -963,7 +963,7 @@
         },
         {
           "label": "Film mit Ton starten",
-          "width": 102,
+          "width": 101,
           "height": 46
         },
         {
@@ -990,11 +990,11 @@
         {
           "label": "Film abspielen",
           "width": 127,
-          "height": 46
+          "height": 47
         },
         {
           "label": "Film mit Ton starten",
-          "width": 102,
+          "width": 101,
           "height": 47
         },
         {
@@ -1025,7 +1025,7 @@
         },
         {
           "label": "Film mit Ton starten",
-          "width": 102,
+          "width": 101,
           "height": 46
         },
         {
@@ -1051,7 +1051,7 @@
       "controls": [
         {
           "label": "Film abspielen",
-          "width": 136,
+          "width": 137,
           "height": 48
         },
         {
@@ -1082,7 +1082,7 @@
       "controls": [
         {
           "label": "Film abspielen",
-          "width": 136,
+          "width": 137,
           "height": 48
         },
         {
@@ -1113,7 +1113,7 @@
       "controls": [
         {
           "label": "Film pauzeren",
-          "width": 124,
+          "width": 123,
           "height": 46
         },
         {
@@ -1123,7 +1123,7 @@
         },
         {
           "label": "Ondertiteling",
-          "width": 150,
+          "width": 151,
           "height": 48
         },
         {
@@ -1300,18 +1300,18 @@
       "controls": [
         {
           "label": "Film afspelen",
-          "width": 129,
-          "height": 48
+          "width": 120,
+          "height": 46
         },
         {
           "label": "Film met geluid · DE",
-          "width": 135,
-          "height": 48
+          "width": 128,
+          "height": 46
         },
         {
           "label": "Volume",
-          "width": 56,
-          "height": 48
+          "width": 54,
+          "height": 46
         }
       ],
       "captions": false,
@@ -1326,7 +1326,7 @@
       "controls": [
         {
           "label": "Film abspielen",
-          "width": 136,
+          "width": 137,
           "height": 48
         },
         {
@@ -1352,7 +1352,7 @@
       "controls": [
         {
           "label": "Film abspielen",
-          "width": 136,
+          "width": 137,
           "height": 48
         },
         {

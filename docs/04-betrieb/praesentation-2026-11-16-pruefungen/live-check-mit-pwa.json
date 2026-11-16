@@ -1,0 +1,26 @@
+{
+ "base": "http://localhost:3311",
+ "zeit": "2026-11-16T00:15:47.143Z",
+ "pruefungen": 350,
+ "befunde": 2,
+ "fehlgeschlagen": [
+  {
+   "id": "Shop-Dienst /api/shop/status",
+   "ok": false,
+   "vorgabe": "Echte Kundenwege: Sortiment lädt",
+   "detail": {
+    "status": 404,
+    "grund": null
+   }
+  },
+  {
+   "id": "Shop-Dienst /api/shop/products",
+   "ok": false,
+   "vorgabe": "Echte Kundenwege: Sortiment lädt",
+   "detail": {
+    "status": 404,
+    "grund": null
+   }
+  }
+ ]
+}
