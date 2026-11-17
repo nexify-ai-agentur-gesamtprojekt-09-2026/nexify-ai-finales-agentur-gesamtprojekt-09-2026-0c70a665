@@ -1974,6 +1974,7 @@ Herleitung: OFFEN 49 + 1 neu (181) = 50. ENTSCHEIDUNG NÖTIG 60 + 2 neue (179, 1
 - **Fertig, wenn:** Öffentliche DNS-Abfrage der betroffenen Namen abgelegt; Abgleich mit dem Stand vor der Änderung (Netz-Inventur, PR 200, sobald eingebracht); Bestätigung oder Rücknahme durch den Inhaber.
 - **Aufwand:** S · **Ausführung:** Messung Fabrik (nur lesend), Bestätigung Inhaber · **Owner:** koordinierende Sitzung · **Nächste Aktion:** lesende DNS-Abfrage im nächsten Regelbetrieb-Lauf
 - **Quellen:** Auftrag der koordinierenden Sitzung zum Regelbetrieb-Lauf 15.11.2026; `tools/live-check.mjs` 15.11.2026, 10:51 UTC
+- **Stand 17.11.2026, ca. 19:00 UTC:** Lesende DNS-Abfrage (DNS über HTTPS, 18:58 UTC): `nexifyai.de` und `www.nexifyai.de` A `185.158.133.1`, Nameserver bei Cloudflare; `nexifyai.cloud` und `www.nexifyai.cloud` A `172.66.40.167`, `172.66.43.89`. Die Apex-Domain zeigt damit nicht mehr auf Vercel; siehe OA-182. Die gemeldeten Einträge (Resend, Clerk, DKIM) sind weiter nicht einzeln nachgemessen.
 
 ## 11. Nachführung 16.11.2026, ca. 03:00 UTC (Stand `origin/main` `9c9c806`, PR 199)
 
@@ -1997,3 +1998,56 @@ Regelbetrieb-Lauf 02:48 UTC. Seit `9c9c806` kein Merge (`git log 9c9c806..origin
 | ERLEDIGT | 10 | 10 |
 
 Herleitung: ENTSCHEIDUNG NÖTIG 62 − 1 (OA-180) = 61; HISTORIE-überholt 8 + 1 (OA-180) = 9. Keine neuen Einträge.
+
+## 12. Nachführung 17.11.2026, ca. 19:00 UTC (Stand `origin/main` `9c9c806`, PR 199)
+
+Regelbetrieb-Lauf 18:47 UTC. Die Hauptsitzung war vom 16.11.2026, ca. 03:00 UTC, bis 17.11.2026, ca. 18:50 UTC, nicht erreichbar; zehn Läufe sind ausgefallen. Seit `9c9c806` kein Merge. Quelle der eigenen Angaben: `PROGRESS.md`, Abschnitt „Stand 17.11.2026, ca. 19:00 UTC“.
+
+### 12.1 Geänderte Zustände
+
+Kein Zustand geändert. Stand-Zeile an OA-181 (DNS lesend gemessen).
+
+### 12.2 Zählung nach der Nachführung (184 Einträge)
+
+| Zustand | Stand 16.11.2026, ca. 03:00 UTC | Stand 17.11.2026, ca. 19:00 UTC |
+|---|---|---|
+| OFFEN | 50 | 51 |
+| TEILWEISE | 13 | 13 |
+| BLOCKIERT | 38 | 38 |
+| ENTSCHEIDUNG NÖTIG | 61 | 63 |
+| HISTORIE-überholt | 9 | 9 |
+| ERLEDIGT | 10 | 10 |
+
+Herleitung: OFFEN 50 + 1 neu (183) = 51. ENTSCHEIDUNG NÖTIG 61 + 2 neue (182, 184) = 63.
+
+### 12.3 Neue Einträge
+
+#### OA-182 · Infrastruktur & Server · ENTSCHEIDUNG NÖTIG
+
+- **Priorität:** 1 Sicherheits-, Daten- und Betriebsrisiko
+- **Ziel:** Klären, wer `nexifyai.de` und `www.nexifyai.de` auf eine Auslieferung außerhalb dieses Repositorys umgestellt hat, ob das gewollt ist, und danach entweder einen geprüften Rückweg auf das Vercel-Projekt `…-ut7r` oder eine neue Führungsentscheidung festhalten.
+- **Blocker:** IST 17.11.2026, 18:58 bis 19:19 UTC: A `185.158.133.1`, Antwort über Cloudflare, Anwendung mit Lovable-Kennungen und einer Commit-Kennung, die es in diesem Repository nicht gibt; Vercel-Projekt `…-ut7r` ohne eigene Domain. Folgen: `tools/live-check.mjs` 313 Prüfungen, 16 Befunde; `tools/gleichmacher.mjs` 781 Abweichungen; Shop-Dienst 404; kein KI-Hinweis im Footer; keine Indexierungssperre für `/teileklar`; `/agb` 404; Katalogzahl ohne belegte Quelle. Widerspricht `AGENTS.md` (Führungsentscheidung 13.11.2026, „ausgeliefert ausschließlich über Vercel“) und D-012 (Gleichmacher vor jeder Auslieferung); berührt D-021. DNS und Vercel werden ohne Freigabe des Inhabers nicht geändert (D-016, D-017).
+- **Abhängigkeiten:** keine (verwandt: OA-031, OA-181, OA-179 Punkt 5 „kanonische Domain“)
+- **Fertig, wenn:** Der Inhaber hat die Auslieferung bestätigt oder einen Rückweg freigegeben; der Stand ist in `AGENTS.md` bzw. `DECISIONS.md` mit Quelle festgehalten; Live-Check und Gleichmacher gegen die öffentliche Domain sind wieder ohne Befund oder die Abweichung ist entschieden.
+- **Aufwand:** S für die Entscheidung · **Ausführung:** Entscheidung nur Inhaber, Messung Fabrik · **Owner:** Inhaber · **Nächste Aktion:** sofort vorlegen
+- **Quellen:** `PROGRESS.md`, Abschnitt „Stand 17.11.2026, ca. 19:00 UTC“; DNS über HTTPS, `curl`, Vercel-API (nur lesend), 17.11.2026
+
+#### OA-183 · Shop TEILEKLAR · OFFEN
+
+- **Priorität:** 2 Verkaufsfähiger Auftritt und Arbeitsplatz
+- **Ziel:** Entwurf PR 218 (`claude/heilung-schaufenster-leer`, Leerzustand statt Dauerladen auf `/teileklar`) unabhängig prüfen lassen und den dadurch roten Resize-Beleg in eigener Arbeit neu erheben.
+- **Blocker:** `evidence/resize-2026-11-10/text-spacing.json` bindet `apps/web/components` vollständig; neu rot: `test_current_report_has_exact_source_binding`, `test_css_script_new_source_and_uncompleted_report_fail_closed`. Erneuerung nur durch Lauf von `apps/site/tests/browser-text-spacing.mjs` am festen Commit (`nexify-belege-und-pins`).
+- **Abhängigkeiten:** keine (verwandt: OA-056)
+- **Fertig, wenn:** Unabhängige Prüfung liegt vor; Beleg am Merge-Stand neu erhoben, alte Fassung unter `superseded/`; Merge durch koordinierende Sitzung oder Inhaber.
+- **Aufwand:** S · **Ausführung:** Fabrik · **Owner:** koordinierende Sitzung · **Nächste Aktion:** Prüfauftrag an einen zweiten Agenten
+- **Quellen:** PR 218, Abschnitte „Prüfung“ und „Nicht belegt“
+
+#### OA-184 · Qualität & Belege · ENTSCHEIDUNG NÖTIG
+
+- **Priorität:** 1 Sicherheits-, Daten- und Betriebsrisiko
+- **Ziel:** Über die Aktualisierung von Next.js 16.4.3 entscheiden: `next build` meldet am 17.11.2026 eine bekannte Sicherheitslücke und bricht beim ersten Lauf ab; Dependabot-PR 217 hebt auf 16.4.5.
+- **Blocker:** Abhängigkeitswechsel braucht geprüfte Herkunft und Freigabe (`nexify-belege-und-pins`, Grenzen); CI an PR 217 rot wie auf `main`.
+- **Abhängigkeiten:** keine (verwandt: OA-022)
+- **Fertig, wenn:** PR 217 geprüft und eingebracht oder mit Begründung abgelehnt; `next build` ohne Abbruch.
+- **Aufwand:** S · **Ausführung:** Prüfung Fabrik, Freigabe Inhaber · **Owner:** Inhaber · **Nächste Aktion:** PR 217 prüfen lassen
+- **Quellen:** lokaler `next build` am 17.11.2026 in `claude/heilung-schaufenster-leer`; PR 217
