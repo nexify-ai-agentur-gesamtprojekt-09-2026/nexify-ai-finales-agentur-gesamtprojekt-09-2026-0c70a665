@@ -4,6 +4,8 @@ import {ActionButton} from '../ActionControl';
 import {HcArrow} from '../HcArrow';
 import { SiteLink } from "../Router";
 import "./shop.css";
+import { useShopCopy } from "./ProductCard";
+import { STORY, type StoryLocale } from "./product-story-copy";
 
 const CATS = [
   { id: "brakes", label: "Bremsen", points: ["Scheibendurchmesser und -dicke in mm", "Belüftet oder voll (nicht austauschbar)", "Vorderachse oder Hinterachse", "Motorcode bei leistungsstarken Varianten"], pitfall: "Ein passender Scheibendurchmesser reicht nicht: Bei stärkeren Motoren ist oft eine größere Bremsanlage verbaut." },
@@ -17,9 +19,14 @@ const CATS = [
 export default function FitmentChecklist() {
   const [catId, setCatId] = useState(""), [hsn, setHsn] = useState(""), [tsn, setTsn] = useState(""), [vehicle, setVehicle] = useState(""), [summary, setSummary] = useState(false);
   const cat = CATS.find(c => c.id === catId);
+  const { locale } = useShopCopy();
+  const story = STORY[(locale as StoryLocale) in STORY ? (locale as StoryLocale) : "de"];
   const vehicleText = vehicle.trim() || [hsn.trim(), tsn.trim()].filter(Boolean).join(" · ") || "Ihr Fahrzeug";
   return <section className="tk-form" aria-labelledby="fit-title" data-testid="fitment-checklist">
     <h2 id="fit-title">Passung prüfen: Worauf es ankommt</h2>
+    <ul className="tk-story-trust">{story.trust.map(item => <li key={item}>{item}</li>)}</ul>
+    <h3>{story.stepsTitle}</h3>
+    <ol className="tk-story-steps" data-testid="fit-steps">{story.steps.map(([title, body], index) => <li key={title}><span className="tk-story-num" aria-hidden="true">{index + 1}</span><div><strong>{title}</strong><p>{body}</p></div></li>)}</ol>
     <p className="tk-meta">Ein Artikelname belegt keine Passung. Wählen Sie eine Kategorie und sehen Sie, welche Angaben entscheiden. Eine automatische Passungsprüfung gegen einen Fahrzeugkatalog gibt es noch nicht.</p>
     <div className="tk-actions" role="group" aria-label="Kategorie wählen">{CATS.map(c => <ActionButton key={c.id} variant={c.id === catId ? "primary" : "secondary"} className={c.id === catId ? "hc-finish-primary" : "hc-text-link"} aria-pressed={c.id === catId} onClick={() => { setCatId(c.id); setSummary(false); }} data-testid={`fit-cat-${c.id}`}>{c.label}</ActionButton>)}</div>
     {cat && <><h3>Diese Angaben entscheiden bei {cat.label}</h3><ul className="tk-checklist" data-testid="fit-points">{cat.points.map(p => <li key={p}>{p}</li>)}</ul><p className="tk-notice" data-testid="fit-pitfall"><strong>Häufigster Irrtum:</strong> {cat.pitfall}</p>

@@ -33,6 +33,18 @@ def supplier_image(value):
     return value
 
 
+def shop_visibility(with_image=True):
+    """Mongo-Filter fuer die Shop-Praesentation.
+
+    Artikel ohne Lieferantenbild bleiben im Datenbestand und fuer Feeds (z. B. billiger.de)
+    erhalten, werden im Shop (Schaufenster, Katalog, Kategorien) aber nicht direkt gezeigt.
+    with_image=False liefert alle Artikel (Datenweitergabe, Admin).
+    """
+    if not with_image:
+        return {}
+    return {"images": {"$elemMatch": {"$regex": r"^https://cdnbigbuy\.com/images/"}}}
+
+
 def present(product, settings, full=False):
     released = settings["price_released"]
     raw_stock = product.get("stock")
@@ -63,14 +75,14 @@ async def catalog_status():
 
 @router.get("/categories")
 async def categories():
-    counts = {row["_id"]: row["n"] async for row in db.products.aggregate([{"$match": {"active": True}}, {"$unwind": "$category_ids"}, {"$group": {"_id": "$category_ids", "n": {"$sum": 1}}}])}
+    counts = {row["_id"]: row["n"] async for row in db.products.aggregate([{"$match": {"active": True, **shop_visibility(True)}}, {"$unwind": "$category_ids"}, {"$group": {"_id": "$category_ids", "n": {"$sum": 1}}}])}
     rows = [c async for c in db.categories.find({})]
     return {"categories": sorted([{"id": c["_id"], "name": c["name"], "root": c.get("root", False), "count": counts.get(c["_id"], 0)} for c in rows if counts.get(c["_id"])], key=lambda c: (not c["root"], c["name"]))}
 
 
 @router.get("/products")
-async def products(q: str = Query("", max_length=120), category: int | None = None, page: int = Query(1, ge=1, le=10000), page_size: int = Query(24, ge=1, le=60), sort: Literal['availability','price_asc','price_desc','name']='availability', in_stock: bool=False):
-    query = {"active": True}
+async def products(q: str = Query("", max_length=120), category: int | None = None, page: int = Query(1, ge=1, le=10000), page_size: int = Query(24, ge=1, le=60), sort: Literal['availability','price_asc','price_desc','name']='availability', in_stock: bool=False, with_image: bool=True):
+    query = {"active": True, **shop_visibility(with_image)}
     if in_stock:
         query['stock'] = {'$gt': 0}
     term = q.strip()
