@@ -67,7 +67,7 @@ try{
   const sourcesShown=await page.locator('.tk-public-commerce .tk-image img').evaluateAll(nodes=>nodes.map(node=>({src:node.src,policy:node.referrerPolicy,loading:node.loading})));
   assert.ok(sourcesShown.length>=1&&sourcesShown.every(image=>image.src.startsWith('https://cdnbigbuy.com/images/')&&image.policy==='no-referrer'&&image.loading==='lazy'));
   assert.ok(imageRequests.length>=1&&imageRequests.every(url=>url.startsWith('https://cdnbigbuy.com/images/')),'only the allow-listed supplier path is requested');
-  assert.equal(await page.locator('[data-testid="product-card-mock-0005"] .tk-image-missing').count(),1,'the item with a foreign image host shows the missing-image notice');
+  assert.equal(await page.locator('[data-testid="product-card-mock-0005"] [data-testid="product-placeholder"]').count(),1,'the item with a foreign image host shows the missing-image notice');
   assert.equal(external.includes('https://evil.example'),false);
  });
  await check('browsing_is_read_only_no_write_request_no_visitor_cookie_no_cart',async()=>{

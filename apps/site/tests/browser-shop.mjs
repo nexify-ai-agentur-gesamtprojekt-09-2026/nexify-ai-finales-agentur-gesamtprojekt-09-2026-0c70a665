@@ -95,7 +95,7 @@ try{
   await go('/teileklar/produkt/mock-0004');await page.locator('[data-testid="product-detail"]').waitFor();
   assert.ok((await page.locator('[data-testid="stock-label"]').first().innerText()).includes('unbekannt'));assert.equal(await page.locator('[data-testid="add-to-cart-button"]').isDisabled(),true);
   await go('/teileklar/produkt/mock-0005');await page.locator('[data-testid="product-detail"]').waitFor();
-  assert.equal(await page.locator('.tk-image img').count(),0,'a non-allowlisted image host is never rendered');assert.equal(await page.locator('.tk-image-missing').count()>0,true);
+  assert.equal(await page.locator('.tk-image img').count(),0,'a non-allowlisted image host is never rendered');assert.equal(await page.locator('[data-testid="product-placeholder"]').count()>0,true,'the branded placeholder stands in for the refused image');
   await go('/teileklar/produkt/gibt-es-nicht');await page.locator('[data-testid="product-missing"]').waitFor();assert.ok((await body()).includes('Artikel nicht gefunden'));
  });
  await check('add_to_cart_creates_httponly_visitor_cart_and_cart_survives_reload',async()=>{

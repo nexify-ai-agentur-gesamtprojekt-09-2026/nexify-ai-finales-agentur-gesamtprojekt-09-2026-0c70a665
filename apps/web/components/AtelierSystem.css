@@ -569,11 +569,13 @@ body:has(#atelier) .skip-link{font-size:15px;font-weight:600;line-height:1.5}
 #atelier .site-header .header-actions{flex:none;margin-left:8px;gap:8px;flex-wrap:nowrap}
 #atelier .site-header .header-cta{padding:0 20px}
 #atelier .site-header .header-cta>span{display:none}
-@container website (min-width:1000px){
+/* Umbruchpunkt in em statt px: bei 200 % Text (WCAG 1.4.4) braucht die volle Navigation doppelt so viel Platz und weicht
+   dann der kompakten Navigation, statt die Kopfleiste zu sprengen (Befund text-spacing 2026-11-18 nach schmalerer Chat-Scheibe). */
+@container website (min-width:62.5em){
  #atelier .site-header .main-navigation{display:flex}
  #atelier .site-header .mobile-navigation{display:none}
 }
-@container website (max-width:999px){
+@container website (max-width:62.4375em){
  #atelier .site-header .main-navigation{display:none}
  #atelier .site-header .mobile-navigation{display:block;margin-left:auto}
  /* Schmale Kopfleiste: reicht der Platz nicht (grosse Schrift, WCAG 1.4.4), bricht der Schalter um, statt die Leiste zu sprengen; Sprache und Farbmodus behalten ihre Breite. */
@@ -650,7 +652,7 @@ body:has(#atelier) .skip-link{font-size:15px;font-weight:600;line-height:1.5}
 #atelier #aifly-panel .orientation-host-figure{position:relative;flex:none;width:112px;height:112px}
 #atelier #aifly-panel .orientation-host-figure::after{content:'';position:absolute;inset:auto 12% -10px;height:14px;z-index:-1;border-radius:50%;background:radial-gradient(ellipse 50% 50% at 50% 50%,var(--as-figure-shadow),transparent 72%)}
 #atelier #aifly-panel .orientation-host-figure img{display:block;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 10px 10px var(--as-figure-shadow))}
-#atelier #aifly-panel .orientation-host-name{display:grid;gap:2px;margin:0 0 12px}
+#atelier #aifly-panel .orientation-host-name{display:grid;gap:2px;margin:0 0 12px;min-width:0;overflow-wrap:anywhere}
 #atelier #aifly-panel .orientation-host-name strong{font-family:var(--font-text);font-size:16px;font-weight:600;line-height:1.5;letter-spacing:0;color:var(--as-ink)}
 #atelier #aifly-panel .orientation-host-name span{font-size:13px;font-weight:400;line-height:1.5;letter-spacing:0;color:var(--as-ink-3)}
 #atelier #aifly-panel .orientation-intro h3{margin:0 0 16px;font-family:var(--font-display);font-size:clamp(28px,8.6cqi,36px);font-weight:500;line-height:var(--as-z-eng);letter-spacing:-.02em;color:var(--as-ink);text-wrap:balance}
@@ -1335,3 +1337,9 @@ html:has(#atelier .mobile-navigation[open]){overflow:hidden}
 #atelier .home-concept .hc-finish-actions:has(>:nth-child(2))>*{align-self:auto;justify-self:stretch;margin:0}
 #atelier .home-concept .hc-finish-actions:has(>:nth-child(2))>:is(.hc-finish-primary,.hc-text-link){justify-content:space-between;height:auto;white-space:normal;text-align:start;overflow-wrap:anywhere}
 #atelier .home-concept .hc-finish-actions:has(>:nth-child(2))>.hc-text-link{padding:var(--as-s-2) calc(var(--as-s-6) + var(--as-s-1) - 1px)}
+/* Schmale Chat-Scheibe (Standard seit 2026-11-18): bei vergrößerter Schrift (WCAG 1.4.4) steht der Name unter der Figur,
+   statt neben ihr aus dem Kasten zu laufen. Schwelle in em: bei 100 % Text bleibt die Zeile, bei 200 % greift die Spalte. */
+@container front (max-width:17em){
+ #atelier #aifly-panel .orientation-host{flex-direction:column;align-items:flex-start}
+ #atelier #aifly-panel .orientation-host-name{max-width:100%}
+}
