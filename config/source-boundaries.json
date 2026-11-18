@@ -18,6 +18,21 @@
       "whole_project_import_allowed": false
     },
     {
+      "id": "N3",
+      "repository": "nexify-ai-agentur-gesamtprojekt-09-2026/nexfiy-ai-studio",
+      "classification": "agency_system",
+      "role": "design_and_content_derivative_of_canonical",
+      "derived_from": "N1",
+      "pinned_commit": "d43b95de17ef4011ad0bad9e6be9357739621321",
+      "pinned_at": "2026-11-18T01:05:00+01:00",
+      "pinned_paths": ["src/routes", "src/styles/pages", "src/components", "src/lib"],
+      "runtime_membership": false,
+      "whole_project_import_allowed": false,
+      "reuse": "page_content_port_into_canonical_model",
+      "license_authority": "The source README names this canonical repository as its origin and states full ownership by the owner; the source is a Lovable rendering of N1, not an external project. Owner decision 2026-11-18, DECISIONS.md D-023.",
+      "no_customer_data_or_secrets": true
+    },
+    {
       "id": "A1",
       "repository": "NeXify-AI-by-NeXify-Chat-it-Automat-it/affilinet-portal-aachen-final",
       "classification": "external_customer_project",
@@ -42,6 +57,30 @@
     "additional_blanket_permission_required_for_authorized_code_reuse": false
   },
   "adopted_customer_components": [],
+  "adopted_agency_components": [
+    {
+      "source_repository": "nexify-ai-agentur-gesamtprojekt-09-2026/nexfiy-ai-studio",
+      "source_commit": "d43b95de17ef4011ad0bad9e6be9357739621321",
+      "source_paths": ["src/routes/passwort-vergessen.tsx", "src/styles/pages/passwort-vergessen.css"],
+      "purpose": "Public password-reset request page; the canonical model has no route for it yet.",
+      "target_paths": ["config/site-map.json"],
+      "license_evidence": "Source README names this canonical repository as origin and states full ownership; N1 derivative. DECISIONS.md D-023.",
+      "adaptations": ["Rebuilt as site-map content with four locales instead of imported HTML", "No mail sending and no account lookup in this step"],
+      "tests": ["tests/test_site_map.py", "apps/site/tests/seo-sitemap.test.mjs"],
+      "contains_customer_data_or_secrets": false
+    },
+    {
+      "source_repository": "nexify-ai-agentur-gesamtprojekt-09-2026/nexfiy-ai-studio",
+      "source_commit": "d43b95de17ef4011ad0bad9e6be9357739621321",
+      "source_paths": ["src/routes/teileklar_.bestellungen.tsx", "src/styles/pages/teileklar.bestellungen.css"],
+      "purpose": "Customer order overview route; registered as private target, no order data in the public build.",
+      "target_paths": ["config/site-map.json"],
+      "license_evidence": "Source README names this canonical repository as origin and states full ownership; N1 derivative. DECISIONS.md D-023.",
+      "adaptations": ["Private access block with customer role and tenant requirement", "Backend not connected; page states that no order data is shown"],
+      "tests": ["tests/test_site_map.py", "apps/site/tests/public-boundaries.test.mjs"],
+      "contains_customer_data_or_secrets": false
+    }
+  ],
   "forbidden_agency_paths": ["apps/portal"],
   "excluded_customer_history_heads": [
     "56cbd8669c2e1d57bcfe633919aad38684c7f5f9",

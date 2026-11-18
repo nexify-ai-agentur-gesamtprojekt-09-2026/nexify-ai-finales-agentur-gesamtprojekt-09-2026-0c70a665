@@ -1,0 +1,169 @@
+{
+  "schema_version": 1,
+  "id": "nexify-selbstkonfiguration",
+  "status": "in_kraft_mit_merge",
+  "authority": {
+    "decision": "DECISIONS.md#D-023",
+    "owner": "Pascal Courbois",
+    "date": "2026-11-18",
+    "interaction": "968460c7-eea5-4853-9ee1-84ac62ca739c",
+    "wording": "Diese sind zu erstellen. Starte daher das gesamte, zuvor mit den Experten nach soll vorgaben zu planen, umzusetzen, relasieren, in betrieb zu nehmen und dauerhaft zu betreiben."
+  },
+  "scope": {
+    "applies_to": ["apps/site", "apps/web", "apps/shop-api", "packages", "config", "ops"],
+    "does_not_apply_to": ["external customer repositories", "third-party services without a recorded access"],
+    "language": "de"
+  },
+  "sources": [
+    {
+      "id": "S1",
+      "path": "AGENTS.md",
+      "role": "verbindliche_arbeitsvorgabe",
+      "required": true
+    },
+    {
+      "id": "S2",
+      "path": "DECISIONS.md",
+      "role": "entscheidungsregister",
+      "required": true
+    },
+    {
+      "id": "S3",
+      "path": "config/llm-policy.json",
+      "role": "modell_und_anbieter_vorgabe",
+      "required": true
+    },
+    {
+      "id": "S4",
+      "path": "config/source-boundaries.json",
+      "role": "quellengrenzen_und_wiederverwendung",
+      "required": true
+    },
+    {
+      "id": "S5",
+      "path": "config/automation.json",
+      "role": "automatisierungsgrenzen",
+      "required": true
+    },
+    {
+      "id": "S6",
+      "path": "docs/automation/selbstkonfiguration.md",
+      "role": "erlaeuterung_und_anwendung",
+      "required": true
+    }
+  ],
+  "derivation_rules": [
+    {
+      "id": "R1",
+      "rule": "Eine Vorgabe gilt nur, wenn sie in einer Quelle unter sources steht; Chatverlauf ist keine Vorgabe.",
+      "from": ["S1", "S2"]
+    },
+    {
+      "id": "R2",
+      "rule": "Widersprechen sich zwei Quellen, gilt die jüngere Inhaberentscheidung; der Widerspruch wird sichtbar gemacht, nicht stillschweigend aufgelöst.",
+      "from": ["S2"]
+    },
+    {
+      "id": "R3",
+      "rule": "Fehlt eine Fähigkeit, wird sie standardkonform gebaut, positiv und negativ getestet und im selben Auftrag eingesetzt; sie wird nicht erfunden und nicht als vorhanden gemeldet.",
+      "from": ["S1"]
+    },
+    {
+      "id": "R4",
+      "rule": "Wiederverwendung braucht Quelle, Commit, Pfade, Zweck, Lizenzgrundlage, Anpassung und Tests; ohne diese Angaben kein Import.",
+      "from": ["S4"]
+    },
+    {
+      "id": "R5",
+      "rule": "Jede Automatisierung bleibt innerhalb der Grenzen aus S5 und D-017; kein automatischer Merge nach main und keine Produktivauslieferung ohne eigenen Nachweis.",
+      "from": ["S5", "S2"]
+    },
+    {
+      "id": "R6",
+      "rule": "Ein Ergebnis wird nur als fertig, live oder verbunden gemeldet, wenn Messwert, Test und unabhängige Prüfung am genannten Commit vorliegen.",
+      "from": ["S1", "S6"]
+    }
+  ],
+  "limits": [
+    {
+      "id": "L1",
+      "rule": "Keine Zahlungen und keine Preisänderungen.",
+      "from": "DECISIONS.md#D-017"
+    },
+    {
+      "id": "L2",
+      "rule": "Keine Änderung an Rechtstexten ohne Freigabe des Inhabers.",
+      "from": "DECISIONS.md#D-017"
+    },
+    {
+      "id": "L3",
+      "rule": "Keine Lockerung von Schutzmechanismen, Rollen oder Mandantentrennung.",
+      "from": "DECISIONS.md#D-017"
+    },
+    {
+      "id": "L4",
+      "rule": "Keine Zugangsdaten im Klartext, weder im Chat noch in Dateien.",
+      "from": "DECISIONS.md#D-017"
+    },
+    {
+      "id": "L5",
+      "rule": "Nichts löschen; kein Force-Push, kein Umhängen fremder Zweige.",
+      "from": "DECISIONS.md#D-017"
+    },
+    {
+      "id": "L6",
+      "rule": "Kein pauschaler Projektimport aus fremden oder abgeleiteten Quellen.",
+      "from": "DECISIONS.md#D-023"
+    }
+  ],
+  "gates": [
+    {
+      "id": "G1",
+      "command": "python3 tools/check_selbstkonfiguration.py",
+      "required": true
+    },
+    {
+      "id": "G2",
+      "command": "python3 tools/check_source_boundaries.py",
+      "required": true
+    },
+    {
+      "id": "G3",
+      "command": "make governance-check",
+      "required": true
+    },
+    {
+      "id": "G4",
+      "command": "python3 -m unittest discover -s tests -p test_selbstkonfiguration.py -q",
+      "required": true
+    }
+  ],
+  "goal_automation": {
+    "id": "goal-automatik",
+    "enabled": true,
+    "trigger": "Ein Auftrag nennt ein Ziel, aus dem sich eine Vorgabe ableiten laesst, und die Ableitung steht in einer Quelle unter sources.",
+    "steps": [
+      "Ist-Stand messen und Quelle mit Commit festhalten.",
+      "SOLL aus den Quellen ableiten und als Abnahmekriterium notieren.",
+      "Plan mit Fachagenten schneiden, WIP=1, Maker und Checker trennen.",
+      "Umsetzen, positiv und negativ testen, Diff pruefen.",
+      "Unabhaengig pruefen lassen; ohne APPROVE kein Abschluss.",
+      "Ausliefern als Entwurfs-PR; kein automatischer Merge.",
+      "Wissen zurueckschreiben und Register nachfuehren."
+    ],
+    "stop_conditions": [
+      "Eine Grenze aus limits ist beruehrt.",
+      "Eine Quelle fehlt, ist gesperrt oder widerspricht einer anderen ohne Entscheidung.",
+      "Ein Test oder eine unabhaengige Pruefung fehlt.",
+      "Eine Produktiv- oder Rechtswirkung ist nicht durch den Inhaber gedeckt."
+    ],
+    "automatic_main_merge": false,
+    "automatic_production_deployment": false
+  },
+  "evidence": {
+    "checked_at": "2026-11-18",
+    "knowledge_bundle_sha256": "05e02d4ac5147c84c65ec92e41ab8bf4647a5731585dc007b9431c70e434305f",
+    "knowledge_verify": "blocked_environment_permission",
+    "knowledge_verify_detail": "knowledge-bootstrap.py --verify exit 1: REA-CAPABILITY-POLICY.json is 0600 root; bundle hash matches the manifest."
+  }
+}

@@ -29,6 +29,9 @@ def validate(policy, root, ancestors):
     adopted = policy.get("adopted_customer_components")
     if not isinstance(adopted, list):
         return ["Component adoption records must be an explicit list"]
+    adopted_agency = policy.get("adopted_agency_components", [])
+    if not isinstance(adopted_agency, list):
+        return ["Agency component adoption records must be an explicit list"]
     sources = {source["id"]: source for source in raw_sources}
     customer = sources.get("A1", {})
     if customer.get("classification") != "external_customer_project" or customer.get("status") != "paused":
@@ -50,6 +53,18 @@ def validate(policy, root, ancestors):
             errors.append("Component adoption needs explicit provenance, adaptation and tests")
         if not isinstance(component, dict) or component.get("contains_customer_data_or_configuration") is not False:
             errors.append("Customer data or configuration cannot be adopted")
+    agency_repositories = {source.get("repository") for source in raw_sources
+                           if source.get("classification") == "agency_system"}
+    for component in adopted_agency:
+        required = ("source_repository", "source_commit", "source_paths", "purpose", "target_paths",
+                    "license_evidence", "adaptations", "tests")
+        if not isinstance(component, dict) or any(not component.get(key) for key in required):
+            errors.append("Agency component adoption needs explicit provenance, adaptation and tests")
+            continue
+        if component.get("contains_customer_data_or_secrets") is not False:
+            errors.append("Agency component adoption must state that it carries no customer data or secrets")
+        if component.get("source_repository") not in agency_repositories:
+            errors.append("Agency component source must be a declared agency source")
     return errors
 
 

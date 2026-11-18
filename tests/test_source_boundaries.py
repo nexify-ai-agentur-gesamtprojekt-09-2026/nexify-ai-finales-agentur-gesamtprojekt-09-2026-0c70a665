@@ -67,5 +67,24 @@ class SourceBoundaryTests(unittest.TestCase):
             del policy[field]
             self.assertTrue(boundary.validate(policy, self.root, self.policy["excluded_customer_history_heads"]))
 
+    def test_agency_component_reuse_requires_provenance_and_no_secrets(self):
+        self.assertEqual(boundary.validate(self.policy, self.root, []), [])
+        component = copy.deepcopy(self.policy["adopted_agency_components"][0])
+        for field in ("source_repository", "source_commit", "source_paths", "purpose",
+                      "target_paths", "license_evidence", "adaptations", "tests"):
+            policy = copy.deepcopy(self.policy)
+            policy["adopted_agency_components"] = [dict(component, **{field: None})]
+            with self.subTest(missing=field):
+                self.assertTrue(boundary.validate(policy, self.root, []))
+        policy = copy.deepcopy(self.policy)
+        policy["adopted_agency_components"] = [dict(component, contains_customer_data_or_secrets=True)]
+        self.assertTrue(boundary.validate(policy, self.root, []))
+        policy = copy.deepcopy(self.policy)
+        policy["adopted_agency_components"] = [dict(component, source_repository="undeclared/other")]
+        self.assertTrue(boundary.validate(policy, self.root, []))
+        policy = copy.deepcopy(self.policy)
+        policy["adopted_agency_components"] = "not-a-list"
+        self.assertTrue(boundary.validate(policy, self.root, []))
+
 
 if __name__ == "__main__": unittest.main()
