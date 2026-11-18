@@ -2868,10 +2868,10 @@
             "en": "Usage and costs"
           },
           "body": {
-            "de": "Die API ist als Prepaid-Angebot angelegt: Sie laden Guthaben auf und verbrauchen es mit Ihren Aufrufen. Ohne Deckung wird keine Anfrage ausgeführt, damit keine Kosten entstehen, die Sie nicht erwarten.\n\nDie Tarife stehen noch zur Freigabe. Vor der Nutzung vereinbaren wir erwartete Aufrufe, Grenzen und Abrechnung mit Ihnen.",
-            "nl": "De API is opgezet als prepaid-aanbod: u laadt tegoed op en verbruikt het met uw aanroepen. Zonder dekking wordt geen aanvraag uitgevoerd, zodat er geen kosten ontstaan die u niet verwacht.\n\nDe tarieven wachten nog op vrijgave. Vóór het gebruik spreken we verwachte aanroepen, limieten en facturering met u af.",
-            "fr": "L’API est conçue comme une offre prépayée : vous rechargez un crédit et le consommez par vos appels. Sans provision, aucune requête n’est exécutée, afin d’éviter des coûts inattendus.\n\nLes tarifs sont encore en attente de validation. Avant l’utilisation, nous convenons avec vous des appels attendus, des limites et de la facturation.",
-            "en": "The API is set up as a prepaid offer: you top up a balance and use it with your calls. Without cover, no request is executed, so no costs arise that you do not expect.\n\nThe rates are still awaiting approval. Before use, we agree expected calls, limits and billing with you."
+            "de": "Die API ist als Prepaid-Angebot angelegt: Sie laden Guthaben auf und verbrauchen es mit Ihren Aufrufen. Ohne Deckung wird keine Anfrage ausgeführt, damit keine Kosten entstehen, die Sie nicht erwarten.\n\nVor der Nutzung vereinbaren wir erwartete Aufrufe, Grenzen und Abrechnung mit Ihnen.",
+            "nl": "De API is opgezet als prepaid-aanbod: u laadt tegoed op en verbruikt het met uw aanroepen. Zonder dekking wordt geen aanvraag uitgevoerd, zodat er geen kosten ontstaan die u niet verwacht.\n\nVóór het gebruik spreken we verwachte aanroepen, limieten en facturering met u af.",
+            "fr": "L’API est conçue comme une offre prépayée : vous rechargez un crédit et le consommez par vos appels. Sans provision, aucune requête n’est exécutée, afin d’éviter des coûts inattendus.\n\nAvant l’utilisation, nous convenons avec vous des appels attendus, des limites et de la facturation.",
+            "en": "The API is set up as a prepaid offer: you top up a balance and use it with your calls. Without cover, no request is executed, so no costs arise that you do not expect.\n\nBefore use, we agree expected calls, limits and billing with you."
           },
           "source_refs": [
             "docs/09-final/mastervorgabe-2026-10-29.md",
@@ -3849,10 +3849,10 @@
         "en": "Your data. A clear purpose."
       },
       "summary": {
-        "de": "Vertrauen braucht nachvollziehbaren Umgang mit Informationen. Für Website, Anfragen und Arbeitsbereiche sind Zweck, Verantwortlichkeit und Aufbewahrung getrennt auszuweisen. Die vollständige Datenschutzerklärung ist noch in Prüfung.",
-        "nl": "Vertrouwen vraagt om inzichtelijke informatieverwerking. Voor website, aanvragen en werkruimten moeten doel, verantwoordelijkheid en bewaartermijn afzonderlijk worden vermeld. De volledige privacyverklaring wordt nog gecontroleerd.",
-        "fr": "La confiance repose sur un traitement compréhensible des informations. Site, demandes et espaces de travail doivent préciser séparément leurs finalités, responsabilités et durées de conservation. La déclaration complète est encore en vérification.",
-        "en": "Trust depends on understandable information handling. The website, enquiries and workspaces must each identify their purpose, responsibility and retention. The complete privacy notice remains under review."
+        "de": "Vertrauen braucht nachvollziehbaren Umgang mit Informationen. Für Website, Anfragen und Arbeitsbereiche sind Zweck, Verantwortlichkeit und Aufbewahrung getrennt auszuweisen.",
+        "nl": "Vertrouwen vraagt om inzichtelijke informatieverwerking. Voor website, aanvragen en werkruimten moeten doel, verantwoordelijkheid en bewaartermijn afzonderlijk worden vermeld.",
+        "fr": "La confiance repose sur un traitement compréhensible des informations. Site, demandes et espaces de travail doivent préciser séparément leurs finalités, responsabilités et durées de conservation.",
+        "en": "Trust depends on understandable information handling. The website, enquiries and workspaces must each identify their purpose, responsibility and retention."
       },
       "site_context": "nexify",
       "sections": [
@@ -3972,10 +3972,10 @@
         "en": "Good work starts with clear agreements."
       },
       "summary": {
-        "de": "Marke, Website, KI und Betreuung gehören zu einem abgestimmten Auftrag. Den verbindlichen Umfang legt die bestätigte Vereinbarung fest. Die Vertragsunterlagen bleiben bis zur gesonderten Endprüfung Entwürfe.",
-        "nl": "Merk, website, AI en begeleiding horen bij een afgestemde opdracht. De bevestigde overeenkomst bepaalt de bindende omvang. Contractdocumenten blijven concepten tot de afzonderlijke eindcontrole.",
-        "fr": "Marque, site, IA et accompagnement s’inscrivent dans une mission définie ensemble. L’accord confirmé fixe le périmètre engageant. Les documents contractuels restent des projets jusqu’à leur validation finale distincte.",
-        "en": "Brand, website, AI and ongoing care belong to an agreed assignment. The confirmed agreement defines the binding scope. Contract documents remain drafts until separate final review."
+        "de": "Marke, Website, KI und Betreuung gehören zu einem abgestimmten Auftrag. Den verbindlichen Umfang legt die bestätigte Vereinbarung fest.",
+        "nl": "Merk, website, AI en begeleiding horen bij een afgestemde opdracht. De bevestigde overeenkomst bepaalt de bindende omvang.",
+        "fr": "Marque, site, IA et accompagnement s’inscrivent dans une mission définie ensemble. L’accord confirmé fixe le périmètre engageant.",
+        "en": "Brand, website, AI and ongoing care belong to an agreed assignment. The confirmed agreement defines the binding scope."
       },
       "site_context": "nexify",
       "sections": [
@@ -4341,10 +4341,10 @@
         "en": "You choose what else becomes active."
       },
       "summary": {
-        "de": "Notwendige Funktionen und optionale Messung haben unterschiedliche Aufgaben. Verständliche Einstellungen sollen vor optionaler Verarbeitung greifen. Die vollständige rechtliche Beschreibung wird noch geprüft.",
-        "nl": "Noodzakelijke functies en optionele meting hebben verschillende doelen. Begrijpelijke instellingen moeten vóór optionele verwerking gelden. De volledige juridische beschrijving wordt nog gecontroleerd.",
-        "fr": "Fonctions nécessaires et mesures facultatives répondent à des besoins différents. Les réglages doivent être compréhensibles et précéder tout traitement facultatif. La description juridique complète est encore en vérification.",
-        "en": "Necessary functions and optional measurement serve different purposes. Understandable settings should take effect before optional processing. The complete legal description remains under review."
+        "de": "Notwendige Funktionen und optionale Messung haben unterschiedliche Aufgaben. Verständliche Einstellungen sollen vor optionaler Verarbeitung greifen.",
+        "nl": "Noodzakelijke functies en optionele meting hebben verschillende doelen. Begrijpelijke instellingen moeten vóór optionele verwerking gelden.",
+        "fr": "Fonctions nécessaires et mesures facultatives répondent à des besoins différents. Les réglages doivent être compréhensibles et précéder tout traitement facultatif.",
+        "en": "Necessary functions and optional measurement serve different purposes. Understandable settings should take effect before optional processing."
       },
       "site_context": "nexify",
       "sections": [
@@ -6677,10 +6677,10 @@
         "en": "TEILEKLAR. Terms with a clear provider."
       },
       "summary": {
-        "de": "Handel und Werkstattservice brauchen eigene Anbieter-, Datenschutz- und Kaufunterlagen. Deren vollständige Freigabe steht aus; diese Übersicht bestätigt keine bereits geltenden Kaufbedingungen.",
-        "nl": "Handel en garageservice hebben eigen aanbieders-, privacy- en koopdocumenten nodig. De volledige goedkeuring staat nog open; dit overzicht bevestigt geen reeds geldende koopvoorwaarden.",
-        "fr": "Commerce et services d’atelier nécessitent leurs propres informations de prestataire, de confidentialité et de vente. Leur validation complète reste ouverte ; cet aperçu ne confirme aucune condition de vente déjà en vigueur.",
-        "en": "Commerce and workshop services require their own provider, privacy and purchase documents. Full approval is pending; this overview does not confirm purchase terms already in force."
+        "de": "Handel und Werkstattservice brauchen eigene Anbieter-, Datenschutz- und Kaufunterlagen. Diese Übersicht bestätigt keine bereits geltenden Kaufbedingungen.",
+        "nl": "Handel en garageservice hebben eigen aanbieders-, privacy- en koopdocumenten nodig. Dit overzicht bevestigt geen reeds geldende koopvoorwaarden.",
+        "fr": "Commerce et services d’atelier nécessitent leurs propres informations de prestataire, de confidentialité et de vente. Cet aperçu ne confirme aucune condition de vente déjà en vigueur.",
+        "en": "Commerce and workshop services require their own provider, privacy and purchase documents. This overview does not confirm purchase terms already in force."
       },
       "site_context": "teileklar",
       "sections": [

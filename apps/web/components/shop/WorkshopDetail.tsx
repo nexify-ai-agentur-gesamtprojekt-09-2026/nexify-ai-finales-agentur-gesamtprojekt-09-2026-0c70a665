@@ -3,7 +3,10 @@ import { useEffect, useState } from "react";
 import {ActionButton} from '../ActionControl';
 import {HcArrow} from '../HcArrow';
 import { SiteLink } from "../Router";
-import { api, type ApiError, type Workshop } from "./api";
+import { api, type ApiError, type Workshop as DirectoryWorkshop } from "./api";
+
+// Standard-Landingpage: Verzeichnisfelder plus öffentliches Profil aus OpenStreetMap (ODbL). Kontakt-E-Mails liefert die API nie aus.
+type Workshop = DirectoryWorkshop & { category?: string; services?: string[]; brands?: string[]; source?: string; source_url?: string; license?: string; data_as_of?: string };
 
 type Form = { name: string; email: string; phone: string; vehicle: string; message: string; consent: boolean };
 const EMPTY: Form = { name: "", email: "", phone: "", vehicle: "", message: "", consent: false };
@@ -69,7 +72,12 @@ export default function WorkshopDetail({ id }: { id: string }) {
         {w.tel && <><dt>Telefon</dt><dd><a href={"tel:" + w.tel} data-testid="workshop-detail-phone">{w.tel}</a></dd></>}
         {w.web && <><dt>Website</dt><dd><a href={w.web} target="_blank" rel="nofollow noopener noreferrer" data-testid="workshop-detail-web">{w.web.replace(/^https?:\/\//, "")}</a></dd></>}
         {w.hours && <><dt>Öffnungszeiten</dt><dd data-testid="workshop-detail-hours">{w.hours}</dd></>}
-      </dl></div>
+        {w.category && <><dt>Betriebsart</dt><dd data-testid="workshop-detail-category">{w.category}</dd></>}
+        {w.brands?.length ? <><dt>Marken laut Eintrag</dt><dd data-testid="workshop-detail-brands">{w.brands.join(", ")}</dd></> : null}
+      </dl>
+      {w.services?.length ? <><h3>Leistungen laut Eintrag</h3><ul className="tk-story-list" data-testid="workshop-detail-services">{w.services.map(s => <li key={s}>{s}</li>)}</ul></> : null}
+      {w.source === "OpenStreetMap" && <p className="tk-meta" data-testid="workshop-detail-attribution">Daten: © <a href={w.source_url || "https://www.openstreetmap.org/copyright"} target="_blank" rel="noopener noreferrer">OpenStreetMap-Mitwirkende</a>, Lizenz <a href="https://opendatacommons.org/licenses/odbl/1-0/" target="_blank" rel="noopener noreferrer">ODbL 1.0</a>{w.data_as_of ? ", Stand " + new Intl.DateTimeFormat("de-DE").format(new Date(w.data_as_of)) : ""}. Angaben können sich geändert haben – im Zweifel bei der Werkstatt nachfragen.</p>}
+    </div>
     <RequestForm workshop={w} />
   </div>;
 }
