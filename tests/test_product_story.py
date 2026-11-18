@@ -19,3 +19,19 @@ class ProductStory(unittest.TestCase):
         self.assertNotIn("passt garantiert", COPY.lower())
         self.assertNotIn("geprüft: passt", COPY.lower())
         self.assertIn("Noch nicht geprüft", COPY)
+
+
+class GuideKind(unittest.TestCase):
+    """Befund Vercel Agent Review (PR #219): „Klebeband“ führte zum Reifenratgeber."""
+    def test_category_matching_uses_word_boundaries(self):
+        import subprocess
+        result = subprocess.run(["node", str(ROOT / "tests/guide-kind.check.mjs")], capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
+
+class LightTheme(unittest.TestCase):
+    """Befund Vercel Agent Review (PR #219): Passungskasten blieb im hellen Thema dunkel."""
+    def test_fit_box_follows_light_theme(self):
+        css = (ROOT / "apps/web/components/shop/Storefront.css").read_text()
+        self.assertRegex(css, r":root\[data-theme='light'\] \.tk-story-fit\{background:[^}]*--color-hell-flaeche")
+        self.assertRegex(css, r":root\[data-theme='light'\] \.tk-story-eyebrow[^{]*\{color:var\(--color-hell-lime-handlung")

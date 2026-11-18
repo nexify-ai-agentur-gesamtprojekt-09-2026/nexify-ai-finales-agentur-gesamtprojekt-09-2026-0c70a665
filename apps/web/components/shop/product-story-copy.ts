@@ -7,13 +7,14 @@ export type GuideKind = "brakes" | "battery" | "lighting" | "filters" | "suspens
 export type Guide = { name: string; plain: string; points: string[]; pitfall: string; install: string[] };
 
 export function guideKind(text: string): GuideKind {
+  // Wortgrenzen bewusst: „Klebeband“, „Zierstreifen“ oder „Lichtmaschine“ sind keine Reifen bzw. Leuchten.
   const s = text.toLowerCase();
-  if (/brems|brake|frein|rem(schijf|blok|klauw)|bremse/.test(s)) return "brakes";
-  if (/batter|akku|accu|starter/.test(s)) return "battery";
-  if (/lamp|licht|scheinwerfer|leucht|light|phare|ampoule|koplamp/.test(s)) return "lighting";
+  if (/brems|brake|frein|\brem(schijf|schijven|blok|blokken|klauw)/.test(s)) return "brakes";
+  if (/batter|\bakku|\baccu/.test(s)) return "battery";
+  if (/lampe|\blamp\b|glühlampe|scheinwerfer|leuchte|leucht(?!turm)|\blicht(?!maschine)|\bheadlight|\blight\b|\bphare|\bampoule|koplamp/.test(s)) return "lighting";
   if (/filter|filtre/.test(s)) return "filters";
-  if (/stoßdämpfer|stossdämpfer|feder|fahrwerk|dämpfer|suspension|amortis|schokdemper|veer/.test(s)) return "suspension";
-  if (/reifen|tire|tyre|pneu|band(en)?\b/.test(s)) return "tires";
+  if (/stoßdämpfer|stossdämpfer|fahrwerk|federbein|schraubenfeder|\bsuspension|amortisseur|schokdemper/.test(s)) return "suspension";
+  if (/(?<![a-zäöü])reifen|winterreifen|sommerreifen|ganzjahresreifen|\btires?\b|\btyres?\b|\bpneus?\b|\bbanden?\b|\bwinterbanden\b/.test(s)) return "tires";
   return "generic";
 }
 
