@@ -14,6 +14,9 @@ from .db import db, now_iso
 router = APIRouter(prefix="/api/workshops")
 REQUEST_STATUS = "Anfrage gesendet – noch kein Termin"
 FIELDS = ("id", "name", "street", "zip", "city", "region", "tel", "web", "hours", "lat", "lon", "market")
+# Öffentlich auf der Standard-Landingpage; contact_email bleibt bewusst intern (Partneransprache).
+PROFILE_FIELDS = ("category", "services", "brands", "source", "source_url", "license", "data_as_of")
+INTERNAL_FIELDS = ("contact_email", "contact_email_status")
 EMAIL = re.compile(r"[^@\s]+@[^@\s]+\.[^@\s]+")
 
 
@@ -24,27 +27,33 @@ def km(a, b, c, d):
 
 
 async def import_workshops(database=None):
+    """Liest alle Verzeichnisdateien und fügt fehlende Einträge hinzu (idempotent, überschreibt nichts)."""
     d = database if database is not None else db
-    if await d.workshops.estimated_document_count():
-        return 0
-    pack = json.loads(config.WORKSHOPS_FILE.read_text(encoding="utf-8"))
-    docs, seen = [], set()
-    for market, block in pack.items():
-        for shop in block.get("shops", []):
-            if shop.get("id") in seen:
-                continue
-            seen.add(shop["id"])
-            doc = {k: shop.get(k) for k in FIELDS if shop.get(k) not in (None, "")}
-            doc.update({"_id": shop["id"], "market": market, "city_key": (shop.get("city") or "").casefold(), "directory_entry": True,
-                        "source": "prototypen/assets/workshops.json"})
-            docs.append(doc)
+    known = {doc["_id"] async for doc in d.workshops.find({}, {"_id": 1})}
+    docs = []
+    for path in config.WORKSHOP_FILES:
+        if not path.exists():
+            continue
+        pack = json.loads(path.read_text(encoding="utf-8"))
+        for market, block in pack.items():
+            for shop in block.get("shops", []):
+                ident = shop.get("id")
+                if not ident or ident in known:
+                    continue
+                known.add(ident)
+                doc = {k: shop.get(k) for k in FIELDS + PROFILE_FIELDS + INTERNAL_FIELDS if shop.get(k) not in (None, "", [])}
+                doc.update({"_id": ident, "market": market, "city_key": (shop.get("city") or "").casefold(), "directory_entry": True})
+                doc["source_file"] = path.name
+                docs.append(doc)
     if docs:
         await d.workshops.insert_many(docs)
     return len(docs)
 
 
 def public(doc, distance=None):
-    item = {k: doc[k] for k in FIELDS if doc.get(k) not in (None, "")}
+    item = {k: doc[k] for k in FIELDS + PROFILE_FIELDS if doc.get(k) not in (None, "", [])}
+    if str(item.get("source", "")).startswith("prototypen/"):  # Altbestand: interner Dateipfad ist keine Quellenangabe
+        item.pop("source")
     item.update({"kind_label": "Verzeichnisbetrieb", "partner": False})
     if distance is not None:
         item["distance_km"] = round(distance, 1)
