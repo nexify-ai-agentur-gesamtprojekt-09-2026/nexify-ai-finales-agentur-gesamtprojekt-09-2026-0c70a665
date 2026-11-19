@@ -2031,6 +2031,7 @@ Herleitung: OFFEN 50 + 1 neu (183) = 51. ENTSCHEIDUNG NÖTIG 61 + 2 neue (182, 1
 - **Fertig, wenn:** Der Inhaber hat die Auslieferung bestätigt oder einen Rückweg freigegeben; der Stand ist in `AGENTS.md` bzw. `DECISIONS.md` mit Quelle festgehalten; Live-Check und Gleichmacher gegen die öffentliche Domain sind wieder ohne Befund oder die Abweichung ist entschieden.
 - **Aufwand:** S für die Entscheidung · **Ausführung:** Entscheidung nur Inhaber, Messung Fabrik · **Owner:** Inhaber · **Nächste Aktion:** sofort vorlegen
 - **Quellen:** `PROGRESS.md`, Abschnitt „Stand 17.11.2026, ca. 19:00 UTC“; DNS über HTTPS, `curl`, Vercel-API (nur lesend), 17.11.2026
+- **Stand 19.11.2026, ca. 19:15 UTC:** `nexifyai.de`, `nexifyai.cloud` und `www.nexifyai.cloud` leiten mit 301 auf `www.nexifyai.de`; dort eine Vite-/TanStack-Anwendung mit Lovable-Kennungen und dem Titel der Startseite aus `main`, deren Kennungen in keinem Zweig dieses Repositorys vorkommen; nicht an den Vercel-Projekten `…-ut7r`/`…-s4k5`. Live-Check 315/15, Gleichmacher 731 Abweichungen. Herkunft weiter nicht belegt (`PROGRESS.md`, Abschnitt „Stand 19.11.2026, ca. 19:15 UTC“).
 
 #### OA-183 · Shop TEILEKLAR · OFFEN
 
@@ -2051,3 +2052,56 @@ Herleitung: OFFEN 50 + 1 neu (183) = 51. ENTSCHEIDUNG NÖTIG 61 + 2 neue (182, 1
 - **Fertig, wenn:** PR 217 geprüft und eingebracht oder mit Begründung abgelehnt; `next build` ohne Abbruch.
 - **Aufwand:** S · **Ausführung:** Prüfung Fabrik, Freigabe Inhaber · **Owner:** Inhaber · **Nächste Aktion:** PR 217 prüfen lassen
 - **Quellen:** lokaler `next build` am 17.11.2026 in `claude/heilung-schaufenster-leer`; PR 217
+
+## 13. Nachführung 19.11.2026, ca. 19:15 UTC (Stand `origin/main` `9c9c806`, PR 199)
+
+Regelbetrieb-Lauf 18:47 UTC. Seit `9c9c806` kein Merge. Quelle der eigenen Angaben: `PROGRESS.md`, Abschnitt „Stand 19.11.2026, ca. 19:15 UTC“.
+
+### 13.1 Geänderte Zustände
+
+Kein Zustand geändert. Stand-Zeile an OA-182 (neue Domain-Lage).
+
+### 13.2 Zählung nach der Nachführung (187 Einträge)
+
+| Zustand | Stand 17.11.2026, ca. 19:00 UTC | Stand 19.11.2026, ca. 19:15 UTC |
+|---|---|---|
+| OFFEN | 51 | 52 |
+| TEILWEISE | 13 | 13 |
+| BLOCKIERT | 38 | 38 |
+| ENTSCHEIDUNG NÖTIG | 63 | 65 |
+| HISTORIE-überholt | 9 | 9 |
+| ERLEDIGT | 10 | 10 |
+
+Herleitung: OFFEN 51 + 1 neu (186) = 52. ENTSCHEIDUNG NÖTIG 63 + 2 neue (185, 187) = 65.
+
+### 13.3 Neue Einträge
+
+#### OA-185 · Recht & Shop · ENTSCHEIDUNG NÖTIG
+
+- **Priorität:** 1 Sicherheits-, Daten- und Betriebsrisiko
+- **Ziel:** Auf der öffentlichen Domain `www.nexifyai.de` fehlen Rechtsseiten: `/agb`, `/widerruf`, `/avv`, `/rechtliches`, `/teileklar/agb`, `/teileklar/widerruf` antworten 404; `/teileklar` verlinkt kein Impressum; `/teileklar/rechtliches` nennt die Kaufunterlagen selbst nicht freigegeben, während die Seite „Alle Preise inkl. MwSt.“, Warenkorb und Kasse zeigt und indexierbar ist. Klären, ob diese Auslieferung so öffentlich bleiben darf.
+- **Blocker:** Die Auslieferung stammt nicht aus `main` (OA-182); Rechtstexte ändern nur mit Freigabe des Inhabers (D-017). Eine Bestellung ist derzeit nicht möglich (Artikel laden nicht, Warenkorb und Kasse „derzeit nicht verfügbar“, Shop-Dienst 404).
+- **Abhängigkeiten:** OA-182 (verwandt: OA-031, OA-183)
+- **Fertig, wenn:** Der Inhaber hat entschieden (Rückweg auf die Auslieferung aus `main` oder Rechtsseiten in der fremden Auslieferung ergänzt und `/teileklar` bis dahin gesperrt); Rechtsseiten und Impressum-Verweis live gemessen.
+- **Aufwand:** S für die Entscheidung · **Ausführung:** Entscheidung Inhaber, Messung Fabrik · **Owner:** Inhaber · **Nächste Aktion:** sofort vorlegen
+- **Quellen:** `PROGRESS.md`, Abschnitt „Stand 19.11.2026, ca. 19:15 UTC“; `curl` und Playwright, 19.11.2026, 19:04 bis 19:06 UTC
+
+#### OA-186 · Infrastruktur & Server · OFFEN
+
+- **Priorität:** 1 Sicherheits-, Daten- und Betriebsrisiko
+- **Ziel:** Drei Subdomains von `nexifyai.cloud` antworten mit Fehlern: `brain` 502, `workplace` 502, `agenten` 530 (Cloudflare 1033), laut Hauptsitzung seit mindestens 19.11.2026, 10:52 UTC; eigene Messung 19:07 UTC. Ursache feststellen und beheben.
+- **Blocker:** Server- und Tunnel-Eingriffe nur mit Freigabe des Inhabers je Schritt und Rückweg (D-016); ein aktuelles Server-Inventar liegt nicht vor.
+- **Abhängigkeiten:** keine (verwandt: OA-181)
+- **Fertig, wenn:** Die drei Adressen antworten wie vorgesehen oder sind mit Entscheidung abgeschaltet; Messung mit Uhrzeit.
+- **Aufwand:** S bis M · **Ausführung:** lesende Messung Fabrik, Eingriff nach Freigabe · **Owner:** Inhaber · **Nächste Aktion:** Freigabe für lesende Server-Messung (`nexify-server-messung`) einholen
+- **Quellen:** `curl`, 19.11.2026, 19:07 UTC; Meldung der Hauptsitzung (Beginn, nicht selbst gemessen)
+
+#### OA-187 · Sicherheit · ENTSCHEIDUNG NÖTIG
+
+- **Priorität:** 1 Sicherheits-, Daten- und Betriebsrisiko
+- **Ziel:** Ein Agenten-Endpunkt einer eigenen Domain ist ohne Anmeldung erreichbar (Meldung der Hauptsitzung). Zugangsschutz herstellen oder den Endpunkt abschalten. Technische Einzelheiten stehen bewusst nicht in diesem Repository.
+- **Blocker:** Eingriff in Server, Zugangsschutz oder DNS nur mit Freigabe des Inhabers (D-016, D-017); hier nicht selbst abgerufen.
+- **Abhängigkeiten:** keine (verwandt: OA-186)
+- **Fertig, wenn:** Der Endpunkt verlangt eine Anmeldung oder ist abgeschaltet; nachgemessen ohne Werkzeugaufruf am Endpunkt.
+- **Aufwand:** S · **Ausführung:** Inhaber · **Owner:** Inhaber · **Nächste Aktion:** sofort vorlegen
+- **Quellen:** Meldung der Hauptsitzung vom 19.11.2026 (nicht nachgeprüft)
