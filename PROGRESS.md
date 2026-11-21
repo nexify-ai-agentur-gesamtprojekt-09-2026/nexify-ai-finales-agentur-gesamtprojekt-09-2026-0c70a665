@@ -1,3 +1,21 @@
+## Stand 21.11.2026, ca. 19:00 UTC · Regelbetrieb: Shop-Pfade von `www.nexifyai.de` leiten auf `teileklar.shop` um, drei Zielpfade 404
+
+Führt den Abschnitt vom 19.11.2026, ca. 19:15 UTC, direkt darunter fort. Kennzeichnung wie dort. Neu in `DECISIONS.md`: nichts.
+
+### Selbst geprüft (IST, 21.11.2026)
+
+- **OFFEN, kritisch, neu: Weiterleitung der Shop-Pfade.** Seit einer Messung zwischen 14:47 und 18:47 UTC leiten `www.nexifyai.de/teileklar` und alle Unterpfade mit 301 auf `teileklar.shop` weiter; um 14:47 UTC antwortete `/teileklar` noch mit 200. Auslöser ist keine Änderung in diesem Repository (`main` unverändert `9c9c806` seit 14.11.2026). Wer umgestellt hat, ist nicht belegt (OA-188).
+- **`teileklar.shop`** (hinter Cloudflare). 200: `/`, `/shop`, `/impressum`, `/datenschutz`, `/agb`, `/widerruf`; Kopfzeile `x-robots-tag: index, follow`; `/api/shop/products` meldet `total` 3720. 404: `/warenkorb`, `/kasse`, `/rechtliches`, `/werkstatt`, `/api/shop/status`. Drei weitergeleitete Pfade (`/teileklar/warenkorb`, `/teileklar/kasse`, `/teileklar/rechtliches`) enden damit auf 404. Ob dort Bestellungen möglich sind, wurde nicht geprüft.
+- **Sitemap von `www.nexifyai.de`:** 36 Adressen (am 19.11.2026: 43), darunter weiterhin zehn `/teileklar`-Adressen, die nun weiterleiten.
+- **Prüfzahlen 18:54 UTC.** Vercel-Adresse von `main`: `node tools/live-check.mjs` 329 Prüfungen, 0 Befunde; `node tools/gleichmacher.mjs` 44 Seiten, 0 Abweichungen. `https://www.nexifyai.de`: `live-check` 228 Prüfungen, 18 Befunde (KI-Hinweis im Footer 3, Kopfleistenabstand 6, Shop-Dienst 2, PWA 4, neu 3: Querüberlauf `/teileklar/partner-werden` bei 360 px, `/teileklar/werkstatt` 404 bei 360 und 1440 px); `gleichmacher` 30 Seiten, 438 Abweichungen, 102 Befunde, 20 Fehler (Shop-Kopfleiste auf `/teileklar` nicht messbar). Vorher (19.11.2026): 315/15 und 42 Seiten/731/152/0.
+- **Fremde Anwendung auf `www.nexifyai.de`:** Hauptskript seit 14:47 UTC `index-B6_Qf_8Z.js` (davor `index-CPoKp_Ou.js`).
+- **Unverändert:** `/agb`, `/widerruf`, `/avv` auf `www.nexifyai.de` 404 (OA-185); drei gestörte Subdomains (OA-186); Agenten-Endpunkt ohne Anmeldung (OA-187); Pull Requests 52 offen, 11 Entwürfe, Auto-Merge an 17; CI auf `main` rot (`next-web`, `repository`) im Lauf vom 20.11.2026, 14:05 UTC.
+- **Ursache der Weiterleitung:** nicht belegt.
+
+### Prüfstand und Umfang dieser Nachführung
+
+Nur Dokumente, Zweig `claude/stand-1115` (PR 206): dieser Abschnitt, Verweis in „Offene Arbeiten“, in `docs/09-final/offene-arbeiten-2026-11-14.md` Abschnitt 14 mit OA-188 und Stand-Zeile an OA-185. Keine Prüfsumme und kein Beleg angefasst.
+
 ## Stand 19.11.2026, ca. 19:15 UTC · Regelbetrieb: `nexifyai.de` liefert wieder eine eigene Seite, aber nicht aus `main`; Rechtsseiten fehlen, drei Subdomains gestört
 
 Führt den Abschnitt vom 19.11.2026, ca. 07:00 UTC, direkt darunter fort. Kennzeichnung wie dort. Neu in `DECISIONS.md`: nichts.
@@ -323,7 +341,7 @@ OFFEN, nicht belegt (aus den Sitzungsnotizen vom 14.11.2026 übernommen, hier ni
 
 Kein zweites Register: Führend bleiben P01–P26 und die Hauptfälle MASTER-01 bis MASTER-18 in `config/acceptance-coverage.json` (`whole_system_accepted: false`). Das Register ist ausdrücklich keine Ausführungsliste und hat für die folgenden Arbeiten kein Feld. Dieser Abschnitt wird bei jeder Nachführung ersetzt, nicht fortgeschrieben.
 
-Die einzelnen offenen Arbeiten stehen in der Arbeitsliste `docs/09-final/offene-arbeiten-2026-11-14.md` (OA-001 bis OA-162 zum Stand `29f0691`, Abschnitt 8 mit OA-163 bis OA-170 zum Stand `500c52d`, Abschnitt 9 mit OA-171 bis OA-178 zum Stand `48f5072`, Abschnitt 10 mit OA-179 bis OA-181 vom 15.11.2026, Abschnitt 11 mit der Nachführung vom 16.11.2026, Abschnitt 12 mit OA-182 bis OA-184 vom 17.11.2026, Abschnitt 13 mit OA-185 bis OA-187 vom 19.11.2026). Sie dient der Vergabe und ersetzt kein führendes Register; die Angaben der Einträge OA-001 bis OA-162 sind hier nicht einzeln nachgeprüft. Weicht sie von diesem Abschnitt ab, gilt dieser Abschnitt.
+Die einzelnen offenen Arbeiten stehen in der Arbeitsliste `docs/09-final/offene-arbeiten-2026-11-14.md` (OA-001 bis OA-162 zum Stand `29f0691`, Abschnitt 8 mit OA-163 bis OA-170 zum Stand `500c52d`, Abschnitt 9 mit OA-171 bis OA-178 zum Stand `48f5072`, Abschnitt 10 mit OA-179 bis OA-181 vom 15.11.2026, Abschnitt 11 mit der Nachführung vom 16.11.2026, Abschnitt 12 mit OA-182 bis OA-184 vom 17.11.2026, Abschnitt 13 mit OA-185 bis OA-187 vom 19.11.2026, Abschnitt 14 mit OA-188 vom 21.11.2026). Sie dient der Vergabe und ersetzt kein führendes Register; die Angaben der Einträge OA-001 bis OA-162 sind hier nicht einzeln nachgeprüft. Weicht sie von diesem Abschnitt ab, gilt dieser Abschnitt.
 
 Zählung der Arbeitsliste nach dieser Nachführung (184 Einträge; Herleitung in Abschnitt 12.2):
 

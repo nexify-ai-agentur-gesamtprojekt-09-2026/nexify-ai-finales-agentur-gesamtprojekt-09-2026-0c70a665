@@ -2085,6 +2085,7 @@ Herleitung: OFFEN 51 + 1 neu (186) = 52. ENTSCHEIDUNG NÖTIG 63 + 2 neue (185, 1
 - **Fertig, wenn:** Der Inhaber hat entschieden (Rückweg auf die Auslieferung aus `main` oder Rechtsseiten in der fremden Auslieferung ergänzt und `/teileklar` bis dahin gesperrt); Rechtsseiten und Impressum-Verweis live gemessen.
 - **Aufwand:** S für die Entscheidung · **Ausführung:** Entscheidung Inhaber, Messung Fabrik · **Owner:** Inhaber · **Nächste Aktion:** sofort vorlegen
 - **Quellen:** `PROGRESS.md`, Abschnitt „Stand 19.11.2026, ca. 19:15 UTC“; `curl` und Playwright, 19.11.2026, 19:04 bis 19:06 UTC
+- **Stand 21.11.2026, ca. 19:00 UTC:** `/teileklar` und Unterpfade leiten auf `teileklar.shop` um; dort `/rechtliches`, `/warenkorb` und `/kasse` 404. Weiter siehe OA-188.
 
 #### OA-186 · Infrastruktur & Server · OFFEN
 
@@ -2105,3 +2106,36 @@ Herleitung: OFFEN 51 + 1 neu (186) = 52. ENTSCHEIDUNG NÖTIG 63 + 2 neue (185, 1
 - **Fertig, wenn:** Der Endpunkt verlangt eine Anmeldung oder ist abgeschaltet; nachgemessen ohne Werkzeugaufruf am Endpunkt.
 - **Aufwand:** S · **Ausführung:** Inhaber · **Owner:** Inhaber · **Nächste Aktion:** sofort vorlegen
 - **Quellen:** Meldung der Hauptsitzung vom 19.11.2026 (nicht nachgeprüft)
+
+## 14. Nachführung 21.11.2026, ca. 19:00 UTC (Stand `origin/main` `9c9c806`, PR 199)
+
+Regelbetrieb-Lauf 18:54 UTC. Seit `9c9c806` kein Merge. Quelle der eigenen Angaben: `PROGRESS.md`, Abschnitt „Stand 21.11.2026, ca. 19:00 UTC“.
+
+### 14.1 Geänderte Zustände
+
+Kein Zustand geändert. Stand-Zeile an OA-185 (Verweis auf OA-188).
+
+### 14.2 Zählung nach der Nachführung (188 Einträge)
+
+| Zustand | Stand 19.11.2026, ca. 19:15 UTC | Stand 21.11.2026, ca. 19:00 UTC |
+|---|---|---|
+| OFFEN | 52 | 52 |
+| TEILWEISE | 13 | 13 |
+| BLOCKIERT | 38 | 38 |
+| ENTSCHEIDUNG NÖTIG | 65 | 66 |
+| HISTORIE-überholt | 9 | 9 |
+| ERLEDIGT | 10 | 10 |
+
+Herleitung: ENTSCHEIDUNG NÖTIG 65 + 1 neu (188) = 66.
+
+### 14.3 Neue Einträge
+
+#### OA-188 · Shop TEILEKLAR · ENTSCHEIDUNG NÖTIG
+
+- **Priorität:** 1 Sicherheits-, Daten- und Betriebsrisiko
+- **Ziel:** Shop-Pfade von `www.nexifyai.de` auf `teileklar.shop` umgeleitet – Herkunft und Zuständigkeit klären; drei Zielpfade 404; Sitemap listet weitergeleitete Adressen. IST 21.11.2026: Seit einer Messung zwischen 14:47 und 18:47 UTC leiten `/teileklar` und alle Unterpfade mit 301 auf `teileklar.shop` (um 14:47 UTC noch 200). Dort 200 für `/`, `/shop`, `/impressum`, `/datenschutz`, `/agb`, `/widerruf`, `x-robots-tag: index, follow`, `/api/shop/products` mit `total` 3720; 404 für `/warenkorb`, `/kasse`, `/rechtliches`, `/werkstatt`, `/api/shop/status`. `/teileklar/warenkorb`, `/teileklar/kasse` und `/teileklar/rechtliches` enden damit auf 404. Die Sitemap von `www.nexifyai.de` (36 Adressen) listet weiterhin zehn `/teileklar`-Adressen, die nun weiterleiten.
+- **Blocker:** Auslöser ist keine Änderung in diesem Repository (`main` unverändert `9c9c806`); wer umgestellt hat und aus welchem Repository `teileklar.shop` stammt, ist nicht belegt. Ob dort Bestellungen möglich sind, wurde nicht geprüft. DNS, Weiterleitungen und Auslieferung werden ohne Freigabe des Inhabers nicht geändert (D-016, D-017).
+- **Abhängigkeiten:** OA-182 (verwandt: OA-183, OA-185)
+- **Fertig, wenn:** Der Inhaber hat bestätigt, ob `teileklar.shop` die gewollte Shop-Auslieferung ist und aus welchem Repository sie stammt; die Zielpfade antworten wie vorgesehen oder die Weiterleitungen sind angepasst; die Sitemap listet keine weitergeleiteten Adressen; Messung mit Uhrzeit.
+- **Aufwand:** S für die Entscheidung · **Ausführung:** Entscheidung Inhaber, Messung Fabrik · **Owner:** Inhaber (Entscheidung) · **Nächste Aktion:** Inhaber bestätigt, ob `teileklar.shop` die gewollte Shop-Auslieferung ist und aus welchem Repository sie stammt
+- **Quellen:** `PROGRESS.md`, Abschnitt „Stand 21.11.2026, ca. 19:00 UTC“; `curl`, `tools/live-check.mjs` und `tools/gleichmacher.mjs`, 21.11.2026, 14:47 bis 18:54 UTC
