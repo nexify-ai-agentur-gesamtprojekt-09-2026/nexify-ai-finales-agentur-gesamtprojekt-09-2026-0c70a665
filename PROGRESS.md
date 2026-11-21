@@ -343,16 +343,16 @@ Kein zweites Register: Führend bleiben P01–P26 und die Hauptfälle MASTER-01 
 
 Die einzelnen offenen Arbeiten stehen in der Arbeitsliste `docs/09-final/offene-arbeiten-2026-11-14.md` (OA-001 bis OA-162 zum Stand `29f0691`, Abschnitt 8 mit OA-163 bis OA-170 zum Stand `500c52d`, Abschnitt 9 mit OA-171 bis OA-178 zum Stand `48f5072`, Abschnitt 10 mit OA-179 bis OA-181 vom 15.11.2026, Abschnitt 11 mit der Nachführung vom 16.11.2026, Abschnitt 12 mit OA-182 bis OA-184 vom 17.11.2026, Abschnitt 13 mit OA-185 bis OA-187 vom 19.11.2026, Abschnitt 14 mit OA-188 vom 21.11.2026). Sie dient der Vergabe und ersetzt kein führendes Register; die Angaben der Einträge OA-001 bis OA-162 sind hier nicht einzeln nachgeprüft. Weicht sie von diesem Abschnitt ab, gilt dieser Abschnitt.
 
-Zählung der Arbeitsliste nach dieser Nachführung (184 Einträge; Herleitung in Abschnitt 12.2):
+Zählung der Arbeitsliste nach dieser Nachführung (188 Einträge; Herleitung in Abschnitt 14.2):
 
-| Zustand | 15.11., 11:00 UTC | 16.11., 03:00 UTC | 17.11., 19:00 UTC |
-|---|---|---|---|
-| OFFEN | 50 | 50 | 51 |
-| TEILWEISE | 13 | 13 | 13 |
-| BLOCKIERT | 38 | 38 | 38 |
-| ENTSCHEIDUNG NÖTIG | 62 | 61 | 63 |
-| HISTORIE-überholt | 8 | 9 | 9 |
-| ERLEDIGT | 10 | 10 | 10 |
+| Zustand | 15.11., 11:00 UTC | 16.11., 03:00 UTC | 17.11., 19:00 UTC | 19.11., 19:15 UTC | 21.11., 19:00 UTC |
+|---|---|---|---|---|---|
+| OFFEN | 50 | 50 | 51 | 52 | 52 |
+| TEILWEISE | 13 | 13 | 13 | 13 | 13 |
+| BLOCKIERT | 38 | 38 | 38 | 38 | 38 |
+| ENTSCHEIDUNG NÖTIG | 62 | 61 | 63 | 65 | 66 |
+| HISTORIE-überholt | 8 | 9 | 9 | 9 | 9 |
+| ERLEDIGT | 10 | 10 | 10 | 10 | 10 |
 
 Seit 16.11., 03:00 UTC: neu OA-182 (öffentliche Domain außerhalb von `main` und Vercel ausgeliefert, Owner Inhaber), OA-183 (PR 218 prüfen lassen, Resize-Beleg neu erheben), OA-184 (Next-Sicherheitshinweis, PR 217).
 
