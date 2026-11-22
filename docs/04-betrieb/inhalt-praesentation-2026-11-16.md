@@ -1639,9 +1639,16 @@ falsch; hier die nachgezählte Aufteilung:
 
 Für den Leser dieses Berichts folgt daraus eine Lesehilfe: **Jeder Befund, der mit „fehlt"
 oder „gibt es nicht" argumentiert, ist vor dem Handeln gegen Repository und Register zu
-prüfen.** Die Befunde, die mit einem Zitat von der Seite argumentieren — und das sind die
-schweren: 01, 02, 04, 05, 06, 07, 08, 10, 11, 12, 37, 38, 39 — sind davon nicht betroffen;
-sie belegen, was dasteht, nicht was fehlt.
+prüfen.** Die Befunde, die mit einem Zitat von der Seite argumentieren — 01, 02, 04, 05,
+06, 07, 08, 10, 12, 37, 38, 39 — sind von diesem Muster nicht betroffen; sie belegen, was
+dasteht, nicht was fehlt.
+
+Eine Einschränkung auch dazu: Befund 11 war ebenfalls zitatgestützt und ist trotzdem
+zurückgezogen (K1, K14). Ein Zitat belegt, dass ein Satz dasteht — nicht, dass er das
+bedeutet, was ich daraus gelesen habe. **Wo zwei Zitate gegeneinander gestellt werden,
+ist zusätzlich zu prüfen, ob beide dieselbe Sache regeln.** Befunde, die nur ein Zitat
+gegen eine nachgemessene Tatsache stellen (etwa 01, 02, 05, 37: eine Überschrift gegen
+eine fehlende Zahl, ein Beweisverweis gegen `total: 0`), sind davon nicht betroffen.
 
 Unverändert und unbestritten bleiben Kipppunkt und Bruch: `/preise-ablauf` nennt keine
 Zahl, und `/teileklar` zeigt null Artikel hinter einem dauerhaften Ladehinweis.
