@@ -241,13 +241,20 @@ Empfehlung: **A** als Ziel. Wenn der Nachweis schnell gebraucht wird: B zusätzl
   Aggregat je IP-Präfix und Minute**, geschrieben erst nach Ablauf der Minute (Anzahl, Gründe, erste/letzte Zeit).
   Jede Abweisung **mit** Identität (gültiges Token, aber falscher Scope, Mandant, Projekt oder Ressource) bleibt ein
   Einzelereignis.
-- Aufbewahrung ohne Bruch der Kette: `audit_ereignis` ist monatlich partitioniert; jede Partition wird beim
-  Monatswechsel mit ihrem letzten Hash versiegelt, der nächste Monat beginnt mit diesem Hash. Nach Ablauf
-  (identitätslose Aggregate 30 Tage, sonst 1 Jahr) wird die Partition als JSONL samt Kettenkopf nach R2 exportiert,
-  der Export zurückgelesen und gegen die Kette geprüft, danach die Partition per `DETACH PARTITION` aus der aktiven
-  Tabelle gelöst und als Archivtabelle behalten. Ein Entfernen der Archivtabelle braucht die Freigabe des Inhabers
-  (D-016). Der Trigger gegen `UPDATE`/`DELETE` gilt für jede Partition; `DETACH` ist nur der Eigentümerrolle der
-  Wartung erlaubt. OFFEN: Schreibrecht und eigener Schlüssel für R2.
+- Zwei getrennte Aufbewahrungseinheiten mit je eigener Hash-Kette: `audit_ereignis` (alle Ereignisse mit Identität,
+  1 Jahr) und `audit_aggregat` (identitätslose Minutenaggregate, 30 Tage). Beide sind monatlich partitioniert; eine
+  Partition enthält damit immer nur eine Frist.
+- Monatswechsel: Ein Aggregat gehört zu dem Monat, in dem seine Minute beginnt. Der Versiegelungslauf startet frühestens
+  5 Minuten nach Monatsende und schließt in **einer** Transaktion zuerst alle noch offenen Fenster des Vormonats aus
+  `drossel_fenster` ab, schreibt deren Aggregate, und versiegelt danach die Partition mit ihrem letzten Hash; der neue
+  Monat beginnt mit diesem Hash. Ein danach noch eintreffendes Ereignis oder Fenster des Vormonats wird nicht in die
+  versiegelte Partition geschrieben, sondern im laufenden Monat mit Kennzeichen `verspaetet` und dem ursprünglichen
+  Zeitpunkt.
+- Ablauf der Frist: Die Partition wird als JSONL samt Kettenkopf nach R2 exportiert, der Export zurückgelesen und gegen
+  die Kette geprüft, danach per `DETACH PARTITION` aus der aktiven Tabelle gelöst und als Archivtabelle behalten. Ein
+  Entfernen der Archivtabelle braucht die Freigabe des Inhabers (D-016). Der Trigger gegen `UPDATE`/`DELETE` gilt für
+  jede Partition; `DETACH` ist nur der Eigentümerrolle der Wartung erlaubt. OFFEN: Schreibrecht und eigener Schlüssel
+  für R2.
 - Alarm, wenn die aktive Audit-Tabelle 1 GiB oder die Platte 95 % erreicht.
 
 ## 10. Sicherheitsgrenzen, die Stufe 2 zuerst als Test schreibt
