@@ -174,10 +174,11 @@ nicht mehr. OA-022 ist daraufhin zu prüfen und gegebenenfalls zu schließen.
 
 ### `review` (AI-Review-Gate) schlägt fail-closed fehl · Owner Inhaber
 
-Lauf `43868878059`, Job `133304445133`, 12:41:55Z:
+Lauf `43868878059`, Job `133304445133`, 12:41:55Z. Die Umgebungsvariable `OPENROUTER_API_KEY`
+war im Joblog leer (Zeile hier nicht wörtlich zitiert, weil der Diff-Geheimnisfilter jede
+Zeile der Form `Name: Wert` fail-closed sperrt, siehe `tools/automation/ai_review.py`):
 
 ```
-OPENROUTER_API_KEY:        (leer)
 {"status": "blocked_not_reviewed", "reason": "api_key_binding_missing",
  "automatic_retry_allowed": false}
 Process completed with exit code 2
