@@ -1,0 +1,32 @@
+{"step": "start", "mode": "apply", "limit": null, "at": "2026-11-22T18:33:03.683057+00:00"}
+{"step": "source_window", "pass": 1, "offset": 0, "count": 500, "new": 500, "sha256": "98ca344c4c34840a69c81651ad302e033212edbac105cee6273c38b6bdcb7caa"}
+{"step": "source_window", "pass": 1, "offset": 400, "count": 500, "new": 400, "sha256": "e0483917ff500b9e55f62f428f7852d58439567d3c007aeca40119ee9e8be832"}
+{"step": "source_window", "pass": 1, "offset": 800, "count": 500, "new": 400, "sha256": "b5fc048607fee03e139ddb6f7d9af031e6917774e059e7b6eb1a33af5397f271"}
+{"step": "source_window", "pass": 1, "offset": 1200, "count": 500, "new": 400, "sha256": "a846ed4f0e29fd5d73ed78d22326a7632ba18e714d81a1b35222b6d59683005b"}
+{"step": "source_window", "pass": 1, "offset": 1600, "count": 500, "new": 400, "sha256": "ba8e3a5e3f8a2fbed1726ece6e26c35b52ce1120bd8c7b4c545d0f4cee4486de"}
+{"step": "source_window", "pass": 1, "offset": 2000, "count": 500, "new": 400, "sha256": "ecd87d1b98875f76b09e78948ac47ae0e2c2de68de96d053f462e2e60dc5ca72"}
+{"step": "source_window", "pass": 1, "offset": 2400, "count": 500, "new": 400, "sha256": "921ee1b47e414fa56f80982b5e664b91a3d195416eb1011578321df1d6bba9b7"}
+{"step": "source_window", "pass": 1, "offset": 2800, "count": 500, "new": 400, "sha256": "fcf3267be825c88ce9cf3c8baf9620489f9a218950fda9de643f60a4a7871bd4"}
+{"step": "source_window", "pass": 1, "offset": 3200, "count": 500, "new": 400, "sha256": "a19b44c4f2461281ed6782e928d1998ffa563d04a8325d1db03dc5003f95d073"}
+{"step": "source_window", "pass": 1, "offset": 3600, "count": 120, "new": 20, "sha256": "2e7b6b67e107a3af344f0439b17a66497811422ad830ded6ce3cbb46f8a6858d"}
+{"step": "source_window", "pass": 1, "offset": 0, "count": 500, "new": 500, "sha256": "98ca344c4c34840a69c81651ad302e033212edbac105cee6273c38b6bdcb7caa"}
+{"step": "source_window", "pass": 1, "offset": 400, "count": 500, "new": 400, "sha256": "e0483917ff500b9e55f62f428f7852d58439567d3c007aeca40119ee9e8be832"}
+{"step": "source_window", "pass": 1, "offset": 800, "count": 500, "new": 400, "sha256": "b5fc048607fee03e139ddb6f7d9af031e6917774e059e7b6eb1a33af5397f271"}
+{"step": "source_window", "pass": 1, "offset": 1200, "count": 500, "new": 400, "sha256": "a846ed4f0e29fd5d73ed78d22326a7632ba18e714d81a1b35222b6d59683005b"}
+{"step": "source_window", "pass": 1, "offset": 1600, "count": 500, "new": 400, "sha256": "ba8e3a5e3f8a2fbed1726ece6e26c35b52ce1120bd8c7b4c545d0f4cee4486de"}
+{"step": "source_window", "pass": 1, "offset": 2000, "count": 500, "new": 400, "sha256": "ecd87d1b98875f76b09e78948ac47ae0e2c2de68de96d053f462e2e60dc5ca72"}
+{"step": "source_window", "pass": 1, "offset": 2400, "count": 500, "new": 400, "sha256": "921ee1b47e414fa56f80982b5e664b91a3d195416eb1011578321df1d6bba9b7"}
+{"step": "source_window", "pass": 1, "offset": 2800, "count": 500, "new": 400, "sha256": "fcf3267be825c88ce9cf3c8baf9620489f9a218950fda9de643f60a4a7871bd4"}
+{"step": "source_window", "pass": 1, "offset": 3200, "count": 500, "new": 400, "sha256": "a19b44c4f2461281ed6782e928d1998ffa563d04a8325d1db03dc5003f95d073"}
+{"step": "source_window", "pass": 1, "offset": 3600, "count": 120, "new": 20, "sha256": "2e7b6b67e107a3af344f0439b17a66497811422ad830ded6ce3cbb46f8a6858d"}
+{"step": "source_stable", "passes": 2, "items": 3720}
+{"step": "source", "total_announced": 3720, "fetched": 3720, "windows": 10, "passes": 1}
+{"step": "images", "unique": 3604, "loading": 267, "not_loading": 3337, "unclear": 0}
+{"step": "skipped_placeholders", "count": 7, "ids": ["airfilter", "brake", "brake-pads-front", "brake-rear", "exhaust", "oil", "shock"]}
+{"step": "source", "collection": "categories", "count": 7, "digest": "56783afab0356a67fcdb707ccfd4ad7a9bad6caab56644bc2fffc49c63bb11cb"}
+{"step": "source", "collection": "products", "count": 3713, "digest": "208e035bd0f5e8b3b1cbcb549e3b5af011a8fe470b662ef163f11bdc8aee6cb0"}
+{"step": "target", "collection": "categories", "target_count": 7, "target_digest": "56783afab0356a67fcdb707ccfd4ad7a9bad6caab56644bc2fffc49c63bb11cb", "inserted": 0, "updated": 0, "unchanged": 7, "match": true}
+{"step": "target", "collection": "products", "target_count": 3713, "target_digest": "208e035bd0f5e8b3b1cbcb549e3b5af011a8fe470b662ef163f11bdc8aee6cb0", "inserted": 0, "updated": 273, "unchanged": 3440, "match": true}
+{"step": "sample", "checked": 20, "equal": 20}
+{"step": "field_sample", "checked": 40, "equal": 40}
+{"step": "done", "outcome": "applied", "published": 273, "run": "catalog-public-transfer-2ce8366ce5b2e81c01ee0518ed6a824b", "field_sample_equal": 40, "field_sample_checked": 40}

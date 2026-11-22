@@ -1,0 +1,10 @@
+{"step": "start", "mode": "dry_run", "limit": 20, "at": "2026-11-16T01:11:26.120177+00:00"}
+{"step": "source_window", "pass": 1, "offset": 0, "count": 500, "new": 500, "sha256": "98ca344c4c34840a69c81651ad302e033212edbac105cee6273c38b6bdcb7caa"}
+{"step": "source", "total_announced": 3720, "fetched": 20, "windows": 1, "passes": 1}
+{"step": "source", "collection": "categories", "count": 2, "digest": "4c91072dddc56521672b6826bbabd113004e9c2d5b1078c8e066f86ba22c5010"}
+{"step": "source", "collection": "products", "count": 20, "digest": "e09c480cea7294509fb6984d130473ba3858d5e91f79f7842500f5f535301838"}
+{"step": "target", "collection": "categories", "target_count": 2, "target_digest": "4c91072dddc56521672b6826bbabd113004e9c2d5b1078c8e066f86ba22c5010", "inserted": 2, "updated": 0, "unchanged": 0, "match": true}
+{"step": "target", "collection": "products", "target_count": 20, "target_digest": "e09c480cea7294509fb6984d130473ba3858d5e91f79f7842500f5f535301838", "inserted": 20, "updated": 0, "unchanged": 0, "match": true}
+{"step": "sample", "checked": 20, "equal": 20}
+{"step": "field_sample", "checked": 20, "equal": 20}
+{"step": "done", "outcome": "dry_run", "published": 20, "run": null, "field_sample_equal": 20, "field_sample_checked": 20}

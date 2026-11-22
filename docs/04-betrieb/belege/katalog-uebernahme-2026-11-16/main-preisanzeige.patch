@@ -1,0 +1,80 @@
+diff --git a/apps/shop-api/shop/cart_api.py b/apps/shop-api/shop/cart_api.py
+index 9cb8423..7948da4 100644
+--- a/apps/shop-api/shop/cart_api.py
++++ b/apps/shop-api/shop/cart_api.py
+@@ -164,6 +164,9 @@ async def priced(owner, shipping_cents=None, address=None, items_override=None,
+         if not product or not product.get("active"):
+             changes.append({"product_id": item["product_id"], "kind": "unavailable", "name": item.get("name")})
+             continue
++        if type(product.get("purchase_cents")) is not int:  # übernommene Katalogartikel ohne Einkaufspreis sind nicht bestellbar
++            changes.append({"product_id": item["product_id"], "kind": "unavailable", "name": item.get("name")})
++            continue
+         unit = pricing.sell_cents(product["purchase_cents"], settings["markup_percent"])
+         stock = stock_or_none(product)
+         if stock is None and not allow_unknown_stock:
+@@ -218,6 +221,8 @@ async def set_item(body: ItemIn, request: Request, response: Response):
+         product = await db.products.find_one({"_id": body.product_id, "active": True})
+         if not product:
+             raise HTTPException(404, {"error": "product_not_found"})
++        if type(product.get("purchase_cents")) is not int:  # übernommene Katalogartikel ohne Einkaufspreis sind nicht bestellbar
++            raise HTTPException(409, {"error": "product_not_orderable", "message": "Dieser Artikel ist derzeit nicht online bestellbar"})
+         stock = verified_stock(product)
+         if stock < body.quantity:
+             raise HTTPException(409, {"error": "insufficient_stock", "stock": stock})
+diff --git a/apps/shop-api/shop/catalog_api.py b/apps/shop-api/shop/catalog_api.py
+index a9d7638..b09f6df 100644
+--- a/apps/shop-api/shop/catalog_api.py
++++ b/apps/shop-api/shop/catalog_api.py
+@@ -8,7 +8,8 @@ from . import pricing
+ from .db import db
+ 
+ router = APIRouter(prefix="/api/shop")
+-PUBLIC_FIELDS = {"_id": 1, "sku": 1, "ean": 1, "name": 1, "images": 1, "stock": 1, "purchase_cents": 1, "category_id": 1, "category_ids": 1, "imported_at": 1, "source_partial": 1}
++PUBLIC_FIELDS = {"_id": 1, "sku": 1, "ean": 1, "name": 1, "images": 1, "stock": 1, "purchase_cents": 1, "category_id": 1, "category_ids": 1, "imported_at": 1, "source_partial": 1,
++                 "list_price_cents": 1, "list_price_status": 1, "source": 1}
+ 
+ # Exact supplier host observed in the read-only catalogue; no wildcard or proxy.
+ # Deployment CSP must separately permit this host before images can load.
+@@ -35,6 +36,15 @@ def supplier_image(value):
+ 
+ def present(product, settings, full=False):
+     released = settings["price_released"]
++    purchase, listed = product.get("purchase_cents"), product.get("list_price_cents")
++    if released and type(purchase) is int and purchase >= 0:
++        price_cents, price_status = pricing.sell_cents(purchase, settings["markup_percent"]), "released"
++    elif (type(listed) is int and listed > 0 and product.get("list_price_status") == "approved_by_transfer_contract"
++          and product.get("source") == "teileklar_public_catalog"):
++        # Veröffentlichter Bruttopreis des bisherigen Shops, übernommen per Vertragsnachweis (transfer_public_catalog.py); nicht bestellbar.
++        price_cents, price_status = listed, "list_price"
++    else:
++        price_cents, price_status = None, "not_released"
+     raw_stock = product.get("stock")
+     stock = int(raw_stock) if isinstance(raw_stock, int) and not isinstance(raw_stock, bool) and 0 <= raw_stock <= 2**53 - 1 else None
+     raw_images = product.get("images")
+@@ -44,14 +54,14 @@ def present(product, settings, full=False):
+             "image_status": "supplier_original" if images else "unavailable",
+             "stock": stock, "in_stock": stock > 0 if stock is not None else None,
+             "stock_status": "reported" if stock is not None else "unknown",
+-            "price_cents": pricing.sell_cents(product["purchase_cents"], settings["markup_percent"]) if released else None,
+-            "price_status": "released" if released else "not_released", "currency": "EUR", "vat_included": True,
++            "price_cents": price_cents, "price_status": price_status, "currency": "EUR", "vat_included": True,
+             "vat_percent": str(pricing.config.VAT_PERCENT), "category_id": product.get("category_id"),
+             "imported_at": product.get("imported_at"), "source_partial": product.get("source_partial", False)}
+     if full:
+         item.update({"images": images, "description": product.get("description") or "",
+                      "details": product.get("details") or {}, "fitment_status": "not_checked",
+-                     "source": "BigBuy", "imported_at": product.get("imported_at"), "bigbuy_id": product.get("bigbuy_id")})
++                     "source": "BigBuy", "imported_at": product.get("imported_at"), "bigbuy_id": product.get("bigbuy_id"),
++                     "orderable": type(purchase) is int and price_status == "released"})
+     return item
+ 
+ 
+@@ -81,7 +91,7 @@ async def products(q: str = Query("", max_length=120), category: int | None = No
+         query["category_ids"] = category
+     total = await db.products.count_documents(query)
+     settings = await pricing.settings(db)
+-    ordering={'availability':[("stock", -1), ("name", 1)],'price_asc':[("purchase_cents",1),("name",1)],'price_desc':[("purchase_cents",-1),("name",1)],'name':[("name",1)]}[sort]
++    ordering={'availability':[("stock", -1), ("name", 1)],'price_asc':[("purchase_cents",1),("list_price_cents",1),("name",1)],'price_desc':[("purchase_cents",-1),("list_price_cents",-1),("name",1)],'name':[("name",1)]}[sort]
+     cursor = db.products.find(query, PUBLIC_FIELDS).sort(ordering).skip((page - 1) * page_size).limit(page_size)
+     items = [present(p, settings) async for p in cursor]
+     return {"items": items, "total": total, "page": page, "page_size": page_size, "pages": max(1, -(-total // page_size)), "q": term, "category": category}

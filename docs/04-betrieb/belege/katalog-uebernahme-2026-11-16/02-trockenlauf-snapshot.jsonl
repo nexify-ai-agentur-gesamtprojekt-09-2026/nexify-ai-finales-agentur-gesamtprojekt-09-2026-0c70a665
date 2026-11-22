@@ -1,0 +1,13 @@
+{"step": "start", "mode": "dry_run", "limit": null, "at": "2026-11-16T01:10:18.008405+00:00"}
+{"step": "source", "total_announced": 3720, "fetched": 3720, "windows": 0, "passes": 0}
+{"step": "abort", "reason": "Quelle nicht übernehmbar: Bild fehlt oder ist nicht zulässig (7); Preis fehlt oder ist nicht eindeutig (13)"}
+{"step": "start", "mode": "dry_run", "limit": null, "at": "2026-11-16T01:10:36.425343+00:00"}
+{"step": "source", "total_announced": 3720, "fetched": 3720, "windows": 0, "passes": 0}
+{"step": "skipped_placeholders", "count": 7, "ids": ["airfilter", "brake", "brake-pads-front", "brake-rear", "exhaust", "oil", "shock"]}
+{"step": "source", "collection": "categories", "count": 7, "digest": "56783afab0356a67fcdb707ccfd4ad7a9bad6caab56644bc2fffc49c63bb11cb"}
+{"step": "source", "collection": "products", "count": 3713, "digest": "311dccca19d8da7c35a09b3d44aab8813e166e2cbf30adad2dad3690679953a9"}
+{"step": "target", "collection": "categories", "target_count": 7, "target_digest": "56783afab0356a67fcdb707ccfd4ad7a9bad6caab56644bc2fffc49c63bb11cb", "inserted": 7, "updated": 0, "unchanged": 0, "match": true}
+{"step": "target", "collection": "products", "target_count": 3713, "target_digest": "311dccca19d8da7c35a09b3d44aab8813e166e2cbf30adad2dad3690679953a9", "inserted": 3713, "updated": 0, "unchanged": 0, "match": true}
+{"step": "sample", "checked": 20, "equal": 20}
+{"step": "field_sample", "checked": 20, "equal": 20}
+{"step": "done", "outcome": "dry_run", "published": 3713, "run": null, "field_sample_equal": 20, "field_sample_checked": 20}

@@ -1,0 +1,438 @@
+{
+ "report": {
+  "outcome": "applied",
+  "target": "mongodb",
+  "collections": {
+   "categories": {
+    "source_count": 2,
+    "source_digest": "4c91072dddc56521672b6826bbabd113004e9c2d5b1078c8e066f86ba22c5010",
+    "target_count": 2,
+    "target_digest": "4c91072dddc56521672b6826bbabd113004e9c2d5b1078c8e066f86ba22c5010",
+    "inserted": 2,
+    "updated": 0,
+    "unchanged": 0,
+    "match": true
+   },
+   "products": {
+    "source_count": 20,
+    "source_digest": "e09c480cea7294509fb6984d130473ba3858d5e91f79f7842500f5f535301838",
+    "target_count": 20,
+    "target_digest": "e09c480cea7294509fb6984d130473ba3858d5e91f79f7842500f5f535301838",
+    "inserted": 20,
+    "updated": 0,
+    "unchanged": 0,
+    "match": true
+   }
+  },
+  "sample": [
+   {
+    "id": "S05111500",
+    "equal": true
+   },
+   {
+    "id": "S05117025",
+    "equal": true
+   },
+   {
+    "id": "S0582556",
+    "equal": true
+   },
+   {
+    "id": "S0582557",
+    "equal": true
+   },
+   {
+    "id": "S0582560",
+    "equal": true
+   },
+   {
+    "id": "S0582561",
+    "equal": true
+   },
+   {
+    "id": "S0582562",
+    "equal": true
+   },
+   {
+    "id": "S3700240",
+    "equal": true
+   },
+   {
+    "id": "S3700511",
+    "equal": true
+   },
+   {
+    "id": "S3700513",
+    "equal": true
+   },
+   {
+    "id": "S3700620",
+    "equal": true
+   },
+   {
+    "id": "S3700621",
+    "equal": true
+   },
+   {
+    "id": "S3700622",
+    "equal": true
+   },
+   {
+    "id": "S3700623",
+    "equal": true
+   },
+   {
+    "id": "S3700624",
+    "equal": true
+   },
+   {
+    "id": "S3700634",
+    "equal": true
+   },
+   {
+    "id": "S3700705",
+    "equal": true
+   },
+   {
+    "id": "S3701179",
+    "equal": true
+   },
+   {
+    "id": "S3701347",
+    "equal": true
+   },
+   {
+    "id": "S3701605",
+    "equal": true
+   }
+  ],
+  "published": 20,
+  "run": "catalog-public-transfer-5e21bc70b35cc81a19cd4445ceabeaa2"
+ },
+ "field_sample": [
+  {
+   "id": "S05111500",
+   "fields_compared": 24,
+   "fields_differing": [],
+   "derived_equal": {
+    "name": true,
+    "price": true,
+    "image": true,
+    "stock": true,
+    "category": true
+   },
+   "equal": true,
+   "price_eur": 2.76,
+   "image": "https://cdnbigbuy.com/images/8001090744913_S05111500_P01.jpg"
+  },
+  {
+   "id": "S05117025",
+   "fields_compared": 24,
+   "fields_differing": [],
+   "derived_equal": {
+    "name": true,
+    "price": true,
+    "image": true,
+    "stock": true,
+    "category": true
+   },
+   "equal": true,
+   "price_eur": 2.39,
+   "image": "https://cdnbigbuy.com/images/8700216007566_S05117025_P01.jpg"
+  },
+  {
+   "id": "S0582556",
+   "fields_compared": 24,
+   "fields_differing": [],
+   "derived_equal": {
+    "name": true,
+    "price": true,
+    "image": true,
+    "stock": true,
+    "category": true
+   },
+   "equal": true,
+   "price_eur": 2.49,
+   "image": "https://cdnbigbuy.com/images/8436535310840_S0582556_ok_P02.jpg"
+  },
+  {
+   "id": "S0582557",
+   "fields_compared": 24,
+   "fields_differing": [],
+   "derived_equal": {
+    "name": true,
+    "price": true,
+    "image": true,
+    "stock": true,
+    "category": true
+   },
+   "equal": true,
+   "price_eur": 2.49,
+   "image": "https://cdnbigbuy.com/images/8436535310864_R02.jpg"
+  },
+  {
+   "id": "S0582560",
+   "fields_compared": 24,
+   "fields_differing": [],
+   "derived_equal": {
+    "name": true,
+    "price": true,
+    "image": true,
+    "stock": true,
+    "category": true
+   },
+   "equal": true,
+   "price_eur": 2.49,
+   "image": "https://cdnbigbuy.com/images/8436571511478_S0582560_ok_P02.jpg"
+  },
+  {
+   "id": "S0582561",
+   "fields_compared": 24,
+   "fields_differing": [],
+   "derived_equal": {
+    "name": true,
+    "price": true,
+    "image": true,
+    "stock": true,
+    "category": true
+   },
+   "equal": true,
+   "price_eur": 2.52,
+   "image": "https://cdnbigbuy.com/images/8436535312653_R01.jpg"
+  },
+  {
+   "id": "S0582562",
+   "fields_compared": 24,
+   "fields_differing": [],
+   "derived_equal": {
+    "name": true,
+    "price": true,
+    "image": true,
+    "stock": true,
+    "category": true
+   },
+   "equal": true,
+   "price_eur": 2.49,
+   "image": "https://cdnbigbuy.com/images/8436535310888_R01.jpg"
+  },
+  {
+   "id": "S3700240",
+   "fields_compared": 24,
+   "fields_differing": [],
+   "derived_equal": {
+    "name": true,
+    "price": true,
+    "image": true,
+    "stock": true,
+    "category": true
+   },
+   "equal": true,
+   "price_eur": 17.82,
+   "image": "https://cdnbigbuy.com/images/8430046673258_A01.jpg"
+  },
+  {
+   "id": "S3700511",
+   "fields_compared": 24,
+   "fields_differing": [],
+   "derived_equal": {
+    "name": true,
+    "price": true,
+    "image": true,
+    "stock": true,
+    "category": true
+   },
+   "equal": true,
+   "price_eur": 3.92,
+   "image": "https://cdnbigbuy.com/images/7612720751419_A02.jpg"
+  },
+  {
+   "id": "S3700513",
+   "fields_compared": 24,
+   "fields_differing": [],
+   "derived_equal": {
+    "name": true,
+    "price": true,
+    "image": true,
+    "stock": true,
+    "category": true
+   },
+   "equal": true,
+   "price_eur": 3.92,
+   "image": "https://cdnbigbuy.com/images/7612720751563_A02.jpg"
+  },
+  {
+   "id": "S3700620",
+   "fields_compared": 24,
+   "fields_differing": [],
+   "derived_equal": {
+    "name": true,
+    "price": true,
+    "image": true,
+    "stock": true,
+    "category": true
+   },
+   "equal": true,
+   "price_eur": 4.4,
+   "image": "https://cdnbigbuy.com/images/5010322750359_A02.jpg"
+  },
+  {
+   "id": "S3700621",
+   "fields_compared": 24,
+   "fields_differing": [],
+   "derived_equal": {
+    "name": true,
+    "price": true,
+    "image": true,
+    "stock": true,
+    "category": true
+   },
+   "equal": true,
+   "price_eur": 4.4,
+   "image": "https://cdnbigbuy.com/images/5010322771095_A01.jpg"
+  },
+  {
+   "id": "S3700622",
+   "fields_compared": 24,
+   "fields_differing": [],
+   "derived_equal": {
+    "name": true,
+    "price": true,
+    "image": true,
+    "stock": true,
+    "category": true
+   },
+   "equal": true,
+   "price_eur": 4.4,
+   "image": "https://cdnbigbuy.com/images/5010322751356_A01.jpg"
+  },
+  {
+   "id": "S3700623",
+   "fields_compared": 24,
+   "fields_differing": [],
+   "derived_equal": {
+    "name": true,
+    "price": true,
+    "image": true,
+    "stock": true,
+    "category": true
+   },
+   "equal": true,
+   "price_eur": 4.4,
+   "image": "https://cdnbigbuy.com/images/5010322755149_A02.jpg"
+  },
+  {
+   "id": "S3700624",
+   "fields_compared": 24,
+   "fields_differing": [],
+   "derived_equal": {
+    "name": true,
+    "price": true,
+    "image": true,
+    "stock": true,
+    "category": true
+   },
+   "equal": true,
+   "price_eur": 4.4,
+   "image": "https://cdnbigbuy.com/images/5010322755156_A02.jpg"
+  },
+  {
+   "id": "S3700634",
+   "fields_compared": 24,
+   "fields_differing": [],
+   "derived_equal": {
+    "name": true,
+    "price": true,
+    "image": true,
+    "stock": true,
+    "category": true
+   },
+   "equal": true,
+   "price_eur": 5.2,
+   "image": "https://cdnbigbuy.com/images/5010322738098_A01.jpg"
+  },
+  {
+   "id": "S3700705",
+   "fields_compared": 24,
+   "fields_differing": [],
+   "derived_equal": {
+    "name": true,
+    "price": true,
+    "image": true,
+    "stock": true,
+    "category": true
+   },
+   "equal": true,
+   "price_eur": 84,
+   "image": "https://cdnbigbuy.com/images/5998204103649_S3700705_P02.jpg"
+  },
+  {
+   "id": "S3701179",
+   "fields_compared": 24,
+   "fields_differing": [],
+   "derived_equal": {
+    "name": true,
+    "price": true,
+    "image": true,
+    "stock": true,
+    "category": true
+   },
+   "equal": true,
+   "price_eur": 7.06,
+   "image": "https://cdnbigbuy.com/images/8430046143355_A02.jpg"
+  },
+  {
+   "id": "S3701347",
+   "fields_compared": 24,
+   "fields_differing": [],
+   "derived_equal": {
+    "name": true,
+    "price": true,
+    "image": true,
+    "stock": true,
+    "category": true
+   },
+   "equal": true,
+   "price_eur": 22.86,
+   "image": "https://cdnbigbuy.com/images/8430046088113_A02.jpg"
+  },
+  {
+   "id": "S3701605",
+   "fields_compared": 24,
+   "fields_differing": [],
+   "derived_equal": {
+    "name": true,
+    "price": true,
+    "image": true,
+    "stock": true,
+    "category": true
+   },
+   "equal": true,
+   "price_eur": 3.05,
+   "image": "https://cdnbigbuy.com/images/0012844791174_S3701605_P02.jpg"
+  }
+ ],
+ "source": {
+  "total": 3720,
+  "windows": [
+   {
+    "pass": 1,
+    "offset": 0,
+    "count": 500,
+    "new": 500,
+    "sha256": "98ca344c4c34840a69c81651ad302e033212edbac105cee6273c38b6bdcb7caa"
+   }
+  ],
+  "fetched": 20,
+  "passes": 1
+ },
+ "categories": [
+  {
+   "id": 62321894,
+   "name": "Reinigungs- & Pflegemittel"
+  },
+  {
+   "id": 213943860,
+   "name": "Autozubehör"
+  }
+ ]
+}
