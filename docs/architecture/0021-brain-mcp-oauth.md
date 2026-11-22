@@ -4,10 +4,13 @@ Status: **Entwurf (Stufe 1), nicht freigegeben, nicht gebaut.** Stand 16.11.2026
 
 > **Vorbehalt vom 16.11.2026, 06:52 UTC:** Die koordinierende Sitzung hat vorgeschlagen, keinen eigenen
 > Anmeldeserver zu bauen. Stattdessen soll brain eine geschützte Ressource hinter dem bestehenden Supabase-Auth-Server
-> von `nexifyai.de/mcp` werden (IST gemessen 06:53 UTC: Ressourcen-Metadaten verweisen auf
-> `nffczuqkhlihimmuzeoz.supabase.co/auth/v1`, dort Selbstregistrierung von Clients, PKCE S256 und `plain`).
-> Folgen bei Bestätigung: Abschnitte 4, 5, 7 und 8 (eigener Anmeldeserver) entfallen. Abschnitte 6, 9, 10 und 12
-> (Zulassung, RLS, Audit, Tests, Rückweg) bleiben und prüfen die Supabase-Token per JWKS.
+> von `nexifyai.de/mcp` werden (IST gemessen 06:53 UTC, Beleg `docs/04-betrieb/brain-befund-2026-11-16.md`,
+> Abschnitt 5: Ressourcen-Metadaten verweisen auf `nffczuqkhlihimmuzeoz.supabase.co/auth/v1`, dort
+> Selbstregistrierung von Clients, PKCE S256 und `plain`).
+> Folgen bei Bestätigung: Abschnitte 4, 5 und 7 (eigener Anmeldeserver) entfallen, aus Abschnitt 8 entfällt nur
+> die Wahl des Anmeldeverfahrens (Optionen A–C). Die **Zulassungstabelle** aus Abschnitt 8 bleibt und wandert in
+> Abschnitt 6: Ein gültiges Supabase-Token ohne Zulassungszeile wird abgewiesen. Abschnitte 6, 9, 10 und 12
+> (Zulassung, Rollen, RLS, Audit, Tests, Rückweg) bleiben und prüfen die Supabase-Token per JWKS.
 > OFFEN vor jeder Umsetzung:
 > - ob dort jeder ein Konto anlegen kann (Einstellung nicht lesbar ohne Projektschlüssel);
 > - fehlende Ressourcenbindung und verzögerter Widerruf der Supabase-Token;
@@ -75,7 +78,9 @@ Middleware `brain-auth` bleiben unberührt.
 Traefik: neuer Router nur über Labels des neuen Containers, Regel
 `Host(brain.nexifyai.cloud) && (PathPrefix(/v2) || PathPrefix(/oauth) || PathPrefix(/konto) || PathPrefix(/.well-known/oauth-) || Path(/.well-known/openid-configuration))`.
 Er ist länger als der Host-Router `cognee-x532` und gewinnt deshalb nach Traefiks Prioritätsregel; `/mcp` trifft er nicht.
-Die Pfade antworten heute 404 (Befund) – es wird also nichts Bestehendes überdeckt.
+Laut Befund antworten heute `/.well-known/oauth-*`, `/.well-known/openid-configuration`, `/register`, `/authorize` und
+`/token` mit 404. `/v2/*`, `/oauth/*` und `/konto` sind **nicht gemessen** (OFFEN, vor Stufe 3 messen, zusammen mit
+`dynamic.yml`), weil ein Datei-Router dort eine bestehende Route haben könnte.
 
 Rückweg Stufe 3: Container `brain-gate` stoppen → Router verschwindet, die Pfade antworten wieder 404, `/mcp` war nie betroffen.
 
@@ -110,8 +115,9 @@ Code ohne PKCE, Token in der Adresse (`bearer_methods_supported: ["header"]`), R
   Ein im Antrag genannter `scope` wird gespeichert, aber nie über das Rollenrecht hinaus gewährt.
 - `redirect_uris`: exakter Vergleich, keine Platzhalter. Zulässig sind `http://127.0.0.1`/`http://[::1]`/`http://localhost`
   mit beliebigem Port (RFC 8252, Port beim Vergleich ignoriert), private Schemata (`cursor://`, `vscode://` …) und
-  `https`. Für `https`-Hosts ohne Eintrag in der Liste bekannter Client-Hosts (Inhaberentscheidung E3) zeigt die
-  Zustimmungsseite eine deutliche Warnung; Vorschlag: zunächst nur bekannte Hosts zulassen, andere nach Freigabe.
+  `https`. `https`-Hosts ohne Eintrag in der Liste bekannter Client-Hosts (Inhaberentscheidung E3) werden bei der
+  Registrierung **abgewiesen**; ein neuer Host kommt erst nach Freigabe auf die Liste. Die Zustimmungsseite zeigt
+  zusätzlich immer den Ziel-Host.
 - Rate-Limit: 10 Registrierungen je IP und Stunde, 200 je Tag gesamt; Antwort 429 mit `Retry-After`.
   Nie genutzte Registrierungen werden nach 30 Tagen **archiviert** (nicht gelöscht).
 - Client-ID-Metadaten-Dokument (Client-ID ist eine `https`-Adresse): in `config/mcp-server.json` geplant und in
@@ -170,7 +176,7 @@ Herabstufung wirkt also sofort, eine Hochstufung erst nach neuer Zustimmung.
 | Autorisierungscode | zufällig, 256 bit | 60 s, einmalig; Zweitnutzung widerruft den daraus entstandenen Grant | Hash |
 | Zugriffstoken | **opak**, 256 bit | 10 min | nur HMAC-SHA-256 mit Server-Pfeffer |
 | Refresh-Token | opak, 256 bit | 14 Tage ohne Nutzung, höchstens 30 Tage ab Zustimmung; danach neu anmelden | HMAC, mit Familien-ID |
-| Anmeldesitzung im Browser | Cookie `__Host-brain_sid`, `Secure`, `HttpOnly`, `SameSite=Lax` | 12 h | Hash |
+| Anmeldesitzung im Browser | Cookie `__Host-brain_sid`, `Secure`, `HttpOnly`, `SameSite=Lax`, `Path=/`, ohne `Domain` | 12 h | Hash |
 
 - **Opak statt JWT**, damit Widerruf sofort wirkt: jede Anfrage schlägt das Token in der Datenbank nach (ein
   indizierter Lesezugriff). Kein Token wird nur dekodiert und geglaubt.
@@ -213,11 +219,14 @@ Empfehlung: **A** als Ziel. Wenn der Nachweis schnell gebraucht wird: B zusätzl
 Jeder Test muss gegen den heutigen Stand (kein brain-gate) scheitern und gegen den Bau bestehen:
 
 1. fremder Mandant: Token für Mandant A liest/schreibt keine Zeile von B (echte PostgreSQL, RLS aktiv, als `brain_gate_app`).
+1b. fremder Mandant im Backend: über den Cognee-Adapter mit getrennten Backend-Identitäten A und B sucht, liest und
+   schreibt A keinen Datensatz von B; auch ein Werkzeugargument mit B's Datensatz-ID wird abgewiesen (echter Cognee-Dienst,
+   nicht gemockt – setzt die Wiederherstellung von Cognee voraus).
 2. abgelaufenes Zugriffstoken → 401 `invalid_token` mit `resource_metadata`.
 3. widerrufenes Token (einzeln, über Familie, über „überall abmelden“) → 401 sofort.
 4. fehlender Scope → 403 `insufficient_scope`; Klasse-C-Werkzeug ist mit keinem Scope erreichbar.
 5. PKCE: fehlende Challenge, `plain`, falscher Verifier, wiederverwendeter Code → abgewiesen.
-6. Redirect-Manipulation: abweichender Pfad, Port bei Nicht-Loopback, Zusatzparameter, offene Weiterleitung, fremder Host → abgewiesen, **ohne** Weiterleitung (Fehler im Browser anzeigen).
+6. Redirect-Manipulation: abweichender Pfad, Port bei Nicht-Loopback, Zusatzparameter, offene Weiterleitung, fremder Host (auch `https` ohne Eintrag nach E3) → abgewiesen, **ohne** Weiterleitung (Fehler im Browser anzeigen).
 7. falsche Ressource (`resource` fehlt oder fremd) und Token einer anderen Ressource → abgewiesen.
 8. Refresh-Wiederverwendung → Familie widerrufen, Audit-Ereignis vorhanden.
 9. nicht zugelassener Mensch → keine Zustimmungsseite, kein Code.
@@ -264,6 +273,11 @@ Jeder Test muss gegen den heutigen Stand (kein brain-gate) scheitern und gegen d
 | E8 | Cognee wiederherstellen (Aufräumplan, Entscheidung 1) | parallel als eigener Auftrag; ohne ihn bleibt brain inhaltlich leer |
 
 ## 14. Vor dem Bau zu prüfen (OFFEN)
+
+- Die Werkzeuge aus Abschnitt 6.1 (`brain.wer_bin_ich`, `brain.status`, `brain.suchen`, `brain.merken`,
+  `brain.entwurf_anlegen`, `brain.verarbeiten`) stehen noch in keinem Werkzeugvertrag. Vor Stufe 2 kommen sie mit
+  Klasse, Rolle und Scope in `config/brain/tools.json`; brain-gate liest die Zuordnung nur von dort, und die Tests aus
+  Abschnitt 10 prüfen gegen genau diese Quelle.
 
 - Aktueller Text der MCP-Autorisierungsspezifikation und die Fassung, die die genannten Clients sprechen
   (`config/mcp-server.json` nennt `2026-07-28`; in dieser Sitzung nicht gegen die Quelle geprüft).

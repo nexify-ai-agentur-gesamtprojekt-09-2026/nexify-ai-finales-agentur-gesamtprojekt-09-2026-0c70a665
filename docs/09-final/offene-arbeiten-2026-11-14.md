@@ -1919,8 +1919,22 @@ Herleitung: OFFEN 46 − 2 (164, 170 nach ERLEDIGT) + 5 neue (171, 174, 175, 177
 - **Priorität:** 1 Sicherheit und Betrieb (ein MCP-Server ohne nutzbaren Anmeldeweg; heute keine Mandantentrennung hinter `brain.nexifyai.cloud/mcp`)
 - **Ziel:** brain wird der eine MCP-Server von NeXify AI mit Browser-Anmeldung (OAuth 2.1, PKCE S256, Selbstregistrierung nach RFC 7591, Metadaten nach RFC 9728/8414, Widerruf, „überall abmelden“, RLS, Audit).
 - **Stand:** Stufe 0 (Bestand, `docs/04-betrieb/brain-befund-2026-11-16.md`) und Stufe 1 (Entwurf, `docs/architecture/0021-brain-mcp-oauth.md`) liegen auf Zweig `claude/brain-mcp-auth`. Nichts gebaut, nichts auf dem Server geändert.
-- **Blocker:** Entscheidungen E1 bis E8 des Inhabers (ADR-0021, Abschnitt 13); Cognee-Dienst ohne Container (OA-144, Aufräumplan Entscheidung 1).
-- **Abhängigkeiten:** OA-144
+- **Blocker:** Entscheidungen E1 bis E8 des Inhabers (ADR-0021, Abschnitt 13) und die Wahl zwischen eigenem Anmeldeserver und dem Supabase-Anmeldeserver von `nexifyai.de/mcp` (ADR-0021, Vorbehalt).
+- **Einschränkung (kein Blocker für den Anmeldeweg):** Ohne laufenden Cognee-Dienst liefern die Brain-Werkzeuge nur `wer_bin_ich` und `status`; Test 1b aus ADR-0021 setzt die Wiederherstellung voraus (Aufräumplan Entscheidung 1, vgl. OA-144).
+- **Abhängigkeiten:** keine für Stufen 2 bis 4; Test 1b und Brain-Inhalte hängen an der Wiederherstellung von Cognee
 - **Fertig, wenn:** Stufen 2 bis 5 nach ADR-0021 bestanden, darunter eine protokollierte echte Verbindung aus einem echten Client per Browser-Anmeldung (Stufe 4) und die Umschaltung nach Freigabe.
 - **Aufwand:** L · **Ausführung:** Sitzung `claude/brain-mcp-auth` (ein Schreiber)
 - **Quellen:** Auftrag des Inhabers 16.11.2026; ADR-0021; Befund 16.11.2026
+
+### 10.1 Zählung nach der Nachführung (179 Einträge)
+
+| Zustand | Stand `48f5072` | Stand 16.11.2026 |
+|---|---|---|
+| OFFEN | 49 | 49 |
+| TEILWEISE | 13 | 13 |
+| BLOCKIERT | 38 | 38 |
+| ENTSCHEIDUNG NÖTIG | 60 | 61 |
+| HISTORIE-überholt | 8 | 8 |
+| ERLEDIGT | 10 | 10 |
+
+Herleitung: ENTSCHEIDUNG NÖTIG 60 + 1 neu (179) = 61. Übrige Zustände unverändert.

@@ -47,8 +47,10 @@ Wesentliche Konfiguration (nur Namen und unkritische Werte):
 - `cognee-mcp` hängt zusätzlich im Netz `librechat_default` (Alias `brain-mcp`), LibreChat erreicht ihn also intern ohne Wand.
 - `cognee`: `ENABLE_BACKEND_ACCESS_CONTROL=True`, Datenbank PostgreSQL `cognee-db`, Vektoren LanceDB, Graph Kuzu,
   `LLM_ENDPOINT` = lokaler Router `172.27.0.1:20129`, Modell-Vorgabewert in der Compose-Datei
-  `openrouter/deepseek-v4.1-flash` (ohne Endung 1017; ob die `.env` ihn überschreibt, ist nur dem Namen nach belegt:
-  Variable `LLM_MODEL` ist gesetzt, Wert nicht gelesen).
+  `openrouter/deepseek-v4.1-flash`. **Abweichung von `config/llm-policy.json`** (verbindlich
+  `deepseek/deepseek-v4.1-flash-1017`, Reasoning `high`): Endung 1017 fehlt, Präfix weicht ab, kein Reasoning gesetzt.
+  Ob die `.env` den Wert überschreibt, ist nur dem Namen nach belegt (Variable `LLM_MODEL` gesetzt, Wert nicht gelesen).
+  Siehe Abschnitt 3.
 - Variablennamen der `.env` (ohne Werte): `TRAEFIK_HOST, ADMIN_EMAIL, ADMIN_PASSWORD, LLM_API_KEY, LLM_MODEL, DB_USER,
   DB_PASSWORD, JWT_SECRET, VERIFICATION_TOKEN_SECRET, RESET_PASSWORD_TOKEN_SECRET, BRAIN_MCP_API_TOKEN,
   EMBEDDING_PROVIDER, EMBEDDING_MODEL, EMBEDDING_ENDPOINT, EMBEDDING_API_KEY, EMBEDDING_DIMENSIONS`.
@@ -57,7 +59,8 @@ Wesentliche Konfiguration (nur Namen und unkritische Werte):
 
 - `traefik:latest` (wandernder Tag), `network_mode: host`, Docker-Provider mit `exposedbydefault=false`,
   Datei-Provider `./dynamic.yml` (beobachtet), Let's-Encrypt per HTTP-Challenge, Dashboard aus, Docker-Socket nur lesend.
-- Die Middleware `brain-auth` (Basic-Auth) steht in `dynamic.yml`. Diese Datei ist über die API nicht lesbar → **OFFEN**
+- Die Middleware `brain-auth@file` (Basic-Auth) kommt aus dem Datei-Provider, also vermutlich aus `dynamic.yml`
+  (aus `@file` abgeleitet, nicht gelesen). Diese Datei ist über die API nicht lesbar → **OFFEN**
   (nur über einen lesenden Mess-Container oder eine Shell erhebbar).
 
 ### 2.3 Weitere laufende Projekte (Stand 06:35 UTC, Namen)
@@ -77,6 +80,7 @@ außerhalb der Projekte läuft `nexify-openbao` (Geheimnisablage, laut Befund 14
 | Protokolle `cognee-x532` | `GET …/docker/cognee-x532/logs` → `[VPS:9999] Request failed` (06:36 UTC) | später wiederholen; Befund 14.11.: 340× `PoolTimeout`, MCP erreicht `cognee:8000` nicht |
 | Plattenbelegung heute | nur per Mess-Container belastbar | wie oben |
 | Wer `brain-mcp` heute nutzt (LibreChat, Claude-Konfigurationen auf dem Server) | Fundstellen laut Befund 14.11., nicht neu erhoben | vor der Umschaltung (Stufe 5) je Verbraucher prüfen |
+| Tatsächliches Modell von `cognee` (Abweichung von `config/llm-policy.json` im Vorgabewert) | `.env`-Wert nicht gelesen; Dienst läuft nicht | vor Wiederherstellung von Cognee `LLM_MODEL` auf `…-1017` mit Reasoning `high` prüfen (Freigabe D-016) |
 | Version und Werkzeugliste von `cognee-mcp` | hinter der Wand, kein Zugang | erst mit Zugang über den neuen Weg |
 
 ## 4. Folgen für den Entwurf
@@ -90,3 +94,22 @@ außerhalb der Projekte läuft `nexify-openbao` (Geheimnisablage, laut Befund 14
    lässt `brain-mcp` (`/mcp`) und `brain-auth` unberührt. Das Aufstellen eines neuen Containers ist trotzdem eine
    Serveränderung und braucht nach D-016 die Freigabe des Inhabers.
 4. Platte und wandernde Image-Tags (`latest`, `main`) sind Betriebsrisiken; neue Bausteine werden auf Digests festgelegt.
+
+## 5. Nachtrag 16.11.2026, 06:53–07:00 UTC: Anmeldeserver hinter `nexifyai.de/mcp` (IST, nur lesend)
+
+Anlass: Hinweis der koordinierenden Sitzung (06:52 UTC). Abrufe aus der Cloud-Sitzung, ohne Token und ohne Schlüssel.
+
+| Abruf | Antwort (gekürzt) |
+|---|---|
+| `GET https://nexifyai.de/mcp` | 401, `www-authenticate: Bearer realm="mcp", resource_metadata="https://nexifyai.de/.well-known/oauth-protected-resource"` |
+| `GET https://nexifyai.de/.well-known/oauth-protected-resource` | 200: `resource=https://nexifyai.de/mcp`, `authorization_servers=["https://nffczuqkhlihimmuzeoz.supabase.co/auth/v1"]`, `bearer_methods_supported=["header"]`, `resource_name="Nexfiy Ai Studio"` |
+| `GET …supabase.co/auth/v1/.well-known/oauth-authorization-server` | 200: `registration_endpoint` vorhanden, `code_challenge_methods_supported=["S256","plain"]`, `grant_types_supported=["authorization_code","refresh_token"]`, `token_endpoint_auth_methods_supported=["client_secret_basic","client_secret_post","none"]`, `scopes_supported=["openid","profile","email","phone","offline_access"]`, `id_token_signing_alg_values_supported=["RS256","HS256","ES256"]` |
+| `GET …/auth/v1/.well-known/jwks.json` | 200: zwei Schlüssel, beide `EC`/`ES256` |
+| `GET …/auth/v1/settings` | 401 „No API key found“ – ob jeder ein Konto anlegen kann, ist **nicht lesbar** (OFFEN) |
+| `nexifyai.de` | löst auf `185.158.133.1` auf; Antwortkopf `x-deployment-id: psr2…`, keine Vercel-Kennung |
+
+- Weder `nffczuqkhlihimmuzeoz` noch eine Route `oauth-protected-resource` kommen auf `origin/main` vor (`git grep`).
+  `nexifyai.de/mcp` wird also nicht aus diesem Repository ausgeliefert. ANNAHME: ein Lovable-Projekt mit Lovable Cloud
+  (Adresse und Merkmale); der Zugang über `mcp.lovable.dev` antwortet für Arbeitsbereiche mit 403
+  `authentication_type_forbidden`, eine Bestätigung liegt nicht vor.
+- Das widerspricht `AGENTS.md` („nexifyai.de wird von Vercel `…-ut7r` ausgeliefert“, Stand 14.11.2026) → OFFEN, Inhaber.
