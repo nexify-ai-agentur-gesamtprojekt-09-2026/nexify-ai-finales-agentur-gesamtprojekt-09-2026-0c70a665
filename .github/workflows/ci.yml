@@ -88,6 +88,12 @@ jobs:
           node-version: '22.23.4'
       - run: npm install --global --ignore-scripts pnpm@12.15.0
       - run: pnpm install --frozen-lockfile --ignore-scripts
+      # apps/web/auth/tests/chat-guidance.test.mjs liest apps/site/.generated/public-site.json.
+      # Die Datei ist ein erzeugtes, nicht eingechecktes Artefakt (apps/site/.gitignore);
+      # ohne diesen Schritt bricht test:auth mit ENOENT ab. Die Jobs "repository" und
+      # "react-site" erzeugen sie bereits, "next-web" bisher nicht.
+      - name: Generate the source-bound public page snapshot the auth tests read
+        run: node apps/site/scripts/generate-public-data.mjs
       - run: pnpm --filter @nexify/web test:auth
       - run: pnpm --filter @nexify/web build
       - run: pnpm --filter @nexify/web typecheck
