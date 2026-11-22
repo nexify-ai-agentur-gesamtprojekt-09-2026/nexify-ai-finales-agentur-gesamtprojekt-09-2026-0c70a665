@@ -403,7 +403,18 @@ dem Gespräch** zu treffen, denn wenn der Interessent die AGB liest — und das 
 eine Kooperation ernst wird — ist dies der Punkt, an dem er verhandelt oder abspringt.
 Übergeben in Abschnitt 6.
 
-### 11 · schwer · `/agb` § 4.7 gegen Startseite und `/preise-ablauf` · Das Transparenzversprechen und die AGB sagen das Gegenteil
+### 11 · ZURÜCKGEZOGEN · `/agb` § 4.7 gegen Startseite und `/preise-ablauf`
+
+> **Dieser Befund ist am 22.11.2026 vollständig zurückgezogen, siehe Nachtrag 4, K14.**
+> Das öffentliche Versprechen lautet „offen ausgewiesen **statt im Projektpreis
+> versteckt**" und betrifft die Trennung vom Projektpreis; genau diese leistet § 4.7 durch
+> eine monatlich gesonderte Rechnung mit eigenem Nummernkreis. Ein Widerspruch ist nicht
+> belegbar. **Die unten stehende Maßnahme ist gegenstandslos — weder die Seiten noch § 4.7
+> sind deshalb zu ändern.** Der Prüfauftrag R6 ist herabgestuft: keine Rechtsprüfung,
+> sondern eine kaufmännische Frage an den Inhaber, ob der Aufschlag von 38 % auf den Seiten
+> genannt werden soll. Der folgende Text ist nur zur Nachvollziehbarkeit erhalten und
+> **gilt nicht**. Die ursprüngliche Überschrift lautete „… sagen das Gegenteil", die
+> Schwere „schwer".
 
 Zitate. Startseite: „Externe Kosten · Hosting, Software, KI-Nutzung, Medien- und
 Werbebudget werden **offen ausgewiesen statt im Projektpreis versteckt**."
@@ -433,13 +444,14 @@ Was daran nicht überzeugt, in drei Punkten:
    Betrieb, Orchestrierung und Betreuung der KI-Infrastruktur"). Problematisch ist nur,
    dass er neben einem Versprechen steht, das das Gegenteil behauptet.
 
-Maßnahme: Entweder das Versprechen auf der Startseite und `/preise-ablauf` präzisieren, so
-dass es zu § 4.7 passt, oder § 4.7 an das Versprechen angleichen. Ein möglicher Weg für
-den Werbetext, der beides trägt: „Hosting, Software, KI-Nutzung und Werbebudget stehen als
-eigene Posten in Ihrer Rechnung — getrennt von der Projektleistung. Für Betrieb und
-Betreuung der KI-Infrastruktur kommt ein benannter Aufschlag hinzu; Ihr Angebot nennt ihn."
-Die Entscheidung über Aufschlag und Nennung von Anbieternamen gehört dem Inhaber
-(Abschnitt 6).
+~~Maßnahme: Entweder das Versprechen auf der Startseite und `/preise-ablauf` präzisieren,
+so dass es zu § 4.7 passt, oder § 4.7 an das Versprechen angleichen.~~ **Gegenstandslos,
+siehe den Hinweis oben (Nachtrag 4, K14). Es ist nichts zu ändern.**
+
+Was ohne Anspruch auf einen Widerspruch bleibt, als Frage an den Inhaber: Der gesondert
+ausgewiesene Betrag ist der Einkaufspreis zuzüglich 38 % unter der Bezeichnung „NeXify AI
+Kosten", und der Aufschlag kommt auf keiner der 29 Seiten vor. Ob er dort genannt werden
+soll, ist eine kaufmännische Entscheidung.
 
 ### 12 · schwer · `/agb` und `/widerruf` gegen `/teileklar` · B2B-Ausschluss und Verbrauchershop widersprechen sich
 
@@ -1514,12 +1526,12 @@ Stand Nachtrag 3: 16.11.2026, 03:45 UTC.
 
 ---
 
-# Nachtrag 4 · 22.11.2026, 18:45 UTC · Fünf weitere Korrekturen, davon eine grundsätzliche
+# Nachtrag 4 · 22.11.2026 · Sechs weitere Korrekturen, davon eine grundsätzliche
 
 Das Gespräch am 16.11.2026 liegt zurück. Dieser Nachtrag ändert nichts mehr daran; er
 berichtigt den Bericht, damit er als Arbeitsgrundlage stimmt. Der automatische Prüfer hat
-auf dem Stand `4dde9f7` fünf weitere Einwände erhoben. **Alle fünf treffen zu**, jeder an
-der Primärquelle nachgeprüft.
+auf dem Stand `4dde9f7` sechs weitere Einwände erhoben. **Alle sechs treffen zu**, jeder
+an der Primärquelle nachgeprüft.
 
 ## K9 · Die Übergabetabelle R1 bis R13 ist ein Parallelregister und darf keines bleiben
 
@@ -1612,12 +1624,18 @@ Anzugleichen ist die Produktseite, nicht der Chat.
 
 ## Was das über diesen Bericht sagt
 
-Mit Nachtrag 4 sind es zwölf Korrekturen an eigenen Befunden. Das Muster ist in elf von
-zwölf Fällen dasselbe: **Ich habe aus dem, was ich auf den öffentlichen Seiten nicht sah,
-auf Abwesenheit geschlossen — und übersehen, dass es an anderer Stelle entschieden,
-implementiert oder dokumentiert war.** Zweimal lag es an meinem Messverfahren (`hreflang`,
-Navigation auf `/agb`), neunmal an einer Entscheidung oder Umsetzung außerhalb der 29
-Seiten.
+Mit Nachtrag 4 sind es **vierzehn** Korrekturen an eigenen Befunden (K1 bis K14). Die
+Zahlen in einer früheren Fassung dieses Absatzes — „zwölf" und „elf von zwölf" — waren
+falsch; hier die nachgezählte Aufteilung:
+
+- **Sieben** folgen dem Muster, **aus Nichtsehen auf Abwesenheit zu schließen**: fünfmal
+  war die Sache an anderer Stelle entschieden oder umgesetzt (K3 Indexierungsgate, K4
+  `/loesungen`, K5 Paketnamen, K6 Angebots-Generator, K13 Chat-Panel-Name), zweimal lag es
+  an meinem Messverfahren (K2 `hreflang`, K12 Navigation auf `/agb`).
+- **Vier** sind überzogene Deutung: K1 und K14 (aus zwei Sätzen, die verschiedene Dinge
+  regeln, einen Widerspruch gemacht), K7 und K11.
+- **Drei** sind Fehler im Vorgehen: K8 (Maßnahme an das falsche Gate gekoppelt), K9
+  (Parallelregister), K10 (Freigabebedarf verneint, den es gibt).
 
 Für den Leser dieses Berichts folgt daraus eine Lesehilfe: **Jeder Befund, der mit „fehlt"
 oder „gibt es nicht" argumentiert, ist vor dem Handeln gegen Repository und Register zu
@@ -1657,8 +1675,9 @@ weckt, nicht eine Frage des Vertrags.
 einer kaufmännischen Frage an den Inhaber: ob der Aufschlag auf den Seiten genannt werden
 soll. Damit entfällt der zweite überflüssige Rechtsauftrag in dieser Prüfung.
 
-Eine Anmerkung in eigener Sache: Dies ist die dritte Korrektur an Befund 11. Zweimal habe
-ich einen „Kern" verteidigt, der ebenfalls nicht trug. Wer den Bericht liest, sollte das
+Eine Anmerkung in eigener Sache: Dies ist die **zweite** Korrektur an Befund 11 — nach K1,
+die Punkt 2 strich. Dazwischen habe ich den verbliebenen „Kern" zweimal auf dem Pull
+Request ausdrücklich verteidigt, zuletzt gegen genau diesen Einwand. Wer den Bericht liest, sollte das
 als Warnung lesen — nicht gegen die zitatbelegten Befunde, sondern gegen meine Neigung,
 aus zwei Sätzen, die verschiedene Dinge regeln, einen Widerspruch zu machen.
 
