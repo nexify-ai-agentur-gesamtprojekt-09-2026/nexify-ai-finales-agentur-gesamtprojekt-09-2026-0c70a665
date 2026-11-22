@@ -230,7 +230,8 @@ Empfehlung: **A** als Ziel. Wenn der Nachweis schnell gebraucht wird: B zusätzl
   Scope, Werkzeug, Argument-Hash (keine Klartext-Argumente, keine Token), Ergebnis (`erlaubt`/`abgewiesen` + Grund,
   `fehler`), Dauer, IP-Präfix (/24 bzw. /48), Anfrage-ID, `vorheriger_hash`, `hash`.
 - Unveränderlich: `brain_gate_app` hat nur `INSERT`; ein Trigger verweigert `UPDATE`/`DELETE` auch dem Eigentümer;
-  Hash-Kette über alle Zeilen; täglicher Kettenkopf nach R2 (`nexify-agentur-pucket`, Schreibrecht OFFEN) in Stufe 6.
+  je Tabelle eine eigene Hash-Kette (siehe unten); täglich wird der aktuelle Kettenkopf beider Ketten zusätzlich nach R2
+  geschrieben (`nexify-agentur-pucket`, Schreibrecht OFFEN, Stufe 6), unabhängig von der monatlichen Versiegelung.
 - Ereignisse mindestens: Registrierung, Anmeldung ok/abgewiesen, Zustimmung, Token ausgestellt/erneuert/widerrufen,
   Refresh-Wiederverwendung, jeder Werkzeugaufruf, jede 401/403 (identitätslose als Aggregat je Minute, siehe unten),
   Zulassung erteilt/entzogen, „überall abmelden“.
@@ -250,12 +251,15 @@ Empfehlung: **A** als Ziel. Wenn der Nachweis schnell gebraucht wird: B zusätzl
   Monat beginnt mit diesem Hash. Ein danach noch eintreffendes Ereignis oder Fenster des Vormonats wird nicht in die
   versiegelte Partition geschrieben, sondern im laufenden Monat mit Kennzeichen `verspaetet` und dem ursprünglichen
   Zeitpunkt.
+- Fristbeginn: Die Frist zählt ab dem Ende des Partitionsmonats. Eine einzelne Zeile bleibt damit 30 bis 61 Tage
+  (`audit_aggregat`) bzw. 12 bis 13 Monate (`audit_ereignis`) in der aktiven Tabelle. Die Fristen sind also
+  Mindestdauern, nicht genaue Zeilenfristen; das ist bewusst so, damit nur ganze Partitionen archiviert werden.
 - Ablauf der Frist: Die Partition wird als JSONL samt Kettenkopf nach R2 exportiert, der Export zurückgelesen und gegen
   die Kette geprüft, danach per `DETACH PARTITION` aus der aktiven Tabelle gelöst und als Archivtabelle behalten. Ein
   Entfernen der Archivtabelle braucht die Freigabe des Inhabers (D-016). Der Trigger gegen `UPDATE`/`DELETE` gilt für
   jede Partition; `DETACH` ist nur der Eigentümerrolle der Wartung erlaubt. OFFEN: Schreibrecht und eigener Schlüssel
   für R2.
-- Alarm, wenn die aktive Audit-Tabelle 1 GiB oder die Platte 95 % erreicht.
+- Alarm, wenn `audit_ereignis` und `audit_aggregat` zusammen (aktive Partitionen) 1 GiB erreichen oder die Platte 95 %.
 
 ## 10. Sicherheitsgrenzen, die Stufe 2 zuerst als Test schreibt
 
