@@ -2140,7 +2140,7 @@ Herleitung: ENTSCHEIDUNG NÖTIG 65 + 1 neu (188) = 66.
 - **Fertig, wenn:** Der Inhaber hat bestätigt, ob `teileklar.shop` die gewollte Shop-Auslieferung ist und aus welchem Repository sie stammt; die Zielpfade antworten wie vorgesehen oder die Weiterleitungen sind angepasst; die Sitemap listet keine weitergeleiteten Adressen; Messung mit Uhrzeit.
 - **Aufwand:** S für die Entscheidung · **Ausführung:** Entscheidung Inhaber, Messung Fabrik · **Owner:** Inhaber (Entscheidung) · **Nächste Aktion:** Inhaber bestätigt, ob `teileklar.shop` die gewollte Shop-Auslieferung ist und aus welchem Repository sie stammt
 - **Quellen:** `PROGRESS.md`, Abschnitt „Stand 21.11.2026, ca. 19:00 UTC“; `curl`, `tools/live-check.mjs` und `tools/gleichmacher.mjs`, 21.11.2026, 14:47 bis 18:54 UTC
-- **Stand 22.11.2026, ca. 07:00 UTC:** Messung zwischen 18:47 und 22:47 UTC am 21.11.2026: Die Weiterleitungen sind korrigiert. `/teileklar/warenkorb` und `/teileklar/kasse` leiten auf `teileklar.shop/shop`, `/teileklar/rechtliches` auf `/impressum`, `/teileklar/werkstatt` auf `/werkstatt-partner`; alle Ziele 200. Direkt auf `teileklar.shop` bleiben `/warenkorb`, `/kasse` und `/api/shop/status` 404; Katalog dort `total` 3720. Wer umgestellt hat: nicht belegt; `main` unverändert `9c9c806`. Zustand bleibt ENTSCHEIDUNG NÖTIG.
+- **Stand 22.11.2026, ca. 07:00 UTC:** Messung zwischen 18:47 und 22:47 UTC am 21.11.2026: Die Weiterleitungen sind geändert, Herkunft nicht belegt. `/teileklar/warenkorb` und `/teileklar/kasse` leiten auf `teileklar.shop/shop`, `/teileklar/rechtliches` auf `/impressum`, `/teileklar/werkstatt` auf `/werkstatt-partner`; die Ziele antworten jetzt mit 200. Direkt auf `teileklar.shop` bleiben `/warenkorb`, `/kasse` und `/api/shop/status` 404; Katalog dort `total` 3720. Wer umgestellt hat: nicht belegt; `main` unverändert `9c9c806`. Zustand bleibt ENTSCHEIDUNG NÖTIG.
 
 ## 15. Nachführung 22.11.2026, ca. 07:00 UTC (Stand `origin/main` `9c9c806`, PR 199)
 
@@ -2148,7 +2148,7 @@ Regelbetrieb-Läufe vom 21.11.2026, 22:47 UTC, bis 22.11.2026, 07:00 UTC. Seit `
 
 ### 15.1 Geänderte Zustände
 
-Kein Zustand geändert. Stand-Zeilen an OA-186 (Subdomains antworten anders) und OA-188 (Weiterleitungen korrigiert).
+Kein Zustand geändert. Stand-Zeilen an OA-186 (Subdomains antworten anders) und OA-188 (Weiterleitungen geändert, Herkunft nicht belegt).
 
 ### 15.2 Zählung nach der Nachführung (188 Einträge)
 
