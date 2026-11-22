@@ -619,9 +619,11 @@ class Nacharbeit(unittest.TestCase):
             self.assertEqual(schritt(termin, aktion, rolle, grund_text=" " + "x" * 200 + " ", **mehr)[0]["grund_text"], "x" * 200)
 
     def test_m25_absage_nimmt_zeitpunkt_und_vorschlag_weg(self):
+        mit_dauer = schritt(wunsch(), "confirm", W, termin_am="2027-03-10T10:00", dauer_minuten=90)[0]
+        self.assertEqual((mit_dauer["dauer_minuten"], schritt(mit_dauer, "cancel", K)[0]["dauer_minuten"]), (90, None))
         for termin, rolle, mehr in ((bestaetigt(), K, {}), (bestaetigt(), W, {"grund_code": "verhindert"}), (verschoben_von_werkstatt(), K, {}), (verschoben_von_kunde(), I, {"grund_code": "betrieblich"})):
             neu, _ = schritt(termin, "cancel", rolle, **mehr)
-            self.assertEqual((neu["termin_am"], neu["vorschlag_am"], neu["antwort_bis"]), (None, None, None))
+            self.assertEqual((neu["termin_am"], neu["vorschlag_am"], neu["antwort_bis"], neu["dauer_minuten"]), (None, None, None, None))
             self.assertEqual((neu["verlauf"][-1]["termin_am_zuvor"], neu["verlauf"][-1]["vorschlag_am_zuvor"]), (termin["termin_am"], termin["vorschlag_am"]))
 
     def test_b13_ergebnis_eines_frueheren_aufrufs(self):

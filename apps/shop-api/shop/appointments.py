@@ -494,7 +494,7 @@ def uebergang(termin, aktion, rolle, eingabe, jetzt, fristen, *, schluessel_prue
     elif nr in ("U5", "U8", "U12"):
         zusatz.update(termin_am_zuvor=termin.get("termin_am"), vorschlag_am_zuvor=termin.get("vorschlag_am"))
         setze.update(abgesagt_von=rolle, grund_code=werte["grund_code"], grund_text=werte["grund_text"], antwort_bis=None,
-                     termin_am=None, vorschlag_am=None)
+                     termin_am=None, dauer_minuten=None, vorschlag_am=None)
     elif nr == "U10":
         setze.update(termin_am=termin["vorschlag_am"], vorschlag_am=None, antwort_bis=None)
         zusatz["vorschlag_von"] = termin["vorschlag_von"]

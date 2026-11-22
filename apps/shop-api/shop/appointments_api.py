@@ -54,7 +54,6 @@ STUNDENGRENZE = 5        # Schutzwert je E-Mail-Adresse und Stunde, übernommen 
 SEITENGROESSE = 50
 RUMPF_MAX = 16384
 VERWALTUNGSPFAD = "/teileklar/termine"   # Vorschlag; die Seite ist Teil B6
-METHODEN = ("GET", "POST", "PUT", "PATCH", "DELETE", "HEAD", "OPTIONS")
 NICHT_GEFUNDEN = {"detail": "Not Found"}   # wortgleich mit dem 404 des Dienstes für unbekannte Pfade
 UEBERGANGSFELDER = ("version", "termin_am", "dauer_minuten", "ueberschneidung_bestaetigt", "vorschlag_am", "grund_code", "grund_text")
 OHNE_CACHE = {"Cache-Control": "no-store"}
@@ -169,8 +168,10 @@ class ArbeitsspeicherTermine:
         """
         treffer = []
         for zeile in self.zeilen.values():
-            zeitpunkt = zeile.get("termin_am") or zeile.get("vorschlag_am") or zeile["wunsch_von"]
-            wirksam = "verfallen" if jetzt is not None and self._faellig(zeile, jetzt) else zeile["zustand"]
+            faellig = jetzt is not None and self._faellig(zeile, jetzt)
+            wirksam = "verfallen" if faellig else zeile["zustand"]
+            # Der Verfall nimmt den Vorschlag weg; maßgeblich ist dann wieder der Wunschbeginn.
+            zeitpunkt = zeile["wunsch_von"] if faellig else zeile.get("termin_am") or zeile.get("vorschlag_am") or zeile["wunsch_von"]
             if (werkstatt_id is None or zeile["werkstatt_id"] == werkstatt_id) and (zustand is None or wirksam == zustand) \
                     and (von is None or zeitpunkt >= von) and (bis is None or zeitpunkt <= bis):
                 treffer.append(zeile)
@@ -385,7 +386,7 @@ def router_fuer(abh):
                 return KUNDE
         return KUNDE if nachweis_passt else None
 
-    async def lade(request, termin_id, jetzt):
+    async def lade(request, termin_id, jetzt, verfall=True):
         """Fremder Betrieb, falscher Nachweis und unbekannte Kennung antworten gleich: 404 (5.3).
 
         Erst die Rolle, dann der Fristablauf: Ein Aufruf ohne Berechtigung schreibt nichts und löst keine Nachricht aus.
@@ -394,6 +395,8 @@ def router_fuer(abh):
         rolle = await rolle_am_termin(termin, await abh.sitzung(request), request.headers.get(NACHWEIS_KOPF))
         if rolle is None:
             raise Abweisung(404, "appointment_not_found")
+        if not verfall:
+            return termin, rolle, False
         termin, eben_verfallen = await verfall_feststellen(termin, jetzt)
         return termin, rolle, eben_verfallen
 
@@ -402,6 +405,11 @@ def router_fuer(abh):
         await abh.speicher.vermerke_zugriff(termin["id"], {"art": "zugriff", "aktion": "lesen", "ausloeser": INHABER, "zeit": termine.utc_text(jetzt)})
 
     # ------------------------------------------------------------ Routen
+    def jede_methode(pfad, eingang):
+        """Ohne Methodenliste: Auch TRACE oder eine Erweiterungsmethode erreicht den Rahmen und damit den Schalter. Eine
+        aufgezählte Liste ließe das Routing für alles andere mit 405 und Allow antworten und verriete den Pfad."""
+        router.add_route(pfad, _JedeMethode(eingang), methods=None, include_in_schema=False)
+
     def route(pfad, methode, kern):
         """Registriert den Pfad für JEDE Methode: bei Schalter aus antwortet alles gleich (404), sonst 405 für fremde Methoden."""
         async def eingang(request: Request):
@@ -409,7 +417,7 @@ def router_fuer(abh):
                 return await kern(request, jetzt, fristen)
             return await rahmen(request, methode, gebunden)
         eingang.__name__ = "termin_" + re.sub(r"[^a-z]+", "_", pfad.lower()).strip("_")
-        router.add_api_route(pfad, eingang, methods=list(METHODEN), include_in_schema=False)
+        jede_methode(pfad, eingang)
         ohne_umleitung(pfad)
 
     def ohne_umleitung(pfad):
@@ -418,22 +426,29 @@ def router_fuer(abh):
         async def kein_pfad(request: Request):
             return JSONResponse(NICHT_GEFUNDEN, status_code=404)
         kein_pfad.__name__ = "termin_kein_pfad_" + re.sub(r"[^a-z]+", "_", pfad.lower()).strip("_")
-        router.add_api_route(pfad + "/", kein_pfad, methods=list(METHODEN), include_in_schema=False)
+        jede_methode(pfad + "/", kein_pfad)
 
     # ------------------------------------------------------------ U1
     async def anlegen(request, jetzt, fristen):
         werkstatt_id = request.path_params["werkstatt_id"]
         profil = await abh.verzeichnis(werkstatt_id)
+        betrieb_fehlt = None   # heutige Eignung des Betriebs; gilt für NEUE Wünsche, nicht für die Wiederholung eines gespeicherten
         if not profil or profil.get("gesperrt"):
-            raise Abweisung(404, "workshop_not_found")
-        if profil.get("partner") is not True:
-            raise Abweisung(409, "workshop_not_partner")   # nichts wird gespeichert, auch keine Kontaktdaten
+            betrieb_fehlt = Abweisung(404, "workshop_not_found")
+        elif profil.get("partner") is not True:
+            betrieb_fehlt = Abweisung(409, "workshop_not_partner")   # nichts wird gespeichert, auch keine Kontaktdaten
+        else:
+            try:
+                termine.lies_zeitpunkt("2000-01-01T12:00", profil.get("zeitzone"))
+            except termine.UnbekannteZeitzone:
+                betrieb_fehlt = Abweisung(503, "appointments_not_configured")
         try:
-            termine.lies_zeitpunkt("2000-01-01T12:00", profil.get("zeitzone"))
-        except termine.UnbekannteZeitzone:
-            raise Abweisung(503, "appointments_not_configured") from None
-        schluessel_roh, schluessel = lies_schluessel(request)
-        eingabe = await lies_rumpf(request)
+            schluessel_roh, schluessel = lies_schluessel(request)
+            eingabe = await lies_rumpf(request)
+        except Abweisung:
+            if betrieb_fehlt:
+                raise betrieb_fehlt from None
+            raise
         nutzlast = termine.pruefsumme(termine.nutzlast_wunsch(werkstatt_id, eingabe))
         zugriff = nachweis_fuer(schluessel_roh, nutzlast)
 
@@ -446,9 +461,16 @@ def router_fuer(abh):
             # Gespeichertes Ergebnis des ersten Aufrufs; derselbe Schlüssel mit derselben Nutzlast ergibt denselben Nachweis.
             return 200, {**antwort(termine.ergebnis_von(vorhanden, schluessel) or vorhanden, KUNDE, jetzt, fristen), "zugriff": zugriff}
 
-        bekannt = await wiederholung()
+        try:
+            bekannt = await wiederholung()
+        except Abweisung:
+            if betrieb_fehlt:
+                raise betrieb_fehlt from None
+            raise
         if bekannt:
-            return bekannt
+            return bekannt   # auch wenn der Betrieb seither gesperrt wurde: das gespeicherte Ergebnis bleibt abrufbar (6.1)
+        if betrieb_fehlt:
+            raise betrieb_fehlt
         if abh.herkunftsgrenze is not None and not await abh.herkunftsgrenze(request):
             raise Abweisung(429, "rate_limited")
         sitzung = await abh.sitzung(request)
@@ -482,7 +504,10 @@ def router_fuer(abh):
         except DoppelterWunsch:
             raise Abweisung(409, "appointment_duplicate") from None
         await sende(termin, termin["benachrichtigungen"], zugriff=zugriff)
-        return 201, {**antwort(await abh.speicher.hole(termin["id"]) or termin, KUNDE, jetzt, fristen), "zugriff": zugriff}
+        # Die Antwort zeigt den eigenen Anlegestand, auch wenn während des Versands schon jemand weitergeschrieben hat:
+        # erste Antwort und Wiederholung sind damit gleich.
+        gespeichert = await abh.speicher.hole(termin["id"]) or termin
+        return 201, {**antwort(termine.ergebnis_von(gespeichert, schluessel) or termin, KUNDE, jetzt, fristen), "zugriff": zugriff}
 
     # ------------------------------------------------------------ Lesen
     async def lesen(request, jetzt, fristen):
@@ -495,7 +520,9 @@ def router_fuer(abh):
     # ------------------------------------------------------------ U2 bis U5, U7 bis U12
     def uebergang_fuer(aktion):
         async def kern(request, jetzt, fristen):
-            termin, rolle, eben_verfallen = await lade(request, request.path_params["termin_id"], jetzt)
+            # Erst prüfen, dann schreiben: Ein abgewiesener Aufruf (Schlüssel, Rumpf, Felder) stellt keinen Fristablauf fest
+            # und löst keine Nachricht aus. Geprüft wird gegen den Stand vor dem Verfall.
+            termin, rolle, _ = await lade(request, request.path_params["termin_id"], jetzt, verfall=False)
             _, schluessel = lies_schluessel(request)
             eingabe = await lies_rumpf(request)
             if "version" not in eingabe:
@@ -506,8 +533,9 @@ def router_fuer(abh):
             if termine.wiederholung(termin, schluessel, aktion, rolle, nutzlast):
                 # Derselbe Schlüssel: kein zweiter Effekt, und die Antwort ist das damalige Ergebnis, nicht der heutige Stand.
                 return 200, antwort(termine.ergebnis_von(termin, schluessel) or termin, rolle, jetzt, fristen)
+            termine.pruefe_eingabe(termin, aktion, rolle, eingabe, jetzt, fristen)
+            termin, eben_verfallen = await verfall_feststellen(termin, jetzt)
             if eben_verfallen:
-                termine.pruefe_eingabe(termin, aktion, rolle, eingabe, jetzt, fristen)
                 raise Abweisung(409, "appointment_expired", zustand=termin["zustand"], version=termin["version"])
             aenderung = termine.uebergang(termin, aktion, rolle, eingabe, jetzt, fristen, schluessel_pruefsumme=schluessel, nutzlast_pruefsumme=nutzlast)
             # Stufe 1 (6.4): keine Sperre, aber keine versehentliche Doppelbestätigung desselben Beginns. Die Bedingung
@@ -527,9 +555,15 @@ def router_fuer(abh):
             if not geschrieben:
                 # Jemand anderes hat zuerst geschrieben. Kein automatisches Wiederholen mit neuer Version (6.2).
                 aktuell = await abh.speicher.hole(termin["id"]) or termin
+                # Hat derselbe Aufruf (gleicher Schlüssel, gleiche Nutzlast) gleichzeitig schon geschrieben, ist das eine
+                # Wiederholung und liefert dessen Ergebnis; nur ein ANDERER Schreibvorgang ist ein Versionskonflikt.
+                if termine.wiederholung(aktuell, schluessel, aktion, rolle, nutzlast):
+                    return 200, antwort(termine.ergebnis_von(aktuell, schluessel) or aktuell, rolle, jetzt, fristen)
                 raise Abweisung(409, "appointment_version_conflict", zustand=aktuell["zustand"], version=aktuell["version"])
             await sende(neu, absichten)
-            return 200, antwort(await abh.speicher.hole(termin["id"]) or neu, rolle, jetzt, fristen)
+            # Die Antwort zeigt den eigenen Übergang, auch wenn während des Versands schon jemand weitergeschrieben hat.
+            gespeichert = await abh.speicher.hole(termin["id"]) or neu
+            return 200, antwort(termine.ergebnis_von(gespeichert, schluessel) or neu, rolle, jetzt, fristen)
         return kern
 
     # ------------------------------------------------------------ Listen
@@ -598,11 +632,22 @@ def router_fuer(abh):
     route("/api/workshops/appointments/{termin_id}", "GET", lesen)
     for aktion in termine.AKTIONEN:
         route("/api/workshops/appointments/{termin_id}/" + aktion, "POST", uebergang_fuer(aktion))
-    router.add_api_route("/api/workshops/{werkstatt_id}/appointments", _zwei_methoden(rahmen, {"POST": anlegen, "GET": liste_des_betriebs}),
-                         methods=list(METHODEN), include_in_schema=False)
+    jede_methode("/api/workshops/{werkstatt_id}/appointments", _zwei_methoden(rahmen, {"POST": anlegen, "GET": liste_des_betriebs}))
     ohne_umleitung("/api/workshops/{werkstatt_id}/appointments")
     route("/api/admin/appointments", "GET", liste_des_inhabers)
     return router
+
+
+class _JedeMethode:
+    """Eingang ohne Methodenliste. Als aufrufbares Objekt (nicht als Funktion) übergeben, damit das Routing ihm keine
+    Vorgabe "nur GET" gibt; über die Methode entscheidet allein der Rahmen, nach dem Schalter."""
+
+    def __init__(self, eingang):
+        self.eingang = eingang
+
+    async def __call__(self, scope, receive, send):
+        antwort = await self.eingang(Request(scope, receive))
+        await antwort(scope, receive, send)
 
 
 def _zwei_methoden(rahmen, kerne):
