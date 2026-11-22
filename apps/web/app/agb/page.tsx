@@ -9,18 +9,22 @@ import '../../components/HomeConcept.css';
 import '../../components/PageConcept.css';
 import agb from '../../lib/legal/agb.json';
 import {PUBLIC_ORIGIN} from '../../lib/page-seo';
+import {pageRobots} from '../../auth/page-robots';
 
 type Subsection = {id?: string; heading: string; paragraphs?: string[]; bullets?: string[]};
 type Section = Subsection & {subsections?: Subsection[]};
 
 const doc = agb as {slug: string; title: string; intro: string; updated: string; sections: Section[]};
 
-export const metadata: Metadata = {
-  title: `${doc.title} · NeXify AI`,
-  description: doc.intro.slice(0, 180),
-  alternates: {canonical: PUBLIC_ORIGIN+'/agb'},
-  robots: {index: true, follow: true},
-};
+// Meta `robots` folgt derselben Regel wie die Kopfzeile X-Robots-Tag (auth/indexing.ts über auth/page-robots.ts), OA-164.
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: `${doc.title} · NeXify AI`,
+    description: doc.intro.slice(0, 180),
+    alternates: {canonical: PUBLIC_ORIGIN+'/agb'},
+    robots: await pageRobots('/agb'),
+  };
+}
 
 function Blocks({node}: {node: Subsection}) {
   return (
