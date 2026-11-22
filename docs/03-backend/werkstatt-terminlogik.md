@@ -2,6 +2,8 @@
 
 Stand: 14.11.2026, Repository `origin/main` auf `2b8da63`. Entwurf zur Bestätigung durch den Inhaber. Dieses Dokument ist eine Spezifikation: kein Produktcode, keine Konfiguration, kein Test wurde geändert, kein Formular abgeschickt.
 
+Fassung 2 vom 22.11.2026: Befunde der automatischen Prüfungen am PR 187 vom 15.11.2026 eingearbeitet (Empfänger im Ereignisschlüssel, Nachrichtenabsicht im selben Schreibvorgang, Reihenfolge von Frist, Version und Übergang, Belegungseintrag gegen parallele Bestätigung, Grund bei U12, Prüfung von `vorgaenger_id`, Liste für Kunden mit Konto, Zugriffsprotokoll, Name der Werkstattrolle offen, Verhalten nach F5 als Pflichtwert). Die Zeilenbelege wurden an `2b8da63` erhoben; von den zitierten Dateien haben die sechs Commits auf `main` bis `9c9c806` nur `apps/shop-api/shop/accounts_api.py` geändert, und die dort zitierten Zeilen (`:55`, `:129`, `:175-176`, `:188`) stimmen an `9c9c806` unverändert.
+
 Bezug: `docs/04-betrieb/werkstattservice-und-suite-ist-soll-2026-11-14.md`, Abschnitt 3.3 (W4, W5, W6) und Abschnitt 5 (J-1); Register OA-085. Priorität laut Auftrag der koordinierenden Sitzung: Inhaber Pascal Courbois, 14.11.2026, Fertigstellung von Shop und Werkstattservice.
 
 Kennzeichnung: **SOLL** = gültige Entscheidung, führender Plan oder Festlegung dieser Spezifikation, die aus einem solchen Plan folgt · **IST** = heute im Repository gelesen (Datei und Zeile) · **ANNAHME** = begründeter Vorschlag dieser Spezifikation, nicht bestätigt · **OFFEN** = fehlt, widersprüchlich oder Entscheidung des Inhabers. Ein Wert, der eine Geschäftsentscheidung ist, steht hier nie als Zahl.
@@ -53,7 +55,7 @@ Auslöser: **K** = Kunde, **W** = Werkstatt (Partnerbetrieb, dem der Termin geh�
 | U9 | `bestaetigt` | `erledigt` | W | bestätigter Zeitpunkt liegt in der Vergangenheit | N10 (OFFEN, E-11) |
 | U10 | `verschoben` | `bestaetigt` | Gegenseite | vorgeschlagener Zeitpunkt liegt noch in der Zukunft | N3 |
 | U11 | `verschoben` | `verschoben` | Gegenseite | neuer Vorschlag; Zahl der Runden unter der Grenze F11 | N5 |
-| U12 | `verschoben` | `abgesagt` | K, W, I | – | N6 |
+| U12 | `verschoben` | `abgesagt` | K, W, I | – (W und I: Grund Pflicht) | N6 |
 | U13 | `verschoben` | `verfallen` | S | Antwortfrist F2 abgelaufen oder vorgeschlagener Zeitpunkt erreicht | N7 |
 
 Alles, was nicht in dieser Tabelle steht, ist verboten und antwortet mit 409 `appointment_transition_forbidden` (Abschnitt 9). Insbesondere:
@@ -99,7 +101,7 @@ Jede Frist ist ein benannter Pflichtwert der Konfiguration **ohne Vorgabe im Cod
 | F2 | Antwortfrist der Gegenseite auf einen Vorschlag | danach U13 | **OFFEN (E-01)** |
 | F3 | Mindestvorlauf: frühester wünschbarer Zeitpunkt ab Absenden | U1 sonst 422 | **OFFEN (E-03)** |
 | F4 | Höchstvorlauf: spätester wünschbarer Zeitpunkt ab Absenden | U1 sonst 422 | **OFFEN (E-03)** |
-| F5 | Bis wann vor dem Termin der Kunde absagen oder verlegen kann, und was danach gilt | U7, U8 | **OFFEN (E-04)**; hängt an Konditionen (W3) und Rechtstexten (W9) |
+| F5 | Bis wann vor dem Termin der Kunde absagen oder verlegen kann, und was danach gilt | U7, U8 | **OFFEN (E-04)**: Grenze **und** Verhalten danach, beides Pflichtwerte ohne Vorgabe (Abschnitt 8.2, B2); hängt an Konditionen (W3) und Rechtstexten (W9) |
 | F6 | Erinnerung an die Werkstatt vor Ablauf von F1 | N8 | **OFFEN (E-11)** |
 | F7 | Erinnerung an den Kunden vor dem bestätigten Termin | N9 | **OFFEN (E-11)** |
 | F8 | Nachfrage an die Werkstatt nach dem Termin, wenn `erledigt` nicht gemeldet ist; und was ohne Meldung geschieht | N11 | **OFFEN (E-11, E-14)** |
@@ -135,7 +137,7 @@ OFFEN (E-02), nicht vorentschieden: Was dem Kunden nach Verfall oder Ablehnung a
 
 ### 4.2 SOLL: wer wann worüber
 
-Kanal im ersten Bau ist E-Mail über die vorhandene Warteschlange; Ereignisschlüssel `appointment:<id>:<ereignis>:<version>`, damit jede Nachricht je Zustandswechsel höchstens einmal entsteht. Zweiter Kanal ist die Anzeige im Partnerportal (W7) und im Kundenkonto, sobald es sie gibt. SMS, Messenger und Telefon sind nicht vorgesehen; im Repository gibt es dafür keinen Adapter.
+Kanal im ersten Bau ist E-Mail über die vorhandene Warteschlange; Ereignisschlüssel `appointment:<id>:<nachricht>:<version>:<empfaengerrolle>` mit `empfaengerrolle` aus `kunde`, `werkstatt`, `inhaber`: **ein Eintrag der Warteschlange je Empfänger**, damit jede Nachricht je Zustandswechsel und Empfänger höchstens einmal entsteht. Die Warteschlange speichert genau eine Adresse je Schlüssel und gibt beim zweiten Einreihen den vorhandenen Eintrag zurück (`mailer.py:35-44`); ohne die Empfängerrolle im Schlüssel bekäme bei N3, N6 und N7 nur die erste Seite eine Nachricht. Haben zwei Rollen dieselbe Adresse, geht trotzdem je Rolle eine Nachricht hinaus (die Inhalte sind je Sicht verschieden). Zweiter Kanal ist die Anzeige im Partnerportal (W7) und im Kundenkonto, sobald es sie gibt. SMS, Messenger und Telefon sind nicht vorgesehen; im Repository gibt es dafür keinen Adapter.
 
 | Nr. | Ereignis | Empfänger | Inhalt (nur Sachstand) | Einordnung |
 |---|---|---|---|---|
@@ -208,11 +210,11 @@ ANNAHME: Im Repository gibt es kein festes Verzeichnis von Datenklassen (gesucht
 | `seite`, `sprache` | ja | B | I | Herkunftsseite und Sprache für die Nachrichten |
 | `grund_code`, `grund_text` | bei U3, bei U5/U8/U12 durch W oder I | B / D | K, W, I | Code aus fester Liste; Freitext optional und kurz |
 | `abgesagt_von` | bei `abgesagt` | B | K, W, I | `kunde`, `werkstatt`, `inhaber` |
-| `verlauf[]` | ja | B (Akteur als Rolle, nicht als Name) | I; K und W die eigenen Einträge und alle Zustandswechsel | je Übergang: Nummer U1 bis U13, von, nach, Auslöser, Zeit, Version, Idempotenzschlüssel als Prüfsumme |
+| `verlauf[]` | ja | B (Akteur als Rolle, nicht als Name) | I; K und W die eigenen Einträge und alle Zustandswechsel | je Übergang: Nummer U1 bis U13, von, nach, Auslöser, Zeit, Version, Idempotenzschlüssel als Prüfsumme, Art des Aufrufs und Prüfsumme seiner Nutzlast (Abschnitt 6.1) |
 | `zugriff_kunde` | ja | E | niemand | Prüfsumme des Verwaltungslinks (Abschnitt 5.3) |
 | `nutzlast_pruefsumme` | ja | B | I | für die Wiederholungsprüfung (Abschnitt 6.1) |
 | `benachrichtigungen[]` | ja | B | I | Ereignisschlüssel und Versandstatus je Nachricht |
-| `vorgaenger_id` | nein | B | K, W, I | Verweis auf einen früheren Termin desselben Anlaufs |
+| `vorgaenger_id` | nein | B | K, W, I | Verweis auf einen früheren Termin desselben Anlaufs; nur nach Prüfung (Abschnitt 5.3) |
 | `erstellt_am`, `geaendert_am` | ja | B | K, W, I | UTC |
 
 **OFFEN (E-09), nicht entschieden:** welche dieser Felder die Werkstatt erhält und auf welcher Grundlage. Die Tabelle zeigt den sparsamsten Zuschnitt, mit dem die Werkstatt entscheiden kann (Name, Fahrzeug, Anliegen, Wunschzeit); die Kontaktdaten des Kunden sind als eigene Stufe ausgewiesen. Dazu gehört auch die Frage, ob die E-Mail N2 das Anliegen im Klartext enthält oder nur auf das Portal verweist. Heute sagt die Eingangsbestätigung, die Werkstatt sei „kein TEILEKLAR-Vertragspartner“ (`mail_templates.py:105`); Rolle von TEILEKLAR bei der Vermittlung und Weitergabe der Anfragedaten sind als W9 beim Inhaber (`werkstattservice-und-suite-ist-soll-2026-11-14.md:102`).
@@ -230,12 +232,15 @@ SOLL:
 | Rolle | Darf | Bindung |
 |---|---|---|
 | Kunde ohne Konto | eigenen Termin lesen, U5, U7, U8, U10 bis U12 | Verwaltungslink mit Zugriffsnachweis; in der Datenbank nur als Prüfsumme (Muster `accounts_api.py:175-176`); Vergleich in konstanter Zeit |
-| Kunde mit Konto | wie oben, zusätzlich Liste der eigenen Termine | `kunde_user_id` gleich Sitzungsnutzer |
-| Werkstatt (Rolle `partner`) | Termine des eigenen Betriebs lesen; U2 bis U4, U7 bis U12 | Sitzung **und** Mitgliedschaft im Betrieb `werkstatt_id`; nie über ein Feld der Anfrage |
-| Inhaber (Rolle `admin`) | alles lesen; U5, U8, U12 mit Grund | `require_admin` (`auth.py:39-45`); jeder Zugriff im Verlauf |
+| Kunde mit Konto | wie oben, zusätzlich Liste der eigenen Termine (`GET /api/workshops/appointments/mine`) | `kunde_user_id` gleich Sitzungsnutzer |
+| Werkstatt (Werkstattrolle; technischer Name OFFEN, siehe unten) | Termine des eigenen Betriebs lesen; U2 bis U4, U7 bis U12 | Sitzung **und** Mitgliedschaft im Betrieb `werkstatt_id`; nie über ein Feld der Anfrage |
+| Inhaber (Rolle `admin`) | alles lesen; U5, U8, U12 mit Grund | `require_admin` (`auth.py:39-45`); jeder schreibende Eingriff im `verlauf`, jeder lesende Zugriff im Zugriffsprotokoll (siehe unten) |
 | System | U6, U13, Nachrichten | kein Zugriff über die öffentliche Schnittstelle |
 
 - Fremder Betrieb, falscher Zugriffsnachweis und unbekannte Kennung antworten gleich: 404 `appointment_not_found` (keine Existenzauskunft; SOLL aus `docs/03-backend/auth-und-rollen.md:92`).
+- **Name der Werkstattrolle, OFFEN (für W7):** `docs/03-backend/auth-und-rollen.md:79` nennt die Rolle `werkstatt`, der Seitenplan führt für das Partnerportal `partner` (`werkstattservice-und-suite-ist-soll-2026-11-14.md:120`). Der Dienst gibt gespeicherte Rollennamen unverändert zurück (`auth.py:28`), eine Zuordnung zwischen beiden Namen gibt es nicht. Diese Spezifikation legt den Namen nicht fest; B1 und B2 prüfen gegen **einen** Konfigurationswert, und W7 entscheidet ihn zusammen mit der Mitgliedschaft. Ein Test (Abschnitt 10, Nr. 79) hält fest, dass der jeweils andere Name keinen Zugriff gibt.
+- **Zugriffsprotokoll für den Inhaber (SOLL aus `auth-und-rollen.md:91`, `:95`):** Jeder lesende Zugriff des Inhabers auf Termine (Einzelabruf und Liste) schreibt einen unveränderlichen Eintrag mit Akteur (Nutzerkennung, nicht nur Rolle), Ziel (Terminkennungen beziehungsweise Filter der Liste), Grund und Zeit. Der `verlauf` ist dafür nicht geeignet, weil er nur Übergänge kennt und den Akteur als Rolle führt. Wiederverwendbar ist das Muster `apps/shop-api/shop/nexify_api.py:81-82`. ANNAHME: Der Grund kommt als Pflichtangabe des Aufrufs (`grund`), sonst 422 `reason_required`; ob das für jeden Lesezugriff gelten soll, gehört zu E-15. Aufbewahrung des Protokolls: OFFEN E-10 (der Plan nennt in `auth-und-rollen.md:95` einen Wert; er wird hier nicht übernommen).
+- **`vorgaenger_id` (SOLL):** Wird nur angenommen, wenn der Aufrufer den Zugriff auf den Vorgänger mit demselben Nachweis oder derselben Sitzung belegt, der Vorgänger in einem Endzustand ist und Betrieb und E-Mail-Adresse des Kunden übereinstimmen. Sonst 404 `appointment_not_found` wie bei jedem fremden Termin, und es wird nichts gespeichert. So kann niemand mit einer erratenen Kennung eine Verbindung zu einem fremden Termin herstellen, die danach Kunde und Werkstatt sehen.
 - Nach D-013 (`DECISIONS.md:100-105`) liegt der Termin im Zielbild in PostgreSQL mit Zeilensicherheit je `werkstatt_id`. IST ist MongoDB; dort setzt der Dienst die Bindung in jeder Abfrage (Betrieb immer im Filter). Der Zugriff wird über die Zugriffsschicht des Shops geführt, sobald sie auf `main` liegt (PR 150, offen), damit die Umstellung den Termin nicht noch einmal anfasst.
 - **Abweichung vom Plan, OFFEN (E-08):** `auth-und-rollen.md:25` verlangt für Werkstattpartner Passwort und zweiten Faktor, `:12` schließt „wer den Link hat, darf“ aus. Eine Antwort der Werkstatt per Link aus der E-Mail, ohne Anmeldung, wäre damit eine bewusste Ausnahme. Diese Spezifikation sieht sie **nicht** vor: Die Werkstatt antwortet angemeldet. Folge: Der erste echte Durchlauf braucht die Partneranmeldung (W7) oder die ausdrückliche Entscheidung des Inhabers für eine Übergangslösung.
 - **Abweichung vom Plan, OFFEN (E-07):** Für Kunden kennt der Plan den signierten Link nur zum Lesen der eigenen Bestellung (`auth-und-rollen.md:75`). Absagen und Annehmen per Link geht darüber hinaus. ANNAHME: zulässig, weil der Kunde sonst für eine Terminanfrage ein Konto bräuchte und das Formular heute ohne Konto arbeitet; ein Link, der beim Öffnen nichts ändert (nur `GET`), und eine Änderung erst nach ausdrücklichem Absenden (`POST`), damit Vorabrufe durch Mailprogramme nichts auslösen.
@@ -250,8 +255,10 @@ SOLL, wie `requests_api.py`:
 
 - Jeder schreibende Aufruf verlangt den Kopf `Idempotency-Key` (16 bis 128 Zeichen aus `[A-Za-z0-9_-]`, `requests_api.py:73`); sonst 400 `idempotency_key_required`. (Deckt sich mit dem Plan `docs/03-backend/backend-architektur.md:60`.)
 - Anlegen (U1): Kennung des Termins = Prüfsumme des Schlüssels (`requests_api.py:79`). Derselbe Schlüssel mit derselben Nutzlast liefert die gespeicherte Antwort mit 200 und erzeugt nichts Neues; mit anderer Nutzlast 409 `idempotency_conflict` (`requests_api.py:101-104`). Der Wettlauf zweier gleichzeitiger Aufrufe wird über den eindeutigen Schlüssel der Datenbank entschieden (`requests_api.py:90-96`).
-- Übergänge (U2 bis U13): Schlüssel und Ergebnis stehen im `verlauf`. Derselbe Schlüssel liefert das gespeicherte Ergebnis. Ein neuer Schlüssel für einen Übergang, dessen Zielzustand schon erreicht ist, antwortet 409 `appointment_transition_forbidden` mit dem aktuellen Zustand, nicht mit einem zweiten Effekt.
-- Nachrichten: höchstens eine je Ereignisschlüssel (Abschnitt 4.2).
+- Übergänge durch einen Aufruf (U2 bis U5, U7 bis U12): Im `verlauf` stehen Schlüssel, Art des Aufrufs (`confirm`, `decline`, …), Prüfsumme der Nutzlast und Ergebnis. Derselbe Schlüssel mit derselben Art und Nutzlast liefert das gespeicherte Ergebnis. Derselbe Schlüssel mit anderer Art oder anderer Nutzlast (anderer Zeitpunkt, anderer Grund) antwortet 409 `idempotency_conflict` und ändert nichts. Ein **neuer** Schlüssel wird wie jeder neue Aufruf geprüft, also gegen Version und Übergangstabelle (Reihenfolge in Abschnitt 9): Ein zweites `confirm` auf einen schon bestätigten Termin scheitert, weil es aus `bestaetigt` keinen Übergang `confirm` gibt, nicht weil der Zielzustand schon erreicht wäre. U11 (`verschoben` → `verschoben`) ist deshalb ausdrücklich erlaubt.
+- Übergänge des Systems (U6, U13) haben keinen Aufrufer und keinen Kopf. Ihr Schlüssel wird gebildet: `system:<id>:<U6|U13>:<version vor dem Übergang>`. Lesender Abruf und Hintergrundlauf bilden damit denselben Schlüssel; der bedingte Schreibvorgang (Abschnitt 6.2) lässt genau einen gewinnen, und der `verlauf` trägt genau einen Eintrag.
+- Nachrichtenabsicht (SOLL, Muster `requests_api.py:88-89`, `:107-121`): Der bedingte Schreibvorgang eines Übergangs schreibt im selben Datensatz die fälligen Nachrichten nach `benachrichtigungen[]` mit Status `ausstehend`. Erst danach wird eingereiht. Bricht der Prozess dazwischen ab, bleibt die Absicht stehen und wird nachgeholt: bei jedem späteren Lesen oder Schreiben dieses Termins, bei der Wiederholung mit demselben Schlüssel und im Hintergrundlauf. Das Einreihen ist je Ereignisschlüssel wirkungsgleich wiederholbar, es entsteht also keine zweite Nachricht. **OFFEN:** Greift niemand auf den Termin zu und läuft kein Zeitgeber (Abschnitt 3.2), bleibt die Nachricht liegen. Die Benachrichtigung der Werkstatt (N2) ist deshalb erst zugesagt, wenn ein laufender Auslöser belegt ist.
+- Nachrichten: höchstens eine je Ereignisschlüssel, und der Schlüssel enthält die Empfängerrolle (Abschnitt 4.2).
 - Mengenbegrenzung je E-Mail-Adresse nach dem Muster `requests_api.py:16`, `:83-85` (429 `rate_limited`). Der Grenzwert ist ein Schutzwert; ob der dortige Wert übernommen wird, entscheidet der Bau, nicht diese Spezifikation.
 
 ### 6.2 Gleichzeitige Bearbeitung
@@ -285,7 +292,7 @@ IST: Es gibt keine Kalender, keine freien Zeiten und keine Angabe zur Kapazität
 
 Daraus folgt, in zwei Stufen:
 
-- **Stufe 1 (erster buchbarer Termin), ANNAHME, weicht vom Plan ab, OFFEN E-06:** Der Kunde nennt ein Wunschfenster; es wird nichts gesperrt. Mehrere Wünsche für dasselbe Fenster sind erlaubt, weil die Werkstatt ihren Kalender selbst führt und entscheidet. Beim Bestätigen (U2, U10) prüft der Dienst, ob für denselben Betrieb schon ein Termin im Zustand `bestaetigt` denselben Beginn hat, und verlangt dann eine ausdrückliche zweite Bestätigung (`ueberschneidung_bestaetigt: true`), sonst 409 `appointment_overlap`. Das verhindert die versehentliche Doppelbestätigung, ohne eine Kapazität zu erfinden.
+- **Stufe 1 (erster buchbarer Termin), ANNAHME, weicht vom Plan ab, OFFEN E-06:** Der Kunde nennt ein Wunschfenster; es wird nichts gesperrt. Mehrere Wünsche für dasselbe Fenster sind erlaubt, weil die Werkstatt ihren Kalender selbst führt und entscheidet. Beim Bestätigen (U2, U10) prüft der Dienst, ob für denselben Betrieb schon ein Termin im Zustand `bestaetigt` denselben Beginn hat, und verlangt dann eine ausdrückliche zweite Bestätigung (`ueberschneidung_bestaetigt: true`), sonst 409 `appointment_overlap`. Das verhindert die versehentliche Doppelbestätigung, ohne eine Kapazität zu erfinden. Die Prüfung darf keine vorherige Abfrage sein, denn die Versionsprüfung aus 6.2 schützt nur einen Termin, nicht zwei verschiedene: Zwei gleichzeitige Bestätigungen verschiedener Termine fänden beide nichts. Deshalb legt jede Bestätigung zuerst einen Belegungseintrag mit eindeutigem Schlüssel aus Betrieb, Beginn und laufender Nummer an. Ohne `ueberschneidung_bestaetigt` ist nur die Nummer 0 zulässig; scheitert das Anlegen am eindeutigen Schlüssel, antwortet der Dienst 409 `appointment_overlap`. Mit dem Feld wird die nächste freie Nummer belegt. Der Eintrag verweist auf den Termin und fällt weg, sobald dieser `bestaetigt` verlässt; scheitert der anschließende Schreibvorgang am Termin, wird er sofort zurückgenommen, und ein Eintrag, dessen Termin nicht `bestaetigt` mit diesem Beginn ist, gilt als nicht vorhanden.
 - **Stufe 2 (Sperren von Zeitfenstern), SOLL laut Plan, nicht Teil des ersten Baus:** setzt gepflegte Zeiten und eine Kapazität je Betrieb voraus. Dann gilt: ein eindeutiger Schlüssel der Datenbank über Betrieb, Beginn und Platz für Termine in `wunsch`, `verschoben` und `bestaetigt`; der zweite Schreibversuch scheitert an der Datenbank (409 `appointment_slot_taken`), nicht an einer vorherigen Abfrage. Eine Sperre fällt mit jedem Endzustand weg.
 - Derselbe Kunde: Ein zweiter offener Wunsch derselben E-Mail-Adresse beim selben Betrieb mit überlappendem Fenster wird abgewiesen (409 `appointment_duplicate`), unabhängig vom Idempotenzschlüssel. ANNAHME; schützt die Werkstatt vor Mehrfachanfragen nach einem Neuladen der Seite.
 
@@ -383,13 +390,13 @@ Voraussetzung ist nur die Bestätigung von Abschnitt 2 durch den Inhaber. Alles 
 | Teil | Inhalt | Dateien (Vorschlag) |
 |---|---|---|
 | B1 | Zustandsmaschine als reine Funktion ohne Datenbank und ohne Uhr: Tabelle aus 2.2, Rollenprüfung, Fristberechnung mit übergebenem „jetzt“, Zeitzonenprüfung | neu `apps/shop-api/shop/appointments.py` |
-| B2 | Schnittstelle nach Abschnitt 9 mit Idempotenz und bedingtem Schreiben; Schalter `TEILEKLAR_APPOINTMENTS` aus = 404; Fristen fehlen = 503 | neu `apps/shop-api/shop/appointments_api.py` |
+| B2 | Schnittstelle nach Abschnitt 9 mit Idempotenz und bedingtem Schreiben; Schalter `TEILEKLAR_APPOINTMENTS` aus = 404; Fristen fehlen = 503. U7 und U8 durch den Kunden nach der Grenze F5: Das Verhalten ist ein Pflichtwert ohne Vorgabe mit genau zwei gebauten Möglichkeiten, `immer_erlaubt` oder `gesperrt_nach_grenze` (409 `appointment_change_closed` mit Verweis auf den direkten Kontakt zur Werkstatt); fehlt der Wert, 503. Weitere Folgen einer späten Absage (etwa Kosten) werden nicht gebaut | neu `apps/shop-api/shop/appointments_api.py` |
 | B3 | Nachrichten N1 bis N7 als Vorlagen, deutsch, nur Sachstand; Versand an Werkstätten zusätzlich hinter eigenem Schalter (W5) | neu `apps/shop-api/shop/appointment_mails.py` (eigene Datei, weil PR 122 `mail_templates.py` ändert) |
 | B4 | Tests aus Abschnitt 10 gegen Speicher im Arbeitsspeicher | neu `tests/test_appointments_state.py`, `tests/test_appointments_http.py` |
 | B5 | Einbinden: Router, Sammlung und Indizes | `apps/shop-api/shop/main.py`, `apps/shop-api/shop/db.py`, `apps/shop-api/vercel_app.py` (`COLLECTIONS`, `INDEXES`, `MODULES`) – berührt PR 122 und PR 150; erst nach deren Entscheidung oder in Absprache mit der koordinierenden Sitzung. Achtung: Ein neuer Pflichtindex schließt den Einstieg, bis er in der Datenbank existiert (`vercel_app.py:136-158`) |
 | B6 | Oberfläche `/teileklar/termine` und Texte in vier Sprachen | nach E-07, E-09, E-13; Baustein W11; nicht Teil von W6 Stufe 1 |
 
-B1 bis B4 berühren keine bestehende Datei und kollidieren mit keinem offenen PR. Nicht baubar ohne Entscheidung: Versand an Werkstätten (E-08, E-09, W3), Erinnerungen (E-11), alles zu P14 (E-14).
+B1 bis B4 berühren keine bestehende Datei und kollidieren mit keinem offenen PR. B2 erfindet damit keine Regel für späte Absagen: Welcher der beiden Werte gilt und wo die Grenze liegt, entscheidet E-04, und ohne diese Entscheidung bleibt die Funktion geschlossen. Nicht baubar ohne Entscheidung: Versand an Werkstätten (E-08, E-09, W3), Erinnerungen (E-11), alles zu P14 (E-14).
 
 ## 9. Schnittstellenentwurf (ohne Code)
 
@@ -399,6 +406,7 @@ Präfix `/api/workshops`, weil diese Adresse schon an den Shop-Dienst geleitet u
 |---|---|---|---|
 | `POST /api/workshops/{werkstatt_id}/appointments` | Kunde | U1 | 201 (neu), 200 (Wiederholung) |
 | `GET /api/workshops/appointments/{id}` | Kunde (Nachweis oder Sitzung), Werkstatt, Inhaber | – | 200 |
+| `GET /api/workshops/appointments/mine?zustand=&seite=` | Kunde mit Konto (Sitzung Pflicht) | – | 200; nur Termine mit `kunde_user_id` gleich Sitzungsnutzer. Die Route wird vor `…/{id}` angemeldet |
 | `POST /api/workshops/appointments/{id}/confirm` | Werkstatt | U2 | 200 |
 | `POST /api/workshops/appointments/{id}/decline` | Werkstatt | U3 | 200 |
 | `POST /api/workshops/appointments/{id}/propose` | Werkstatt, Kunde | U4, U7, U11 | 200 |
@@ -406,7 +414,7 @@ Präfix `/api/workshops`, weil diese Adresse schon an den Shop-Dienst geleitet u
 | `POST /api/workshops/appointments/{id}/cancel` | Kunde, Werkstatt, Inhaber | U5, U8, U12 | 200 |
 | `POST /api/workshops/appointments/{id}/complete` | Werkstatt | U9 | 200 |
 | `GET /api/workshops/{werkstatt_id}/appointments?zustand=&von=&bis=&seite=` | Werkstatt des Betriebs, Inhaber | – | 200 |
-| `GET /api/admin/appointments?zustand=&werkstatt_id=&seite=` | Inhaber | – | 200 |
+| `GET /api/admin/appointments?zustand=&werkstatt_id=&seite=` | Inhaber | – | 200; schreibt einen Eintrag ins Zugriffsprotokoll (5.3) |
 
 U6 und U13 haben keine Route; sie entstehen beim Lesen, beim Übergangsversuch und im Hintergrundlauf (Abschnitt 3.2).
 
@@ -432,12 +440,13 @@ Fehler, alle in der Form `{"detail": {"error": "<code>", …}}`:
 | 409 | `appointment_overlap` | Bestätigung ohne `ueberschneidung_bestaetigt` bei gleichem Beginn (6.4) |
 | 409 | `appointment_duplicate` | zweiter offener Wunsch derselben Adresse beim selben Betrieb mit überlappendem Fenster |
 | 409 | `appointment_slot_taken` | nur Stufe 2 (6.4) |
+| 409 | `appointment_change_closed` | Kunde verlegt oder sagt ab nach der Grenze F5, wenn `gesperrt_nach_grenze` gilt |
 | 422 | `appointment_invalid` | Feldfehler in `fields`: `required`, `invalid`, `too_short`, `too_early` (F3), `too_late` (F4), `in_past`, `time_not_existent`, `time_ambiguous`, `window_invalid`, `reason_required`, `version_required` |
 | 429 | `rate_limited` | Mengenbegrenzung |
 | 503 | `appointments_not_configured` | Pflichtwert F1 bis F5 oder F11 fehlt |
 | 503 | `runtime_binding_unavailable` | Laufzeitsperre des Shop-Dienstes (IST, `werkstattservice-und-suite-ist-soll-2026-11-14.md:42-45`) |
 
-Reihenfolge der Prüfungen (SOLL): Schalter → Herkunft → Anmeldung und Rolle → Auffinden mit Mandantenbindung (404) → Idempotenzschlüssel → Wiederholung erkannt? → Feldprüfung (422) → Frist (409 `appointment_expired`) → Übergang erlaubt (409) → Version (409) → bedingtes Schreiben → Nachricht einreihen. Bei 409 `workshop_not_partner` wird nichts gespeichert, auch keine Kontaktdaten.
+Reihenfolge der Prüfungen (SOLL): Schalter → Herkunft → Anmeldung und Rolle → Auffinden mit Mandantenbindung (404) → Idempotenzschlüssel → Wiederholung erkannt? (gleicher Schlüssel: gespeichertes Ergebnis oder 409 `idempotency_conflict`) → Feldprüfung (422) → Frist: Ist der Termin `verfallen` oder verfällt er durch diese Prüfung, 409 `appointment_expired` → Version (409 `appointment_version_conflict`) → Übergang für diese Rolle erlaubt (409 `appointment_transition_forbidden`) → Belegungseintrag bei Bestätigung (409 `appointment_overlap`) → bedingtes Schreiben von Zustand, Verlauf und Nachrichtenabsicht in einem Schritt → Nachricht einreihen. Die Version steht vor der Übergangsprüfung, damit ein veralteter Aufruf als veraltet gemeldet wird und nicht als verboten; die Frist steht vor der Version, weil der Verfall selbst die Version erhöht und der Aufrufer sonst nie erführe, dass die Frist der Grund war. Bei 409 `workshop_not_partner` wird nichts gespeichert, auch keine Kontaktdaten.
 
 ## 10. Testfälle
 
@@ -482,7 +491,7 @@ Alle Tests laufen gegen einen Speicher im Arbeitsspeicher mit übergebener Uhr (
 29. `P` bittet um Verlegung (U7) → `verschoben`, `vorschlag_von` = `werkstatt`; N5 an den Kunden.
 30. Kunde sagt ab (U8) → `abgesagt`; N6 an `P` mit dem abgesagten Zeitpunkt.
 31. `P` sagt ab mit Grund (U8) → `abgesagt`; N6 an den Kunden. Ohne Grund → 422.
-32. Kunde verlegt oder sagt ab nach der Grenze F5 → Verhalten nach E-04 (Test wird mit der Entscheidung ergänzt; bis dahin als übersprungen mit Verweis auf E-04 geführt, nicht als bestanden).
+32. Kunde verlegt oder sagt ab nach der Grenze F5: mit `gesperrt_nach_grenze` → 409 `appointment_change_closed`, Zustand unverändert; mit `immer_erlaubt` → wie Nr. 28 und 30; Verhalten nicht gesetzt → 503 `appointments_not_configured`. Werkstatt und Inhaber sind von der Grenze nicht betroffen. (Welcher Wert im Betrieb gilt, entscheidet E-04; der Test prüft beide.)
 33. Verboten aus `bestaetigt`: `confirm`, `decline`, `accept` durch jede Rolle; `complete` durch Kunde oder Inhaber → 409.
 34. Uhr weit hinter `termin_am`, `GET` → Zustand bleibt `bestaetigt` (kein automatisches `erledigt`, kein Verfall).
 
@@ -494,21 +503,21 @@ Alle Tests laufen gegen einen Speicher im Arbeitsspeicher mit übergebener Uhr (
 38. Vorschlag von `P`, Kunde schlägt neu vor (U11) → `verschoben`, `vorschlag_von` = `kunde`, Runde 2, neues `antwort_bis`; N5 an `P`.
 39. Vorschlag von `P`, `P` schlägt erneut vor → 409.
 40. Runde = F11, Gegenseite schlägt neu vor → 409 `appointment_transition_forbidden`; `accept` und `cancel` bleiben möglich.
-41. Kunde sagt ab (U12) → `abgesagt`; N6 an `P`. `P` sagt ab → N6 an den Kunden.
+41. Kunde sagt ab (U12) → `abgesagt`; N6 an `P`. `P` sagt ab mit Grund → N6 an den Kunden; `P` oder Inhaber ohne Grund → 422 `reason_required`.
 42. Uhr hinter `antwort_bis` → `verfallen` (U13); N7 an Kunde und `P`, je genau einmal.
 43. Uhr hinter `vorschlag_am`, Gegenseite nimmt an → 409 `appointment_expired`.
 44. Verboten aus `verschoben`: `confirm`, `decline`, `complete` → 409.
 
 **Endzustände**
 
-45. Für jeden der vier Endzustände: jeder der sechs schreibenden Aufrufe auf einen bestehenden Termin (`confirm`, `decline`, `propose`, `accept`, `cancel`, `complete`) durch jede Rolle → 409 `appointment_transition_forbidden`; Zustand, Version und Verlauf unverändert; keine Nachricht.
-46. Neuer Wunsch nach `abgelehnt` mit `vorgaenger_id` → 201, eigener Datensatz; der alte bleibt unverändert.
+45. Für `abgelehnt`, `abgesagt` und `erledigt`: jeder der sechs schreibenden Aufrufe auf einen bestehenden Termin (`confirm`, `decline`, `propose`, `accept`, `cancel`, `complete`) durch jede Rolle mit aktueller Version → 409 `appointment_transition_forbidden`. Für `verfallen`: dieselben Aufrufe → 409 `appointment_expired`. In allen Fällen Zustand, Version und Verlauf unverändert; keine Nachricht.
+46. Neuer Wunsch nach `abgelehnt` mit `vorgaenger_id` → 201, eigener Datensatz; der alte bleibt unverändert. Mit der Kennung eines fremden Termins, eines Termins bei `P2`, eines Termins mit anderer E-Mail-Adresse oder eines noch offenen Termins als `vorgaenger_id` → 404 `appointment_not_found`; nichts gespeichert.
 
 **Idempotenz und Gleichzeitigkeit der Übergänge**
 
 47. `confirm` zweimal mit demselben Schlüssel → zweimal 200 mit derselben Antwort; Version nur einmal erhöht; eine N3.
-48. `confirm` ein zweites Mal mit neuem Schlüssel → 409 `appointment_transition_forbidden`; keine zweite N3.
-49. `confirm` mit Version 1, während der Termin Version 2 hat → 409 `appointment_version_conflict` mit `zustand` und `version`.
+48. `confirm` ein zweites Mal mit neuem Schlüssel und aktueller Version → 409 `appointment_transition_forbidden`; keine zweite N3.
+49. `confirm` mit Version 1, während der Termin Version 2 hat → 409 `appointment_version_conflict` mit `zustand` und `version` (nicht `appointment_transition_forbidden`, obwohl der Termin nicht mehr `wunsch` ist).
 50. Übergang ohne `version` → 422 `version_required`.
 51. Gleichzeitig `confirm` durch `P` und `cancel` durch den Kunden, beide mit Version 1 → genau einer 200, der andere 409; Endstand ist der des Gewinners; nur dessen Nachricht entsteht.
 52. Gleichzeitig Fristablauf und `confirm` → Endstand entweder `bestaetigt` mit N3 oder `verfallen` mit N7, nie beides.
@@ -520,7 +529,7 @@ Alle Tests laufen gegen einen Speicher im Arbeitsspeicher mit übergebener Uhr (
 55. Kunde mit Nachweis von Termin A ruft Termin B auf → 404. Ohne Nachweis und ohne Sitzung → 404.
 56. Falscher Nachweis und unbekannte `id` liefern dieselbe Antwort (Status und Rumpf gleich).
 57. `GET /api/workshops/{P}/appointments` als `P` → nur Termine von `P`; als `P2` → 404; als Kunde → 404; ohne Sitzung → 401.
-58. `GET /api/admin/appointments` ohne Sitzung → 401 `authentication_required`; als Kunde oder Partner → 403 `admin_required`; als Inhaber → 200. Jeder schreibende Eingriff des Inhabers steht danach mit Grund im Verlauf des Termins.
+58. `GET /api/admin/appointments` ohne Sitzung → 401 `authentication_required`; als Kunde oder Partner → 403 `admin_required`; als Inhaber mit `grund` → 200 und genau ein Eintrag im Zugriffsprotokoll mit Nutzerkennung, Filter, Grund und Zeit; ebenso beim Einzelabruf mit der Terminkennung als Ziel; ohne `grund` → 422 `reason_required` und kein Eintrag. Jeder schreibende Eingriff des Inhabers steht danach mit Grund im Verlauf des Termins.
 59. Sicht der Werkstatt enthält keine Felder, die nach 5.2 nicht für W sichtbar sind (Test gegen eine feste Feldliste; bei E-09 anzupassen).
 60. Sicht des Kunden enthält keinen `zugriff_kunde`, keine `nutzlast_pruefsumme` und keine internen Verlaufseinträge.
 61. Ein Feld `rolle`, `werkstatt_id` oder `abgesagt_von` im Rumpf der Anfrage ändert den Auslöser nicht.
@@ -547,6 +556,17 @@ Alle Tests laufen gegen einen Speicher im Arbeitsspeicher mit übergebener Uhr (
 73. Kein Test erzeugt eine Nachricht an einen Betrieb ohne freigeschaltete Partnerschaft (Zählung über alle Tests).
 74. Schalter für den Versand an Werkstätten aus → U1 bleibt 201; keine N2; N1 sagt nicht, die Werkstatt sei informiert; `benachrichtigung` weist das aus.
 75. Jede Vorlage N1 bis N7: enthält Vorgangsnummer und Zustand; N3 enthält Datum, Uhrzeit, Zeitzone, Anschrift; keine enthält einen Hinweis auf Angebote, Gutscheine, Bewertungen oder andere Betriebe (Prüfung gegen eine Sperrwortliste).
+
+**Nachträge aus der Prüfung des Entwurfs (15.11.2026)**
+
+76. U13 mit zwei Empfängern: genau zwei Einträge in der Warteschlange mit verschiedenen Schlüsseln (`…:kunde`, `…:werkstatt`), je einer je Adresse. Ebenso N3 nach U10 und N6 nach Absage durch den Inhaber.
+77. Abbruch zwischen Schreiben und Einreihen (nachgestellt: Einreihen wirft nach gespeichertem Übergang): Zustand ist gespeichert, `benachrichtigungen[]` trägt `ausstehend`. Danach ein `GET`, alternativ die Wiederholung mit demselben Schlüssel, alternativ der Hintergrundlauf → die Nachricht wird genau einmal eingereiht, auch wenn alle drei nacheinander laufen. Für U1 gilt das für N1 und N2.
+78. Zwei gleichzeitige `confirm` für **verschiedene** Wünsche bei `P` mit demselben Beginn T, beide ohne `ueberschneidung_bestaetigt` → genau einer 200, der andere 409 `appointment_overlap`; genau ein Belegungseintrag. Danach wird der erste Termin abgesagt → `confirm` des zweiten ohne das Feld gelingt.
+79. Rollenname: Mit dem konfigurierten Namen der Werkstattrolle gelingt Nr. 15; ein Konto mit dem jeweils anderen Namen (`werkstatt` beziehungsweise `partner`) erhält 404 wie jeder Fremde.
+80. `GET /api/workshops/appointments/mine` ohne Sitzung → 401; als Kunde A → nur Termine mit dessen `kunde_user_id`, keiner von Kunde B und keiner, den A ohne Anmeldung mit derselben E-Mail-Adresse angelegt hat; eine Kennung `mine` wird nicht als Terminkennung behandelt.
+81. Derselbe Schlüssel für `propose` mit anderem Zeitpunkt, für `cancel` mit anderem Grund und für `decline` statt `confirm` → jeweils 409 `idempotency_conflict`; Zustand und Version unverändert.
+82. Gleichzeitig `GET` und Hintergrundlauf nach Fristablauf → genau ein Eintrag U6 im `verlauf` mit dem Schlüssel `system:<id>:U6:<version>`; Version genau einmal erhöht; N7 je Empfänger genau einmal.
+83. Gegenvorschlag (U11) mit neuem Schlüssel und aktueller Version → 200, obwohl Ausgangs- und Zielzustand `verschoben` sind (Gegenprobe zu Nr. 48).
 
 ## 11. Nicht geprüft
 
