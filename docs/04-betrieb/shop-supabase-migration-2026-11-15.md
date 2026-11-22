@@ -246,8 +246,15 @@ Gegenprobe nicht wiederholt. Für die Katalog-Erstbefüllung: 10 Fehler eingebau
 
 ### 6.3 Gates
 
-Lokal gelaufen am Stand dieses Zweigs; ein CI-Lauf liegt nicht vor (Actions startet in diesem
-Repository derzeit keine Jobs, siehe Skill `nexify-zweig-und-pr`, „Bekannte Lage“).
+Lokal gelaufen am Stand dieses Zweigs. **Berichtigung 22.11.2026:** Die frühere Aussage, Actions
+starte hier keine Jobs, war ungeprüft übernommen und trifft nicht (mehr) zu. Am Stand dfc3417 liefen
+die Jobs; die Protokolle der drei roten Prüfungen wurden gelesen:
+
+| Prüfung | Was im Protokoll steht | Einordnung |
+|---|---|---|
+| `repository` (`make test`) | 912 Tests, 56 Fehlschläge, 45 Fehler | lokal mit derselben Umgebung nachgestellt: gleiche Zahlen; namentlich kein Fehlschlag, den `main` 9c9c806 nicht auch hat (`main`: 57 und 47). Vorbestehend, nicht aus diesem Zweig |
+| `next-web` (`test:auth`) | 137 von 138; Test 4 von `chat-guidance.test.mjs` bricht ab, weil `apps/site/.generated/public-site.json` auf dem Runner fehlt | der Job erzeugt die Datei nicht (kein Bau- oder Erzeugungsschritt). Lokal mit erzeugter Datei 138 von 138. `apps/web` ist von diesem Zweig nicht berührt |
+| `review` (`tools/automation/ai_review.py`) | `blocked_not_reviewed`, Grund `diff_or_metadata_limit_exceeded` | liegt an der Größe dieses PR (enthält die Commits von PR 150). Keine Durchsicht erfolgt. Abhilfe: PR 150 zuerst mergen, dann schrumpft der Unterschied; ob er dann unter die Grenze fällt, ist nicht belegt |
 
 | Gate | Ergebnis |
 |---|---|
