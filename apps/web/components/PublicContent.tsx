@@ -37,6 +37,11 @@ function uniquePages(candidates:(PublicPage|undefined)[]):PublicPage[]{
 }
 const anchorId=(pageId:string,sectionId:string,index:number)=>"content-"+pageId.replace(/[^a-z0-9_-]/gi,"-")+"-"+sectionId.replace(/[^a-z0-9_-]/gi,"-")+"-"+index;
 const paragraphs=(text:string)=>text.split(/\n\s*\n/).map(part=>part.trim()).filter(Boolean);
+// Inhaberbefund 15.11.2026 (/wissen/projekt-vorbereiten): Eine nummerierte Aufzaehlung stand als nackte Textzeilen
+// untereinander. Ist ein Abschnitt durchgehend nummeriert, bekommt er den Ablauf-Baustein der Startseite
+// (.hc-process mit ol/li, Ziffer aus dem CSS-Zaehler) statt Fliesstext. Kein neuer Baustein, keine neuen Werte.
+const SCHRITT=/^\s*\d+[.)]\s+/;
+const schritte=(parts:string[])=>parts.length>=3&&parts.every(part=>SCHRITT.test(part))?parts.map(part=>part.replace(SCHRITT,"")):null;
 const startIntent=(intent:unknown)=>window.dispatchEvent(new CustomEvent("nexify-action",{detail:intent}));
 
 export default function PublicContent({page,pages,children,sectionContent={},explanation}:{page:PublicPage;pages:PublicPage[];children?:ReactNode;sectionContent?:Record<string,ReactNode>;explanation?:ReactNode}){
@@ -66,7 +71,10 @@ export default function PublicContent({page,pages,children,sectionContent={},exp
  };
  const heroAction=(action:PublicPage["actions"][number],index:number)=>{
   const primary=index===0;const variant=primary?"primary":"secondary";const className=primary?"identity-primary-link":"identity-secondary-link";
-  const inner=primary?<><span>{action.label[locale]}</span><span aria-hidden="true" className="identity-primary-arrow">→</span></>:action.label[locale];
+  // Befund 15.11.2026: Der zweite Schalter im Kopfbereich war reiner Text - gleiche Farbe wie der Fliesstext
+  // (Token --color-text-sekundaer), keine Unterstreichung, kein Rahmen, kein Grund. Er bekommt denselben Pfeil wie jeder andere Verweis
+  // auf diesen Seiten (HcArrow), damit erkennbar ist, dass er zu etwas fuehrt.
+  const inner=primary?<><span>{action.label[locale]}</span><span aria-hidden="true" className="identity-primary-arrow">→</span></>:<>{action.label[locale]}<HcArrow/></>;
   if(action.type==="chat"&&action.chat_intent)return <ActionButton key={index} variant={variant} className={className} onClick={()=>startIntent(action.chat_intent)} data-testid={"page-action-"+index}>{inner}</ActionButton>;
   const target=get(action.target_id||"");
   return target?<ActionLink key={index} variant={variant} className={className} href={target.path} data-testid={"page-action-"+index}>{inner}</ActionLink>:<span key={index} className="hc-caption">{action.label[locale]} · {t.unavailable}</span>;
@@ -87,9 +95,24 @@ export default function PublicContent({page,pages,children,sectionContent={},exp
   {supplementFirst&&supplement}
   {sections.length>0&&<div className="pc-sections">{sections.map((section,index)=>{
    const custom=sectionContent[section.id];
-   return <section className="hc-intro hc-container pc-section" id={anchorId(page.id,section.id,index)} tabIndex={-1} key={section.id} aria-labelledby={anchorId(page.id,section.id,index)+"-title"}>
-    <div><span className="hc-kicker">{String(index+1).padStart(2,"0")} / {total}</span><h2 id={anchorId(page.id,section.id,index)+"-title"}>{section.heading[locale]}</h2></div>
-    <div className="pc-section-body">{paragraphs(section.body[locale]).map((part,i)=><p key={i}>{part}</p>)}{custom}</div>
+   const id=anchorId(page.id,section.id,index);
+   const parts=paragraphs(section.body[locale]);
+   const folge=schritte(parts);
+   const kopf=<div><span className="hc-kicker">{String(index+1).padStart(2,"0")} / {total}</span><h2 id={id+"-title"}>{section.heading[locale]}</h2></div>;
+   // Nummerierter Ablauf: Ablauf-Baustein der Startseite, ueber die ganze Breite. Damit steht neben der Aufzaehlung
+   // auch keine leere Spalte mehr (Inhaberbefund 15.11.2026, Punkt 2).
+   if(folge)return <section className="hc-section hc-process hc-container pc-section pc-section-steps" id={id} tabIndex={-1} key={section.id} aria-labelledby={id+"-title"}>
+    <header className="hc-section-heading">{kopf}</header>
+    <ol>{folge.map((part,i)=><li key={i}><h3>{part}</h3></li>)}</ol>
+    {custom}
+   </section>;
+   // Zwei oder mehr Absaetze: der erste steht als Vorspann unter der Ueberschrift, der Rest daneben. So tragen beide
+   // Spalten Inhalt, statt dass die linke ueber die ganze Hoehe leer bleibt (Inhaberbefund 15.11.2026, Punkt 3).
+   const vorspann=parts.length>1?parts[0]:null;
+   const rest=vorspann?parts.slice(1):parts;
+   return <section className="hc-intro hc-container pc-section" id={id} tabIndex={-1} key={section.id} aria-labelledby={id+"-title"}>
+    <div className="pc-section-head">{kopf}{vorspann&&<p className="pc-section-lead">{vorspann}</p>}</div>
+    <div className="pc-section-body">{rest.map((part,i)=><p key={i}>{part}</p>)}{custom}</div>
    </section>;
   })}</div>}
   {Boolean(page.contact_channels?.length)&&<section className="hc-section hc-container hc-budget" aria-labelledby={"contact-title-"+page.id}>

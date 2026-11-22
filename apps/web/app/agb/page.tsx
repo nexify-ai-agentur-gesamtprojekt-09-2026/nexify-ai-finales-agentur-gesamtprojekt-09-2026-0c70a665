@@ -61,11 +61,11 @@ export default function AgbPage() {
             </section>
           ))}
         </article>
-        <footer className="pc-hero-actions">
+        <div className="pc-hero-actions">
           <Link className="hc-text-link is-primary" href="/impressum">Impressum<HcArrow/></Link>
           <Link className="hc-text-link" href="/datenschutz">Datenschutz<HcArrow/></Link>
           <Link className="hc-text-link" href="/kontakt">Kontakt aufnehmen<HcArrow/></Link>
-        </footer>
+        </div>
       </section>
     </div>
   );

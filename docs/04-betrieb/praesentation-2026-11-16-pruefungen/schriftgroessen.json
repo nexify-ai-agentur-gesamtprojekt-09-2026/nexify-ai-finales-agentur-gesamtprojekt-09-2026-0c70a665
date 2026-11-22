@@ -1,0 +1,231 @@
+{
+ "390": [
+  {
+   "px": 0,
+   "n": 4,
+   "tags": [
+    "label"
+   ]
+  },
+  {
+   "px": 12,
+   "n": 116,
+   "tags": [
+    "span",
+    "a"
+   ]
+  },
+  {
+   "px": 13,
+   "n": 388,
+   "tags": [
+    "h2",
+    "span",
+    "summary",
+    "small",
+    "p"
+   ]
+  },
+  {
+   "px": 14,
+   "n": 110,
+   "tags": [
+    "a",
+    "label",
+    "option",
+    "button",
+    "span"
+   ]
+  },
+  {
+   "px": 15,
+   "n": 909,
+   "tags": [
+    "a",
+    "summary",
+    "span",
+    "button",
+    "label"
+   ]
+  },
+  {
+   "px": 16,
+   "n": 204,
+   "tags": [
+    "p",
+    "small",
+    "span",
+    "li",
+    "button"
+   ]
+  },
+  {
+   "px": 18,
+   "n": 51,
+   "tags": [
+    "p",
+    "h3",
+    "span"
+   ]
+  },
+  {
+   "px": 18.4,
+   "n": 36,
+   "tags": [
+    "span"
+   ]
+  },
+  {
+   "px": 24,
+   "n": 133,
+   "tags": [
+    "h2",
+    "h3",
+    "strong",
+    "a"
+   ]
+  },
+  {
+   "px": 32,
+   "n": 9,
+   "tags": [
+    "h2"
+   ]
+  },
+  {
+   "px": 36,
+   "n": 20,
+   "tags": [
+    "span",
+    "h2",
+    "h1"
+   ]
+  }
+ ],
+ "1280": [
+  {
+   "px": 0,
+   "n": 4,
+   "tags": [
+    "label"
+   ]
+  },
+  {
+   "px": 12,
+   "n": 125,
+   "tags": [
+    "span",
+    "a"
+   ]
+  },
+  {
+   "px": 13,
+   "n": 388,
+   "tags": [
+    "h2",
+    "span",
+    "summary",
+    "small",
+    "p"
+   ]
+  },
+  {
+   "px": 14,
+   "n": 110,
+   "tags": [
+    "a",
+    "label",
+    "option",
+    "button",
+    "span"
+   ]
+  },
+  {
+   "px": 15,
+   "n": 892,
+   "tags": [
+    "a",
+    "summary",
+    "span",
+    "button",
+    "option"
+   ]
+  },
+  {
+   "px": 16,
+   "n": 204,
+   "tags": [
+    "p",
+    "small",
+    "span",
+    "li",
+    "button"
+   ]
+  },
+  {
+   "px": 18,
+   "n": 77,
+   "tags": [
+    "p",
+    "label",
+    "span",
+    "h3",
+    "button"
+   ]
+  },
+  {
+   "px": 18.4,
+   "n": 18,
+   "tags": [
+    "span"
+   ]
+  },
+  {
+   "px": 23.9,
+   "n": 18,
+   "tags": [
+    "span"
+   ]
+  },
+  {
+   "px": 24,
+   "n": 91,
+   "tags": [
+    "h3",
+    "strong",
+    "a",
+    "h2"
+   ]
+  },
+  {
+   "px": 30.9,
+   "n": 42,
+   "tags": [
+    "h2",
+    "strong"
+   ]
+  },
+  {
+   "px": 32,
+   "n": 9,
+   "tags": [
+    "h2"
+   ]
+  },
+  {
+   "px": 38.2,
+   "n": 11,
+   "tags": [
+    "span",
+    "h1"
+   ]
+  },
+  {
+   "px": 41.8,
+   "n": 9,
+   "tags": [
+    "h2"
+   ]
+  }
+ ]
+}

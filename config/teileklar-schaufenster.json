@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "zweck": "Woher das Schaufenster von /teileklar seine Artikel nimmt. Ein Wort umstellen genügt.",
+  "quelle": "eigen",
+  "werte": {
+    "eigen": "Artikel kommen aus dem eigenen Shop-Dienst (/api/shop). Ist er leer oder nicht erreichbar, sagt die Seite das.",
+    "extern": "Das Sortiment liegt im laufenden Shop unter der eigenen Adresse teileklar.shop. /teileklar verweist sichtbar dorthin, statt ein leeres Schaufenster zu zeigen."
+  },
+  "externer_shop": {
+    "adresse": "https://teileklar.shop/",
+    "name": "teileklar.shop",
+    "adressen_je_sprache": {
+      "de": "https://teileklar.shop/de/",
+      "nl": "https://teileklar.shop/nl/"
+    },
+    "beleg": "15.11.2026, 00:4x UTC: HTTP 200, Titel „Autoteile online kaufen – passgenau für dein Fahrzeug | TEILEKLAR“, Preisangaben und Warenkorb im ausgelieferten HTML. Die Adresse steht als requested_production_domain in config/site-map.json.",
+    "beleg_sprachen": "22.11.2026 gemessen (HTTP-Status, ohne Anmeldung): / 200 (html lang=de), /de/ 200, /nl/ 200, /fr/ 403, /en/ 404. Darum nur de und nl als eigene Marktadressen; fr und en nehmen „adresse“, weil es für sie keine erreichbare Marktseite gibt. Befund von Codex am PR 213, nachgeprüft.",
+    "grenze": "Die Marktzuordnung des Shops ist seine eigene. Wir behaupten mit dieser Zuordnung nichts über Preise, Steuer oder Rechtstexte des jeweiligen Marktes."
+  },
+  "entscheidung_offen": "Ob umgestellt wird, entscheidet der Inhaber. Steht das eigene Sortiment, bleibt „eigen“."
+}

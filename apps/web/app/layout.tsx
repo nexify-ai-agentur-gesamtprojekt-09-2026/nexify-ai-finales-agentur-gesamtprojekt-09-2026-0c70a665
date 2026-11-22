@@ -39,7 +39,7 @@ export default async function RootLayout({children}:{children:ReactNode}) {
   const jar=await cookies(),initialChat=initialChatFromCookie(jar.get('nx-chat-open')?.value);
   // Die Projektfunktionen hinter /api (Sitzung, Angebot, Termin) gibt es nur am lokalen Entwicklungs-Gateway (next.config.ts, rewrites).
   const gateway=process.env.NODE_ENV==='development';
-  const content = <NextRouterBridge locale={locale}><PublicExperienceProvider data={publicExperienceData}><Workspace initialLocale={locale} pages={publicPages()} gateway={gateway} initialChat={initialChat} initialChatWidth={chatWidthFromCookie(jar.get('nx-chat-width')?.value)}>{children}</Workspace></PublicExperienceProvider></NextRouterBridge>;
+  const content = <NextRouterBridge locale={locale}><PublicExperienceProvider data={publicExperienceData}><Workspace initialLocale={locale} pages={publicPages()} gateway={gateway} initialChat={initialChat} initialChatWidth={chatWidthFromCookie(jar.get('nx-chat-width')?.value)} documentRoutes>{children}</Workspace></PublicExperienceProvider></NextRouterBridge>;
   // Some browser extensions add attributes to html/body before React runs.
   // Tolerance is deliberately limited to these two roots; page components still hydrate strictly.
   return <html lang={locale} data-theme={theme} style={{colorScheme:theme}} suppressHydrationWarning><body suppressHydrationWarning><PublicInstallation enabled={installation.enabled}/>{content}</body></html>;

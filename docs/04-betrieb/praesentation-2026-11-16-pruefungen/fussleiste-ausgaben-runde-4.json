@@ -1,0 +1,63 @@
+[
+ {
+  "ausgabe": "Next (apps/web)",
+  "verweiseInsgesamt": 58,
+  "dokumentverweise": [
+   "/agb",
+   "/avv",
+   "/widerruf"
+  ],
+  "geprueft": [
+   {
+    "href": "/agb",
+    "h1": "Allgemeine Geschäftsbedingungen (B2B)"
+   },
+   {
+    "href": "/avv",
+    "h1": "Auftragsverarbeitungsvertrag (AVV / DPA)"
+   },
+   {
+    "href": "/widerruf",
+    "h1": "Widerrufsrecht"
+   }
+  ],
+  "rechtlicheVerweise": [
+   "/impressum",
+   "/datenschutz",
+   "/ki-hinweise",
+   "/barrierefreiheit",
+   "/cookies",
+   "/impressum",
+   "/datenschutz",
+   "/ki-hinweise",
+   "/barrierefreiheit",
+   "/cookies",
+   "/impressum",
+   "/datenschutz",
+   "/ki-hinweise",
+   "/datenschutz"
+  ]
+ },
+ {
+  "ausgabe": "tragbare Ausgabe (apps/site, Vite)",
+  "verweiseInsgesamt": 55,
+  "dokumentverweise": [],
+  "geprueft": [],
+  "rechtlicheVerweise": [
+   "/impressum",
+   "/datenschutz",
+   "/ki-hinweise",
+   "/barrierefreiheit",
+   "/cookies",
+   "/impressum",
+   "/datenschutz",
+   "/ki-hinweise",
+   "/barrierefreiheit",
+   "/cookies",
+   "/impressum",
+   "/datenschutz",
+   "/ki-hinweise",
+   "/datenschutz"
+  ]
+ }
+]

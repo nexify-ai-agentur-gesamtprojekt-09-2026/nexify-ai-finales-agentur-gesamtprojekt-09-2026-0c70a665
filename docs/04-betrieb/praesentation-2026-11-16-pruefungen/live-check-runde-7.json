@@ -1,0 +1,82 @@
+{
+ "base": "http://localhost:3311",
+ "zeit": "2026-11-22T18:49:54.142Z",
+ "pruefungen": 350,
+ "befunde": 7,
+ "fehlgeschlagen": [
+  {
+   "id": "Shop-Dienst /api/shop/status",
+   "ok": false,
+   "vorgabe": "Echte Kundenwege: Sortiment lädt",
+   "detail": {
+    "status": 404,
+    "grund": null
+   }
+  },
+  {
+   "id": "Shop-Dienst /api/shop/products",
+   "ok": false,
+   "vorgabe": "Echte Kundenwege: Sortiment lädt",
+   "detail": {
+    "status": 404,
+    "grund": null
+   }
+  },
+  {
+   "id": "PWA Manifest erreichbar und vollständig",
+   "ok": false,
+   "vorgabe": "Mobil und PWA: installierbar, offline-fähig",
+   "detail": {
+    "status": 404,
+    "type": "",
+    "fehlend": [
+     "id",
+     "name",
+     "short_name",
+     "start_url",
+     "scope",
+     "display",
+     "lang",
+     "dir",
+     "background_color",
+     "theme_color"
+    ],
+    "icons": []
+   }
+  },
+  {
+   "id": "PWA Icons und Kurzwege erreichbar",
+   "ok": false,
+   "vorgabe": "Mobil und PWA: installierbar, offline-fähig",
+   "detail": {
+    "tot": []
+   }
+  },
+  {
+   "id": "PWA Service Worker erreichbar, als Skript, ohne langes Caching",
+   "ok": false,
+   "vorgabe": "Mobil und PWA: installierbar, offline-fähig",
+   "detail": {
+    "status": 404,
+    "type": "",
+    "cache": "s-maxage=31536000"
+   }
+  },
+  {
+   "id": "PWA Service Worker übernimmt keine offene Sitzung",
+   "ok": false,
+   "vorgabe": "Mobil und PWA: installierbar, offline-fähig",
+   "detail": {
+    "status": 404
+   }
+  },
+  {
+   "id": "PWA Manifest im Kopf verlinkt",
+   "ok": false,
+   "vorgabe": "Mobil und PWA: installierbar, offline-fähig",
+   "detail": {
+    "status": 200
+   }
+  }
+ ]
+}

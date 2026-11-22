@@ -1,0 +1,75 @@
+node tools/ds-audit-cli.js
+Pruefumfang: HTML-Referenzprototypen; kein React-, Live- oder WCAG-Vollnachweis.
+
+Ergebnis: 0 Fehler, 0 Warnungen (dokumentierte Ausnahmen aus design-rules.json abgezogen)
+bash tools/gesundheit-selbsttest.sh
+TAP version 13
+# Subtest: echte lokale HTTP-Proben, Redirectstatus, Ausfall und Statusdatei
+ok 1 - echte lokale HTTP-Proben, Redirectstatus, Ausfall und Statusdatei
+  ---
+  duration_ms: 39.685407
+  type: 'test'
+  ...
+# Subtest: Check-Untergrenze sperrt auch bei gesunden Diensten
+ok 2 - Check-Untergrenze sperrt auch bei gesunden Diensten
+  ---
+  duration_ms: 1.814978
+  type: 'test'
+  ...
+# Subtest: Hostproben unterscheiden aktive Units und gesunde Container
+ok 3 - Hostproben unterscheiden aktive Units und gesunde Container
+  ---
+  duration_ms: 0.645926
+  type: 'test'
+  ...
+# Subtest: Transportfehler werden begrenzt wiederholt
+ok 4 - Transportfehler werden begrenzt wiederholt
+  ---
+  duration_ms: 0.435208
+  type: 'test'
+  ...
+# Subtest: Statuspersistenzfehler sind sichtbar
+ok 5 - Statuspersistenzfehler sind sichtbar
+  ---
+  duration_ms: 0.16125
+  type: 'test'
+  ...
+# Subtest: Spezialnamen und ungueltige Erwartungswerte koennen Ausfaelle nicht verstecken
+ok 6 - Spezialnamen und ungueltige Erwartungswerte koennen Ausfaelle nicht verstecken
+  ---
+  duration_ms: 0.311078
+  type: 'test'
+  ...
+# Subtest: Ressourcengrenzen sind definiert, konfigurierbar und fail-closed
+ok 7 - Ressourcengrenzen sind definiert, konfigurierbar und fail-closed
+  ---
+  duration_ms: 0.653692
+  type: 'test'
+  ...
+# Subtest: DNS-Diagnose prueft exakten DNS-only-Eintrag und hat keine Schreibschnittstelle
+ok 8 - DNS-Diagnose prueft exakten DNS-only-Eintrag und hat keine Schreibschnittstelle
+  ---
+  duration_ms: 0.767122
+  type: 'test'
+  ...
+# Subtest: Fehlender DNS-Zugriff oder fremde Zone ist unbekannt statt gruen
+ok 9 - Fehlender DNS-Zugriff oder fremde Zone ist unbekannt statt gruen
+  ---
+  duration_ms: 0.40359
+  type: 'test'
+  ...
+# Subtest: Gemischte DNS-Aufloesung und Providerfehler koennen nicht gruen sein
+ok 10 - Gemischte DNS-Aufloesung und Providerfehler koennen nicht gruen sein
+  ---
+  duration_ms: 0.620078
+  type: 'test'
+  ...
+1..10
+# tests 10
+# suites 0
+# pass 10
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 178.367603
