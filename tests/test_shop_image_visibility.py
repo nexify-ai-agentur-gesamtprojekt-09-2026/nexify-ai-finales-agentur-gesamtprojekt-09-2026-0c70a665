@@ -110,15 +110,28 @@ class FilterMatchesValidator(unittest.TestCase):
 
 
 class FilterUsesIndex(unittest.TestCase):
-    """Befund cubic (PR #219): der Sichtbarkeitsfilter soll einen Index nutzen können, statt alle Artikel zu prüfen."""
+    """Befund cubic (PR #219): fester Präfix im Muster; ein eigener Index braucht zuerst die Vercel-Allowlist und den Namespace-Operator."""
     def test_literal_prefix_and_index(self):
         import re
         src = API.read_text()
         pattern = re.search(r'SUPPLIER_IMAGE_PATTERN = \(r"([^"]+)"', src).group(1)
         self.assertTrue(pattern.startswith(r"^https://cdnbigbuy\.com/"), pattern[:40])  # fester Anfang vor jedem Vorgriff
         self.assertIn('return {"images": {"$elemMatch": {"$regex": SUPPLIER_IMAGE_PATTERN}}}', src)  # ohne i-Flag: Präfix im Index nutzbar
+
+    def test_db_indexes_match_vercel_allowlist(self):
+        """Befund cubic (PR #219): jeder in ensure_indexes() angelegte Index muss in vercel_app.INDEXES stehen,
+        sonst lehnt check_metadata() die Datenbank ab (required_index_unverified → 503)."""
+        import ast, re
         db_src = (ROOT / "apps/shop-api/shop/db.py").read_text()
-        self.assertIn('create_index([("active", 1), ("images", 1)])', db_src)
+        created = set()
+        for coll, arg in re.findall(r'd\.(\w+)\.create_index\((\[[^\]]*\]|"[^"]+")', db_src):
+            value = ast.literal_eval(arg)
+            created.add((coll, (value,) if isinstance(value, str) else tuple(k for k, _ in value)))
+        tree = ast.parse((ROOT / "apps/shop-api/vercel_app.py").read_text())
+        node = next(n for n in tree.body if isinstance(n, ast.Assign) and getattr(n.targets[0], "id", "") == "INDEXES")
+        allowed = {(coll, keys) for coll, specs in ast.literal_eval(node.value).items() for keys, _, _ in specs}
+        self.assertTrue(created)
+        self.assertEqual(created - allowed, set())
 
 
 if __name__ == "__main__":

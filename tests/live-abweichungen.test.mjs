@@ -71,9 +71,12 @@ test('ROT · Schutz vor Einbettung und Browser-Rechte per Header (frame-ancestor
 /* ---------- Grün: Gegenproben (müssen bestehen, sonst misst der Test falsch) ---------- */
 
 test('GRÜN · jede Adresse der Sitemap antwortet 200',()=>{
- const urls=[...hole('/sitemap.xml').body.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m=>{const u=new URL(m[1]);return u.pathname+u.search;}); // Pfad statt Präfix: Sitemap darf den kanonischen www-Host nennen
- assert.ok(urls.length>0,'Sitemap ohne Adressen');
- const schlecht=urls.filter(u=>hole(u).status!==200).map(u=>`${u} → ${hole(u).status}`);
+ const urls=[...hole('/sitemap.xml').body.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m=>new URL(m[1]));
+ const eigen=new URL(BASIS).hostname.replace(/^www\./,'');
+ assert.deepEqual(urls.filter(u=>u.hostname.replace(/^www\./,'')!==eigen).map(u=>u.href),[],'Sitemap nennt fremde Hosts'); // www-Alias erlaubt (Befund cubic)
+ const pfade=urls.map(u=>u.pathname+u.search);
+ assert.ok(pfade.length>0,'Sitemap ohne Adressen');
+ const schlecht=pfade.filter(u=>hole(u).status!==200).map(u=>`${u} → ${hole(u).status}`);
  assert.deepEqual(schlecht,[]);
 });
 
