@@ -75,7 +75,7 @@ class FakeCursor:
 class FakeCollection:
     def __init__(self): self.docs = {}
     def find(self, *a, **k): return FakeCursor([{"_id": i} for i in self.docs])
-    async def insert_many(self, docs):
+    async def insert_many(self, docs, ordered=True):
         for d in docs: self.docs[d["_id"]] = d
 
 
@@ -117,3 +117,38 @@ class Import(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class ContactExportGuard(unittest.TestCase):
+    """Befund Codex Review (PR #219): mit --mit-kontakt darf nichts innerhalb des Repositorys geschrieben werden."""
+    def test_every_path_inside_repository_is_rejected(self):
+        import tempfile
+        src = Path(tempfile.mkdtemp()) / "in.csv"
+        src.write_text("Werkstatt-ID,Name,PLZ,E-Mail\nosm-node-1,A,80331,a@b.de\n", encoding="utf-8")
+        for target in [ROOT / "prototypen/assets/contacts.json", ROOT / "prototypen/assets/workshops.json", ROOT / "x.json"]:
+            before = target.read_bytes() if target.exists() else None
+            self.assertEqual(sheet.main(["tool", str(src), str(target), "--mit-kontakt"]), 2, target)
+            self.assertEqual(target.read_bytes() if target.exists() else None, before, target)
+        outside = Path(tempfile.mkdtemp()) / "contacts.json"
+        self.assertEqual(sheet.main(["tool", str(src), str(outside), "--mit-kontakt"]), 0)
+        self.assertIn("a@b.de", outside.read_text(encoding="utf-8"))
+
+
+class SeedCommand(Import):
+    """Befund Codex Review (PR #219): Vercel führt den lifespan-Import nicht aus; es braucht einen ausdrücklichen Weg."""
+    def test_seed_command_imports_idempotently(self):
+        from shop import seed_workshops
+        fake = FakeDb()
+        first = asyncio.run(seed_workshops.run(fake))
+        second = asyncio.run(seed_workshops.run(fake))
+        self.assertGreater(first["added"], 1000)
+        self.assertEqual(second["added"], 0)
+
+    def test_parallel_duplicate_inserts_are_tolerated(self):
+        class Dup(Exception):
+            details = {"writeErrors": [{"code": 11000}], "nInserted": 3}
+        class Racing(FakeCollection):
+            async def insert_many(self, docs, ordered=True):
+                raise Dup()
+        fake = FakeDb(); fake.workshops = Racing()
+        self.assertEqual(asyncio.run(self.api.import_workshops(fake)), 3)

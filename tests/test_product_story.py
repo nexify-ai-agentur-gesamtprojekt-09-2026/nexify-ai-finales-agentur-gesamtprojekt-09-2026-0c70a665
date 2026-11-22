@@ -35,3 +35,25 @@ class LightTheme(unittest.TestCase):
         css = (ROOT / "apps/web/components/shop/Storefront.css").read_text()
         self.assertRegex(css, r":root\[data-theme='light'\] \.tk-story-fit\{background:[^}]*--color-hell-flaeche")
         self.assertRegex(css, r":root\[data-theme='light'\] \.tk-story-eyebrow[^{]*\{color:var\(--color-hell-lime-handlung")
+
+
+class HonestWorkshopWording(unittest.TestCase):
+    """Befund Codex Review (PR #219): Verzeichnisbetriebe sind keine Partner, Einbau wird direkt vereinbart."""
+    def test_no_partner_claims_without_negation(self):
+        import re
+        for line in COPY.splitlines():
+            for m in re.finditer(r"(?i)\bpartner(n|s)?\b|partenaires", line):
+                window = line[max(0, m.start() - 60):m.end() + 10].lower()
+                self.assertTrue(any(n in window for n in ("keine bestätigten", "geen bevestigde", "pas des partenaires", "not confirmed")), line[:120])
+
+
+class TariffStatus(unittest.TestCase):
+    """Befund Codex Review (PR #219) / AGENTS.md: ungeklärte Tarife bleiben „zur Freigabe“."""
+    def test_api_page_keeps_tariff_approval_note_in_all_locales(self):
+        import json
+        body = json.loads((ROOT / "config/site-map.json").read_text())["pages"][14]["sections"][1]["body"]
+        self.assertIn("zur Freigabe", body["de"])
+        self.assertIn("vrijgave", body["nl"])
+        self.assertIn("validation", body["fr"])
+        self.assertIn("pending approval", body["en"])
+        self.assertNotIn("noch zur Freigabe", body["de"])

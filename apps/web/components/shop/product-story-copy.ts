@@ -9,6 +9,8 @@ export type Guide = { name: string; plain: string; points: string[]; pitfall: st
 export function guideKind(text: string): GuideKind {
   // Wortgrenzen bewusst: „Klebeband“, „Zierstreifen“ oder „Lichtmaschine“ sind keine Reifen bzw. Leuchten.
   const s = text.toLowerCase();
+  // Bremsleuchte, Bremslicht(schalter), brake light, feu stop, remlicht sind Beleuchtung, keine Bremsteile.
+  if (/bremsleucht|bremslicht|brake ?light|stop ?light|feu (de )?stop|remlicht|remlamp/.test(s)) return "lighting";
   if (/brems|brake|frein|\brem(schijf|schijven|blok|blokken|klauw)/.test(s)) return "brakes";
   if (/batter|\bakku|\baccu/.test(s)) return "battery";
   if (/lampe|\blamp\b|glühlampe|scheinwerfer|leuchte|leucht(?!turm)|\blicht(?!maschine)|\bheadlight|\blight\b|\bphare|\bampoule|koplamp/.test(s)) return "lighting";
@@ -34,7 +36,7 @@ type Copy = {
 };
 
 const de: Copy = {
-  trust: ["Daten mit Quelle und Stand", "Passung offen ausgewiesen", "Gesetzliches Widerrufsrecht", "Einbau über Werkstatt anfragen"],
+  trust: ["Daten mit Quelle und Stand", "Passung offen ausgewiesen", "Gesetzliches Widerrufsrecht", "Werkstätten in der Nähe finden"],
   fitEyebrow: "Passt das zu meinem Auto?", fitTitle: "Passungskasten", fitStatus: "Noch nicht geprüft",
   fitLead: "Bei TEILEKLAR gilt: Zu jedem Teil gehört eine Passungsangabe. Für diesen Artikel liegt noch keine geprüfte Fahrzeugzuordnung vor – deshalb behaupten wir keine. Sicher passend heißt hier: belegt, nicht angenommen.",
   stepsTitle: "So klären Sie die Passung in drei Schritten",
@@ -53,9 +55,9 @@ const de: Copy = {
   shipCards: [["Versand", "Lieferzeit und Versandkosten sehen Sie vor der Zahlung im Warenkorb."], ["Preis", "Alle Preise sind Endpreise mit ausgewiesener Mehrwertsteuer; Versand kommt separat dazu."], ["Rückgabe", "Verbraucher haben ein gesetzliches Widerrufsrecht. Die Bedingungen stehen unter Rechtliches."]],
   legal: "Rechtliches und Widerruf lesen",
   faqEyebrow: "Fragen zu diesem Teil", faqTitle: "Kurz beantwortet",
-  faq: [["Passt dieses Teil zu meinem Fahrzeug?", "Das können wir für diesen Artikel noch nicht bestätigen, weil keine geprüfte Fahrzeugzuordnung vorliegt. Mit HSN/TSN und der Nummer Ihres Altteils lässt es sich klären."], ["Wo finde ich HSN und TSN?", "Im Fahrzeugschein (Zulassungsbescheinigung Teil I): HSN in Feld 2.1, TSN in Feld 2.2."], ["Kann ich das Teil einbauen lassen?", "Ja. Über die Werkstattsuche finden Sie Partner in Ihrer Nähe und fragen den Einbau an."], ["Was heißt „Quelle und Stand“?", "Jede Angabe nennt, woher sie kommt und wie aktuell sie ist. Fehlt etwas, steht das offen dort."]],
+  faq: [["Passt dieses Teil zu meinem Fahrzeug?", "Das können wir für diesen Artikel noch nicht bestätigen, weil keine geprüfte Fahrzeugzuordnung vorliegt. Mit HSN/TSN und der Nummer Ihres Altteils lässt es sich klären."], ["Wo finde ich HSN und TSN?", "Im Fahrzeugschein (Zulassungsbescheinigung Teil I): HSN in Feld 2.1, TSN in Feld 2.2."], ["Kann ich das Teil einbauen lassen?", "Die Werkstattsuche zeigt Betriebe aus einem öffentlichen Verzeichnis in Ihrer Nähe. Das sind keine bestätigten TEILEKLAR-Partner: Termin und Einbau vereinbaren Sie direkt mit dem Betrieb, zum Beispiel per Telefon oder über seine Website."], ["Was heißt „Quelle und Stand“?", "Jede Angabe nennt, woher sie kommt und wie aktuell sie ist. Fehlt etwas, steht das offen dort."]],
   toolsEyebrow: "Weiter prüfen", toolsTitle: "Passende Werkzeuge",
-  tools: [["Fahrzeug & Passung", "Entscheidende Angaben je Teileart und Fragenliste für Händler oder Werkstatt.", "/teileklar/fahrzeug-und-passung"], ["Teilesuche", "Nach Teil, Teilenummer oder Kategorie suchen.", "/teileklar/suche"], ["Werkstatt", "Einbau anfragen bei Partnern in Ihrer Nähe.", "/teileklar/werkstatt"]],
+  tools: [["Fahrzeug & Passung", "Entscheidende Angaben je Teileart und Fragenliste für Händler oder Werkstatt.", "/teileklar/fahrzeug-und-passung"], ["Teilesuche", "Nach Teil, Teilenummer oder Kategorie suchen.", "/teileklar/suche"], ["Werkstatt", "Verzeichnisbetriebe in Ihrer Nähe finden und direkt kontaktieren.", "/teileklar/werkstatt"]],
   guides: {
     brakes: { name: "Bremsen", plain: "Bremsscheiben und Beläge wandeln Bewegung in Wärme um. Maße, Belüftung und Achse müssen exakt stimmen – sonst bremst das Auto schlechter oder gar nicht sicher.", points: ["Scheibendurchmesser und -dicke in mm", "Belüftet oder voll (nicht austauschbar)", "Vorder- oder Hinterachse", "Motorcode bei leistungsstarken Varianten"], pitfall: "Ein passender Durchmesser reicht nicht: Bei stärkeren Motoren ist oft eine andere Scheibe verbaut.", install: [] },
     battery: { name: "Batterie", plain: "Die Batterie startet den Motor und versorgt die Bordelektronik. Kapazität, Technologie und Bauform müssen zum Fahrzeug passen.", points: ["Kapazität in Ah und Kälteprüfstrom in A", "Start-Stopp-Ausführung (EFB/AGM) oder konventionell", "Gehäusemaß und Polanordnung", "Halterung passend zum Fahrzeug"], pitfall: "Gleiche Kapazität, falsche Technologie: In Start-Stopp-Fahrzeugen hält eine einfache Batterie oft nicht lange.", install: [] },
@@ -68,7 +70,7 @@ const de: Copy = {
 };
 
 const nl: Copy = {
-  trust: ["Gegevens met bron en datum", "Geschiktheid open vermeld", "Wettelijk herroepingsrecht", "Montage via werkplaats aanvragen"],
+  trust: ["Gegevens met bron en datum", "Geschiktheid open vermeld", "Wettelijk herroepingsrecht", "Werkplaatsen in de buurt vinden"],
   fitEyebrow: "Past dit op mijn auto?", fitTitle: "Passingskader", fitStatus: "Nog niet gecontroleerd",
   fitLead: "Bij TEILEKLAR hoort bij elk onderdeel een passingsaanduiding. Voor dit artikel is nog geen gecontroleerde voertuigkoppeling beschikbaar – daarom beweren we er geen. Passend betekent hier: aangetoond, niet aangenomen.",
   stepsTitle: "Zo controleert u de pasvorm in drie stappen",
@@ -87,9 +89,9 @@ const nl: Copy = {
   shipCards: [["Verzending", "Levertijd en verzendkosten ziet u vóór de betaling in het mandje."], ["Prijs", "Alle prijzen zijn eindprijzen met btw; verzending komt erbij."], ["Retour", "Consumenten hebben een wettelijk herroepingsrecht. De voorwaarden staan onder Juridisch."]],
   legal: "Juridisch en herroeping lezen",
   faqEyebrow: "Vragen over dit onderdeel", faqTitle: "Kort beantwoord",
-  faq: [["Past dit onderdeel op mijn voertuig?", "Dat kunnen we voor dit artikel nog niet bevestigen, omdat er geen gecontroleerde voertuigkoppeling is. Met HSN/TSN en het nummer van uw oude onderdeel is het op te lossen."], ["Waar vind ik HSN en TSN?", "In het Duitse kentekenbewijs (Zulassungsbescheinigung Teil I): HSN in veld 2.1, TSN in veld 2.2."], ["Kan ik het laten monteren?", "Ja. Via de werkplaatszoeker vindt u partners in de buurt en vraagt u de montage aan."], ["Wat betekent „bron en datum”?", "Elke vermelding noemt de herkomst en de actualiteit. Ontbreekt iets, dan staat dat er open bij."]],
+  faq: [["Past dit onderdeel op mijn voertuig?", "Dat kunnen we voor dit artikel nog niet bevestigen, omdat er geen gecontroleerde voertuigkoppeling is. Met HSN/TSN en het nummer van uw oude onderdeel is het op te lossen."], ["Waar vind ik HSN en TSN?", "In het Duitse kentekenbewijs (Zulassungsbescheinigung Teil I): HSN in veld 2.1, TSN in veld 2.2."], ["Kan ik het laten monteren?", "De werkplaatszoeker toont bedrijven uit een openbaar register in uw buurt. Dit zijn geen bevestigde TEILEKLAR-partners: afspraak en montage regelt u rechtstreeks met het bedrijf, bijvoorbeeld telefonisch of via de website."], ["Wat betekent „bron en datum”?", "Elke vermelding noemt de herkomst en de actualiteit. Ontbreekt iets, dan staat dat er open bij."]],
   toolsEyebrow: "Verder controleren", toolsTitle: "Passende hulpmiddelen",
-  tools: [["Voertuig & passing", "Beslissende gegevens per onderdeelsoort en vragenlijst voor handel of werkplaats.", "/teileklar/fahrzeug-und-passung"], ["Onderdelen zoeken", "Zoeken op onderdeel, nummer of categorie.", "/teileklar/suche"], ["Werkplaats", "Montage aanvragen bij partners in de buurt.", "/teileklar/werkstatt"]],
+  tools: [["Voertuig & passing", "Beslissende gegevens per onderdeelsoort en vragenlijst voor handel of werkplaats.", "/teileklar/fahrzeug-und-passung"], ["Onderdelen zoeken", "Zoeken op onderdeel, nummer of categorie.", "/teileklar/suche"], ["Werkplaats", "Bedrijven uit het register in de buurt vinden en direct contacteren.", "/teileklar/werkstatt"]],
   guides: {
     brakes: { name: "Remmen", plain: "Remschijven en blokken zetten beweging om in warmte. Maten, ventilatie en as moeten exact kloppen, anders remt de auto slechter.", points: ["Schijfdiameter en dikte in mm", "Geventileerd of massief", "Voor- of achteras", "Motorcode bij sterkere varianten"], pitfall: "Een passende diameter is niet genoeg: bij sterkere motoren zit vaak een andere schijf.", install: [] },
     battery: { name: "Accu", plain: "De accu start de motor en voedt de boordelektronica. Capaciteit, techniek en afmeting moeten bij het voertuig passen.", points: ["Capaciteit in Ah en koudstartstroom in A", "Start-stop (EFB/AGM) of conventioneel", "Afmeting en poolopstelling", "Houder passend bij het voertuig"], pitfall: "Zelfde capaciteit, verkeerde techniek: in start-stopauto’s gaat een gewone accu vaak snel stuk.", install: [] },
@@ -102,7 +104,7 @@ const nl: Copy = {
 };
 
 const fr: Copy = {
-  trust: ["Données avec source et date", "Compatibilité affichée ouvertement", "Droit de rétractation légal", "Montage via un atelier"],
+  trust: ["Données avec source et date", "Compatibilité affichée ouvertement", "Droit de rétractation légal", "Trouver un atelier proche"],
   fitEyebrow: "Est-ce compatible avec ma voiture ?", fitTitle: "Encadré compatibilité", fitStatus: "Pas encore vérifié",
   fitLead: "Chez TEILEKLAR, chaque pièce porte une indication de compatibilité. Pour cet article, aucune affectation à un véhicule n’est vérifiée – nous n’en affirmons donc aucune. Compatible signifie ici : prouvé, pas supposé.",
   stepsTitle: "Vérifier la compatibilité en trois étapes",
@@ -121,9 +123,9 @@ const fr: Copy = {
   shipCards: [["Livraison", "Délai et frais de livraison s’affichent dans le panier avant le paiement."], ["Prix", "Tous les prix sont des prix finaux avec TVA ; la livraison s’ajoute."], ["Retour", "Les consommateurs disposent d’un droit de rétractation légal. Les conditions figurent sous Mentions légales."]],
   legal: "Lire mentions légales et rétractation",
   faqEyebrow: "Questions sur cette pièce", faqTitle: "Réponses courtes",
-  faq: [["Cette pièce convient-elle à mon véhicule ?", "Nous ne pouvons pas encore le confirmer, faute d’affectation vérifiée. Avec HSN/TSN et la référence de l’ancienne pièce, on peut le clarifier."], ["Où trouver HSN et TSN ?", "Sur la carte grise allemande : HSN champ 2.1, TSN champ 2.2."], ["Puis-je la faire monter ?", "Oui. La recherche d’atelier vous montre des partenaires proches pour demander le montage."], ["Que signifie « source et date » ?", "Chaque indication nomme son origine et son actualité. S’il manque quelque chose, c’est écrit."]],
+  faq: [["Cette pièce convient-elle à mon véhicule ?", "Nous ne pouvons pas encore le confirmer, faute d’affectation vérifiée. Avec HSN/TSN et la référence de l’ancienne pièce, on peut le clarifier."], ["Où trouver HSN et TSN ?", "Sur la carte grise allemande : HSN champ 2.1, TSN champ 2.2."], ["Puis-je la faire monter ?", "La recherche d’atelier affiche des garages d’un annuaire public près de chez vous. Ce ne sont pas des partenaires TEILEKLAR confirmés : rendez-vous et montage se convenient directement avec le garage, par téléphone ou via son site."], ["Que signifie « source et date » ?", "Chaque indication nomme son origine et son actualité. S’il manque quelque chose, c’est écrit."]],
   toolsEyebrow: "Continuer à vérifier", toolsTitle: "Outils utiles",
-  tools: [["Véhicule et compatibilité", "Données décisives par type de pièce et liste de questions pour le vendeur ou l’atelier.", "/teileklar/fahrzeug-und-passung"], ["Recherche de pièces", "Chercher par pièce, référence ou catégorie.", "/teileklar/suche"], ["Atelier", "Demander le montage auprès de partenaires proches.", "/teileklar/werkstatt"]],
+  tools: [["Véhicule et compatibilité", "Données décisives par type de pièce et liste de questions pour le vendeur ou l’atelier.", "/teileklar/fahrzeug-und-passung"], ["Recherche de pièces", "Chercher par pièce, référence ou catégorie.", "/teileklar/suche"], ["Atelier", "Trouver des garages de l’annuaire près de chez vous et les contacter directement.", "/teileklar/werkstatt"]],
   guides: {
     brakes: { name: "Freins", plain: "Disques et plaquettes transforment le mouvement en chaleur. Dimensions, ventilation et essieu doivent être exacts.", points: ["Diamètre et épaisseur du disque en mm", "Ventilé ou plein", "Essieu avant ou arrière", "Code moteur pour variantes puissantes"], pitfall: "Un diamètre identique ne suffit pas : les moteurs plus puissants ont souvent un autre disque.", install: [] },
     battery: { name: "Batterie", plain: "La batterie démarre le moteur et alimente l’électronique. Capacité, technologie et format doivent convenir.", points: ["Capacité en Ah et courant de démarrage à froid en A", "Start-stop (EFB/AGM) ou conventionnelle", "Dimensions et position des bornes", "Support adapté au véhicule"], pitfall: "Même capacité, mauvaise technologie : en start-stop, une batterie simple vieillit vite.", install: [] },
@@ -136,7 +138,7 @@ const fr: Copy = {
 };
 
 const en: Copy = {
-  trust: ["Data with source and date", "Fitment shown openly", "Statutory right of withdrawal", "Request fitting via a workshop"],
+  trust: ["Data with source and date", "Fitment shown openly", "Statutory right of withdrawal", "Find workshops nearby"],
   fitEyebrow: "Does it fit my car?", fitTitle: "Fitment box", fitStatus: "Not yet checked",
   fitLead: "At TEILEKLAR every part carries a fitment statement. For this item no verified vehicle match exists yet – so we claim none. Fits here means: proven, not assumed.",
   stepsTitle: "Clarify fitment in three steps",
@@ -155,9 +157,9 @@ const en: Copy = {
   shipCards: [["Shipping", "Delivery time and shipping costs show in the cart before payment."], ["Price", "All prices are final prices with VAT shown; shipping is added."], ["Returns", "Consumers have a statutory right of withdrawal. Terms are under Legal."]],
   legal: "Read legal and withdrawal terms",
   faqEyebrow: "Questions about this part", faqTitle: "Answered briefly",
-  faq: [["Does this part fit my vehicle?", "We cannot confirm that for this item yet because no verified vehicle assignment exists. HSN/TSN and the number of your old part can settle it."], ["Where do I find HSN and TSN?", "On the German registration document (Part I): HSN in field 2.1, TSN in field 2.2."], ["Can I have it fitted?", "Yes. The workshop finder shows partners near you and lets you request fitting."], ["What does “source and date” mean?", "Every statement names where it comes from and how current it is. If something is missing, it says so."]],
+  faq: [["Does this part fit my vehicle?", "We cannot confirm that for this item yet because no verified vehicle assignment exists. HSN/TSN and the number of your old part can settle it."], ["Where do I find HSN and TSN?", "On the German registration document (Part I): HSN in field 2.1, TSN in field 2.2."], ["Can I have it fitted?", "The workshop finder lists businesses from a public directory near you. They are not confirmed TEILEKLAR partners: arrange the appointment and fitting directly with the workshop, for example by phone or via its website."], ["What does “source and date” mean?", "Every statement names where it comes from and how current it is. If something is missing, it says so."]],
   toolsEyebrow: "Keep checking", toolsTitle: "Useful tools",
-  tools: [["Vehicle & fitment", "Deciding details per part type and a question list for dealer or workshop.", "/teileklar/fahrzeug-und-passung"], ["Part search", "Search by part, part number or category.", "/teileklar/suche"], ["Workshop", "Request fitting from partners near you.", "/teileklar/werkstatt"]],
+  tools: [["Vehicle & fitment", "Deciding details per part type and a question list for dealer or workshop.", "/teileklar/fahrzeug-und-passung"], ["Part search", "Search by part, part number or category.", "/teileklar/suche"], ["Workshop", "Find directory workshops near you and contact them directly.", "/teileklar/werkstatt"]],
   guides: {
     brakes: { name: "Brakes", plain: "Discs and pads turn motion into heat. Dimensions, ventilation and axle must be exact, otherwise the car brakes worse.", points: ["Disc diameter and thickness in mm", "Vented or solid", "Front or rear axle", "Engine code for high-power variants"], pitfall: "A matching diameter is not enough: stronger engines often use a different disc.", install: [] },
     battery: { name: "Battery", plain: "The battery starts the engine and powers the electronics. Capacity, technology and size must suit the vehicle.", points: ["Capacity in Ah and cold-cranking current in A", "Start-stop (EFB/AGM) or conventional", "Case size and terminal layout", "Holder suited to the vehicle"], pitfall: "Same capacity, wrong technology: in start-stop cars a plain battery often fails early.", install: [] },

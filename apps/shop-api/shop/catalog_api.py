@@ -33,6 +33,11 @@ def supplier_image(value):
     return value
 
 
+# Dieselbe Grenze wie supplier_image(): nur cdnbigbuy.com, Pfad unter /images/, erlaubte Endung,
+# keine Abfrage, kein Fragment, keine Zugangsdaten, kein Port, keine Pfadsegmente "." oder "..".
+SUPPLIER_IMAGE_PATTERN = r"^https://cdnbigbuy\.com/images/(?!(?:[A-Za-z0-9_.-]*/)*\.{1,2}(?:/|$))[A-Za-z0-9_./-]+\.(?:jpg|jpeg|png|webp)$"
+
+
 def shop_visibility(with_image=True):
     """Mongo-Filter fuer die Shop-Praesentation.
 
@@ -42,7 +47,7 @@ def shop_visibility(with_image=True):
     """
     if not with_image:
         return {}
-    return {"images": {"$elemMatch": {"$regex": r"^https://cdnbigbuy\.com/images/"}}}
+    return {"images": {"$elemMatch": {"$regex": SUPPLIER_IMAGE_PATTERN, "$options": "i"}}}
 
 
 def present(product, settings, full=False):

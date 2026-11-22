@@ -149,8 +149,9 @@ def main(argv: list[str]) -> int:
     rows = list(csv.DictReader(Path(args[1]).open(encoding="utf-8")))
     shops, stats = convert(rows, existing_directory_keys(), with_contact)
     out = Path(args[2]) if len(args) > 2 else DEFAULT_OUT
-    if with_contact and out.resolve() == DEFAULT_OUT.resolve():
-        print("Kontaktdaten nicht in die eingecheckte Datei schreiben – bitte Ziel außerhalb des Repositorys angeben.")
+    if with_contact and out.resolve().is_relative_to(ROOT.resolve()):
+        # Kontaktadressen dürfen nie im Repository landen – auch nicht unter anderem Namen.
+        print("Kontaktdaten nur außerhalb des Repositorys schreiben – bitte ein Ziel außerhalb von " + str(ROOT) + " angeben.")
         return 2
     out.write_text(json.dumps({"de-DE": {"total": len(shops), "shops": shops}}, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     print(json.dumps(stats, ensure_ascii=False))

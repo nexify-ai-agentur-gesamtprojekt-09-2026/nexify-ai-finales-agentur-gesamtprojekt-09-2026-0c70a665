@@ -46,7 +46,13 @@ async def import_workshops(database=None):
                 doc["source_file"] = path.name
                 docs.append(doc)
     if docs:
-        await d.workshops.insert_many(docs)
+        try:
+            await d.workshops.insert_many(docs, ordered=False)
+        except Exception as error:  # parallele Läufe: bereits vorhandene _id überspringen, alles andere melden
+            details = getattr(error, "details", None) or {}
+            if not details or any(e.get("code") != 11000 for e in details.get("writeErrors", [])):
+                raise
+            return details.get("nInserted", 0)
     return len(docs)
 
 

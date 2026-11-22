@@ -12,7 +12,8 @@ PLACEHOLDER = ROOT / "apps/web/components/shop/ProductPlaceholder.tsx"
 def load(names):
     tree = ast.parse(API.read_text())
     nodes = [n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name in names
-             or isinstance(n, ast.Import) and any(a.name == "re" for a in n.names)]
+             or isinstance(n, ast.Import) and any(a.name == "re" for a in n.names)
+             or isinstance(n, ast.Assign) and any(getattr(t, "id", "") == "SUPPLIER_IMAGE_PATTERN" for t in n.targets)]
     scope = {}
     exec(compile(ast.Module(body=nodes, type_ignores=[]), "catalog_visibility", "exec"), scope)
     return scope
@@ -82,3 +83,27 @@ class ShopImageVisibility(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class FilterMatchesValidator(unittest.TestCase):
+    """Befund Codex Review (PR #219): Filter und supplier_image() müssen dasselbe akzeptieren."""
+    CASES = [
+        "https://cdnbigbuy.com/images/a.jpg", "https://cdnbigbuy.com/images/x/y-1_2.WEBP", "https://cdnbigbuy.com/images/p.png",
+        "https://cdnbigbuy.com/images/a.jpg?x=1", "https://cdnbigbuy.com/images/a.jpg#f", "https://cdnbigbuy.com/images/../a.jpg",
+        "https://cdnbigbuy.com/images/./a.jpg", "https://cdnbigbuy.com/images/a.gif", "https://cdnbigbuy.com/images/a b.jpg",
+        "https://user:pw@cdnbigbuy.com/images/a.jpg", "https://cdnbigbuy.com:444/images/a.jpg", "http://cdnbigbuy.com/images/a.jpg",
+        "https://cdnbigbuy.com/other/a.jpg", "https://cdnbigbuy.com/images/a.jpg.exe", "https://cdnbigbuy.com/images/..a.jpg",
+    ]
+
+    def test_regex_and_validator_agree(self):
+        import re
+        from urllib.parse import urlsplit
+        tree = ast.parse(API.read_text())
+        nodes = [n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name in {"shop_visibility", "supplier_image"}
+                 or isinstance(n, ast.Assign) and any(getattr(t, "id", "") in ("SUPPLIER_IMAGE_HOSTS", "SUPPLIER_IMAGE_PATTERN") for t in n.targets)]
+        scope = {"re": re, "urlsplit": urlsplit}
+        exec(compile(ast.Module(body=nodes, type_ignores=[]), "catalog", "exec"), scope)
+        pattern = scope["shop_visibility"](True)["images"]["$elemMatch"]
+        regex = re.compile(pattern["$regex"], re.I if "i" in pattern.get("$options", "") else 0)
+        for url in self.CASES:
+            self.assertEqual(bool(regex.search(url)), scope["supplier_image"](url) is not None, url)
