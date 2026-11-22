@@ -95,8 +95,10 @@ einmal neu an. Metadaten, Zustimmung und Tests 2 bis 7 laufen für beide Ressour
 
 **LibreChat-Umgehung schließen:** Die Umschaltung des Routers wirkt nicht auf das Docker-Netz `librechat_default`, über
 das LibreChat `cognee-mcp` direkt erreicht. Zur Stufe 5 gehören deshalb: LibreChat auf `brain-gate` (mit eigener
-Zulassung als `agent`) umstellen, danach den Alias `brain-mcp` aus `librechat_default` herausnehmen (Konfiguration
-bleibt als Kommentar erhalten). Rückweg: Alias wieder eintragen. Beides ist eine Serveränderung nach D-016.
+Zulassung als `agent`) umstellen, danach `cognee-mcp` **vollständig** aus dem Netz `librechat_default` lösen (nicht nur
+den Alias entfernen; Service-Name und IP wären sonst weiter erreichbar). Prüfung: aus dem LibreChat-Container ist
+`cognee-mcp` weder per Name noch per IP erreichbar. Konfiguration bleibt als Kommentar erhalten. Rückweg: Netz wieder
+anhängen. Beides ist eine Serveränderung nach D-016.
 
 ## 4. Anmeldefluss
 
@@ -230,13 +232,23 @@ Empfehlung: **A** als Ziel. Wenn der Nachweis schnell gebraucht wird: B zusätzl
 - Unveränderlich: `brain_gate_app` hat nur `INSERT`; ein Trigger verweigert `UPDATE`/`DELETE` auch dem Eigentümer;
   Hash-Kette über alle Zeilen; täglicher Kettenkopf nach R2 (`nexify-agentur-pucket`, Schreibrecht OFFEN) in Stufe 6.
 - Ereignisse mindestens: Registrierung, Anmeldung ok/abgewiesen, Zustimmung, Token ausgestellt/erneuert/widerrufen,
-  Refresh-Wiederverwendung, jeder Werkzeugaufruf, jede 401/403, Zulassung erteilt/entzogen, „überall abmelden“.
+  Refresh-Wiederverwendung, jeder Werkzeugaufruf, jede 401/403 (identitätslose als Aggregat je Minute, siehe unten),
+  Zulassung erteilt/entzogen, „überall abmelden“.
 - Lesbar nur für `inhaber` in `/konto`; Export als JSONL.
 - Begrenzt gegen Missbrauch: Anfragen ohne gültiges Token werden je IP-Präfix gedrosselt (60/min an `/v2/mcp` und
-  `/oauth/*`, danach 429 ohne Datenbankzugriff). Abweisungen ohne Identität werden je IP-Präfix und Minute zu **einer**
-  Zeile verdichtet (Zähler statt Einzelzeile). Aufbewahrung: identitätslose Abweisungen 30 Tage, alle übrigen
-  Ereignisse 1 Jahr, danach Export nach R2 und Archivierung (nicht Löschung). Alarm, wenn die Audit-Tabelle 1 GiB
-  oder die Platte 95 % erreicht.
+  `/oauth/*`, danach 429 ohne Datenbankzugriff). Die Zähler liegen in einer **eigenen, veränderlichen** Tabelle
+  `drossel_fenster` (kein Audit). Abweisungen **ohne** Identität erscheinen im Audit als **ein unveränderliches
+  Aggregat je IP-Präfix und Minute**, geschrieben erst nach Ablauf der Minute (Anzahl, Gründe, erste/letzte Zeit).
+  Jede Abweisung **mit** Identität (gültiges Token, aber falscher Scope, Mandant, Projekt oder Ressource) bleibt ein
+  Einzelereignis.
+- Aufbewahrung ohne Bruch der Kette: `audit_ereignis` ist monatlich partitioniert; jede Partition wird beim
+  Monatswechsel mit ihrem letzten Hash versiegelt, der nächste Monat beginnt mit diesem Hash. Nach Ablauf
+  (identitätslose Aggregate 30 Tage, sonst 1 Jahr) wird die Partition als JSONL samt Kettenkopf nach R2 exportiert,
+  der Export zurückgelesen und gegen die Kette geprüft, danach die Partition per `DETACH PARTITION` aus der aktiven
+  Tabelle gelöst und als Archivtabelle behalten. Ein Entfernen der Archivtabelle braucht die Freigabe des Inhabers
+  (D-016). Der Trigger gegen `UPDATE`/`DELETE` gilt für jede Partition; `DETACH` ist nur der Eigentümerrolle der
+  Wartung erlaubt. OFFEN: Schreibrecht und eigener Schlüssel für R2.
+- Alarm, wenn die aktive Audit-Tabelle 1 GiB oder die Platte 95 % erreicht.
 
 ## 10. Sicherheitsgrenzen, die Stufe 2 zuerst als Test schreibt
 
@@ -284,7 +296,7 @@ Jeder Test muss gegen den heutigen Stand (kein brain-gate) scheitern und gegen d
 | 2 | nur Code und Tests im Repo | Zweig verwerfen |
 | 3 | neuer Container `brain-gate` + `brain-gate-db` (eigenes Compose-Projekt, Images auf Digest), eigene Volumes | Projekt stoppen; Volumes bleiben (nichts löschen); `/mcp` unberührt |
 | 4 | echter Client verbindet sich | Grant widerrufen |
-| 5 | zweiter Router auf `/mcp` mit höherer Priorität; LibreChat auf brain-gate, Alias `brain-mcp` aus `librechat_default` heraus | Priorität zurück, Alias wieder eintragen; alter Router und `brain-auth` sind nie entfernt |
+| 5 | zweiter Router auf `/mcp` mit höherer Priorität; LibreChat auf brain-gate, `cognee-mcp` aus `librechat_default` gelöst | Priorität zurück, Netz wieder anhängen; alter Router und `brain-auth` sind nie entfernt |
 
 ## 13. Entscheidungen, die beim Inhaber liegen
 

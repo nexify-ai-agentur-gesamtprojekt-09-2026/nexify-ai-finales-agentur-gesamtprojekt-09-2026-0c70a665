@@ -109,7 +109,8 @@ Anlass: Hinweis der koordinierenden Sitzung (06:52 UTC). Abrufe aus der Cloud-Si
 | `nexifyai.de` | löst auf `185.158.133.1` auf; Antwortkopf `x-deployment-id: psr2…`, keine Vercel-Kennung |
 
 - Weder `nffczuqkhlihimmuzeoz` noch eine Route `oauth-protected-resource` kommen auf `origin/main` vor (`git grep`).
-  `nexifyai.de/mcp` wird also nicht aus diesem Repository ausgeliefert. ANNAHME: ein Lovable-Projekt mit Lovable Cloud
+  Das ist nur eine Beobachtung; woher `nexifyai.de/mcp` ausgeliefert wird, bleibt OFFEN, bis ein Nachweis Auslieferung →
+  Commit vorliegt. ANNAHME: ein Lovable-Projekt mit Lovable Cloud
   (Adresse und Merkmale); der Zugang über `mcp.lovable.dev` antwortet für Arbeitsbereiche mit 403
   `authentication_type_forbidden`, eine Bestätigung liegt nicht vor.
 - Das widerspricht `AGENTS.md` („nexifyai.de wird von Vercel `…-ut7r` ausgeliefert“, Stand 14.11.2026) → OFFEN, Inhaber.
