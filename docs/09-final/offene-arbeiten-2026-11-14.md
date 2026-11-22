@@ -279,6 +279,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Quellen:** PROGRESS.md, Abschnitte „Stand 14.11.2026, ca. 14:25 UTC“ und „Offene Arbeiten“ (14.11.2026); docs/09-final/auftragsregister-2026-11-08.md (Fortschreibungen bis 12.11.2026); Linear, Team „Nexifyai“, Abruf 14.11.2026
 - **Stand 14.11.2026, 20:40 UTC:** Ursache belegt (IST, `gh api …/check-runs/<id>/annotations`, 20:34 UTC): GitHub meldet am Lauf „The job was not started because an Actions budget is preventing further use.“ Alle Läufe auf `main` (`500c52d`) und auf den Zweigen enden nach 3 bis 5 Sekunden ohne Schritt mit „failure“. Zu tun (nur Inhaber): Actions-Budget und Abrechnungseinstellungen prüfen. Bleibt BLOCKIERT.
 - **Stand 14.11.2026, ca. 22:00 UTC:** Unverändert (IST, `gh api …/commits/48f5072/check-runs` und Anmerkungen, 21:47 UTC): Die Läufe auf `48f5072` (CI, Chat owner schema fixture, Slack) enden um 21:45 UTC nach 2 bis 3 Sekunden mit „failure“, Anmerkung wie oben. Bleibt BLOCKIERT.
+- **Stand 22.11.2026, 18:55 UTC:** Runner-Teil erledigt (IST): Seit 16.11.2026, 12:41 UTC starten Jobs wieder; am 22.11. liefen auf PR 216 die Jobs `repository` (912 Tests) und `review` mit Schritten durch. Offen ist nur noch der Check „review“: endet `blocked_not_reviewed`, weil das Repo-Geheimnis fehlt (OF-15, nur Inhaber). Bleibt bis dahin BLOCKIERT; das Actions-Budget ist kein Blocker mehr.
 
 #### OA-023 · Infrastruktur & Server · ENTSCHEIDUNG NÖTIG
 

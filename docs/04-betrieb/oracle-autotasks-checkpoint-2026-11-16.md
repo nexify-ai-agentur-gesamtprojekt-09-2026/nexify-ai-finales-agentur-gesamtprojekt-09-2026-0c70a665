@@ -52,16 +52,22 @@ Aufgaben, davon 3.442 offen. Der Router nimmt höchstens 255 Optionen an.
   zugeordnet.
 
 Abgleich mit dem Repository (eigener Abruf 16.11.2026, Hauptstand `9c9c806`):
-`docs/JEFF-INTEGRATION.md` nennt unverändert denselben Endpunkt und dasselbe Modell.
-Eine dokumentierte Umstellung als Ursache ist damit ausgeschlossen. Dasselbe Dokument
+`docs/JEFF-INTEGRATION.md` nennt dasselbe Modell, aber den öffentlichen Endpunkt
+`https://ai-router.nexifyai.cloud/v1/systemone`; beobachtet wurde `127.0.0.1:20128/v1/systemone`.
+Ob der lokale Dienst dorthin weiterleitet, ist **nicht belegt** (OFFEN). Ein Endpunkt- oder
+Proxywechsel als Mitursache ist damit nicht ausgeschlossen; die 422-Antwort mit der
+Größenangabe erklärt den Stillstand aber für sich. Dasselbe Dokument
 beschreibt das Gate in einer GitLab-CI, während der führende Stand auf GitHub mit
 GitHub-Actions-Runnern liegt; als Quelle für den heutigen Bauablauf ist es insoweit
 nicht belastbar (OFFEN).
 
 ## 3. Start der Lösung (vorbereitet, NICHT ausgeführt)
 
-Ablagestelle des ausführbaren Starts: `ops/server1/nx-ora-02-schritt3.sh` im
-Lovable-Projekt „NeXify AI Studio" (Syntax geprüft, nie ausgeführt).
+Ablagestelle des ausführbaren Starts (unveränderlich, unabhängig abrufbar): Repository
+`nexify-ai-agentur-gesamtprojekt-09-2026/nexfiy-ai-studio`, Zweig `lovable`, Commit `0a2b971`,
+Pfad `ops/server1/nx-ora-02-schritt3.sh`, SHA-256
+`48da88246b742524fab8cd36a0690415c1fd9e6fb402789e855f813495d83cee` (Syntax geprüft, nie ausgeführt).
+Vor einer Ausführung Prüfsumme gegen diese Angabe abgleichen.
 
 Inhalt der Korrektur, Datei `/usr/local/bin/nx-jeff-workloop`, Zeile 695:
 
@@ -81,6 +87,11 @@ Ablauf des Skripts: Stufenbegrenzung suchen, Sicherung
 ersetzen, `python3 -m py_compile`, bei Fehler sofortiger Rücksetzer, Dienst neu
 starten, erste Wahl abwarten, Dienst anhalten, Belegzeilen ausgeben.
 
+**Sperre:** Beim Schritt „erste Wahl abwarten“ kann die Schleife bereits eine Aufgabe ausführen,
+und das Anhalten danach ist nicht garantiert. Das Skript darf deshalb **erst nach** der lesenden
+Klärung der `MAIL-`-Aufgaben (Abschnitt 5) und ausdrücklicher Freigabe des Inhabers laufen. Das gilt
+ebenso für Weckpunkt und Fallback in Abschnitt 6.
+
 Rückweg: `cp -a nx-jeff-workloop.bak-20261116-choices nx-jeff-workloop && systemctl restart nx-jeff-workloop`.
 
 ## 4. Blocker (OFFEN, nur vom Inhaber lösbar)
@@ -97,7 +108,8 @@ Zwei zulässige Wege, Owner Inhaber:
 
 ## 5. Risiko vor dem Wiederanlauf (hoch, ungeprüft)
 
-Von den 3.442 offenen Aufgaben tragen **3.517 von 3.638** das Präfix `MAIL-`.
+Von den insgesamt 3.638 Aufgaben tragen **3.517** das Präfix `MAIL-`; wie viele davon zu den
+3.442 offenen gehören, ist **nicht belegt** (lesend zu zählen: `status=open` und Präfix `MAIL-`).
 Ob sie echte Empfängeradressen Dritter enthalten und ob bei Ausführung Post
 rausgegangen wäre, ist **nicht geprüft**. Der Serverzugang dafür fehlt.
 
@@ -118,10 +130,10 @@ Wiederanlauf vor dieser Klärung ist ein eigenes Risiko und nicht freigegeben.
 |---|---|
 | `next_action` | Lesende Klärung der `MAIL-`-Aufgaben, danach NX-ORA-02 |
 | Vorbedingung | Serverzugang nach Abschnitt 4 |
-| `next_run_target` | 2026-11-17T07:00:00Z (08:00 Europe/Amsterdam) |
-| Trigger | Weckpunkt `trig_019NZHgrhm9MuhFjmTWRs8rR`, gebunden an die koordinierende Sitzung; beim Anlegen mit `fire_at` bestätigt |
+| `next_run_target` | **kein Zukunftstermin gesetzt** (Stand 22.11.2026, 18:55 UTC). Vorbedingungen Serverzugang und MAIL-Klärung liegen beim Inhaber; ein Termin davor liefe leer. OFFEN beim Inhaber. |
+| Trigger | HISTORIE: Weckpunkt `trig_019NZHgrhm9MuhFjmTWRs8rR` (Ziel 2026-11-17T07:00:00Z) hat am 2026-11-17T07:00:38Z ausgelöst, Lauf `SUCCEEDED`, danach `run_once_fired` (Abruf 22.11.2026). Kein Folgetermin angelegt. |
 | Executor | Koordinierende Claude-Sitzung; Ausführung auf Server 1 durch den Lovable-Projektagenten „NeXify AI Studio" |
-| Fallback | Inhaber führt `ops/server1/nx-ora-02-schritt3.sh` selbst aus |
+| Fallback | Inhaber führt das Skript aus Abschnitt 3 selbst aus, erst nach MAIL-Klärung (Sperre Abschnitt 3) |
 | Eskalation | Inhaber Pascal Courbois |
 | Kostenrahmen | Keine neuen kostenpflichtigen Verpflichtungen. Bisher 11,7 Lovable-Credits für NX-ORA-01 und SKA-01. |
 
@@ -271,7 +283,8 @@ nicht auf die Live-Seite. Die Vercel-Befunde in Abschnitt 9 betreffen keine Prod
 Ordnern; keiner wird Cloud-Sitzungen angeboten (`not_available`). Eine auf dem Rechner laufende
 Sitzung hätte Zugriff auf die lokale MCP-Lösung der Lovable-Desktop-App **und** auf den eigenen
 SSH-Schlüssel des Inhabers. Damit wäre NX-ORA-02 ohne neuen Schlüssel auf der Produktionsmaschine
-ausführbar. Das ist der empfohlene Weg für den Serverzugang.
+ausführbar. Diese Variante ist **nicht freigegeben** und braucht eine ausdrückliche Entscheidung des Inhabers;
+sie gehört nicht zu den zwei zugelassenen Zugangswegen aus Abschnitt 4.
 
 ## 11. Nachtrag 16.11.2026, ca. 15:20 UTC
 
