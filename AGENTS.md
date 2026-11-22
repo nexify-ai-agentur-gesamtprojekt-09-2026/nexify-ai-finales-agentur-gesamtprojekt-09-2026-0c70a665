@@ -13,6 +13,14 @@ nicht verfolgt; `apps/web/wrangler.jsonc` und `docs/deployment/cloudflare-worker
 sind eine ungenutzte Vorbereitung und kein Auftrag. Die Führungsentscheidung vom
 04.11.2026 (ChatGPT-Sites-Stand) ist im widersprechenden Umfang historisch.
 
+Stand 22.11.2026, 18:50 UTC (gemessen, lesend): Der Absatz „Stand 16.11.2026, 13:10 UTC“ unten ist
+**HISTORIE**. `nexifyai.de` leitet per 301 auf `www.nexifyai.de` um; beide lösen auf Cloudflare-Adressen auf.
+`https://www.nexifyai.de/.well-known/nexify-build.json` nennt `served_by: "cloudflare worker nexfiy-ai-studio (.de)"`,
+Commit `6eb6273165` aus `main` von `nexfiy-ai-studio`, gebaut auf `srv1243952`, ausgeliefert 2026-11-22T13:18:38+01:00
+(`tools/deploy-live.sh`, Betreiber: Hermes/NeX). Der Lovable-Zweig `lovable` ist damit nicht mehr der ausgelieferte Stand.
+`/mcp` und `/.well-known/oauth-protected-resource` antworten auf dem neuen Stand mit 404. Ob dieser Wechsel als
+Produktionsweg gilt, ist vom Inhaber in `DECISIONS.md` festzuhalten (OFFEN).
+
 Stand 16.11.2026, 13:10 UTC (Inhaberangabe im Chat, Pascal Courbois: „vercel ist auch raus“;
 gemessen 13:05 UTC): `nexifyai.de` löst auf `185.158.133.1` auf und wird vom Lovable-Projekt
 „Nexfiy Ai Studio“ (`dcb47f25-0aec-4b03-88b7-4b67f07d4a09`) ausgeliefert; `/.well-known/oauth-protected-resource`
