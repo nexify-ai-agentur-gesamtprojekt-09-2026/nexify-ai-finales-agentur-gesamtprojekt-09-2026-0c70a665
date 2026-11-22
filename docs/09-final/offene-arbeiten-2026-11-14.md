@@ -2096,6 +2096,7 @@ Herleitung: OFFEN 51 + 1 neu (186) = 52. ENTSCHEIDUNG NÖTIG 63 + 2 neue (185, 1
 - **Fertig, wenn:** Die drei Adressen antworten wie vorgesehen oder sind mit Entscheidung abgeschaltet; Messung mit Uhrzeit.
 - **Aufwand:** S bis M · **Ausführung:** lesende Messung Fabrik, Eingriff nach Freigabe · **Owner:** Inhaber · **Nächste Aktion:** Freigabe für lesende Server-Messung (`nexify-server-messung`) einholen
 - **Quellen:** `curl`, 19.11.2026, 19:07 UTC; Meldung der Hauptsitzung (Beginn, nicht selbst gemessen)
+- **Stand 22.11.2026, ca. 07:00 UTC:** Messung zwischen 02:47 und 06:47 UTC: `brain.nexifyai.cloud` antwortet mit 307 auf `/docs`, dort 200 ohne Anmeldung abrufbar; ob die Schnittstellen dahinter offen sind, ist nicht geprüft (vorher 502). `workplace.nexifyai.cloud` 404 (vorher 502). `agenten.nexifyai.cloud` unverändert 530. Kein Eingriff dieser Sitzung; wer geändert hat, nicht belegt. Zustand bleibt OFFEN.
 
 #### OA-187 · Sicherheit · ENTSCHEIDUNG NÖTIG
 
@@ -2139,3 +2140,25 @@ Herleitung: ENTSCHEIDUNG NÖTIG 65 + 1 neu (188) = 66.
 - **Fertig, wenn:** Der Inhaber hat bestätigt, ob `teileklar.shop` die gewollte Shop-Auslieferung ist und aus welchem Repository sie stammt; die Zielpfade antworten wie vorgesehen oder die Weiterleitungen sind angepasst; die Sitemap listet keine weitergeleiteten Adressen; Messung mit Uhrzeit.
 - **Aufwand:** S für die Entscheidung · **Ausführung:** Entscheidung Inhaber, Messung Fabrik · **Owner:** Inhaber (Entscheidung) · **Nächste Aktion:** Inhaber bestätigt, ob `teileklar.shop` die gewollte Shop-Auslieferung ist und aus welchem Repository sie stammt
 - **Quellen:** `PROGRESS.md`, Abschnitt „Stand 21.11.2026, ca. 19:00 UTC“; `curl`, `tools/live-check.mjs` und `tools/gleichmacher.mjs`, 21.11.2026, 14:47 bis 18:54 UTC
+- **Stand 22.11.2026, ca. 07:00 UTC:** Messung zwischen 18:47 und 22:47 UTC am 21.11.2026: Die Weiterleitungen sind korrigiert. `/teileklar/warenkorb` und `/teileklar/kasse` leiten auf `teileklar.shop/shop`, `/teileklar/rechtliches` auf `/impressum`, `/teileklar/werkstatt` auf `/werkstatt-partner`; alle Ziele 200. Direkt auf `teileklar.shop` bleiben `/warenkorb`, `/kasse` und `/api/shop/status` 404; Katalog dort `total` 3720. Wer umgestellt hat: nicht belegt; `main` unverändert `9c9c806`. Zustand bleibt ENTSCHEIDUNG NÖTIG.
+
+## 15. Nachführung 22.11.2026, ca. 07:00 UTC (Stand `origin/main` `9c9c806`, PR 199)
+
+Regelbetrieb-Läufe vom 21.11.2026, 22:47 UTC, bis 22.11.2026, 07:00 UTC. Seit `9c9c806` kein Merge. Quelle der eigenen Angaben: `PROGRESS.md`, Abschnitt „Stand 22.11.2026, ca. 07:00 UTC“.
+
+### 15.1 Geänderte Zustände
+
+Kein Zustand geändert. Stand-Zeilen an OA-186 (Subdomains antworten anders) und OA-188 (Weiterleitungen korrigiert).
+
+### 15.2 Zählung nach der Nachführung (188 Einträge)
+
+| Zustand | Stand 21.11.2026, ca. 19:00 UTC | Stand 22.11.2026, ca. 07:00 UTC |
+|---|---|---|
+| OFFEN | 52 | 52 |
+| TEILWEISE | 13 | 13 |
+| BLOCKIERT | 38 | 38 |
+| ENTSCHEIDUNG NÖTIG | 66 | 66 |
+| HISTORIE-überholt | 9 | 9 |
+| ERLEDIGT | 10 | 10 |
+
+Herleitung: keine Zustandsänderung, keine neuen Einträge.
