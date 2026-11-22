@@ -726,7 +726,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Quellen:** PROGRESS.md, Abschnitte „Stand 14.11.2026, ca. 14:25 UTC“ und „Offene Arbeiten“ (14.11.2026); DECISIONS.md (D-011 bis D-020, 14.11.2026)
 - **Stand 22.11.2026:** HISTORIE, überholt durch D-023 (`DECISIONS.md`): Die Frage „jetzt mit MongoDB wieder einschalten oder erst mit Supabase“ ist entschieden: weder noch, der Shop ist pausiert und wird vorübergehend offline genommen (OA-189). Nichts gelöscht; eine Wiederaufnahme braucht eine neue Inhaberentscheidung mit eigenem Releaseplan und dann einen neuen Eintrag.
 
-#### OA-070 · Shop TEILEKLAR · HISTORIE-überholt (bis 22.11.2026: BLOCKIERT)
+#### OA-070 · Shop TEILEKLAR · BLOCKIERT
 
 - **Ziel:** Zahlung freischalten: REVOLUT_MODE, Händlerschlüssel und Webhook für den Livebetrieb.
 - **Blocker:** Nur mit ausdrücklichem Wort des Inhabers; Freigabe-Gate der Kasse (docs/09-final/07) und OF-09. Sandbox und Live sind getrennte Schlüssel.
@@ -734,7 +734,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Fertig, wenn:** Testzahlung im Sandbox-Modus belegt; Live-Modus erst nach Freigabe; Webhook bestätigt Zahlungseingang.
 - **Aufwand:** M · **Ausführung:** nur Inhaber (Schlüssel, Freigabe); Tests Agent
 - **Quellen:** docs/deployment/environment-variables.md Abschnitt 6 (14.11.2026); docs/09-final/auftragsregister-2026-11-08.md (Fortschreibungen bis 12.11.2026); GO-LIVE.md Abschnitt 5–7 (Stand 13./14.11.2026)
-- **Stand 22.11.2026:** HISTORIE, überholt durch D-023 (`DECISIONS.md`): Die Zahlung wird nicht freigeschaltet; neue Shop-Transaktionen werden serverseitig deaktiviert. Nichts gelöscht; eine Wiederaufnahme braucht eine neue Inhaberentscheidung mit eigenem Releaseplan und dann einen neuen Eintrag.
+- **Stand 22.11.2026:** Zurückgestellt nach D-023 (`DECISIONS.md`), Zustand bleibt. Keine Arbeit daran, bis der Inhaber die Wiederaufnahme mit eigenem Releaseplan entscheidet; nichts gestrichen.
 
 #### OA-071 · Shop TEILEKLAR · BLOCKIERT
 
@@ -816,7 +816,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Quellen:** docs/09-final/auftragsregister-2026-11-08.md (Fortschreibungen bis 12.11.2026); docs/01-konzept/teileklar-shop.md und docs/09-final/11-teileklar-datenblatt.md
 - **Stand 22.11.2026:** Zurückgestellt nach D-023 (`DECISIONS.md`), Zustand bleibt. Keine Arbeit daran, bis der Inhaber die Wiederaufnahme mit eigenem Releaseplan entscheidet; nichts gestrichen.
 
-#### OA-079 · Shop TEILEKLAR · HISTORIE-überholt (bis 22.11.2026: BLOCKIERT)
+#### OA-079 · Shop TEILEKLAR · BLOCKIERT
 
 - **Ziel:** Erste echte Bestellung durchgängig nachweisen: Artikel, Warenkorb, Kasse, Zahlung, Lieferantenbestellung, Rechnung, Mail.
 - **Blocker:** Jede Stufe davor ist offen. Rechnung: tools/rechnung.mjs erzeugt nur ein Minimalgerüst ohne Steuersumme (GO-LIVE Abschnitt 7).
@@ -824,7 +824,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Fertig, wenn:** Eine Testbestellung mit Belegen je Stufe; danach eine echte Bestellung mit Freigabe des Inhabers.
 - **Aufwand:** L · **Ausführung:** Agent nach Zugang: alle Shop-Zugänge und Freigaben
 - **Quellen:** GO-LIVE.md Abschnitt 5–7 (Stand 13./14.11.2026); PROGRESS.md, Abschnitte „Stand 14.11.2026, ca. 14:25 UTC“ und „Offene Arbeiten“ (14.11.2026)
-- **Stand 22.11.2026:** HISTORIE, überholt durch D-023 (`DECISIONS.md`): Eine erste echte Bestellung wird nicht nachgewiesen, solange der Shop pausiert ist. Nichts gelöscht; eine Wiederaufnahme braucht eine neue Inhaberentscheidung mit eigenem Releaseplan und dann einen neuen Eintrag.
+- **Stand 22.11.2026:** Zurückgestellt nach D-023 (`DECISIONS.md`), Zustand bleibt. Keine Arbeit daran, bis der Inhaber die Wiederaufnahme mit eigenem Releaseplan entscheidet; nichts gestrichen.
 
 #### OA-080 · Shop TEILEKLAR · ENTSCHEIDUNG NÖTIG
 
@@ -876,7 +876,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Quellen:** docs/06-auftraege/werkstatt-verzeichnis.md (31.08.2026); docs/01-konzept/teileklar-shop.md und docs/09-final/11-teileklar-datenblatt.md
 - **Stand 22.11.2026:** Zurückgestellt nach D-023 (`DECISIONS.md`), Zustand bleibt. Keine Arbeit daran, bis der Inhaber die Wiederaufnahme mit eigenem Releaseplan entscheidet; nichts gestrichen.
 
-#### OA-085 · Werkstattservice · HISTORIE-überholt (bis 22.11.2026: OFFEN)
+#### OA-085 · Werkstattservice · OFFEN
 
 - **Ziel:** Online-Terminbuchung bei Partnerwerkstätten bauen.
 - **Blocker:** Nicht gebaut; Seite sagt das offen. Terminlogik und Bestätigung durch die Werkstatt sind nicht spezifiziert.
@@ -885,9 +885,9 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Aufwand:** L · **Ausführung:** Agent sofort (Spezifikation und Code); Betrieb nach Datenbank
 - **Quellen:** config/site-map.json und apps/web/components/shop/PhaseNotice.tsx (origin/main 14.11.2026); docs/01-konzept/gesamtprojektplan.md
 - **Stand 14.11.2026, 20:40 UTC:** Nicht gebaut. Die Terminlogik liegt als Spezifikationsentwurf in PR 187 vor (Paket J-1, eine Datei `docs/03-backend/werkstatt-terminlogik.md`, nicht gemergt). Bleibt OFFEN.
-- **Stand 22.11.2026:** HISTORIE, überholt durch D-023 (`DECISIONS.md`): Die Online-Terminbuchung wird nicht gebaut; die Entwürfe PR 187 und PR 195 sind eingefroren (OA-193). Nichts gelöscht; eine Wiederaufnahme braucht eine neue Inhaberentscheidung mit eigenem Releaseplan und dann einen neuen Eintrag.
+- **Stand 22.11.2026:** Zurückgestellt nach D-023 (`DECISIONS.md`), Zustand bleibt. Keine Arbeit daran, bis der Inhaber die Wiederaufnahme mit eigenem Releaseplan entscheidet; nichts gestrichen. PR 187 und PR 195 sind eingefroren (OA-193).
 
-#### OA-086 · Werkstattservice · HISTORIE-überholt (bis 22.11.2026: BLOCKIERT)
+#### OA-086 · Werkstattservice · BLOCKIERT
 
 - **Ziel:** Partnerwerkstätten gewinnen: Partnervertrag, Ansprache, Aufnahme ins Partnerportal.
 - **Blocker:** Partnervertrag und Konditionen fehlen (Kostenaussage für Werkstätten offen, O-9). Ansprache per E-Mail ohne Einwilligung ist unzulässig; der Auftrag selbst empfiehlt Formular und Telefon.
@@ -895,7 +895,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Fertig, wenn:** Unterzeichnete Partner in der Datenbank; Ziel laut Plan 25 aktive Partner.
 - **Aufwand:** L · **Ausführung:** nur Inhaber (Vertrag, Konditionen, Ansprache)
 - **Quellen:** docs/06-auftraege/werkstatt-verzeichnis.md (31.08.2026); docs/01-konzept/gesamtprojektplan.md; docs/05-marketing/gesamtkonzept-2026-11-14.md (14.11.2026)
-- **Stand 22.11.2026:** HISTORIE, überholt durch D-023 (`DECISIONS.md`): Keine Gewinnung von Partnerwerkstätten und kein Marketing für den Werkstattservice während der Pause. Nichts gelöscht; eine Wiederaufnahme braucht eine neue Inhaberentscheidung mit eigenem Releaseplan und dann einen neuen Eintrag.
+- **Stand 22.11.2026:** Zurückgestellt nach D-023 (`DECISIONS.md`), Zustand bleibt. Keine Arbeit daran, bis der Inhaber die Wiederaufnahme mit eigenem Releaseplan entscheidet; nichts gestrichen.
 
 #### OA-087 · Werkstattservice · ENTSCHEIDUNG NÖTIG
 
@@ -1903,6 +1903,7 @@ Herleitung: OFFEN 46 − 2 (164, 170 nach ERLEDIGT) + 5 neue (171, 174, 175, 177
 - **Fertig, wenn:** Meta-Tag und Kopfzeile stimmen für alle Seiten in allen Schalterzuständen überein; betroffene Belege durch Lauf erneuert.
 - **Aufwand:** S · **Ausführung:** Fabrik (Paket C, ein Schreiber)
 - **Quellen:** docs/04-betrieb/indexierung-freigabe-2026-11-14.md, Abschnitt 11 („Grenze“); PR 198 (`48f5072`)
+- **Stand 22.11.2026:** Zurückgestellt nach D-023 (`DECISIONS.md`), Zustand bleibt. Keine Arbeit daran, bis der Inhaber die Wiederaufnahme mit eigenem Releaseplan entscheidet; nichts gestrichen.
 
 #### OA-176 · Qualität & Belege · ENTSCHEIDUNG NÖTIG
 
@@ -1936,33 +1937,29 @@ Herleitung: OFFEN 46 − 2 (164, 170 nach ERLEDIGT) + 5 neue (171, 174, 175, 177
 
 ## 10. Nachführung 22.11.2026, ca. 18:45 UTC (Inhaberentscheidung D-023, Stand `origin/main` `9c9c806`)
 
-OA-179 bis OA-188 sind durch die offene PR 206 (Zweig `claude/stand-1115`, dort höchste Nummer OA-188; OA-179 zusätzlich im Zweig `claude/brain-mcp-auth`, PR 215; eigene lesende Prüfung 22.11.2026) belegt und bleiben hier bewusst frei; dieser Abschnitt beginnt deshalb bei OA-189. Auftrag der koordinierenden Sitzung: die Inhaberentscheidung D-023 (`DECISIONS.md`) in die bestehenden Einträge eintragen und die daraus folgenden Arbeiten anhängen, nichts löschen, nichts umnummerieren. Quelle: D-023 samt den dort genannten Nachrichten des Inhabers vom 22.11.2026; eigene lesende Messung gegen `www.nexifyai.de` und `teileklar.shop` am 22.11.2026, 18:40 bis 18:41 UTC (`curl`, nur `GET`); Abruf der offenen Pull Requests über die GitHub-Schnittstelle um 18:42 UTC; `git show`/`grep` an `origin/main` und, für die Agenturseite, am Repository `nexfiy-ai-studio` (Commit `6eb6273`). Abschnitte 1 bis 9 sind bis auf sechs Zustände in Überschriften und die Stand-Zeilen unten unverändert. Die Nachführung 15.11. bis 21.11.2026 liegt in PR 206 und ist hier nicht enthalten.
+OA-179 bis OA-188 sind durch die offene PR 206 (Zweig `claude/stand-1115`, dort höchste Nummer OA-188; OA-179 zusätzlich im Zweig `claude/brain-mcp-auth`, PR 215; eigene lesende Prüfung 22.11.2026) belegt und bleiben hier bewusst frei; dieser Abschnitt beginnt deshalb bei OA-189. Auftrag der koordinierenden Sitzung: die Inhaberentscheidung D-023 (`DECISIONS.md`) in die bestehenden Einträge eintragen und die daraus folgenden Arbeiten anhängen, nichts löschen, nichts umnummerieren. Quelle: D-023 samt den dort genannten Nachrichten des Inhabers vom 22.11.2026; eigene lesende Messung gegen `www.nexifyai.de` und `teileklar.shop` am 22.11.2026, 18:40 bis 18:41 UTC (`curl`, nur `GET`); Abruf der offenen Pull Requests über die GitHub-Schnittstelle um 18:42 UTC; `git show`/`grep` an `origin/main` und, für die Agenturseite, am Repository `nexfiy-ai-studio` (Commit `6eb6273`). Abschnitte 1 bis 9 sind bis auf zwei Zustände in Überschriften und die Stand-Zeilen unten unverändert. Die Nachführung 15.11. bis 21.11.2026 liegt in PR 206 und ist hier nicht enthalten.
 
 ### 10.1 Geänderte Zustände
 
 | Eintrag | vorher | jetzt | Beleg |
 |---|---|---|---|
-| OA-069 | ENTSCHEIDUNG NÖTIG | HISTORIE-überholt | D-023 |
-| OA-070 | BLOCKIERT | HISTORIE-überholt | D-023 |
-| OA-079 | BLOCKIERT | HISTORIE-überholt | D-023 |
+| OA-069 | ENTSCHEIDUNG NÖTIG | HISTORIE-überholt | D-023 (die gestellte Frage ist entschieden) |
 | OA-082 | ENTSCHEIDUNG NÖTIG | HISTORIE-überholt | D-023 (Altpfade: 404 ohne Weiterleitung) |
-| OA-085 | OFFEN | HISTORIE-überholt | D-023 |
-| OA-086 | BLOCKIERT | HISTORIE-überholt | D-023 |
 
-Nur mit Stand-Zeile „Zurückgestellt nach D-023, Zustand bleibt“ versehen: OA-066 bis OA-068, OA-071 bis OA-078, OA-080, OA-081, OA-084, OA-087, OA-129. Bewusst unverändert, weil sie Bestandsdaten, Konten und Zugänge schützen und unabhängig von der Pause gelten: OA-011, OA-013, OA-171 bis OA-174.
+Nur mit Stand-Zeile „Zurückgestellt nach D-023, Zustand bleibt“ versehen (TEILEKLAR ist vorübergehend pausiert, nichts ist gestrichen): OA-066 bis OA-068, OA-070 bis OA-081, OA-084 bis OA-087, OA-129, OA-175. Ohne Stand-Zeile geblieben: OA-011, OA-013, OA-171 bis OA-174. Davon gilt OA-013 (offengelegte Schlüssel erneuern) unabhängig von der Pause; OA-011 und OA-173 sind zurückgestellt; ob Schutzkorrekturen am Shop-Dienst während der Pause zulässig sind (OA-171, OA-174; Entscheidung OA-172), entscheidet der Inhaber, bis dahin keine Arbeit daran (`PROGRESS.md`, „Offene Arbeiten“; D-023, Offen).
 
 ### 10.2 Zählung nach der Nachführung (183 Einträge auf diesem Stand; OA-179 bis OA-188 nicht mitgezählt)
 
 | Zustand | Stand `48f5072` | Stand D-023 |
 |---|---|---|
-| OFFEN | 49 | 50 |
+| OFFEN | 49 | 51 |
 | TEILWEISE | 13 | 15 |
-| BLOCKIERT | 38 | 35 |
+| BLOCKIERT | 38 | 38 |
 | ENTSCHEIDUNG NÖTIG | 60 | 59 |
-| HISTORIE-überholt | 8 | 14 |
+| HISTORIE-überholt | 8 | 10 |
 | ERLEDIGT | 10 | 10 |
 
-Herleitung: OFFEN 49 − 1 (085) + 2 neue (191, 192) = 50. TEILWEISE 13 + 2 neue (190, 193) = 15. BLOCKIERT 38 − 3 (070, 079, 086) = 35. ENTSCHEIDUNG NÖTIG 60 − 2 (069, 082) + 1 neu (189) = 59. HISTORIE-überholt 8 + 6 = 14. Mit dem Einbringen von PR 206 kommen dessen zehn Einträge hinzu; die Zählung ist dann neu herzuleiten.
+Herleitung: OFFEN 49 + 2 neue (191, 192) = 51. TEILWEISE 13 + 2 neue (190, 193) = 15. BLOCKIERT unverändert 38. ENTSCHEIDUNG NÖTIG 60 − 2 (069, 082) + 1 neu (189) = 59. HISTORIE-überholt 8 + 2 = 10. Summe 183. Mit dem Einbringen von PR 206 kommen dessen zehn Einträge hinzu; die Zählung ist dann neu herzuleiten.
 
 ### 10.3 Neue Einträge
 
@@ -2010,8 +2007,8 @@ Herleitung: OFFEN 49 − 1 (085) + 2 neue (191, 192) = 50. TEILWEISE 13 + 2 neue
 
 - **Priorität:** 1 Sicherheits-, Daten- und Betriebsrisiko
 - **Ziel:** Offene Shop- und Werkstatt-PRs nach D-023 einordnen und gegen unbeabsichtigtes Einbringen sichern. Reihenfolge laut Inhaber: „Auto-Merge stoppen → Shop-PRs einfrieren → Domaintrennung korrigieren → TEILEKLAR sicher offline nehmen → Agentur und Kundencenter fertigstellen.“
-- **Blocker:** Stand 22.11.2026: Auto-Merge an 187, 195, 208 und 219 laut koordinierender Sitzung um 18:33 UTC abgeschaltet und zurückgelesen (hier nicht nachgeprüft); alle zwölf Shop-PRs offen (eigener Abruf 18:42 UTC). Eingefroren: 60, 65, 67, 122, 147, 150, 187, 195, 208, 214, 218, 219 und `nexfiy-ai-studio` #4; die dortige Domaintrennung (301 in Shop-Routen) widerspricht D-023. Gemischte PRs 213, 73, 119 und `nexfiy-ai-studio` #2 und #3: nicht einbringen, bevor Shop- und Werkstattanteile herausgelöst sind. PR 211 (CI-Reparatur): nicht einbringen, solange die betroffenen PRs nicht gegen unbeabsichtigte Integration gesichert sind (ein wieder laufendes CI macht verbliebenes Auto-Merge wirksam, OA-027), danach reguläre unabhängige CI- und Sicherheitsprüfung. Freeze-Kommentare an den PRs und die Benachrichtigung der Agenten sind in Arbeit, nicht erledigt. Der Auto-Merge-Zustand der übrigen offenen PRs ist hier nicht geprüft.
+- **Blocker:** IST 22.11.2026, 18:57 UTC (öffentliche GitHub-Schnittstelle, eigener Abruf; deckungsgleich mit der Messung des unabhängigen Reviewers von 18:51 UTC): 54 offene PRs. `auto_merge: null` an den zwölf Shop- und Werkstatt-PRs 60, 65, 67, 122, 147, 150, 187, 195, 208, 214, 218, 219, an den gemischten PRs 73, 119, 213 sowie an 211 und 222. Auto-Merge weiter eingeschaltet an 17 PRs: 189, 192, 193, 197, 200, 202, 203, 204, 205, 207, 209, 210, 212, 215, 216, 220, 221. Eingefroren: die zwölf Shop-PRs und `nexfiy-ai-studio` #4; die dortige Domaintrennung (301 in Shop-Routen) widerspricht D-023. Gemischte PRs 213, 73, 119 und `nexfiy-ai-studio` #2 und #3: nicht einbringen, bevor Shop- und Werkstattanteile herausgelöst sind. Freeze- bzw. Sperrkommentar: an zwei Stichproben gelesen (PR 219, 18:40:02 UTC; PR 213, 18:40:41 UTC); für die übrigen und für `nexfiy-ai-studio` laut koordinierender Sitzung seit ca. 18:39 bis 18:40 UTC, hier nicht einzeln geprüft. GitHub Actions führt wieder Jobs aus (CI-Lauf 44750211973 auf `main` `9c9c806` am 20.11.2026: `next-web` und `repository` rot, drei Jobs grün; CI läuft auch auf PR-Köpfen). Damit kann verbliebenes Auto-Merge wirksam werden, sobald die Prüfungen eines PR bestehen (OA-027). PR 211 (CI-Reparatur von `next-web`): nicht einbringen, solange die betroffenen PRs nicht gegen unbeabsichtigte Integration gesichert sind, danach reguläre unabhängige CI- und Sicherheitsprüfung. Auf den Zweig von PR 208 wurde während des Einfrierens weiter gepusht (Kopf 18:42 UTC `dfc3417`, 18:57 UTC `47a4dee`, eigene Abrufe; laut Reviewer 18:38:48 UTC, ebenso PR 214 um 18:38:35 UTC, letzteres hier nicht nachgeprüft).
 - **Abhängigkeiten:** OA-027, OA-051, OA-022
-- **Fertig, wenn:** An keinem der genannten PRs ist Auto-Merge eingeschaltet (zurückgelesen, mit Uhrzeit); jeder trägt einen Freeze-Vermerk mit Verweis auf D-023; die gemischten PRs sind zerlegt oder ausdrücklich zurückgestellt; PR 211 ist nach Prüfung eingeordnet.
+- **Fertig, wenn:** An keinem der genannten PRs ist Auto-Merge eingeschaltet (zurückgelesen, mit Uhrzeit); über Auto-Merge an den 17 übrigen PRs ist entschieden (OA-027); jeder der genannten trägt einen Freeze-Vermerk mit Verweis auf D-023; die gemischten PRs sind zerlegt oder ausdrücklich zurückgestellt; PR 211 ist nach Prüfung eingeordnet.
 - **Aufwand:** M · **Ausführung:** koordinierende Sitzung auf Wort des Inhabers (fremde PRs werden sonst nicht verändert); Zerlegung Fabrik
-- **Quellen:** DECISIONS.md D-023; GitHub-Abruf offene PRs 22.11.2026, 18:42 UTC (53 offen); Angaben der koordinierenden Sitzung vom 22.11.2026
+- **Quellen:** DECISIONS.md D-023; GitHub-Abrufe offene PRs 22.11.2026, 18:42 UTC (53 offen) und 18:57 UTC (54 offen, mit Auto-Merge-Zustand); Angaben der koordinierenden Sitzung und des unabhängigen Reviewers vom 22.11.2026

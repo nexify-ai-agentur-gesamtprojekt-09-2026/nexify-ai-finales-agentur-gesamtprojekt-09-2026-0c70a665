@@ -32,7 +32,8 @@ Werkstatt-/Partner-/Kunden-/Affiliatebereiche“ im Abschnitt „Aktueller Gesam
 und kanonische Quelle“ sowie „NeX2fly, Leistungen und TEILEKLAR bleiben eigene
 sachliche Wege mit öffentlichen Informationsseiten“ im Abschnitt „Aktuelle Ausarbeitung
 nach angenommenem Grundentwurf“, soweit sie TEILEKLAR- oder Werkstattbereiche als Teil
-der Agenturwebsite führen. Unverändert gelten alle Regeln dieses Dokuments, namentlich
+der Agenturwebsite führen; Kunden- und Partnerbereiche des NeXify-Kundencenters sind
+davon nicht überholt. Unverändert gelten alle Regeln dieses Dokuments, namentlich
 die Mandantentrennung („Unterschiedliche Domains, Rollen oder Mandanten nicht durch
 einen gemeinsamen Cookie oder Clientclaim gleichsetzen“) und die Grenzen aus D-016 und
 D-017; Shop-Daten und Bestandsfälle bleiben erhalten. IST und OFFEN stehen nur in D-023:
@@ -238,6 +239,8 @@ Baue aus den HTML-Referenzen in `prototypen/` (`*.dc.html`) das Produkt. **Die R
 
 ## Aktueller Gesamtauftrag und kanonische Quelle · 26.10.2026
 
+Stand 22.11.2026: In Teilen HISTORIE, überholt durch D-023 (TEILEKLAR-, Werkstatt- und Shop-Bereiche sind nicht mehr Teil der Agenturwebsite); siehe Stand-Absatz unter „Aktuelle Führungsentscheidung“.
+
 Der Nutzer bestimmt `nexifyai-dev/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665` als gemeinsames Repository des Gesamtsystems. Neue Anwendungen, Regeln, Integrationsverträge, REA-Anbindung und Small-Business-Zuordnungen hier führen. Bestehende Quellstände und Herkunft bei der Konsolidierung bewahren; weder Force-Push noch Löschung der Ausgangsrepositories. GitHub ist die kanonische Quelle; eine bestätigte lokale GitLab-Anbindung ist nachgelagerte CI/Spiegelung mit Fast-forward, keine zweite Schreibquelle. Historische Mirror-/Watcher-/Factory-Skripte nicht ungeprüft starten.
 
 Zielaufbau nach Nutzerpräzisierung: portable React/Vite-/TypeScript-Ausgabe unter `apps/site` für öffentlichen Webauftritt und native NeX Agentic AIFly-Seitenleiste; die bestehende Next-/Clerk-Ausgabe unter `apps/web` bleibt als Referenz erhalten. Vercel ist Hauptbetrieb und nach aktueller Nutzerbestätigung die verbindliche Live-Vorschau. Eine ChatGPT-Backupausgabe war zuvor gewünscht; ihre fehlende Deploymentfähigkeit ist kein Blocker des aktuellen Veröffentlichungswegs. Neue Ergebnisse als direkten Vercel-Link liefern, nicht als ChatGPT-Bildausgabe. Bestehende `.cloud`-Seite bis Fertigstellung erhalten; eigene Agentur- und TEILEKLAR-Funktionen mit klaren Anwendungskontexten. Affilinet Portal Aachen ist ein gesondertes, pausiertes Kundenprojekt und kein Agenturmodul, keine Lieferabhängigkeit und kein zu migrierender Datenbestand. Die Seitenarchitektur umfasst die eigenen TEILEKLAR-, Werkstatt-/Partner-/Kunden-/Affiliatebereiche. Zielmarkt: 90 Prozent Deutschland als Nutzerziel, kein behaupteter Analyticswert. Einheitliche deutsche Ansprache, passende Folgeseiten und überprüfte Verlinkungen; NL-/FR-Schlüsselsätze erhalten. Unterschiedliche Domains, Rollen oder Mandanten nicht durch einen gemeinsamen Cookie oder Clientclaim gleichsetzen.
@@ -398,6 +401,8 @@ normal verwenden, keine Tokenlogs und keine Secretdateisuche.
 
 
 ## Aktuelle Ausarbeitung nach angenommenem Grundentwurf
+
+Stand 22.11.2026: In Teilen HISTORIE, überholt durch D-023 (TEILEKLAR-, Werkstatt- und Shop-Bereiche sind nicht mehr Teil der Agenturwebsite); siehe Stand-Absatz unter „Aktuelle Führungsentscheidung“.
 
 Die Oberfläche vom 26.10.2026 ist vom Nutzer nur als grober Anfang akzeptiert,
 nicht als final abgenommen. Folgeauftrag: alle Seiten, Inhalte, Nutzerwege und
