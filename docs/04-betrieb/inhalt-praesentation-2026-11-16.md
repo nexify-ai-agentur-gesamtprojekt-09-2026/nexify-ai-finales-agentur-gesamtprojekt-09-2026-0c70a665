@@ -303,6 +303,13 @@ Warnung vor Passwörtern und Zahlungsdaten bleibt. Läuft inzwischen ein Modell,
 Satz auf `/ki-hinweise` zu berichtigen. In beiden Fällen ist **ein** Name für den Dialog
 festzulegen.
 
+> **Korrigiert am 22.11.2026, siehe Nachtrag 4, K13:** Der Name ist bereits entschieden.
+> `docs/09-final/auftragsregister-2026-11-08.md` hält unter dem 09.11.2026 fest: „Der
+> Produktname gilt, wie er im Code steht: Chat-Panel ‚NeX Agentic AIFly' mit Untertitel
+> ‚NeXify AI'" — Freigabe Pascal. Die Richtung der Maßnahme kehrt sich damit um: Nicht der
+> Chat ist umzubenennen, sondern der Satz auf `/produkte/aifly-oracle`, der AIFly ORACLE
+> als den Antwortenden im Chat ausgibt, ist an die Entscheidung anzugleichen.
+
 ### 08 · schwer · `/kontakt` und zehn weitere Seiten · Die zugesagte Vorgangsnummer ist nicht belegt
 
 Zitate. Auf elf Seiten, im Fragenblock: „Beschreiben Sie Ihr Vorhaben über das
@@ -764,11 +771,20 @@ Zitat: „**Startseite/**" statt „Startseite". Betrifft `/leistungsumfang`,
 steht „Startseite" ohne Schrägstrich. Grenzfall zur Darstellung; der Hinweis geht an die
 Sitzung auf `claude/eigene-seiten-praesentation`.
 
-### 31 · leicht · `/agb` und `/avv` und `/widerruf` · Keine Brotkrume, kein Weg zurück
+### 31 · leicht · `/agb` und `/avv` und `/widerruf` · Die Brotkrume lässt „Startseite" aus
+
+> **Korrigiert am 22.11.2026, siehe Nachtrag 4, K12.** Die ursprüngliche Fassung sprach von
+> „kein Weg zurück". Das war falsch und ist zurückgenommen.
 
 Die drei Seiten beginnen mit „NEXIFY AI / Rechtliches" ohne den Eintrag „Startseite", den
-alle 26 anderen Seiten tragen. Zusammen mit Befund 05 (keine eingehenden Links) bedeutet
-das: Wer auf `/agb` landet, hat keinen sichtbaren Weg in den Auftritt zurück.
+alle 26 anderen Seiten tragen.
+
+**Nicht zutreffend war der Schluss daraus.** Nachgezählt im ausgelieferten HTML von
+`/agb`: achtmal `/kontakt`, sechsmal `/datenschutz`, viermal `/impressum`, dreimal die
+Startseite, dazu die vollständige Kopf- und Fußzeile des Auftritts. Wer auf `/agb` landet,
+findet sehr wohl zurück. Es bleibt eine kosmetische Auslassung in der Brotkrumenzeile.
+
+Unberührt bleibt Befund 05: Es führt kein Link **auf** diese Seiten.
 
 ### 32 · leicht · `/agb` · Deutsches Recht zitiert, niederländisches Recht vereinbart
 
@@ -862,7 +878,13 @@ vorgeschlagen; die Entscheidung liegt beim Inhaber, bei Rechtsfragen nach Prüfu
 > **Ergänzt am 16.11.2026:** Nachtrag 2 nennt eine vierte Maßnahme, die billiger ist als
 > alle drei hier und fast ebenso viel bewirkt — das bereits vorhandene Abrechnungsmodell
 > und den Tagesbericht aus den AGB auf `/preise-ablauf` und `/wissen` sichtbar machen
-> (Befund 37 und 38). Sie braucht keine Inhaberentscheidung und keine Rechtsprüfung.
+> (Befund 37 und 38). ~~Sie braucht keine Inhaberentscheidung und keine Rechtsprüfung.~~
+>
+> **Korrigiert am 22.11.2026, siehe Nachtrag 4, K10:** Dieser Satz war falsch. Tagessatz,
+> tägliche Abrechnung und tägliche Beendbarkeit sind Vertragsbedingungen aus AGB, die
+> dieser Bericht selbst als Entwurf mit offenen Widersprüchen (R2 bis R8) führt. Sie auf
+> Marketingseiten zu veröffentlichen, wäre eine kundengerichtete Zusage und gehört hinter
+> dieselbe kaufmännische und rechtliche Freigabe wie die Dokumente selbst.
 
 **Erstens: Den Unfertigkeitshinweis aus der globalen Fußzeile und aus den Teaserkarten
 nehmen.** (Befund 01) Das ist die einzige Maßnahme, die den Gesamteindruck in einer Nacht
@@ -1471,10 +1493,15 @@ was heute steht, statt zu bestreiten, was nicht belegt ist.
 
 ## Was diese Korrekturen für die Bewertung bedeuten
 
-Die 90-Prozent-Einschätzung in Nachtrag 2 ändert sich nur in einem Punkt: Die Station
-`/ki-hinweise` und die Sprachfassungen fallen als Verlustquellen weg. Kipppunkt bleibt
-`/preise-ablauf`, Bruch bleibt `/teileklar`. Beide sind von diesen Korrekturen nicht
-berührt und beide sind belegt.
+Die 90-Prozent-Einschätzung in Nachtrag 2 ändert sich nur in einem Punkt: Die
+Sprachfassungen fallen als Verlustquelle weg. Kipppunkt bleibt `/preise-ablauf`, Bruch
+bleibt `/teileklar`. Beide sind von diesen Korrekturen nicht berührt und beide sind belegt.
+
+> **Korrigiert am 22.11.2026, siehe Nachtrag 4, K11:** Hier stand zunächst, auch die
+> Station `/ki-hinweise` falle weg. Das war ein Fehler: Keine der Korrekturen K2 bis K8
+> nimmt Befund 07 zurück. Die Station bleibt in der Verlusttabelle, und zwar in beiden
+> denkbaren Zuständen — läuft kein Modell, gilt die Kritik an der Produktvorführung; läuft
+> eines, ist die öffentliche Aussage „ohne Live-KI-Modell" ein sichtbarer Widerspruch.
 
 Und eine Einordnung, die nach der Gegenprüfung deutlicher ist als vorher: **In fünf von
 sechs Fällen habe ich eine bewusste, dokumentierte Entscheidung des Hauses für einen Mangel
@@ -1484,3 +1511,121 @@ Das Problem ist seltener, dass etwas falsch entschieden wurde, und häufiger, da
 richtige Entscheidung auf den Seiten nicht erkennbar wird.
 
 Stand Nachtrag 3: 16.11.2026, 03:45 UTC.
+
+---
+
+# Nachtrag 4 · 22.11.2026, 18:45 UTC · Fünf weitere Korrekturen, davon eine grundsätzliche
+
+Das Gespräch am 16.11.2026 liegt zurück. Dieser Nachtrag ändert nichts mehr daran; er
+berichtigt den Bericht, damit er als Arbeitsgrundlage stimmt. Der automatische Prüfer hat
+auf dem Stand `4dde9f7` fünf weitere Einwände erhoben. **Alle fünf treffen zu**, jeder an
+der Primärquelle nachgeprüft.
+
+## K9 · Die Übergabetabelle R1 bis R13 ist ein Parallelregister und darf keines bleiben
+
+Gemessen am 22.11.2026: `PROGRESS.md`, `DECISIONS.md` und `config/acceptance-coverage.json`
+enthalten **null Treffer** für diesen Bericht und null für die Kennungen R1 bis R13.
+
+`AGENTS.md` verlangt ausdrücklich, keine zweite Aufgabenverwaltung und keine
+Parallelregister zu schaffen. Genau das ist Abschnitt 6 heute: dreizehn Arbeitspakete,
+von denen mehrere Freigabeblocker sind und von denen Nachtrag 2 und 3 inzwischen eines
+zurückgezogen (R9) und mehrere umformuliert haben — alles nur in dieser Datei. Wer die
+Rechtsprüfung übernimmt, kann hier einen überholten Punkt abarbeiten oder einen gültigen
+übersehen.
+
+**Das ist kein Inhaltsfehler des Berichts, sondern ein Führungsfehler in seiner Ablage,
+und er geht auf mich.**
+
+Was ich dagegen tun kann, ist begrenzt: Diese Sitzung hat den Auftrag, ausschließlich
+diese eine Datei zu schreiben. `PROGRESS.md` und `config/acceptance-coverage.json` fasse
+ich nicht an. Deshalb hier die ausdrückliche Feststellung, die bis zur Übernahme gilt:
+
+> **Abschnitt 6 ist kein Register.** Er ist eine einmalige Übergabeliste zum Stand
+> 16.11.2026, fortgeschrieben am 22.11.2026. Verbindlich wird jeder Punkt erst, wenn er in
+> das führende Register übernommen ist. Bis dahin ist der jeweils letzte Nachtrag maßgeblich,
+> nicht die Tabelle: **R9 ist zurückgezogen**, R1 bis R8 und R10 bis R13 stehen.
+
+Nächster Schritt, Owner: Inhaber oder die Sitzung, die in die führenden Dokumente schreiben
+darf. Fälligkeit: vor der Beauftragung der Rechtsprüfung, sonst arbeitet sie auf einem
+Stand, den niemand pflegt.
+
+## K10 · „Braucht keine Freigabe" war falsch — das Abrechnungsmodell ist Vertragsinhalt
+
+In Nachtrag 2 hatte ich empfohlen, Tagessatz, Tagesbericht und tägliche Beendbarkeit auf
+`/preise-ablauf` und `/wissen` sichtbar zu machen, und dazu geschrieben, das brauche „keine
+Inhaberentscheidung und keine Rechtsprüfung". **Dieser Satz ist zurückgenommen.**
+
+Der Einwand trifft genau: Es sind Zahlungs- und Kündigungsbedingungen aus Dokumenten, die
+dieser Bericht selbst als Entwürfe mit offenen Widersprüchen führt — Zahlungsziel (R2),
+24-Stunden-Einwandsfrist (R3), zwei Abnahmefiktionen (R4), Verbindlichkeit von Angeboten
+(R5). Sie auf Marketingseiten zu stellen, hieße, einem Interessenten tägliche Abrechnung
+und tägliche Kündbarkeit öffentlich zuzusagen, bevor der zugrundeliegende Vertrag steht.
+
+Korrigiert in Abschnitt 7 und hier. Die Maßnahme selbst bleibt richtig und bleibt die
+wirksamste — sie gehört nur **hinter** dieselbe Freigabe wie die Rechtstexte (R11), nicht
+daran vorbei. Was ohne Freigabe geht, bleibt unverändert: Der Inhaber kann das Modell im
+Gespräch selbst vortragen.
+
+## K11 · `/ki-hinweise` gehört zurück in die Verlusttabelle
+
+Am Ende von Nachtrag 3 stand, nach den Korrekturen fielen „die Station `/ki-hinweise` und
+die Sprachfassungen" als Verlustquellen weg. Für die Sprachfassungen stimmt das (K2). Für
+`/ki-hinweise` nicht: **Keine der Korrekturen K2 bis K8 nimmt Befund 07 zurück.**
+
+Der Befund gilt in beiden denkbaren Zuständen. Läuft kein Sprachmodell, bleibt die Kritik,
+dass die KI-Agentur ihre eigene KI nicht vorführt. Läuft eines, ist die öffentliche Aussage
+auf `/ki-hinweise` falsch und damit ein sichtbarer Widerspruch. Die Station ist wieder
+eingesetzt; die Einschätzung in Nachtrag 2 war insoweit richtig und ich hatte sie ohne
+Grund abgeschwächt.
+
+## K12 · `/agb` ist kein Weg ohne Rückweg — Befund 31 war überzogen
+
+Befund 31 behauptete, wer auf `/agb` lande, habe „keinen sichtbaren Weg in den Auftritt
+zurück". Nachgezählt im ausgelieferten HTML von `/agb`: achtmal `/kontakt`, sechsmal
+`/datenschutz`, viermal `/impressum`, dreimal die Startseite, dazu die vollständige Kopf-
+und Fußzeile.
+
+Die Ursache des Fehlers ist mein Messverfahren: Für die Lesbarkeit hatte ich alle Zeilen
+entfernt, die auf mindestens zwanzig Seiten vorkommen — also genau die geteilte Navigation.
+Aus ihrer Abwesenheit in meiner bereinigten Fassung habe ich auf Abwesenheit auf der Seite
+geschlossen. Das ist derselbe Fehlertyp wie bei `hreflang` (K2).
+
+Was bleibt: Die Brotkrumenzeile lässt „Startseite" aus — eine kosmetische Auslassung.
+Unberührt bleibt Befund 05, der etwas anderes sagt: Es führt kein Link **auf** diese Seiten.
+
+## K13 · Der Name des Chat-Panels ist bereits vom Inhaber entschieden
+
+In Befund 07 hatte ich vorgeschlagen, für den Dialog einen Namen festzulegen, und „AIFly
+ORACLE" als genügend bezeichnet. Nachgelesen in
+`docs/09-final/auftragsregister-2026-11-08.md`, Eintrag vom 09.11.2026: „**Entscheidung
+(09.11.2026, Freigabe Pascal):** Der Produktname gilt, wie er im Code steht: Chat-Panel
+‚NeX Agentic AIFly' mit Untertitel ‚NeXify AI'."
+
+Mein Vorschlag hätte also einen Namen zurückgebracht, den der Inhaber für das Panel
+ausdrücklich verworfen hat. **Zurückgenommen.**
+
+Die Richtung der Maßnahme kehrt sich um, und der Befund wird dadurch schärfer, nicht
+milder: Das Panel heißt richtig, wie es heißt. Falsch ist der Satz auf
+`/produkte/aifly-oracle` — „AIFly ORACLE ist das KI-System, das … Ihnen im Chat dieser
+Website antwortet" —, denn im Chat antwortet nach der Entscheidung NeX Agentic AIFly.
+Anzugleichen ist die Produktseite, nicht der Chat.
+
+## Was das über diesen Bericht sagt
+
+Mit Nachtrag 4 sind es zwölf Korrekturen an eigenen Befunden. Das Muster ist in elf von
+zwölf Fällen dasselbe: **Ich habe aus dem, was ich auf den öffentlichen Seiten nicht sah,
+auf Abwesenheit geschlossen — und übersehen, dass es an anderer Stelle entschieden,
+implementiert oder dokumentiert war.** Zweimal lag es an meinem Messverfahren (`hreflang`,
+Navigation auf `/agb`), neunmal an einer Entscheidung oder Umsetzung außerhalb der 29
+Seiten.
+
+Für den Leser dieses Berichts folgt daraus eine Lesehilfe: **Jeder Befund, der mit „fehlt"
+oder „gibt es nicht" argumentiert, ist vor dem Handeln gegen Repository und Register zu
+prüfen.** Die Befunde, die mit einem Zitat von der Seite argumentieren — und das sind die
+schweren: 01, 02, 04, 05, 06, 07, 08, 10, 11, 12, 37, 38, 39 — sind davon nicht betroffen;
+sie belegen, was dasteht, nicht was fehlt.
+
+Unverändert und unbestritten bleiben Kipppunkt und Bruch: `/preise-ablauf` nennt keine
+Zahl, und `/teileklar` zeigt null Artikel hinter einem dauerhaften Ladehinweis.
+
+Stand Nachtrag 4: 22.11.2026, 18:45 UTC.
