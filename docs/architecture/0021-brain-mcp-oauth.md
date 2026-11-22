@@ -86,7 +86,17 @@ Rückweg Stufe 3: Container `brain-gate` stoppen → Router verschwindet, die Pf
 
 Umschaltung (Stufe 5, nur nach Freigabe): `/mcp` bekommt einen zweiten Router auf brain-gate mit höherer Priorität;
 `brain-auth` und der alte Router bleiben in der Konfiguration, werden nur deaktiviert (Priorität), nicht entfernt.
-Rückweg: Priorität zurück. `/v2/mcp` bleibt als zweite Ressource gültig, damit verbundene Clients nicht neu anmelden müssen.
+Rückweg: Priorität zurück. `/v2/mcp` bleibt als eigene Ressource gültig, damit verbundene Clients nicht neu anmelden müssen.
+
+`/mcp` ist nach der Umschaltung eine **zweite, eigene Ressource** (`https://brain.nexifyai.cloud/mcp`) mit eigenen
+Metadaten unter `/.well-known/oauth-protected-resource/mcp` und eigenem `resource_metadata` in der 401. Token bleiben je
+Ressource gebunden; ein `/v2/mcp`-Token gilt an `/mcp` nicht und umgekehrt. Clients, die auf `/mcp` wechseln, melden sich
+einmal neu an. Metadaten, Zustimmung und Tests 2 bis 7 laufen für beide Ressourcen.
+
+**LibreChat-Umgehung schließen:** Die Umschaltung des Routers wirkt nicht auf das Docker-Netz `librechat_default`, über
+das LibreChat `cognee-mcp` direkt erreicht. Zur Stufe 5 gehören deshalb: LibreChat auf `brain-gate` (mit eigener
+Zulassung als `agent`) umstellen, danach den Alias `brain-mcp` aus `librechat_default` herausnehmen (Konfiguration
+bleibt als Kommentar erhalten). Rückweg: Alias wieder eintragen. Beides ist eine Serveränderung nach D-016.
 
 ## 4. Anmeldefluss
 
@@ -156,13 +166,22 @@ Herabstufung wirkt also sofort, eine Hochstufung erst nach neuer Zustimmung.
 
 - Muster wie ADR-0008: Wurzeltabelle `mandant`, jede mandantenbezogene Tabelle mit `mandant_id NOT NULL`,
   `ENABLE` **und** `FORCE ROW LEVEL SECURITY`, Richtlinien mit `USING` **und** `WITH CHECK`.
+- Projektgrenze ebenso: jede projektbezogene Tabelle trägt zusätzlich `projekt_id NOT NULL`, und beide Prädikate
+  (`mandant_id = app.mandant_id AND projekt_id = app.projekt_id`) stehen in `USING` und `WITH CHECK`. Die
+  Zulassungsprüfung ist nach (Subjekt, Mandant, Projekt) geschlüsselt.
+- Auflösen des Tokens vor dem Kontext: Die Token-Tabelle ist für `brain_gate_app` nicht lesbar. Eine Funktion
+  `token_aufloesen(hmac)` mit `SECURITY DEFINER` (eigene Eigentümerrolle, fester `search_path`) liefert für genau einen
+  exakt passenden HMAC nur Subjekt, Mandant, Projekt, Ressource, Ablauf und Widerrufsstand, sonst nichts – keine
+  Aufzählung, kein Präfixvergleich. Danach setzt dieselbe Transaktion den Kontext mit `SET LOCAL`.
 - brain-gate verbindet sich als Rolle `brain_gate_app` **ohne** `BYPASSRLS`, nicht Tabelleneigentümer. Je Anfrage
   eine Transaktion mit `SET LOCAL app.mandant_id`, `app.projekt_id`, `app.subjekt_id` aus dem **in der Datenbank
   nachgeschlagenen** Token-Datensatz, nie aus Kopfzeilen oder Werkzeugargumenten. Fehlt der Wert, sieht die Rolle
   keine Zeile.
 - Ein Token ist an genau **einen** Mandanten und **ein** Projekt gebunden (bei der Zustimmung gewählt). Wechsel = neue Zustimmung.
 - Backend Cognee: je Mandant ein eigener Cognee-Benutzer bzw. -Mandant mit eigenen Datensätzen
-  (`ENABLE_BACKEND_ACCESS_CONTROL=True` ist gesetzt). brain-gate wählt die Backend-Identität aus dem Mandanten des
+  (`ENABLE_BACKEND_ACCESS_CONTROL=True` ist gesetzt). **Voraussetzung, nicht belegt:** Version, Anmelde-API und das
+  Verhalten je Benutzer der wiederhergestellten Cognee-Instanz sind unbekannt (Dienst ohne Container). Kein
+  Cognee-Werkzeug wird freigeschaltet, bevor Test 1b am echten Dienst bestanden ist. brain-gate wählt die Backend-Identität aus dem Mandanten des
   Tokens. Die Backend-Zugänge liegen in OpenBao, nicht in brain-gate-db und nie im Token.
 - Grenze, ehrlich: Cognees eigene Daten liegen in LanceDB/Kuzu je Datensatz, **nicht** unter PostgreSQL-RLS.
   Dort trennt Cognees Rechtemodell plus getrennte Backend-Identität, nicht RLS (siehe Abschnitt 11).
@@ -213,12 +232,20 @@ Empfehlung: **A** als Ziel. Wenn der Nachweis schnell gebraucht wird: B zusätzl
 - Ereignisse mindestens: Registrierung, Anmeldung ok/abgewiesen, Zustimmung, Token ausgestellt/erneuert/widerrufen,
   Refresh-Wiederverwendung, jeder Werkzeugaufruf, jede 401/403, Zulassung erteilt/entzogen, „überall abmelden“.
 - Lesbar nur für `inhaber` in `/konto`; Export als JSONL.
+- Begrenzt gegen Missbrauch: Anfragen ohne gültiges Token werden je IP-Präfix gedrosselt (60/min an `/v2/mcp` und
+  `/oauth/*`, danach 429 ohne Datenbankzugriff). Abweisungen ohne Identität werden je IP-Präfix und Minute zu **einer**
+  Zeile verdichtet (Zähler statt Einzelzeile). Aufbewahrung: identitätslose Abweisungen 30 Tage, alle übrigen
+  Ereignisse 1 Jahr, danach Export nach R2 und Archivierung (nicht Löschung). Alarm, wenn die Audit-Tabelle 1 GiB
+  oder die Platte 95 % erreicht.
 
 ## 10. Sicherheitsgrenzen, die Stufe 2 zuerst als Test schreibt
 
 Jeder Test muss gegen den heutigen Stand (kein brain-gate) scheitern und gegen den Bau bestehen:
 
 1. fremder Mandant: Token für Mandant A liest/schreibt keine Zeile von B (echte PostgreSQL, RLS aktiv, als `brain_gate_app`).
+1c. fremdes Projekt im selben Mandanten: Token für Projekt A liest/schreibt keine Zeile von Projekt B.
+1d. Token-Auflösung: `token_aufloesen` liefert für einen falschen oder gekürzten HMAC nichts und lässt sich nicht zur
+   Aufzählung nutzen; ohne gesetzten Kontext sieht `brain_gate_app` keine Zeile.
 1b. fremder Mandant im Backend: über den Cognee-Adapter mit getrennten Backend-Identitäten A und B sucht, liest und
    schreibt A keinen Datensatz von B; auch ein Werkzeugargument mit B's Datensatz-ID wird abgewiesen (echter Cognee-Dienst,
    nicht gemockt – setzt die Wiederherstellung von Cognee voraus).
@@ -246,7 +273,7 @@ Jeder Test muss gegen den heutigen Stand (kein brain-gate) scheitern und gegen d
 - Kein Single-Sign-on mit `nexifyai.de`, keine Kunden-Selbstregistrierung, keine Abrechnung je Aufruf.
 - Kein Hochverfügbarkeitsbetrieb: ein Container, ein Server; fällt srv1941843, fällt brain (wie heute).
 - Er ersetzt `brain-auth` und den LibreChat-Zugang über `librechat_default` nicht in Stufe 3; LibreChat erreicht
-  `cognee-mcp` intern weiterhin ohne Wand. Das bleibt bis zur Umschaltung ein offener Punkt.
+  `cognee-mcp` intern weiterhin ohne Wand. Geschlossen wird das erst in Stufe 5 (Abschnitt 3).
 - Er führt keine Modellaufrufe ein. Falls Werkzeuge später Cognee-`cognify` auslösen, gilt
   `deepseek/deepseek-v4.1-flash-1017`, Reasoning `high`; IST in der Compose-Datei ist der Vorgabewert ohne 1017 (Befund).
 
@@ -257,7 +284,7 @@ Jeder Test muss gegen den heutigen Stand (kein brain-gate) scheitern und gegen d
 | 2 | nur Code und Tests im Repo | Zweig verwerfen |
 | 3 | neuer Container `brain-gate` + `brain-gate-db` (eigenes Compose-Projekt, Images auf Digest), eigene Volumes | Projekt stoppen; Volumes bleiben (nichts löschen); `/mcp` unberührt |
 | 4 | echter Client verbindet sich | Grant widerrufen |
-| 5 | zweiter Router auf `/mcp` mit höherer Priorität | Priorität zurück; alter Router und `brain-auth` sind nie entfernt |
+| 5 | zweiter Router auf `/mcp` mit höherer Priorität; LibreChat auf brain-gate, Alias `brain-mcp` aus `librechat_default` heraus | Priorität zurück, Alias wieder eintragen; alter Router und `brain-auth` sind nie entfernt |
 
 ## 13. Entscheidungen, die beim Inhaber liegen
 
@@ -275,7 +302,8 @@ Jeder Test muss gegen den heutigen Stand (kein brain-gate) scheitern und gegen d
 ## 14. Vor dem Bau zu prüfen (OFFEN)
 
 - Die Werkzeuge aus Abschnitt 6.1 (`brain.wer_bin_ich`, `brain.status`, `brain.suchen`, `brain.merken`,
-  `brain.entwurf_anlegen`, `brain.verarbeiten`) stehen noch in keinem Werkzeugvertrag. Vor Stufe 2 kommen sie mit
+  `brain.entwurf_anlegen`, `brain.verarbeiten`) stehen noch in keinem Werkzeugvertrag; `config/brain/tools.json` kennt
+  heute andere Kennungen (`wissen.lesen`, `dateien`, `git` …) und kein `cognify`. Vor Stufe 2 kommen sie mit
   Klasse, Rolle und Scope in `config/brain/tools.json`; brain-gate liest die Zuordnung nur von dort, und die Tests aus
   Abschnitt 10 prüfen gegen genau diese Quelle.
 
