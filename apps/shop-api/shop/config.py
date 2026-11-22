@@ -14,6 +14,9 @@ PUBLIC_ORIGIN = os.environ["PREVIEW_PUBLIC_ORIGIN"].rstrip("/")
 VAT_PERCENT = Decimal(os.environ["SHOP_VAT_PERCENT"])
 DEFAULT_MARKUP_PERCENT = Decimal("30")
 WORKSHOPS_FILE = ROOT / "prototypen" / "assets" / "workshops.json"
+# Werkstätten Deutschland aus OpenStreetMap (ODbL-1.0), erzeugt mit tools/import_werkstaetten_sheet.py
+WORKSHOPS_OSM_DE_FILE = ROOT / "prototypen" / "assets" / "workshops-osm-de.json"
+WORKSHOP_FILES = (WORKSHOPS_FILE, WORKSHOPS_OSM_DE_FILE)
 GATEWAY_PORT = int(os.environ.get("LEGACY_GATEWAY_PORT", "3003"))  # GATEWAY_PORT belongs to the platform proxy; do not bind it.
 NEXT_PORT = 3000
 SHIP_SAMPLE_COUNTRY = os.environ.get("SHIP_SAMPLE_COUNTRY", "DE")

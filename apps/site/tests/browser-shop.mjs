@@ -15,7 +15,7 @@ import {createShopMock,MOCK_LABEL} from './fixtures/shop-api-mock.mjs';
 const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'playwright');
 const root=fileURLToPath(new URL('../',import.meta.url)),repo=fileURLToPath(new URL('../../../',import.meta.url));
 const OUTPUT='evidence/shop-ui-mock-2026-11-09/browser-shop.json';
-const sources=['apps/web/components/shop/api.ts','apps/web/components/shop/CatalogView.tsx','apps/web/components/shop/CategoryList.tsx','apps/web/components/shop/ProductCard.tsx','apps/web/components/shop/ProductDetail.tsx','apps/web/components/shop/CartView.tsx','apps/web/components/shop/Checkout.tsx','apps/web/components/shop/AddressStep.tsx','apps/web/components/shop/SellerInfo.tsx','apps/web/components/shop/CommerceHeader.tsx','apps/web/components/shop/PublicShopContent.tsx','apps/web/components/shop/shipping-hint.ts','apps/web/components/shop/shop.css','apps/web/components/shop/Storefront.css','apps/web/components/PublicExperience.tsx','apps/site/src/main.tsx','config/shop-interface-copy.json','apps/site/tests/browser-shop.mjs','apps/site/tests/fixtures/shop-api-mock.mjs'];
+const sources=['apps/web/components/shop/api.ts','apps/web/components/shop/ProductPlaceholder.tsx','apps/web/components/shop/ProductStory.tsx','apps/web/components/shop/product-story-copy.ts','apps/web/components/shop/CatalogView.tsx','apps/web/components/shop/CategoryList.tsx','apps/web/components/shop/ProductCard.tsx','apps/web/components/shop/ProductDetail.tsx','apps/web/components/shop/CartView.tsx','apps/web/components/shop/Checkout.tsx','apps/web/components/shop/AddressStep.tsx','apps/web/components/shop/SellerInfo.tsx','apps/web/components/shop/CommerceHeader.tsx','apps/web/components/shop/PublicShopContent.tsx','apps/web/components/shop/shipping-hint.ts','apps/web/components/shop/shop.css','apps/web/components/shop/Storefront.css','apps/web/components/PublicExperience.tsx','apps/site/src/main.tsx','config/shop-interface-copy.json','apps/site/tests/browser-shop.mjs','apps/site/tests/fixtures/shop-api-mock.mjs'];
 async function hashes(){return Object.fromEntries(await Promise.all(sources.map(async path=>[path,createHash('sha256').update(await readFile(join(repo,path))).digest('hex')])));}
 const before=await hashes();
 const cache=await mkdtemp(join(tmpdir(),'nexify-browser-shop-'));
@@ -95,7 +95,7 @@ try{
   await go('/teileklar/produkt/mock-0004');await page.locator('[data-testid="product-detail"]').waitFor();
   assert.ok((await page.locator('[data-testid="stock-label"]').first().innerText()).includes('unbekannt'));assert.equal(await page.locator('[data-testid="add-to-cart-button"]').isDisabled(),true);
   await go('/teileklar/produkt/mock-0005');await page.locator('[data-testid="product-detail"]').waitFor();
-  assert.equal(await page.locator('.tk-image img').count(),0,'a non-allowlisted image host is never rendered');assert.equal(await page.locator('.tk-image-missing').count()>0,true);
+  assert.equal(await page.locator('.tk-image img').count(),0,'a non-allowlisted image host is never rendered');assert.equal(await page.locator('[data-testid="product-placeholder"]').count()>0,true,'the branded placeholder stands in for the refused image');
   await go('/teileklar/produkt/gibt-es-nicht');await page.locator('[data-testid="product-missing"]').waitFor();assert.ok((await body()).includes('Artikel nicht gefunden'));
  });
  await check('add_to_cart_creates_httponly_visitor_cart_and_cart_survives_reload',async()=>{

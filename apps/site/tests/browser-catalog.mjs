@@ -15,7 +15,7 @@ import {createShopMock,MOCK_LABEL} from './fixtures/shop-api-mock.mjs';
 const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'playwright');
 const root=fileURLToPath(new URL('../',import.meta.url)),repo=fileURLToPath(new URL('../../../',import.meta.url));
 const OUTPUT='evidence/shop-ui-mock-2026-11-09/browser-catalog.json';
-const sources=['apps/web/components/shop/api.ts','apps/web/components/shop/CatalogView.tsx','apps/web/components/shop/CategoryList.tsx','apps/web/components/shop/ProductCard.tsx','apps/web/components/shop/ProductDetail.tsx','apps/web/components/shop/PublicShopContent.tsx','apps/web/components/shop/CommerceHeader.tsx','apps/web/components/shop/shop.css','apps/web/components/shop/Storefront.css','apps/web/components/PublicExperience.tsx','apps/site/src/main.tsx','config/shop-interface-copy.json','apps/site/tests/browser-catalog.mjs','apps/site/tests/fixtures/shop-api-mock.mjs'];
+const sources=['apps/web/components/shop/api.ts','apps/web/components/shop/ProductPlaceholder.tsx','apps/web/components/shop/ProductStory.tsx','apps/web/components/shop/product-story-copy.ts','apps/web/components/shop/CatalogView.tsx','apps/web/components/shop/CategoryList.tsx','apps/web/components/shop/ProductCard.tsx','apps/web/components/shop/ProductDetail.tsx','apps/web/components/shop/PublicShopContent.tsx','apps/web/components/shop/CommerceHeader.tsx','apps/web/components/shop/shop.css','apps/web/components/shop/Storefront.css','apps/web/components/PublicExperience.tsx','apps/site/src/main.tsx','config/shop-interface-copy.json','apps/site/tests/browser-catalog.mjs','apps/site/tests/fixtures/shop-api-mock.mjs'];
 async function hashes(){return Object.fromEntries(await Promise.all(sources.map(async path=>[path,createHash('sha256').update(await readFile(join(repo,path))).digest('hex')])));}
 const before=await hashes();
 const cache=await mkdtemp(join(tmpdir(),'nexify-browser-catalog-'));
@@ -67,7 +67,7 @@ try{
   const sourcesShown=await page.locator('.tk-public-commerce .tk-image img').evaluateAll(nodes=>nodes.map(node=>({src:node.src,policy:node.referrerPolicy,loading:node.loading})));
   assert.ok(sourcesShown.length>=1&&sourcesShown.every(image=>image.src.startsWith('https://cdnbigbuy.com/images/')&&image.policy==='no-referrer'&&image.loading==='lazy'));
   assert.ok(imageRequests.length>=1&&imageRequests.every(url=>url.startsWith('https://cdnbigbuy.com/images/')),'only the allow-listed supplier path is requested');
-  assert.equal(await page.locator('[data-testid="product-card-mock-0005"] .tk-image-missing').count(),1,'the item with a foreign image host shows the missing-image notice');
+  assert.equal(await page.locator('[data-testid="product-card-mock-0005"] [data-testid="product-placeholder"]').count(),1,'the item with a foreign image host shows the missing-image notice');
   assert.equal(external.includes('https://evil.example'),false);
  });
  await check('browsing_is_read_only_no_write_request_no_visitor_cookie_no_cart',async()=>{

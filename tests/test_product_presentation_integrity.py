@@ -82,7 +82,7 @@ assert.equal(api.supplierImageSource(src), src);
 for (const bad of ['https://evil.example/a.jpg','/media/generated.webp','/api/shop/image?src=x','https://cdnbigbuy.com/images/../a.jpg','https://cdnbigbuy.com/images/a.svg','https://cdnbigbuy.com:443/images/a.jpg']) assert.equal(api.supplierImageSource(bad), null);
 const card = load(fs.readFileSync('apps/web/components/shop/ProductCard.tsx','utf8'), {
   'react':{useState:()=>[state, value=>{state=value;}]},
-  'react/jsx-runtime':{jsx,jsxs:jsx}, '../Router':{SiteLink:'a'}, './api':api,
+  'react/jsx-runtime':{jsx,jsxs:jsx}, '../Router':{SiteLink:'a'}, './api':api, './ProductPlaceholder':{ProductPlaceholder:'placeholder'},
   '../Workspace':{useUI:()=>({locale:'de'})},
   '../../../../config/shop-interface-copy.json':{default:JSON.parse(fs.readFileSync('config/shop-interface-copy.json','utf8'))}
 });
@@ -92,13 +92,27 @@ assert.equal(img.type,'img'); assert.equal(img.props.style.objectFit,'contain');
 assert.equal(img.props.referrerPolicy,'no-referrer');
 img.props.onError();
 view=card.ProductImage({src,alt:'Actual product'});
-assert.equal(view.props.children.props.children,'Lieferantenbild konnte nicht geladen werden');
-assert.equal(view.props.children.props.role,'status');
+assert.equal(view.props.children.type,'placeholder');
+assert.equal(view.props.children.props.label,'Lieferantenbild konnte nicht geladen werden');
 view=card.ProductImage({src:src.replace('MKT5','MKT6'),alt:'Next variant'});
 assert.equal(view.props.children.type,'img');
 view=card.ProductImage({src:'/media/ai-product.webp',alt:'Product'});
-assert.equal(view.props.children.type,'span');
+assert.equal(view.props.children.type,'placeholder');
+assert.equal(view.props.children.props.label,'Kein Lieferantenbild verfügbar');
 assert(card.StockLabel({stock:null}).props.children.includes('unbekannt'));
+// Befund cubic (PR #219): die echte Platzhalter-Komponente prüfen, nicht nur den Mock.
+const copyJson = JSON.parse(fs.readFileSync('config/shop-interface-copy.json','utf8'));
+for (const locale of ['de','nl','fr','en']) assert.ok(copyJson[locale].placeholderCaption, locale);
+assert.equal(view.props.children.props.caption, copyJson.de.placeholderCaption);
+const ph = load(fs.readFileSync('apps/web/components/shop/ProductPlaceholder.tsx','utf8'), {'react':{useId:()=>':r1:'}, 'react/jsx-runtime':{jsx,jsxs:jsx}});
+const svg = ph.ProductPlaceholder({label:'Kein Lieferantenbild verfügbar', caption:copyJson.en.placeholderCaption});
+assert.equal(svg.type,'svg'); assert.equal(svg.props.role,'img'); assert.equal(svg.props['aria-label'],'Kein Lieferantenbild verfügbar');
+const flat = node => node == null || typeof node !== 'object' ? [node] : [node, ...[].concat(node.props?.children ?? []).flatMap(flat)];
+const nodes = flat(svg);
+assert.ok(nodes.includes(copyJson.en.placeholderCaption), 'lokalisierte Unterzeile');
+const texts = nodes.filter(n => n && n.type === 'text');
+// fester dunkler Grund: Schrift aus dem hellen Dunkel-Token, nicht aus dem themenabhängigen Text-Token
+for (const t of texts) assert.equal(t.props.style.fill, 'var(--color-dunkel-licht)');
 assert(card.StockLabel({stock:0}).props.children.includes('nicht auf Lager'));
 console.log(JSON.stringify({passed:true}));
 '''

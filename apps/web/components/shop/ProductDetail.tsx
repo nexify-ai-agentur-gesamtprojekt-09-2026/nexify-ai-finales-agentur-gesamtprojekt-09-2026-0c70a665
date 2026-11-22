@@ -5,6 +5,7 @@ import {HcArrow} from '../HcArrow';
 import { SiteLink } from "../Router";
 import { api, notifyCart, type ApiError, type Cart, type ProductDetail as Detail } from "./api";
 import { ProductImage, StockLabel, useShopCopy } from "./ProductCard";
+import ProductStory from "./ProductStory";
 
 const DETAIL_LABELS = { weight: "weight", height: "height", width: "width", depth: "depth", condition: "condition" } as const;
 
@@ -49,7 +50,7 @@ export default function ProductDetail({ id, readOnly = false, initialProduct }: 
   if (missing) return <div className="tk-empty" data-testid="product-missing"><h2>{t("productMissing")}</h2><p>{t("productMissingBody")}</p><SiteLink href="/teileklar/shop" className="hc-text-link">{t("goShop")}<HcArrow/></SiteLink></div>;
   if (!product) return <p role="status">{t("productLoading")}</p>;
   const images = product.images.length ? product.images : [null];
-  return <article className="tk-product" data-testid="product-detail">
+  return <article className="tk-pdp" data-testid="product-detail"><div className="tk-product">
     <div className="tk-gallery"><ProductImage src={images[active]} alt={product.name} large />
       {images.length > 1 && <div className="tk-thumbs">{images.map((src, index) => <button key={index} type="button" aria-label={t("imageNumber", { number: number(index + 1) })} aria-pressed={index === active} onClick={() => setActive(index)}><ProductImage src={src} alt="" /></button>)}</div>}</div>
     <div className="tk-product-info">
@@ -69,5 +70,7 @@ export default function ProductDetail({ id, readOnly = false, initialProduct }: 
       </dl>
       {product.description && <div className="tk-description"><h3>{t("description")}</h3><p>{product.description.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim()}</p></div>}
     </div>
+  </div>
+    <ProductStory product={product} />
   </article>;
 }

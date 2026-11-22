@@ -3,6 +3,7 @@ import { useState } from "react";
 import { SiteLink } from "../Router";
 import { useUI } from "../Workspace";
 import shopCopy from "../../../../config/shop-interface-copy.json";
+import { ProductPlaceholder } from "./ProductPlaceholder";
 import { supplierImageSource, type Product } from "./api";
 
 export function useShopCopy() {
@@ -22,7 +23,7 @@ export function ProductImage({ src, alt, large = false }: { src: string | null |
   const failed = safeSrc !== null && failedSrc === safeSrc;
   return <div className={"tk-image" + (large ? " is-large" : "")}>
     {safeSrc && !failed ? <img key={safeSrc} src={safeSrc} alt={alt} loading="lazy" decoding="async" referrerPolicy="no-referrer" style={{ objectFit: "contain" }} onError={() => setFailedSrc(safeSrc)} /> :
-      <span className="tk-image-missing" role="status">{failed ? t("imageError") : t("imageMissing")}</span>}
+      <ProductPlaceholder label={failed ? t("imageError") : t("imageMissing")} caption={t("placeholderCaption")} large={large} />}
   </div>;
 }
 

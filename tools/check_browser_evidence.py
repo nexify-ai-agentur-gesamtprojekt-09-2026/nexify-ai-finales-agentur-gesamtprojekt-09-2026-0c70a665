@@ -323,6 +323,8 @@ SHOP_UI_MOCK_SOURCE_PATHS = (
     "apps/web/components/PublicExperience.tsx", "apps/site/src/main.tsx",
     "config/shop-interface-copy.json", "apps/site/tests/browser-shop.mjs",
     "apps/site/tests/fixtures/shop-api-mock.mjs",
+    # Befund cubic (PR #219): Platzhalter und Produktstory gehören zum geprüften Quellstand.
+    "apps/web/components/shop/ProductPlaceholder.tsx", "apps/web/components/shop/ProductStory.tsx", "apps/web/components/shop/product-story-copy.ts",
 )
 CATALOG_UI_MOCK_SOURCE_PATHS = (
     "apps/web/components/shop/api.ts", "apps/web/components/shop/CatalogView.tsx",
@@ -332,6 +334,8 @@ CATALOG_UI_MOCK_SOURCE_PATHS = (
     "apps/web/components/shop/Storefront.css", "apps/web/components/PublicExperience.tsx",
     "apps/site/src/main.tsx", "config/shop-interface-copy.json",
     "apps/site/tests/browser-catalog.mjs", "apps/site/tests/fixtures/shop-api-mock.mjs",
+    # Befund cubic (PR #219): Platzhalter und Produktstory gehören zum geprüften Quellstand.
+    "apps/web/components/shop/ProductPlaceholder.tsx", "apps/web/components/shop/ProductStory.tsx", "apps/web/components/shop/product-story-copy.ts",
 )
 SHOP_UI_MOCK_CHECKS = (
     "catalog_search_sort_stock_filter_category_and_pagination_use_server_parameters",
