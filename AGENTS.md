@@ -20,6 +20,28 @@ Inhaber abgenommen ist; der Umzug von `apps/web` auf Cloudflare ist nach D-021 i
 Prüfung, nichts ist umgeschaltet, der Shop-Dienst bleibt vorerst auf Vercel. Daraus
 folgt kein Auftrag, DNS, Produktion oder einen Tarif zu ändern (D-016, D-017).
 
+Stand 22.11.2026 (SOLL, Inhaberentscheidung D-023 in `DECISIONS.md`): Jeder Agent lädt
+beim Start D-023 und behandelt ältere widersprechende Shop- und Werkstatt-Prioritäten
+als überholt. Vorrang haben die Agentur- und Marketingwebsite `nexifyai.de`, das
+NeXify-Kundencenter und der Agenturvertrieb; TEILEKLAR.shop samt Werkstattservice ist
+eine getrennte, vorübergehend pausierte Marke ohne Weiterentwicklung, Relaunch oder
+Marketing bis zu einer neuen Inhaberentscheidung. HISTORIE, überholt durch D-023, sind
+damit die Sätze „eigene Agentur- und TEILEKLAR-Funktionen mit klaren
+Anwendungskontexten“ und „Die Seitenarchitektur umfasst die eigenen TEILEKLAR-,
+Werkstatt-/Partner-/Kunden-/Affiliatebereiche“ im Abschnitt „Aktueller Gesamtauftrag
+und kanonische Quelle“ sowie „NeX2fly, Leistungen und TEILEKLAR bleiben eigene
+sachliche Wege mit öffentlichen Informationsseiten“ im Abschnitt „Aktuelle Ausarbeitung
+nach angenommenem Grundentwurf“, soweit sie TEILEKLAR- oder Werkstattbereiche als Teil
+der Agenturwebsite führen; Kunden- und Partnerbereiche des NeXify-Kundencenters sind
+davon nicht überholt. Unverändert gelten alle Regeln dieses Dokuments, namentlich
+die Mandantentrennung („Unterschiedliche Domains, Rollen oder Mandanten nicht durch
+einen gemeinsamen Cookie oder Clientclaim gleichsetzen“) und die Grenzen aus D-016 und
+D-017; Shop-Daten und Bestandsfälle bleiben erhalten. IST und OFFEN stehen nur in D-023:
+Die Agenturseite wird am 22.11.2026 nicht aus diesem Repository ausgeliefert, und
+`teileklar.shop` ist nicht offline; die Abweichung von der Führungsentscheidung vom
+13.11.2026 oben und die Frage GitHub oder GitLab als führende Quelle (Register G27)
+sind nicht entschieden und werden hier nicht aufgelöst.
+
 Stand 13.11.2026 (HISTORIE, in Teilen überholt durch den Nachtrag vom 14.11.2026
 direkt darunter): Die Domains
 `nexifyai.de` und `nexifyai.cloud` zeigen per DNS nicht auf dieses Vercel-Projekt; die
@@ -217,6 +239,8 @@ Baue aus den HTML-Referenzen in `prototypen/` (`*.dc.html`) das Produkt. **Die R
 
 ## Aktueller Gesamtauftrag und kanonische Quelle · 26.10.2026
 
+Stand 22.11.2026: In Teilen HISTORIE, überholt durch D-023 (TEILEKLAR-, Werkstatt- und Shop-Bereiche sind nicht mehr Teil der Agenturwebsite); siehe Stand-Absatz unter „Aktuelle Führungsentscheidung“.
+
 Der Nutzer bestimmt `nexifyai-dev/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665` als gemeinsames Repository des Gesamtsystems. Neue Anwendungen, Regeln, Integrationsverträge, REA-Anbindung und Small-Business-Zuordnungen hier führen. Bestehende Quellstände und Herkunft bei der Konsolidierung bewahren; weder Force-Push noch Löschung der Ausgangsrepositories. GitHub ist die kanonische Quelle; eine bestätigte lokale GitLab-Anbindung ist nachgelagerte CI/Spiegelung mit Fast-forward, keine zweite Schreibquelle. Historische Mirror-/Watcher-/Factory-Skripte nicht ungeprüft starten.
 
 Zielaufbau nach Nutzerpräzisierung: portable React/Vite-/TypeScript-Ausgabe unter `apps/site` für öffentlichen Webauftritt und native NeX Agentic AIFly-Seitenleiste; die bestehende Next-/Clerk-Ausgabe unter `apps/web` bleibt als Referenz erhalten. Vercel ist Hauptbetrieb und nach aktueller Nutzerbestätigung die verbindliche Live-Vorschau. Eine ChatGPT-Backupausgabe war zuvor gewünscht; ihre fehlende Deploymentfähigkeit ist kein Blocker des aktuellen Veröffentlichungswegs. Neue Ergebnisse als direkten Vercel-Link liefern, nicht als ChatGPT-Bildausgabe. Bestehende `.cloud`-Seite bis Fertigstellung erhalten; eigene Agentur- und TEILEKLAR-Funktionen mit klaren Anwendungskontexten. Affilinet Portal Aachen ist ein gesondertes, pausiertes Kundenprojekt und kein Agenturmodul, keine Lieferabhängigkeit und kein zu migrierender Datenbestand. Die Seitenarchitektur umfasst die eigenen TEILEKLAR-, Werkstatt-/Partner-/Kunden-/Affiliatebereiche. Zielmarkt: 90 Prozent Deutschland als Nutzerziel, kein behaupteter Analyticswert. Einheitliche deutsche Ansprache, passende Folgeseiten und überprüfte Verlinkungen; NL-/FR-Schlüsselsätze erhalten. Unterschiedliche Domains, Rollen oder Mandanten nicht durch einen gemeinsamen Cookie oder Clientclaim gleichsetzen.
@@ -377,6 +401,8 @@ normal verwenden, keine Tokenlogs und keine Secretdateisuche.
 
 
 ## Aktuelle Ausarbeitung nach angenommenem Grundentwurf
+
+Stand 22.11.2026: In Teilen HISTORIE, überholt durch D-023 (TEILEKLAR-, Werkstatt- und Shop-Bereiche sind nicht mehr Teil der Agenturwebsite); siehe Stand-Absatz unter „Aktuelle Führungsentscheidung“.
 
 Die Oberfläche vom 26.10.2026 ist vom Nutzer nur als grober Anfang akzeptiert,
 nicht als final abgenommen. Folgeauftrag: alle Seiten, Inhalte, Nutzerwege und

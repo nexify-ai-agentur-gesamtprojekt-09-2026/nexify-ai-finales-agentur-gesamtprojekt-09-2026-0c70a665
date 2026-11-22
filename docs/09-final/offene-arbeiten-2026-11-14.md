@@ -694,6 +694,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Fertig, wenn:** Alle Shop-Oberflächen in vier Sprachen, Laufzeitprüfung je Sprache grün.
 - **Aufwand:** M · **Ausführung:** Agent sofort (Entwurf); Prüfung Muttersprachler
 - **Quellen:** docs/09-final/auftragsregister-2026-11-08.md (Fortschreibungen bis 12.11.2026); docs/05-marketing/gesamtkonzept-2026-11-14.md (14.11.2026)
+- **Stand 22.11.2026:** Zurückgestellt nach D-023 (`DECISIONS.md`), Zustand bleibt. Keine Arbeit daran, bis der Inhaber die Wiederaufnahme mit eigenem Releaseplan entscheidet; nichts gestrichen.
 
 #### OA-067 · Shop TEILEKLAR · BLOCKIERT
 
@@ -703,6 +704,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Fertig, wenn:** /api/shop/status und /api/shop/products antworten mit 200; Live-Prüfung ohne Shop-Befund.
 - **Aufwand:** S · **Ausführung:** Agent nach Zugang: Shell srv1243952 (Adresse finden); Eintragen durch Inhaber
 - **Quellen:** PROGRESS.md, Abschnitte „Stand 14.11.2026, ca. 14:25 UTC“ und „Offene Arbeiten“ (14.11.2026); Sitzungsverlauf 69187537 (Zusammenfassungen 11:39 und 16:53 UTC, Nutzeraussagen bis 18:20 UTC, 14.11.2026); docs/deployment/environment-variables.md Abschnitt 6 (14.11.2026)
+- **Stand 22.11.2026:** Zurückgestellt nach D-023 (`DECISIONS.md`), Zustand bleibt. Keine Arbeit daran, bis der Inhaber die Wiederaufnahme mit eigenem Releaseplan entscheidet; nichts gestrichen.
 
 #### OA-068 · Shop TEILEKLAR · BLOCKIERT
 
@@ -712,8 +714,9 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Fertig, wenn:** Werte gesetzt; Dienst meldet keinen Konfigurationsgrund mehr.
 - **Aufwand:** S · **Ausführung:** Agent auf ausdrückliches Wort des Inhabers
 - **Quellen:** docs/deployment/environment-variables.md Abschnitt 6 (14.11.2026); Sitzungsverlauf 69187537 (Zusammenfassungen 11:39 und 16:53 UTC, Nutzeraussagen bis 18:20 UTC, 14.11.2026)
+- **Stand 22.11.2026:** Zurückgestellt nach D-023 (`DECISIONS.md`), Zustand bleibt. Keine Arbeit daran, bis der Inhaber die Wiederaufnahme mit eigenem Releaseplan entscheidet; nichts gestrichen.
 
-#### OA-069 · Shop TEILEKLAR · ENTSCHEIDUNG NÖTIG
+#### OA-069 · Shop TEILEKLAR · HISTORIE-überholt (bis 22.11.2026: ENTSCHEIDUNG NÖTIG)
 
 - **Ziel:** Entscheiden: Shop jetzt mit MongoDB wieder einschalten oder erst mit der Supabase-Umstellung.
 - **Blocker:** PROGRESS „Braucht den Inhaber“; D-013 nennt Supabase als Ziel, D-006 bleibt IST.
@@ -721,6 +724,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Fertig, wenn:** Entscheidung in DECISIONS.md.
 - **Aufwand:** S · **Ausführung:** nur Inhaber
 - **Quellen:** PROGRESS.md, Abschnitte „Stand 14.11.2026, ca. 14:25 UTC“ und „Offene Arbeiten“ (14.11.2026); DECISIONS.md (D-011 bis D-020, 14.11.2026)
+- **Stand 22.11.2026:** HISTORIE, überholt durch D-023 (`DECISIONS.md`): Die Frage „jetzt mit MongoDB wieder einschalten oder erst mit Supabase“ ist entschieden: weder noch, der Shop ist pausiert und wird vorübergehend offline genommen (OA-189). Nichts gelöscht; eine Wiederaufnahme braucht eine neue Inhaberentscheidung mit eigenem Releaseplan und dann einen neuen Eintrag.
 
 #### OA-070 · Shop TEILEKLAR · BLOCKIERT
 
@@ -730,6 +734,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Fertig, wenn:** Testzahlung im Sandbox-Modus belegt; Live-Modus erst nach Freigabe; Webhook bestätigt Zahlungseingang.
 - **Aufwand:** M · **Ausführung:** nur Inhaber (Schlüssel, Freigabe); Tests Agent
 - **Quellen:** docs/deployment/environment-variables.md Abschnitt 6 (14.11.2026); docs/09-final/auftragsregister-2026-11-08.md (Fortschreibungen bis 12.11.2026); GO-LIVE.md Abschnitt 5–7 (Stand 13./14.11.2026)
+- **Stand 22.11.2026:** Zurückgestellt nach D-023 (`DECISIONS.md`), Zustand bleibt. Keine Arbeit daran, bis der Inhaber die Wiederaufnahme mit eigenem Releaseplan entscheidet; nichts gestrichen.
 
 #### OA-071 · Shop TEILEKLAR · BLOCKIERT
 
@@ -739,6 +744,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Fertig, wenn:** Ein freigegebener Auswahlimport läuft; Bestellweiterleitung im Sandbox-Modus belegt.
 - **Aufwand:** L · **Ausführung:** nur Inhaber (Zugang, Guthaben, Vertrag); Import Agent
 - **Quellen:** DECISIONS.md (D-011 bis D-020, 14.11.2026); docs/09-final/auftragsregister-2026-11-08.md (Fortschreibungen bis 12.11.2026); docs/01-konzept/teileklar-shop.md und docs/09-final/11-teileklar-datenblatt.md
+- **Stand 22.11.2026:** Zurückgestellt nach D-023 (`DECISIONS.md`), Zustand bleibt. Keine Arbeit daran, bis der Inhaber die Wiederaufnahme mit eigenem Releaseplan entscheidet; nichts gestrichen.
 
 #### OA-072 · Shop TEILEKLAR · OFFEN
 
@@ -748,6 +754,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Fertig, wenn:** Katalog mit Datenstand, geplanter Abgleich läuft belegt, keine unvollständigen Artikel sichtbar.
 - **Aufwand:** L · **Ausführung:** Agent nach Zugang: BigBuy-Produktivzugang
 - **Quellen:** config/acceptance-coverage.json (master_cases, requirements_reconciliation; Stand origin/main 14.11.2026); GitHub-Abruf offene PRs, 14.11.2026 ca. 18:30 UTC
+- **Stand 22.11.2026:** Zurückgestellt nach D-023 (`DECISIONS.md`), Zustand bleibt. Keine Arbeit daran, bis der Inhaber die Wiederaufnahme mit eigenem Releaseplan entscheidet; nichts gestrichen.
 
 #### OA-073 · Shop TEILEKLAR · ENTSCHEIDUNG NÖTIG
 
@@ -757,6 +764,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Fertig, wenn:** Gültige Regel mit Positiv- und Negativtest der Bestellannahme.
 - **Aufwand:** S · **Ausführung:** nur Inhaber
 - **Quellen:** config/acceptance-coverage.json (master_cases, requirements_reconciliation; Stand origin/main 14.11.2026)
+- **Stand 22.11.2026:** Zurückgestellt nach D-023 (`DECISIONS.md`), Zustand bleibt. Keine Arbeit daran, bis der Inhaber die Wiederaufnahme mit eigenem Releaseplan entscheidet; nichts gestrichen.
 
 #### OA-074 · Shop TEILEKLAR · TEILWEISE
 
@@ -766,6 +774,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Fertig, wenn:** Jeder sichtbare Artikel hat ein geprüftes Bild; Batch-Tests grün.
 - **Aufwand:** M · **Ausführung:** Agent sofort (nach Katalog)
 - **Quellen:** DECISIONS.md (D-011 bis D-020, 14.11.2026); docs/09-final/pin-rebase-2026-11-14.md Abschnitte 6 und 10 (14.11.2026)
+- **Stand 22.11.2026:** Zurückgestellt nach D-023 (`DECISIONS.md`), Zustand bleibt. Keine Arbeit daran, bis der Inhaber die Wiederaufnahme mit eigenem Releaseplan entscheidet; nichts gestrichen.
 
 #### OA-075 · Shop TEILEKLAR · OFFEN
 
@@ -775,6 +784,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Fertig, wenn:** Kasse zeigt für jedes Lieferland den belegten Betrag vor Abschluss; Test je Land.
 - **Aufwand:** M · **Ausführung:** Agent nach Zugang: BigBuy-Zugang
 - **Quellen:** docs/05-marketing/gesamtkonzept-2026-11-14.md (14.11.2026); docs/09-final/auftragsregister-2026-11-08.md (Fortschreibungen bis 12.11.2026)
+- **Stand 22.11.2026:** Zurückgestellt nach D-023 (`DECISIONS.md`), Zustand bleibt. Keine Arbeit daran, bis der Inhaber die Wiederaufnahme mit eigenem Releaseplan entscheidet; nichts gestrichen.
 
 #### OA-076 · Shop TEILEKLAR · TEILWEISE
 
@@ -784,6 +794,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Fertig, wenn:** 139 von 139 Aufrufen; Tests grün; ein Lauf gegen eine Wegwerf-Datenbank belegt.
 - **Aufwand:** M · **Ausführung:** Agent sofort
 - **Quellen:** Sitzungsverlauf 69187537 (Zusammenfassungen 11:39 und 16:53 UTC, Nutzeraussagen bis 18:20 UTC, 14.11.2026); PROGRESS.md, Abschnitte „Stand 14.11.2026, ca. 14:25 UTC“ und „Offene Arbeiten“ (14.11.2026); GitHub-Abruf offene PRs, 14.11.2026 ca. 18:30 UTC
+- **Stand 22.11.2026:** Zurückgestellt nach D-023 (`DECISIONS.md`), Zustand bleibt. Keine Arbeit daran, bis der Inhaber die Wiederaufnahme mit eigenem Releaseplan entscheidet; nichts gestrichen.
 
 #### OA-077 · Shop TEILEKLAR · BLOCKIERT
 
@@ -793,6 +804,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Fertig, wenn:** Shop liest und schreibt nachweislich über Supabase mit RLS-Tests, geprüfter Übernahme und getestetem Rückweg.
 - **Aufwand:** XL · **Ausführung:** Agent nach Zugang: Supabase-Instanz + Freigabe Umschaltung
 - **Quellen:** DECISIONS.md (D-011 bis D-020, 14.11.2026); PROGRESS.md, Abschnitte „Stand 14.11.2026, ca. 14:25 UTC“ und „Offene Arbeiten“ (14.11.2026); config/acceptance-coverage.json (master_cases, requirements_reconciliation; Stand origin/main 14.11.2026)
+- **Stand 22.11.2026:** Zurückgestellt nach D-023 (`DECISIONS.md`), Zustand bleibt. Keine Arbeit daran, bis der Inhaber die Wiederaufnahme mit eigenem Releaseplan entscheidet; nichts gestrichen.
 
 #### OA-078 · Shop TEILEKLAR · OFFEN
 
@@ -802,6 +814,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Fertig, wenn:** Je Funktion ein Test gegen laufenden Dienst.
 - **Aufwand:** L · **Ausführung:** Agent sofort (Code); Nachweis nach Datenbank
 - **Quellen:** docs/09-final/auftragsregister-2026-11-08.md (Fortschreibungen bis 12.11.2026); docs/01-konzept/teileklar-shop.md und docs/09-final/11-teileklar-datenblatt.md
+- **Stand 22.11.2026:** Zurückgestellt nach D-023 (`DECISIONS.md`), Zustand bleibt. Keine Arbeit daran, bis der Inhaber die Wiederaufnahme mit eigenem Releaseplan entscheidet; nichts gestrichen.
 
 #### OA-079 · Shop TEILEKLAR · BLOCKIERT
 
@@ -811,6 +824,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Fertig, wenn:** Eine Testbestellung mit Belegen je Stufe; danach eine echte Bestellung mit Freigabe des Inhabers.
 - **Aufwand:** L · **Ausführung:** Agent nach Zugang: alle Shop-Zugänge und Freigaben
 - **Quellen:** GO-LIVE.md Abschnitt 5–7 (Stand 13./14.11.2026); PROGRESS.md, Abschnitte „Stand 14.11.2026, ca. 14:25 UTC“ und „Offene Arbeiten“ (14.11.2026)
+- **Stand 22.11.2026:** Zurückgestellt nach D-023 (`DECISIONS.md`), Zustand bleibt. Keine Arbeit daran, bis der Inhaber die Wiederaufnahme mit eigenem Releaseplan entscheidet; nichts gestrichen.
 
 #### OA-080 · Shop TEILEKLAR · ENTSCHEIDUNG NÖTIG
 
@@ -820,6 +834,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Fertig, wenn:** Entscheidung und steuerliche Einordnung dokumentiert; Texte und Rechnung folgen.
 - **Aufwand:** S · **Ausführung:** nur Inhaber / Steuerberatung
 - **Quellen:** docs/05-marketing/gesamtkonzept-2026-11-14.md (14.11.2026); docs/01-konzept/teileklar-shop.md und docs/09-final/11-teileklar-datenblatt.md
+- **Stand 22.11.2026:** Zurückgestellt nach D-023 (`DECISIONS.md`), Zustand bleibt. Keine Arbeit daran, bis der Inhaber die Wiederaufnahme mit eigenem Releaseplan entscheidet; nichts gestrichen.
 
 #### OA-081 · Shop TEILEKLAR · ENTSCHEIDUNG NÖTIG
 
@@ -829,8 +844,9 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Fertig, wenn:** Entscheidung; brauchbare Teile als neuer kleiner PR.
 - **Aufwand:** S · **Ausführung:** nur Inhaber (Entscheidung); Zuschnitt Agent
 - **Quellen:** PROGRESS.md, Abschnitte „Stand 14.11.2026, ca. 14:25 UTC“ und „Offene Arbeiten“ (14.11.2026); GitHub-Abruf offene PRs, 14.11.2026 ca. 18:30 UTC
+- **Stand 22.11.2026:** Zurückgestellt nach D-023 (`DECISIONS.md`), Zustand bleibt. Keine Arbeit daran, bis der Inhaber die Wiederaufnahme mit eigenem Releaseplan entscheidet; nichts gestrichen.
 
-#### OA-082 · Shop TEILEKLAR · ENTSCHEIDUNG NÖTIG
+#### OA-082 · Shop TEILEKLAR · HISTORIE-überholt (bis 22.11.2026: ENTSCHEIDUNG NÖTIG)
 
 - **Ziel:** Rolle der Domain teileklar.shop klären (eigener Auftritt oder Weiterleitung auf /teileklar).
 - **Blocker:** Domain liegt bei Cloudflare (Meldung 31.08.), Hostinger meldete am 23.09. falsche DNS-Einstellungen für Mail.
@@ -838,6 +854,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Fertig, wenn:** Entscheidung; Domain liefert oder leitet belegt weiter.
 - **Aufwand:** S · **Ausführung:** nur Inhaber
 - **Quellen:** Gmail-Abruf 14.11.2026 (Betreffzeilen/Vorschau)
+- **Stand 22.11.2026:** HISTORIE, überholt durch D-023 (`DECISIONS.md`): Die Rolle der Domain ist entschieden: `teileklar.shop` ist eine getrennte, pausierte Marke; `nexifyai.de/teileklar*` antwortet künftig mit 404 ohne Weiterleitung (OA-190). IST am 22.11.2026, 18:40 UTC: noch 301 auf `teileklar.shop`. Nichts gelöscht; eine Wiederaufnahme braucht eine neue Inhaberentscheidung mit eigenem Releaseplan und dann einen neuen Eintrag.
 
 #### OA-083 · Werkstattservice · ERLEDIGT (bis 14.11.2026, 20:40 UTC: OFFEN)
 
@@ -857,6 +874,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Fertig, wenn:** Zahl der Betriebe je Land aus der laufenden Datenbank gelesen; Quellenprotokoll vorhanden.
 - **Aufwand:** M · **Ausführung:** Agent nach Zugang: laufender Shop-Dienst
 - **Quellen:** docs/06-auftraege/werkstatt-verzeichnis.md (31.08.2026); docs/01-konzept/teileklar-shop.md und docs/09-final/11-teileklar-datenblatt.md
+- **Stand 22.11.2026:** Zurückgestellt nach D-023 (`DECISIONS.md`), Zustand bleibt. Keine Arbeit daran, bis der Inhaber die Wiederaufnahme mit eigenem Releaseplan entscheidet; nichts gestrichen.
 
 #### OA-085 · Werkstattservice · OFFEN
 
@@ -867,6 +885,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Aufwand:** L · **Ausführung:** Agent sofort (Spezifikation und Code); Betrieb nach Datenbank
 - **Quellen:** config/site-map.json und apps/web/components/shop/PhaseNotice.tsx (origin/main 14.11.2026); docs/01-konzept/gesamtprojektplan.md
 - **Stand 14.11.2026, 20:40 UTC:** Nicht gebaut. Die Terminlogik liegt als Spezifikationsentwurf in PR 187 vor (Paket J-1, eine Datei `docs/03-backend/werkstatt-terminlogik.md`, nicht gemergt). Bleibt OFFEN.
+- **Stand 22.11.2026:** Zurückgestellt nach D-023 (`DECISIONS.md`), Zustand bleibt. Keine Arbeit daran, bis der Inhaber die Wiederaufnahme mit eigenem Releaseplan entscheidet; nichts gestrichen. PR 187 und PR 195 sind eingefroren (OA-193).
 
 #### OA-086 · Werkstattservice · BLOCKIERT
 
@@ -876,6 +895,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Fertig, wenn:** Unterzeichnete Partner in der Datenbank; Ziel laut Plan 25 aktive Partner.
 - **Aufwand:** L · **Ausführung:** nur Inhaber (Vertrag, Konditionen, Ansprache)
 - **Quellen:** docs/06-auftraege/werkstatt-verzeichnis.md (31.08.2026); docs/01-konzept/gesamtprojektplan.md; docs/05-marketing/gesamtkonzept-2026-11-14.md (14.11.2026)
+- **Stand 22.11.2026:** Zurückgestellt nach D-023 (`DECISIONS.md`), Zustand bleibt. Keine Arbeit daran, bis der Inhaber die Wiederaufnahme mit eigenem Releaseplan entscheidet; nichts gestrichen.
 
 #### OA-087 · Werkstattservice · ENTSCHEIDUNG NÖTIG
 
@@ -885,6 +905,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Fertig, wenn:** Entscheidung in DECISIONS.md; Partnerseite nennt die Konditionen.
 - **Aufwand:** S · **Ausführung:** nur Inhaber
 - **Quellen:** docs/05-marketing/gesamtkonzept-2026-11-14.md (14.11.2026)
+- **Stand 22.11.2026:** Zurückgestellt nach D-023 (`DECISIONS.md`), Zustand bleibt. Keine Arbeit daran, bis der Inhaber die Wiederaufnahme mit eigenem Releaseplan entscheidet; nichts gestrichen.
 
 #### OA-088 · Kundenberatung & Chat · OFFEN
 
@@ -1272,6 +1293,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Fertig, wenn:** Entscheidung; Seiten entsprechend.
 - **Aufwand:** S · **Ausführung:** nur Inhaber (Entscheidung)
 - **Quellen:** config/site-map.json und apps/web/components/shop/PhaseNotice.tsx (origin/main 14.11.2026); docs/05-marketing/gesamtkonzept-2026-11-14.md (14.11.2026)
+- **Stand 22.11.2026:** Zurückgestellt nach D-023 (`DECISIONS.md`), Zustand bleibt. Keine Arbeit daran, bis der Inhaber die Wiederaufnahme mit eigenem Releaseplan entscheidet; nichts gestrichen.
 
 #### OA-130 · Vertrieb & Leads · HISTORIE-überholt
 
@@ -1881,6 +1903,7 @@ Herleitung: OFFEN 46 − 2 (164, 170 nach ERLEDIGT) + 5 neue (171, 174, 175, 177
 - **Fertig, wenn:** Meta-Tag und Kopfzeile stimmen für alle Seiten in allen Schalterzuständen überein; betroffene Belege durch Lauf erneuert.
 - **Aufwand:** S · **Ausführung:** Fabrik (Paket C, ein Schreiber)
 - **Quellen:** docs/04-betrieb/indexierung-freigabe-2026-11-14.md, Abschnitt 11 („Grenze“); PR 198 (`48f5072`)
+- **Stand 22.11.2026:** Zurückgestellt nach D-023 (`DECISIONS.md`), Zustand bleibt. Keine Arbeit daran, bis der Inhaber die Wiederaufnahme mit eigenem Releaseplan entscheidet; nichts gestrichen.
 
 #### OA-176 · Qualität & Belege · ENTSCHEIDUNG NÖTIG
 
@@ -1911,3 +1934,81 @@ Herleitung: OFFEN 46 − 2 (164, 170 nach ERLEDIGT) + 5 neue (171, 174, 175, 177
 - **Fertig, wenn:** Format um ein Commit-Feld ergänzt, Prüfskript prüft es, künftige Läufe tragen es.
 - **Aufwand:** M · **Ausführung:** Fabrik (Paket C, ein Schreiber)
 - **Quellen:** docs/09-final/pin-rebase-2026-11-14.md, Abschnitt 12; Commit-Text von PR 198
+
+## 10. Nachführung 22.11.2026, ca. 18:45 UTC (Inhaberentscheidung D-023, Stand `origin/main` `9c9c806`)
+
+OA-179 bis OA-188 sind durch die offene PR 206 (Zweig `claude/stand-1115`, dort höchste Nummer OA-188; OA-179 zusätzlich im Zweig `claude/brain-mcp-auth`, PR 215; eigene lesende Prüfung 22.11.2026) belegt und bleiben hier bewusst frei; dieser Abschnitt beginnt deshalb bei OA-189. Auftrag der koordinierenden Sitzung: die Inhaberentscheidung D-023 (`DECISIONS.md`) in die bestehenden Einträge eintragen und die daraus folgenden Arbeiten anhängen, nichts löschen, nichts umnummerieren. Quelle: D-023 samt den dort genannten Nachrichten des Inhabers vom 22.11.2026; eigene lesende Messung gegen `www.nexifyai.de` und `teileklar.shop` am 22.11.2026, 18:40 bis 18:41 UTC (`curl`, nur `GET`); Abruf der offenen Pull Requests über die GitHub-Schnittstelle um 18:42 UTC; `git show`/`grep` an `origin/main` und, für die Agenturseite, am Repository `nexfiy-ai-studio` (Commit `6eb6273`). Abschnitte 1 bis 9 sind bis auf zwei Zustände in Überschriften und die Stand-Zeilen unten unverändert. Die Nachführung 15.11. bis 21.11.2026 liegt in PR 206 und ist hier nicht enthalten.
+
+### 10.1 Geänderte Zustände
+
+| Eintrag | vorher | jetzt | Beleg |
+|---|---|---|---|
+| OA-069 | ENTSCHEIDUNG NÖTIG | HISTORIE-überholt | D-023 (die gestellte Frage ist entschieden) |
+| OA-082 | ENTSCHEIDUNG NÖTIG | HISTORIE-überholt | D-023 (Altpfade: 404 ohne Weiterleitung) |
+
+Nur mit Stand-Zeile „Zurückgestellt nach D-023, Zustand bleibt“ versehen (TEILEKLAR ist vorübergehend pausiert, nichts ist gestrichen): OA-066 bis OA-068, OA-070 bis OA-081, OA-084 bis OA-087, OA-129, OA-175. Ohne Stand-Zeile geblieben: OA-011, OA-013, OA-171 bis OA-174. Davon gilt OA-013 (offengelegte Schlüssel erneuern) unabhängig von der Pause; OA-011 und OA-173 sind zurückgestellt; ob Schutzkorrekturen am Shop-Dienst während der Pause zulässig sind (OA-171, OA-174; Entscheidung OA-172), entscheidet der Inhaber, bis dahin keine Arbeit daran (`PROGRESS.md`, „Offene Arbeiten“; D-023, Offen).
+
+### 10.2 Zählung nach der Nachführung (183 Einträge auf diesem Stand; OA-179 bis OA-188 nicht mitgezählt)
+
+| Zustand | Stand `48f5072` | Stand D-023 |
+|---|---|---|
+| OFFEN | 49 | 51 |
+| TEILWEISE | 13 | 15 |
+| BLOCKIERT | 38 | 38 |
+| ENTSCHEIDUNG NÖTIG | 60 | 59 |
+| HISTORIE-überholt | 8 | 10 |
+| ERLEDIGT | 10 | 10 |
+
+Herleitung: OFFEN 49 + 2 neue (191, 192) = 51. TEILWEISE 13 + 2 neue (190, 193) = 15. BLOCKIERT unverändert 38. ENTSCHEIDUNG NÖTIG 60 − 2 (069, 082) + 1 neu (189) = 59. HISTORIE-überholt 8 + 2 = 10. Summe 183. Mit dem Einbringen von PR 206 kommen dessen zehn Einträge hinzu; die Zählung ist dann neu herzuleiten.
+
+### 10.3 Neue Einträge
+
+#### OA-189 · Shop TEILEKLAR · ENTSCHEIDUNG NÖTIG
+
+- **Priorität:** 1 Sicherheits-, Daten- und Betriebsrisiko
+- **Ziel:** `teileklar.shop` nach D-023 vorübergehend offline nehmen: keine neuen Bestellungen und keine neuen Werkstattanfragen, serverseitig; Daten und notwendige Bestandskundenprozesse bleiben erhalten.
+- **Blocker:** Quell-Repository, Server, Writer und Deployweg von `teileklar.shop` sind nicht belegt. Art des Cutovers nicht entschieden (Wartungsseite, 503 mit `Retry-After`, Indexierung), ebenso Bestandsfälle und Supportkontakt. IST 22.11.2026, 18:40 UTC: `/`, `/shop`, `/kundenportal`, `/werkstatt-partner` antworten 200 mit `X-Robots-Tag: index, follow`. Jeder Eingriff in die Produktion nur mit Freigabe des Inhabers je Schritt (D-016).
+- **Abhängigkeiten:** OA-192 (Sicherung vorher)
+- **Fertig, wenn:** Der Inhaber hat die Art des Cutovers freigegeben; `teileklar.shop` nimmt nachweislich keine neuen Bestellungen und Anfragen an (Messung je Weg); Bestandskunden erreichen einen benannten Supportkontakt; Rückweg geprüft.
+- **Aufwand:** S für die Entscheidung, M für die Ausführung · **Ausführung:** Entscheidung und Freigabe nur Inhaber; Ausführung durch den belegten Writer der Domain
+- **Quellen:** DECISIONS.md D-023; config/acceptance-coverage.json, Konflikt `SCOPE-TEILEKLAR-001`; eigene Messung 22.11.2026, 18:40 UTC
+
+#### OA-190 · Website · TEILWEISE
+
+- **Priorität:** 2 Verkaufsfähiger Auftritt und Arbeitsplatz
+- **Ziel:** TEILEKLAR vollständig aus der Agenturwebsite ausgliedern (Repository `nexfiy-ai-studio`): keine Navigation, Routen, Kacheln, Bilder, Sitemap-Einträge; Altpfade `nexifyai.de/teileklar` und `/teileklar/*` antworten mit 404 und `X-Robots-Tag: noindex`, ohne Weiterleitung und ohne Übertragung von Querystrings (D-023).
+- **Blocker:** Umsetzung laut koordinierender Sitzung als Entwurfs-PR in `nexfiy-ai-studio` in Arbeit, nicht ausgeliefert. IST 22.11.2026, 18:40 UTC: `/teileklar*` 301 auf `teileklar.shop` samt Querystring; Verweise in Hauptnavigation, mobiler Navigation, Fußbereich und Startseite; „teileklar“ 23-mal im HTML von `/`, 29-mal in `/portale`; 10 von 36 Sitemap-Adressen unter `/teileklar`. Eine temporäre 302 wird erst nach verifizierter TEILEKLAR-Wartungsseite gesondert geprüft.
+- **Abhängigkeiten:** keine; Auslieferung nach den Regeln des Repositorys `nexfiy-ai-studio`
+- **Fertig, wenn:** Live-Messung zeigt 0 Treffer für TEILEKLAR in Navigation, Seiteninhalt und Sitemap; die Altpfade liefern 404 mit `noindex` und keine Weiterleitung zum Shop.
+- **Aufwand:** M · **Ausführung:** Fabrik (ein Schreiber im Repository `nexfiy-ai-studio`); Auslieferung mit Freigabe
+- **Quellen:** DECISIONS.md D-023; `nexfiy-ai-studio` `public/_redirects` (Commit `6eb6273`); eigene Messung 22.11.2026, 18:40 bis 18:41 UTC
+
+#### OA-191 · Suite & Portal · OFFEN
+
+- **Priorität:** 2 Verkaufsfähiger Auftritt und Arbeitsplatz (laut D-023 „jetzt höchste Entwicklungspriorität“)
+- **Ziel:** NeXify-Kundencenter produktionsreif: sichere Anmeldung, Kunden- und Mandantentrennung, Projektübersicht, Angebote, Freigaben, Dokumente, Rechnungen, Support. Keine Demo-Funktion wird als produktiv gekennzeichnet; das Kundencenter ist kein TEILEKLAR-Kundenkonto.
+- **Blocker:** Befund 22.11.2026: live nur Attrappen (`/anmelden`, `/registrieren`, `/passwort-vergessen` zeigen Formulare, laut koordinierender Sitzung ohne Gegenstelle; `/kundenportal` 404). Die Portal-API `apps/shop-api/shop/nexify_api.py` ist in Produktion nicht eingebunden (`MODULES` in `apps/shop-api/vercel_app.py` nennt sie nicht), hat keinen Test (`grep` über `tests/`) und hängt über `accounts_api.session_user` an Shop-Konten und am Cookie `tk_session`; das widerspricht der Mandantentrennung aus D-023. Offene Entscheidungen: Datenhaltung und Laufzeit, Pfad, Buchhaltung, Dateispeicher und Scanner, Twenty-CRM (kein Code und keine Feldzuordnung im Repository), MFA.
+- **Abhängigkeiten:** OA-044, OA-040, OA-029; Entscheidung zur Live-Quelle der Agenturseite (D-023, Offen 5)
+- **Fertig, wenn:** Jede der acht Funktionen läuft gegen einen echten Dienst mit eigener Anmeldung und eigenen Daten des Agenturmandanten; Positiv- und Negativtests der Mandantentrennung; kein gemeinsamer Cookie, keine gemeinsame Sitzung mit TEILEKLAR; Live-Nachweis je Funktion.
+- **Aufwand:** XL · **Ausführung:** Entscheidungen nur Inhaber; Bau Fabrik, je Scope ein Schreiber, unabhängige Prüfung
+- **Quellen:** DECISIONS.md D-023; apps/shop-api/shop/nexify_api.py und apps/shop-api/vercel_app.py (`origin/main` `9c9c806`); eigene Messung 22.11.2026, 18:40 UTC
+
+#### OA-192 · Shop TEILEKLAR · OFFEN
+
+- **Priorität:** 1 Sicherheits-, Daten- und Betriebsrisiko
+- **Ziel:** Bestandsdaten und Bestandsfälle des Shops (Konten, Bestellungen, Zahlungsereignisse, Werkstattanfragen, Partneranträge) lesend sichern und belegen, mit Wiederherstellungsnachweis; nichts löschen.
+- **Blocker:** Ort der laufenden Datenbank hinter `teileklar.shop` ist im Repository nicht belegt (vgl. OA-067); Zugang nur über den Inhaber. Jeder Eingriff über das Lesen hinaus braucht Freigabe je Schritt (D-016, D-017).
+- **Abhängigkeiten:** keine; Voraussetzung für OA-189
+- **Fertig, wenn:** Sicherung mit Datum, Umfang und Prüfsumme abgelegt (außerhalb dieses Repositorys); eine Wiederherstellung in eine Wegwerf-Umgebung ist belegt; Liste der offenen Bestandsfälle liegt dem Inhaber vor.
+- **Aufwand:** M · **Ausführung:** Agent nach Zugang, nur lesend; Freigabe Inhaber
+- **Quellen:** DECISIONS.md D-023, D-016, D-017; config/acceptance-coverage.json, Konflikte `SCOPE-TEILEKLAR-001` und `DATA-STORE-001`
+
+#### OA-193 · Qualität & Belege · TEILWEISE
+
+- **Priorität:** 1 Sicherheits-, Daten- und Betriebsrisiko
+- **Ziel:** Offene Shop- und Werkstatt-PRs nach D-023 einordnen und gegen unbeabsichtigtes Einbringen sichern. Reihenfolge laut Inhaber: „Auto-Merge stoppen → Shop-PRs einfrieren → Domaintrennung korrigieren → TEILEKLAR sicher offline nehmen → Agentur und Kundencenter fertigstellen.“
+- **Blocker:** IST 22.11.2026, 18:57 UTC (öffentliche GitHub-Schnittstelle, eigener Abruf; deckungsgleich mit der Messung des unabhängigen Reviewers von 18:51 UTC): 54 offene PRs. `auto_merge: null` an den zwölf Shop- und Werkstatt-PRs 60, 65, 67, 122, 147, 150, 187, 195, 208, 214, 218, 219, an den gemischten PRs 73, 119, 213 sowie an 211 und 222. Auto-Merge weiter eingeschaltet an 17 PRs: 189, 192, 193, 197, 200, 202, 203, 204, 205, 207, 209, 210, 212, 215, 216, 220, 221. Eingefroren: die zwölf Shop-PRs und `nexfiy-ai-studio` #4; die dortige Domaintrennung (301 in Shop-Routen) widerspricht D-023. Gemischte PRs 213, 73, 119 und `nexfiy-ai-studio` #2 und #3: nicht einbringen, bevor Shop- und Werkstattanteile herausgelöst sind. Freeze- bzw. Sperrkommentar: an zwei Stichproben gelesen (PR 219, 18:40:02 UTC; PR 213, 18:40:41 UTC); für die übrigen und für `nexfiy-ai-studio` laut koordinierender Sitzung seit ca. 18:39 bis 18:40 UTC, hier nicht einzeln geprüft. GitHub Actions führt wieder Jobs aus (CI-Lauf 44750211973 auf `main` `9c9c806` am 20.11.2026: `next-web` und `repository` rot, drei Jobs grün; CI läuft auch auf PR-Köpfen). Damit kann verbliebenes Auto-Merge wirksam werden, sobald die Prüfungen eines PR bestehen (OA-027). PR 211 (CI-Reparatur von `next-web`): nicht einbringen, solange die betroffenen PRs nicht gegen unbeabsichtigte Integration gesichert sind, danach reguläre unabhängige CI- und Sicherheitsprüfung. Auf den Zweig von PR 208 wurde während des Einfrierens weiter gepusht (Kopf 18:42 UTC `dfc3417`, 18:57 UTC `47a4dee`, eigene Abrufe; laut Reviewer 18:38:48 UTC, ebenso PR 214 um 18:38:35 UTC, letzteres hier nicht nachgeprüft).
+- **Abhängigkeiten:** OA-027, OA-051, OA-022
+- **Fertig, wenn:** An keinem der genannten PRs ist Auto-Merge eingeschaltet (zurückgelesen, mit Uhrzeit); über Auto-Merge an den 17 übrigen PRs ist entschieden (OA-027); jeder der genannten trägt einen Freeze-Vermerk mit Verweis auf D-023; die gemischten PRs sind zerlegt oder ausdrücklich zurückgestellt; PR 211 ist nach Prüfung eingeordnet.
+- **Aufwand:** M · **Ausführung:** koordinierende Sitzung auf Wort des Inhabers (fremde PRs werden sonst nicht verändert); Zerlegung Fabrik
+- **Quellen:** DECISIONS.md D-023; GitHub-Abrufe offene PRs 22.11.2026, 18:42 UTC (53 offen) und 18:57 UTC (54 offen, mit Auto-Merge-Zustand); Angaben der koordinierenden Sitzung und des unabhängigen Reviewers vom 22.11.2026
