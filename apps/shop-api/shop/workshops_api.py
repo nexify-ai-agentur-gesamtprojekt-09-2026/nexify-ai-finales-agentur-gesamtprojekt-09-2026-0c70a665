@@ -50,7 +50,9 @@ async def import_workshops(database=None):
             await d.workshops.insert_many(docs, ordered=False)
         except Exception as error:  # parallele Läufe: bereits vorhandene _id überspringen, alles andere melden
             details = getattr(error, "details", None) or {}
-            if not details or any(e.get("code") != 11000 for e in details.get("writeErrors", [])):
+            write_errors = details.get("writeErrors") or []
+            # Nur reine Duplikat-Fehler sind harmlos; ohne writeErrors oder mit writeConcernErrors ist nichts belegt gespeichert.
+            if not write_errors or details.get("writeConcernErrors") or any(e.get("code") != 11000 for e in write_errors):
                 raise
             return details.get("nInserted", 0)
     return len(docs)

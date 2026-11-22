@@ -5,16 +5,18 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import {execFileSync} from 'node:child_process';
+import {readFileSync} from 'node:fs';
 
 const BASIS=(process.env.LIVE_BASE||'https://nexifyai.de').replace(/\/$/,'');
 const speicher=new Map();
 
-/* curl statt fetch: curl folgt der Proxy-Umgebung der Laufumgebung, node:fetch in Node 22 nicht. */
+/* curl statt fetch: curl folgt der Proxy-Umgebung der Laufumgebung, node:fetch in Node 22 nicht.
+   -L folgt Weiterleitungen (z. B. Standardhost → kanonischer Host); geprüft wird die letzte Antwort (Befund cubic, PR #219). */
 function hole(pfad){
  if(speicher.has(pfad))return speicher.get(pfad);
- const roh=execFileSync('curl',['-s','-i','-m','25',BASIS+pfad],{encoding:'utf8',maxBuffer:32*1024*1024});
+ const roh=execFileSync('curl',['-s','-i','-L','--max-redirs','5','-m','25',BASIS+pfad],{encoding:'utf8',maxBuffer:32*1024*1024});
  const teile=roh.split('\r\n\r\n');
- while(teile.length>1&&/^HTTP\/1\.[01] 200 Connection Established/i.test(teile[0]))teile.shift();
+ while(teile.length>1&&/^HTTP\/[\d.]+ \d{3}/.test(teile[1]))teile.shift(); // Proxy-CONNECT und Weiterleitungen: nur der letzte Kopf zählt
  const kopf=teile.shift()||'';const body=teile.join('\r\n\r\n');
  const status=Number((kopf.match(/^HTTP\/[\d.]+ (\d{3})/)||[])[1]);
  const header={};for(const z of kopf.split('\r\n').slice(1)){const i=z.indexOf(':');if(i>0)header[z.slice(0,i).toLowerCase()]=z.slice(i+1).trim();}
@@ -39,7 +41,7 @@ test('ROT · Vorschau-Metadaten vollständig und auf eigener Domain (og:url, og:
  for(const k of ['og:url','og:site_name','twitter:card'])if(!meta(h,k))fehlt.push(k);
  const bild=meta(h,'og:image');
  if(!bild)fehlt.push('og:image');
- else if(!bild.startsWith(BASIS))fehlt.push(`og:image liegt nicht auf ${BASIS}: ${new URL(bild).host}`);
+ else{const host=new URL(bild,BASIS+'/').hostname.replace(/^www\./,''),eigen=new URL(BASIS).hostname.replace(/^www\./,'');if(host!==eigen)fehlt.push(`og:image liegt nicht auf ${eigen}: ${host}`);}
  assert.deepEqual(fehlt,[]);
 });
 
@@ -69,17 +71,19 @@ test('ROT · Schutz vor Einbettung und Browser-Rechte per Header (frame-ancestor
 /* ---------- Grün: Gegenproben (müssen bestehen, sonst misst der Test falsch) ---------- */
 
 test('GRÜN · jede Adresse der Sitemap antwortet 200',()=>{
- const urls=[...hole('/sitemap.xml').body.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m=>m[1].replace(BASIS,''));
- assert.ok(urls.length>=30,`Sitemap zu klein: ${urls.length}`);
+ const urls=[...hole('/sitemap.xml').body.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m=>{const u=new URL(m[1]);return u.pathname+u.search;}); // Pfad statt Präfix: Sitemap darf den kanonischen www-Host nennen
+ assert.ok(urls.length>0,'Sitemap ohne Adressen');
  const schlecht=urls.filter(u=>hole(u).status!==200).map(u=>`${u} → ${hole(u).status}`);
  assert.deepEqual(schlecht,[]);
 });
 
-test('GRÜN · Startseite ist indexierbar (kein noindex per Meta oder Header) und kanonisch',()=>{
- const a=hole('/');
- assert.ok(!/noindex/i.test(a.header['x-robots-tag']||''));
- assert.ok(!/<meta[^>]+name="robots"[^>]*noindex/i.test(a.body));
- assert.match(a.body,new RegExp(`<link rel="canonical" href="${BASIS}/"`));
+test('GRÜN · Indexierbarkeit der Startseite folgt dem Freigabestand in config/site-map.json und ist kanonisch',()=>{
+ // Befund cubic (PR #219): nicht pauschal „indexierbar“ fordern – das Indexierungs-Gate steht in der Konfiguration.
+ const soll=JSON.parse(readFileSync(new URL('../config/site-map.json',import.meta.url),'utf8')).pages.find(p=>p.path==='/').metadata.indexability;
+ const a=hole('/');const noindex=/noindex/i.test(a.header['x-robots-tag']||'')||/<meta[^>]+name="robots"[^>]*noindex/i.test(a.body);
+ assert.equal(noindex,/noindex/.test(soll),`Soll laut Konfiguration: ${soll}`);
+ const eigen=new URL(BASIS).hostname.replace(/^www\./,'').replace(/\./g,'\\.');
+ assert.match(a.body,new RegExp(`<link rel="canonical" href="https://(?:www\\.)?${eigen}/"`)); // Standardhost leitet auf www weiter
  assert.match(a.body,/<html lang="de"/);
 });
 

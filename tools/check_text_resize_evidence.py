@@ -4,7 +4,7 @@ import hashlib
 import json
 from pathlib import Path
 
-CURRENT_RESIZE_REPORT = Path('evidence/resize-2026-11-18/text-spacing.json')
+CURRENT_RESIZE_REPORT = Path('evidence/resize-2026-11-22/text-spacing.json')
 
 def check_resize(report, expected_paths):
     rows = [row for row in report['checks'] if row.get('text_resize_200') is True]

@@ -4,7 +4,10 @@ Der Vercel-Adapter (vercel_app.py) lädt bewusst nur die Router, nie shop.main u
 lifespan; dort läuft import_workshops() also nicht. Dieser Befehl ist der dokumentierte Weg,
 das Verzeichnis (prototypen/assets/workshops*.json) in die Ziel-Datenbank zu bringen:
 
-    MONGO_URL=... DB_NAME=... python3 -m shop.seed_workshops        (aus apps/shop-api)
+    MONGO_URL=... DB_NAME=... PREVIEW_PUBLIC_ORIGIN=... SHOP_VAT_PERCENT=... \
+        python3 -m shop.seed_workshops                                  (aus apps/shop-api)
+
+Die vier Variablen verlangt shop/config.py beim Import (gleiche Werte wie im Shop-Betrieb).
 
 Idempotent: vorhandene Einträge bleiben unverändert, nur fehlende kommen hinzu.
 Schreibt in die angegebene Datenbank – für Produktion nur nach Freigabe ausführen.

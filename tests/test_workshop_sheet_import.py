@@ -32,6 +32,13 @@ class Convert(unittest.TestCase):
     def test_phone_email_and_truncated_lists(self):
         self.assertEqual(sheet.phone("498912345"), "+498912345")
         self.assertIsNone(sheet.phone("#ERROR!"))
+        # Befund cubic (PR #219): führendes "+" erlaubt, führende 0 ist kein E.164
+        self.assertEqual(sheet.phone("+498912345"), "+498912345")
+        self.assertIsNone(sheet.phone("0898912345"))
+        self.assertIsNone(sheet.phone("+0898912345"))
+        self.assertIsNone(sheet.phone("++498912345"))
+        # Befund cubic (PR #219): keine unbelegte Einordnung als freie Werkstatt
+        self.assertNotIn("kind", sheet.convert([row()], set())[0][0])
         self.assertEqual(sheet.email("%5c%22info-verl@schroeder-team.de"), "info-verl@schroeder-team.de")
         self.assertIsNone(sheet.email("kein mail"))
         self.assertEqual(sheet.split_list("Reparatur, Bremsen, Lackieru..."), ["Reparatur", "Bremsen"])
@@ -53,12 +60,15 @@ class Convert(unittest.TestCase):
 
 class Dataset(unittest.TestCase):
     def test_generated_file_is_complete_and_inside_germany(self):
-        shops = json.loads(OUT.read_text(encoding="utf-8"))["de-DE"]["shops"]
-        self.assertGreater(len(shops), 1000)
+        pack = json.loads(OUT.read_text(encoding="utf-8"))["de-DE"]
+        shops = pack["shops"]
+        self.assertEqual(pack["total"], len(shops))
+        self.assertEqual(len(shops), 1157)  # Stand Tabelle „Werkstaetten Deutschland“ beim Import
         self.assertEqual(len({s["id"] for s in shops}), len(shops))
         for s in shops:
             self.assertEqual(s["license"], "ODbL-1.0")
             self.assertNotIn("contact_email", s)
+            self.assertNotIn("kind", s)
             if "lat" in s:
                 self.assertTrue(47.2 <= s["lat"] <= 55.1 and 5.8 <= s["lon"] <= 15.1, s["id"])
 
@@ -93,7 +103,7 @@ class Import(unittest.TestCase):
         sys.path.insert(0, str(ROOT / "apps/shop-api"))
         try:
             from shop import workshops_api
-        except Exception as error:  # Abhängigkeiten der API fehlen in dieser Umgebung
+        except ImportError as error:  # nur fehlende Pakete überspringen; echte Fehler der API bleiben rot
             self.skipTest(f"shop-api nicht importierbar: {error}")
         self.api = workshops_api
 
@@ -113,10 +123,6 @@ class Import(unittest.TestCase):
         self.assertNotIn("contact_email_status", pub)
         self.assertEqual(pub["license"], "ODbL-1.0")
         self.assertEqual(self.api.public({"id": "T", "name": "Y", "source": "prototypen/assets/workshops.json"}).get("source"), None)
-
-
-if __name__ == "__main__":
-    unittest.main()
 
 
 class ContactExportGuard(unittest.TestCase):
@@ -152,3 +158,31 @@ class SeedCommand(Import):
                 raise Dup()
         fake = FakeDb(); fake.workshops = Racing()
         self.assertEqual(asyncio.run(self.api.import_workshops(fake)), 3)
+
+    def test_other_bulk_write_failures_are_reported(self):
+        """Befund Vercel/cubic (PR #219): ohne writeErrors oder mit writeConcernErrors ist nichts belegt gespeichert."""
+        for details in ({"writeErrors": [], "nInserted": 0, "writeConcernErrors": [{"code": 64}]},
+                        {"writeErrors": [{"code": 11000}], "nInserted": 3, "writeConcernErrors": [{"code": 64}]},
+                        {"nInserted": 0}, {"writeErrors": [{"code": 11000}, {"code": 121}], "nInserted": 1}):
+            class Failure(Exception):
+                pass
+            Failure.details = details
+            class Broken(FakeCollection):
+                async def insert_many(self, docs, ordered=True):
+                    raise Failure()
+            fake = FakeDb(); fake.workshops = Broken()
+            with self.assertRaises(Failure, msg=details):
+                asyncio.run(self.api.import_workshops(fake))
+
+    def test_seed_doc_names_every_required_variable(self):
+        """Befund cubic (PR #219): der dokumentierte Aufruf muss alle Pflichtvariablen nennen."""
+        import re
+        from shop import seed_workshops
+        required = set(re.findall(r'os\.environ\["([A-Z_]+)"\]', (ROOT / "apps/shop-api/shop/config.py").read_text()))
+        self.assertTrue(required)
+        for name in required:
+            self.assertIn(name + "=", seed_workshops.__doc__, name)
+
+
+if __name__ == "__main__":
+    unittest.main()

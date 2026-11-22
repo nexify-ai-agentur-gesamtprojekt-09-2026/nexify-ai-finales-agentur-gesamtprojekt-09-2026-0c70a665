@@ -35,7 +35,13 @@ def supplier_image(value):
 
 # Dieselbe Grenze wie supplier_image(): nur cdnbigbuy.com, Pfad unter /images/, erlaubte Endung,
 # keine Abfrage, kein Fragment, keine Zugangsdaten, kein Port, keine Pfadsegmente "." oder "..".
-SUPPLIER_IMAGE_PATTERN = r"^https://cdnbigbuy\.com/images/(?!(?:[A-Za-z0-9_.-]*/)*\.{1,2}(?:/|$))[A-Za-z0-9_./-]+\.(?:jpg|jpeg|png|webp)$"
+# Schema und Host nur klein (wie startswith/netloc-Prüfung), Pfad "/images/" und Endung ohne Rücksicht auf
+# Groß-/Kleinschreibung (wie re.I), höchstens 2048 Zeichen, "$(?![\s\S])" = echtes Textende (kein abschließendes \n).
+# Gilt gleich in Python-re und in MongoDBs PCRE; daher ohne $options.
+# Der feste Anfang "https://cdnbigbuy.com/" steht ohne Vorgriff direkt hinter "^": MongoDB nutzt ihn als
+# Bereichsgrenze im Index (active, images); 2026 = 2048 - len("https://cdnbigbuy.com/").
+SUPPLIER_IMAGE_PATTERN = (r"^https://cdnbigbuy\.com/(?=.{1,2026}$(?![\s\S]))(?i:images)/(?!(?:[A-Za-z0-9_.-]*/)*\.{1,2}(?:/|$))"
+                          r"[A-Za-z0-9_./-]+\.(?i:jpg|jpeg|png|webp)$(?![\s\S])")
 
 
 def shop_visibility(with_image=True):
@@ -47,7 +53,7 @@ def shop_visibility(with_image=True):
     """
     if not with_image:
         return {}
-    return {"images": {"$elemMatch": {"$regex": SUPPLIER_IMAGE_PATTERN, "$options": "i"}}}
+    return {"images": {"$elemMatch": {"$regex": SUPPLIER_IMAGE_PATTERN}}}
 
 
 def present(product, settings, full=False):

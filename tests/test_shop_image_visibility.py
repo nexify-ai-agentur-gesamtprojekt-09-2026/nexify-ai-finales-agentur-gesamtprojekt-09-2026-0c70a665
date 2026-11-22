@@ -81,10 +81,6 @@ class ShopImageVisibility(unittest.TestCase):
         self.assertEqual(offenders, [])
 
 
-if __name__ == "__main__":
-    unittest.main()
-
-
 class FilterMatchesValidator(unittest.TestCase):
     """Befund Codex Review (PR #219): Filter und supplier_image() müssen dasselbe akzeptieren."""
     CASES = [
@@ -93,6 +89,10 @@ class FilterMatchesValidator(unittest.TestCase):
         "https://cdnbigbuy.com/images/./a.jpg", "https://cdnbigbuy.com/images/a.gif", "https://cdnbigbuy.com/images/a b.jpg",
         "https://user:pw@cdnbigbuy.com/images/a.jpg", "https://cdnbigbuy.com:444/images/a.jpg", "http://cdnbigbuy.com/images/a.jpg",
         "https://cdnbigbuy.com/other/a.jpg", "https://cdnbigbuy.com/images/a.jpg.exe", "https://cdnbigbuy.com/images/..a.jpg",
+        # Befunde cubic (PR #219): Zeilenende, Groß-/Kleinschreibung von Schema/Host, Längengrenze 2048
+        "https://cdnbigbuy.com/images/a.jpg\n", "HTTPS://cdnbigbuy.com/images/a.jpg", "https://CDNBIGBUY.com/images/a.jpg",
+        "https://cdnbigbuy.com/IMAGES/a.jpg", "https://cdnbigbuy.com/images/" + "a" * 2015 + ".jpg",
+        "https://cdnbigbuy.com/images/" + "a" * 2016 + ".jpg",
     ]
 
     def test_regex_and_validator_agree(self):
@@ -107,3 +107,19 @@ class FilterMatchesValidator(unittest.TestCase):
         regex = re.compile(pattern["$regex"], re.I if "i" in pattern.get("$options", "") else 0)
         for url in self.CASES:
             self.assertEqual(bool(regex.search(url)), scope["supplier_image"](url) is not None, url)
+
+
+class FilterUsesIndex(unittest.TestCase):
+    """Befund cubic (PR #219): der Sichtbarkeitsfilter soll einen Index nutzen können, statt alle Artikel zu prüfen."""
+    def test_literal_prefix_and_index(self):
+        import re
+        src = API.read_text()
+        pattern = re.search(r'SUPPLIER_IMAGE_PATTERN = \(r"([^"]+)"', src).group(1)
+        self.assertTrue(pattern.startswith(r"^https://cdnbigbuy\.com/"), pattern[:40])  # fester Anfang vor jedem Vorgriff
+        self.assertIn('return {"images": {"$elemMatch": {"$regex": SUPPLIER_IMAGE_PATTERN}}}', src)  # ohne i-Flag: Präfix im Index nutzbar
+        db_src = (ROOT / "apps/shop-api/shop/db.py").read_text()
+        self.assertIn('create_index([("active", 1), ("images", 1)])', db_src)
+
+
+if __name__ == "__main__":
+    unittest.main()

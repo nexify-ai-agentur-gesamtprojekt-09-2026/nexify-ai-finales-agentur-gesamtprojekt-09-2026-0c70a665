@@ -61,7 +61,8 @@ def longitude(raw: str) -> float | None:
 
 def phone(e164: str) -> str | None:
     d = (e164 or "").strip()
-    return "+" + d if d.isdigit() and 8 <= len(d) <= 15 else None
+    d = d[1:] if d.startswith("+") else d  # E.164 darf mit "+" geschrieben sein
+    return "+" + d if d.isdigit() and 8 <= len(d) <= 15 and not d.startswith("0") else None
 
 
 def email(raw: str) -> str | None:
@@ -110,7 +111,6 @@ def convert(rows: list[dict], existing_keys: set[tuple[str, str]] = frozenset(),
             "category": (row.get("Kategorie") or "").strip(),
             "services": split_list(row.get("Leistungen", "")),
             "brands": split_list(row.get("Marken", "")),
-            "kind": "frei",
             "source": "OpenStreetMap",
             "source_url": (row.get("Quell-Link") or "").strip(),
             "license": (row.get("Lizenz") or "ODbL-1.0").strip(),
@@ -146,7 +146,8 @@ def main(argv: list[str]) -> int:
     if len(args) < 2:
         print(__doc__)
         return 2
-    rows = list(csv.DictReader(Path(args[1]).open(encoding="utf-8")))
+    with Path(args[1]).open(encoding="utf-8", newline="") as source:
+        rows = list(csv.DictReader(source))
     shops, stats = convert(rows, existing_directory_keys(), with_contact)
     out = Path(args[2]) if len(args) > 2 else DEFAULT_OUT
     if with_contact and out.resolve().is_relative_to(ROOT.resolve()):

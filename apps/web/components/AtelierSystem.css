@@ -1338,8 +1338,8 @@ html:has(#atelier .mobile-navigation[open]){overflow:hidden}
 #atelier .home-concept .hc-finish-actions:has(>:nth-child(2))>:is(.hc-finish-primary,.hc-text-link){justify-content:space-between;height:auto;white-space:normal;text-align:start;overflow-wrap:anywhere}
 #atelier .home-concept .hc-finish-actions:has(>:nth-child(2))>.hc-text-link{padding:var(--as-s-2) calc(var(--as-s-6) + var(--as-s-1) - 1px)}
 /* Schmale Chat-Scheibe (Standard seit 2026-11-18): bei vergrößerter Schrift (WCAG 1.4.4) steht der Name unter der Figur,
-   statt neben ihr aus dem Kasten zu laufen. Schwelle in em: bei 100 % Text bleibt die Zeile, bei 200 % greift die Spalte. */
-@container front (max-width:17em){
+   statt neben ihr aus dem Kasten zu laufen. Schwelle in em: bei 100 % Text bleibt die Zeile (Scheibe 266–312px > 12em = 192px), bei 200 % greift die Spalte (12em = 384px). */
+@container front (max-width:12em){
  #atelier #aifly-panel .orientation-host{flex-direction:column;align-items:flex-start}
  #atelier #aifly-panel .orientation-host-name{max-width:100%}
 }

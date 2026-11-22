@@ -16,6 +16,7 @@ async def ensure_indexes(database=None):
     d = database if database is not None else db
     await d.products.create_index("bigbuy_id", unique=True)
     await d.products.create_index([("active", 1), ("category_ids", 1)])
+    await d.products.create_index([("active", 1), ("images", 1)])  # Shop-Sichtbarkeit: Präfix-Regex auf images (catalog_api)
     await d.products.create_index("ean")
     await d.products.create_index("sku")
     await d.carts.create_index("owner", unique=True)

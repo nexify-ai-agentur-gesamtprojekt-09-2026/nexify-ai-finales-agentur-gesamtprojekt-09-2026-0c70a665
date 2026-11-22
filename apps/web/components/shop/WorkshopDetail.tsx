@@ -17,6 +17,15 @@ type RequestReceipt = { id: string; status: string; workshop_id?: string; state?
 const RECEIPT_FALLBACK = "Ihre Anfrage ist bei TEILEKLAR eingegangen. Die Werkstatt wurde noch nicht benachrichtigt.";
 const NOT_PARTNER_FALLBACK = "Diese Werkstatt nimmt über TEILEKLAR derzeit keine Anfragen an.";
 
+/** Kalendertag JJJJ-MM-TT als TT.MM.JJJJ – ohne Date-Umrechnung (kein UTC-Vortag); Unbekanntes bleibt Rohtext. */
+export function asOfDate(value: string): string {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value);
+  if (!m) return value;
+  const [y, mo, d] = [Number(m[1]), Number(m[2]), Number(m[3])];
+  const days = [31, y % 4 === 0 && (y % 100 !== 0 || y % 400 === 0) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+  return mo >= 1 && mo <= 12 && d >= 1 && d <= days[mo - 1] ? `${m[3]}.${m[2]}.${m[1]}` : value;
+}
+
 function validate(f: Form) {
   const e: Record<string, string> = {};
   if (f.name.trim().length < 2) e.name = "required";
@@ -76,7 +85,7 @@ export default function WorkshopDetail({ id }: { id: string }) {
         {w.brands?.length ? <><dt>Marken laut Eintrag</dt><dd data-testid="workshop-detail-brands">{w.brands.join(", ")}</dd></> : null}
       </dl>
       {w.services?.length ? <><h3>Leistungen laut Eintrag</h3><ul className="tk-story-list" data-testid="workshop-detail-services">{w.services.map(s => <li key={s}>{s}</li>)}</ul></> : null}
-      {w.source === "OpenStreetMap" && <p className="tk-meta" data-testid="workshop-detail-attribution">Daten: © <a href={w.source_url || "https://www.openstreetmap.org/copyright"} target="_blank" rel="noopener noreferrer">OpenStreetMap-Mitwirkende</a>, Lizenz <a href="https://opendatacommons.org/licenses/odbl/1-0/" target="_blank" rel="noopener noreferrer">ODbL 1.0</a>{w.data_as_of ? ", Stand " + new Intl.DateTimeFormat("de-DE").format(new Date(w.data_as_of)) : ""}. Angaben können sich geändert haben – im Zweifel bei der Werkstatt nachfragen.</p>}
+      {w.source === "OpenStreetMap" && <p className="tk-meta" data-testid="workshop-detail-attribution">Daten: © <a href={w.source_url || "https://www.openstreetmap.org/copyright"} target="_blank" rel="noopener noreferrer">OpenStreetMap-Mitwirkende</a>, Lizenz <a href="https://opendatacommons.org/licenses/odbl/1-0/" target="_blank" rel="noopener noreferrer">ODbL 1.0</a>{w.data_as_of ? ", Stand " + asOfDate(w.data_as_of) : ""}. Angaben können sich geändert haben – im Zweifel bei der Werkstatt nachfragen.</p>}
     </div>
     <RequestForm workshop={w} />
   </div>;

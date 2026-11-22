@@ -1,5 +1,5 @@
 {
-  "recorded_at": "2026-11-22T12:14:24.412Z",
+  "recorded_at": "2026-11-22T12:39:10.571Z",
   "passed": true,
   "mock": true,
   "mock_label": "mit gemockter Antwort: synthetic in-memory shop API; contract copied from apps/shop-api, server code not executed",
@@ -17,9 +17,12 @@
   ],
   "source_sha256": {
     "apps/web/components/shop/api.ts": "c94e85237975d714c0cb1625c7f016d0c3f89c4cff3092f571860ee1a5640e28",
+    "apps/web/components/shop/ProductPlaceholder.tsx": "ade49c6663522c72855fe4b9faf089a68f200d6655463629b0b884467f9e8f0f",
+    "apps/web/components/shop/ProductStory.tsx": "8a649d5e706eaa28ffdbf3fc4ad33a8a8a7421d26c602fdf2d235ce9ce3ae856",
+    "apps/web/components/shop/product-story-copy.ts": "3e13a88b0de88badb27ee16822ca205f44a8eb64ff4a21ee68b1de93b7edb517",
     "apps/web/components/shop/CatalogView.tsx": "cc4ffce1e2cb59229a2f89aa710011dfd69e73e5c313dd6c064b726cef9a1b23",
     "apps/web/components/shop/CategoryList.tsx": "8025d3506094418b0b076fcbd7dd29d75ffc015474a39a1d22d3e67ba1727bb7",
-    "apps/web/components/shop/ProductCard.tsx": "8b647fbc2f23d23532c3d37e2dec213306c7a20ee3353b0b00aab26d461f5d0a",
+    "apps/web/components/shop/ProductCard.tsx": "c5771ccb5fc28c027fe05e04dcb13fbcd60dcb582bac373b964063cdf2a2913f",
     "apps/web/components/shop/ProductDetail.tsx": "b55814e0afc7146cd00203f98a63c834408c2130dfe8617c4c34ab8998c17c1d",
     "apps/web/components/shop/PublicShopContent.tsx": "9153b8cf651806c4afe80e6326d1ff9fbc1639ea9a06ea9e5fd4d168a0372436",
     "apps/web/components/shop/CommerceHeader.tsx": "f438ccd0dae2808a50612f048f684c339eb9c9d3c1fdae23619d02de43eb4a56",
@@ -27,8 +30,8 @@
     "apps/web/components/shop/Storefront.css": "a049b0b8bbd081aa8a97c6e05ff4b96f32099914573a2ebc9dc2b9346edd09bb",
     "apps/web/components/PublicExperience.tsx": "1e599cf9bf7659d2637d641de473d75fea0b06f6c67d958d19770812f0b769c4",
     "apps/site/src/main.tsx": "39e7cf3f8399869a2d579e29dab4dda36617e91cc824b94a31b1bc4ffdb80545",
-    "config/shop-interface-copy.json": "478f9e55f45ba09c4aa3767339e4aaae9ac87be1e055b8acf3a75fda57534c3b",
-    "apps/site/tests/browser-catalog.mjs": "af50a8b8968e2dfb29677e6bce1233ed98504907aa7cbe94a91232cdc687398d",
+    "config/shop-interface-copy.json": "b712b0e81912b915e5a633f560c75c9e737ecb133b3612217009e3da73ec7446",
+    "apps/site/tests/browser-catalog.mjs": "19714eef29bca7d685669c30b9559e78c4abbe4bdfce4c597cadc827557326cd",
     "apps/site/tests/fixtures/shop-api-mock.mjs": "66eff93269139503c34335ac700cf057b4f7cd6509c125871a73dbc6df5e98a5"
   },
   "requests": [

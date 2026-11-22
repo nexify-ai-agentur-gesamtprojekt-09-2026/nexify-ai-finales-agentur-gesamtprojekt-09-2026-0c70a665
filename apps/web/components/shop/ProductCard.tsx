@@ -23,7 +23,7 @@ export function ProductImage({ src, alt, large = false }: { src: string | null |
   const failed = safeSrc !== null && failedSrc === safeSrc;
   return <div className={"tk-image" + (large ? " is-large" : "")}>
     {safeSrc && !failed ? <img key={safeSrc} src={safeSrc} alt={alt} loading="lazy" decoding="async" referrerPolicy="no-referrer" style={{ objectFit: "contain" }} onError={() => setFailedSrc(safeSrc)} /> :
-      <ProductPlaceholder label={failed ? t("imageError") : t("imageMissing")} large={large} />}
+      <ProductPlaceholder label={failed ? t("imageError") : t("imageMissing")} caption={t("placeholderCaption")} large={large} />}
   </div>;
 }
 
