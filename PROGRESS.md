@@ -1,3 +1,72 @@
+## Stand 22.11.2026, 18:40 UTC · Prüfkette: Actions laufen wieder, `next-web` behoben, `repository` ist der echte Blocker
+
+Führt die Abschnitte darunter fort; sie bleiben als Stände ihrer Commits stehen.
+Belege und alle Zahlen: `docs/04-betrieb/ci-gruen-und-merge-2026-11-15.md`
+(Zweig `claude/ci-gruen`, PR 211, Kopf `1555400`). Entscheidungen nur in
+`DECISIONS.md`; neu ist dort keine.
+
+- **GitHub Actions startet wieder Jobs (IST, erste echte Läufe 15.11. ab 22:28
+  UTC, erneut 22.11. 18:31 UTC).** Der Satz „GitHub Actions startet keine Jobs"
+  in der Betriebslage vom 14.11. (21:47 UTC) und die gleichlautenden Stellen in
+  den älteren Abschnitten sind damit **HISTORIE**. Eingeordnet: Jeder
+  abgeschlossene CI-Lauf auf `main` ab `d1837e6` (13.11., 20:55 UTC) endete
+  nach 2 bis 4 Sekunden mit „Actions budget is preventing further use", 83 Läufe
+  in Folge, auch der zu `9c9c806` (kein Protokoll, `runner_id: 0`). Für `main`
+  gibt es deshalb **seit `edfba82` (12.11.) keine CI-Messung**; die Zahlen unten
+  stammen aus dem Zweiglauf, dessen Inhalt sich von `main` nur um zwei Dateien
+  unterscheidet. OA-022 ist damit faktisch erledigt, der Registereintrag ist
+  noch nicht umgestellt.
+- **`next-web` behoben (IST, in echtem CI grün).** Ursache war eine fehlende
+  Voraussetzung: `apps/web/auth/tests/chat-guidance.test.mjs` liest das
+  erzeugte, per `apps/site/.gitignore` nicht eingecheckte
+  `apps/site/.generated/public-site.json`; die Jobs `repository` und
+  `react-site` erzeugen es, `next-web` nicht (ENOENT, 137 von 138 Tests).
+  `.github/workflows/ci.yml` führt den Schritt nun auch dort aus → 138/138,
+  in CI `success` auf vier aufeinanderfolgenden Köpfen. Kein Test abgeschaltet,
+  übersprungen oder aufgeweicht.
+- **`repository` ist der verbleibende Blocker (IST).** `Ran 912 tests`,
+  `FAILED (failures=56, errors=45, skipped=17)` — 101 Fälle, dazu
+  `make check-arch` rot (ARCH-010/027/029, dieselben Ursachen). Drei Ursachen:
+  59 Fälle an der Pillow-Versionssperre (OA-053), 29 an 28 von 362 veralteten
+  Pins in `config/acceptance-coverage.json`, 13 an drei von sieben roten
+  Browser-Beleg-Prüfern. Von den 28 veralteten Pins sind 14 von einem roten
+  Prüfer gebunden, 14 nicht.
+- **OA-053 ist schwerer als bisher geführt (IST, gemessen 16.11.).** Weg B
+  (Werkzeuge auf Pillow 13.0.0) ist die richtige Richtung, sein Beleg ist aber
+  weder hier noch mit HF-Zugang allein erzeugbar: `birefnet_onnx.py` verlangt
+  die **nicht vorhandene** Exportdatei
+  `birefnet-e2bf8e4-fp32-opset17-lastlogits-1024.onnx`, deren Erzeugung in
+  `config/integrations/birefnet-onnx.json` selbst als offener Blocker steht
+  (`exporter_code_hash: null`, „never execute it blindly", Parität offen);
+  `birefnet_rembg_batch.py` verlangt zusätzlich die ebenfalls fehlende
+  `BiRefNet-general-epoch_244.onnx` (972.666.916 Byte). Weg B umfasst außerdem
+  **drei** Werkzeuge, die Zeile `runtime_contract.pillow` in
+  `config/integrations/birefnet-onnx.json` und **drei** Pins (der dieser
+  Config ist heute gültig). Weg A braucht keinen neuen Beleg, schreibt aber 62
+  gemeldete Schwachstellen fest. ENTSCHEIDUNG NÖTIG, unverändert Inhaber.
+- **`main` unverändert (IST, Abruf 22.11., 18:32 UTC).** `origin/main` steht
+  weiter auf `9c9c806`; seit dem 14.11. ist nichts gemergt. Offen sind rund 42
+  Pull Requests, keiner davon als Entwurf geführt (eigene Zählung 15.11.).
+- **Auto-Merge: die Warnung aus OA-027 ist jetzt scharf, wird aber abgefangen
+  (IST).** Da Actions wieder laufen, gilt der dort notierte Satz „läuft Actions
+  wieder an, gehen ungeprüfte Stände von selbst nach `main`" tatsächlich. An
+  PR 211 wurde zweimal auf „bereit" gestellt und Auto-Merge (squash)
+  eingeschaltet (16.11. 03:06, 22.11. 18:31 UTC, beide durch `nexifyai-dev`,
+  nicht durch die arbeitende Sitzung); beide Male hat ein automatisches Gate es
+  binnen Minuten zurückgenommen, mit der Begründung „keine `APPROVED`-Review;
+  roter CI; grüne Hilfsworkflows und Vercel-Kontexte ersetzen die verpflichtende
+  Evidenz nicht". OFFEN (Inhaber): Auto-Merge an den übrigen offenen PRs
+  bestätigen oder abschalten (OA-027) — dort greift dasselbe Gate nur, wenn die
+  Prüfkette rot bleibt.
+- **Verwaiste Vercel-Projekte: zeitweise, nicht dauernd (IST).** `site`,
+  `site-k23m`, `site-gjp7`, `web`, `web-2kby` meldeten am ersten Kopf Fehler,
+  an den folgenden **keinen Status**; der kombinierte Status zu `797c776` war
+  `success` mit genau den zwei maßgeblichen Projekten. Präzisiert OA-023.
+- **Nicht gemessen in dieser Nachführung:** Live-Zustand der Produktion
+  (`tools/live-check.mjs`, `tools/gleichmacher.mjs` nicht ausgeführt, weil kein
+  Merge stattfand), Ursache des roten Checks `review` (auf mehreren fremden PRs
+  gleich rot), die vier grünen Belegprüfer.
+
 ## Stand 14.11.2026, ca. 22:00 UTC · Abend III: Skills, Kontoverknüpfung im Shop-Dienst, robots-Meta, Belege Runde 3
 
 Führt den Abschnitt von ca. 20:40 UTC direkt darunter fort; jener bleibt als Stand von `500c52d` stehen. Kennzeichnung wie dort (SOLL, IST, „laut PR“, Notiz, OFFEN). Entscheidungen stehen nur in `DECISIONS.md`; neu ist dort keine. Quelle der PR-Angaben: `git log origin/main` bis `48f5072` und `gh api …/pulls/<n>` (Abruf 14.11.2026, 21:47 UTC). Alle drei Merges durch `nexifyai-dev`, Merge-Zeiten laut GitHub in UTC.

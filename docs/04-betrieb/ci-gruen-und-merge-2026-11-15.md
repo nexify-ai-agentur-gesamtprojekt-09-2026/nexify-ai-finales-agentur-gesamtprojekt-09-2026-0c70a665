@@ -511,22 +511,65 @@ Inhaberentscheidung bleibt (D-017, OA-053). Die sachlich beste Reihenfolge ist
 **Weg B mit dem Lauf in einer geeigneten Umgebung**: erst den Beleg erzeugen,
 dann die drei Versionsprüfungen und die zwei Pins in einem Zug nachziehen.
 
+### Nachtrag 22.11.2026, 18:40 UTC · Weg B braucht zwei ONNX-Artefakte, eines davon ist ein offener Blocker
+
+Anlass: vier Befunde des Codex-Code-Reviews zu `1555400`, alle vier einzeln
+nachgeprüft und **alle vier zutreffend**. Zwei davon verschärfen den Befund aus
+dem Nachtrag 05:45 UTC; meine dortige Formulierung, ein CI-Job oder Server „mit
+Hugging-Face-Zugang und den gepinnten Fassungen" genüge, war **zu optimistisch**.
+
+Richtig ist: die 444-MB-Datei bei Hugging Face ist `model.safetensors`, also die
+**Quelle**, nicht das Artefakt, das die Werkzeuge laden.
+
+| Verlangt von | Artefakt | Zustand |
+|---|---|---|
+| `tools/birefnet_onnx.py` | `birefnet-e2bf8e4-fp32-opset17-lastlogits-1024.onnx` | **fehlt**; muss aus den Gewichten **exportiert** werden |
+| `tools/birefnet_rembg_batch.py` | `BiRefNet-general-epoch_244.onnx`, 972.666.916 Byte | **fehlt**, eigenes Artefakt |
+
+Der Export ist selbst ein offener Blocker, von
+`config/integrations/birefnet-onnx.json` wörtlich festgehalten:
+`exporter_code_hash: null`, `known_export_blocker`: „Official notebook uses a
+different Dynamic weight and unpinned third-party deform_conv2d exporter;
+never execute it blindly. Fixed General export needs reviewed standard-op
+lowering, exporter hash and numerical parity pilot."
+
+**Folge:** Weg B hat eine Vorbedingung, die vor der Versionsfrage liegt — rund
+1,4 GB Artefakte beschaffen und prüfen, davon eines über einen Export, der
+reviewte Operator-Absenkung, einen Exporter-Hash und einen Paritätstest
+braucht. Das ist kein Nebenschritt, sondern eigene Arbeit mit eigener
+Entscheidung. Damit steht neben Weg A und Weg B realistisch ein dritter Weg:
+**Weg A auf Zeit**, also bewusst auf 12.3.0 pinnen, mit Begründung und
+Ablaufdatum, und den Export als eigenen Auftrag führen. Welcher der drei gilt,
+entscheidet der Inhaber; diese Sitzung hat keinen davon ausgeführt.
+
+Die beiden übrigen Befunde sind in dieser Fassung ebenfalls behoben: der Umfang
+von Weg B (drei Werkzeuge, die Zeile `runtime_contract.pillow` in
+`config/integrations/birefnet-onnx.json`, **drei** Pins statt zwei) und die zu
+starke Aussage über die verwaisten Vercel-Projekte („an jedem Pull Request" →
+zeitweise). Der vierte Befund, die Nachführung von `PROGRESS.md`, ist im selben
+Commit erledigt: der dortige Satz „GitHub Actions startet keine Jobs" war
+überholt und hätte folgende Sitzungen auf den falschen Blocker gesetzt.
+
 ## 7. Vorschlag für die Entscheidung des Inhabers
 
 Vier getrennte, je einzeln entscheidbare Punkte. Die ersten drei sind
 Voraussetzung dafür, dass `main` wieder grün werden kann.
 
 1. **Pillow / OA-053** (Abschnitt 3.3, größter Einzelposten mit 59 von 101):
-   Nach dem Nachtrag 05:45 UTC ist die Frage **nicht** „A oder B nach
-   Vorliebe". Weg B ist die richtige Richtung, sein verlangter Beleg (Lauf mit
-   Modell) ist in diesem Container aber **nicht erzeugbar**: Gewichte fehlen
-   (444 MB bei Hugging Face), `onnx` ist nicht installiert, `onnxruntime` ist
-   1.29.0 statt der exakt gepinnten 1.31.1. Weg A braucht keinen neuen Beleg,
-   schreibt aber 62 gemeldete Schwachstellen fest.
-   **Empfehlung: Weg B, aber den Lauf in einer Umgebung mit Hugging-Face-Zugang
-   und den gepinnten `onnx`/`onnxruntime`-Fassungen erzeugen** (CI-Job oder
-   Server), danach die **drei** Versionsprüfungen und die **zwei** Pins in
-   einem Zug nachziehen. `tools/birefnet_rembg_batch.py` gehört dazu.
+   Die Frage ist **nicht** „A oder B nach Vorliebe". Weg B ist die richtige
+   Richtung, sein verlangter Beleg (Lauf mit Modell) ist hier **nicht
+   erzeugbar** — und auch mit Hugging-Face-Zugang allein nicht, siehe den
+   Nachtrag 22.11. unten. Weg A braucht keinen neuen Beleg, schreibt aber 62
+   gemeldete Schwachstellen fest.
+   **Umfang von Weg B, vollständig:** drei Versionsprüfungen
+   (`product_image_batch.py:84`, `birefnet_onnx.py:202`,
+   `birefnet_rembg_batch.py:60`), die Zeile `runtime_contract.pillow` in
+   `config/integrations/birefnet-onnx.json` (sonst ist das Laufzeitinventar
+   falsch) und **drei** Pins im Register — der dieser Config ist heute
+   **gültig** und würde durch die Änderung neu abweichen.
+   **Vorbedingung, die zuerst entschieden werden muss:** die beiden
+   ONNX-Artefakte beschaffen oder erzeugen und prüfen (Nachtrag 22.11.).
+   Erst danach lässt sich Weg B in einem Zug nachziehen.
 2. **Chat-Weg der SDK-Prüfungen** (Befund (i)): Soll
    `apps/site/tests/browser-critical.mjs` künftig
    `apps/web/app/api/chat/route.ts` mit einem Stellvertreter-Router messen (so
@@ -540,9 +583,13 @@ Voraussetzung dafür, dass `main` wieder grün werden kann.
    Produktion nicht gibt, und es entscheidet sich Ersatzprüfung oder
    Stilllegung.
 4. **Verwaiste Vercel-Projekte** (Abschnitt 6): Die fünf Projekte `site`,
-   `site-k23m`, `site-gjp7`, `web`, `web-2kby` melden an jedem Pull Request
-   einen roten Status, ohne Bezug zum Inhalt. Aufräumen wäre eine Änderung an
-   der Vercel-Einrichtung und ist hier nicht erfolgt.
+   `site-k23m`, `site-gjp7`, `web`, `web-2kby` melden **zeitweise** einen roten
+   Status ohne Bezug zum Inhalt — am ersten Kopf dieses Zweigs ja, an den
+   folgenden gar keinen (der kombinierte Status zu `797c776` war `success` mit
+   genau den zwei maßgeblichen Projekten). Nicht „an jedem Pull Request":
+   dafür gibt die Messung nichts her. Aufräumen wäre eine Änderung an der
+   Vercel-Einrichtung und ist hier nicht erfolgt; der Umfang ist entsprechend
+   kleiner, als die Zahl Fünf vermuten lässt.
 
 ## 8. Merge-Strecke
 
