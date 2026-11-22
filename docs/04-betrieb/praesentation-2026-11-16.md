@@ -507,7 +507,7 @@ behoben und gemessen: Befunde 12 und 13 in Abschnitt 2.
 
 > **Ausgang: Es bleibt bei `www.nexifyai.de`.** Der Ausfall der Domain war vorübergehend.
 > Commit `99f4783` hat die kanonische Adresse auf `nexifyai.cloud` umgestellt, Commit
-> `ba3bd19` nimmt genau das zurück. Der Abschnitt bleibt stehen, weil beides gemessen und
+> `f30dccb` nimmt genau das zurück. Der Abschnitt bleibt stehen, weil beides gemessen und
 > begründet war und die Entscheidungslage sonst nicht nachvollziehbar ist.
 >
 > **Zeitleiste, jeweils eigene Messung:**
@@ -519,7 +519,7 @@ behoben und gemessen: Befunde 12 und 13 in Abschnitt 2.
 > | 06:0x | Umstellung auf `nexifyai.cloud` (`99f4783`), Abnahmekriterien erfüllt |
 > | 06:20 | `nexifyai.de` ist wieder online; Entscheidung des Inhabers: „Shop und alles ist online auf .de — das bleibt auch." |
 > | 06:3x | Ich messe nach: `https://nexifyai.de/` 200 („Websites, Apps und KI-Automatisierung · NeXify AI"), `https://www.nexifyai.de/` 200, `https://nexifyai.de/teileklar` 200 („TEILEKLAR.shop – Katalog und Teilefragen für Auto und Motorrad") |
-> | 06:4x | Rücknahme (`ba3bd19`): die fünf Quellen stehen wieder auf `https://www.nexifyai.de`, Entscheidung **E13 gilt unverändert** |
+> | 06:4x | Rücknahme (`f30dccb`): die fünf Quellen stehen wieder auf `https://www.nexifyai.de`, Entscheidung **E13 gilt unverändert** |
 >
 > **Beobachtung, die jemand bewerten sollte** (ich ändere daran nichts): Die laufende
 > Auslieferung auf `nexifyai.de` trägt den Titel „Websites, Apps und KI-Automatisierung ·
@@ -591,3 +591,95 @@ Aufnahme in `PROGRESS.md` ist raus.
 **Was ich nicht geprüft habe:** Ob die Auslieferung nach dem Merge tatsächlich die neuen
 Adressen zeigt — dafür muss der Zweig erst live sein. Die Messung oben ist der lokale
 Produktionsbau dieses Zweigs, nicht `https://nexifyai.cloud/`.
+
+---
+
+## 12. Die sechs Befunde der Codex-Prüfung (22.11.2026)
+
+Codex hat am 16.11. sechs Befunde am Pull Request hinterlassen; sie blieben offen, weil die
+Sitzung danach ruhte. Ich habe jeden nachgeprüft. **Alle sechs waren berechtigt**, vier
+davon betreffen die vorbereitete, nicht aktivierte TEILEKLAR-Variante.
+
+### 14 · `/teileklar/katalog` · dauerhafte Weiterleitung auf ein wechselndes Ziel
+
+Das Ziel hängt an `config/teileklar-schaufenster.json` und kann sich mit einem Wort ändern.
+`permanentRedirect` (308) darf der Browser behalten — nach einer Umstellung liefe er weiter
+auf das alte Ziel, trotz Neuauslieferung und `force-dynamic`. **Behoben:** `redirect` (307).
+Gemessen: `/teileklar/katalog` → **HTTP 307** auf `/teileklar/shop`.
+
+### 15 · Schaufenster im Externmodus · „Alle Artikel ansehen" führte ins leere Haus
+
+Im Externmodus sagt der Abschnitt, alle Artikel lägen im laufenden Shop — der Verweis
+daneben führte weiter auf `/teileklar/shop`, also genau auf das leere eigene Sortiment.
+**Behoben:** Im Externmodus zeigt der Verweis auf den laufenden Shop („Alle Artikel bei
+teileklar.shop ansehen", Pfeil nach außen); sonst unverändert.
+
+### 16 · Externe Shop-Adresse · eine einzige deutsche Marktadresse für alle Sprachen
+
+`https://teileklar.shop/de/` hätte auch niederländische und französische Besucher in den
+deutschen Markt geschickt. **Gemessen am 22.11.2026** (reine Statusabfrage): `/` 200
+(`html lang="de"`), `/de/` 200, `/nl/` 200, `/fr/` **403**, `/en/` **404**. **Behoben:**
+`adressen_je_sprache` mit den zwei belegten Marktadressen (de, nl); fr und en nehmen die
+allgemeine Adresse, weil es für sie keine erreichbare Marktseite gibt. Das Schaufenster
+wählt nach der Sprache des Besuchers. Über Preise, Steuer oder Rechtstexte des jeweiligen
+Marktes behaupten wir damit nichts — das entscheidet der Shop.
+
+### 17 · Rechtsdokumente in der Fußzeile · übersetzt beschriftet, aber deutsch
+
+`/agb`, `/avv` und `/widerruf` liegen nur auf Deutsch vor. Die Fußzeile beschriftete sie
+übersetzt und hängte die Sprachwahl an die Adresse (`/agb?lang=nl`) — ein niederländischer
+Besucher folgte also einem scheinbar niederländischen Rechtsverweis und bekam deutschen
+Text. **Behoben:** Die Beschriftung bleibt in der Sprache des Besuchers, sagt aber dazu,
+dass das Dokument deutsch ist. Gemessen im Browser (`rechtsverweise-sprachen-runde-7.json`):
+
+| Sprache | Beschriftung | `hreflang` |
+|---|---|---|
+| de | „AGB", „Auftragsverarbeitung (AVV)", „Widerruf" | `de` |
+| nl | „Algemene voorwaarden **(DE)**" usw. | `de` |
+| fr | „Conditions générales **(DE)**" usw. | `de` |
+| en | „Terms and conditions **(DE)**" usw. | `de` |
+
+Die Dokumente selbst sind unverändert. Übersetzte Rechtstexte wären eine inhaltliche und
+rechtliche Entscheidung des Inhabers, keine Darstellungsfrage.
+
+### 18 · TEILEKLAR-Chat · nl/fr/en behaupteten, Bestellen sei nicht möglich
+
+Der voreingestellte Begrüßungstext endete in **nl, fr und en** mit „Online bestellen ist
+derzeit nicht möglich" — **im deutschen Text steht dieser Satz nicht**, und die Seite
+daneben beschreibt in vier Schritten, wie bestellt wird. Das war schon vor der
+Extern-Variante ein Widerspruch und in drei von vier Sprachen eine Aussage, die die
+deutsche Fassung nicht trägt. **Behoben:** Der Satz ist in den drei Sprachen entfernt; alle
+vier Fassungen sagen jetzt dasselbe. Es ist keine Zusage hinzugekommen.
+
+### 19 · Kopfleiste · die Deckung stand als Zahl mitten in der Regel (P1)
+
+Codex verlangt, neue Flächen in `config/design-tokens.json` einzutragen (AGENTS.md,
+„Tokens"). **Gemessen:** `design-tokens.json` enthält **0** `--as-*`-Werte — das gesamte
+Atelier-Flächensystem (`--as-ground`, `--as-glass-dense`, `--as-glass-filter-bar` …) ist in
+`AtelierSystem.css` definiert, und dort stehen **67** `color-mix`-Ausdrücke mit fester
+Prozentzahl. Meine 86 % waren einer von 67, keine neue Praxis.
+
+**Was ich getan habe:** Die Deckung heißt jetzt `--as-bar-ground-opacity` und steht bei den
+übrigen Leistenwerten, mit der Herleitung daneben — an einer Stelle einstellbar statt als
+Zahl in der Regel. **Was ich nicht getan habe:** einen einzelnen Wert nach
+`design-tokens.json` verschieben, während 66 gleichartige in der CSS bleiben. Das wäre
+weniger einheitlich, nicht mehr, und es rührt an eine hash-gebundene Quelle, deren Pin auf
+`main` ohnehin schon veraltet ist. **Die Überführung des Atelier-Flächensystems in die
+Token-Datei ist ein eigener Auftrag**, und er gehört dem Inhaber vorgelegt, nicht nebenbei
+in einem Darstellungs-PR erledigt.
+
+### Gates nach dieser Runde
+
+`gleichmacher` 47 Seiten / 32.213 Vergleiche / **0 Abweichungen**; `make check`,
+`tools/lint.mjs`, `ds-audit-cli` je Exit 0 (0 Fehler, 0 Warnungen); `live-check` dieselben
+sieben umgebungsbedingten Befunde; `unittest` **15 rote Namen gegen 16 auf `main`**, kein
+neuer roter Test. Belege erneuert (`text-spacing` 129 Prüfungen/0 Befunde,
+`browser-consent-ui` 18 Prüfungen, `browser-public-experience` 70 Routen/10 private).
+
+**Zu den Pins, ausdrücklich:** Ein erster Versuch hat 31 Pins auf einmal nachgezogen —
+darunter `AGENTS.md`, `PROGRESS.md`, `design-tokens.json`, `site-map.json` und
+`packages/tokens/*`, die dieser Zweig **nicht** anfasst. Das habe ich zurückgenommen.
+Nachgezogen sind jetzt genau **fünf**: die drei von diesem Zweig geänderten Komponenten und
+die zwei Belegdateien, deren Messung ich neu erhoben habe. Die **26** übrigen veralteten
+Bindungen bleiben, wie sie auf `main` stehen — sie gehören zum Rückstand dort und nicht in
+diesen Pull Request.

@@ -1,0 +1,70 @@
+{
+ "de": [
+  {
+   "href": "/agb",
+   "text": "AGB",
+   "hreflang": "de"
+  },
+  {
+   "href": "/avv",
+   "text": "Auftragsverarbeitung (AVV)",
+   "hreflang": "de"
+  },
+  {
+   "href": "/widerruf",
+   "text": "Widerruf",
+   "hreflang": "de"
+  }
+ ],
+ "nl": [
+  {
+   "href": "/agb?lang=nl",
+   "text": "Algemene voorwaarden (DE)",
+   "hreflang": "de"
+  },
+  {
+   "href": "/avv?lang=nl",
+   "text": "Verwerkersovereenkomst (DE)",
+   "hreflang": "de"
+  },
+  {
+   "href": "/widerruf?lang=nl",
+   "text": "Herroeping (DE)",
+   "hreflang": "de"
+  }
+ ],
+ "fr": [
+  {
+   "href": "/agb?lang=fr",
+   "text": "Conditions générales (DE)",
+   "hreflang": "de"
+  },
+  {
+   "href": "/avv?lang=fr",
+   "text": "Contrat de sous-traitance (DE)",
+   "hreflang": "de"
+  },
+  {
+   "href": "/widerruf?lang=fr",
+   "text": "Rétractation (DE)",
+   "hreflang": "de"
+  }
+ ],
+ "en": [
+  {
+   "href": "/agb?lang=en",
+   "text": "Terms and conditions (DE)",
+   "hreflang": "de"
+  },
+  {
+   "href": "/avv?lang=en",
+   "text": "Data processing agreement (DE)",
+   "hreflang": "de"
+  },
+  {
+   "href": "/widerruf?lang=en",
+   "text": "Right of withdrawal (DE)",
+   "hreflang": "de"
+  }
+ ]
+}
