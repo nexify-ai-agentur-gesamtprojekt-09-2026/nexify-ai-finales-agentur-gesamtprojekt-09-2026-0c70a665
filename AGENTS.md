@@ -13,6 +13,25 @@ nicht verfolgt; `apps/web/wrangler.jsonc` und `docs/deployment/cloudflare-worker
 sind eine ungenutzte Vorbereitung und kein Auftrag. Die Führungsentscheidung vom
 04.11.2026 (ChatGPT-Sites-Stand) ist im widersprechenden Umfang historisch.
 
+Stand 22.11.2026, 18:50 UTC (gemessen, lesend): Der Absatz „Stand 16.11.2026, 13:10 UTC“ unten ist
+**HISTORIE**. `nexifyai.de` leitet per 301 auf `www.nexifyai.de` um; beide lösen auf Cloudflare-Adressen auf.
+`https://www.nexifyai.de/.well-known/nexify-build.json` nennt `served_by: "cloudflare worker nexfiy-ai-studio (.de)"`,
+Commit `6eb6273165` aus `main` von `nexfiy-ai-studio`, gebaut auf `srv1243952`, ausgeliefert 2026-11-22T13:18:38+01:00
+(`tools/deploy-live.sh`, Betreiber: Hermes/NeX). Der Lovable-Zweig `lovable` ist damit nicht mehr der ausgelieferte Stand.
+`/mcp` und `/.well-known/oauth-protected-resource` antworten auf dem neuen Stand mit 404. Ob dieser Wechsel als
+Produktionsweg gilt, ist vom Inhaber in `DECISIONS.md` festzuhalten (OFFEN). Bis dahin bleibt D-021 formal
+in Kraft; die Vercel-Aussagen in diesem Dokument (auch unter „Aktueller Gesamtauftrag“) beschreiben
+nicht den gemessenen Stand. Nachweis: `docs/04-betrieb/oracle-autotasks-checkpoint-2026-11-16.md`, Abschnitt 12
+(Selbstauskunft des Build-Stempels; Cloudflare-Konto nicht geprüft).
+
+Stand 16.11.2026, 13:10 UTC (Inhaberangabe im Chat, Pascal Courbois: „vercel ist auch raus“;
+gemessen 13:05 UTC): `nexifyai.de` löst auf `185.158.133.1` auf und wird vom Lovable-Projekt
+„Nexfiy Ai Studio“ (`dcb47f25-0aec-4b03-88b7-4b67f07d4a09`) ausgeliefert; `/.well-known/oauth-protected-resource`
+nennt `resource_name: "Nexfiy Ai Studio"`. Die Aussage „ausgeliefert wird **ausschließlich über Vercel**“
+und die Vercel-Angaben in diesem Abschnitt sind damit **HISTORIE**. Was `main` dieses Repositorys heute
+noch für die Produktion bedeutet, ist OFFEN und vom Inhaber festzulegen; ein Eintrag in `DECISIONS.md`
+steht aus. Nachweis: `docs/04-betrieb/oracle-autotasks-checkpoint-2026-11-16.md`, Abschnitt 10.
+
 Stand 14.11.2026, 17:42 UTC: Der Satz „Cloudflare wird als Hosting nicht verfolgt“ und
 die Einordnung „kein Auftrag“ sind HISTORIE, überholt durch D-021 in `DECISIONS.md`.
 Vercel ist der heutige Auslieferungsweg und bleibt es, bis ein Umzug gemessen und vom
