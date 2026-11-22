@@ -131,7 +131,7 @@ Wiederanlauf vor dieser Klärung ist ein eigenes Risiko und nicht freigegeben.
 | `next_action` | Lesende Klärung der `MAIL-`-Aufgaben, danach NX-ORA-02 |
 | Vorbedingung | Serverzugang nach Abschnitt 4 |
 | `next_run_target` | **kein Zukunftstermin gesetzt** (Stand 22.11.2026, 18:55 UTC). Vorbedingungen Serverzugang und MAIL-Klärung liegen beim Inhaber; ein Termin davor liefe leer. OFFEN beim Inhaber. |
-| Trigger | HISTORIE: Weckpunkt `trig_019NZHgrhm9MuhFjmTWRs8rR` (Ziel 2026-11-17T07:00:00Z) hat am 2026-11-17T07:00:38Z ausgelöst, Lauf `SUCCEEDED`, danach `run_once_fired` (Abruf 22.11.2026). Kein Folgetermin angelegt. |
+| Trigger | HISTORIE: Weckpunkt `trig_019NZHgrhm9MuhFjmTWRs8rR` (Ziel 2026-11-17T07:00:00Z) hat am 2026-11-17T07:00:38Z ausgelöst, Lauf `SUCCEEDED`, danach `run_once_fired` (Abruf 22.11.2026). Kein Folgetermin angelegt. Auftrag des Weckpunkts war ein lesender Lagebericht an den Inhaber, ausdrücklich ohne weitere Weckpunkte; die Sitzung hatte keinen Serverzugang. Was der Lauf im Einzelnen getan hat, ist im Repository **nicht belegt**. |
 | Executor | Koordinierende Claude-Sitzung; Ausführung auf Server 1 durch den Lovable-Projektagenten „NeXify AI Studio" |
 | Fallback | Inhaber führt das Skript aus Abschnitt 3 selbst aus, erst nach MAIL-Klärung (Sperre Abschnitt 3) |
 | Eskalation | Inhaber Pascal Courbois |
@@ -145,11 +145,13 @@ zugesichert.
 
 ## 7. Was ausdrücklich nicht nachgewiesen ist
 
-- **Kein laufender Autotask-Betrieb.** Die Schleife ruht seit 14.11.2026, 18:14 UTC.
+- **Kein laufender Autotask-Betrieb.** Die Schleife ruht seit 14.11.2026, 18:14 UTC (zuletzt so gemessen am 16.11.;
+  ein späterer Serverbefund liegt nicht vor, OFFEN).
 - **Kein 24/7-Betrieb und kein externer Scheduler.** Der Weckpunkt aus Abschnitt 6
   weckt eine Chatsitzung. Er ist kein verifiziert laufender Hostinger-Scheduler und
   ersetzt ihn nicht (`AGENTS.md`, Abschnitt „Dauerhafte GOAL-Bindung").
-- **Keine Wirkung auf Server 1.** Weder Sicherung noch Änderung noch Neustart.
+- **Keine Wirkung auf Server 1 durch diese Sitzung.** Weder Sicherung noch Änderung noch Neustart; auch der
+  Weckpunktlauf vom 17.11. hatte keinen Serverzugang. Änderungen durch Dritte (z. B. Hermes) seit dem 16.11. sind nicht geprüft.
   `aufgaben.json` unberührt, BigBuy unberührt.
 - **Kein Beleg zum Inhalt der MAIL-Aufgaben.**
 - **Kein Nachweis des letzten erfolgreichen Abrufs der Slack-Brücke.** Erfolgreiche
