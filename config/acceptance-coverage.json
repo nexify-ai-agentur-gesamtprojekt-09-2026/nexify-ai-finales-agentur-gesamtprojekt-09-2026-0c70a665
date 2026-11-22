@@ -3661,6 +3661,20 @@
         "current_safe_behavior": "apps/shop-api bleibt unverändert auf MongoDB; keine Datenübernahme, keine Umschaltung der Produktion und kein Eingriff in die bestehende MongoDB ohne Freigabe des Inhabers (D-016)",
         "next_step": "Shop-Schema mit RLS und Plan für Datenübernahme, Idempotenz, Backup/Restore und Rückweg auf der eigenen Supabase-Instanz vorlegen; Instanz und Zugang belegen",
         "completion_criterion": "Shop liest und schreibt nachweislich über die eigene Supabase-Instanz mit RLS-Positiv-/Negativtests, geprüfter Datenübernahme und getestetem Rückweg; D-006 danach als Historie geführt"
+      },
+      {
+        "id": "SCOPE-TEILEKLAR-001",
+        "source_refs": [
+          "DECISIONS.md:D-023",
+          "AGENTS.md:Aktueller Gesamtauftrag und kanonische Quelle",
+          "AGENTS.md:Aktuelle Ausarbeitung nach angenommenem Grundentwurf",
+          "config/operating-model.json:scope.products"
+        ],
+        "status": "decision_recorded_execution_pending",
+        "owner_area": "Shop / Werkstatt / Release; Freigaben Inhaber",
+        "current_safe_behavior": "Keine Weiterentwicklung und kein Merge von Shop-/Werkstattpaketen (P08–P14, RQ-034); keine neuen Bestellungen oder Werkstattanfragen freischalten; Shop-Daten und Bestandsfälle unverändert erhalten; keine DNS-/Produktionsänderung ohne Freigabe des Inhabers je Schritt (D-016)",
+        "next_step": "Altpfade nexifyai.de/teileklar* auf 404 mit X-Robots-Tag noindex ausliefern und TEILEKLAR aus Navigation, Routen und Sitemap der Agenturseite entfernen (Repository nexfiy-ai-studio); Quell-Repository, Writer und Deployweg von teileklar.shop belegen und den Offline-Cutover dem Inhaber je Schritt zur Freigabe vorlegen; Bestandsdaten vorher lesend sichern",
+        "completion_criterion": "teileklar.shop nimmt nachweislich keine neuen Bestellungen und Werkstattanfragen an; Agenturseite ohne TEILEKLAR-Navigation, -Routen und -Sitemap-Einträge (Live-Messung); Bestandsdaten mit Sicherungs- und Wiederherstellungsnachweis; Wiederaufnahme nur mit neuer D-Nummer und eigenem Releaseplan"
       }
     ],
     "hash_binding_note": "source_sha256 excludes this register itself; exact register bytes are bound by Git commit and delivery package manifest to avoid a recursive self-hash.",

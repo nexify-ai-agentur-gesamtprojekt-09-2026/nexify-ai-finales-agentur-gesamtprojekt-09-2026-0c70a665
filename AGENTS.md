@@ -20,6 +20,27 @@ Inhaber abgenommen ist; der Umzug von `apps/web` auf Cloudflare ist nach D-021 i
 Prüfung, nichts ist umgeschaltet, der Shop-Dienst bleibt vorerst auf Vercel. Daraus
 folgt kein Auftrag, DNS, Produktion oder einen Tarif zu ändern (D-016, D-017).
 
+Stand 22.11.2026 (SOLL, Inhaberentscheidung D-023 in `DECISIONS.md`): Jeder Agent lädt
+beim Start D-023 und behandelt ältere widersprechende Shop- und Werkstatt-Prioritäten
+als überholt. Vorrang haben die Agentur- und Marketingwebsite `nexifyai.de`, das
+NeXify-Kundencenter und der Agenturvertrieb; TEILEKLAR.shop samt Werkstattservice ist
+eine getrennte, vorübergehend pausierte Marke ohne Weiterentwicklung, Relaunch oder
+Marketing bis zu einer neuen Inhaberentscheidung. HISTORIE, überholt durch D-023, sind
+damit die Sätze „eigene Agentur- und TEILEKLAR-Funktionen mit klaren
+Anwendungskontexten“ und „Die Seitenarchitektur umfasst die eigenen TEILEKLAR-,
+Werkstatt-/Partner-/Kunden-/Affiliatebereiche“ im Abschnitt „Aktueller Gesamtauftrag
+und kanonische Quelle“ sowie „NeX2fly, Leistungen und TEILEKLAR bleiben eigene
+sachliche Wege mit öffentlichen Informationsseiten“ im Abschnitt „Aktuelle Ausarbeitung
+nach angenommenem Grundentwurf“, soweit sie TEILEKLAR- oder Werkstattbereiche als Teil
+der Agenturwebsite führen. Unverändert gelten alle Regeln dieses Dokuments, namentlich
+die Mandantentrennung („Unterschiedliche Domains, Rollen oder Mandanten nicht durch
+einen gemeinsamen Cookie oder Clientclaim gleichsetzen“) und die Grenzen aus D-016 und
+D-017; Shop-Daten und Bestandsfälle bleiben erhalten. IST und OFFEN stehen nur in D-023:
+Die Agenturseite wird am 22.11.2026 nicht aus diesem Repository ausgeliefert, und
+`teileklar.shop` ist nicht offline; die Abweichung von der Führungsentscheidung vom
+13.11.2026 oben und die Frage GitHub oder GitLab als führende Quelle (Register G27)
+sind nicht entschieden und werden hier nicht aufgelöst.
+
 Stand 13.11.2026 (HISTORIE, in Teilen überholt durch den Nachtrag vom 14.11.2026
 direkt darunter): Die Domains
 `nexifyai.de` und `nexifyai.cloud` zeigen per DNS nicht auf dieses Vercel-Projekt; die
