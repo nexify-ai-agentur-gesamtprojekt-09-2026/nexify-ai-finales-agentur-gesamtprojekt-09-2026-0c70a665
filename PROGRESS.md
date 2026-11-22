@@ -1,3 +1,107 @@
+## Stand 14.11.2026, ca. 22:00 UTC · Abend III: Skills, Kontoverknüpfung im Shop-Dienst, robots-Meta, Belege Runde 3
+
+Führt den Abschnitt von ca. 20:40 UTC direkt darunter fort; jener bleibt als Stand von `500c52d` stehen. Kennzeichnung wie dort (SOLL, IST, „laut PR“, Notiz, OFFEN). Entscheidungen stehen nur in `DECISIONS.md`; neu ist dort keine. Quelle der PR-Angaben: `git log origin/main` bis `48f5072` und `gh api …/pulls/<n>` (Abruf 14.11.2026, 21:47 UTC). Alle drei Merges durch `nexifyai-dev`, Merge-Zeiten laut GitHub in UTC.
+
+### Gemergt seit `500c52d` (PR 188), je Punkt SOLL, IST, OFFEN
+
+**PR 194 `2396553` (20:59) · Lehren des Abends in die bestehenden Skills.**
+- IST: Nur Dokumente unter `.claude/skills/` (neun Dateien, kein neuer Skill). `nexify-zweig-und-pr` nennt jetzt die Vorher-Messung an `origin/main` im Wegwerf-Worktree nach beiden `generate-public-data`-Aufrufen, „Kein `git stash`“, das Zurücklesen von Entwurf und Auto-Merge nach dem Anlegen eines PR, Schritt 9 nach dem Squash-Merge und in „Bekannte Lage“ Actions-Budget, Codex-Kontingent und verwaiste Vercel-Projekte. OA-170 damit ERLEDIGT.
+- OFFEN: Was dort als „Bericht vom 14.11.2026, nicht nachgemessen“ steht, bleibt Notiz.
+
+**PR 196 `d4f2032` (21:26) · Shop-Dienst: Google-Anmeldung verweigert statt mit unbestätigtem Passwortkonto zusammenzuführen.**
+- IST Befund (`docs/04-betrieb/konto-verknuepfung-befund-2026-11-14.md`): `google_session` suchte das Konto nur über die E-Mail-Adresse und startete eine Sitzung, während Passwort und Sitzungen des Bestandskontos weiter galten (Übernahme eines vorab registrierten Kontos); eine Google-Sitzung mit der Adresse eines Admin-Kontos erhielt die Admin-Rolle ohne Passwort. Heute hinter dem 503-Gate des Shop-Dienstes.
+- IST Behebung (`apps/shop-api/shop/accounts_api.py`): unbestätigtes Passwortkonto 409 `account_exists_unverified`, jede Rolle außer `customer` 403 `google_login_not_allowed`; Zurücksetzen des Passworts bestätigt die Adresse und widerruft aktive API-Schlüssel des Kontos. Laut PR: `tests/test_shop_account_linking.py` mit 10 Tests, vor der Änderung 4 von 5 der ersten Tests rot; unabhängige Prüfung durch einen zweiten Agenten, Nacharbeit im selben PR. Im eigenen Lauf dieser Nachführung (ohne `.venv`) lädt das Testmodul nicht (fehlendes Python-Paket), ist hier also nicht ausgeführt.
+- OFFEN: Registrierung mit fremder Adresse bleibt möglich (OA-171); Vermittler `GOOGLE_SESSION_URL` ohne Anwendungskennung und ohne Merkmal „Adresse bestätigt“, dazu Admin per Google und Bestandskonten (Inhaber, OA-172); Versand der Mail zum Zurücksetzen nicht belegt, ohne ihn bleiben Passwortkonten bei 409 stehen (OA-173); Teammitglieder-Einträge überleben das Zurücksetzen (OA-174).
+
+**PR 198 `48f5072` (21:45) · robots-Meta nach der Indexierungsregel (OA-164), Ausfallkarten, Schaufenster-Kachel, Google-Ablehnungsmeldung; Belege neu erhoben.**
+- IST am Repository: Das Meta-Tag auf `/agb`, `/avv`, `/widerruf`, `/teileklar/kategorien` und `/teileklar/werkstatt` kommt aus derselben Entscheidung wie die Kopfzeile (`apps/web/auth/page-robots.ts`, neben `indexing.ts`, weil `apps/web/lib` an den Resize-Beleg gebunden ist); die drei Rechtsseiten ändern nur ihre Metadaten, nicht den Rechtstext. Ausfallkarten von Warenkorb und Kasse ohne Trennpunkt auf eigener Zeile; Name der Schaufenster-Kachel auf zwei Zeilen begrenzt; `AuthForms.tsx` zeigt für 409 und 403 aus PR 196 je eine eigene Meldung (`components/shop/google-login-message.ts`). Neu erhoben am Commit `68f84c0`: Text-Resize-Beleg (laut PR 129 Prüfungen, 43 Routen, 0 Befunde, 175 Quellen), Katalog- und Shop-Beleg (laut PR bestanden, 7 und 13 Prüfungen); vorige Fassungen unter `superseded/`. Nachweise: `docs/04-betrieb/indexierung-freigabe-2026-11-14.md`, Abschnitt 11; `docs/09-final/pin-rebase-2026-11-14.md`, Abschnitt 12. OA-164 damit ERLEDIGT.
+- IST Auslieferung: Commit-Status an `48f5072` für `…-ut7r` und `…-s4k5` „success“ (`gh api …/commits/48f5072/status`, 21:47 UTC). Die Live-Nachmessung (`tools/live-check.mjs`, `tools/gleichmacher.mjs`, `curl` auf die Domains) läuft laut Auftrag der koordinierenden Sitzung getrennt; ihr Ergebnis liegt dieser Nachführung nicht vor und wird hier nicht behauptet.
+- OFFEN: Meta-Tag der Katalogseiten folgt nur dem Hauptschalter `NEXIFY_INDEXING` (OA-175); Observability-Belege `browser-exceptions-next.json` und `-vite.json` neu abweichend, Neulauf scheitert an einer fehlenden Erwartung des Harness zum heutigen Chat, `tools/check_browser_evidence.py` weiter rot (OA-176); Beleglauf mit Playwright 1.63.0 statt der festgelegten 1.65.0 (OA-177); die drei Belege tragen kein eigenes Commit-Feld, `68f84c0` steht nur im Commit-Text und in `pin-rebase` (eigene Prüfung 21:47 UTC; OA-178). Die hreflang-Frage der TEILEKLAR-Seiten aus OA-164 ist nicht Teil der Erledigung.
+
+### Betriebslage
+
+- **GitHub Actions startet keine Jobs (IST, Abruf 21:47 UTC).** Die Läufe auf `48f5072` (CI mit sieben Jobs, Chat owner schema fixture, Slack) enden um 21:45 UTC nach 2 bis 3 Sekunden mit „failure“; Anmerkung am Job: „The job was not started because an Actions budget is preventing further use.“ Unverändert OA-022, Inhaber.
+- **Codex-Review (IST, Kommentare von `chatgpt-codex-connector[bot]` an PR 198).** Review-Kontingent erschöpft, Sicherheitsprüfung startet mangels Guthaben nicht. Unverändert OA-146, Inhaber.
+- **Verwaiste Vercel-Projekte (IST, Kommentare von `vercel[bot]` an PR 198).** `web`, `web-2kby`, `site`, `site-gjp7`, `site-k23m` melden weiter Fehler beim Bau. Unverändert OA-023.
+- **Shop-Dienst, Website in Produktion:** in dieser Nachführung nicht gemessen; letzte eigene Messung 20:33 UTC (Abschnitt darunter).
+- **Zweite Sitzung.** Die Entwürfe 186, 187, 189, 190, 192, 193, 195 und 197 sind offen und gehören einem anderen Owner; sie werden hier nur geführt, nicht bewertet.
+
+### Prüfstand und Umfang dieser Nachführung
+
+Prüfstand `main` `48f5072` lokal (IST, 14.11.2026, ca. 21:50 UTC, Python 3.13, ohne `.venv`, ohne `node_modules`, erzeugte Seitendaten beider Anwendungen vorhanden): `python3 -m unittest discover -s tests` 844 Tests, 40 Failures, 7 Errors (davon 4 Ladefehler fehlender Python-Pakete, neu darunter `test_shop_account_linking` aus PR 196), 19 Skips, 47 rote Namen. Mit dieser Nachführung, die nur Dokumente ändert, dieselben 47 Namen, kein neuer, keiner weggefallen (Namensvergleich im selben Arbeitsbaum vor und nach der Änderung). `python3 tools/verify_requirements_reconciliation.py` 41 Zeilen „Stale implementation source“, vorher und nachher gleich. `make governance-check`, `make check` und `node tools/ds-audit-cli.js` (0 Fehler, 0 Warnungen) mit Exit 0. Nicht gemessen: `tools/live-check.mjs` und `tools/gleichmacher.mjs` gegen die Produktion.
+
+Diese Nachführung (Zweig `claude/stand-2200`) ändert nur Dokumente: diesen Abschnitt und „Offene Arbeiten“ in `PROGRESS.md`; in `docs/09-final/offene-arbeiten-2026-11-14.md` Abschnitt 9, zwei Zustände in Überschriften (OA-164, OA-170) und fünf Stand-Zeilen. `DECISIONS.md` und `AGENTS.md` sind unverändert: Keine neue Entscheidung, der Stand-Absatz in `AGENTS.md` behauptet nichts, was PR 194 bis 198 widerlegen. Keine Prüfsumme und kein Beleg angefasst.
+
+## Stand 14.11.2026, ca. 20:40 UTC · Abend II: Anfrageweg, Indexierungsregel, AI Gateway gesperrt, Testumgebung, Lösungsregister, Stilreste
+
+Führt den Abschnitt von ca. 18:45 UTC direkt darunter fort; jener bleibt als Stand von `2906f58` stehen, zwei dort überholte Sätze sind an Ort und Stelle als überholt markiert. Kennzeichnung: SOLL = gültige Vorgabe mit Quelle; IST = am Repository oder durch eigenen Abruf dieser Nachführung belegt, mit Quelle und Zeit; „laut PR“ = im Commit oder in der PR-Beschreibung genannt, hier nicht wiederholt; Notiz = Quelle genannt, hier nicht nachprüfbar; OFFEN = fehlt oder nicht belegt. Entscheidungen stehen nur in `DECISIONS.md`; neu ist dort keine. Quelle der PR-Angaben: `git log origin/main` bis `500c52d` und `gh api …/pulls/<n>` (Abruf 14.11.2026, 20:33 bis 20:36 UTC). Alle Merges durch `nexifyai-dev`, Merge-Zeiten laut GitHub in UTC.
+
+### Gemergt seit `2906f58` (PR 175), je Punkt SOLL, IST, OFFEN
+
+**PR 176 `5f0a411` (18:48) · Nachführung der führenden Dokumente.**
+- IST: Abschnitt von ca. 18:45 UTC, D-021 und D-022 als Vorschlag, Arbeitsliste `docs/09-final/offene-arbeiten-2026-11-14.md`.
+- OFFEN: D-021 und D-022 tragen weiter den Vermerk „Vorschlag“; eine ausdrückliche Bestätigung des Inhabers ist im Repository nicht belegt (Stand-Zeile an beiden Einträgen).
+
+**PR 177 `5ad9d5c` (18:49) · Mailing vorbereiten, ohne Versand (Paket E).**
+- SOLL: Wunsch des Inhabers, ab 15.11.2026 Kundenmailings über Resend zu versenden (Quelle: Commit-Text; D-017 und § 7 UWG gelten).
+- IST: Nur Dokumente: `docs/04-betrieb/mailversand-zustand-2026-11-14.md` (Messprotokoll), `docs/05-marketing/mailing/` mit Voraussetzungen je Empfängergruppe, Aufwärmplan, Entscheidungsvorlage und vier Vorlagenentwürfen in Deutsch mit Platzhaltern. Laut PR: 0 Einwilligungen, 0 geprüfte Bestandskunden, 1 Kontakt ohne Nachweis; `nexifyai.cloud` bei Resend verifiziert, `nexifyai.de` „failed“. Nichts versendet, in Resend und DNS nichts geändert.
+- OFFEN: Rechtsgrundlage je Empfängergruppe (Inhaber, OA-001); Anmelde-, Abmelde- und Sperrweg liegt nur als Entwurf in PR 186 vor; Fassungen in NL, FR, EN fehlen (OA-105).
+
+**PR 178 `530173d` (18:56) · IST gegen SOLL für Bot-Team, Routinen, Werkstattservice und Suite (Pakete H, I, J).**
+- IST: Drei Dokumente unter `docs/04-betrieb/` (`bot-team-ist-soll-…`, `routinen-ist-soll-…`, `werkstattservice-und-suite-ist-soll-2026-11-14.md`). Kein Produktcode, keine Konfiguration geändert. Laut PR: 9 Profile, 44 Rollen, 17 Fachfähigkeiten, kein Agent läuft; 18 geplante Routinen; `config/skills-register.json` bewusst unverändert (gültig gebunden).
+- OFFEN: Die Dokumente sind Analysen; aus ihnen sind Umsetzungspakete geschnitten (J-1 bis J-7), gebaut ist davon nur J-5 (PR 181). Bestätigung der Tabellen durch den Inhaber steht aus (OA-039, OA-134).
+
+**PR 179 `a8a5d66` (19:07) · Testumgebung herstellbar (Paket B).**
+- IST: `make test-env` baut `.venv` wie der CI-Job (Python 3.12, nur Pakete mit Prüfsumme), `make test-py` lässt die Suite darin laufen; `chat-route-errors.test.mjs` prüft JSON und SSE Feld für Feld; `pnpm-workspace.yaml` lehnt die Installationsskripte von `esbuild` und `workerd` ab. Bericht: `docs/09-final/testumgebung-und-abhaengigkeiten-2026-11-14.md`. Laut PR: 882 statt 823 Tests in `.venv`, 200 Läufe des Chat-Fehlertests in Folge grün. Ursache der Audit-Meldung `inventory_status: blocked` ist benannt (Abschnitt 7 des Berichts): Sie bestand schon am 30.10.2026 und ist berechtigt.
+- OFFEN (Inhaber): Pillow 12.3.0 gegen 13.0.0 und die leeren Prüfsummen in `skills-lock.json` (Abschnitte 2 und 3 des Berichts, OA-053). OFFEN (Fabrik): inhaltliche Durchsicht der 23 Dateien für das KI-Durchsetzungsregister (OA-167).
+
+**PR 180 `0333c16` (19:14) · Lösungsregister.**
+- SOLL: Auftrag des Inhabers vom 14.11.2026 laut Commit-Text: Was genutzt wird und welche Zugänge es gibt, soll nicht mehr verloren gehen.
+- IST: `config/loesungsregister.json` ohne Geheimniswerte, lesbare Fassung `docs/04-betrieb/loesungsregister.md`, Prüfung `tools/check_loesungsregister.py` in `make governance-check`, Skill `.claude/skills/nexify-loesungsregister`, dazu `docs/04-betrieb/aufraeumplan-2026-11-14.md` mit Sperrvermerk (kein Volume-Prune: Cognee-Daten). Eigener Lauf 20:36 UTC: 58 Lösungen, 48 Zugänge, lesbare Fassung stimmt überein; 17 Zugänge sind als „Erneuerung fällig“ geführt, 15 als offengelegt.
+- OFFEN (Inhaber): die 17 Erneuerungen und die als Frage geführten Rollen im Register (OA-169).
+
+**PR 181 `81b0ae9` (19:17) · Anfrageformular meldet die Abweisung ehrlich (Paket J-5).**
+- SOLL: Eine Anfrage über die Website erreicht den Inhaber (Zielbild; `AGENTS.md`, Führungsentscheidung 10.11.2026, Umsatz zuerst).
+- IST Befund: Über die Formulare auf `/kontakt`, `/teileklar/termine`, `/teileklar/gutscheine` und `/teileklar/partner-werden` kommt keine Anfrage an. `POST /api/requests` geht an den Shop-Dienst und wird am Laufzeit-Gate abgewiesen; gespeichert und versendet wird nichts. Eigener Abruf 20:33 UTC: `GET https://nexifyai.de/api/requests` 503 `runtime_binding_unavailable`, `payment_mode_unbound`. Befund-Dokument: `docs/04-betrieb/anfrageweg-befund-2026-11-14.md`.
+- IST Heilung: Das Formular erkennt die Abweisung, sagt in vier Sprachen, dass nichts gesendet und nichts gespeichert wurde, nennt die Kontaktadresse und übergibt die Angaben per `mailto`. Der Schutzmechanismus des Shop-Dienstes ist unverändert. Laut PR: 6 Tests, Browserlauf gegen den lokalen Build.
+- OFFEN (Inhaber): eigener Empfänger für Agentur-Anfragen in `apps/web` oder Bindung des Shop-Dienstes (OA-163). OFFEN, nicht geprüft: Zustellung an `mail@nexifyai.cloud`; das Postfach ist bis dahin der einzige schriftliche Weg (OA-092).
+
+**PR 183 `202ca8f` (19:29) · Cloudflare AI Gateway als zweiter Chat-Weg, ausgeschaltet und gesperrt.**
+- SOLL: `config/llm-policy.json` nennt als Zielweg nur den 9router; Modell und Reasoning nach `CLAUDE.md`.
+- IST: Zweiter Weg in `apps/web/app/api/chat/llm-gateway.ts`, greift nur mit `CHAT_LLM_ROUTE=cloudflare-ai-gateway` und ist im Code gesperrt (`POLICY_PERMITS_CLOUDFLARE_GATEWAY = false`, Zeile 48; ein Test vergleicht die Sperre mit der Policy-Datei). Ohne die Variable bleibt alles beim 9router. Betriebsnotiz: `docs/04-betrieb/cloudflare-ai-gateway-2026-11-14.md`. Kein Modellaufruf, keine Änderung im Cloudflare-Konto.
+- OFFEN (Inhaber): Freigabe braucht einen D-Eintrag und die Änderung von `config/llm-policy.json` (Wortlautvorschlag in Abschnitt 8 der Notiz, nicht eingetragen; OA-165). Achtung laut Notiz: Das Setzen von `CHAT_LLM_ROUTE` schaltet heute den Chat für alle Besucher ab. Ein Cloudflare-API-Token und das Geheimnis eines Access-Dienst-Tokens standen im Klartext im Chat und sind zu erneuern (Abschnitt 7 der Notiz, OA-166).
+
+**PR 182 `08b0456` (19:35) · Indexierungsregel durchgesetzt, Freigabe bleibt beim Inhaber.**
+- SOLL: Die Website bleibt gesperrt, bis der Inhaber die Veröffentlichung freigibt (`NEXIFY_INDEXING=enabled` in Vercel Production; TEILEKLAR zusätzlich nur mit `NEXIFY_INDEXING_TEILEKLAR`). Vorlage: `docs/04-betrieb/indexierung-freigabe-2026-11-14.md`.
+- IST: Regel in `apps/web/auth/indexing.ts`; `apps/web/proxy.ts` setzt für jede Seite, die sie nicht erfüllt, `X-Robots-Tag: noindex, nofollow`; die Sitemap führt TEILEKLAR erst mit dem Shop-Schalter. Eigene Messung 20:33 UTC (`curl`): `/`, `/kontakt`, `/leistungen`, `/agb`, `/avv`, `/widerruf`, `/teileklar/kategorien`, `/teileklar/werkstatt` auf `nexifyai.de` sowie die Startseiten von `www.nexifyai.de`, `nexifyai.cloud` und `www.nexifyai.cloud` antworten mit 200 und tragen die Kopfzeile; `sitemap.xml` nennt 28 Adressen, keine mit `/teileklar`. Das ist eine Stichprobe von 11 Abrufen, nicht alle Seiten. Laut PR: zwei Belege durch Browserlauf neu erhoben, drei Pins nachgezogen.
+- OFFEN: Das robots-Meta-Tag auf `/agb`, `/avv`, `/widerruf`, `/teileklar/kategorien` und `/teileklar/werkstatt` steht weiter auf `index, follow` (eigene Messung 20:33 UTC); es gilt die strengere Kopfzeile, die Seitendateien sind an Belege gebunden (OA-164). OFFEN (Inhaber): Freigabe selbst, Rechtsform und Impressum, Rolle von Apex, `www` und `.cloud` (OA-031, OA-009).
+
+**PR 185 `2b8da63` (19:52) · Resize-Beleg nach PR 181 neu erhoben.**
+- IST: PR 181 hatte drei Quellen der Resize-Bindung verändert; dadurch waren auf `main` zwei Tests in `tests/test_resize_source_binding.py` wieder rot. Neuer Lauf von `apps/site/tests/browser-text-spacing.mjs` am festen Commit `81b0ae9` (laut PR 129 Prüfungen, 43 Routen, 0 Befunde); Nachtrag in `docs/09-final/pin-rebase-2026-11-14.md`, Abschnitt 11.
+- Lehre (IST, dort festgehalten): Die Vorher-Messung des Namensvergleichs läuft erst nach `node apps/site/scripts/generate-public-data.mjs`; ohne erzeugte Seitendaten scheitern beide Tests schon am fehlenden Bestand, und ein neuer Fehlschlag bleibt unsichtbar. Notiz aus dem Auftrag der koordinierenden Sitzung, im Repository nicht festgehalten: kein `git stash` zwischen Worktrees (der Stapel ist allen Worktrees gemeinsam).
+- OFFEN: Beide Lehren stehen noch nicht im Skill `nexify-zweig-und-pr` (OA-170).
+
+**PR 188 `500c52d` (20:31) · Stilreste und Gleichmacher (Paket D, OA-037, OA-052).**
+- IST: 21 wirkungslose Deklarationen in `Storefront.css` und `HomeMaster.css` entfernt, 46 Literale in `shop.css` und `Storefront.css` durch Tokens gleichen Werts ersetzt; der Gleichmacher misst jetzt Karten, die TEILEKLAR-Kopfleiste, die Schalterliste im Abschlussbereich und den Chat-Hinweis. Drei Belege durch Browserlauf neu erhoben. Laut PR: Gleichmacher lokal 44 Seiten, 31.497 Vergleiche, 0 Abweichungen; gegen `nexifyai.de` 31.553 Vergleiche, 0 Abweichungen; `tools/live-check.mjs` lokal 329 Prüfungen, 2 Befunde (Shop-Dienst).
+- OFFEN (Inhaber): Die Abschnittsleiste auf `/kontakt` und `/leistungen` läuft beim Blättern sichtbar unter der Glas-Kopfleiste durch; laut PR nur gemessen, nicht behoben, weil die Abhilfe einen Baustein der Startseite ändert (OA-168). OFFEN: Warenkorb, Kasse und Produktseite sind laut PR lokal nicht gerendert (kein Shop-Dienst).
+
+### Betriebsbefunde des Abends
+
+- **GitHub Actions startet keine Jobs (IST, Abruf 20:34 UTC).** Die jüngsten Läufe auf `main` (`500c52d`: CI, Chat owner schema fixture, Slack, Copilot Code Review) und auf den Zweigen enden nach 3 bis 5 Sekunden mit „failure“, ohne einen Schritt auszuführen. GitHub nennt die Ursache selbst als Anmerkung am Lauf: „The job was not started because an Actions budget is preventing further use.“ Damit ist die Ursache ein Ausgabenlimit für Actions im Abrechnungskonto. OFFEN (Inhaber): Budget und Abrechnungseinstellungen prüfen (OA-022). Bis dahin gibt es kein automatisches Gate vor `main`; es zählt die lokale Prüfung.
+- **Auto-Merge (IST, Abruf 20:35 UTC).** 26 Pull Requests offen; bei 22 ist Auto-Merge eingeschaltet, darunter PR 184 (Cloudflare-Umzug). Sobald Actions wieder Jobs startet und die Prüfungen bestehen, gehen diese Stände ohne weitere Abnahme nach `main` (OA-027).
+- **Codex-Review (IST, Kommentare des Dienstes an PR 185, 186 und 188).** „You have reached your Codex usage limits for code reviews“; die Sicherheitsprüfung startet nicht, weil das zahlende Konto kein Guthaben hat. OFFEN (Inhaber, OA-146).
+- **Fünf Vercel-Projekte ohne Repository (IST, Kommentare von `vercel[bot]` an PR 185, 186 und 188).** `web`, `web-2kby`, `site`, `site-gjp7` und `site-k23m` melden bei jedem Push „The provided GitHub repository can't be found“. Die Auslieferung von `500c52d` über `…-ut7r` und `…-s4k5` ist laut Commit-Status erfolgreich. OFFEN (Inhaber): Projekte trennen oder löschen (OA-023).
+- **Shop-Dienst (IST, 20:33 UTC).** `/api/shop/status` antwortet weiter mit 503 `runtime_binding_unavailable`, `database_binding_missing_or_unsuitable`.
+- **Zweite Koordinations-Sitzung.** IST: PR 186 (Einwilligungsweg Mailing, Entwurf, alles hinter dem Schalter `NEXIFY_MAILING_CONSENT`, Standard aus, nicht gemergt, Kopf `b1fd6db`) stammt aus einer anderen Sitzung als diese Nachführung (Kennung in der PR-Beschreibung). Notiz, Quelle: Auftrag der koordinierenden Sitzung, hier nicht nachprüfbar: Jene Sitzung übernimmt die Pakete J-1, J-2, J-3, J-4, J-6 und J-7; Studienkolleg, Belege und Pins, Stil, Cloudflare-Umzug und führende Dokumente bleiben bei der ersten Sitzung. Abweichung zur Notiz (IST): PR 187 (J-1, Terminlogik als Spezifikation, Entwurf) und PR 189 (unabhängige Prüfung von PR 118, Entwurf) tragen jeweils eine weitere, dritte und vierte Sitzungskennung. Notiz laut Beschreibung von PR 187: Der Inhaber hat am 14.11.2026 die Fertigstellung von Shop und Werkstattservice zur Priorität erklärt; im Repository nicht als Entscheidung eingetragen.
+- **Cloudflare-Umzug (D-021).** IST: Die Vorbereitung liegt als PR 184 vor (Zweig `claude/cloudflare-umzug`, Kopf `1c43325`, nicht gemergt, kein Entwurf, Auto-Merge eingeschaltet). Nichts ist umgeschaltet.
+- **Kundenprojekt Studienkolleg Aachen.** Nur Verweis; seit dem Abschnitt von 18:45 UTC liegt dieser Nachführung nichts Neues vor. Einzelheiten nur im Kundenrepository.
+
+### Prüfstand und Umfang dieser Nachführung
+
+Prüfstand `main` `500c52d` lokal (IST, 14.11.2026, ca. 20:40 UTC, Python 3.13, ohne `.venv`, ohne `node_modules`, erzeugte Seitendaten vorhanden): `python3 -m unittest discover -s tests` 843 Tests, 40 Failures, 6 Errors (davon 3 Ladefehler fehlender Python-Pakete), 19 Skips, 46 rote Namen; mit dieser Nachführung, die nur Dokumente ändert, dieselben 46 Namen, kein neuer (Namensvergleich gegen einen Wegwerf-Arbeitsbaum auf `500c52d`). `python3 tools/verify_requirements_reconciliation.py` 41 Zeilen „Stale implementation source“, vorher und nachher gleich. Nicht neu gemessen: `tools/live-check.mjs` und `tools/gleichmacher.mjs` gegen die Produktion (letzte Messung laut PR 188).
+
+Diese Nachführung (Zweig `claude/stand-abend`) ändert nur Dokumente: diesen Abschnitt und „Offene Arbeiten“ in `PROGRESS.md`, zwei Überholt-Vermerke im Abschnitt von 18:45 UTC; je eine Stand-Zeile an D-021 und D-022 in `DECISIONS.md`; Abschnitt 8 und Stand-Zeilen in `docs/09-final/offene-arbeiten-2026-11-14.md`. `AGENTS.md` ist unverändert: Der Stand-Absatz behauptet nichts Falsches (Vercel liefert aus, Cloudflare in Prüfung, Indexierung aus); die dort genannte Fehlerkennung des Shop-Dienstes ist eine datierte Messung von 10:37 UTC. Keine Prüfsumme und kein Beleg wurden angefasst; `PROGRESS.md`, `DECISIONS.md` und `AGENTS.md` wichen schon vorher von ihren Bindungen ab, die Arbeitsliste ist nicht gebunden.
+
 ## Stand 14.11.2026, ca. 18:45 UTC · Abend: Kopfleiste, Chat auf dem iPhone, Belege, Befunde, Cloudflare in Prüfung
 
 Führt den Abschnitt von ca. 14:25 UTC direkt darunter fort; jener bleibt als Stand von `e0c7e38`/`9cb98c4` stehen. Kennzeichnung: IST = am Repository oder durch eigenen Abruf dieser Nachführung belegt, mit Quelle und Zeit; Notiz = Quelle genannt, hier nicht nachgeprüft; OFFEN = fehlt oder nicht belegt. Entscheidungen stehen nur in `DECISIONS.md` (neu als Vorschlag: D-021, D-022). Quelle der PR-Angaben: `git log origin/main` bis `2906f58` und die PR-Beschreibungen 168 bis 175 (Abruf 14.11.2026, ca. 18:35 UTC); die dort genannten Messungen sind hier nicht wiederholt.
@@ -16,12 +120,12 @@ Ohne Pull Request direkt auf `main` (IST, `git log origin/main`): `4f097ef` (14:
 
 Befunde des Abends:
 - Chat-Meldung „Der Chat ist im Moment nicht erreichbar“ (vom Inhaber um 17:28 UTC gemeldet): Notiz, Quelle: koordinierende Sitzung und Register OA-023. Die Meldung kam vom Schwesterprojekt `…-s4k5` bei Vercel, das `main` ohne Umgebungsvariablen baut und dessen Chat mit 503 antwortet. `nexifyai.de` war nicht betroffen. Hier nicht nachgemessen (kein Chat-Aufruf, weil er einen bezahlten Modellaufruf auslöst).
-- Indexierung (IST, `curl`, 14.11.2026, 18:41 UTC): `nexifyai.de`, `www.nexifyai.de` und `nexifyai.cloud` antworten mit 200 von Vercel und tragen `<meta name="robots" content="noindex, nofollow">`. Die Klärung läuft auf dem lokalen Zweig `claude/indexierung`; er lag um 18:40 UTC nicht auf `origin` (IST, `git ls-remote`). Das Einschalten bleibt eine Freigabe des Inhabers.
+- Indexierung (IST, `curl`, 14.11.2026, 18:41 UTC): `nexifyai.de`, `www.nexifyai.de` und `nexifyai.cloud` antworten mit 200 von Vercel und tragen `<meta name="robots" content="noindex, nofollow">`. Die Klärung läuft auf dem lokalen Zweig `claude/indexierung`; er lag um 18:40 UTC nicht auf `origin` (IST, `git ls-remote`). Überholt, Stand 20:40 UTC: Der Zweig ist mit PR 182 (`08b0456`, 19:35 UTC) gemergt; die Regel wird seither im Proxy durchgesetzt (Abschnitt darüber). Das Einschalten bleibt eine Freigabe des Inhabers.
 - Vercel-Zahlung: Notiz, Quelle: Standortbestimmung der koordinierenden Sitzung. Laut Mail vom 14.11.2026, 01:37 UTC, ist eine Zahlung über 300,05 $ für das Team `nexify-projekte` fehlgeschlagen. Produktion wird heute nur über Vercel ausgeliefert. Nur der Inhaber kann das klären.
 - Hermes-Oberfläche: Sie ist über `unternehmensbot.eu` öffentlich erreichbar, geschützt nur durch die eigene Anmeldung. Das widerspricht D-019 Folge 4; Folge 5 (Docker-Socket entfernen) ist offen. Quelle: `docs/04-betrieb/server-befund-2026-11-14.md`; hier nicht neu gemessen. Die Korrektur braucht eine Shell und die Freigabe nach D-016.
 - Auto-Merge-Vorfall: Notiz laut Register OA-027: Am 14.11. um 16:18 UTC wurden sieben Pull Requests (150, 147, 163, 135, 115, 74, 48) auf „bereit“ und Auto-Merge gestellt; die Frage an den Inhaber, wer das war und ob es bleiben soll, ist unbeantwortet. IST (Abruf `gh api …/pulls?state=open`, 18:42 UTC): 22 Pull Requests offen, keiner mehr als Entwurf geführt, bei 21 ist Auto-Merge eingeschaltet (durch `nexifyai-dev`), nur bei PR 105 nicht. Gemergt ist davon nichts, weil GitHub Actions keine Jobs startet. Läuft Actions wieder an, gehen ungeprüfte Stände von selbst nach `main`.
 - Kundenprojekt Studienkolleg Aachen (nur Verweis, keine Kundendaten in diesem Repository; Notiz, Quelle: koordinierende Sitzung): Paket 2 ist unabhängig geprüft, die Nacharbeit läuft; die Vorbereitung für Cloudflare liegt dort als PR 21 vor. Einzelheiten nur im Kundenrepository.
-- Cloudflare (D-021): Auftrag des Inhabers von 17:42 UTC, den Umzug „wenn möglich“ durchzuführen. Der Zweig `claude/cloudflare-umzug` (`65a6577`, auf `origin`, nicht gemergt) trägt Bericht und Vorbereitung. Notiz aus dem Bericht dort: Rechenzeit lokal 46 bis 56 ms je Seite gegen 10 ms im kostenlosen Tarif; drei Messversuche auf Cloudflare kamen nicht zustande. Nichts ist umgeschaltet.
+- Cloudflare (D-021): Auftrag des Inhabers von 17:42 UTC, den Umzug „wenn möglich“ durchzuführen. Der Zweig `claude/cloudflare-umzug` (`65a6577`, auf `origin`, nicht gemergt) trägt Bericht und Vorbereitung. Überholt, Stand 20:40 UTC: Der Zweig liegt als PR 184 vor (Kopf `1c43325`, nicht gemergt). Notiz aus dem Bericht dort: Rechenzeit lokal 46 bis 56 ms je Seite gegen 10 ms im kostenlosen Tarif; drei Messversuche auf Cloudflare kamen nicht zustande. Nichts ist umgeschaltet.
 
 Prüfstand `main` `2906f58` lokal vor dieser Nachführung (IST, 14.11.2026, ca. 18:38 UTC): `python3 -m unittest discover -s tests` 823 Tests, 40 Failures, 8 Errors, 19 Skips im frischen Arbeitsbaum ohne `node_modules`; mit installierten Node-Paketen und erzeugten Seitendaten 39 Failures, 6 Errors (gemessen ca. 18:50 UTC mit dieser Nachführung, die nur Dokumente ändert; Namensvergleich ohne neuen Eintrag). `python3 tools/verify_requirements_reconciliation.py` 24 Meldungen „Stale implementation source“, vorher und nachher gleich. Nicht neu gemessen: `tools/live-check.mjs` und `tools/gleichmacher.mjs` gegen die Produktion (letzte Messung laut PR 175).
 
@@ -90,66 +194,97 @@ Diese Nachführung (Zweig `claude/stand-halten`) ändert nur Dokumente und einen
 
 OFFEN, nicht belegt (aus den Sitzungsnotizen vom 14.11.2026 übernommen, hier nicht nachgeprüft): Zuordnung der Domains zum Projekt `prj_lKQEWQ…` über die Vercel-Schnittstelle (Abruf von hier 403; die Zuordnung steht in `docs/deployment/environment-variables.md` Abschnitt 6); 503 `database_metadata_unavailable` im früheren Projekt `prj_Po7jl…`; signierter Composio-Webhook 200; GitHub Actions startet kontoweit keine Jobs (zuletzt belegt am 13.11.2026 im Befund, Abschnitt 10); Zahl und Zustand der offenen Pull Requests. Live-Wirkung der Shop-Zulassungsliste: unverändert offen, siehe nächster Abschnitt.
 
-## Offene Arbeiten · Stand 14.11.2026, ca. 18:45 UTC
+## Offene Arbeiten · Stand 14.11.2026, ca. 22:00 UTC
 
 Kein zweites Register: Führend bleiben P01–P26 und die Hauptfälle MASTER-01 bis MASTER-18 in `config/acceptance-coverage.json` (`whole_system_accepted: false`). Das Register ist ausdrücklich keine Ausführungsliste und hat für die folgenden Arbeiten kein Feld. Dieser Abschnitt wird bei jeder Nachführung ersetzt, nicht fortgeschrieben.
 
-Die einzelnen offenen Arbeiten stehen in der Arbeitsliste `docs/09-final/offene-arbeiten-2026-11-14.md` (Einträge OA-001 bis OA-162, je mit Ziel, Blocker, Abhängigkeiten, Abschlusskriterium, Aufwand und Quellen). Sie ist eine Momentaufnahme der koordinierenden Sitzung zum Stand `29f0691` (PR 174), dient der Vergabe und ersetzt kein führendes Register; ihre Angaben sind hier nicht einzeln nachgeprüft. Sie wird nicht fortgeschrieben: Bei der nächsten Nachführung ersetzt dieser Abschnitt den Verweis oder nennt eine neue Fassung. Weicht sie von diesem Abschnitt ab, gilt dieser Abschnitt.
+Die einzelnen offenen Arbeiten stehen in der Arbeitsliste `docs/09-final/offene-arbeiten-2026-11-14.md` (OA-001 bis OA-162 zum Stand `29f0691`, Abschnitt 8 mit OA-163 bis OA-170 zum Stand `500c52d`, Abschnitt 9 mit OA-171 bis OA-178 zum Stand `48f5072`). Sie dient der Vergabe und ersetzt kein führendes Register; die Angaben der Einträge OA-001 bis OA-162 sind hier nicht einzeln nachgeprüft. Weicht sie von diesem Abschnitt ab, gilt dieser Abschnitt.
 
-Zählung der Arbeitsliste (162 Einträge):
+Zählung der Arbeitsliste nach dieser Nachführung (178 Einträge; Herleitung in Abschnitt 9.2 der Liste):
 
-| Zustand | Einträge |
-|---|---|
-| OFFEN | 54 |
-| TEILWEISE | 10 |
-| BLOCKIERT | 37 |
-| ENTSCHEIDUNG NÖTIG | 53 |
-| HISTORIE-überholt | 8 |
+| Zustand | 20:40 UTC | 22:00 UTC |
+|---|---|---|
+| OFFEN | 46 | 49 |
+| TEILWEISE | 13 | 13 |
+| BLOCKIERT | 37 | 38 |
+| ENTSCHEIDUNG NÖTIG | 58 | 60 |
+| HISTORIE-überholt | 8 | 8 |
+| ERLEDIGT | 8 | 10 |
 
-| Priorität | Einträge |
-|---|---|
-| 1 Sicherheits-, Daten- und Betriebsrisiko | 27 |
-| 2 Verkaufsfähiger Auftritt und Arbeitsplatz | 36 |
-| 3 Kundenwege, Leads, Umsatz | 45 |
-| 4 Kundenprojekte abnahmefähig | 9 |
-| 5 Betrieb und Skalierung | 45 |
+Erledigt seit 20:40 UTC: OA-170 (PR 194 `2396553`), OA-164 (PR 198 `48f5072`). Neu: OA-171 bis OA-174 (Reste aus PR 196), OA-175 bis OA-178 (Reste aus PR 198).
 
-Offene Pull Requests (IST, `gh api …/pulls?state=open`, 14.11.2026, 18:42 UTC): 22 offen. Nummern: 163, 150, 147, 135, 126, 125, 124, 123, 122, 121, 120, 119, 118, 115, 105, 75, 74, 73, 67, 65, 60, 48. Gegenüber 11:24 UTC (24 offen) sind 152, 107 und 94 gemergt (IST, `git log origin/main`), 163 ist neu. Zustand von Entwurf und Auto-Merge: siehe Abschnitt „Stand 14.11.2026, ca. 18:45 UTC“.
+Offene Pull Requests (IST, `gh api …/pulls?state=open` und GitHub-MCP `list_pull_requests`, 14.11.2026, 21:47 UTC): 31 offen. Gegenüber 20:35 UTC (26 offen) neu: 190, 192, 193, 195, 197; gemergt seither nur neue Nummern (194, 196, 198). Auto-Merge eingeschaltet: 21, nicht bei 184, 105 und den acht Entwürfen.
 
-Kann die Fabrik (innerhalb D-017, ohne neue Freigabe; Pakete laut Arbeitsliste Abschnitt 5, je Paket ein Schreiber und ein eigener Zweig):
-- A · Führende Dokumente nachführen (OA-060): diese Nachführung.
-- B · Tests stabilisieren (OA-059, OA-057, OA-053, OA-062).
-- C · Belege und Pins, ein Schreiber (OA-056, OA-034); 28 Pins sind veraltet.
-- D · Stilreste und Gleichmacher (OA-037, OA-052).
-- E · Mailing vorbereiten, ohne Versand (OA-104, OA-105, OA-008, OA-106).
-- F · Einwilligungsweg hinter Schalter entwerfen (OA-003, OA-098).
-- G · Lead-Plan und Wettbewerb (OA-095, OA-100).
-- H · Bot-Team: IST-Tabelle und Rollenabbildung (OA-134, OA-141, OA-147).
-- I · Routinen: IST gegen SOLL (OA-150, OA-158, OA-156).
-- J · Werkstattservice und Suite: IST gegen SOLL (OA-083, OA-039, OA-085).
-- K · Shop-Zugriffsschicht fertigstellen, PR 150 (OA-076).
-- L · Entscheidungsvorlagen für den Inhaber (OA-044, OA-051, OA-038).
-- M · Nur lesende Messungen (OA-021, OA-132).
+| PR | Titel (gekürzt) | Entwurf | Auto-Merge |
+|---|---|---|---|
+| 197 | brain: Cognee aufnehmen, Adapter hinter Schalter | ja | aus |
+| 195 | werkstatt: Terminbuchung Stufe 1 hinter Schalter | ja | aus |
+| 193 | hermes: Arbeitsbereich des Inhabers vorbereiten | ja | aus |
+| 192 | sicherheit: /intern/workspace ohne Anmeldung nur Hülle | ja | aus |
+| 190 | suite: Funktionsliste nutzbar/Hülle/fehlt (OA-039) | ja | aus |
+| 189 | review: unabhängige Prüfung von PR 118 | ja | aus |
+| 187 | werkstatt: Terminlogik als Spezifikation (J-1) | ja | aus |
+| 186 | mailing: Einwilligungsweg hinter Schalter (Paket F) | ja | aus |
+| 184 | hosting: Cloudflare-Umzug vorbereiten und belegen | nein | aus |
+| 163 | Entscheidung: Eingangsgrenze des Chats | nein | an |
+| 150 | shop: Zugriffsschicht Katalog und Warenkorb | nein | an |
+| 147 | shop: Zielschema PostgreSQL mit RLS | nein | an |
+| 135 | NeX AIFly Suite: Produktseite /produkte/aifly-suite | nein | an |
+| 126 | chat: Ursache von chat_llm_failed protokollieren | nein | an |
+| 125 | Skill nexify-design-system | nein | an |
+| 124 | Entwurf: NeXify-MCP-Server | nein | an |
+| 123 | suite: Composio-Anbindung hinter Schalter | nein | an |
+| 122 | Shop-API: 503-Ursache, Werkstattanfrage, Partnerantrag | nein | an |
+| 121 | Entwurf: Python-Agentenkern und Wissensport | nein | an |
+| 120 | Entwurf: Führungs-Skill, Chat-Daten, Messplan | nein | an |
+| 119 | Marke und Texte: Namensregel, Markenarchitektur | nein | an |
+| 118 | Kunden-Suite: Fundament im Backend | nein | an |
+| 115 | chat: Neuaufbau (Paket 5) | nein | an |
+| 105 | chat: Ursache von chat_llm_failed (Paket 1) | nein | aus |
+| 75 | feat(leistungen): Ablauf- und Investitionssektion | nein | an |
+| 74 | docs(mcp): NEXIFY-MASTER-MCP-001 Phase 0/1 | nein | an |
+| 73 | feat(home): Startseite neu aufgebaut | nein | an |
+| 67 | Funktionsfähiger Gesamtstand | nein | an |
+| 65 | Warenkorb und Mailbudget absichern | nein | an |
+| 60 | Editorial boilerplate, BigBuy-Katalog | nein | an |
+| 48 | Sentry Core types im Vercel-Funktionscompiler | nein | an |
 
-Braucht den Inhaber (vollständige Liste: Arbeitsliste Abschnitt 6; hier das Dringende und die offenen Fragen des Abends):
-- Vercel-Zahlung über 300,05 $ klären (Mail vom 14.11.2026, 01:37 UTC; Notiz). Daran hängt die Auslieferung der Produktion.
-- Auto-Merge an 21 offenen Pull Requests: bestätigen oder abschalten, bevor GitHub Actions wieder Jobs startet (OA-027, OA-022). Überholte Pull Requests schließen, über die übrigen entscheiden (OA-051).
-- Direkt auf `main` gebrachte Rechtsseiten `/agb`, `/avv`, `/widerruf` und der KI-Satz im Chat: Freigabe bestätigen oder zurücknehmen lassen (D-010, D-017).
-- Hermes-Oberfläche aus dem öffentlichen Netz nehmen und Docker-Socket entfernen; Freigabe je Schritt, Shell nötig (D-019 Folgen 4 und 5, D-016; OA-015, OA-016). Vorher frische Snapshots (OA-018).
-- Datenschutzrechtliche Bewertung im Kundenprojekt abschließen (OA-026, fristgebunden; nur Verweis, Einzelheiten im Kundenprojekt).
-- Cloudflare: Kostenweg A, B oder C wählen und ein Token mit Worker-Recht für die Messung bereitstellen (D-021, OA-028).
-- Architektur von Suite und Arbeitsplatz des Inhabers: Die Empfehlung der koordinierenden Sitzung liegt vor (Suite in `apps/web`, Arbeitsplatz auf der Hermes-Oberfläche, jeweils mit eigenem Composio-Produkt); entschieden ist nichts (OA-044, OA-040).
-- AgentMemory und LightRAG durch die vorhandene Cognee-Installation ablösen: Frage des Inhabers von 18:13 UTC, nicht entschieden; Bestand und Mandantentrennung von Cognee sind nicht belegt (OA-144).
-- Indexierung einschalten und die Rolle von Apex, `www` und `.cloud` festlegen (OA-031); hängt an Rechtsform und Impressum (OA-009).
-- Mailing: Vor jedem Werbeversand je Empfängergruppe die Grundlage festlegen (Einwilligung oder Bestandskunden-Ausnahme); bis dahin wird nichts versendet (OA-001, OA-002, OA-005, OA-006).
-- Composio: Welches Produkt ist gebucht, und welcher Status gilt in `config/automation.json` gegenüber `config/integrations/composio.json`; Schlüssel erneuern, die im Gespräch standen (D-017, OA-013).
-- Modellweg und Modellkennung: Die Regel verlangt die Kennung mit Endung `-1017`, der Chat sendet den Router-Namen (OA-048); Ausgabenlimit am Router-Schlüssel des Chats (OA-025).
-- Supabase-Instanz: Adresse, Schlüssel, Freigabe für Migrationen (D-013, OA-029). Shop-Dienst in Produktion an eine Datenbank binden oder erst mit Supabase einschalten (OA-067, OA-069).
-- GitHub Actions startet kontoweit keine Jobs (OA-022). Regelbetrieb ohne offene Sitzung (OA-151).
-- Welches Register führt: `docs/09-final/auftragsregister-2026-11-08.md` nennt sich „das führende Aufgabenregister“, `AGENTS.md` führt P01–P26 in `config/acceptance-coverage.json` (OA-061). IST Widerspruch, nicht aufgelöst.
-- Entscheidungen E1, E3, E4, E5, E6, E12 (`docs/09-final/08-recht-und-compliance.md`); Livegang der Kasse (Freigabe-Gate `docs/09-final/07`).
+- PR 184 (Cloudflare-Umzug, D-021): wartet auf den Inhaber (Kostenweg, Token mit Worker-Recht; OA-028). IST: Auto-Merge ist dort nicht mehr eingeschaltet (20:35 UTC noch an); wer es abgeschaltet hat, ist hier nicht belegt.
+- 186, 187, 189, 190, 192, 193, 195, 197: Entwürfe einer zweiten Sitzung, offen, anderer Owner; hier nicht bewertet.
 
-Next Steps: D-021 und D-022 durch die koordinierende Sitzung oder den Inhaber bestätigen; Auto-Merge klären, bevor Actions wieder läuft; Pakete B bis M laut Arbeitsliste vergeben; nach jedem Merge diesen Abschnitt ersetzen.
+Kann die Fabrik (innerhalb D-017, ohne neue Freigabe; je Paket ein Schreiber und ein eigener Zweig):
+- A · Führende Dokumente nachführen (OA-060): fortgeführt mit dieser Nachführung.
+- B · Tests: Durchsicht für das KI-Durchsetzungsregister (OA-167) offen.
+- C · Belege und Pins, ein Schreiber (OA-056, OA-034): zuletzt mit PR 198 neu erhoben. Offen: Katalogseiten-Meta (OA-175), Commit-Feld der Belege (OA-178), Lauf mit Playwright 1.65.0 (OA-177, hängt am Runner in Actions), Observability-Belege nach Entscheidung (OA-176).
+- Shop-Konten vor dem Binden des Dienstes: Bestätigung der Adresse bei der Registrierung (OA-171), Teammitglieder beim Zurücksetzen (OA-174).
+- E · Mailing ohne Versand: OA-106 offen. F · Einwilligungsweg: Entwurf PR 186, anderer Owner.
+- G · Lead-Plan und Wettbewerb (OA-095, OA-100): offen.
+- H, I, J · Folgepakete J-1 bis J-7: J-5 gebaut (PR 181); J-1 und weitere als Entwürfe der zweiten Sitzung (187, 195).
+- K · Shop-Zugriffsschicht, PR 150 (OA-076): offen.
+- M · Nur lesende Messungen (OA-021, OA-132): offen. Live-Nachmessung nach PR 198: läuft getrennt, Ergebnis hier nicht belegt.
+
+Braucht den Inhaber (vollständige Liste: Arbeitsliste Abschnitte 6, 8 und 9; hier das Dringende):
+- GitHub Actions: Budget und Abrechnungseinstellungen prüfen (OA-022, unverändert 21:47 UTC). Vorher Auto-Merge an 21 offenen Pull Requests bestätigen oder abschalten (OA-027); über die übrigen PRs entscheiden (OA-051).
+- Codex-Kontingent (OA-146); fünf Vercel-Projekte ohne Repository trennen (OA-023).
+- Anfrageweg: Über die Formulare kommt keine Anfrage an; Empfänger wählen (OA-163, OA-092). Daran hängt auch der Versand der Mail zum Zurücksetzen (OA-173).
+- Neu · Google-Anmeldung im Shop-Dienst: eigene OAuth-Anwendung statt Vermittler, Admin per Google ja oder nein, Bestandskonten vor dem Binden prüfen (OA-172; `docs/04-betrieb/konto-verknuepfung-befund-2026-11-14.md`, Abschnitt 4).
+- Neu · Erwartung des Observability-Harness zum heutigen Chat (OA-176; `pin-rebase-2026-11-14.md`, Abschnitt 6, Entscheidung 3).
+- Offengelegte Cloudflare-Geheimnisse erneuern (OA-166) und die 17 fälligen Erneuerungen (OA-169).
+- Cloudflare AI Gateway freigeben oder gesperrt lassen (OA-165). Cloudflare-Umzug: Kostenweg und Token (D-021, OA-028, PR 184).
+- Pillow 12.3.0 oder 13.0.0; leere Prüfsummen in `skills-lock.json` (OA-053). Kopfleisten-Glas auf `/kontakt` und `/leistungen` (OA-168).
+- Vercel-Zahlung über 300,05 $ klären (Notiz vom 14.11.2026, 01:37 UTC).
+- D-021 und D-022 ausdrücklich bestätigen (beide stehen als Vorschlag auf `main`).
+- Rechtsseiten `/agb`, `/avv`, `/widerruf` und der KI-Satz im Chat: Freigabe bestätigen oder zurücknehmen (D-010, D-017).
+- Hermes-Oberfläche aus dem öffentlichen Netz, Docker-Socket entfernen (D-019, OA-015, OA-016, OA-018); kein Volume-Prune.
+- Datenschutzrechtliche Bewertung im Kundenprojekt (OA-026, fristgebunden; nur Verweis).
+- Indexierung einschalten und Rolle von Apex, `www`, `.cloud` (OA-031); hängt an Rechtsform und Impressum (OA-009).
+- Mailing: Grundlage je Empfängergruppe vor jedem Werbeversand (OA-001, OA-002, OA-005, OA-006).
+- Architektur Suite und Arbeitsplatz (OA-044, OA-040); Cognee statt AgentMemory und LightRAG (OA-144); Composio-Status.
+- Modellkennung im Chat (OA-048), Ausgabenlimit am Router-Schlüssel (OA-025).
+- Supabase-Instanz und Bindung des Shop-Dienstes (D-013, OA-029, OA-067, OA-069). Regelbetrieb ohne offene Sitzung (OA-151).
+- Welches Register führt (OA-061, Widerspruch nicht aufgelöst). Entscheidungen E1, E3, E4, E5, E6, E12; Livegang der Kasse.
+
+Next Steps: Ergebnis der Live-Nachmessung zu PR 198 nachtragen, sobald es vorliegt; Actions-Budget und Auto-Merge klären; Anfrageweg entscheiden (OA-163); Google-Anbindung entscheiden (OA-172); nach jedem Merge diesen Abschnitt ersetzen.
 
 ## Shop-Projektbindung als Zulassungsliste · 14.11.2026
 Die feste Prüfung `VERCEL_PROJECT_ID == prj_Po7jl…` in `apps/shop-api/vercel_app.py` und `namespace_operator.py` ist eine optionale, nicht geheime Liste `SHOP_ALLOWED_PROJECT_IDS` (kommagetrennt, Leerzeichen toleriert) mit einer gemeinsamen Funktion `project_binding_verified`. Nicht gesetzt, leer oder nur Leerzeichen/Kommas gilt als nicht konfiguriert und ergibt exakt das bisherige Projekt, nie „offen“. Eine gesetzte Liste ersetzt den Standard. Diagnosecode weiter `project_binding_unverified`, ohne ID oder Liste in Antwort, Ausnahme oder Log. `PROJECT_ID`, Namespace-Marker und Plan-Digest bleiben an `prj_Po7jl…` gebunden. Doku: `docs/deployment/environment-variables.md` Abschnitt 6 (Nachträge in den beiden Release-Dokumenten vom 31.10.).

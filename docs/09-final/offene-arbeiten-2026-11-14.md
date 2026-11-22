@@ -2,11 +2,11 @@
 
 Stand des Monorepos: origin/main 29f0691 (14.11.2026 18:55 MEZ, PR 174). Reine Extraktion und Ordnung: nichts wurde umgesetzt, geändert oder versendet. Kundendaten des Kundenprojekts stehen hier nicht, nur Verweise. Dieses Verzeichnis ist eine Arbeitsliste zur Vergabe und ersetzt kein führendes Register.
 
-Zustände: OFFEN, TEILWEISE, BLOCKIERT, ENTSCHEIDUNG NÖTIG, HISTORIE-überholt. Aufwand: S bis 2 Stunden Agentenarbeit, M bis 1 Tag, L mehrere Tage, XL Wochen.
+Zustände: OFFEN, TEILWEISE, BLOCKIERT, ENTSCHEIDUNG NÖTIG, HISTORIE-überholt; seit der Nachführung vom 14.11.2026, 20:40 UTC zusätzlich ERLEDIGT (Abschnitt 8). Aufwand: S bis 2 Stunden Agentenarbeit, M bis 1 Tag, L mehrere Tage, XL Wochen.
 
 ## 1. Zählung
 
-**162 Einträge.**
+**162 Einträge** zum Stand `29f0691`. Die Tabellen dieses Abschnitts zeigen diesen Stand und bleiben als Historie stehen; die Zählung nach der Nachführung von 20:40 UTC (170 Einträge) steht in Abschnitt 8.
 
 | Bereich | Einträge |
 |---|---|
@@ -104,6 +104,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Fertig, wenn:** Anmeldung erzeugt Bestätigungsmail; erst der Klick setzt den Kontakt aktiv; gespeichert sind Zeitpunkt, Text der Einwilligung, Quelle; Abmeldung wirkt sofort; Positiv- und Negativtest belegt.
 - **Aufwand:** M · **Ausführung:** Agent sofort (Entwurf und Tests); Live: Agent nach Zugang: Supabase-Instanz
 - **Quellen:** DSGVO Art. 6, 7, 14, 21, 33, gelesen über dsgvo-gesetz.de am 14.11.2026 (EUR-Lex war nicht auslesbar); Resend-Konto, Abruf 14.11.2026 (list-domains, list-segments, list-broadcasts, list-topics, get-usage; nur Zählung); GO-LIVE.md Abschnitt 5–7 (Stand 13./14.11.2026)
+- **Stand 14.11.2026, 20:40 UTC:** Entwurf liegt als PR 186 vor (Zweig `claude/quirky-gates-r14fnk`, Kopf `b1fd6db`, zweite Sitzung): Anmeldung mit Bestätigungsmail, Nachweis, Sperrliste und Abmeldung hinter dem Schalter `NEXIFY_MAILING_CONSENT`, Standard aus. Nicht gemergt, nichts eingeschaltet, keine Migration eingespielt (IST, `gh api …/pulls/186`, 20:34 UTC). Bleibt OFFEN.
 
 #### OA-004 · Recht & Datenschutz · OFFEN
 
@@ -149,6 +150,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Fertig, wenn:** Vorlage enthält Anbieterangaben wie im Impressum und einen Abmeldelink, der ohne Anmeldung wirkt; Test belegt.
 - **Aufwand:** S · **Ausführung:** Agent sofort (Entwurf); Freigabe nur Inhaber
 - **Quellen:** § 7 UWG, gelesen über dejure.org/gesetze/UWG/7.html am 14.11.2026 (gesetze-im-internet.de antwortete mit 503); PROGRESS.md, Abschnitte „Stand 14.11.2026, ca. 14:25 UTC“ und „Offene Arbeiten“ (14.11.2026)
+- **Stand 14.11.2026, 20:40 UTC:** Vier Vorlagenentwürfe in Deutsch mit Platzhaltern statt Impressumswerten liegen seit PR 177 (`5ad9d5c`) unter `docs/05-marketing/mailing/vorlagen/`. Anbieterangaben und ein wirkender Abmeldelink fehlen weiter (OA-009, PR 186). Bleibt OFFEN.
 
 #### OA-009 · Recht & Datenschutz · ENTSCHEIDUNG NÖTIG
 
@@ -275,6 +277,8 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Fertig, wenn:** Ein Lauf auf main mit Jobs; Check „review“ nicht mehr „blocked_not_reviewed“.
 - **Aufwand:** S · **Ausführung:** nur Inhaber
 - **Quellen:** PROGRESS.md, Abschnitte „Stand 14.11.2026, ca. 14:25 UTC“ und „Offene Arbeiten“ (14.11.2026); docs/09-final/auftragsregister-2026-11-08.md (Fortschreibungen bis 12.11.2026); Linear, Team „Nexifyai“, Abruf 14.11.2026
+- **Stand 14.11.2026, 20:40 UTC:** Ursache belegt (IST, `gh api …/check-runs/<id>/annotations`, 20:34 UTC): GitHub meldet am Lauf „The job was not started because an Actions budget is preventing further use.“ Alle Läufe auf `main` (`500c52d`) und auf den Zweigen enden nach 3 bis 5 Sekunden ohne Schritt mit „failure“. Zu tun (nur Inhaber): Actions-Budget und Abrechnungseinstellungen prüfen. Bleibt BLOCKIERT.
+- **Stand 14.11.2026, ca. 22:00 UTC:** Unverändert (IST, `gh api …/commits/48f5072/check-runs` und Anmerkungen, 21:47 UTC): Die Läufe auf `48f5072` (CI, Chat owner schema fixture, Slack) enden um 21:45 UTC nach 2 bis 3 Sekunden mit „failure“, Anmerkung wie oben. Bleibt BLOCKIERT.
 
 #### OA-023 · Infrastruktur & Server · ENTSCHEIDUNG NÖTIG
 
@@ -284,6 +288,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Fertig, wenn:** Nur noch das Produktionsprojekt baut main; alte Adressen antworten nicht mehr oder leiten um.
 - **Aufwand:** S · **Ausführung:** nur Inhaber
 - **Quellen:** Sitzungsverlauf 69187537 (Zusammenfassungen 11:39 und 16:53 UTC, Nutzeraussagen bis 18:20 UTC, 14.11.2026); PROGRESS.md, Abschnitte „Stand 14.11.2026, ca. 14:25 UTC“ und „Offene Arbeiten“ (14.11.2026)
+- **Stand 14.11.2026, 20:40 UTC:** Belegt (IST, Kommentare von `vercel[bot]` an PR 185, 186 und 188): Die fünf Projekte `web`, `web-2kby`, `site`, `site-gjp7` und `site-k23m` melden bei jedem Push „The provided GitHub repository can't be found“. Das Schwesterprojekt `…-s4k5` baut weiter `main` (Commit-Status an `500c52d`: erfolgreich). Entscheidung unverändert offen.
 
 #### OA-024 · Infrastruktur & Server · OFFEN
 
@@ -320,6 +325,8 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Fertig, wenn:** Antwort des Inhabers; Auto-Merge an Entwürfen ohne Prüfung abgeschaltet oder ausdrücklich bestätigt.
 - **Aufwand:** S · **Ausführung:** nur Inhaber
 - **Quellen:** Sitzungsverlauf 69187537 (Zusammenfassungen 11:39 und 16:53 UTC, Nutzeraussagen bis 18:20 UTC, 14.11.2026); GitHub-Abruf offene PRs, 14.11.2026 ca. 18:30 UTC
+- **Stand 14.11.2026, 20:40 UTC:** IST (`gh api …/pulls?state=open`, 20:35 UTC): 26 Pull Requests offen, bei 22 ist Auto-Merge eingeschaltet, neu auch bei PR 184 (Cloudflare-Umzug). Wirksam wird das, sobald das Actions-Budget (OA-022) wieder Jobs zulässt. Frage an den Inhaber unverändert offen.
+- **Stand 14.11.2026, ca. 22:00 UTC:** IST (`gh api …/pulls?state=open`, 21:47 UTC): 31 Pull Requests offen, bei 21 ist Auto-Merge eingeschaltet. Nicht mehr bei PR 184 (Cloudflare-Umzug; wer es abgeschaltet hat, ist hier nicht belegt); weiter nicht bei 105 und bei den acht Entwürfen 186, 187, 189, 190, 192, 193, 195, 197. Frage an den Inhaber unverändert offen.
 
 ### Priorität 2 Verkaufsfähiger Auftritt und Arbeitsplatz
 
@@ -331,6 +338,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Fertig, wenn:** Entscheidung für Weg A, B oder C in DECISIONS.md; AGENTS.md nachgeführt; bei Umzug Vorschau auf workers.dev gemessen.
 - **Aufwand:** L · **Ausführung:** nur Inhaber (Entscheidung); Zweig claude/cloudflare-umzug liegt vor
 - **Quellen:** Sitzungsverlauf 69187537 (Zusammenfassungen 11:39 und 16:53 UTC, Nutzeraussagen bis 18:20 UTC, 14.11.2026); AGENTS.md (Führungsentscheidungen 10.11./13.11./14.11.2026)
+- **Stand 14.11.2026, 20:40 UTC:** Die Vorbereitung liegt als PR 184 vor (Zweig `claude/cloudflare-umzug`, Kopf `1c43325`, nicht gemergt, Auto-Merge eingeschaltet). Getrennt davon ist mit PR 183 (`202ca8f`) ein Chat-Weg über das Cloudflare AI Gateway vorbereitet und gesperrt (OA-165). Entscheidung unverändert offen.
 
 #### OA-029 · Infrastruktur & Server · BLOCKIERT
 
@@ -358,6 +366,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Fertig, wenn:** Seiten ohne noindex ausgeliefert, Sitemap und Canonical zeigen auf eine Hauptadresse, Live-Prüfung grün.
 - **Aufwand:** S · **Ausführung:** nur Inhaber (Entscheidung); danach Agent
 - **Quellen:** PROGRESS.md, Abschnitte „Stand 14.11.2026, ca. 14:25 UTC“ und „Offene Arbeiten“ (14.11.2026); docs/09-final/auftragsregister-2026-11-08.md (Fortschreibungen bis 12.11.2026)
+- **Stand 14.11.2026, 20:40 UTC:** Vorbereitung erledigt mit PR 182 (`08b0456`): Die Regel wird im Proxy durchgesetzt, Standard gesperrt, Freigabe über `NEXIFY_INDEXING` (TEILEKLAR zusätzlich `NEXIFY_INDEXING_TEILEKLAR`), Vorlage `docs/04-betrieb/indexierung-freigabe-2026-11-14.md`. Eigene Messung 20:33 UTC: elf abgerufene Seiten auf vier Hosts tragen `X-Robots-Tag: noindex, nofollow`, Sitemap 28 Adressen ohne `/teileklar`. Das Abschlusskriterium (Seiten ohne `noindex`) ist nicht erfüllt und soll es ohne Freigabe nicht sein; die Entscheidung bleibt beim Inhaber. Rest: OA-164.
 
 #### OA-032 · Website · ENTSCHEIDUNG NÖTIG
 
@@ -404,7 +413,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Aufwand:** S · **Ausführung:** nur Inhaber; danach Agent
 - **Quellen:** docs/09-final/auftragsregister-2026-11-08.md (Fortschreibungen bis 12.11.2026)
 
-#### OA-037 · Website · OFFEN
+#### OA-037 · Website · ERLEDIGT (bis 14.11.2026, 20:40 UTC: OFFEN)
 
 - **Ziel:** Verbliebene .tk-window-Regeln in Storefront.css und HomeMaster.css gegen die drei Verwendungen abgleichen.
 - **Blocker:** Keiner.
@@ -412,6 +421,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Fertig, wenn:** Keine unbenutzte Regel mehr; Gleichmacher 0 Abweichungen.
 - **Aufwand:** S · **Ausführung:** Agent sofort
 - **Quellen:** PROGRESS.md, Abschnitte „Stand 14.11.2026, ca. 14:25 UTC“ und „Offene Arbeiten“ (14.11.2026)
+- **Stand 14.11.2026, 20:40 UTC:** ERLEDIGT mit PR 188 (`500c52d`). Laut PR: 21 wirkungslose Deklarationen in `Storefront.css` und `HomeMaster.css` entfernt, vier Regeln entfallen ganz; nachher gegen vorher 73 Fälle, 267.900 Stilwerte, 0 Abweichungen; Gleichmacher 0 Abweichungen. Hier nicht nachgemessen. Bewusst stehen geblieben: Literale ohne passenden Token.
 
 #### OA-038 · Website · ENTSCHEIDUNG NÖTIG
 
@@ -422,7 +432,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Aufwand:** S · **Ausführung:** Agent sofort (Vorschlag); Entscheidung Inhaber
 - **Quellen:** docs/09-final/auftragsregister-2026-11-08.md (Fortschreibungen bis 12.11.2026)
 
-#### OA-039 · Suite & Portal · OFFEN
+#### OA-039 · Suite & Portal · TEILWEISE (bis 14.11.2026, 20:40 UTC: OFFEN)
 
 - **Ziel:** Festhalten, was von Suite und Portalen heute wirklich nutzbar ist, als verbindliche Liste.
 - **Blocker:** IST: Produktseite /produkte/nex2fly, Seiten /anmelden und /registrieren, private Routen /portal/kunde, /portal/api, /portal/affiliate liefern eine Hülle ohne Daten; kein angebundenes Konto-Backend (RQ-023, REC-PORTALS-01). Marketingkonzept O-6: Funktionsliste fehlt.
@@ -430,6 +440,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Fertig, wenn:** Tabelle je Funktion mit „nutzbar / Hülle / fehlt“ und Beleg, vom Inhaber bestätigt.
 - **Aufwand:** S · **Ausführung:** Agent sofort
 - **Quellen:** config/acceptance-coverage.json (master_cases, requirements_reconciliation; Stand origin/main 14.11.2026); docs/05-marketing/gesamtkonzept-2026-11-14.md (14.11.2026); config/site-map.json und apps/web/components/shop/PhaseNotice.tsx (origin/main 14.11.2026)
+- **Stand 14.11.2026, 20:40 UTC:** Dokument liegt seit PR 178 (`530173d`) vor: `docs/04-betrieb/werkstattservice-und-suite-ist-soll-2026-11-14.md`. Die Bestätigung durch den Inhaber aus dem Abschlusskriterium ist nicht belegt; deshalb TEILWEISE.
 
 #### OA-040 · Suite & Portal · ENTSCHEIDUNG NÖTIG
 
@@ -538,8 +549,9 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Fertig, wenn:** Kein offener PR älter als sieben Tage ohne Vermerk; überholte geschlossen mit Begründung.
 - **Aufwand:** S · **Ausführung:** nur Inhaber; Vorschlag je PR: Agent sofort
 - **Quellen:** GitHub-Abruf offene PRs, 14.11.2026 ca. 18:30 UTC; PROGRESS.md, Abschnitte „Stand 14.11.2026, ca. 14:25 UTC“ und „Offene Arbeiten“ (14.11.2026)
+- **Stand 14.11.2026, 20:40 UTC:** IST (20:35 UTC): 26 offen statt 22. Neu: PR 184 (Cloudflare-Umzug), PR 186 (Einwilligungsweg, Entwurf), PR 187 (Terminlogik, Entwurf), PR 189 (Prüfung von PR 118, Entwurf, Empfehlung „nacharbeiten“). Geschlossen wurde nichts.
 
-#### OA-052 · Qualität & Belege · TEILWEISE
+#### OA-052 · Qualität & Belege · ERLEDIGT (bis 14.11.2026, 20:40 UTC: TEILWEISE)
 
 - **Ziel:** Gleichmacher um Karten erweitern (Eingabefelder und Filmrahmen sind seit PR 159 enthalten).
 - **Blocker:** Keiner.
@@ -547,8 +559,9 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Fertig, wenn:** Karten in der Prüfliste; Lauf gegen die Produktion 0 Abweichungen oder Befundliste.
 - **Aufwand:** S · **Ausführung:** Agent sofort
 - **Quellen:** PROGRESS.md, Abschnitte „Stand 14.11.2026, ca. 14:25 UTC“ und „Offene Arbeiten“ (14.11.2026); DECISIONS.md (D-011 bis D-020, 14.11.2026)
+- **Stand 14.11.2026, 20:40 UTC:** ERLEDIGT mit PR 188 (`500c52d`). Laut PR: Karten (Detail, Ablauf, Galerie, Angebot, Kosten, Satz, Abschluss-Fläche), TEILEKLAR-Kopfleiste, Abschluss-Schalterliste und Chat-Hinweis sind Messpunkte; Lauf gegen `nexifyai.de` 31.553 Vergleiche, 0 Abweichungen. Hier nicht nachgemessen.
 
-#### OA-053 · Qualität & Belege · OFFEN
+#### OA-053 · Qualität & Belege · ENTSCHEIDUNG NÖTIG (bis 14.11.2026, 20:40 UTC: OFFEN)
 
 - **Ziel:** Widerspruch der Pillow-Version beheben (requirements-image.txt 13.0.0, Werkzeug akzeptiert nur 12.3.0) und skills-lock.json mit Prüfsummen füllen.
 - **Blocker:** Pin-Bericht Befunde 4 und 5: mit 13.0.0 scheitern 59 Tests des Bild-Batches.
@@ -556,6 +569,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Fertig, wenn:** Eine geprüfte Version in beiden Dateien, Tests grün; neun Einträge mit computedHash.
 - **Aufwand:** S · **Ausführung:** Agent sofort
 - **Quellen:** docs/09-final/pin-rebase-2026-11-14.md Abschnitte 6 und 10 (14.11.2026)
+- **Stand 14.11.2026, 20:40 UTC:** Nicht behoben, aber entscheidungsreif seit PR 179 (`a8a5d66`): `docs/09-final/testumgebung-und-abhaengigkeiten-2026-11-14.md`, Abschnitt 2 (Pillow 12.3.0 gegen 13.0.0, Empfehlung dort: Weg B) und Abschnitt 3 (leere Prüfsummen in `skills-lock.json`). Beides ist ein Abhängigkeitswechsel und braucht den Inhaber; deshalb ENTSCHEIDUNG NÖTIG.
 
 #### OA-054 · Qualität & Belege · BLOCKIERT
 
@@ -583,8 +597,9 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Fertig, wenn:** Je Pin ein bestandener zuständiger Lauf oder ein Vermerk „Entscheidung offen“; Zahl der veralteten Pins sinkt belegt.
 - **Aufwand:** M · **Ausführung:** Agent sofort (Identity-Hero, Kontrast, PWA, Sitemap); Rest nach Entscheidung
 - **Quellen:** docs/09-final/pin-rebase-2026-11-14.md Abschnitte 6 und 10 (14.11.2026); PROGRESS.md, Abschnitte „Stand 14.11.2026, ca. 14:25 UTC“ und „Offene Arbeiten“ (14.11.2026)
+- **Stand 14.11.2026, 20:40 UTC:** Seit dem Stand der Liste sind Belege mit Browserlauf neu erhoben und Pins nachgezogen worden: PR 182 (`proxy.ts`, zwei Belege), PR 185 (Text-Resize nach PR 181), PR 188 (Katalog, Shop, Text-Spacing). IST auf `500c52d` (eigener Lauf, ca. 20:40 UTC): `python3 tools/verify_requirements_reconciliation.py` meldet 41 Zeilen „Stale implementation source“. Die Zahl der veralteten Pins im Register ist hier nicht neu gezählt. Bleibt TEILWEISE.
 
-#### OA-057 · Qualität & Belege · OFFEN
+#### OA-057 · Qualität & Belege · ERLEDIGT (bis 14.11.2026, 20:40 UTC: OFFEN)
 
 - **Ziel:** Drei Ladefehler der Python-Tests beheben (in der Laufumgebung fehlen fastapi, httpx, bson).
 - **Blocker:** Kein Codefehler; die Umgebung installiert die Abhängigkeiten des Shop-Dienstes nicht.
@@ -592,6 +607,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Fertig, wenn:** Tests laden; dokumentierter Installationsschritt (z. B. Makefile-Ziel oder Hinweis in AGENTS.md).
 - **Aufwand:** S · **Ausführung:** Agent sofort
 - **Quellen:** docs/09-final/pin-rebase-2026-11-14.md Abschnitte 6 und 10 (14.11.2026)
+- **Stand 14.11.2026, 20:40 UTC:** ERLEDIGT mit PR 179 (`a8a5d66`): `make test-env` baut `.venv` wie der CI-Job, `make test-py` lässt die Suite darin laufen; laut PR laden alle Module (882 statt 823 Tests). Ohne `.venv` bleiben die drei Ladefehler bestehen (eigener Lauf auf `500c52d`: 3 Zeilen `_FailedTest`). Folge laut Bericht: In `.venv` sind 59 Namen der Bildwerkzeuge rot, bis OA-053 entschieden ist.
 
 #### OA-058 · Qualität & Belege · ENTSCHEIDUNG NÖTIG
 
@@ -602,7 +618,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Aufwand:** S · **Ausführung:** nur Inhaber oder koordinierende Sitzung mit Vermerk
 - **Quellen:** docs/09-final/pin-rebase-2026-11-14.md Abschnitte 6 und 10 (14.11.2026); Sitzungsverlauf 69187537 (Zusammenfassungen 11:39 und 16:53 UTC, Nutzeraussagen bis 18:20 UTC, 14.11.2026)
 
-#### OA-059 · Qualität & Belege · OFFEN
+#### OA-059 · Qualität & Belege · ERLEDIGT (bis 14.11.2026, 20:40 UTC: OFFEN)
 
 - **Ziel:** Wackligen Test chat-route-errors.test.mjs Zeile 58 stabil machen, ohne seine Aussage abzuschwächen.
 - **Blocker:** Die Ausgabe trägt eine zufällige Kennung, die „429“ enthalten kann.
@@ -610,8 +626,9 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Fertig, wenn:** Test prüft den Statuscode strukturiert; 200 Läufe in Folge grün.
 - **Aufwand:** S · **Ausführung:** Agent sofort
 - **Quellen:** PROGRESS.md, Abschnitte „Stand 14.11.2026, ca. 14:25 UTC“ und „Offene Arbeiten“ (14.11.2026)
+- **Stand 14.11.2026, 20:40 UTC:** ERLEDIGT mit PR 179 (`a8a5d66`): JSON- und SSE-Antwort werden zerlegt und Feld für Feld geprüft; laut PR 200 Läufe in Folge grün.
 
-#### OA-060 · Qualität & Belege · OFFEN
+#### OA-060 · Qualität & Belege · ERLEDIGT (bis 14.11.2026, 20:40 UTC: OFFEN)
 
 - **Ziel:** Führende Dokumente nachführen: Stand nach 14:25 UTC.
 - **Blocker:** Seither gemergt: PR 168 bis 174 (u. a. Kopfleiste, Chat-Eingabe iPhone, Abschlussbereich als Liste, Pins). Nicht vermerkt: Wunsch zum Cloudflare-Umzug mit Messung, Ursache der Chat-Meldung (Schwesterprojekt), Fragen zu Cognee und Composio, Auto-Merge-Vorfall, tatsächliche Liste offener PRs (22 statt 24).
@@ -619,6 +636,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Fertig, wenn:** PROGRESS.md mit neuem Abschnitt und ersetzter Liste „Offene Arbeiten“; AGENTS.md-Hinweis zu Cloudflare als „Entscheidung offen“.
 - **Aufwand:** S · **Ausführung:** Agent sofort
 - **Quellen:** PROGRESS.md, Abschnitte „Stand 14.11.2026, ca. 14:25 UTC“ und „Offene Arbeiten“ (14.11.2026); Sitzungsverlauf 69187537 (Zusammenfassungen 11:39 und 16:53 UTC, Nutzeraussagen bis 18:20 UTC, 14.11.2026); GitHub-Abruf offene PRs, 14.11.2026 ca. 18:30 UTC
+- **Stand 14.11.2026, 20:40 UTC:** ERLEDIGT mit PR 176 (`5f0a411`); fortgeführt mit der Nachführung von ca. 20:40 UTC (Zweig `claude/stand-abend`).
 
 #### OA-061 · Qualität & Belege · ENTSCHEIDUNG NÖTIG
 
@@ -629,7 +647,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Aufwand:** S · **Ausführung:** nur Inhaber
 - **Quellen:** PROGRESS.md, Abschnitte „Stand 14.11.2026, ca. 14:25 UTC“ und „Offene Arbeiten“ (14.11.2026); docs/09-final/auftragsregister-2026-11-08.md (Fortschreibungen bis 12.11.2026); AGENTS.md (Führungsentscheidungen 10.11./13.11./14.11.2026)
 
-#### OA-062 · Qualität & Belege · OFFEN
+#### OA-062 · Qualität & Belege · ERLEDIGT (bis 14.11.2026, 20:40 UTC: OFFEN)
 
 - **Ziel:** Meldung „inventory_status: blocked“ im Governance-Audit klären (Quellabweichung im KI-Durchsetzungsregister).
 - **Blocker:** Im Pin-Lauf beobachtet; ob vorbestehend, wurde nicht verglichen.
@@ -637,6 +655,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Fertig, wenn:** Ursache benannt; Audit ohne Blockade oder mit begründetem Vermerk.
 - **Aufwand:** S · **Ausführung:** Agent sofort
 - **Quellen:** Sitzungsverlauf 69187537 (Zusammenfassungen 11:39 und 16:53 UTC, Nutzeraussagen bis 18:20 UTC, 14.11.2026)
+- **Stand 14.11.2026, 20:40 UTC:** ERLEDIGT mit PR 179 (`a8a5d66`), Bericht Abschnitt 7: Ursache benannt, begründeter Vermerk. Die Blockade bestand schon am 30.10.2026 (`cfaca08`) und ist berechtigt: 11 registrierte Quellen sind geändert, 12 KI-nahe Dateien nicht registriert, darunter der ausgelieferte Chat. Die Meldung bleibt bestehen; die inhaltliche Durchsicht ist die neue Arbeit OA-167.
 
 #### OA-063 · Qualität & Belege · BLOCKIERT
 
@@ -820,7 +839,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Aufwand:** S · **Ausführung:** nur Inhaber
 - **Quellen:** Gmail-Abruf 14.11.2026 (Betreffzeilen/Vorschau)
 
-#### OA-083 · Werkstattservice · OFFEN
+#### OA-083 · Werkstattservice · ERLEDIGT (bis 14.11.2026, 20:40 UTC: OFFEN)
 
 - **Ziel:** IST und SOLL des Werkstattservice in einem Dokument festhalten.
 - **Blocker:** IST: Seiten /teileklar/werkstatt (Verzeichnis nach Entfernung), /teileklar/termine (Hinweis „Online-Terminbuchung noch nicht verfügbar“), /teileklar/partner-werden (Formular), private Hüllen /teileklar/partnerportal und /teileklar/nachbarschaft; im Dienst workshops_api.py und requests_api.py. Solange der Shop-Dienst mit 503 antwortet, ist nichts davon nutzbar. Geplant laut Gesamtprojektplan: Verzeichnis, Erstansprache, Partnervertrag, Auftragsübergabe, Terminlogik, Ziel 25 aktive Partner.
@@ -828,6 +847,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Fertig, wenn:** Ein Dokument mit Stand je Baustein und Beleg.
 - **Aufwand:** S · **Ausführung:** Agent sofort
 - **Quellen:** config/site-map.json und apps/web/components/shop/PhaseNotice.tsx (origin/main 14.11.2026); docs/01-konzept/gesamtprojektplan.md; docs/01-konzept/teileklar-shop.md und docs/09-final/11-teileklar-datenblatt.md
+- **Stand 14.11.2026, 20:40 UTC:** ERLEDIGT mit PR 178 (`530173d`): `docs/04-betrieb/werkstattservice-und-suite-ist-soll-2026-11-14.md`.
 
 #### OA-084 · Werkstattservice · TEILWEISE
 
@@ -846,6 +866,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Fertig, wenn:** Ein Terminwunsch erreicht die Werkstatt, wird bestätigt oder abgelehnt, der Kunde erhält die Antwort; Tests je Zustand.
 - **Aufwand:** L · **Ausführung:** Agent sofort (Spezifikation und Code); Betrieb nach Datenbank
 - **Quellen:** config/site-map.json und apps/web/components/shop/PhaseNotice.tsx (origin/main 14.11.2026); docs/01-konzept/gesamtprojektplan.md
+- **Stand 14.11.2026, 20:40 UTC:** Nicht gebaut. Die Terminlogik liegt als Spezifikationsentwurf in PR 187 vor (Paket J-1, eine Datei `docs/03-backend/werkstatt-terminlogik.md`, nicht gemergt). Bleibt OFFEN.
 
 #### OA-086 · Werkstattservice · BLOCKIERT
 
@@ -909,6 +930,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Fertig, wenn:** Eine gekennzeichnete Testanfrage kommt im internen Postfach an; Eingangsbestätigung beim Absender; Beleg abgelegt.
 - **Aufwand:** S · **Ausführung:** Agent auf Wort des Inhabers (löst zwei Mails aus)
 - **Quellen:** docs/05-marketing/gesamtkonzept-2026-11-14.md (14.11.2026); config/integrations/resend.json (Readback 29.10.2026); docs/09-final/auftragsregister-2026-11-08.md (Fortschreibungen bis 12.11.2026)
+- **Stand 14.11.2026, 20:40 UTC:** Befund vom 14.11.2026, ca. 19:00 UTC (`docs/04-betrieb/anfrageweg-befund-2026-11-14.md`): Es gibt keinen Zustellweg. `POST /api/requests` wird in Produktion mit 503 abgewiesen, gespeichert und versendet wird nichts; eigener Abruf 20:33 UTC bestätigt den 503. PR 181 (`81b0ae9`) lässt das Formular das ehrlich melden und in eine E-Mail übergeben. Das Abschlusskriterium (Testanfrage kommt im Postfach an) ist nicht erfüllt; die Zustellung an `mail@nexifyai.cloud` ist ungeprüft. Bleibt OFFEN; Entscheidung zum Empfänger: OA-163.
 
 #### OA-093 · Kundenberatung & Chat · ENTSCHEIDUNG NÖTIG
 
@@ -963,6 +985,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Fertig, wenn:** Anmeldung über die Website erzeugt bestätigte Kontakte im Segment.
 - **Aufwand:** M · **Ausführung:** Agent sofort (Entwurf); Live nach re_doi
 - **Quellen:** docs/01-konzept/NeXify-Marketingkonzept.md (älter, 2026); Gmail-Abruf 14.11.2026 (Betreffzeilen/Vorschau)
+- **Stand 14.11.2026, 20:40 UTC:** Der Anmeldeweg dafür liegt als Entwurf in PR 186 vor (siehe OA-003); Formular, Bestätigungs- und Abmeldeseite sind dort ausdrücklich nicht enthalten. Bleibt OFFEN.
 
 #### OA-099 · Vertrieb & Leads · OFFEN
 
@@ -1017,8 +1040,9 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Fertig, wenn:** Absender-Subdomain verifiziert; SPF, DKIM, DMARC per DNS-Abfrage belegt; Testmail trägt beide Kopfzeilen; Aufwärmplan mit Tagesmengen.
 - **Aufwand:** S · **Ausführung:** Agent sofort (Messung, Plan); DNS-Einträge nur Inhaber
 - **Quellen:** Resend-Konto, Abruf 14.11.2026 (list-domains, list-segments, list-broadcasts, list-topics, get-usage; nur Zählung); Resend-Dokumentation (resend.com/docs: Domains, Unsubscribe-Kopfzeilen), Abruf 14.11.2026; docs/09-final/auftragsregister-2026-11-08.md (Fortschreibungen bis 12.11.2026)
+- **Stand 14.11.2026, 20:40 UTC:** Seit PR 177 (`5ad9d5c`) im Repository: Messprotokoll `docs/04-betrieb/mailversand-zustand-2026-11-14.md` und Aufwärmplan `docs/05-marketing/mailing/aufwaermplan.md`. In Resend und DNS wurde nichts angelegt; Absender-Subdomain und Testmail fehlen. Bleibt TEILWEISE.
 
-#### OA-105 · Marketing & Mailings · OFFEN
+#### OA-105 · Marketing & Mailings · TEILWEISE (bis 14.11.2026, 20:40 UTC: OFFEN)
 
 - **Ziel:** Mailvorlagen für Kampagnen in vier Sprachen entwerfen (ohne Versand).
 - **Blocker:** Vorhanden sind nur Transaktionsvorlagen (Angebot, Buchung, intern).
@@ -1026,6 +1050,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Fertig, wenn:** Vorlagen im Repository mit Pflichtangaben-Platzhaltern, gerendert geprüft; Freigabe des Inhabers je Text.
 - **Aufwand:** S · **Ausführung:** Agent sofort
 - **Quellen:** config/integrations/resend.json (Readback 29.10.2026); docs/05-marketing/gesamtkonzept-2026-11-14.md (14.11.2026)
+- **Stand 14.11.2026, 20:40 UTC:** Vier Vorlagenentwürfe in Deutsch mit Pflichtangaben-Platzhaltern liegen seit PR 177 (`5ad9d5c`) unter `docs/05-marketing/mailing/vorlagen/`. Es fehlen die Fassungen in NL, FR und EN, die gerenderte Prüfung und die Freigabe des Inhabers je Text; deshalb TEILWEISE.
 
 #### OA-106 · Marketing & Mailings · OFFEN
 
@@ -1035,6 +1060,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Fertig, wenn:** Kampagnen laufen über Segmente und Themen mit Abmeldung; Transaktionsmails bleiben unberührt; Test belegt Sperre nach Abmeldung.
 - **Aufwand:** M · **Ausführung:** Agent sofort (Entwurf)
 - **Quellen:** config/integrations/resend.json (Readback 29.10.2026); Resend-Konto, Abruf 14.11.2026 (list-domains, list-segments, list-broadcasts, list-topics, get-usage; nur Zählung)
+- **Stand 14.11.2026, 20:40 UTC:** Unverändert offen. PR 186 (Entwurf) bringt Sperrliste und Abmeldung, den Kampagnenversand ausdrücklich nicht.
 
 #### OA-107 · Marketing & Mailings · ENTSCHEIDUNG NÖTIG
 
@@ -1283,7 +1309,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Aufwand:** M · **Ausführung:** nur Inhaber (Entscheidung)
 - **Quellen:** GitHub-Abruf offene PRs, 14.11.2026 ca. 18:30 UTC; PROGRESS.md, Abschnitte „Stand 14.11.2026, ca. 14:25 UTC“ und „Offene Arbeiten“ (14.11.2026)
 
-#### OA-134 · Bot-Team & Hermes · OFFEN
+#### OA-134 · Bot-Team & Hermes · TEILWEISE (bis 14.11.2026, 20:40 UTC: OFFEN)
 
 - **Ziel:** Verbindlich festhalten, welche Agenten wirklich laufen und welche nur geplant sind.
 - **Blocker:** Geplant: 9 Profile (companion, baumeister, pruefer, recherche, triage, angebot, wissen, orchestrator, waechter), 44 Unternehmensrollen im Rollenkatalog, 17 Fachfähigkeiten im Anhang A, 12 Abteilungen im Betriebsmodell. Wirklich laufend: keiner dieser Agenten – alle 9 Profile haben keinen verbundenen Worker (connected_worker_id leer, activation überall aus). Es arbeiten nur Claude-Code-Sitzungen auf Zuruf und ihre Unteragenten; der Website-Chat ist ein Modellaufruf, kein Agent. Der Hermes-Container läuft, ein Funktionsnachweis fehlt.
@@ -1291,6 +1317,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Fertig, wenn:** Eine Tabelle Rolle, Laufzeit, läuft ja/nein, Beleg; im Repository und vom Inhaber gelesen.
 - **Aufwand:** S · **Ausführung:** Agent sofort
 - **Quellen:** config/integrations/nexify-team-runtime-candidate.json (14.11.2026); docs/09-final/master-goal-anhang-growth-product-factory-2026-11-09.md (09.11.2026); config/operating-model.json (26.10.2026); docs/04-betrieb/server-befund-2026-11-14.md (14.11.2026); docs/09-final/auftragsregister-2026-11-08.md (Fortschreibungen bis 12.11.2026)
+- **Stand 14.11.2026, 20:40 UTC:** Tabelle liegt seit PR 178 (`530173d`) vor: `docs/04-betrieb/bot-team-ist-soll-2026-11-14.md` (laut PR 9 Profile, 44 Rollen, kein Agent läuft). „Vom Inhaber gelesen“ ist nicht belegt; deshalb TEILWEISE.
 
 #### OA-135 · Bot-Team & Hermes · BLOCKIERT
 
@@ -1346,7 +1373,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Aufwand:** M · **Ausführung:** Agent nach Zugang: Freigabe des Kanals, Shell
 - **Quellen:** DECISIONS.md (D-011 bis D-020, 14.11.2026); docs/04-betrieb/server-befund-2026-11-14.md (14.11.2026); Mem-Notiz „NeXify AI FACTORY — Steuerungswiki & Umsetzungsplan“ (Stand 07.11., geändert 09.11.2026); Abruf der geplanten Aufgaben (list_triggers), 14.11.2026 ca. 18:40 UTC
 
-#### OA-141 · Bot-Team & Hermes · OFFEN
+#### OA-141 · Bot-Team & Hermes · TEILWEISE (bis 14.11.2026, 20:40 UTC: OFFEN)
 
 - **Ziel:** 17 Fachfähigkeiten des Anhangs A gegen vorhandene Skills und Werkzeuge abbilden (NX-UM-010).
 - **Blocker:** Im Auftragsregister „BLOCKED“ ohne Quelländerung; die 13 Arbeitsweisen-Skills unter .claude/skills sind seither dazugekommen.
@@ -1354,6 +1381,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Fertig, wenn:** config/skills-register.json nennt je Rolle IST, FEHLT oder UNGEPRÜFT mit Fundstelle; valides JSON; unabhängige Prüfung.
 - **Aufwand:** M · **Ausführung:** Agent sofort
 - **Quellen:** docs/09-final/auftragsregister-2026-11-08.md (Fortschreibungen bis 12.11.2026); docs/09-final/master-goal-anhang-growth-product-factory-2026-11-09.md (09.11.2026)
+- **Stand 14.11.2026, 20:40 UTC:** Die Abbildung der 17 Fachfähigkeiten steht seit PR 178 (`530173d`) in `docs/04-betrieb/bot-team-ist-soll-2026-11-14.md`. `config/skills-register.json` ist bewusst unverändert, weil die Datei mit gültiger Prüfsumme gebunden ist (Vorschlag im Dokument); das Abschlusskriterium ist damit nicht erfüllt. TEILWEISE.
 
 #### OA-142 · Bot-Team & Hermes · OFFEN
 
@@ -1399,6 +1427,8 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Fertig, wenn:** Kontingent verfügbar oder Rollen einer anderen Laufzeit zugeordnet.
 - **Aufwand:** S · **Ausführung:** nur Inhaber
 - **Quellen:** PROGRESS.md, Abschnitte „Stand 14.11.2026, ca. 14:25 UTC“ und „Offene Arbeiten“ (14.11.2026); config/integrations/nexify-team-runtime-candidate.json (14.11.2026)
+- **Stand 14.11.2026, 20:40 UTC:** Belegt (IST, Kommentare von `chatgpt-codex-connector[bot]` an PR 185, 186 und 188, 19:52 bis 20:32 UTC): „You have reached your Codex usage limits for code reviews“; die Sicherheitsprüfung startet nicht, weil das zahlende Konto kein Guthaben hat. Bleibt BLOCKIERT, nur Inhaber.
+- **Stand 14.11.2026, ca. 22:00 UTC:** Unverändert (IST, Kommentare von `chatgpt-codex-connector[bot]` an PR 198, Abruf 21:47 UTC): dieselbe Meldung zum Review-Kontingent und zur Sicherheitsprüfung. Bleibt BLOCKIERT.
 
 #### OA-147 · Bot-Team & Hermes · OFFEN
 
@@ -1427,7 +1457,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Aufwand:** S · **Ausführung:** kein Auftrag
 - **Quellen:** Mem-Notiz „NeXify AI FACTORY — Steuerungswiki & Umsetzungsplan“ (Stand 07.11., geändert 09.11.2026)
 
-#### OA-150 · Routinen & Dauerbetrieb · OFFEN
+#### OA-150 · Routinen & Dauerbetrieb · ERLEDIGT (bis 14.11.2026, 20:40 UTC: OFFEN)
 
 - **Ziel:** Laufende und geplante Routinen in einem Dokument gegenüberstellen.
 - **Blocker:** IST laut Abruf: genau eine wiederkehrende Aufgabe ist aktiv – „NeXify Regelbetrieb in der Hauptsitzung“, sechsmal täglich (alle vier Stunden, Minute 47, Europe/Amsterdam), letzter Lauf 14:48 UTC. Dazu drei einmalige Erinnerungen. Deaktiviert: der frühere Regelbetrieb in eigener Umgebung (kann das Repository nicht klonen), die stündliche Ziel-Automatik (seit 07.11.), der Nachtlauf Regelkreis (seit 14.11.). Geplant, aber ohne Routine: täglicher, wöchentlicher und monatlicher Betriebsrhythmus, Tagesbericht 08:00.
@@ -1435,6 +1465,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Fertig, wenn:** Dokument unter docs/04-betrieb mit Stand je Routine und Beleg des letzten Laufs.
 - **Aufwand:** S · **Ausführung:** Agent sofort
 - **Quellen:** Abruf der geplanten Aufgaben (list_triggers), 14.11.2026 ca. 18:40 UTC; config/operating-model.json (26.10.2026); docs/09-final/auftragsregister-2026-11-08.md (Fortschreibungen bis 12.11.2026); PROGRESS.md, Abschnitte „Stand 14.11.2026, ca. 14:25 UTC“ und „Offene Arbeiten“ (14.11.2026)
+- **Stand 14.11.2026, 20:40 UTC:** ERLEDIGT mit PR 178 (`530173d`): `docs/04-betrieb/routinen-ist-soll-2026-11-14.md` (laut PR 18 geplante Routinen mit Zustand, Zielort und Zustellweg).
 
 #### OA-151 · Routinen & Dauerbetrieb · BLOCKIERT
 
@@ -1651,3 +1682,232 @@ Einträge, die ein Agent ohne weitere Zugänge oder Entscheidungen beginnen kann
 - Slack, Linear nur erste 50 von mehr Tickets, Mem 60 von 105 Notizen (Titel), übrige nur per Suche
 - docs/**: 348 Dateien, davon die führenden vollständig, die übrigen per Stichwortsuche und Überschriften; docs/masterplan (520 KB) und docs/09-final/mastervorgabe (113 KB) nicht vollständig
 - Sitzungsverlauf: nur Nutzeraussagen, zwei Zusammenfassungen und späte Agentenberichte
+
+## 8. Nachführung 14.11.2026, ca. 20:40 UTC (Stand `origin/main` `500c52d`, PR 188)
+
+Auftrag der koordinierenden Sitzung: erledigte Einträge kennzeichnen, neue Befunde anhängen, nichts löschen. Quelle: `git log origin/main` von `29f0691` bis `500c52d` (PR 175 bis 183, 185, 188), die dort genannten Dokumente, `gh api` (Pull Requests, Läufe, Kommentare; 20:33 bis 20:36 UTC) und eine eigene lesende Messung gegen `nexifyai.de` um 20:33 UTC. „Laut PR“ heißt: im Commit oder in der PR-Beschreibung genannt, hier nicht wiederholt. Die Abschnitte 1 bis 7 zeigen weiter den Stand `29f0691`; geändert sind dort nur die Zustände in 13 Überschriften (alter Zustand steht in Klammern dahinter) und je eine Zeile „Stand 14.11.2026, 20:40 UTC“ an 28 Einträgen. Die Paketliste in Abschnitt 5 und die Liste in Abschnitt 6 sind nicht umgeschrieben; maßgeblich für die Vergabe ist `PROGRESS.md`, „Offene Arbeiten“.
+
+### 8.1 Geänderte Zustände
+
+| Eintrag | vorher | jetzt | Beleg |
+|---|---|---|---|
+| OA-037 | OFFEN | ERLEDIGT | PR 188 `500c52d` |
+| OA-052 | TEILWEISE | ERLEDIGT | PR 188 `500c52d` |
+| OA-057 | OFFEN | ERLEDIGT | PR 179 `a8a5d66` |
+| OA-059 | OFFEN | ERLEDIGT | PR 179 `a8a5d66` |
+| OA-060 | OFFEN | ERLEDIGT | PR 176 `5f0a411` |
+| OA-062 | OFFEN | ERLEDIGT (Ursache benannt; Folgearbeit OA-167) | PR 179 `a8a5d66` |
+| OA-083 | OFFEN | ERLEDIGT | PR 178 `530173d` |
+| OA-150 | OFFEN | ERLEDIGT | PR 178 `530173d` |
+| OA-039 | OFFEN | TEILWEISE (Bestätigung des Inhabers fehlt) | PR 178 `530173d` |
+| OA-134 | OFFEN | TEILWEISE („vom Inhaber gelesen“ fehlt) | PR 178 `530173d` |
+| OA-141 | OFFEN | TEILWEISE (`config/skills-register.json` unverändert) | PR 178 `530173d` |
+| OA-105 | OFFEN | TEILWEISE (nur Deutsch, ohne Freigabe) | PR 177 `5ad9d5c` |
+| OA-053 | OFFEN | ENTSCHEIDUNG NÖTIG (Vorlage liegt vor) | PR 179 `a8a5d66` |
+
+Geprüft und bewusst nicht als erledigt gekennzeichnet, obwohl ein PR dazu gemergt ist: OA-092 (Anfrageweg; PR 181 heilt die Meldung, nicht die Zustellung), OA-031 (Indexierung; PR 182 setzt die Sperre durch, die Freigabe ist Sache des Inhabers), OA-104 und OA-008 (Mailing; PR 177 liefert Dokumente), OA-022 (Actions; Ursache jetzt belegt, nicht behoben). Nur mit Stand-Zeile versehen: OA-003, OA-008, OA-022, OA-023, OA-027, OA-028, OA-031, OA-051, OA-056, OA-085, OA-092, OA-098, OA-104, OA-106, OA-146.
+
+### 8.2 Zählung nach der Nachführung (170 Einträge)
+
+| Zustand | Stand `29f0691` | Stand `500c52d` |
+|---|---|---|
+| OFFEN | 54 | 46 |
+| TEILWEISE | 10 | 13 |
+| BLOCKIERT | 37 | 37 |
+| ENTSCHEIDUNG NÖTIG | 53 | 58 |
+| HISTORIE-überholt | 8 | 8 |
+| ERLEDIGT | 0 | 8 |
+
+Herleitung: OFFEN 54 − 7 (037, 057, 059, 060, 062, 083, 150 nach ERLEDIGT) − 5 (039, 134, 141, 105 nach TEILWEISE, 053 nach ENTSCHEIDUNG NÖTIG) + 4 neue (164, 166, 167, 170) = 46. TEILWEISE 10 − 1 (052) + 4 = 13. ENTSCHEIDUNG NÖTIG 53 + 1 (053) + 4 neue (163, 165, 168, 169) = 58. ERLEDIGT 7 + 1 = 8.
+
+### 8.3 Neue Einträge
+
+#### OA-163 · Kundenberatung & Chat · ENTSCHEIDUNG NÖTIG
+
+- **Priorität:** 1 Sicherheits-, Daten- und Betriebsrisiko (Anfragen gehen verloren)
+- **Ziel:** Entscheiden, über welchen Weg Anfragen aus den Formularen den Inhaber erreichen, und den Weg in Betrieb nehmen.
+- **Blocker:** Über `/kontakt`, `/teileklar/termine`, `/teileklar/gutscheine` und `/teileklar/partner-werden` kommt keine Anfrage an: `/api/requests` antwortet in Produktion mit 503 (`runtime_binding_unavailable`, `payment_mode_unbound`; eigener Abruf 20:33 UTC). Zwei Möglichkeiten laut Befund: Shop-Dienst binden (widerspricht dem Zielbild D-013) oder eigener Empfänger in `apps/web`, der über Resend an das Postfach sendet. Für den zweiten Weg fehlen `RESEND_API_KEY` und `RESEND_FROM` in Production und die Entscheidung, ob ohne Speicherung gesendet werden darf (der Einwilligungstext nennt „gespeichert“).
+- **Abhängigkeiten:** OA-092, OA-067, OA-030
+- **Fertig, wenn:** Inhaber hat den Weg gewählt; eine gekennzeichnete Testanfrage kommt im Postfach an; Beleg abgelegt.
+- **Aufwand:** S für die Entscheidung, M für den Bau · **Ausführung:** Entscheidung nur Inhaber, Bau Fabrik
+- **Quellen:** docs/04-betrieb/anfrageweg-befund-2026-11-14.md; PR 181 (`81b0ae9`)
+
+#### OA-164 · Website · ERLEDIGT (OFFEN)
+
+- **Priorität:** 2 Verkaufsfähiger Auftritt und Arbeitsplatz
+- **Ziel:** robots-Meta-Tag auf `/agb`, `/avv`, `/widerruf`, `/teileklar/kategorien` und `/teileklar/werkstatt` an die Indexierungsregel angleichen.
+- **Blocker:** Die fünf Seiten tragen `<meta name="robots" content="index, follow">`, während die Kopfzeile `X-Robots-Tag: noindex, nofollow` sperrt (eigene Messung 20:33 UTC). Es gilt die strengere Angabe; der Widerspruch bleibt aber sichtbar. `page-seo.ts` und `layout.tsx` sind an Browser-Belege gebunden; eine Änderung braucht den zuständigen Browserlauf. Die drei Rechtsseiten kamen ohne Pull Request auf `main` (Freigabe nach D-017 nicht belegt).
+- **Abhängigkeiten:** OA-031, OA-056
+- **Fertig, wenn:** Meta-Tag und Kopfzeile stimmen auf allen Seiten überein; betroffene Belege durch Lauf erneuert.
+- **Aufwand:** M · **Ausführung:** Fabrik (Paket C, ein Schreiber)
+- **Quellen:** docs/04-betrieb/indexierung-freigabe-2026-11-14.md, Abschnitte 1 und 9; PR 182 (`08b0456`). Dazu aus Abschnitt 9 derselben Vorlage: TEILEKLAR-Seiten nennen hreflang für nl, fr und en, liefern aber nur deutschen Text; vor dem Shop-Schalter zu bereinigen.
+- **Stand 14.11.2026, ca. 22:00 UTC:** ERLEDIGT mit PR 198 (`48f5072`, gemergt 21:45 UTC). Das Meta-Tag der fünf Seiten kommt aus derselben Entscheidung wie die Kopfzeile (`apps/web/auth/page-robots.ts`); Text-Resize-, Katalog- und Shop-Beleg durch Browserlauf neu erhoben (`docs/04-betrieb/indexierung-freigabe-2026-11-14.md`, Abschnitt 11; `docs/09-final/pin-rebase-2026-11-14.md`, Abschnitt 12). Laut PR, hier nicht live nachgemessen. Reste als neue Einträge: Katalogseiten-Meta (OA-175), Observability-Belege (OA-176), Playwright-Fassung (OA-177), Commit-Feld der Belege (OA-178). Der hreflang-Satz oben bleibt offen und ist nicht Teil dieser Erledigung.
+
+#### OA-165 · Kundenberatung & Chat · ENTSCHEIDUNG NÖTIG
+
+- **Priorität:** 5 Betrieb und Skalierung
+- **Ziel:** Entscheiden, ob der Chat über das Cloudflare AI Gateway laufen darf, und in welchem Verhältnis zum 9router.
+- **Blocker:** Der Weg ist gebaut, ausgeschaltet und im Code gesperrt (`POLICY_PERMITS_CLOUDFLARE_GATEWAY = false` in `apps/web/app/api/chat/llm-gateway.ts`). `config/llm-policy.json` nennt als Zielweg nur den 9router. Die Freigabe braucht einen D-Eintrag und die Änderung der Policy; der Wortlautvorschlag steht in der Betriebsnotiz, Abschnitt 8, und ist nicht eingetragen. Das Setzen von `CHAT_LLM_ROUTE` schaltet heute den Chat für alle Besucher ab. Offen laut Notiz: bezahlter Verbindungstest, Auftragsverarbeitung und Datenschutzerklärung, Aufbewahrung der Protokolle.
+- **Abhängigkeiten:** OA-048, OA-025
+- **Fertig, wenn:** D-Eintrag vom Inhaber, Policy nachgeführt, Verbindungstest mit Beleg; oder ausdrücklich „bleibt gesperrt“.
+- **Aufwand:** S · **Ausführung:** nur Inhaber
+- **Quellen:** docs/04-betrieb/cloudflare-ai-gateway-2026-11-14.md; PR 183 (`202ca8f`)
+
+#### OA-166 · Infrastruktur & Server · OFFEN
+
+- **Priorität:** 1 Sicherheits-, Daten- und Betriebsrisiko
+- **Ziel:** Das im Chat offengelegte Cloudflare-API-Token und das Geheimnis des Access-Dienst-Tokens erneuern.
+- **Blocker:** Beide Werte standen im Klartext in einem Chat und gelten als offengelegt. Die Werte stehen nicht im Repository.
+- **Abhängigkeiten:** keine
+- **Fertig, wenn:** Beide Geheimnisse erneuert, alter Wert ungültig, neuer Wert nur im Geheimnisspeicher; Erneuerungsstand im Lösungsregister nachgeführt.
+- **Aufwand:** S · **Ausführung:** nur Inhaber
+- **Quellen:** docs/04-betrieb/cloudflare-ai-gateway-2026-11-14.md, Abschnitt 7 (mit den Schritten im Dashboard); config/loesungsregister.json
+
+#### OA-167 · Qualität & Belege · OFFEN
+
+- **Priorität:** 5 Betrieb und Skalierung
+- **Ziel:** KI-Durchsetzungsregister `config/ai-enforcement-coverage.json` inhaltlich nachführen, sodass der ausgelieferte Chat darin steht.
+- **Blocker:** Das Register ist vom 30.10.2026. 11 registrierte Quellen sind seither geändert, 12 KI-nahe Dateien nicht registriert, darunter `apps/web/app/api/chat/route.ts` und `apps/web/lib/chat-llm.ts`. Ein bloßes Nachtragen der Prüfsummen würde eine Durchsicht behaupten, die nicht stattgefunden hat.
+- **Abhängigkeiten:** OA-062 (Ursache), OA-048
+- **Fertig, wenn:** Jede der 23 Dateien ist durchgesehen und mit Eintrag im Register; `python3 tools/check_ai_coverage.py` ohne `--audit` endet mit Exit 0.
+- **Aufwand:** M · **Ausführung:** Fabrik, eigener Zweig
+- **Quellen:** docs/09-final/testumgebung-und-abhaengigkeiten-2026-11-14.md, Abschnitt 7; PR 179 (`a8a5d66`)
+
+#### OA-168 · Website · ENTSCHEIDUNG NÖTIG
+
+- **Priorität:** 2 Verkaufsfähiger Auftritt und Arbeitsplatz
+- **Ziel:** Entscheiden, wie sich die Glas-Kopfleiste und die Abschnittsleiste auf `/kontakt` und `/leistungen` beim Blättern zueinander verhalten.
+- **Blocker:** Laut PR 188 läuft die Abschnittsleiste beim Blättern sichtbar unter der Glas-Kopfleiste durch; nur gemessen, nicht behoben. Eine Abhilfe ändert einen Baustein der Startseite (D-012) und ist eine Gestaltungsentscheidung. Hier nicht nachgemessen.
+- **Abhängigkeiten:** D-022 (Kopfleiste)
+- **Fertig, wenn:** Entscheidung des Inhabers; danach Umsetzung mit Gleichmacher und Live-Prüfung ohne Befund.
+- **Aufwand:** S · **Ausführung:** Entscheidung nur Inhaber
+- **Quellen:** Beschreibung von PR 188 (`500c52d`), Abschnitt „Nicht belegt“
+
+#### OA-169 · Infrastruktur & Server · ENTSCHEIDUNG NÖTIG
+
+- **Priorität:** 1 Sicherheits-, Daten- und Betriebsrisiko
+- **Ziel:** Die im Lösungsregister als fällig geführten Erneuerungen von Zugängen durchführen und die dort als Frage geführten Rollen beantworten.
+- **Blocker:** `config/loesungsregister.json` führt 48 Zugänge, davon 17 mit `erneuerung_faellig` und 15 als offengelegt (eigene Zählung 20:36 UTC); mehrere Lösungen tragen als Rolle im Plan eine Frage an den Inhaber. Erneuern kann nur, wer das jeweilige Konto führt.
+- **Abhängigkeiten:** OA-013, OA-014, OA-166
+- **Fertig, wenn:** Kein Zugang mehr mit fälliger Erneuerung; jede Frage im Register beantwortet oder als offen bestätigt; `python3 tools/check_loesungsregister.py` besteht.
+- **Aufwand:** M · **Ausführung:** nur Inhaber, Nachführung Fabrik
+- **Quellen:** config/loesungsregister.json; docs/04-betrieb/loesungsregister.md; PR 180 (`0333c16`)
+
+#### OA-170 · Qualität & Belege · ERLEDIGT (OFFEN)
+
+- **Priorität:** 5 Betrieb und Skalierung
+- **Ziel:** Zwei Lehren zum Namensvergleich der Python-Suite in den Skill `nexify-zweig-und-pr` aufnehmen.
+- **Blocker:** Der Bericht zu PR 181 nannte „kein neuer Name“, obwohl zwei Tests neu rot waren: Die Vorher-Messung lief ohne erzeugte Seitendaten (`pin-rebase-2026-11-14.md`, Abschnitt 11). Schritt 3 des Skills nennt `node apps/site/scripts/generate-public-data.mjs` nicht vor der Vorher-Messung. Zweite Lehre, Notiz aus dem Auftrag der koordinierenden Sitzung, im Repository nicht festgehalten: kein `git stash` zwischen Worktrees. Außerdem nennt der Abschnitt „Bekannte Lage“ des Skills die Ursache des Actions-Ausfalls noch nicht (OA-022).
+- **Abhängigkeiten:** keine
+- **Fertig, wenn:** Skill nennt beide Schritte; „Bekannte Lage“ berichtigt.
+- **Aufwand:** S · **Ausführung:** Fabrik
+- **Quellen:** docs/09-final/pin-rebase-2026-11-14.md, Abschnitt 11; PR 185 (`2b8da63`); .claude/skills/nexify-zweig-und-pr/SKILL.md
+- **Stand 14.11.2026, ca. 22:00 UTC:** ERLEDIGT mit PR 194 (`2396553`, gemergt 20:59 UTC). IST am Repository: `.claude/skills/nexify-zweig-und-pr/SKILL.md` nennt in Schritt 3 die Vorher-Messung an `origin/main` im Wegwerf-Worktree nach beiden `generate-public-data`-Aufrufen, in Schritt 2 „Kein `git stash`“ und in „Bekannte Lage“ das Actions-Budget als Ursache.
+
+## 9. Nachführung 14.11.2026, ca. 22:00 UTC (Stand `origin/main` `48f5072`, PR 198)
+
+Auftrag der koordinierenden Sitzung wie in Abschnitt 8: erledigte Einträge kennzeichnen, neue Befunde anhängen, nichts löschen. Quelle: `git log origin/main` von `500c52d` bis `48f5072` (PR 194, 196, 198; alle gemergt durch `nexifyai-dev`), die dort genannten Dokumente, `gh api` (Pull Requests, Check-Läufe, Anmerkungen, Commit-Status, Kommentare; 21:47 UTC). Nicht neu gemessen: Website und Shop-Dienst in Produktion; die Live-Nachmessung zu PR 198 läuft laut Auftrag getrennt, ihr Ergebnis liegt dieser Nachführung nicht vor. Abschnitte 1 bis 8 sind bis auf zwei Zustände in Überschriften (alter Zustand in Klammern) und fünf Zeilen „Stand 14.11.2026, ca. 22:00 UTC“ unverändert.
+
+### 9.1 Geänderte Zustände
+
+| Eintrag | vorher | jetzt | Beleg |
+|---|---|---|---|
+| OA-164 | OFFEN | ERLEDIGT (Reste in OA-175 bis OA-178) | PR 198 `48f5072` |
+| OA-170 | OFFEN | ERLEDIGT | PR 194 `2396553` |
+
+Nur mit Stand-Zeile versehen: OA-022 (Actions-Budget, unverändert), OA-027 (Auto-Merge jetzt an 21 von 31 offenen PRs, nicht mehr an PR 184), OA-146 (Codex-Kontingent, unverändert). PR 196 (`d4f2032`) schließt eine Lücke, für die es keinen eigenen Eintrag gab (Google-Anmeldung wurde mit einem unbestätigten Passwortkonto zusammengeführt; `docs/04-betrieb/konto-verknuepfung-befund-2026-11-14.md`); seine Reste stehen in OA-171 bis OA-174. Die dort in Abschnitt 3 als offen geführte Anzeige der Ablehnung im Frontend ist mit PR 198 gebaut (`apps/web/components/shop/google-login-message.ts`, `AuthForms.tsx`); laut PR, nicht gegen ein gebundenes Backend gemessen.
+
+### 9.2 Zählung nach der Nachführung (178 Einträge)
+
+| Zustand | Stand `500c52d` | Stand `48f5072` |
+|---|---|---|
+| OFFEN | 46 | 49 |
+| TEILWEISE | 13 | 13 |
+| BLOCKIERT | 37 | 38 |
+| ENTSCHEIDUNG NÖTIG | 58 | 60 |
+| HISTORIE-überholt | 8 | 8 |
+| ERLEDIGT | 8 | 10 |
+
+Herleitung: OFFEN 46 − 2 (164, 170 nach ERLEDIGT) + 5 neue (171, 174, 175, 177, 178) = 49. BLOCKIERT 37 + 1 neu (173) = 38. ENTSCHEIDUNG NÖTIG 58 + 2 neue (172, 176) = 60. ERLEDIGT 8 + 2 = 10.
+
+### 9.3 Neue Einträge
+
+#### OA-171 · Shop TEILEKLAR · OFFEN
+
+- **Priorität:** 1 Sicherheits-, Daten- und Betriebsrisiko (vor dem Binden des Shop-Dienstes)
+- **Ziel:** Registrierung im Shop-Dienst erst nach Bestätigung der E-Mail-Adresse wirksam machen.
+- **Blocker:** `register` legt weiter ein Konto mit beliebiger, unbestätigter Adresse an und startet sofort eine Sitzung. Seit PR 196 ist ein solches Konto nicht mehr über Google erreichbar, die Registrierung mit fremder Adresse bleibt aber möglich. Gehört zu G04 im Register (`config/acceptance-coverage.json`, „E-Mail-/Workspaceverifizierung“). Heute hinter dem 503-Gate.
+- **Abhängigkeiten:** OA-173 (Mailversand), OA-067
+- **Fertig, wenn:** Ein neues Konto ist ohne bestätigte Adresse nicht anmeldbar; Tests belegen es.
+- **Aufwand:** M · **Ausführung:** Fabrik, eigener Zweig
+- **Quellen:** docs/04-betrieb/konto-verknuepfung-befund-2026-11-14.md, Abschnitt 3; PR 196 (`d4f2032`)
+
+#### OA-172 · Shop TEILEKLAR · ENTSCHEIDUNG NÖTIG
+
+- **Priorität:** 1 Sicherheits-, Daten- und Betriebsrisiko (vor dem Binden des Shop-Dienstes)
+- **Ziel:** Google-Anmeldung über eine eigene OAuth-Anwendung mit Prüfung von `aud` und `email_verified` statt über einen fremden Vermittler; dazu entscheiden, ob Admin-Konten je über Google anmelden dürfen, und wie mit Bestandskonten mit `google_linked` und Passwort umzugehen ist.
+- **Blocker:** `GOOGLE_SESSION_URL` liefert nur `email` und `name`, kein Merkmal, ob Google die Adresse bestätigt hat, und keine Bindung an eine eigene Anwendungskennung; die Behebung aus PR 196 vertraut dem Vermittler bei neuen Konten weiter. Inhaberentscheidungen 1 bis 3 im Befund.
+- **Abhängigkeiten:** OA-171, OA-067
+- **Fertig, wenn:** Inhaber hat entschieden; eigene Anbindung gebaut und getestet oder Vermittler ausdrücklich bestätigt; Bestandskonten geprüft.
+- **Aufwand:** S für die Entscheidung, M für den Bau · **Ausführung:** Entscheidung nur Inhaber, Bau Fabrik
+- **Quellen:** docs/04-betrieb/konto-verknuepfung-befund-2026-11-14.md, Abschnitte 3 und 4; PR 196 (`d4f2032`)
+
+#### OA-173 · Shop TEILEKLAR · BLOCKIERT
+
+- **Priorität:** 1 Sicherheits-, Daten- und Betriebsrisiko (vor dem Binden des Shop-Dienstes)
+- **Ziel:** Belegen, dass die Mail zum Zurücksetzen des Passworts zugestellt wird.
+- **Blocker:** Seit PR 196 führt für Passwortkonten der einzige Weg zur Google-Anmeldung über „Passwort vergessen“. Ohne funktionierenden Versand (`mailer`, Resend; Zustand: `docs/04-betrieb/mailversand-zustand-2026-11-14.md`) bleibt der Inhaber des Kontos bei 409 stehen. Versandzugang in Production fehlt (siehe OA-163).
+- **Abhängigkeiten:** OA-163, OA-067
+- **Fertig, wenn:** Eine gekennzeichnete Testmail zum Zurücksetzen kommt an; Beleg abgelegt.
+- **Aufwand:** S · **Ausführung:** Zugang nur Inhaber, Messung Fabrik
+- **Quellen:** docs/04-betrieb/konto-verknuepfung-befund-2026-11-14.md, Abschnitte 3 und 4 (Punkt 4)
+
+#### OA-174 · Shop TEILEKLAR · OFFEN
+
+- **Priorität:** 4 Kundenprojekte abnahmefähig (vor Inbetriebnahme des Portals)
+- **Ziel:** Beim Zurücksetzen des Passworts auch die Teammitglieder-Einträge behandeln, die ein Angreifer im Konto angelegt haben kann.
+- **Blocker:** Einträge in `team_members` (`apps/shop-api/shop/nexify_api.py`) überleben das Zurücksetzen. Heutige Wirkung laut Befund gering: Einladungen ohne eigene Anmeldung, `nexify_api` gehört nicht zur Vercel-Auslieferung (`MODULES` in `vercel_app.py`).
+- **Abhängigkeiten:** keine
+- **Fertig, wenn:** Verhalten entschieden und umgesetzt (widerrufen oder zur Bestätigung vorlegen), mit Test.
+- **Aufwand:** S · **Ausführung:** Fabrik
+- **Quellen:** docs/04-betrieb/konto-verknuepfung-befund-2026-11-14.md, Abschnitt 3
+
+#### OA-175 · Website · OFFEN
+
+- **Priorität:** 2 Verkaufsfähiger Auftritt und Arbeitsplatz
+- **Ziel:** Meta-`robots` der Katalogseiten aus `pageMetadata` an die volle Indexierungsregel binden (Host, Umgebung, Shop-Schalter), nicht nur an `NEXIFY_INDEXING`.
+- **Blocker:** Mit eingeschaltetem Hauptschalter, aber falschem Host oder für `/teileklar` ohne Shop-Schalter zeigen diese Seiten `index, follow` bei sperrender Kopfzeile (lokal gesehen an `/impressum` mit Host `127.0.0.1`). Ohne Schalter tritt der Fall nicht auf; es gilt die strengere Kopfzeile. `apps/web/lib/page-seo.ts` ist als Verzeichnis an den Text-Resize-Beleg gebunden.
+- **Abhängigkeiten:** OA-031, OA-056
+- **Fertig, wenn:** Meta-Tag und Kopfzeile stimmen für alle Seiten in allen Schalterzuständen überein; betroffene Belege durch Lauf erneuert.
+- **Aufwand:** S · **Ausführung:** Fabrik (Paket C, ein Schreiber)
+- **Quellen:** docs/04-betrieb/indexierung-freigabe-2026-11-14.md, Abschnitt 11 („Grenze“); PR 198 (`48f5072`)
+
+#### OA-176 · Qualität & Belege · ENTSCHEIDUNG NÖTIG
+
+- **Priorität:** 5 Betrieb und Skalierung
+- **Ziel:** Observability-Belege `evidence/observability-integration-2026-10-28/browser-exceptions-next.json` und `-vite.json` wieder gültig machen.
+- **Blocker:** PR 198 hat `apps/web/app/teileklar/kategorien/page.tsx` und `werkstatt/page.tsx` geändert; beide Belege weichen dadurch neu ab (dazu weiter `apps/web/lib/contact-copy.ts`). Der Neulauf von `apps/site/tests/browser-exception-capture.mjs` scheitert in Schritt 4 (`.request-fallback` wird nach 30 s nicht sichtbar): Dem Harness fehlt eine Erwartung, die zum heutigen Chat passt (offene Entscheidung 3 aus Abschnitt 6 von `pin-rebase-2026-11-14.md`). `tools/check_browser_evidence.py` bleibt rot wie auf `main`.
+- **Abhängigkeiten:** OA-056
+- **Fertig, wenn:** Entscheidung zur Erwartung des Harness; bestandener Lauf; beide Belege neu erhoben; `tools/check_browser_evidence.py` ohne diesen Befund.
+- **Aufwand:** M · **Ausführung:** Entscheidung Inhaber, Lauf Fabrik
+- **Quellen:** docs/09-final/pin-rebase-2026-11-14.md, Abschnitte 10 und 12; PR 198 (`48f5072`)
+
+#### OA-177 · Qualität & Belege · OFFEN
+
+- **Priorität:** 5 Betrieb und Skalierung
+- **Ziel:** Beleg-Läufe mit der festgelegten Playwright-Fassung ausführen.
+- **Blocker:** Die Läufe zu PR 198 liefen mit Playwright 1.63.0 aus der Laufumgebung; `.github/evidence-runner/package.json` legt 1.65.0 fest. Ob die Ergebnisse mit 1.65.0 gleich ausfallen, ist nicht gemessen.
+- **Abhängigkeiten:** OA-022 (der festgelegte Runner läuft in Actions)
+- **Fertig, wenn:** Die drei Belege aus PR 198 mit 1.65.0 bestätigt oder die Abweichung begründet festgehalten.
+- **Aufwand:** S · **Ausführung:** Fabrik
+- **Quellen:** docs/09-final/pin-rebase-2026-11-14.md, Abschnitt 12
+
+#### OA-178 · Qualität & Belege · OFFEN
+
+- **Priorität:** 5 Betrieb und Skalierung
+- **Ziel:** Belege tragen den Commit, an dem sie erhoben wurden, als eigenes Feld.
+- **Blocker:** `evidence/resize-2026-11-10/text-spacing.json`, `evidence/shop-ui-mock-2026-11-09/browser-catalog.json` und `browser-shop.json` enthalten kein Commit-Feld und den Erhebungs-Commit `68f84c0` nicht (eigene Prüfung 21:47 UTC); er steht nur in Commit-Text und `pin-rebase-2026-11-14.md`. Eine Änderung des Formats berührt die Prüfskripte und alle Belege dieser Art.
+- **Abhängigkeiten:** OA-056
+- **Fertig, wenn:** Format um ein Commit-Feld ergänzt, Prüfskript prüft es, künftige Läufe tragen es.
+- **Aufwand:** M · **Ausführung:** Fabrik (Paket C, ein Schreiber)
+- **Quellen:** docs/09-final/pin-rebase-2026-11-14.md, Abschnitt 12; Commit-Text von PR 198

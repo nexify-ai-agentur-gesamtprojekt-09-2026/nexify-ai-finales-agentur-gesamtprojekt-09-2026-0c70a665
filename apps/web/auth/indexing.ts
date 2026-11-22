@@ -11,6 +11,12 @@
  * Die Regel wird in proxy.ts als Kopfzeile `X-Robots-Tag: noindex, nofollow` durchgesetzt. Suchmaschinen wenden die
  * strengste Angabe an; ein `index` im Meta-Tag einer Seite hebt die Kopfzeile nicht auf. Dieses Modul hat bewusst
  * keine Importe, damit es der Proxy, die Sitemap und die Node-Tests gleich verwenden.
+ *
+ * Das Meta-Tag der Seiten mit eigener Route (/agb, /avv, /widerruf, /teileklar/kategorien, /teileklar/werkstatt) folgt
+ * derselben Entscheidung: auth/page-robots.ts ruft indexingDecision mit denselben Eingaben wie der Proxy auf und
+ * übersetzt das Ergebnis mit robotsDirective (OA-164). Die Katalogseiten aus lib/page-seo.ts (pageMetadata) folgen im
+ * Meta-Tag weiter nur dem Schalter NEXIFY_INDEXING; Host, Produktion und der TEILEKLAR-Schalter greifen dort allein
+ * über die Kopfzeile.
  */
 export type IndexingEnvironment = Record<string, string | undefined>;
 
@@ -80,3 +86,7 @@ export function indexingDecision(input: { path: string; hosts: readonly string[]
   if (isTeileklarPath(path) && !teileklarIndexingOn(env)) return { index: false, reason: 'teileklar_switch_off' };
   return { index: true, reason: 'allowed' };
 }
+
+/** Meta-Angabe einer Seite, abgeleitet aus derselben Entscheidung wie die Kopfzeile: gesperrt heißt `noindex, nofollow` (NOINDEX_HEADER_VALUE). */
+export type RobotsDirective = { index: boolean; follow: boolean };
+export const robotsDirective = (decision: IndexingDecision): RobotsDirective => (decision.index ? { index: true, follow: true } : { index: false, follow: false });
