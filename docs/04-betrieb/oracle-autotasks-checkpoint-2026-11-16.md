@@ -296,3 +296,28 @@ sie gehört nicht zu den zwei zugelassenen Zugangswegen aus Abschnitt 4.
   nur auf Statusspalte(n) der Anfragen beschlossen; Chat-Modell der Website bleibt vorerst
   `openai/gpt-6-astra`, Umstellung auf DeepSeek nur bei vorhandenem 9router-Zugang im Website-Projekt;
   Prüfsperren in PR #216 bleiben aktiv (kein Hash-Refresh ohne neuen Nachweis, BigBuy unberührt).
+
+
+## 12. Messung Auslieferungsweg nexifyai.de, 2026-11-22T18:54:28Z
+
+Lesend aus dieser Sitzung (Beleg für den Absatz „Stand 22.11.2026, 18:50 UTC“ in `AGENTS.md`):
+
+- `https://nexifyai.de/` → HTTP 301 -> https://www.nexifyai.de/
+- Namensauflösung: 104.21.17.237 nexifyai.de;104.21.17.237 www.nexifyai.de;172.67.178.219 nexifyai.de;172.67.178.219 www.nexifyai.de;
+- `https://www.nexifyai.de/mcp` → HTTP 404; `/.well-known/oauth-protected-resource` → HTTP 404
+- `https://www.nexifyai.de/.well-known/nexify-build.json` (Auszug):
+
+```json
+{
+  "domain": "www.nexifyai.de",
+  "source_repo": "nexifyai-dev/nexfiy-ai-studio",
+  "commit": "6eb62731658f87360ca90342558570e9ef5f5f45",
+  "deployed_at": "2026-11-22T13:18:38+01:00",
+  "host": "srv1243952",
+  "served_by": "cloudflare worker nexfiy-ai-studio (.de)",
+  "generator": "scripts/quality/gen-build-stamp.py"
+}
+```
+
+Selbstauskunft des Stempels; das Skript `tools/deploy-live.sh` in `nexfiy-ai-studio` (`main`, `6eb6273`) erzeugt ihn und
+liest ihn nach dem Deploy zurück. Nicht geprüft: Konto und Worker-Konfiguration bei Cloudflare.

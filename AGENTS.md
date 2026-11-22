@@ -21,7 +21,8 @@ Commit `6eb6273165` aus `main` von `nexfiy-ai-studio`, gebaut auf `srv1243952`, 
 `/mcp` und `/.well-known/oauth-protected-resource` antworten auf dem neuen Stand mit 404. Ob dieser Wechsel als
 Produktionsweg gilt, ist vom Inhaber in `DECISIONS.md` festzuhalten (OFFEN). Bis dahin bleibt D-021 formal
 in Kraft; die Vercel-Aussagen in diesem Dokument (auch unter „Aktueller Gesamtauftrag“) beschreiben
-nicht den gemessenen Stand.
+nicht den gemessenen Stand. Nachweis: `docs/04-betrieb/oracle-autotasks-checkpoint-2026-11-16.md`, Abschnitt 12
+(Selbstauskunft des Build-Stempels; Cloudflare-Konto nicht geprüft).
 
 Stand 16.11.2026, 13:10 UTC (Inhaberangabe im Chat, Pascal Courbois: „vercel ist auch raus“;
 gemessen 13:05 UTC): `nexifyai.de` löst auf `185.158.133.1` auf und wird vom Lovable-Projekt
