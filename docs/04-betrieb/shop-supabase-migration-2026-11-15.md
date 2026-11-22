@@ -207,8 +207,8 @@ Ohne Bestätigung werden sie übersprungen, nicht als grün gezählt.
 
 | Lauf | Tests | bestanden | übersprungen | rot |
 |---|---|---|---|---|
-| mit lokalem PostgreSQL 16.15 und Treiber (Python 3.13) | 295 | 219 | 76 | 0 |
-| ohne Bestätigung, ohne Treiber (Umgebung aus `make test-env`, Python 3.12) | 288 | 115 | 173 | 0 |
+| mit lokalem PostgreSQL 16.15 und Treiber (Python 3.13), Stand 22.11.2026 | 299 | 223 | 76 | 0 |
+| ohne Bestätigung, ohne Treiber (Umgebung aus `make test-env`, Python 3.12), Stand 22.11.2026 | 291 | 115 | 176 | 0 |
 
 Die 76 übersprungenen im ersten Lauf brauchen ein echtes MongoDB-Replica-Set: 65 Vertragsaussagen,
 1 Vergleichslauf, 10 Aussagen von `test_cart_merge_replica_contract.py` (vorbestehend).
@@ -218,9 +218,9 @@ Die 76 übersprungenen im ersten Lauf brauchen ein echtes MongoDB-Replica-Set: 6
 | Vertragstests, gemeinsame Suite | `test_store_contract.py` | 65 Aussagen je Bindung | dieselben Aussagen gegen die MongoDB-Umsetzung (über den Stellvertreter: 65 grün, plus 2 MongoDB-Besonderheiten) und gegen PostgreSQL (65 grün). Keine Aussage wurde für PostgreSQL geändert; hinzugekommen ist eine für die beiden neuen Methoden. |
 | PostgreSQL-Besonderheiten | `test_store_contract.py` (`PostgresSpecifics`) | 9 | zwei Zusammenführungen, die beide den Kontokorb anlegen, enden ohne Fehler und ohne zweiten Korb; das Zeichen U+0000 wird abgewiesen, der gleichlautende Text gespeichert; doppeltes Befüllen des Verzeichnisses ohne Treibertext; Millisekunden wie bisher; Schutzgrenze und nicht ablegbare Daten; Beträge, die keine ganzen Cent sind, erreichen die Tabelle nie; Aufräumen nur auf Aufruf; zwei wartende Zustandswechsel haben einen Gewinner; zwei gleichzeitige Zusammenführungen übernehmen die Positionen genau einmal |
 | Vergleichslauf alt gegen neu | `test_store_parity.py` | 157 Schritte | eine feste Schrittfolge über alle neun Bereiche gegen beide Umsetzungen; jede Rückgabe als Text verglichen (gleiche Felder, gleiche Folge), erzeugte Kennungen maskiert: 157 von 157 gleich |
-| RLS und Rechte | `test_postgres_rls.py` | 8 | jede Tabelle mit erzwungener RLS und genau einer Policy; Anmeldung ohne Rechte erreicht nichts; `anon`/`authenticated` erreichen nichts; Tabellenrecht ohne Policy sieht null Zeilen und schreibt keine; Dienstrolle löscht keine Geschäftsdaten und ändert weder Schema noch Policies noch fremde Schemas; die Datenbank weist falsche Beträge ab; Treibertext verlässt die Schicht nicht |
-| Katalog-Erstbefüllung | `test_catalog_transfer.py` | 17 | je 8 Aussagen gegen Ziel MongoDB (Stellvertreter) und Ziel PostgreSQL, 1 zur Befehlszeile; Abschnitt 12 |
-| Datenumzug | `test_postgres_transfer.py` | 11 | ein geschlossenes Ziel wird nie wieder beschrieben; | Trockenlauf lässt das Ziel leer; Zahl und Prüfsumme gleich für alle 19 Sammlungen; zweiter Lauf schreibt keine Zeile (Zeilenversionen unverändert); nur geänderte und neue Dokumente werden geschrieben; Zeile nur im Ziel und geändertes Zahlungsereignis führen zum Abbruch ohne Festschreiben; acht Arten nicht verlustfrei übertragbarer Dokumente brechen ab; Quelle wird nur über `find` gelesen (einmal je Sammlung und Lauf); Protokoll ohne Inhalte; beide Umsetzungen antworten nach dem Umzug gleich (24 Abrufe als Text) |
+| RLS und Rechte | `test_postgres_rls.py` | 9 | die Migration weist eine vorhandene Rolle `shop_api` mit Anmeldung, Superuser-Recht, BYPASSRLS, Rollen-, Datenbank- oder Replikationsrecht ab; jede Tabelle mit erzwungener RLS und genau einer Policy; Anmeldung ohne Rechte erreicht nichts; `anon`/`authenticated` erreichen nichts; Tabellenrecht ohne Policy sieht null Zeilen und schreibt keine; Dienstrolle löscht keine Geschäftsdaten und ändert weder Schema noch Policies noch fremde Schemas; die Datenbank weist falsche Beträge ab; Treibertext verlässt die Schicht nicht |
+| Katalog-Erstbefüllung | `test_catalog_transfer.py` | 18 | je 8 Aussagen gegen Ziel MongoDB (Stellvertreter) und Ziel PostgreSQL, 1 nur PostgreSQL (geschlossenes Ziel), 1 zur Befehlszeile; Abschnitt 12 |
+| Datenumzug | `test_postgres_transfer.py` | 13 | abgelaufene Zeilen flüchtiger Sammlungen, die die Quelle nicht mehr trägt, blockieren den nächsten Lauf nicht und werden nicht gelöscht; der Quellbericht nennt Beträge, die das Ziel abweisen würde, ohne Zielverbindung; ein geschlossenes Ziel wird nie wieder beschrieben; | Trockenlauf lässt das Ziel leer; Zahl und Prüfsumme gleich für alle 19 Sammlungen; zweiter Lauf schreibt keine Zeile (Zeilenversionen unverändert); nur geänderte und neue Dokumente werden geschrieben; Zeile nur im Ziel und geändertes Zahlungsereignis führen zum Abbruch ohne Festschreiben; acht Arten nicht verlustfrei übertragbarer Dokumente brechen ab; Quelle wird nur über `find` gelesen (einmal je Sammlung und Lauf); Protokoll ohne Inhalte; beide Umsetzungen antworten nach dem Umzug gleich (24 Abrufe als Text) |
 | Schalter | `test_store_backend_switch.py` | 4 | ohne Variable MongoDB und der PostgreSQL-Code wird nicht geladen; `postgres` bindet alle Bereiche ohne Verbindungsaufbau; fehlende Adresse und jeder andere Wert stoppen den Start, ohne die Adresse zu nennen |
 
 ### 6.2 Gegenprobe (gezielt eingebaute Fehler in `shop/store/pg/`, nicht eingecheckt)
@@ -287,6 +287,23 @@ Festschreiben bei Abweichung“. Befunde und was daraus wurde:
 | Der Schalter stellt nur die neun Bereiche um; Portal, lokaler Dienst und Import bleiben auf MongoDB | bleibt, Abschnitt 8 Punkt 10 ergänzt |
 | Prüfsumme vergleicht verschachtelte `ObjectId` als Text | bleibt, im Skript benannt |
 | Reihenfolge von `order_mails`: MongoDB könnte nach Schlüssel statt nach Ablage liefern | offen, nur gegen echtes MongoDB klärbar (Abschnitt 8 Punkt 6) |
+
+**Nachtrag 22.11.2026 – zweite automatische Durchsicht.** Am 15.11.2026 gegen 21:55 UTC wurde der PR
+vom Konto des Repositories auf „bereit zur Prüfung“ gestellt; das löste zwei automatische Durchsichten
+aus (zusammen zehn Meldungen, sieben verschiedene Sachverhalte). Jede wurde am Code nachgeprüft; alle
+sieben trafen zu und sind mit Test behoben:
+
+| Befund | Stand |
+|---|---|
+| Katalog-Erstbefüllung nach PostgreSQL beachtete die Marke `transfer_closed` nicht und hätte nach dem Umschalten neuere Katalogdaten überschrieben | behoben: Prüfung vor dem ersten Schreiben, auch im Trockenlauf; getestet |
+| Gleiche MongoDB als Quelle und Ziel wurde nur am Adresstext erkannt (andere Zugangsdaten oder Optionen genügten) | behoben: verglichen werden Server und Datenbankname ohne Zugangsdaten und Optionen; getestet. Grenze: derselbe Server unter zwei verschiedenen Namen wird nicht erkannt |
+| Mindestzahl galt für alle Produktdokumente, nicht für die veröffentlichten (`active`) | behoben: beide Zahlen müssen die Mindestzahl erreichen; getestet |
+| Nach einem Umzug von MongoDB per TTL entfernte Sitzungen, Rücksetz-Token und Fehlversuche ließen jeden weiteren Lauf abbrechen | behoben: abgelaufene Zielzeilen dieser drei Tabellen, die die Quelle nicht mehr trägt, zählen nicht als Abweichung und werden im Bericht ausgewiesen (`expired_only_in_target`). Der Umzug löscht sie nicht; Geschäftsdaten bleiben streng; getestet |
+| Quellbericht prüfte Beträge nicht; unzulässige scheiterten erst am Ziel | behoben: ganze Zahl und Grenzen werden schon beim Lesen der Quelle geprüft (`purchase_cents`, `shipping_cents`, `subtotal_cents`, `total_cents`, `paid_transitions`); getestet ohne Zielverbindung |
+| Migration 0002 übernahm eine vorhandene Rolle `shop_api` ungeprüft | behoben: Abbruch, wenn die Rolle Anmeldung, Superuser-Recht, BYPASSRLS, Rollen-, Datenbank- oder Replikationsrecht hat; getestet |
+| Vergleichslauf schrieb `ObjectId` als Typnamen statt als Kennung (betrifft nur den übersprungenen Lauf gegen ein echtes Replica-Set) | behoben; mangels MongoDB weiterhin nicht ausgeführt |
+
+Die Gegenprobe (6.2) wurde für diese Änderungen nicht wiederholt.
 
 ## 7. Umschaltplan (nur Plan; nichts davon ist ausgeführt)
 
@@ -387,6 +404,14 @@ cd apps/shop-api && /tmp/shop-venv/bin/python -m unittest discover -s tests
   Verfassers. Er ist nicht durch Umschreiben der Historie behoben, weil die Regeln des Repositories
   Force-Push ausschließen; spätere Commits sind ohne diese Zeilen. Beim Squash-Merge bitte eine
   Nachricht ohne sie verwenden.
+- **Stand des PR am 22.11.2026 (zurückgelesen).** PR 208 ist offen und kein Entwurf mehr: Das Konto
+  des Repositories hat ihn am 15.11.2026 auf „bereit“ gestellt und Auto-Merge (Squash) eingeschaltet;
+  Auto-Merge ist seit dem 22.11.2026 wieder aus. Beides stammt nicht vom Verfasser. Nicht gemergt;
+  `main` steht unverändert auf 9c9c806.
+- **Dringender Auftrag „Katalog über die öffentliche Schnittstelle“ (15.11.2026, Frist 16.11.2026).**
+  Auf diesem Zweig nicht ausgeführt. Der Auftrag ist auf dem fremden Zweig `claude/katalog-uebernahme`
+  bearbeitet worden (Commits vom 16.11.2026, eigenes Dokument `katalog-uebernahme-2026-11-16.md`);
+  ein zweiter Bau hier wäre doppelt, und der fremde Zweig wird von hier nicht geändert.
 - **Nicht geändert, aber nachzuführen** (Leitdokumente und gebundene Dateien gehören der
   koordinierenden Sitzung): `docs/deployment/environment-variables.md`, Abschnitt 6, um
   `SHOP_STORE_BACKEND` und `SHOP_POSTGRES_DSN`; `config/loesungsregister.json`, Eintrag `supabase`,

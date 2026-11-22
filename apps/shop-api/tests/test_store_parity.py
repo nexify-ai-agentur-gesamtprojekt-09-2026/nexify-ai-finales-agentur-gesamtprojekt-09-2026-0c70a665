@@ -26,7 +26,7 @@ def text(value):
     def fallback(v):
         if isinstance(v, datetime):
             return (v if v.tzinfo else v.replace(tzinfo=timezone.utc)).isoformat()
-        return type(v).__name__
+        return str(v) if type(v).__name__ == 'ObjectId' else type(v).__name__
     return GENERATED.sub('"_id":"<generated>"', json.dumps(value, default=fallback, ensure_ascii=False, separators=(',', ':')))
 
 

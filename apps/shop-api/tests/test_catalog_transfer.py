@@ -23,7 +23,7 @@ catalog = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(catalog)
 NOW = datetime(2026, 11, 15, 12, 0, tzinfo=timezone.utc)
 CONTRACT = {'scope': 'catalog_first_fill', 'tenant': 'teileklar', 'supplier': 'bigbuy', 'supplier_agreement_reference': 'synthetischer Vertragsverweis',
-            'data_licence_reference': 'synthetischer Lizenzverweis', 'approved_by': 'Inhaber (synthetisch)', 'approved_at': '2026-11-15', 'product_count_minimum': 4}
+            'data_licence_reference': 'synthetischer Lizenzverweis', 'approved_by': 'Inhaber (synthetisch)', 'approved_at': '2026-11-15', 'product_count_minimum': 3}
 
 
 class Subscript:
@@ -81,11 +81,11 @@ class CatalogTransferContract:
     async def test_writing_needs_a_complete_publication_contract_for_exactly_this_transfer(self):
         broken = {'absent': None, 'empty': {}, 'other tenant': {**CONTRACT, 'tenant': 'anderer'}, 'other scope': {**CONTRACT, 'scope': 'import'},
                   'no supplier agreement': {**CONTRACT, 'supplier_agreement_reference': ' '}, 'no licence': {k: v for k, v in CONTRACT.items() if k != 'data_licence_reference'},
-                  'no approver': {**CONTRACT, 'approved_by': ''}, 'no date': {**CONTRACT, 'approved_at': 'bald'}, 'other count': {**CONTRACT, 'product_count_minimum': 3},
+                  'no approver': {**CONTRACT, 'approved_by': ''}, 'no date': {**CONTRACT, 'approved_at': 'bald'}, 'other count': {**CONTRACT, 'product_count_minimum': 2},
                   'extra field': {**CONTRACT, 'password': 'x'}}
         for label, contract in broken.items():
             with self.subTest(label), self.assertRaises(catalog.Abort) as caught:
-                await self.run_transfer(apply=True, contract=contract, expect_min=4)
+                await self.run_transfer(apply=True, contract=contract, expect_min=3)
             self.assertIn('D-008', str(caught.exception))
             self.assertEqual(self.source.reads, 0, 'the source is not even read without the contract')
         self.assertEqual(await self.target_rows('products'), [])
@@ -97,13 +97,16 @@ class CatalogTransferContract:
         with self.assertRaises(catalog.Abort) as caught:
             await self.run_transfer(apply=True, contract={**CONTRACT, 'product_count_minimum': 5})
         self.assertIn('erwartet sind mindestens 5', str(caught.exception), 'the minimum of the contract holds without the option')
+        with self.assertRaises(catalog.Abort) as caught:
+            await self.run_transfer(apply=True, contract={**CONTRACT, 'product_count_minimum': 4})
+        self.assertIn('3 veröffentlichte Produkte', str(caught.exception), 'four stored products of which three are published do not meet a minimum of four')
         self.assertEqual(await self.target_rows('products'), [])
-        report = await self.run_transfer(apply=True, contract=CONTRACT, expect_min=4, sample=3)
+        report = await self.run_transfer(apply=True, contract=CONTRACT, expect_min=3, sample=3)
         self.assertEqual(report['sample'], [{'id': i, 'equal': True} for i in ('bb-1', 'bb-2', 'bb-3')])
         self.assertIn('"step": "sample", "checked": 3, "equal": 3', '\n'.join(self.lines))
 
     async def test_applied_catalog_is_served_by_the_new_store_and_a_second_run_writes_nothing(self):
-        first = await self.run_transfer(apply=True, contract=CONTRACT, expect_min=4)
+        first = await self.run_transfer(apply=True, contract=CONTRACT, expect_min=3)
         self.assertEqual(first['outcome'], 'applied')
         for name, entry in first['collections'].items():
             self.assertEqual((entry['source_count'], entry['source_digest']), (entry['target_count'], entry['target_digest']), name)
@@ -124,14 +127,14 @@ class CatalogTransferContract:
                          ('Inhaber (synthetisch)', '2026-11-15', 'synthetischer Vertragsverweis', 64))
         self.assertEqual(run['finished_at'], '2026-10-05T08:00:00+00:00', 'the status shows the age of the data, not the moment of the transfer')
         before = await self.target_state()
-        second = await self.run_transfer(apply=True, contract=CONTRACT, expect_min=4)
+        second = await self.run_transfer(apply=True, contract=CONTRACT, expect_min=3)
         self.assertEqual({c: (e['inserted'], e['updated'], e['unchanged']) for c, e in second['collections'].items()}, {'categories': (0, 0, 2), 'products': (0, 0, 4)})
         self.assertEqual(await self.target_state(), before, 'nothing was rewritten, the run entry of the first transfer stands')
 
     async def test_a_changed_source_product_is_the_only_row_written_next_time(self):
-        await self.run_transfer(apply=True, contract=CONTRACT, expect_min=4)
+        await self.run_transfer(apply=True, contract=CONTRACT, expect_min=3)
         self.old.collections['products'].docs[0]['stock'] = 99
-        report = await self.run_transfer(apply=True, contract=CONTRACT, expect_min=4)
+        report = await self.run_transfer(apply=True, contract=CONTRACT, expect_min=3)
         self.assertEqual({c: (e['inserted'], e['updated']) for c, e in report['collections'].items()}, {'categories': (0, 0), 'products': (0, 1)})
         self.assertEqual((await (await self.new_store()).catalog.published_product('bb-1'))['stock'], 99)
 
@@ -143,7 +146,7 @@ class CatalogTransferContract:
             with self.subTest(expected):
                 self.old.collections['products'].docs = [old_product(1), old_product(9, **change)]
                 with self.assertRaises(catalog.Abort) as caught:
-                    await self.run_transfer(apply=True, contract=CONTRACT, expect_min=4)
+                    await self.run_transfer(apply=True, contract=CONTRACT, expect_min=3)
                 self.assertIn(expected, str(caught.exception))
                 self.assertNotIn('Teil 9', str(caught.exception), 'the message names reasons and counts, not content')
                 self.assertEqual(await self.target_rows('products'), [])
@@ -152,7 +155,7 @@ class CatalogTransferContract:
     async def test_a_product_that_exists_only_in_the_target_aborts_and_is_neither_deleted_nor_joined(self):
         await self.seed_target('products', [old_product(50)])
         with self.assertRaises(catalog.Abort) as caught:
-            await self.run_transfer(apply=True, contract=CONTRACT, expect_min=4)
+            await self.run_transfer(apply=True, contract=CONTRACT, expect_min=3)
         self.assertIn('products: Quelle 4 / Ziel 5', str(caught.exception))
         self.assertEqual([p['_id'] for p in await self.target_rows('products')], ['bb-50'])
         self.assertEqual(await self.target_rows('categories'), [], 'the categories written before the deviation were undone')
@@ -160,7 +163,7 @@ class CatalogTransferContract:
 
     async def test_the_source_is_only_read_and_nothing_but_the_catalog_reaches_the_target(self):
         untouched = copy.deepcopy({name: c.docs for name, c in self.old.collections.items()})
-        await self.run_transfer(apply=True, contract=CONTRACT, expect_min=4)
+        await self.run_transfer(apply=True, contract=CONTRACT, expect_min=3)
         self.assertEqual({name: c.docs for name, c in self.old.collections.items()}, untouched)
         self.assertEqual(self.source.reads, 2, 'one find for categories and one for products')
         for name in ('settings', 'orders', 'users', 'carts', 'price_releases'):
@@ -202,6 +205,18 @@ class CatalogToPostgres(CatalogTransferContract, unittest.IsolatedAsyncioTestCas
     async def target_rows(self, collection): return [self.base.join(*row) for row in self.query(f'select id, doc::text from shop.{collection} order by seq')]
     async def target_state(self): return {t: self.query(f'select id::text, xmin::text from shop.{t} order by 1') for t in ('products', 'categories', 'imports')}
 
+    async def test_a_closed_target_is_not_written_by_the_catalog_transfer_either(self):
+        await self.run_transfer(apply=True, contract=CONTRACT, expect_min=3)
+        pg_fixture.run(self.database_name, "update shop.products set doc = '{\"name\":\"neuer Stand\",\"active\":true,\"purchase_cents\":1}' where id = 'bb-1'",
+                       "insert into shop.settings (id, doc) values ('transfer_closed', '{\"closed_at\":\"2026-11-15T12:00:00+00:00\"}')")
+        before = await self.target_state()
+        for options in ({'apply': True, 'contract': CONTRACT}, {}):
+            with self.subTest(options), self.assertRaises(catalog.Abort) as caught:
+                await self.run_transfer(**options)
+            self.assertIn('geschlossen', str(caught.exception))
+        self.assertEqual(await self.target_state(), before)
+        self.assertEqual(self.query("select doc ->> 'name' from shop.products where id = 'bb-1'"), [('neuer Stand',)], 'the newer product of the leading target stands')
+
 
 class CommandLine(unittest.TestCase):
     def run_main(self, arguments, environment):
@@ -219,6 +234,12 @@ class CommandLine(unittest.TestCase):
         self.assertEqual(self.run_main(['--apply', '--publication-contract', 'FOLDER/missing.json'], mongo), 3)
         self.assertEqual(self.run_main(['--apply', '--publication-contract', 'FOLDER/broken.json'], mongo), 3)
         self.assertEqual(self.run_main([], {**mongo, 'CATALOG_TARGET_DB_NAME': 'old'}), 3)
+        for same in ('mongodb://writer:other@127.0.0.1:1/?retryWrites=true', 'mongodb://127.0.0.1:1,127.0.0.2:1/admin', 'MONGODB://w@127.0.0.1:1'):
+            with self.subTest(same):
+                self.assertEqual(self.run_main([], {**mongo, 'CATALOG_TARGET_MONGO_URL': same, 'CATALOG_TARGET_DB_NAME': 'old'}), 3, 'credentials and options do not make it another database')
+        self.assertEqual(catalog.mongo_hosts('mongodb://u:p@Host-A,host-b:27018/db?x=1'), {'host-a:27017', 'host-b:27018'})
+        self.assertEqual(catalog.mongo_hosts('mongodb+srv://u:p@Cluster.example.invalid/?x=1'), {'cluster.example.invalid'})
+        self.assertFalse(catalog.mongo_hosts('mongodb://127.0.0.1:1/') & catalog.mongo_hosts('mongodb://127.0.0.1:2/'))
         with patch('sys.stderr'), self.assertRaises(SystemExit):
             catalog.main([])  # no run without a log file
 

@@ -50,6 +50,15 @@ TYPED_TABLES = {
     "webhook_events": (("event_key",), ("event_key", "event", "order_id", "received_at"), (), False),
 }
 COLLECTIONS = [*DOCUMENT_TABLES, *TYPED_TABLES]
+# Beträge und Zähler, die das Zielschema als ganze Zahl in Grenzen erzwingt (0001_shop_schema.sql, shop.j_whole):
+# Sammlung -> Feld -> (kleinster, größter Wert). Fehlt das Feld oder ist es null, ist das zulässig.
+WHOLE_NUMBERS = {"products": {"purchase_cents": (0, None)}, "settings": {"shipping_cents": (0, None)},
+                 "orders": {"subtotal_cents": (0, None), "shipping_cents": (0, None), "total_cents": (0, None), "paid_transitions": (0, 1)}}
+# Flüchtige Sammlungen: MongoDB entfernt dort abgelaufene Dokumente selbst (TTL-Index, shop/store/accounts.py).
+# Eine Zielzeile, die es in der Quelle nicht mehr gibt UND die nach derselben Regel abgelaufen ist, ist deshalb
+# keine Abweichung. Sie wird nicht gelöscht (das tut shop.purge_expired im Betrieb), nur nicht mitgezählt.
+# Das Fenster der Fehlversuche entspricht LOCK_WINDOW in shop/accounts_api.py.
+EXPIRED = {"sessions": "expires_at <= now()", "password_resets": "expires_at <= now()", "login_failures": "at <= now() - interval '15 minutes'"}
 INTEGER_ID = {"categories"}
 # Nach dem Umschalten ist PostgreSQL der führende Stand. Dann legt der Verantwortliche diese Zeile an
 # (insert into shop.settings (id, doc) values ('transfer_closed', '{"closed_at":"<Zeitpunkt>"}')), und kein Lauf schreibt mehr.
@@ -135,6 +144,14 @@ def prepare(base, collection, doc):
             text = base.encode(body)
         except Exception:
             raise Abort(f"{collection}: Dokument {str(row_id)[:40]} lässt sich nicht als JSON ablegen") from None
+        for field, (lowest, highest) in WHOLE_NUMBERS.get(collection, {}).items():
+            value = body.get(field)
+            if value is None:
+                continue
+            if isinstance(value, bool) or not isinstance(value, int):
+                raise Abort(f"{collection}: Dokument {str(row_id)[:40]}, Feld {field} ist keine ganze Zahl")
+            if value < lowest or (highest is not None and value > highest):
+                raise Abort(f"{collection}: Dokument {str(row_id)[:40]}, Feld {field} liegt außerhalb der zulässigen Grenzen")
         return row_id, text, base.join(row_id, text)
     required, allowed, moments, _ = TYPED_TABLES[collection]
     unknown, missing = sorted(set(body) - set(allowed)), [f for f in required if body.get(f) is None]
@@ -201,16 +218,23 @@ async def write_target(cur, collection, rows):
     return inserted, updated, len(rows) - inserted - updated
 
 
-async def read_target(base, cur, collection):
+async def read_target(base, cur, collection, source_ids=None):
+    """Stand des Ziels. ``source_ids`` gegeben: abgelaufene Zeilen flüchtiger Sammlungen, die die Quelle nicht mehr
+    trägt, bleiben außen vor und werden in ``digest.expired_only_in_target`` gezählt."""
     digest = Digest()
+    digest.expired_only_in_target = 0
     if collection in DOCUMENT_TABLES:
         await cur.execute(f"select id, doc::text from shop.{collection} order by seq")
         for row_id, text in await cur.fetchall():
             digest.add(row_id, base.join(row_id, text))
         return digest
     _, allowed, _, _ = TYPED_TABLES[collection]
-    await cur.execute(f"select id, {', '.join(allowed)} from shop.{collection} order by seq")
-    for row_id, *values in await cur.fetchall():
+    expired = EXPIRED.get(collection, "false") if source_ids is not None else "false"
+    await cur.execute(f"select ({expired}), id, {', '.join(allowed)} from shop.{collection} order by seq")
+    for gone, row_id, *values in await cur.fetchall():
+        if gone and row_id not in source_ids:
+            digest.expired_only_in_target += 1
+            continue
         digest.add(row_id, typed_view(base, collection, row_id, dict(zip(allowed, values))))
     return digest
 
@@ -247,12 +271,14 @@ async def transfer(source, target_dsn, *, apply, log=print, collections=None):
                         inserted, updated, unchanged = await write_target(cur, collection, prepared[collection])
                     except psycopg.Error as exc:
                         raise Abort(f"{collection}: das Ziel weist die Daten ab ({type(exc).__name__}, SQLSTATE {exc.sqlstate})") from None
-                    target = await read_target(base, cur, collection)
+                    target = await read_target(base, cur, collection, set(report[collection]["_digest"].rows))
                     entry = report[collection]
-                    entry.update(target_count=target.count, target_digest=target.value, inserted=inserted, updated=updated, unchanged=unchanged)
+                    entry.update(target_count=target.count, target_digest=target.value, inserted=inserted, updated=updated, unchanged=unchanged,
+                                 expired_only_in_target=target.expired_only_in_target)
                     entry["match"] = target.count == entry["source_count"] and target.value == entry["source_digest"]
                     log(json.dumps({"step": "target", "collection": collection, "count": target.count, "digest": target.value,
-                                    "inserted": inserted, "updated": updated, "unchanged": unchanged, "match": entry["match"]}))
+                                    "inserted": inserted, "updated": updated, "unchanged": unchanged, "match": entry["match"],
+                                    "expired_only_in_target": target.expired_only_in_target}))
                     if not entry["match"]:
                         differing = entry["_digest"].difference(target)
                         mismatches.append(f"{collection}: Quelle {entry['source_count']} / Ziel {target.count}, abweichende Kennungen (höchstens 5): "

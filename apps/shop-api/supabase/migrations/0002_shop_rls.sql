@@ -27,6 +27,13 @@ begin
   if not exists (select 1 from pg_roles where rolname = 'shop_api') then
     create role shop_api nologin;
   end if;
+  -- Eine schon vorhandene Rolle dieses Namens wird nur übernommen, wenn sie die Grenze nicht aufhebt:
+  -- Eine Rolle mit Superuser-Recht oder BYPASSRLS liest an erzwungener RLS vorbei; eine Rolle mit eigener
+  -- Anmeldung, Rollen-, Datenbank- oder Replikationsrecht ist keine reine Gruppenrolle für den Dienst.
+  if exists (select 1 from pg_roles where rolname = 'shop_api'
+             and (rolcanlogin or rolsuper or rolbypassrls or rolcreaterole or rolcreatedb or rolreplication)) then
+    raise exception 'role shop_api exists with login, superuser, bypassrls, createrole, createdb or replication; refusing to grant it the shop';
+  end if;
 end $$;
 
 revoke all on schema shop from public;

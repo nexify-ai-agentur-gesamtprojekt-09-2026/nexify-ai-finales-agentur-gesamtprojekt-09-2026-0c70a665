@@ -192,6 +192,47 @@ class TransferContract(unittest.IsolatedAsyncioTestCase):
         self.assertEqual((await store.orders.get('o2'))['status'], 'bezahlt', 'the payment recorded after the switch stands')
         self.assertEqual(await store.catalog.shop_settings(), (await contract.load_store(self.mongo).catalog.shop_settings()), 'the marker is no shop setting')
 
+    async def test_expired_rows_the_source_no_longer_has_do_not_block_the_next_run_and_are_not_deleted(self):
+        await self.run_transfer()
+        gone = {'sessions': 0, 'login_failures': 0, 'password_resets': 1}  # MongoDB removed these by its TTL index after the first run
+        for name, index in gone.items():
+            self.mongo.collections[name].docs.pop(index)
+        pg_fixture.run(self.database_name, "update shop.sessions set expires_at = now() - interval '1 minute'",
+                       "update shop.login_failures set at = now() - interval '16 minutes'")
+        before = self.stored()
+        report = await self.run_transfer()
+        for name in gone:
+            entry = report['collections'][name]
+            self.assertEqual((entry['match'], entry['expired_only_in_target'], entry['target_count']), (True, 1, entry['source_count']), name)
+        self.assertEqual(self.stored(), before, 'the expired rows are left to the purge of the service, the transfer deletes nothing')
+        pg_fixture.run(self.database_name, "update shop.login_failures set at = now() - interval '14 minutes'")
+        with self.assertRaises(transfer_module.Abort) as caught:
+            await self.run_transfer()
+        self.assertIn('login_failures: Quelle 0 / Ziel 1', str(caught.exception), 'a row that is not yet expired and missing in the source is still a deviation')
+        pg_fixture.run(self.database_name, "update shop.login_failures set at = now() - interval '16 minutes'",
+                       "insert into shop.orders (id, doc) values ('only-here', '{\"owner\":\"user:x\",\"idempotency_key\":\"k\"}')")
+        with self.assertRaises(transfer_module.Abort) as caught:
+            await self.run_transfer()
+        self.assertIn('orders: Quelle 2 / Ziel 3', str(caught.exception), 'business data stay strict')
+
+    async def test_the_source_report_already_names_amounts_the_target_would_reject(self):
+        cases = {'not whole cents': {'total_cents': 19.95}, 'text': {'total_cents': '1995'}, 'negative': {'subtotal_cents': -1}, 'truth value': {'shipping_cents': True},
+                 'second paid transition': {'paid_transitions': 2}}
+        for label, fields in cases.items():
+            with self.subTest(label):
+                self.mongo = synthetic_shop()
+                self.mongo.collections['orders'].docs.append({**contract.order('bad'), **fields})
+                with self.assertRaises(transfer_module.Abort) as caught:
+                    await transfer_module.transfer(ReadOnlySource(self.mongo), None, apply=False, log=self.lines.append)
+                self.assertTrue(str(caught.exception).startswith('orders: Dokument bad, Feld ' + next(iter(fields))), str(caught.exception))
+        self.mongo = synthetic_shop()
+        self.mongo.collections['products'].docs.append({**contract.product('bad', 'N'), 'purchase_cents': -5})
+        with self.assertRaises(transfer_module.Abort):
+            await transfer_module.transfer(ReadOnlySource(self.mongo), None, apply=False, log=self.lines.append)
+        self.mongo = synthetic_shop()
+        self.mongo.collections['orders'].docs.append({**contract.order('ok'), 'total_cents': None})
+        self.assertEqual((await transfer_module.transfer(ReadOnlySource(self.mongo), None, apply=False, log=self.lines.append))['collections']['orders']['source_count'], 3)
+
     async def test_documents_that_cannot_be_moved_without_loss_abort_before_the_target_is_touched(self):
         cases = {'amount that is not whole cents': ('orders', {**contract.order('bad'), 'total_cents': 19.95}),
                  'amount stored as text': ('orders', {**contract.order('bad'), 'total_cents': '1995'}),

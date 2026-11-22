@@ -202,6 +202,10 @@ class PostgresTarget:
         async with await psycopg.AsyncConnection.connect(self.dsn) as conn:
             try:
                 async with conn.cursor() as cur:
+                    await cur.execute("select 1 from shop.settings where id = %s", (common.CLOSED_MARKER,))
+                    if await cur.fetchone():
+                        raise Abort("Das Ziel ist geschlossen (Marke in shop.settings): PostgreSQL ist der führende Stand, "
+                                    "eine Übernahme aus dem bisherigen Shop würde neuere Katalogdaten überschreiben. Nichts geschrieben.")
                     for collection in COLLECTIONS:
                         rows = [(doc["_id"], base.encode({k: v for k, v in doc.items() if k != "_id"})) for doc in docs[collection]]
                         try:
@@ -232,6 +236,9 @@ async def transfer(source, target, *, apply=False, contract=None, expect_min=Non
     docs, digests = await read_source(base, source)
     if expect_min is not None and digests["products"].count < expect_min:
         raise Abort(f"products: Quelle trägt {digests['products'].count} Produkte, erwartet sind mindestens {expect_min}; nichts geschrieben")
+    published = sum(1 for p in docs["products"] if p.get("active") is True)
+    if expect_min is not None and published < expect_min:
+        raise Abort(f"products: Quelle trägt {published} veröffentlichte Produkte (active), erwartet sind mindestens {expect_min}; nichts geschrieben")
     for collection in COLLECTIONS:
         log(json.dumps({"step": "source", "collection": collection, "count": digests[collection].count, "digest": digests[collection].value}))
     stamps = sorted(p["imported_at"] for p in docs["products"] if isinstance(p.get("imported_at"), str))
@@ -260,7 +267,19 @@ async def transfer(source, target, *, apply=False, contract=None, expect_min=Non
     checked = [{"id": str(i)[:40], "equal": result["products"][3].rows.get(i) == digests["products"].rows[i]} for i in chosen]
     log(json.dumps({"step": "sample", "checked": len(checked), "equal": sum(c["equal"] for c in checked)}))
     return {"outcome": "applied" if apply else "dry_run", "target": target.kind, "collections": report, "sample": checked,
-            "published": sum(1 for p in docs["products"] if p.get("active") is True), "run": run_record["_id"] if apply else None}
+            "published": published, "run": run_record["_id"] if apply else None}
+
+
+def mongo_hosts(url):
+    """Die Server einer MongoDB-Adresse ohne Zugangsdaten, Pfad und Optionen, als Menge ``host:port`` in Kleinschrift.
+
+    Zwei Adressen mit einem gemeinsamen Server und gleichem Datenbanknamen gelten als dieselbe Datenbank, auch wenn
+    sich Benutzer oder Optionen unterscheiden. Nicht erkannt wird derselbe Server unter zwei verschiedenen Namen.
+    """
+    scheme, _, rest = url.partition("://")
+    authority = rest.split("/", 1)[0].split("?", 1)[0].rsplit("@", 1)[-1]
+    default = "" if scheme.lower() == "mongodb+srv" else ":27017"
+    return {h.lower() if h.rsplit("]", 1)[-1].count(":") else h.lower() + default for h in authority.split(",") if h}
 
 
 def main(argv=None):
@@ -285,8 +304,9 @@ def main(argv=None):
         except (TypeError, OSError, ValueError):
             print("Festschreiben verlangt --publication-contract mit einer lesbaren JSON-Datei (D-008/OA-071).", file=sys.stderr)
             return 3
-    if kind == "mongodb" and (os.environ["CATALOG_TARGET_MONGO_URL"], os.environ["CATALOG_TARGET_DB_NAME"]) == (os.environ["CATALOG_SOURCE_MONGO_URL"], os.environ["CATALOG_SOURCE_DB_NAME"]):
-        print("Quelle und Ziel sind dieselbe Datenbank.", file=sys.stderr)
+    if kind == "mongodb" and os.environ["CATALOG_TARGET_DB_NAME"] == os.environ["CATALOG_SOURCE_DB_NAME"] \
+            and mongo_hosts(os.environ["CATALOG_TARGET_MONGO_URL"]) & mongo_hosts(os.environ["CATALOG_SOURCE_MONGO_URL"]):
+        print("Quelle und Ziel sind dieselbe Datenbank (gleicher Datenbankname auf einem gemeinsamen Server).", file=sys.stderr)
         return 3
     handle = open(args.log, "a", encoding="utf-8")
 

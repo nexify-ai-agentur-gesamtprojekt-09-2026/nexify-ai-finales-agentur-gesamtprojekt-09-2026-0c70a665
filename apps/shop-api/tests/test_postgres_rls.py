@@ -51,6 +51,21 @@ class ShopRowLevelSecurity(unittest.TestCase):
         policies = {(row[0], row[1], tuple(row[2])) for row in admin.execute("select tablename, policyname, roles from pg_policies where schemaname = 'shop'")}
         self.assertEqual(policies, {(table, 'shop_api_all', ('shop_api',)) for table in TABLES})
 
+    def test_the_migration_refuses_an_existing_service_role_that_would_lift_the_boundary(self):
+        import psycopg
+        migration = (pg_fixture.MIGRATIONS / '0002_shop_rls.sql').read_text(encoding='utf-8')
+        for attribute in ('login', 'bypassrls', 'superuser', 'createrole', 'createdb', 'replication'):
+            with self.subTest(attribute), psycopg.connect(pg_fixture.dsn_for(self.database)) as conn:
+                conn.execute(f'alter role shop_api {attribute}')  # inside the transaction; rolled back below
+                with self.assertRaises(psycopg.errors.RaiseException) as caught:
+                    conn.execute(migration)
+                self.assertIn('refusing', str(caught.exception))
+                conn.rollback()
+        with psycopg.connect(pg_fixture.dsn_for(self.database)) as conn:
+            conn.execute(migration)  # the plain group role passes, as before
+            self.assertEqual(conn.execute("select rolcanlogin or rolsuper or rolbypassrls or rolcreaterole or rolcreatedb or rolreplication from pg_roles where rolname = 'shop_api'").fetchone(), (False,))
+            conn.rollback()
+
     def test_login_without_any_grant_reaches_nothing(self):
         probe = self.connect(pg_fixture.PROBE_LOGIN)
         for table in sorted(TABLES):
