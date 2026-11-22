@@ -862,7 +862,7 @@ vorgeschlagen; die Entscheidung liegt beim Inhaber, bei Rechtsfragen nach Prüfu
 | R3 | `/agb` § 4.1 (3) | 24-Stunden-Einwandsfrist mit Anerkennungsfiktion (Befund 10, 22). |
 | R4 | `/agb` § 4.1 (2) gegen § 7 | Zwei Abnahmefiktionen, 24 Stunden gegen 14 Tage (Befund 22). |
 | R5 | `/agb` § 2 gegen § 4.6 (1) | Angebote unverbindlich gegen 14 Tage verbindlich (Befund 21). |
-| R6 | `/agb` § 4.7 | 38 % Aufschlag und Nichtnennung von Anbieternamen gegen das öffentliche Transparenzversprechen (Befund 11). |
+| R6 | `/agb` § 4.7 | **Herabgestuft am 22.11.2026** (Nachtrag 4, K14): kein Widerspruch, keine Rechtsprüfung. Kaufmännische Frage an den Inhaber, ob der Aufschlag von 38 % auf den Seiten genannt werden soll. |
 | R7 | `/agb`, `/widerruf` gegen `/teileklar` | B2B-Ausschluss gegen Verbrauchershop mit Kasse, MwSt.-Preisen und Rückgabehinweis (Befund 12). |
 | R8 | `/agb` § 12 | Deutsche Vorschriften bei vereinbartem niederländischem Recht, „analog"-Verweise (Befund 32). |
 | ~~R9~~ | ~~`/avv` § 3 gegen `/agb` § 4.7 (1)~~ | **Zurückgezogen am 16.11.2026** (Nachtrag 2, K1). Es liegt kein Widerspruch vor; § 4.7 (1) betrifft nur die Rechnung. Keine Rechtsprüfung nötig. |
@@ -1628,4 +1628,38 @@ sie belegen, was dasteht, nicht was fehlt.
 Unverändert und unbestritten bleiben Kipppunkt und Bruch: `/preise-ablauf` nennt keine
 Zahl, und `/teileklar` zeigt null Artikel hinter einem dauerhaften Ladehinweis.
 
-Stand Nachtrag 4: 22.11.2026, 18:45 UTC.
+## K14 · Auch der „Kern" von Befund 11 hält nicht — R6 wird herabgestuft
+
+Diesen Punkt hatte ich zweimal ausdrücklich verteidigt, zuletzt in Nachtrag 2 unter K1 mit
+den Worten „derselbe Sachverhalt mit gegenteiliger Aussage". **Auch das ist zu stark, und
+ich nehme es zurück.**
+
+Die beiden Sätze noch einmal nebeneinander, wörtlich:
+
+- Öffentlich: „Hosting, Software, KI-Nutzung, Medien- und Werbebudget werden **offen
+  ausgewiesen statt im Projektpreis versteckt**."
+- `/agb` § 4.7: Die KI-Kosten werden **monatlich gesondert in Rechnung** gestellt, unter
+  eigener fortlaufender Rechnungsnummer, in der Rechnung bezeichnet als „NeXify AI Kosten".
+
+Das Versprechen betrifft die **Trennung vom Projektpreis**, und genau diese Trennung leistet
+§ 4.7: eigene Rechnung, eigener Nummernkreis, eigener Abrechnungszeitraum. Dass
+Anbieternamen fehlen, betrifft den Grad der Aufschlüsselung — etwas, das der öffentliche
+Text nicht zusagt. Ein Widerspruch lässt sich daraus nicht belegen.
+
+**Was als Beobachtung bleibt**, und nur als solche: Der gesondert ausgewiesene Betrag ist
+nicht der externe Einkaufspreis, sondern dieser zuzüglich 38 %, und er trägt die
+Bezeichnung „NeXify AI Kosten". Der Aufschlag kommt auf allen 29 Seiten **nicht vor** —
+gemessen, „38 %" und „Aufschlag" finden sich ausschließlich in `/agb`. Ob ein Leser des
+Satzes „offen ausgewiesen" damit rechnet, ist eine Frage der Erwartung, die dieser Text
+weckt, nicht eine Frage des Vertrags.
+
+**Folge für die Übergabe: R6 ist kein Prüfauftrag an die Rechtsprüfung mehr.** Er wird zu
+einer kaufmännischen Frage an den Inhaber: ob der Aufschlag auf den Seiten genannt werden
+soll. Damit entfällt der zweite überflüssige Rechtsauftrag in dieser Prüfung.
+
+Eine Anmerkung in eigener Sache: Dies ist die dritte Korrektur an Befund 11. Zweimal habe
+ich einen „Kern" verteidigt, der ebenfalls nicht trug. Wer den Bericht liest, sollte das
+als Warnung lesen — nicht gegen die zitatbelegten Befunde, sondern gegen meine Neigung,
+aus zwei Sätzen, die verschiedene Dinge regeln, einen Widerspruch zu machen.
+
+Stand Nachtrag 4: 22.11.2026, 18:50 UTC.
