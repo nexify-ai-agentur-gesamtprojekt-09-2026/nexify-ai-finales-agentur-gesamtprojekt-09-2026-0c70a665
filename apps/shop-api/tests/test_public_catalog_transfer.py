@@ -217,6 +217,27 @@ class Writing(unittest.TestCase):
                         items=[item(1), item(2), item(3)], image_check=outage))
         self.assertEqual(self.database.collections.get("products", contract.Collection()).docs, [])
 
+    def test_withdraw_hides_transferred_products_without_deleting_and_a_rerun_restores_them(self):
+        items = [item(1), item(2), item(3)]
+        run(pub.run(self.db(), apply=True, contract=CONTRACT, limit=None, pause=0, log=lambda line: None, items=items, image_check=lambda url: True))
+        products = self.database.collections["products"]
+        products.docs.append({"_id": "bb-9", "name": "fremd", "source": "bigbuy", "active": True})
+        dry = run(pub.withdraw(self.db(), apply=False, contract=None, log=lambda line: None))
+        self.assertEqual((dry["outcome"], dry["visible_before"]), ("dry_run", 3))
+        self.assertTrue(all(d["active"] for d in products.docs))
+        with self.assertRaises(pub.Abort):
+            run(pub.withdraw(self.db(), apply=True, contract=None, log=lambda line: None))
+        done = run(pub.withdraw(self.db(), apply=True, contract=CONTRACT, log=lambda line: None))
+        self.assertEqual(done["withdrawn"], 3)
+        self.assertEqual(len(products.docs), 4)  # nichts gelöscht
+        self.assertEqual({d["_id"]: d["active"] for d in products.docs}, {"S0000001": False, "S0000002": False, "S0000003": False, "bb-9": True})
+        self.assertTrue(any(d.get("mode") == "catalog_withdraw" for d in self.database.collections["imports"].docs))
+        # Wiederherstellen per erneuter Übernahme setzt voraus, dass im Namensraum nur übernommene Artikel liegen
+        # (fremde Produkte gelten als Abweichung, der Lauf bricht dann ab – gewollt).
+        products.docs = [d for d in products.docs if d["_id"] != "bb-9"]
+        run(pub.run(self.db(), apply=True, contract=CONTRACT, limit=None, pause=0, log=lambda line: None, items=items, image_check=lambda url: True))
+        self.assertTrue(all(d["active"] for d in products.docs))
+
     def test_contract_minimum_applies_to_full_runs(self):
         items = [item(1), item(2)]
         with self.assertRaises(pub.Abort):

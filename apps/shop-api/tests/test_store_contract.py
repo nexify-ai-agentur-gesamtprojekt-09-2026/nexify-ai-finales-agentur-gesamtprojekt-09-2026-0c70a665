@@ -117,7 +117,7 @@ class Collection:
         return copy.deepcopy({k: v for k, v in doc.items() if k not in fields})
     async def create_index(self, key, unique=False, **options):
         if unique and key not in self.unique: self.unique.append(key)
-    async def insert_one(self, doc):
+    async def insert_one(self, doc, session=None):
         stored = copy.deepcopy(doc); self._insert(stored); doc['_id'] = stored['_id']
     async def delete_one(self, query):
         target = next((d for d in self.docs if matches(d, query)), None)
@@ -128,9 +128,11 @@ class Collection:
         if target is None: return None
         before = copy.deepcopy(target); apply(target, update)
         return copy.deepcopy(target) if return_document else before
-    async def update_many(self, query, update):
+    async def update_many(self, query, update, session=None):
+        changed = 0
         for target in self.docs:
-            if matches(target, query): apply(target, update)
+            if matches(target, query): apply(target, update); changed += 1
+        return SimpleNamespace(modified_count=changed, matched_count=changed)
     def find(self, query, fields=None, session=None):
         return Cursor([self._project(d, fields) for d in self.docs if matches(d, query)])
     async def find_one(self, query, fields=None, sort=None, session=None):

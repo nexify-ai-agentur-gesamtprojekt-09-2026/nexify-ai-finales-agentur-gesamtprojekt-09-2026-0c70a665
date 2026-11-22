@@ -223,9 +223,19 @@ Umgesetzt (dieser Zweig): Push-Auslöser entfernt. Start nur manuell (`workflow_
 Noch offen, als Vorschlag (nicht gebaut):
 - **Staging-/Smoke-Lauf vorab:** derselbe Workflow mit einem zweiten Ziel `nexify_teileklar_shop_staging` (eigene Umgebung
   und eigenes Geheimnis) und einer Abnahme gegen eine Vorschau-Adresse. Der Produktionsjob hängt per `needs:` daran.
-- **Ausführbarer Rückweg:** `transfer_public_catalog.py --withdraw` setzt bei allen Dokumenten mit
-  `source = teileklar_public_catalog` `active: false`. Es löscht nichts, protokolliert und wird mit eigenem Vertragsnachweis
-  ausgelöst. Getestet würde er im Staging-Ziel.
+- **Ausführbarer Rückweg: gebaut und belegt (Nachtrag 22.11.2026).** `transfer_public_catalog.py --withdraw` (ohne
+  `--apply` nur Zählung) schaltet alle Dokumente mit `source = teileklar_public_catalog` unsichtbar (`active: false`).
+  Er löscht nichts, verlangt dieselbe Vertragsdatei, arbeitet in einer Transaktion und trägt einen Lauf-Eintrag
+  `catalog_withdraw` in `imports` ein. Fremde Produkte bleiben unberührt (getestet). Wiederherstellen heißt: die Übernahme
+  erneut ausführen. Lokal im produktionsgleichen Namensraum:
+  | Schritt | Ergebnis | Beleg |
+  |---|---|---|
+  | Rückweg trocken (16.11.) | 273 sichtbar gezählt, nichts geändert | `final/4-rueckweg-trocken.jsonl` |
+  | Rückweg echt (16.11.) | 273 → 0 sichtbar, 3713 Dokumente erhalten, `check_metadata` ok | `final/5-rueckweg.jsonl` |
+  | Wiederherstellung (22.11., lebende Quelle) | zwei Durchgänge stabil (3720), Bilder 267 ladend / 3337 nicht / 0 unklar; 273 wieder sichtbar, 3440 unverändert; Prüfsumme `208e035b…` gleich dem Lauf vom 16.11. | `final/6-wiederherstellung.jsonl`, `final/ns-after-restore.txt` |
+
+  Grenze: Die Wiederherstellung per erneuter Übernahme gelingt nur, solange im Namensraum keine fremden Produkte liegen.
+  Fremde Produkte zählen als Abweichung, und der Lauf bricht ab (gewollt).
 - **Technisch erzwungene Freigabe:** „Required reviewers“ in `katalog-produktion` (Inhaber, Schritt 1). Die Sitzung kann das
   nicht selbst setzen.
 

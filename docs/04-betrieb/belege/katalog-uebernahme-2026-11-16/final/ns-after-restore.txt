@@ -1,0 +1,1 @@
+{'namespace_check': 'ok', 'products': 3713, 'published': 273}

@@ -33,6 +33,7 @@ from datetime import datetime, timezone
 from decimal import Decimal, InvalidOperation
 import hashlib
 import importlib.util
+import inspect
 import json
 import os
 from pathlib import Path
@@ -409,9 +410,48 @@ async def run(target_db, *, apply, contract, limit, pause, log, items=None, expe
     return report, sample, meta, docs
 
 
+async def withdraw(target_db, *, apply, contract, log, now=None):
+    """Rückweg: schaltet alle von dieser Übernahme stammenden Artikel unsichtbar (``active: false``). Löscht nichts.
+
+    Betroffen sind nur Dokumente mit ``source = teileklar_public_catalog``; Kategorien, Lauf-Einträge und alle anderen Daten
+    bleiben unverändert. Ohne ``apply`` wird nur gezählt. Mit ``apply`` verlangt der Rückweg dieselbe Vertragsdatei wie die
+    Übernahme und schreibt in einer Transaktion samt Lauf-Eintrag in ``imports`` (Kennungen als Prüfsumme). Wiederherstellen:
+    die Übernahme erneut ausführen; sie schaltet Artikel mit ladendem Bild wieder sichtbar."""
+    if apply:
+        tc.check_contract(contract, None, CONTRACT_FIXED, CONTRACT_TEXT)
+    query = {"source": SOURCE_TAG, "active": True}
+    ids = sorted([d["_id"] async for d in target_db.products.find(query, {"_id": 1})])
+    digest = hashlib.sha256("\n".join(ids).encode()).hexdigest()
+    log(json.dumps({"step": "withdraw_plan", "visible": len(ids), "ids_sha256": digest, "mode": "apply" if apply else "dry_run"}))
+    if not apply or not ids:
+        return {"outcome": "dry_run" if not apply else "nothing_to_do", "withdrawn": 0, "visible_before": len(ids)}
+    moment = (now or datetime.now(timezone.utc)).isoformat()
+    proof = tc.check_contract(contract, None, CONTRACT_FIXED, CONTRACT_TEXT)
+
+    async def work(session):
+        result = await target_db.products.update_many({"_id": {"$in": ids}, **query}, {"$set": {"active": False}}, session=session)
+        if result.modified_count != len(ids):
+            raise Abort(f"Rückweg: {result.modified_count} statt {len(ids)} Artikel geändert; nichts festgeschrieben")
+        await target_db.imports.insert_one({"_id": "catalog-public-withdraw-" + digest[:24] + "-" + moment[:19].replace(":", ""),
+                                            "status": "done", "mode": "catalog_withdraw", "started_at": moment, "finished_at": moment,
+                                            "withdrawn": len(ids), "ids_sha256": digest, "publication_contract": proof}, session=session)
+
+    session = target_db.client.start_session()
+    if inspect.isawaitable(session):
+        session = await session
+    async with session:
+        await session.with_transaction(work)
+    left = await target_db.products.count_documents(query)
+    log(json.dumps({"step": "withdraw_done", "withdrawn": len(ids), "visible_after": left}))
+    if left:
+        raise Abort(f"Rückweg unvollständig: {left} Artikel weiter sichtbar")
+    return {"outcome": "withdrawn", "withdrawn": len(ids), "visible_before": len(ids)}
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description="Katalog von teileklar.shop über die öffentliche Schnittstelle übernehmen. Ohne --apply wird nichts geschrieben.")
     parser.add_argument("--apply", action="store_true")
+    parser.add_argument("--withdraw", action="store_true", help="Rückweg: übernommene Artikel unsichtbar schalten (löscht nichts)")
     parser.add_argument("--publication-contract")
     parser.add_argument("--limit", type=int, help="nur die ersten N Artikel (Probelauf)")
     parser.add_argument("--pause", type=float, default=1.5, help="Sekunden zwischen zwei Seiten")
@@ -451,6 +491,8 @@ def main(argv=None):
         from motor.motor_asyncio import AsyncIOMotorClient
         client = AsyncIOMotorClient(os.environ["CATALOG_TARGET_MONGO_URL"], serverSelectionTimeoutMS=15000)
         try:
+            if args.withdraw:
+                return await withdraw(client[os.environ["CATALOG_TARGET_DB_NAME"]], apply=args.apply, contract=contract, log=log)
             items = json.loads(Path(args.from_snapshot).read_text(encoding="utf-8"))["items"] if args.from_snapshot else None
             return await run(client[os.environ["CATALOG_TARGET_DB_NAME"]], apply=args.apply, contract=contract, limit=args.limit, pause=args.pause, log=log, items=items)
         finally:
@@ -459,13 +501,17 @@ def main(argv=None):
     try:
         log(json.dumps({"step": "start", "mode": "apply" if args.apply else "dry_run", "limit": args.limit, "at": datetime.now(timezone.utc).isoformat()}))
         try:
-            report, sample, meta, docs = asyncio.run(go())
+            outcome = asyncio.run(go())
         except Abort as exc:
             log(json.dumps({"step": "abort", "reason": str(exc)}, ensure_ascii=False))
             return 2
         except Exception as exc:  # Treibertexte können Adressen enthalten; nur die Art nennen.
             log(json.dumps({"step": "abort", "reason": "Fehler der Art " + type(exc).__name__}))
             return 2
+        if args.withdraw:
+            log(json.dumps({"step": "done", **outcome}))
+            return 0
+        report, sample, meta, docs = outcome
         if args.snapshot_out:
             Path(args.snapshot_out).write_text(json.dumps({"meta": meta, "items": [d["legacy"] for d in docs["products"]]}, ensure_ascii=False), encoding="utf-8")
         if args.report:
