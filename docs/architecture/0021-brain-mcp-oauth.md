@@ -1,6 +1,19 @@
 # 0021 — brain als der eine MCP-Server mit Browser-Anmeldung (OAuth 2.1)
 
 Status: **Entwurf (Stufe 1), nicht freigegeben, nicht gebaut.** Stand 16.11.2026.
+
+> **Vorbehalt vom 16.11.2026, 06:52 UTC:** Die koordinierende Sitzung hat vorgeschlagen, keinen eigenen
+> Anmeldeserver zu bauen. Stattdessen soll brain eine geschützte Ressource hinter dem bestehenden Supabase-Auth-Server
+> von `nexifyai.de/mcp` werden (IST gemessen 06:53 UTC: Ressourcen-Metadaten verweisen auf
+> `nffczuqkhlihimmuzeoz.supabase.co/auth/v1`, dort Selbstregistrierung von Clients, PKCE S256 und `plain`).
+> Folgen bei Bestätigung: Abschnitte 4, 5, 7 und 8 (eigener Anmeldeserver) entfallen. Abschnitte 6, 9, 10 und 12
+> (Zulassung, RLS, Audit, Tests, Rückweg) bleiben und prüfen die Supabase-Token per JWKS.
+> OFFEN vor jeder Umsetzung:
+> - ob dort jeder ein Konto anlegen kann (Einstellung nicht lesbar ohne Projektschlüssel);
+> - fehlende Ressourcenbindung und verzögerter Widerruf der Supabase-Token;
+> - dass `nexifyai.de` derzeit nicht aus diesem Repository ausgeliefert wird.
+>
+> Bis zur Entscheidung des Inhabers gilt keiner der beiden Wege als gewählt.
 Auftrag: Inhaber Pascal Courbois, 16.11.2026 06:30 UTC; Architekturvorgaben 1–8 und Stufenplan der koordinierenden Sitzung.
 Grundlage: `docs/04-betrieb/brain-befund-2026-11-16.md` (Stufe 0), `docs/04-betrieb/aufraeumplan-2026-11-14.md`,
 `docs/architecture/0017-brain-ingestion.md`, `docs/adr/0008-mandantentrennung-gemeinsames-schema.md`,
