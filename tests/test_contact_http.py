@@ -35,7 +35,7 @@ class ContactHttpContract(unittest.IsolatedAsyncioTestCase):
         router = APIRouter(prefix='/api/requests')
         namespace = {'__name__':'contact_http_fixture','router':router,'BaseModel':BaseModel,'Field':Field,
                      'Header':Header,'HTTPException':HTTPException,'Request':Request,
-                     'db':types.SimpleNamespace(requests=self.db),'notify':notify,'_requester':anonymous,'DuplicateKeyError':Duplicate,
+                     'store':types.SimpleNamespace(requests=self.db,AlreadyExists=Duplicate),'notify':notify,'_requester':anonymous,
                      'hashlib':hashlib,'json':json,'re':re,'datetime':datetime,'timedelta':timedelta,'timezone':timezone,
                      'EMAIL':re.compile(r'[^@\s]+@[^@\s]+\.[^@\s]+'),'HOURLY_LIMIT':5,
                      'now_iso':lambda:datetime.now(timezone.utc).isoformat()}

@@ -204,7 +204,7 @@ class MergeReplicaContract(unittest.IsolatedAsyncioTestCase):
             {'owner':'guest:synthetic','items':[{'product_id':'a','name':'A','quantity':2,'price_seen_cents':100}]},
         ])
         self.assertIsNone(await adapter.check_metadata(bound))
-        self.cart.db = bound
+        self.cart.store.carts.db = bound
         await self.cart.merge(self.ident)
         self.assertIsNone(await adapter.check_metadata(bound))
         names = await bound.list_collection_names()

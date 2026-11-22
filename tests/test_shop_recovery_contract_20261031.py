@@ -20,15 +20,35 @@ def load_function(path, name, namespace):
     return namespace[name]
 
 
+def load_store(path, name, database, **names):
+    """The real data-access class (shop/store), executed from its source over the given stand-in collections.
+
+    The functions under test reach storage only through it, so every statement below still
+    covers the query the service really sends. No package import, no driver.
+    """
+    class Unused(Exception):
+        pass
+    tree = ast.parse((ROOT / path).read_text(encoding="utf-8"))
+    body = [n for n in tree.body if isinstance(n, (ast.Assign, ast.FunctionDef)) or (isinstance(n, ast.ClassDef) and n.name == name)]
+    namespace = {"DuplicateKeyError": Unused, "AlreadyExists": Unused, **names}
+    exec(compile(ast.fix_missing_locations(ast.Module(body=body, type_ignores=[])), str(path), "exec"), namespace)
+    return namespace[name](database)
+
+
+def order_store(database):
+    return load_store("apps/shop-api/shop/store/orders.py", "MongoOrderStore", database)
+
+
 class ShopRecoveryContract(unittest.IsolatedAsyncioTestCase):
     async def test_missing_price_approval_is_unreleased(self):
-        class Settings:
-            async def find_one(self, query):
-                return None
+        class Catalog:
+            async def shop_settings(self):
+                return {}  # no stored settings; the store contract maps a missing record to {}
 
         config = types.SimpleNamespace(DEFAULT_MARKUP_PERCENT=Decimal("30"))
-        settings = load_function("apps/shop-api/shop/pricing.py", "settings", {"Decimal": Decimal, "config": config})
-        result = await settings(types.SimpleNamespace(settings=Settings()))
+        settings = load_function("apps/shop-api/shop/pricing.py", "settings",
+                                 {"Decimal": Decimal, "config": config, "store": types.SimpleNamespace(catalog=Catalog())})
+        result = await settings()
         self.assertFalse(result["price_released"], "Missing price approval must remain unreleased")
 
     async def test_existing_order_replay_precedes_price_gate_but_new_order_does_not(self):
@@ -61,7 +81,7 @@ class ShopRecoveryContract(unittest.IsolatedAsyncioTestCase):
         validator_ns = {"HTTPException": HTTPException, "hashlib": hashlib}
         exec(compile(ast.fix_missing_locations(ast.Module(body=[validation], type_ignores=[])), "checkout_api.py", "exec"), validator_ns)
         namespace = {"auth": types.SimpleNamespace(identity=identity), "validate_order_replay": validator_ns["validate_order_replay"],
-                     "owner_for": owner_for, "db": types.SimpleNamespace(orders=orders),
+                     "owner_for": owner_for, "store": types.SimpleNamespace(orders=order_store(types.SimpleNamespace(orders=orders))),
                      "require_price_release": require_price_release, "payment_response": payment_response,
                      "replay": lambda order: {"order_id": order["_id"]}}
         exec(compile(ast.fix_missing_locations(ast.Module(body=[node], type_ignores=[])), "checkout_api.py", "exec"), namespace)
@@ -123,10 +143,11 @@ class ShopRecoveryContract(unittest.IsolatedAsyncioTestCase):
         templates = types.SimpleNamespace(order_confirmation=lambda _: ("subject", "html", "text"),
                                           internal_new_order=lambda _: ("subject", "html", "text"))
         fake_db = types.SimpleNamespace(orders=Orders(), carts=Carts())
+        store = types.SimpleNamespace(orders=order_store(fake_db), carts=load_store("apps/shop-api/shop/store/carts.py", "MongoCartStore", fake_db))
         send = load_function("apps/shop-api/shop/checkout_api.py", "send_paid_mails",
-                             {"PAID": "bezahlt", "db": fake_db, "mailer": FakeMailer(), "mail_templates": templates})
+                             {"PAID": "bezahlt", "store": store, "mailer": FakeMailer(), "mail_templates": templates})
         namespace = {"PAID": "bezahlt", "OPEN": "zahlung_offen", "FAILED": "zahlung_nicht_abgeschlossen",
-                     "db": fake_db, "revolut": FakeRevolut(), "revision_filter": lambda owner, revision: {"owner": owner, "revision": revision},
+                     "store": store, "revolut": FakeRevolut(),
                      "now_iso": lambda: "2026-10-31T00:00:00Z", "send_paid_mails": send}
         sync_payment = load_function("apps/shop-api/shop/checkout_api.py", "sync_payment", namespace)
         with self.assertRaisesRegex(RuntimeError, "injected interruption after paid transition"):
@@ -173,7 +194,7 @@ class ShopRecoveryContract(unittest.IsolatedAsyncioTestCase):
         templates = types.SimpleNamespace(order_confirmation=lambda _: ("subject", "html", "text"),
                                           internal_new_order=lambda _: ("subject", "html", "text"))
         orders = Orders()
-        ns = {"PAID": "bezahlt", "db": types.SimpleNamespace(orders=orders), "mailer": Mailer(), "mail_templates": templates}
+        ns = {"PAID": "bezahlt", "store": types.SimpleNamespace(orders=order_store(types.SimpleNamespace(orders=orders))), "mailer": Mailer(), "mail_templates": templates}
         send = load_function("apps/shop-api/shop/checkout_api.py", "send_paid_mails", ns)
         recover = load_function("apps/shop-api/shop/checkout_api.py", "recover_paid_mail_intents", ns)
         await send(copy.deepcopy(order))
@@ -199,7 +220,7 @@ class ShopRecoveryContract(unittest.IsolatedAsyncioTestCase):
                 return {"_id": key} if to else None
         templates = types.SimpleNamespace(order_confirmation=lambda _: ("subject", "html", "text"),
                                           internal_new_order=lambda _: ("subject", "html", "text"))
-        ns = {"PAID": "bezahlt", "db": types.SimpleNamespace(orders=Orders()), "mailer": Mailer(), "mail_templates": templates}
+        ns = {"PAID": "bezahlt", "store": types.SimpleNamespace(orders=order_store(types.SimpleNamespace(orders=Orders()))), "mailer": Mailer(), "mail_templates": templates}
         send = load_function("apps/shop-api/shop/checkout_api.py", "send_paid_mails", ns)
         await send(order)
         self.assertTrue(order["paid_mail_recovery_pending"])
@@ -297,7 +318,8 @@ class MailerLeaseContract(unittest.IsolatedAsyncioTestCase):
                 if outcome == "unknown":
                     raise HTTPError("simulated lost response")
                 return types.SimpleNamespace(status_code=outcome, json=lambda: {"id": "fake-id"})
-        namespace = {"db": types.SimpleNamespace(outbox=outbox), "datetime": datetime.datetime,
+        store = types.SimpleNamespace(outbox=load_store("apps/shop-api/shop/store/outbox.py", "MongoOutboxStore", types.SimpleNamespace(outbox=outbox)))
+        namespace = {"store": store, "datetime": datetime.datetime,
                      "timedelta": datetime.timedelta, "timezone": datetime.timezone, "secrets": secrets,
                      "CLAIM_LEASE_SECONDS": 300, "MAX_ATTEMPTS": 5, "transport": None,
                      "httpx": types.SimpleNamespace(AsyncClient=Client, HTTPError=HTTPError),

@@ -4,11 +4,9 @@ from urllib.parse import urlsplit
 from fastapi import APIRouter, HTTPException, Query
 from typing import Literal
 
-from . import pricing
-from .db import db
+from . import pricing, store
 
 router = APIRouter(prefix="/api/shop")
-PUBLIC_FIELDS = {"_id": 1, "sku": 1, "ean": 1, "name": 1, "images": 1, "stock": 1, "purchase_cents": 1, "category_id": 1, "category_ids": 1, "imported_at": 1, "source_partial": 1}
 
 # Exact supplier host observed in the read-only catalogue; no wildcard or proxy.
 # Deployment CSP must separately permit this host before images can load.
@@ -57,42 +55,33 @@ def present(product, settings, full=False):
 
 @router.get("/status")
 async def catalog_status():
-    last = await db.imports.find_one({"status": "done"}, sort=[("finished_at", -1)])
-    return {"products": await db.products.count_documents({"active": True}), "last_import_at": last and last.get("finished_at"), "source": "BigBuy", "partial": bool(last and last.get("partial"))}
+    last = await store.catalog.last_finished_import()
+    return {"products": await store.catalog.count_published(), "last_import_at": last and last.get("finished_at"), "source": "BigBuy", "partial": bool(last and last.get("partial"))}
 
 
 @router.get("/categories")
 async def categories():
-    counts = {row["_id"]: row["n"] async for row in db.products.aggregate([{"$match": {"active": True}}, {"$unwind": "$category_ids"}, {"$group": {"_id": "$category_ids", "n": {"$sum": 1}}}])}
-    rows = [c async for c in db.categories.find({})]
+    counts = await store.catalog.published_counts_by_category()
+    rows = await store.catalog.categories()
     return {"categories": sorted([{"id": c["_id"], "name": c["name"], "root": c.get("root", False), "count": counts.get(c["_id"], 0)} for c in rows if counts.get(c["_id"])], key=lambda c: (not c["root"], c["name"]))}
 
 
 @router.get("/products")
 async def products(q: str = Query("", max_length=120), category: int | None = None, page: int = Query(1, ge=1, le=10000), page_size: int = Query(24, ge=1, le=60), sort: Literal['availability','price_asc','price_desc','name']='availability', in_stock: bool=False):
-    query = {"active": True}
-    if in_stock:
-        query['stock'] = {'$gt': 0}
     term = q.strip()
-    if term:
-        pattern = re.escape(term)
-        query["$or"] = [{"name": {"$regex": pattern, "$options": "i"}}, {"sku": {"$regex": "^" + pattern, "$options": "i"}}, {"ean": term}]
-    if category is not None:
-        query["category_ids"] = category
-    total = await db.products.count_documents(query)
-    settings = await pricing.settings(db)
-    ordering={'availability':[("stock", -1), ("name", 1)],'price_asc':[("purchase_cents",1),("name",1)],'price_desc':[("purchase_cents",-1),("name",1)],'name':[("name",1)]}[sort]
-    cursor = db.products.find(query, PUBLIC_FIELDS).sort(ordering).skip((page - 1) * page_size).limit(page_size)
-    items = [present(p, settings) async for p in cursor]
+    search = {"term": term, "category": category, "in_stock": in_stock}
+    total = await store.catalog.count_search(**search)
+    settings = await pricing.settings()
+    items = [present(p, settings) for p in await store.catalog.page_search(**search, sort=sort, page=page, page_size=page_size)]
     return {"items": items, "total": total, "page": page, "page_size": page_size, "pages": max(1, -(-total // page_size)), "q": term, "category": category}
 
 
 @router.get("/products/{product_id}")
 async def product(product_id: str):
-    doc = await db.products.find_one({"_id": product_id, "active": True})
+    doc = await store.catalog.published_product(product_id)
     if not doc:
         raise HTTPException(404, {"error": "product_not_found"})
-    category = await db.categories.find_one({"_id": doc.get("category_id")})
-    item = present(doc, await pricing.settings(db), full=True)
+    category = await store.catalog.category(doc.get("category_id"))
+    item = present(doc, await pricing.settings(), full=True)
     item["category_name"] = category and category["name"]
     return item
