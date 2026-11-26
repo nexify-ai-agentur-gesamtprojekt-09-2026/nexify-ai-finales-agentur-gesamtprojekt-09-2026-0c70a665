@@ -1,3 +1,25 @@
+## Stand 26.11.2026, ca. 07:00 UTC · Regelbetrieb: Ausfall vom 22. bis 26.11., anderer Build auf `www.nexifyai.de`, `teileklar.shop` antwortet 503, Live-Check gegen die Domain bricht ab
+
+Führt den Abschnitt vom 22.11.2026, ca. 07:00 UTC, direkt darunter fort. Kennzeichnung wie dort. Neu in `DECISIONS.md`: nichts.
+
+### Selbst geprüft (IST, 26.11.2026, 06:54 bis 07:05 UTC)
+
+- **OFFEN: Ausfall des Regelbetriebs.** Die geplanten Läufe vom 22.11.2026, 22:47 UTC, bis 26.11.2026, 02:47 UTC (20 Läufe), wurden nicht ausgeführt; die Benachrichtigungen kamen erst am 26.11.2026, 06:52 UTC, gesammelt an. Für diesen Zeitraum gibt es keine Messung und keinen Tagesbericht. Ursache nicht belegt (die Sitzung war nicht erreichbar). Alle Vergleiche unten beziehen sich deshalb auf den 22.11.2026 (OA-151).
+- **`main` und Pull Requests.** `main` unverändert `9c9c806` (14.11.2026). Seit 22.11.2026, 19:00 UTC, 0 Merges und 0 neue PRs; 54 offen, davon 3 Entwürfe, Auto-Merge an 17. PR 206, 211, 218, 220, 221 und 222 seit 22.11.2026 unverändert.
+- **CI auf `main`.** Die zeitgesteuerten Läufe vom 23., 24. und 25.11.2026 enden jeweils rot; im Lauf vom 25.11.2026, 15:43 UTC, schlagen `next-web` und `repository` fehl, `openapi-schema`, `react-site` und `postgres-isolation` bestehen. Ursache nicht untersucht (OA-022).
+- **Vercel-Adresse von `main`** (07:00 bis 07:04 UTC, nacheinander): `node tools/live-check.mjs` 329 Prüfungen, 0 Befunde; `node tools/gleichmacher.mjs` 44 Seiten, 0 Abweichungen. Unverändert.
+- **Fremde Anwendung auf `www.nexifyai.de`** (Antwortkopf `server: cloudflare`, nicht aus `main`). Hauptskript jetzt `index-ChUwWm2E.js` (22.11.2026: `index-DsVj8dEd.js`), also ein anderer Build bei unverändertem `main`; Herkunft nicht belegt. Sitemap 27 Einträge (22.11.2026: 36). `/agb`, `/widerruf`, `/avv` und `/api/shop/status` weiterhin 404; `/impressum`, `/datenschutz` und `/sw.js` 200 (`/sw.js` am 22.11.2026: 404). `/teileklar` jetzt 404 (22.11.2026: 301 auf `teileklar.shop`) (OA-182, OA-185, OA-188).
+- **OFFEN, neu: Live-Check gegen die Domain bricht ab.** `node tools/live-check.mjs https://nexifyai.de` endet zweimal reproduziert (06:54 und 06:58 UTC) mit einem unbehandelten Playwright-Timeout (`tools/live-check.mjs:55`, wartet auf `.hc-gallery-card` Nr. 3), Exit 1, ohne Prüfzahlen (22.11.2026: 231 Prüfungen, 17 Befunde). Die Prüfgruppen wurden für die Domain daher nicht gemessen. Das Werkzeug wurde nicht geändert (OA-189).
+- **Gleichmacher gegen `nexifyai.de`** (06:57 UTC): 28 Seiten, 296 Abweichungen, 97 Befunde, 20 Fehler, alle „Norm nicht messbar auf /teileklar“ (Shop-Kopfleisten-Bausteine, Breiten 390 und 1440). Vorher (22.11.2026): 30 Seiten, 452 Abweichungen, 104 Befunde, 20 Fehler.
+- **`teileklar.shop`.** `/` 200; `/warenkorb`, `/kasse` und `/api/shop/status` 503, die Schnittstelle meldet „TEILEKLAR.shop ist vorübergehend nicht verfügbar.“ (22.11.2026: dort 404, Katalog erreichbar). Wer umgestellt hat: nicht belegt (OA-188).
+- **Subdomains.** `brain.nexifyai.cloud` 302 auf `/docs` (am 22.11.2026 als 307 erfasst), `/docs` 200 ohne Anmeldung; `workplace.nexifyai.cloud` 404; `agenten.nexifyai.cloud` 530 – in der Sache unverändert. `mcp.nexifyai.cloud` in diesem Lauf nicht gemessen (OA-186).
+- **OFFEN, nicht bestätigt: D-023.** Die in Entwurfs-PR 222 beschriebene Inhaberentscheidung D-023 (Agentur und Kundencenter zuerst, TEILEKLAR.shop pausiert) ist von dieser Sitzung nicht bestätigt und steht nicht auf `main`. Die 503-Antwort des Shops passt zu ihr, belegt sie aber nicht.
+- **Ursachen** des neuen Builds, der geänderten Shop-Antworten und der roten CI-Jobs: nicht belegt.
+
+### Prüfstand und Umfang dieser Nachführung
+
+Nur Dokumente, Zweig `claude/stand-1115` (PR 206): dieser Abschnitt, Überschrift, Zählung und Verweise in „Offene Arbeiten“, in `docs/09-final/offene-arbeiten-2026-11-14.md` Abschnitt 16 mit OA-189 und Stand-Zeilen an OA-022, OA-151, OA-182, OA-185, OA-186 und OA-188. Keine Prüfsumme und kein Beleg angefasst.
+
 ## Stand 22.11.2026, ca. 07:00 UTC · Regelbetrieb: Shop-Weiterleitungen geändert (Herkunft nicht belegt), `brain` und `workplace` antworten anders, Prüfungen laufen nacheinander
 
 Führt den Abschnitt vom 21.11.2026, ca. 19:00 UTC, direkt darunter fort. Kennzeichnung wie dort. Neu in `DECISIONS.md`: nichts.
@@ -355,26 +377,26 @@ Diese Nachführung (Zweig `claude/stand-halten`) ändert nur Dokumente und einen
 
 OFFEN, nicht belegt (aus den Sitzungsnotizen vom 14.11.2026 übernommen, hier nicht nachgeprüft): Zuordnung der Domains zum Projekt `prj_lKQEWQ…` über die Vercel-Schnittstelle (Abruf von hier 403; die Zuordnung steht in `docs/deployment/environment-variables.md` Abschnitt 6); 503 `database_metadata_unavailable` im früheren Projekt `prj_Po7jl…`; signierter Composio-Webhook 200; GitHub Actions startet kontoweit keine Jobs (zuletzt belegt am 13.11.2026 im Befund, Abschnitt 10); Zahl und Zustand der offenen Pull Requests. Live-Wirkung der Shop-Zulassungsliste: unverändert offen, siehe nächster Abschnitt.
 
-## Offene Arbeiten · Stand 22.11.2026, ca. 07:00 UTC
+## Offene Arbeiten · Stand 26.11.2026, ca. 07:00 UTC
 
 Kein zweites Register: Führend bleiben P01–P26 und die Hauptfälle MASTER-01 bis MASTER-18 in `config/acceptance-coverage.json` (`whole_system_accepted: false`). Das Register ist ausdrücklich keine Ausführungsliste und hat für die folgenden Arbeiten kein Feld. Dieser Abschnitt wird bei jeder Nachführung ersetzt, nicht fortgeschrieben.
 
-Die einzelnen offenen Arbeiten stehen in der Arbeitsliste `docs/09-final/offene-arbeiten-2026-11-14.md` (OA-001 bis OA-162 zum Stand `29f0691`, Abschnitt 8 mit OA-163 bis OA-170 zum Stand `500c52d`, Abschnitt 9 mit OA-171 bis OA-178 zum Stand `48f5072`, Abschnitt 10 mit OA-179 bis OA-181 vom 15.11.2026, Abschnitt 11 mit der Nachführung vom 16.11.2026, Abschnitt 12 mit OA-182 bis OA-184 vom 17.11.2026, Abschnitt 13 mit OA-185 bis OA-187 vom 19.11.2026, Abschnitt 14 mit OA-188 vom 21.11.2026, Abschnitt 15 mit der Nachführung vom 22.11.2026 ohne neue Einträge). Sie dient der Vergabe und ersetzt kein führendes Register; die Angaben der Einträge OA-001 bis OA-162 sind hier nicht einzeln nachgeprüft. Weicht sie von diesem Abschnitt ab, gilt dieser Abschnitt.
+Die einzelnen offenen Arbeiten stehen in der Arbeitsliste `docs/09-final/offene-arbeiten-2026-11-14.md` (OA-001 bis OA-162 zum Stand `29f0691`, Abschnitt 8 mit OA-163 bis OA-170 zum Stand `500c52d`, Abschnitt 9 mit OA-171 bis OA-178 zum Stand `48f5072`, Abschnitt 10 mit OA-179 bis OA-181 vom 15.11.2026, Abschnitt 11 mit der Nachführung vom 16.11.2026, Abschnitt 12 mit OA-182 bis OA-184 vom 17.11.2026, Abschnitt 13 mit OA-185 bis OA-187 vom 19.11.2026, Abschnitt 14 mit OA-188 vom 21.11.2026, Abschnitt 15 mit der Nachführung vom 22.11.2026 ohne neue Einträge, Abschnitt 16 mit OA-189 vom 26.11.2026). Sie dient der Vergabe und ersetzt kein führendes Register; die Angaben der Einträge OA-001 bis OA-162 sind hier nicht einzeln nachgeprüft. Weicht sie von diesem Abschnitt ab, gilt dieser Abschnitt.
 
-Zählung der Arbeitsliste nach dieser Nachführung (188 Einträge; Herleitung in Abschnitt 14.2, am 22.11.2026 unverändert, Abschnitt 15.2):
+Zählung der Arbeitsliste nach dieser Nachführung (189 Einträge; Herleitung in Abschnitt 16.2):
 
-| Zustand | 15.11., 11:00 UTC | 16.11., 03:00 UTC | 17.11., 19:00 UTC | 19.11., 19:15 UTC | 21.11., 19:00 UTC | 22.11., 07:00 UTC |
-|---|---|---|---|---|---|---|
-| OFFEN | 50 | 50 | 51 | 52 | 52 | 52 |
-| TEILWEISE | 13 | 13 | 13 | 13 | 13 | 13 |
-| BLOCKIERT | 38 | 38 | 38 | 38 | 38 | 38 |
-| ENTSCHEIDUNG NÖTIG | 62 | 61 | 63 | 65 | 66 | 66 |
-| HISTORIE-überholt | 8 | 9 | 9 | 9 | 9 | 9 |
-| ERLEDIGT | 10 | 10 | 10 | 10 | 10 | 10 |
+| Zustand | 15.11., 11:00 UTC | 16.11., 03:00 UTC | 17.11., 19:00 UTC | 19.11., 19:15 UTC | 21.11., 19:00 UTC | 22.11., 07:00 UTC | 26.11., 07:00 UTC |
+|---|---|---|---|---|---|---|---|
+| OFFEN | 50 | 50 | 51 | 52 | 52 | 52 | 53 |
+| TEILWEISE | 13 | 13 | 13 | 13 | 13 | 13 | 13 |
+| BLOCKIERT | 38 | 38 | 38 | 38 | 38 | 38 | 38 |
+| ENTSCHEIDUNG NÖTIG | 62 | 61 | 63 | 65 | 66 | 66 | 66 |
+| HISTORIE-überholt | 8 | 9 | 9 | 9 | 9 | 9 | 9 |
+| ERLEDIGT | 10 | 10 | 10 | 10 | 10 | 10 | 10 |
 
-Seit 16.11., 03:00 UTC neu: OA-182 (öffentliche Domain außerhalb von `main` und Vercel ausgeliefert, Owner Inhaber), OA-183 (PR 218 prüfen lassen, Resize-Beleg neu erheben), OA-184 (Next-Sicherheitshinweis, PR 217); am 19.11. OA-185 (Rechtsseiten und Kaufweg), OA-186 (gestörte Subdomains), OA-187 (Agenten-Endpunkt ohne Anmeldung); am 21.11. OA-188 (Shop-Umleitung auf `teileklar.shop`). Am 22.11. keine neuen Einträge, Stand-Zeilen an OA-186 und OA-188.
+Seit 16.11., 03:00 UTC neu: OA-182 (öffentliche Domain außerhalb von `main` und Vercel ausgeliefert, Owner Inhaber), OA-183 (PR 218 prüfen lassen, Resize-Beleg neu erheben), OA-184 (Next-Sicherheitshinweis, PR 217); am 19.11. OA-185 (Rechtsseiten und Kaufweg), OA-186 (gestörte Subdomains), OA-187 (Agenten-Endpunkt ohne Anmeldung); am 21.11. OA-188 (Shop-Umleitung auf `teileklar.shop`). Am 22.11. keine neuen Einträge, Stand-Zeilen an OA-186 und OA-188. Am 26.11. OA-189 (Live-Check bricht gegen die Domain ab), Stand-Zeilen an OA-022, OA-151, OA-182, OA-185, OA-186 und OA-188.
 
-Offene Pull Requests (IST, `gh api …/pulls?state=open`, 17.11.2026, 19:10 UTC, ergänzt um PR 218): 50 offen, davon 9 Entwürfe; Auto-Merge eingeschaltet an 17 (16.11., 02:56 UTC: an 18). Seit 16.11., 02:56 UTC neu: 215 bis 218; gemergt oder geschlossen seither keiner.
+Offene Pull Requests (IST, `gh api …/pulls?state=open`, 17.11.2026, 19:10 UTC, ergänzt um PR 218): 50 offen, davon 9 Entwürfe; Auto-Merge eingeschaltet an 17 (16.11., 02:56 UTC: an 18). Seit 16.11., 02:56 UTC neu: 215 bis 218; gemergt oder geschlossen seither keiner. Stand der Tabelle 17.11., Zahlen 26.11.: 54/3/17 (54 offen, 3 Entwürfe, Auto-Merge an 17; `PROGRESS.md`, Abschnitt „Stand 26.11.2026, ca. 07:00 UTC“); die Tabelle ist nicht auf den 26.11. nachgeführt.
 
 | PR | Titel (gekürzt) | Entwurf | Auto-Merge |
 |---|---|---|---|
@@ -441,7 +463,7 @@ Kann die Fabrik (innerhalb D-017, ohne neue Freigabe; je Paket ein Schreiber und
 - G · Lead-Plan und Wettbewerb (OA-095, OA-100): offen.
 - H, I, J · Folgepakete J-1 bis J-7: J-5 gebaut (PR 181); J-1 und weitere als Entwürfe der zweiten Sitzung (187, 195).
 - K · Shop-Zugriffsschicht, PR 150 (OA-076): offen.
-- M · Nur lesende Messungen (OA-021, OA-132, OA-181): offen. Regelbetrieb mit Sichtprüfung der eigenen Seiten: zuletzt 17.11.2026, 18:47 UTC (`PROGRESS.md`, oberster Abschnitt); zehn Läufe dazwischen ausgefallen. Befund `/teileklar` „wird geladen“: Korrektur als Entwurf PR 218 (OA-183).
+- M · Nur lesende Messungen (OA-021, OA-132, OA-181): offen. Regelbetrieb mit Sichtprüfung der eigenen Seiten: zuletzt 26.11.2026, 06:54 bis 07:05 UTC (`PROGRESS.md`, oberster Abschnitt); davor 20 Läufe vom 22.11.2026, 22:47 UTC, bis 26.11.2026, 02:47 UTC, ausgefallen (OA-151). Abbruch von `tools/live-check.mjs` gegen die Domain beheben (OA-189). Befund `/teileklar` „wird geladen“: Korrektur als Entwurf PR 218 (OA-183).
 
 Braucht den Inhaber (vollständige Liste: Arbeitsliste Abschnitte 6, 8 und 9; hier das Dringende):
 - Kritisch · `nexifyai.de` und `www.nexifyai.de` zeigen auf eine fremde Auslieferung (A `185.158.133.1`, Lovable-Kennungen), nicht auf `main` über Vercel; das Vercel-Projekt `…-ut7r` trägt die Domain nicht mehr. Bestätigen, ob gewollt, und über Rückweg oder neue Führungsentscheidung befinden (OA-182; `AGENTS.md` 13.11.2026, D-012, D-021).

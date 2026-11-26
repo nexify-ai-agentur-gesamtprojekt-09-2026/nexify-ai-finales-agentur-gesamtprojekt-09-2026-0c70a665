@@ -283,6 +283,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Stand 14.11.2026, ca. 22:00 UTC:** Unverändert (IST, `gh api …/commits/48f5072/check-runs` und Anmerkungen, 21:47 UTC): Die Läufe auf `48f5072` (CI, Chat owner schema fixture, Slack) enden um 21:45 UTC nach 2 bis 3 Sekunden mit „failure“, Anmerkung wie oben. Bleibt BLOCKIERT.
 - **Stand 15.11.2026, ca. 11:00 UTC:** Unverändert (IST, `gh api …/actions/runs` und Anmerkungen, ca. 10:55 UTC): Die Läufe „CI“ und „PR-Triage“ auf `af8d52a` (Zweig von PR 205) vom 15.11.2026, 10:50 bis 10:52 UTC, enden mit „failure“; Anmerkung am ersten CI-Job: „The job was not started because an Actions budget is preventing further use.“ Bleibt BLOCKIERT.
 - **Stand 16.11.2026, ca. 03:00 UTC:** Lage geändert (IST, `gh api …/actions/runs` und `…/runs/<id>/jobs`, 02:56 UTC): Actions startet wieder Jobs. Die Läufe auf `9def230` vom 16.11.2026, 02:26 UTC, führen Schritte aus; „CI“ dort mit 5 Jobs: `openapi-schema`, `postgres-isolation`, `react-site` bestanden, `next-web` und `repository` mit „Process completed with exit code 1“ (Befund am Code, hier nicht untersucht). Wann die Budgetsperre endete, ist hier nicht belegt (zuletzt am 15.11.2026, 10:52 UTC, gemessen). Budgetfrage erledigt, soweit messbar; offen bleibt, ob die Freigabe dauerhaft ist (Inhaber). Folge für OA-027.
+- **Stand 26.11.2026, ca. 07:00 UTC:** CI auf `main` (`9c9c806`): die zeitgesteuerten Läufe vom 23., 24. und 25.11.2026 enden jeweils rot; im Lauf vom 25.11.2026, 15:43 UTC, schlagen `next-web` und `repository` fehl, `openapi-schema`, `react-site` und `postgres-isolation` bestehen. Die Jobs starten also mit Schritten; die Ursache der roten Jobs ist nicht untersucht. Zustand unverändert.
 
 #### OA-023 · Infrastruktur & Server · ENTSCHEIDUNG NÖTIG
 
@@ -1482,6 +1483,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Fertig, wenn:** Zwei aufeinanderfolgende Läufe in eigener Umgebung mit Live-Prüfung und Gleichmacher belegt.
 - **Aufwand:** S · **Ausführung:** nur Inhaber (Umgebung/Repository-Zugriff einrichten); danach Agent
 - **Quellen:** PROGRESS.md, Abschnitte „Stand 14.11.2026, ca. 14:25 UTC“ und „Offene Arbeiten“ (14.11.2026); Abruf der geplanten Aufgaben (list_triggers), 14.11.2026 ca. 18:40 UTC
+- **Stand 26.11.2026, ca. 07:00 UTC:** Ausfall des Regelbetriebs belegt: Die geplanten Läufe vom 22.11.2026, 22:47 UTC, bis 26.11.2026, 02:47 UTC (20 Läufe), wurden nicht ausgeführt; die Benachrichtigungen kamen erst am 26.11.2026, 06:52 UTC, gesammelt in der Sitzung an. Für diesen Zeitraum gibt es keine Messung und keinen Tagesbericht. Ursache nicht belegt (die Sitzung war nicht erreichbar). Das bestätigt den Blocker: Der Regelbetrieb hängt an einer offenen Sitzung. Bleibt BLOCKIERT.
 
 #### OA-152 · Routinen & Dauerbetrieb · OFFEN
 
@@ -2032,6 +2034,7 @@ Herleitung: OFFEN 50 + 1 neu (183) = 51. ENTSCHEIDUNG NÖTIG 61 + 2 neue (182, 1
 - **Aufwand:** S für die Entscheidung · **Ausführung:** Entscheidung nur Inhaber, Messung Fabrik · **Owner:** Inhaber · **Nächste Aktion:** sofort vorlegen
 - **Quellen:** `PROGRESS.md`, Abschnitt „Stand 17.11.2026, ca. 19:00 UTC“; DNS über HTTPS, `curl`, Vercel-API (nur lesend), 17.11.2026
 - **Stand 19.11.2026, ca. 19:15 UTC:** `nexifyai.de`, `nexifyai.cloud` und `www.nexifyai.cloud` leiten mit 301 auf `www.nexifyai.de`; dort eine Vite-/TanStack-Anwendung mit Lovable-Kennungen und dem Titel der Startseite aus `main`, deren Kennungen in keinem Zweig dieses Repositorys vorkommen; nicht an den Vercel-Projekten `…-ut7r`/`…-s4k5`. Live-Check 315/15, Gleichmacher 731 Abweichungen. Herkunft weiter nicht belegt (`PROGRESS.md`, Abschnitt „Stand 19.11.2026, ca. 19:15 UTC“).
+- **Stand 26.11.2026, ca. 07:00 UTC:** Messung 06:54 bis 07:05 UTC. `www.nexifyai.de` antwortet weiter über Cloudflare (`server: cloudflare`) mit einer Anwendung, die nicht aus `main` stammt. Hauptskript jetzt `index-ChUwWm2E.js` (22.11.2026: `index-DsVj8dEd.js`), also ein anderer Build bei unverändertem `main` `9c9c806`; Herkunft nicht belegt. Sitemap 27 Einträge (22.11.2026: 36). `node tools/live-check.mjs https://nexifyai.de` bricht ab, ohne Prüfzahlen (OA-189); `node tools/gleichmacher.mjs` 28 Seiten, 296 Abweichungen, 97 Befunde, 20 Fehler (22.11.2026: 30/452/104/20). Zustand bleibt ENTSCHEIDUNG NÖTIG.
 
 #### OA-183 · Shop TEILEKLAR · OFFEN
 
@@ -2086,6 +2089,7 @@ Herleitung: OFFEN 51 + 1 neu (186) = 52. ENTSCHEIDUNG NÖTIG 63 + 2 neue (185, 1
 - **Aufwand:** S für die Entscheidung · **Ausführung:** Entscheidung Inhaber, Messung Fabrik · **Owner:** Inhaber · **Nächste Aktion:** sofort vorlegen
 - **Quellen:** `PROGRESS.md`, Abschnitt „Stand 19.11.2026, ca. 19:15 UTC“; `curl` und Playwright, 19.11.2026, 19:04 bis 19:06 UTC
 - **Stand 21.11.2026, ca. 19:00 UTC:** `/teileklar` und Unterpfade leiten auf `teileklar.shop` um; dort `/rechtliches`, `/warenkorb` und `/kasse` 404. Weiter siehe OA-188.
+- **Stand 26.11.2026, ca. 07:00 UTC:** Messung 07:04 UTC: `/agb`, `/widerruf`, `/avv` auf `www.nexifyai.de` weiterhin 404; `/impressum` und `/datenschutz` 200. `/teileklar` jetzt 404 (22.11.2026: 301 auf `teileklar.shop`), siehe OA-188. Zustand unverändert.
 
 #### OA-186 · Infrastruktur & Server · OFFEN
 
@@ -2097,6 +2101,7 @@ Herleitung: OFFEN 51 + 1 neu (186) = 52. ENTSCHEIDUNG NÖTIG 63 + 2 neue (185, 1
 - **Aufwand:** S bis M · **Ausführung:** lesende Messung Fabrik, Eingriff nach Freigabe · **Owner:** Inhaber · **Nächste Aktion:** Freigabe für lesende Server-Messung (`nexify-server-messung`) einholen
 - **Quellen:** `curl`, 19.11.2026, 19:07 UTC; Meldung der Hauptsitzung (Beginn, nicht selbst gemessen)
 - **Stand 22.11.2026, ca. 07:00 UTC:** Messung zwischen 02:47 und 06:47 UTC: `brain.nexifyai.cloud` antwortet mit 307 auf `/docs`, dort 200 ohne Anmeldung abrufbar; ob die Schnittstellen dahinter offen sind, ist nicht geprüft (vorher 502). `workplace.nexifyai.cloud` 404 (vorher 502). `agenten.nexifyai.cloud` unverändert 530. Kein Eingriff dieser Sitzung; wer geändert hat, nicht belegt. Zustand bleibt OFFEN.
+- **Stand 26.11.2026, ca. 07:00 UTC:** Messung 07:04 UTC: `brain.nexifyai.cloud` 302 auf `/docs` (am 22.11.2026 als 307 erfasst), `/docs` 200 ohne Anmeldung; `workplace.nexifyai.cloud` 404; `agenten.nexifyai.cloud` 530 – in der Sache unverändert. `mcp.nexifyai.cloud` wurde in diesem Lauf nicht gemessen. Zwischen 22.11.2026, 22:47 UTC, und 26.11.2026, 02:47 UTC, liegt keine Messung vor (OA-151). Zustand bleibt OFFEN.
 
 #### OA-187 · Sicherheit · ENTSCHEIDUNG NÖTIG
 
@@ -2141,6 +2146,7 @@ Herleitung: ENTSCHEIDUNG NÖTIG 65 + 1 neu (188) = 66.
 - **Aufwand:** S für die Entscheidung · **Ausführung:** Entscheidung Inhaber, Messung Fabrik · **Owner:** Inhaber (Entscheidung) · **Nächste Aktion:** Inhaber bestätigt, ob `teileklar.shop` die gewollte Shop-Auslieferung ist und aus welchem Repository sie stammt
 - **Quellen:** `PROGRESS.md`, Abschnitt „Stand 21.11.2026, ca. 19:00 UTC“; `curl`, `tools/live-check.mjs` und `tools/gleichmacher.mjs`, 21.11.2026, 14:47 bis 18:54 UTC
 - **Stand 22.11.2026, ca. 07:00 UTC:** Messung zwischen 18:47 und 22:47 UTC am 21.11.2026: Die Weiterleitungen sind geändert, Herkunft nicht belegt. `/teileklar/warenkorb` und `/teileklar/kasse` leiten auf `teileklar.shop/shop`, `/teileklar/rechtliches` auf `/impressum`, `/teileklar/werkstatt` auf `/werkstatt-partner`; die Ziele antworten jetzt mit 200. Direkt auf `teileklar.shop` bleiben `/warenkorb`, `/kasse` und `/api/shop/status` 404; Katalog dort `total` 3720. Wer umgestellt hat: nicht belegt; `main` unverändert `9c9c806`. Zustand bleibt ENTSCHEIDUNG NÖTIG.
+- **Stand 26.11.2026, ca. 07:00 UTC:** Messung 07:04 UTC: `www.nexifyai.de/teileklar` antwortet jetzt mit 404 (22.11.2026: 301 auf `teileklar.shop`). Auf `teileklar.shop` antwortet `/` mit 200; `/warenkorb`, `/kasse` und `/api/shop/status` antworten mit 503, die Schnittstelle meldet „TEILEKLAR.shop ist vorübergehend nicht verfügbar.“ (22.11.2026: dort 404, Katalog erreichbar). `gleichmacher` gegen `nexifyai.de` meldet 20 Fehler „Norm nicht messbar auf /teileklar“ (Shop-Kopfleisten-Bausteine, Breiten 390 und 1440). Wer umgestellt hat: nicht belegt; `main` unverändert `9c9c806`. Die in Entwurfs-PR 222 beschriebene Inhaberentscheidung D-023 (Agentur und Kundencenter zuerst, TEILEKLAR.shop pausiert) ist hier nicht bestätigt; die 503-Antwort passt zu ihr, belegt sie aber nicht. Zustand bleibt ENTSCHEIDUNG NÖTIG.
 
 ## 15. Nachführung 22.11.2026, ca. 07:00 UTC (Stand `origin/main` `9c9c806`, PR 199)
 
@@ -2162,3 +2168,37 @@ Kein Zustand geändert. Stand-Zeilen an OA-186 (Subdomains antworten anders) und
 | ERLEDIGT | 10 | 10 |
 
 Herleitung: keine Zustandsänderung, keine neuen Einträge.
+
+## 16. Nachführung 26.11.2026, ca. 07:00 UTC (Stand `origin/main` `9c9c806`, PR 199)
+
+Regelbetrieb-Lauf 26.11.2026, 06:54 bis 07:05 UTC. Seit `9c9c806` kein Merge. Die geplanten Läufe vom 22.11.2026, 22:47 UTC, bis 26.11.2026, 02:47 UTC (20 Läufe), sind ausgefallen; für diesen Zeitraum gibt es keine Messung (OA-151). Quelle der eigenen Angaben: `PROGRESS.md`, Abschnitt „Stand 26.11.2026, ca. 07:00 UTC“.
+
+### 16.1 Geänderte Zustände
+
+Kein Zustand geändert. Stand-Zeilen an OA-022 (CI auf `main` täglich rot), OA-151 (Ausfall des Regelbetriebs), OA-182 (anderer Build auf `www.nexifyai.de`, Sitemap 27), OA-185 (Rechtsseiten unverändert 404), OA-186 (Subdomains in der Sache unverändert) und OA-188 (`/teileklar` 404, `teileklar.shop` 503).
+
+### 16.2 Zählung nach der Nachführung (189 Einträge)
+
+| Zustand | Stand 22.11.2026, ca. 07:00 UTC | Stand 26.11.2026, ca. 07:00 UTC |
+|---|---|---|
+| OFFEN | 52 | 53 |
+| TEILWEISE | 13 | 13 |
+| BLOCKIERT | 38 | 38 |
+| ENTSCHEIDUNG NÖTIG | 66 | 66 |
+| HISTORIE-überholt | 9 | 9 |
+| ERLEDIGT | 10 | 10 |
+
+Herleitung: OFFEN 52 + 1 neu (189) = 53.
+
+### 16.3 Neue Einträge
+
+#### OA-189 · Qualität & Belege · OFFEN
+
+- **Priorität:** 5 Betrieb und Skalierung
+- **Ziel:** `node tools/live-check.mjs` bricht gegen `https://nexifyai.de` mit einem unbehandelten Playwright-Timeout ab, statt einen Befund zu melden: `tools/live-check.mjs:55` ruft `scrollIntoViewIfNeeded()` auf `.hc-gallery-card` Nr. 3 außerhalb des `try` auf; findet die Seite die dritte Karte nicht, endet der Lauf nach 30 s mit Exit 1 ohne Prüfzahlen. Damit fehlen für die öffentliche Domain alle übrigen Prüfgruppen. Werkzeug so ändern, dass eine fehlende Karte als Befund zählt und der Lauf vollständig weiterläuft; die Prüfregel selbst nicht abschwächen.
+- **Blocker:** keiner; das Werkzeug wurde in diesem Lauf bewusst nicht geändert (Nachführung nur Dokumente).
+- **Abhängigkeiten:** keine (verwandt: OA-182)
+- **Fertig, wenn:** Ein Lauf gegen eine Seite ohne drei Galerie-Karten liefert Prüfzahlen mit einem Befund zur Galerie statt eines Abbruchs; Lauf gegen die Vercel-Adresse von `main` unverändert 329/0.
+- **Aufwand:** S · **Ausführung:** Fabrik, eigener Zweig · **Owner:** Fabrik · **Nächste Aktion:** Änderung im eigenen Zweig mit beiden Läufen als Beleg
+- **Quellen:** `node tools/live-check.mjs https://nexifyai.de`, 26.11.2026, 06:54 und 06:58 UTC, zweimal reproduziert (`TimeoutError`, „waiting for locator('.hc-gallery-card').nth(2)“, Exit 1); 22.11.2026 lieferte derselbe Aufruf 231 Prüfungen, 17 Befunde
+
