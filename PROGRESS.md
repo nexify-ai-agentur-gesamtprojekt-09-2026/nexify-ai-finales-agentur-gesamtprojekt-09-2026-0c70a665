@@ -1,3 +1,186 @@
+## Stand 26.11.2026, ca. 07:00 UTC · Regelbetrieb: Ausfall vom 22. bis 26.11., anderer Build auf `www.nexifyai.de`, `teileklar.shop` antwortet 503, Live-Check gegen die Domain bricht ab
+
+Führt den Abschnitt vom 22.11.2026, ca. 07:00 UTC, direkt darunter fort. Kennzeichnung wie dort. Neu in `DECISIONS.md`: nichts.
+
+### Selbst geprüft (IST, 26.11.2026, 06:54 bis 07:05 UTC)
+
+- **OFFEN: Ausfall des Regelbetriebs.** Die geplanten Läufe vom 22.11.2026, 22:47 UTC, bis 26.11.2026, 02:47 UTC (20 Läufe), wurden nicht ausgeführt; die Benachrichtigungen kamen erst am 26.11.2026, 06:52 UTC, gesammelt an. Für diesen Zeitraum gibt es keine Messung und keinen Tagesbericht. Ursache nicht belegt (die Sitzung war nicht erreichbar). Alle Vergleiche unten beziehen sich deshalb auf den 22.11.2026 (OA-151).
+- **`main` und Pull Requests.** `main` unverändert `9c9c806` (14.11.2026). Seit 22.11.2026, 19:00 UTC, 0 Merges und 0 neue PRs; 54 offen, davon 3 Entwürfe, Auto-Merge an 17. PR 206, 211, 218, 220, 221 und 222 seit 22.11.2026 unverändert.
+- **CI auf `main`.** Die zeitgesteuerten Läufe vom 23., 24. und 25.11.2026 enden jeweils rot; im Lauf vom 25.11.2026, 15:43 UTC, schlagen `next-web` und `repository` fehl, `openapi-schema`, `react-site` und `postgres-isolation` bestehen. Ursache nicht untersucht (OA-022).
+- **Vercel-Adresse von `main`** (07:00 bis 07:04 UTC, nacheinander): `node tools/live-check.mjs` 329 Prüfungen, 0 Befunde; `node tools/gleichmacher.mjs` 44 Seiten, 0 Abweichungen. Unverändert.
+- **Fremde Anwendung auf `www.nexifyai.de`** (Antwortkopf `server: cloudflare`, nicht aus `main`). Hauptskript jetzt `index-ChUwWm2E.js` (22.11.2026: `index-DsVj8dEd.js`), also ein anderer Build bei unverändertem `main`; Herkunft nicht belegt. Sitemap 27 Einträge (22.11.2026: 36). `/agb`, `/widerruf`, `/avv` und `/api/shop/status` weiterhin 404; `/impressum`, `/datenschutz` und `/sw.js` 200 (`/sw.js` am 22.11.2026: 404). `/teileklar` jetzt 404 (22.11.2026: 301 auf `teileklar.shop`) (OA-182, OA-185, OA-188).
+- **OFFEN, neu: Live-Check gegen die Domain bricht ab.** `node tools/live-check.mjs https://nexifyai.de` endet zweimal reproduziert (06:54 und 06:58 UTC) mit einem unbehandelten Playwright-Timeout (`tools/live-check.mjs:55`, wartet auf `.hc-gallery-card` Nr. 3), Exit 1, ohne Prüfzahlen (22.11.2026: 231 Prüfungen, 17 Befunde). Die Prüfgruppen wurden für die Domain daher nicht gemessen. Das Werkzeug wurde nicht geändert (OA-189).
+- **Gleichmacher gegen `nexifyai.de`** (06:57 UTC): 28 Seiten, 296 Abweichungen, 97 Befunde, 20 Fehler, alle „Norm nicht messbar auf /teileklar“ (Shop-Kopfleisten-Bausteine, Breiten 390 und 1440). Vorher (22.11.2026): 30 Seiten, 452 Abweichungen, 104 Befunde, 20 Fehler.
+- **`teileklar.shop`.** `/` 200; `/warenkorb`, `/kasse` und `/api/shop/status` 503, die Schnittstelle meldet „TEILEKLAR.shop ist vorübergehend nicht verfügbar.“ (22.11.2026: dort 404, Katalog erreichbar). Wer umgestellt hat: nicht belegt (OA-188).
+- **Subdomains.** `brain.nexifyai.cloud` 302 auf `/docs` (am 22.11.2026 als 307 erfasst), `/docs` 200 ohne Anmeldung; `workplace.nexifyai.cloud` 404; `agenten.nexifyai.cloud` 530 – in der Sache unverändert. `mcp.nexifyai.cloud` in diesem Lauf nicht gemessen (OA-186).
+- **OFFEN, nicht bestätigt: D-023.** Die in Entwurfs-PR 222 beschriebene Inhaberentscheidung D-023 (Agentur und Kundencenter zuerst, TEILEKLAR.shop pausiert) ist von dieser Sitzung nicht bestätigt und steht nicht auf `main`. Die 503-Antwort des Shops passt zu ihr, belegt sie aber nicht.
+- **Ursachen** des neuen Builds, der geänderten Shop-Antworten und der roten CI-Jobs: nicht belegt.
+
+### Prüfstand und Umfang dieser Nachführung
+
+Nur Dokumente, Zweig `claude/stand-1115` (PR 206): dieser Abschnitt, Überschrift, Zählung und Verweise in „Offene Arbeiten“, in `docs/09-final/offene-arbeiten-2026-11-14.md` Abschnitt 16 mit OA-189 und Stand-Zeilen an OA-022, OA-151, OA-182, OA-185, OA-186 und OA-188. Keine Prüfsumme und kein Beleg angefasst.
+
+## Stand 22.11.2026, ca. 07:00 UTC · Regelbetrieb: Shop-Weiterleitungen geändert (Herkunft nicht belegt), `brain` und `workplace` antworten anders, Prüfungen laufen nacheinander
+
+Führt den Abschnitt vom 21.11.2026, ca. 19:00 UTC, direkt darunter fort. Kennzeichnung wie dort. Neu in `DECISIONS.md`: nichts.
+
+### Selbst geprüft (IST, 21./22.11.2026)
+
+- **Shop-Weiterleitungen geändert, Herkunft nicht belegt** (Messung zwischen 18:47 und 22:47 UTC am 21.11.2026). Auf `www.nexifyai.de` leiten jetzt `/teileklar/warenkorb` und `/teileklar/kasse` auf `teileklar.shop/shop`, `/teileklar/rechtliches` auf `/impressum`, `/teileklar/werkstatt` auf `/werkstatt-partner`; die Ziele antworten jetzt mit 200. Direkt auf `teileklar.shop` bleiben `/warenkorb`, `/kasse` und `/api/shop/status` 404; Katalog dort `total` 3720. Wer umgestellt hat: nicht belegt; `main` unverändert `9c9c806` (OA-188, Zustand bleibt ENTSCHEIDUNG NÖTIG).
+- **Subdomains** (Messung zwischen 02:47 und 06:47 UTC am 22.11.2026). `brain.nexifyai.cloud` antwortet mit 307 auf `/docs`, dort 200 ohne Anmeldung abrufbar; ob die Schnittstellen dahinter offen sind, ist nicht geprüft (vorher 502). `workplace.nexifyai.cloud` 404 (vorher 502). `agenten.nexifyai.cloud` unverändert 530. Kein Eingriff dieser Sitzung; wer es war, nicht belegt (OA-186).
+- **Prüfzahlen 06:52 bis 07:00 UTC** (vier Läufe nacheinander). Vercel-Adresse von `main`: `node tools/live-check.mjs` 329 Prüfungen, 0 Befunde; `node tools/gleichmacher.mjs` 44 Seiten, 0 Abweichungen. `https://www.nexifyai.de`: `live-check` 231 Prüfungen, 17 Befunde (Titel im Rahmen 2: `/teileklar` und `/teileklar/partner-werden` bei 360 px; KI-Hinweis 3; Kopfleistenabstand 6; Sortiment/Shop-Dienst 2; PWA 4); `gleichmacher` 30 Seiten, 452 Abweichungen, 104 Befunde, 20 Fehler (Shop-Kopfleiste auf `/teileklar` nicht messbar). Vorher (21.11.2026, 18:54 UTC): 228/18 und 30 Seiten/438/102/20.
+- **Messhinweis.** Der Lauf um 02:52 UTC mit vier parallelen Browserläufen ergab Scheinbefunde (Vercel-`live-check` 34 Befunde „status -1“, `gleichmacher` 23 „nicht ladbar“); die Wiederholung nacheinander ergab wieder 329/0 und 30/452/104/20. Seitdem laufen die Prüfungen nacheinander.
+- **Fremde Anwendung auf `www.nexifyai.de`:** Hauptskript seit 02:47 UTC `index-DsVj8dEd.js` (um 22:47 UTC am 21.11.2026 `index-BL3s7dC4.js`).
+- **Unverändert:** `/agb`, `/widerruf`, `/avv` auf `www.nexifyai.de` 404 (OA-185); Agenten-Endpunkt ohne Anmeldung (OA-187); Pull Requests 52 offen, 11 Entwürfe, Auto-Merge an 17; keine Merges und keine neuen PRs in 24 Stunden; CI auf `main` zuletzt am 20.11.2026, 14:05 UTC, rot.
+- **Ursachen** der geänderten Weiterleitungen und Subdomain-Antworten: nicht belegt.
+
+### Prüfstand und Umfang dieser Nachführung
+
+Nur Dokumente, Zweig `claude/stand-1115` (PR 206): dieser Abschnitt, Überschrift und Verweise in „Offene Arbeiten“, in `docs/09-final/offene-arbeiten-2026-11-14.md` Abschnitt 15 ohne neue Einträge und Stand-Zeilen an OA-186 und OA-188. Keine Prüfsumme und kein Beleg angefasst.
+
+## Stand 21.11.2026, ca. 19:00 UTC · Regelbetrieb: Shop-Pfade von `www.nexifyai.de` leiten auf `teileklar.shop` um, drei Zielpfade 404
+
+Führt den Abschnitt vom 19.11.2026, ca. 19:15 UTC, direkt darunter fort. Kennzeichnung wie dort. Neu in `DECISIONS.md`: nichts.
+
+### Selbst geprüft (IST, 21.11.2026)
+
+- **OFFEN, kritisch, neu: Weiterleitung der Shop-Pfade.** Seit einer Messung zwischen 14:47 und 18:47 UTC leiten `www.nexifyai.de/teileklar` und alle Unterpfade mit 301 auf `teileklar.shop` weiter; um 14:47 UTC antwortete `/teileklar` noch mit 200. Auslöser ist keine Änderung in diesem Repository (`main` unverändert `9c9c806` seit 14.11.2026). Wer umgestellt hat, ist nicht belegt (OA-188).
+- **`teileklar.shop`** (hinter Cloudflare). 200: `/`, `/shop`, `/impressum`, `/datenschutz`, `/agb`, `/widerruf`; Kopfzeile `x-robots-tag: index, follow`; `/api/shop/products` meldet `total` 3720. 404: `/warenkorb`, `/kasse`, `/rechtliches`, `/werkstatt`, `/api/shop/status`. Drei weitergeleitete Pfade (`/teileklar/warenkorb`, `/teileklar/kasse`, `/teileklar/rechtliches`) enden damit auf 404. Ob dort Bestellungen möglich sind, wurde nicht geprüft.
+- **Sitemap von `www.nexifyai.de`:** 36 Adressen (am 19.11.2026: 43), darunter weiterhin zehn `/teileklar`-Adressen, die nun weiterleiten.
+- **Prüfzahlen 18:54 UTC.** Vercel-Adresse von `main`: `node tools/live-check.mjs` 329 Prüfungen, 0 Befunde; `node tools/gleichmacher.mjs` 44 Seiten, 0 Abweichungen. `https://www.nexifyai.de`: `live-check` 228 Prüfungen, 18 Befunde (KI-Hinweis im Footer 3, Kopfleistenabstand 6, Shop-Dienst 2, PWA 4, neu 3: Querüberlauf `/teileklar/partner-werden` bei 360 px, `/teileklar/werkstatt` 404 bei 360 und 1440 px); `gleichmacher` 30 Seiten, 438 Abweichungen, 102 Befunde, 20 Fehler (Shop-Kopfleiste auf `/teileklar` nicht messbar). Vorher (19.11.2026): 315/15 und 42 Seiten/731/152/0.
+- **Fremde Anwendung auf `www.nexifyai.de`:** Hauptskript seit 14:47 UTC `index-B6_Qf_8Z.js` (davor `index-CPoKp_Ou.js`).
+- **Unverändert:** `/agb`, `/widerruf`, `/avv` auf `www.nexifyai.de` 404 (OA-185); drei gestörte Subdomains (OA-186); Agenten-Endpunkt ohne Anmeldung (OA-187); Pull Requests 52 offen, 11 Entwürfe, Auto-Merge an 17; CI auf `main` rot (`next-web`, `repository`) im Lauf vom 20.11.2026, 14:05 UTC.
+- **Ursache der Weiterleitung:** nicht belegt.
+
+### Prüfstand und Umfang dieser Nachführung
+
+Nur Dokumente, Zweig `claude/stand-1115` (PR 206): dieser Abschnitt, Verweis in „Offene Arbeiten“, in `docs/09-final/offene-arbeiten-2026-11-14.md` Abschnitt 14 mit OA-188 und Stand-Zeile an OA-185. Keine Prüfsumme und kein Beleg angefasst.
+
+## Stand 19.11.2026, ca. 19:15 UTC · Regelbetrieb: `nexifyai.de` liefert wieder eine eigene Seite, aber nicht aus `main`; Rechtsseiten fehlen, drei Subdomains gestört
+
+Führt den Abschnitt vom 19.11.2026, ca. 07:00 UTC, direkt darunter fort. Kennzeichnung wie dort. Neu in `DECISIONS.md`: nichts.
+
+### Selbst geprüft (IST, 19.11.2026)
+
+- **OFFEN, kritisch, geändert: Domain-Lage** (`curl`, 18:53 bis 19:08 UTC). `nexifyai.de`, `nexifyai.cloud` und `www.nexifyai.cloud` leiten mit 301 auf `https://www.nexifyai.de/`; `www.nexifyai.de` antwortet 200 über Cloudflare (`server: cloudflare`, Ressourcen `cf-cache-status: HIT`). Titel „Ein Gespräch. Ein Projekt, das passt. · NeXify AI“ (wie `apps/web` auf `main`), aber andere Anwendung: Startseite 56 KB statt 382 KB, keine `/_next/static/`-Verweise, Vite-Bündel unter `/assets/*-<hash>.js` (`index-…`, `routes-…`, `NexifyShell-…`, `SiteFilm-…`, `teileklar-…`), Bilder unter `/site-assets/<hash>.webp`, im Hauptbündel TanStack-Router und Lovable-Fehlermelder. `NexifyShell`, `SiteFilm`, `site-assets` und der `robots.txt`-Text („KI-Crawler ausdruecklich erlaubt“) kommen auf `origin/main` und auf keinem der 156 entfernten Zweige dieses Repositorys vor (`git grep`, 18:55 UTC), auch nicht in PR 219 und PR 220. Keines der Vercel-Projekte `…-ut7r` und `…-s4k5` trägt eine eigene Domain, `nexifyai.de` ist im Vercel-Team nicht eingetragen (Vercel-API, nur lesend, ca. 18:57 UTC). Herkunft damit: nicht aus diesem Repository, nicht über diese Vercel-Projekte; woher genau, ist nicht belegt (OA-182).
+- **Rechtsseiten auf `www.nexifyai.de`.** 200: `/impressum`, `/datenschutz`, `/cookies`, `/barrierefreiheit`, `/ki-hinweise`, `/vertragsgrundlagen`, `/teileklar/rechtliches`. 404: `/agb`, `/widerruf`, `/avv`, `/rechtliches`, `/teileklar/agb`, `/teileklar/widerruf`. Startseite verlinkt Impressum, Datenschutz, Cookies, Barrierefreiheit, KI-Hinweise und Vertragsgrundlagen; `/teileklar` verlinkt Datenschutz, Cookies, Barrierefreiheit, KI-Hinweise und `/teileklar/rechtliches`, aber kein Impressum (Playwright, gerendertes DOM, 1440 und 390 px, 19:05 UTC). `/teileklar/rechtliches` sagt selbst, die Kaufunterlagen seien nicht freigegeben. Kein Rechtstext geändert (OA-185).
+- **Kaufweg `/teileklar`** (Playwright, 19:05 UTC, nur beobachtet, alle Nicht-GET-Anfragen im Browser abgefangen, nichts abgesendet). Kopfzeile „Alle Preise inkl. MwSt.“, Verweise auf Warenkorb und Kasse; `/teileklar/shop` bleibt bei „Artikel werden geladen …“, kein Artikel, kein Knopf „In den Warenkorb“; `/teileklar/warenkorb` und `/teileklar/kasse` 200 mit „derzeit nicht verfügbar“. `/api/shop/status` und `/api/shop/products` 404. Eine Bestellung lässt sich derzeit nicht beginnen.
+- **Indexierung.** `/` und `/teileklar`: kein `X-Robots-Tag`, kein Meta-robots im gerenderten DOM; `robots.txt` erlaubt alles außer `/api/`, nennt die Sitemap; Sitemap 43 Adressen, alle 200, davon 15 unter `/teileklar`. `/teileklar` ist damit indexierbar, obwohl der Kaufweg nicht funktioniert und die Kaufunterlagen fehlen. Keine Kundennamen, Kundenlogos oder Referenzabschnitte auf `/` und `/teileklar` gefunden.
+- **Live-Messung `https://www.nexifyai.de`** (Worktree auf `9c9c806`). `node tools/live-check.mjs` (18:58 UTC): 315 Prüfungen, 15 Befunde (KI-Hinweis im Footer fehlt 3, Kopfleistenabstand 6, Shop-Dienst 404 2, PWA 4). `node tools/gleichmacher.mjs` (19:02 UTC): 42 Seiten, 731 Abweichungen, 152 Befunde, 0 Fehler (überwiegend Abschluss-Schalterliste 105).
+- **Eigene Auslieferung von `main` auf Vercel** (`…-gesamtpro-one.vercel.app`, `9c9c806`, READY): `live-check` 329 Prüfungen, 0 Befunde (19:00 UTC); `gleichmacher` 44 Seiten, 0 Abweichungen (19:04 UTC). `main` unverändert `9c9c806`.
+- **Subdomains gestört** (`curl` 19:07 UTC; laut Hauptsitzung seit mindestens 19.11.2026, 10:52 UTC): `brain.nexifyai.cloud` 502, `workplace.nexifyai.cloud` 502, `agenten.nexifyai.cloud` 530 (Cloudflare 1033). Kein Server-Eingriff (D-016; OA-186).
+- **Agenten-Endpunkt ohne Anmeldung erreichbar** (Meldung der Hauptsitzung, hier bewusst ohne technische Einzelheiten und ohne eigenen Abruf). Liegt beim Inhaber (OA-187).
+- **Pull Requests** (`gh api …/pulls`, ca. 19:08 UTC): 52 offen, 11 Entwürfe, Auto-Merge an 17; seit 15:00 UTC nichts neu, gemergt oder geschlossen. PR 206 und PR 218 Entwurf ohne Auto-Merge, keine neuen Review-Kommentare.
+
+### Prüfstand und Umfang dieser Nachführung
+
+Nur Dokumente, Zweig `claude/stand-1115` (PR 206): dieser Abschnitt, Verweis in „Offene Arbeiten“, in `docs/09-final/offene-arbeiten-2026-11-14.md` Abschnitt 13 mit OA-185 bis OA-187 und Stand-Zeile an OA-182. Prüfstand im Commit.
+
+## Stand 19.11.2026, ca. 07:00 UTC · Regelbetrieb: `nexifyai.de` und `nexifyai.cloud` leiten auf `www.nexifyai.cloud` um, eigene Auslieferung von `main` weiter fehlerfrei
+
+Führt den Abschnitt vom 17.11.2026, ca. 19:00 UTC, direkt darunter fort. Kennzeichnung wie dort. Neu in `DECISIONS.md`: nichts.
+
+### Selbst geprüft (IST, 19.11.2026)
+
+- **Ausgefallene Läufe.** Die Hauptsitzung war vom 17.11.2026, ca. 23:00 UTC, bis 19.11.2026, ca. 02:50 UTC, nicht erreichbar; die sechs Läufe vom 18.11. (02:47, 06:48, 10:47, 14:47, 18:47, 22:47 UTC) sind ausgefallen, der Lauf vom 19.11., 02:48 UTC, brach am Nutzungslimit ab (laut koordinierender Sitzung). Zwischen 17.11., 22:57 UTC, und 19.11., 06:53 UTC, gibt es keine Messung dieser Reihe.
+- **`main` unverändert.** Kopf `9c9c806` (PR 199); `git fetch`, 06:52 UTC. Seit 17.11.2026, 23:00 UTC, kein PR gemergt oder geschlossen (`gh api …/pulls?state=closed`, ca. 07:00 UTC). Produktion des Vercel-Projekts `…-ut7r` steht auf `9c9c806` (READY), einzige Domain weiter `nexify-ai-finales-agentur-gesamtpro-one.vercel.app` (Vercel-API, `list_deployments`, `list_project_domains`, ca. 07:00 UTC).
+- **OFFEN, kritisch, geändert: DNS und Auslieferung der öffentlichen Domains** (DNS über HTTPS und `curl`, 06:53 bis 06:58 UTC). `nexifyai.de` und `www.nexifyai.de`: A `172.67.178.219`, `104.21.17.237` (Cloudflare-Proxy; NS `brynne`/`carmelo.ns.cloudflare.com`), nicht mehr `185.158.133.1`. `nexifyai.de`, `www.nexifyai.de` und `nexifyai.cloud` antworten auf jeden Pfad mit 301 nach `https://www.nexifyai.cloud/<pfad>` (`server: cloudflare`); `/agb`, `/impressum`, `/datenschutz`, `/widerruf`, `/avv`, `/api/shop/status` dort ebenfalls 301, `sitemap.xml` ohne Adresse. Ziel `www.nexifyai.cloud` (A `172.66.40.167`, `172.66.43.89`): Titel „NeXify AI – KI-Agenten für Betriebe: Aufbau einmalig, Betrieb optional“, `X-Robots-Tag: index, follow`, Kopfzeile `x-nexify-edge-fix: B-20`, `robots.txt` „Produktion, v10-Gesamtauftritt, Stand 27.09.2026“; `/agb`, `/impressum`, `/datenschutz`, `/widerruf`, `/avv` 200, `/api/shop/status` und `/teileklar` 404, `sitemap.xml` 285 Adressen. Diese Auslieferung stammt nicht aus `apps/` dieses Repositorys (Titel, Kopfzeile und `robots.txt`-Text kommen in `apps/` nicht vor). Wer umgestellt hat, ist nicht belegt; nichts zurückgestellt, kein DNS- oder Vercel-Eingriff (OA-182, beim Inhaber).
+- **Live-Messung `https://nexifyai.de` (misst die Weiterleitung auf die fremde Auslieferung).** `node tools/live-check.mjs` (06:55 UTC): bricht ohne Ergebnis ab (`TimeoutError` beim Warten auf `.hc-gallery-card`), keine Zahl (17.11.: 313/16). `node tools/gleichmacher.mjs` (06:56 UTC): 6 Seiten, 6 Abweichungen, 2 Befunde, 14 Fehler (17.11.: 42/781/161/3).
+- **Eigene Auslieferung von `main` auf Vercel** (`…-gesamtpro-one.vercel.app`, unverändert): `live-check` 329 Prüfungen, 0 Befunde (06:57 UTC); `gleichmacher` 44 Seiten, 0 Abweichungen (06:57 UTC); `/`, `/agb`, `/impressum`, `/datenschutz`, `/widerruf`, `/avv` 200; `/api/shop/status` 200 mit `"products":0`; `/teileklar` `X-Robots-Tag` und Meta `noindex, nofollow`; Sitemap 28 Adressen.
+- **Pull Requests (`gh api …/pulls?state=open`, ca. 07:00 UTC).** 52 offen, davon 11 Entwürfe, Auto-Merge an 17. Neu seit 17.11., 23:00 UTC: 219 („TEILEKLAR: Produktseiten nach Passungskonzept …“) und 220 („architektur: Agenten-Architektur der vorhandenen Laufzeit klären …“), beide Entwurf, ohne Auto-Merge, anderer Owner, nicht bewertet. PR 206 und PR 218 unverändert (Entwurf, ohne Auto-Merge), keine neuen Review-Kommentare.
+- **GitHub Actions startet Jobs.** Jüngster „CI“-Lauf auf `main` (`9c9c806`, Zeitplan, 18.11.2026, 14:10 bis 14:12 UTC): `openapi-schema`, `react-site`, `postgres-isolation` bestanden, `next-web` und `repository` rot (wie 17.11.; Ursachen dort). Danach auf `main` zwei Dependabot-Läufe (18.11., 19:12 UTC) mit Erfolg.
+
+### Prüfstand und Umfang dieser Nachführung
+
+Nur dieser Abschnitt, Zweig `claude/stand-1115` (PR 206). „Offene Arbeiten“ und die Arbeitsliste sind unverändert; OA-182 umfasst die geänderte Lage. Prüfstand im Commit.
+
+## Stand 17.11.2026, ca. 19:00 UTC · Regelbetrieb: `nexifyai.de` wird nicht mehr aus `main` über Vercel ausgeliefert, Actions läuft mit echten Schritten, Heilungs-PR für das Schaufenster
+
+Führt den Abschnitt vom 16.11.2026, ca. 03:00 UTC, direkt darunter fort. Kennzeichnung wie dort. Neu in `DECISIONS.md`: nichts.
+
+### Selbst geprüft (IST, 17.11.2026)
+
+- **Ausfall der Hauptsitzung.** Die Hauptsitzung war vom 16.11.2026, ca. 03:00 UTC, bis 17.11.2026, ca. 18:50 UTC, nicht erreichbar; die zehn Regelbetrieb-Läufe vom 16.11. (06:48, 10:48, 14:48, 18:47, 22:47 UTC) und 17.11. (02:47, 06:48, 10:48, 14:47 UTC) sind ausgefallen (laut koordinierender Sitzung). Zwischen 02:55 UTC am 16.11. und 18:53 UTC am 17.11. gibt es keine Messung dieser Reihe; wann die Lage unten entstanden ist, ist damit nicht eingrenzbar.
+- **`main` unverändert.** Kopf `9c9c806` (PR 199); `git fetch` und `git log 9c9c806..origin/main`, 18:50 UTC, leer. Seit 16.11.2026, 03:00 UTC, kein PR gemergt oder geschlossen (`gh api …/pulls?state=closed`, 19:10 UTC).
+- **OFFEN, kritisch: `https://nexifyai.de` kommt nicht mehr aus diesem Repository.** Öffentliche DNS-Abfrage (DNS über HTTPS, 18:58 UTC): `nexifyai.de` und `www.nexifyai.de` A `185.158.133.1`, Antwort über Cloudflare (`server: cloudflare`), `www` leitet mit 302 auf die Apex-Domain. Ausgeliefert wird eine andere Anwendung: TanStack-Router statt Next.js, Kennungen eines Lovable-Projekts im Quelltext, Commit-Kennung `648ac529…`, die es in diesem Repository nicht gibt. Das Vercel-Projekt `…-ut7r` hat nur noch die Adresse `nexify-ai-finales-agentur-gesamtpro-one.vercel.app` (Vercel-API, `list_project_domains`, 19:00 UTC); seine Produktionsauslieferung steht auf `9c9c806` (READY). `nexifyai.cloud` leitet auf `www.nexifyai.cloud` (A `172.66.40.167`, `172.66.43.89`, Cloudflare), Titel „NeXify AI – KI-Agenten für Betriebe …“, `X-Robots-Tag: index, follow`, `/api/shop/status` 404 mit `{"detail":"Not Found"}`; Herkunft nicht belegt. Wer die Domain umgestellt hat, ist nicht belegt; die Führungsentscheidung „ausgeliefert ausschließlich über Vercel“ (`AGENTS.md`, 13.11.2026) und D-012 (Gleichmacher vor jeder Auslieferung) sind damit für die öffentliche Domain nicht mehr eingehalten. Nichts zurückgestellt, kein DNS- oder Vercel-Eingriff (OA-182).
+- **Live-Messung `https://nexifyai.de` (misst die fremde Auslieferung).** `node tools/live-check.mjs` (18:58 UTC): 313 Prüfungen, 16 Befunde (16.11.: 329/0), u. a. Shop-Dienst `/api/shop/status` und `/api/shop/products` 404, KI-Hinweis im Footer fehlt in de, nl, fr, PWA (Manifest unvollständig, Service Worker und Offline-Seite 404), Kopfleistenabstand bei 768, 1120, 1440 und 1835 px, Galerie-Filme, Titel auf `/konto`. `node tools/gleichmacher.mjs` (19:01 UTC): 42 Seiten, 26.305 Vergleiche, 781 Abweichungen, 161 Befunde, 3 Fehler (16.11.: 44 Seiten, 0).
+- **Vergleich: eigene Auslieferung von `main` auf Vercel** (`…-gesamtpro-one.vercel.app`): `live-check` 329 Prüfungen, 0 Befunde (19:04 UTC); `gleichmacher` 44 Seiten, 31.441 Vergleiche, 0 Abweichungen (19:06 UTC); `/api/shop/status` 200 mit `"products":0`; `X-Robots-Tag: noindex, nofollow`.
+- **Indexierung und Shop auf `nexifyai.de` (`curl`, 19:19 UTC).** `/`, `/impressum`, `/leistungen`, `/teileklar`: 200, keine Kopfzeile `X-Robots-Tag`, kein Meta-robots (16.11.: Meta `index, follow`, `/teileklar*` gesperrt). `/agb`: 404 mit Meta `noindex`. `robots.txt` erlaubt allen genannten Robotern `/`. `sitemap.xml`: 37 Adressen, alle unter `https://nexifyai.de/` (16.11.: 28 unter `https://www.nexifyai.de/`). `/api/shop/status`: 404, Produktzahl dort nicht messbar; die fremde Seite `/teileklar` nennt „3.344 Artikel im Katalog“, Quelle dieser Zahl nicht belegt.
+- **Sichtprüfung** (Playwright, `domcontentloaded`, nach dem Scrollen aufgenommen, 1440 und 390 px, ca. 19:05 UTC): `/`, `/leistungen`, `/kontakt`, `/preise-ablauf`, `/teileklar` auf `nexifyai.de`: alle 200, kein waagerechter Überlauf, keine kaputten Bilder, keine Seitenfehler, keine Platzhalter. Keine Kundennamen, Kundenlogos, Fallbeispiele oder Referenzabschnitte gefunden; „Kunden“ nur in Sätzen wie „Markeninszenierung · kein Kundenprojekt“. `/teileklar` zeigt dort einen gefüllten Katalog (s. o.), der Befund „wird geladen“ vom 16.11. tritt auf der öffentlichen Domain nicht auf. Auf der Vercel-Auslieferung von `main` besteht er fort: „Das Schaufenster wird geladen …“ und zwei leere Bereiche.
+- **Heilungs-PR 218** (Entwurf, `claude/heilung-schaufenster-leer`, Kopf `382a632`): `Storefront.tsx` unterscheidet „geladen, aber leer“ von „lädt“ und zeigt die vorhandenen Leertexte `noItems`, `noItemsBody`, `categoriesMissing`, `categoriesMissingBody` aus `config/shop-interface-copy.json` (vier Sprachen) im Baustein `tk-empty`; kein neuer Text, kein Stylesheet. Lokal belegt mit gemockter Antwort `{"items":[],"total":0}` bei 1440 und 390 px; `gleichmacher` lokal 44/0; Gates grün; neu rot genau die zwei Resize-Bindungen, Beleg nicht neu erhoben (OA-183). Einzelheiten im PR.
+- **Pull Requests (`gh api …/pulls?state=open`, 19:10 UTC).** 49 offen (mit PR 218: 50), davon 8 Entwürfe (186, 206, 211 bis 216; mit 218: 9). Auto-Merge an 17 (16.11.: 18; PR 206 seither aus). Neu seit 16.11.: 215, 216 (Entwürfe, anderer Owner), 217 (Dependabot, Next 16.4.3 → 16.4.5).
+- **GitHub Actions läuft mit echten Schritten** (OA-022). Jüngster Lauf auf `main`: „CI“ 44104496947 (Zeitplan, 17.11.2026, 14:33:56 bis 14:35:57 UTC, rund 2 min): `react-site`, `postgres-isolation`, `openapi-schema` bestanden; `next-web` rot im Schritt `pnpm --filter @nexify/web test:auth` (ein Test, `chat-guidance.test.mjs` Nr. 4, `ENOENT … apps/site/.generated/public-site.json`); `repository` rot im Schritt „Audit, behavior, integrity and architecture“ (`Ran 912 tests`, `failures=56, errors=45, skipped=17`, u. a. veraltete Prüfsummen). Auf dem Kopf von PR 206 (`9a83468`, Lauf 43795689375) dieselben zwei Jobs mit denselben Schritten und Zahlen: Ursache liegt auf `main`, nicht in PR 206. Korrektur für `next-web` als Entwurf PR 211; `repository` dort als Entscheidung beim Inhaber. Vermerkt als Kommentar an PR 206. Dritter roter Check an PR 206 und PR 218: „Bound AI review“ (`review`, nur auf `pull_request_target`, nicht auf `main`) endet an jedem PR seit dem 16.11. mit `blocked_not_reviewed`, Grund laut Artefakt `api_key_binding_missing` (Schlüssel für den Review-Dienst fehlt, nur Inhaber). An PR 218 zusätzlich die fünf verwaisten Vercel-Projekte rot (OA-023); `…-ut7r` und `…-s4k5` `success`. Vermerkt als Kommentar an PR 218.
+- **Nebenbefund:** `next build` (Next 16.4.3) bricht beim ersten Lauf mit einem Hinweis auf eine bekannte Sicherheitslücke ab und baut beim zweiten durch; Dependabot-PR 217 hebt auf 16.4.5 (OA-184).
+
+### Prüfstand und Umfang dieser Nachführung
+
+Nur Dokumente, Zweig `claude/stand-1115` (PR 206): dieser Abschnitt, „Offene Arbeiten“ ersetzt, in `docs/09-final/offene-arbeiten-2026-11-14.md` Abschnitt 12 mit OA-182 bis OA-184 und Stand-Zeile an OA-181. Prüfstand im Abschnitt „Prüfung“ von PR 206.
+
+## Stand 16.11.2026, ca. 03:00 UTC · Regelbetrieb: Indexierung der Agenturseiten an, Shop-Dienst 200 mit leerem Katalog, Actions startet wieder Jobs
+
+Führt den Abschnitt vom 15.11.2026, ca. 11:00 UTC, direkt darunter fort. Kennzeichnung wie dort. Entscheidungen stehen nur in `DECISIONS.md`; neu ist dort keine.
+
+### Selbst geprüft (IST, 16.11.2026)
+
+- **`main` unverändert.** Kopf `9c9c806` (PR 199, gemergt 14.11.2026, 21:54:51 UTC); seit `9c9c806` kein Merge (`git fetch` und `git log 9c9c806..origin/main`, 02:49 UTC, leer; `gh api …/pulls?state=closed`, keine Merge-Zeit nach 14.11.2026, 21:55 UTC).
+- **Ausgefallene Regelbetrieb-Läufe:** Die Läufe vom 15.11.2026 um 14:47, 18:47 und 22:47 UTC sind ausgefallen (Sitzung nicht erreichbar, laut koordinierender Sitzung). Zwischen 10:55 UTC am 15.11. und 02:49 UTC am 16.11. gibt es keine Messung dieser Reihe.
+- **Live-Messung `https://nexifyai.de`.** `node tools/live-check.mjs` (02:55 UTC): 329 Prüfungen, 0 Befunde (15.11., 10:51 UTC: 2 Befunde, Shop-Dienst 503). `node tools/gleichmacher.mjs` (02:55 UTC): 44 Seiten, Breiten 390 und 1440, 0 Abweichungen (unverändert).
+- **Shop-Dienst.** `/api/shop/status` 200 mit `{"products":0,"last_import_at":null,"source":"BigBuy","partial":false}` (02:53 UTC): Der Dienst antwortet, der Katalog ist leer. Bestätigt die Messung der Hauptsitzung vom 15.11.2026, ca. 12:27 UTC.
+- **Indexierung (`curl`, 02:53 UTC).** `/`, `/impressum`, `/agb`, `/avv`, `/widerruf`, `/datenschutz`, `/leistungen`: 200, keine Kopfzeile `X-Robots-Tag`, Meta `index, follow`. `/teileklar` und `/teileklar/kategorien`: `X-Robots-Tag: noindex, nofollow` und Meta `noindex, nofollow`. `robots.txt`: `Allow: /`, sperrt `/api/`, `/intern/`, `/portal/` und sieben private TEILEKLAR-Pfade, nennt `https://www.nexifyai.de/sitemap.xml`. `sitemap.xml`: 200, 28 Adressen, alle unter `https://www.nexifyai.de/`, keine unter `/teileklar`. Bestätigt die Messung der Hauptsitzung vom 15.11.2026, ca. 12:27 UTC. Die Agenturseiten sind damit für Suchmaschinen freigegeben; wann und durch wen der Schalter gesetzt wurde, ist hier nicht belegt (keine Vercel-Variable gelesen).
+- **OFFEN, Widerspruch (Owner: Inhaber):** `docs/04-betrieb/indexierung-freigabe-2026-11-14.md`, Abschnitt 5, knüpft die Freigabe an (a) richtige Rechtsform und Impressum (`verified_operator_profile` OFFEN) und (b) die Erlaubnis, die Rechtstexte in der vorliegenden Fassung öffentlich auffindbar zu machen (`legal_texts_and_consumer_flow_where_applicable` OFFEN). Dass beides erfüllt ist, ist in den Dokumenten nicht belegt. Keine Bewertung, kein Zurückschalten; Bestätigung des Inhabers nötig (OA-031).
+- **Sichtprüfung der eigenen Seiten** (Playwright, `domcontentloaded`, 1440 und 390 px, 02:54 UTC; `/`, `/leistungen`, `/kontakt`, `/preise-ablauf` statt des nicht vorhandenen `/preise` (404), `/teileklar`): alle 200, kein waagerechter Überlauf, keine kaputten Bilder, keine Konsolenfehler, keine Platzhalter („Lorem“, „TODO“). Keine Kundennamen, Kundenlogos, Fallbeispiele oder Referenzabschnitte gefunden (Textsuche in den gerenderten Seiten). 44 interne Verweise der Seiten (Stichprobe der Schalter per Statuscode): 42 mit 200, zwei mit 307 (`/teileklar/kategorie` → `/teileklar/kategorien`, `/teileklar/produkt` → `/teileklar/shop`). **Befund:** `/teileklar` verspricht ein Sortiment („Entdecken Sie unser Sortiment“, „Artikel im Schaufenster“), zeigt aber bei leerem Katalog dauerhaft „Das Schaufenster wird geladen …“ und leere Flächen unter „Was suchen Sie?“ und „Artikel im Schaufenster“. Nicht behoben (Shop- und Textbezug, Ursache leerer Katalog).
+- **Pull Requests (`gh api …/pulls?state=open`, 02:56 UTC).** 46 offen, davon 5 Entwürfe (186, 211, 212, 213, 214). Auto-Merge eingeschaltet an 18: 187, 189, 190, 192, 193, 195, 197, 200 bis 210 (alle eingeschaltet über das Konto `nexifyai-dev`; am 15.11., ca. 10:55 UTC: an keinem). Darunter PR 206 (diese Nachführung, am 15.11.2026, 21:56 UTC auf „bereit“ gestellt) und PR 207 („betrieb: Speicher-Bereinigung 15.11.2026 – Messung, ausgeführte Schritte …“, anderer Owner, nicht bewertet). Wer über das gemeinsame Konto gehandelt hat, ist nicht belegt (OA-027).
+- **GitHub Actions startet wieder Jobs** (OA-022): Läufe auf `9def230` am 16.11.2026, 02:26 UTC, mit ausgeführten Schritten; „CI“ dort mit 5 Jobs, `openapi-schema`, `postgres-isolation`, `react-site` bestanden, `next-web` und `repository` mit „exit code 1“. Für `main` ist kein Branchenschutz mit verlangten Statusprüfungen gesetzt (`…/branches/main/protection`: 404); die Regeln für `main` verlangen u. a. CodeQL und ein Deployment `copilot`. Ob und wann Auto-Merge an den 18 PRs greift, ist damit nicht vorhersagbar; die Lage gehört vor einen weiteren Merge zum Inhaber (OA-027).
+
+### OFFEN: gemeldet von einer zweiten Sitzung, vom Inhaber in der Hauptsitzung nicht bestätigt, keine D-Nummer
+
+Gebündelt unter OA-179 (Bestätigung durch den Inhaber):
+1. Entscheidungsliste vom 15.11.2026, ca. 12:15 UTC, u. a.: Katalogübernahme aus dem alten Shop; Umschalten der Shop-Domain erst ab 3.720 Produkten, mit Live-Zahlung und Testbestellung; kanonische Domain `nexifyai.de`; Rechtsform nach Handelsregisterstand; Merge-Reihenfolge 197, 193, 186, 195 nach grünem CI; DeepSeek-Delegation über den Router mit Tagesdeckel, bis zur Hinterlegung des Schlüssels aus.
+2. Kundenschutzregel „Referenzen nur auf Anfrage“: keine Kundennamen, Kundenlogos, Fallbeispiele oder Referenzen auf den eigenen Seiten, auch nicht anonymisiert. Überholt die früher gemeldete Linie „Referenzen anonymisiert“ (Abschnitt darunter, Punkt 4).
+3. Verkaufsgrundsatz: Der eigene Auftritt ist Vertrieb; unfertige oder widersprüchliche öffentliche Stellen sind Befunde. Folge: Der Regelbetrieb enthält seit 16.11.2026 eine Sichtprüfung der eigenen Seiten (oben).
+
+Hinweis (IST, 02:53 UTC): Die Sitemap nennt durchgehend `https://www.nexifyai.de/…`, nicht die gemeldete kanonische Domain `nexifyai.de`; keine Bewertung, Teil von OA-179 und OA-031.
+
+### Prüfstand und Umfang dieser Nachführung
+
+Nur Dokumente, Zweig `claude/stand-1115` (PR 206): dieser Abschnitt; im Abschnitt vom 15.11.2026 Kundendomains, Kundenname und Sitzungskennung entfernt; „Offene Arbeiten“ ersetzt; in `docs/09-final/offene-arbeiten-2026-11-14.md` Abschnitt 11 sowie Stand-Zeilen an OA-017, OA-018, OA-022, OA-027, OA-031, OA-179, OA-180, OA-181. Prüfstand im Abschnitt „Prüfung“ von PR 206.
+
+## Stand 15.11.2026, ca. 11:00 UTC · Regelbetrieb: Live-Messung, Auto-Merge abgeschaltet, gemeldete Entscheidungen offen
+
+Führt den Abschnitt von ca. 22:00 UTC direkt darunter fort; jener bleibt als Stand von `48f5072`/`9c9c806` stehen. Kennzeichnung: IST (hier gemessen), IST aus der Hauptsitzung (dort gemessen, hier nicht erneut geprüft), Meldung einer zweiten Sitzung (weder hier gemessen noch vom Inhaber bestätigt), OFFEN. Entscheidungen stehen nur in `DECISIONS.md`; neu ist dort keine.
+
+### Selbst geprüft (IST)
+
+- **`main` unverändert.** Kopf `9c9c806` (PR 199); seit dem letzten Stand kein Merge (`git fetch` und `git log 9c9c806..origin/main`, 15.11.2026, 10:49 UTC, leer). Commit-Status an `9c9c806` für `…-ut7r` und `…-s4k5` „success“.
+- **Live-Messung `https://nexifyai.de`.** `node tools/live-check.mjs` (10:51 UTC): 329 Prüfungen, 2 Befunde, beide Shop-Dienst (`/api/shop/status`, `/api/shop/products`) 503 mit Grund `database_binding_missing_or_unsuitable`; Zahl und Inhalt wie um 06:54 UTC. Der Live-Check enthält keine Anmelde- oder Kontoprüfung; eine Wirkung der gemeldeten DNS-Änderungen von ca. 09:25 UTC auf Anmeldung oder Konto ist damit nicht gemessen (OA-181). `node tools/gleichmacher.mjs` (10:53 UTC): 44 Seiten, Breiten 390 und 1440, 0 Abweichungen. Startseite 200 (`curl`, 10:54 UTC).
+- **Pull Requests (`gh api …/pulls?state=open`, ca. 10:55 UTC).** 37 offen, davon 14 Entwürfe; Auto-Merge an keinem eingeschaltet (am 14.11., 21:47 UTC: 21 von 31). Ereignisse `auto_merge_disabled` des Kontos `nexifyai-dev` am 15.11.2026 zwischen 10:44:23 und 10:45:54 UTC an 21 PRs, darunter PR 147 (10:45:51) und PR 150 (10:45:52); wer über das gemeinsame Konto gehandelt hat, ist nicht belegt (OA-027). PR 184 (Cloudflare-Umzug) offen, kein Entwurf, ohne Auto-Merge.
+- **Neue Entwürfe, offen, anderer Owner** (nur geführt, nicht bewertet): 200 „betrieb: Netz-Inventur vom 14.11.2026 (Domains, Zonen, Änderungsverlauf, Widersprüche)“; 201 „Zielkunden- und Marktrecherche NeXify AI + TEILEKLAR (14.11.2026)“; 202 „Markenzeichen-Library: Handschrift dokumentieren, Design-Sperre nachweisen (additiv)“; 203 „master-audit: konsolidiertes belegtes Lagebild (15.11.2026)“; dazu nach 10:00 UTC 204 „Inhaltsentwurf: eigene Seiten deutlich erweitert, belegt, zur Abnahme – keine Seiten-/Designdateien geändert“ und 205 „automatisierung: Prozesslandkarte und vier vorbereitete Automatisierungen (alle ausgeschaltet)“.
+- **GitHub Actions** startet weiter keine Jobs (Läufe auf `af8d52a`, 10:50 bis 10:52 UTC, Anmerkung „Actions budget“; OA-022).
+
+### Aus der Hauptsitzung (IST dort, hier nicht erneut geprüft)
+
+- **Resend:** `nexifyai.de` am 15.11.2026, ca. 10:40 UTC „verified“ (14.11., 23 UTC „partially_verified“, davor „failed“); `nexifyai.cloud` „verified“. Öffentliches DNS zeigte am 14.11.2026 die drei Resend-Einträge (DKIM, MX und SPF für `send`). Ob damit Mail aus Production zugestellt wird, ist nicht belegt (OA-163, OA-173).
+- **Cloudflare-Vorschau der Agentur:** am 14.11.2026, 22:06 UTC erneut am Asset-Upload gescheitert (401), nichts angelegt; PR 184 unverändert offen.
+- **Kundenprojekt (nur Verweis):** Ein Kundenprojekt wurde am 15.11. an eine zweite koordinierende Sitzung übergeben; Einzelheiten nur im Kundenrepository.
+
+### OFFEN: gemeldet von einer zweiten Sitzung, vom Inhaber in der Hauptsitzung NICHT bestätigt
+
+Ausdrücklich keine Entscheidung und keine D-Nummer; Vorlage an den Inhaber als OA-179 (Owner Inhaber).
+1. KI-Kennzeichnung immer in allen Projekten wie im Footer.
+2. Design-Sperre für die eigenen Seiten.
+3. Begrenzte Autonomie für rückholbare DNS-Reparaturen und das Mergen reifer, zweifach geprüfter PRs.
+4. Generalfreigabe vom 15.11.2026, ca. 10:40 UTC, für offene Punkte, daraus u. a.: Shop-Zielbild neue Fassung auf Vercel mit altem Dienst als Rückweg; Auto-Merge abschalten für nicht zweifach geprüfte PRs; jetzt kein Cloudflare-Umzug (Vercel bleibt); Indexierung bleibt aus, bis die Impressumsdaten bestätigt sind; festgelegte Preise als „ab“-Preise nur in Textentwürfen; Referenzen anonymisiert (HISTORIE: überholt durch die am 16.11.2026 gemeldete Kundenschutzregel „Referenzen nur auf Anfrage“, Abschnitt darüber); kein zweiter Zeitplan neben dem Regelbetrieb.
+
+Gemeldete, hier nicht nachgemessene Handlungen der zweiten Sitzung: DNS-Einträge in der Zone `nexifyai.de` am 14.11.2026, 22:03 UTC (Resend) und am 15.11.2026, ca. 09:25 UTC (Clerk-CNAMEs, Hostinger-DKIM auf „nur DNS“) (OA-181); Zweig `claude/speicher-bereinigung` für den Server.
+
+**Risiko-Hinweis (OA-180, am 16.11.2026 überführt nach OA-017/OA-018):** Das geplante „Original entfernen“ von Altläufen auf `srv1941843` steht im Widerspruch zur Dauergrenze „nichts löschen“ (D-017) und zu D-016 (Freigabe je Schritt, geprüfter Rückweg). Der Hostinger-Snapshot läuft laut Meldung am 15.11.2026 um 11:47 UTC ab (nicht nachgeprüft). Der Sperrvermerk im Aufräumplan (kein Prune, Cognee-Volumes) gilt.
+
+### Prüfstand und Umfang dieser Nachführung
+
+Prüfstand `main` `9c9c806` lokal (IST, 15.11.2026, ca. 10:55 bis 11:05 UTC, Python 3, ohne `.venv`, ohne `node_modules`, erzeugte Seitendaten beider Anwendungen vorhanden, `apps/web` mit `NEXIFY_PUBLIC_INSTALLATION=public-pwa`): `python3 -m unittest discover -s tests` 844 Tests, 40 Failures, 7 Errors, 19 Skips, 47 rote Namen; nach dieser Nachführung, die nur Dokumente ändert, dieselben 47 Namen, kein neuer, keiner weggefallen (Namensvergleich im selben Arbeitsbaum vor und nach der Änderung). `python3 tools/verify_requirements_reconciliation.py` 41 Zeilen „Stale implementation source“, vorher und nachher gleich. `make governance-check`, `make check` und `node tools/ds-audit-cli.js` (0 Fehler, 0 Warnungen) mit Exit 0. Kein CI-Lauf (OA-022).
+
+Diese Nachführung (Zweig `claude/stand-1115`) ändert nur Dokumente: diesen Abschnitt in `PROGRESS.md` und in `docs/09-final/offene-arbeiten-2026-11-14.md` Abschnitt 10 (OA-179 bis OA-181) sowie zwei Stand-Zeilen (OA-022, OA-027). `DECISIONS.md` und `AGENTS.md` sind unverändert. Keine Prüfsumme und kein Beleg angefasst. „Offene Arbeiten“ ist mit der Nachführung vom 16.11.2026 (Abschnitt darüber) ersetzt.
+
 ## Stand 14.11.2026, ca. 22:00 UTC · Abend III: Skills, Kontoverknüpfung im Shop-Dienst, robots-Meta, Belege Runde 3
 
 Führt den Abschnitt von ca. 20:40 UTC direkt darunter fort; jener bleibt als Stand von `500c52d` stehen. Kennzeichnung wie dort (SOLL, IST, „laut PR“, Notiz, OFFEN). Entscheidungen stehen nur in `DECISIONS.md`; neu ist dort keine. Quelle der PR-Angaben: `git log origin/main` bis `48f5072` und `gh api …/pulls/<n>` (Abruf 14.11.2026, 21:47 UTC). Alle drei Merges durch `nexifyai-dev`, Merge-Zeiten laut GitHub in UTC.
@@ -194,63 +377,82 @@ Diese Nachführung (Zweig `claude/stand-halten`) ändert nur Dokumente und einen
 
 OFFEN, nicht belegt (aus den Sitzungsnotizen vom 14.11.2026 übernommen, hier nicht nachgeprüft): Zuordnung der Domains zum Projekt `prj_lKQEWQ…` über die Vercel-Schnittstelle (Abruf von hier 403; die Zuordnung steht in `docs/deployment/environment-variables.md` Abschnitt 6); 503 `database_metadata_unavailable` im früheren Projekt `prj_Po7jl…`; signierter Composio-Webhook 200; GitHub Actions startet kontoweit keine Jobs (zuletzt belegt am 13.11.2026 im Befund, Abschnitt 10); Zahl und Zustand der offenen Pull Requests. Live-Wirkung der Shop-Zulassungsliste: unverändert offen, siehe nächster Abschnitt.
 
-## Offene Arbeiten · Stand 14.11.2026, ca. 22:00 UTC
+## Offene Arbeiten · Stand 26.11.2026, ca. 07:00 UTC
 
 Kein zweites Register: Führend bleiben P01–P26 und die Hauptfälle MASTER-01 bis MASTER-18 in `config/acceptance-coverage.json` (`whole_system_accepted: false`). Das Register ist ausdrücklich keine Ausführungsliste und hat für die folgenden Arbeiten kein Feld. Dieser Abschnitt wird bei jeder Nachführung ersetzt, nicht fortgeschrieben.
 
-Die einzelnen offenen Arbeiten stehen in der Arbeitsliste `docs/09-final/offene-arbeiten-2026-11-14.md` (OA-001 bis OA-162 zum Stand `29f0691`, Abschnitt 8 mit OA-163 bis OA-170 zum Stand `500c52d`, Abschnitt 9 mit OA-171 bis OA-178 zum Stand `48f5072`). Sie dient der Vergabe und ersetzt kein führendes Register; die Angaben der Einträge OA-001 bis OA-162 sind hier nicht einzeln nachgeprüft. Weicht sie von diesem Abschnitt ab, gilt dieser Abschnitt.
+Die einzelnen offenen Arbeiten stehen in der Arbeitsliste `docs/09-final/offene-arbeiten-2026-11-14.md` (OA-001 bis OA-162 zum Stand `29f0691`, Abschnitt 8 mit OA-163 bis OA-170 zum Stand `500c52d`, Abschnitt 9 mit OA-171 bis OA-178 zum Stand `48f5072`, Abschnitt 10 mit OA-179 bis OA-181 vom 15.11.2026, Abschnitt 11 mit der Nachführung vom 16.11.2026, Abschnitt 12 mit OA-182 bis OA-184 vom 17.11.2026, Abschnitt 13 mit OA-185 bis OA-187 vom 19.11.2026, Abschnitt 14 mit OA-188 vom 21.11.2026, Abschnitt 15 mit der Nachführung vom 22.11.2026 ohne neue Einträge, Abschnitt 16 mit OA-189 vom 26.11.2026). Sie dient der Vergabe und ersetzt kein führendes Register; die Angaben der Einträge OA-001 bis OA-162 sind hier nicht einzeln nachgeprüft. Weicht sie von diesem Abschnitt ab, gilt dieser Abschnitt.
 
-Zählung der Arbeitsliste nach dieser Nachführung (178 Einträge; Herleitung in Abschnitt 9.2 der Liste):
+Zählung der Arbeitsliste nach dieser Nachführung (189 Einträge; Herleitung in Abschnitt 16.2):
 
-| Zustand | 20:40 UTC | 22:00 UTC |
-|---|---|---|
-| OFFEN | 46 | 49 |
-| TEILWEISE | 13 | 13 |
-| BLOCKIERT | 37 | 38 |
-| ENTSCHEIDUNG NÖTIG | 58 | 60 |
-| HISTORIE-überholt | 8 | 8 |
-| ERLEDIGT | 8 | 10 |
+| Zustand | 15.11., 11:00 UTC | 16.11., 03:00 UTC | 17.11., 19:00 UTC | 19.11., 19:15 UTC | 21.11., 19:00 UTC | 22.11., 07:00 UTC | 26.11., 07:00 UTC |
+|---|---|---|---|---|---|---|---|
+| OFFEN | 50 | 50 | 51 | 52 | 52 | 52 | 53 |
+| TEILWEISE | 13 | 13 | 13 | 13 | 13 | 13 | 13 |
+| BLOCKIERT | 38 | 38 | 38 | 38 | 38 | 38 | 38 |
+| ENTSCHEIDUNG NÖTIG | 62 | 61 | 63 | 65 | 66 | 66 | 66 |
+| HISTORIE-überholt | 8 | 9 | 9 | 9 | 9 | 9 | 9 |
+| ERLEDIGT | 10 | 10 | 10 | 10 | 10 | 10 | 10 |
 
-Erledigt seit 20:40 UTC: OA-170 (PR 194 `2396553`), OA-164 (PR 198 `48f5072`). Neu: OA-171 bis OA-174 (Reste aus PR 196), OA-175 bis OA-178 (Reste aus PR 198).
+Seit 16.11., 03:00 UTC neu: OA-182 (öffentliche Domain außerhalb von `main` und Vercel ausgeliefert, Owner Inhaber), OA-183 (PR 218 prüfen lassen, Resize-Beleg neu erheben), OA-184 (Next-Sicherheitshinweis, PR 217); am 19.11. OA-185 (Rechtsseiten und Kaufweg), OA-186 (gestörte Subdomains), OA-187 (Agenten-Endpunkt ohne Anmeldung); am 21.11. OA-188 (Shop-Umleitung auf `teileklar.shop`). Am 22.11. keine neuen Einträge, Stand-Zeilen an OA-186 und OA-188. Am 26.11. OA-189 (Live-Check bricht gegen die Domain ab), Stand-Zeilen an OA-022, OA-151, OA-182, OA-185, OA-186 und OA-188.
 
-Offene Pull Requests (IST, `gh api …/pulls?state=open` und GitHub-MCP `list_pull_requests`, 14.11.2026, 21:47 UTC): 31 offen. Gegenüber 20:35 UTC (26 offen) neu: 190, 192, 193, 195, 197; gemergt seither nur neue Nummern (194, 196, 198). Auto-Merge eingeschaltet: 21, nicht bei 184, 105 und den acht Entwürfen.
+Offene Pull Requests (IST, `gh api …/pulls?state=open`, 17.11.2026, 19:10 UTC, ergänzt um PR 218): 50 offen, davon 9 Entwürfe; Auto-Merge eingeschaltet an 17 (16.11., 02:56 UTC: an 18). Seit 16.11., 02:56 UTC neu: 215 bis 218; gemergt oder geschlossen seither keiner. Stand der Tabelle 17.11., Zahlen 26.11.: 54/3/17 (54 offen, 3 Entwürfe, Auto-Merge an 17; `PROGRESS.md`, Abschnitt „Stand 26.11.2026, ca. 07:00 UTC“); die Tabelle ist nicht auf den 26.11. nachgeführt.
 
 | PR | Titel (gekürzt) | Entwurf | Auto-Merge |
 |---|---|---|---|
-| 197 | brain: Cognee aufnehmen, Adapter hinter Schalter | ja | aus |
-| 195 | werkstatt: Terminbuchung Stufe 1 hinter Schalter | ja | aus |
-| 193 | hermes: Arbeitsbereich des Inhabers vorbereiten | ja | aus |
-| 192 | sicherheit: /intern/workspace ohne Anmeldung nur Hülle | ja | aus |
-| 190 | suite: Funktionsliste nutzbar/Hülle/fehlt (OA-039) | ja | aus |
-| 189 | review: unabhängige Prüfung von PR 118 | ja | aus |
-| 187 | werkstatt: Terminlogik als Spezifikation (J-1) | ja | aus |
-| 186 | mailing: Einwilligungsweg hinter Schalter (Paket F) | ja | aus |
-| 184 | hosting: Cloudflare-Umzug vorbereiten und belegen | nein | aus |
-| 163 | Entscheidung: Eingangsgrenze des Chats | nein | an |
-| 150 | shop: Zugriffsschicht Katalog und Warenkorb | nein | an |
-| 147 | shop: Zielschema PostgreSQL mit RLS | nein | an |
-| 135 | NeX AIFly Suite: Produktseite /produkte/aifly-suite | nein | an |
-| 126 | chat: Ursache von chat_llm_failed protokollieren | nein | an |
-| 125 | Skill nexify-design-system | nein | an |
-| 124 | Entwurf: NeXify-MCP-Server | nein | an |
-| 123 | suite: Composio-Anbindung hinter Schalter | nein | an |
-| 122 | Shop-API: 503-Ursache, Werkstattanfrage, Partnerantrag | nein | an |
-| 121 | Entwurf: Python-Agentenkern und Wissensport | nein | an |
-| 120 | Entwurf: Führungs-Skill, Chat-Daten, Messplan | nein | an |
-| 119 | Marke und Texte: Namensregel, Markenarchitektur | nein | an |
-| 118 | Kunden-Suite: Fundament im Backend | nein | an |
-| 115 | chat: Neuaufbau (Paket 5) | nein | an |
-| 105 | chat: Ursache von chat_llm_failed (Paket 1) | nein | aus |
-| 75 | feat(leistungen): Ablauf- und Investitionssektion | nein | an |
-| 74 | docs(mcp): NEXIFY-MASTER-MCP-001 Phase 0/1 | nein | an |
-| 73 | feat(home): Startseite neu aufgebaut | nein | an |
-| 67 | Funktionsfähiger Gesamtstand | nein | an |
-| 65 | Warenkorb und Mailbudget absichern | nein | an |
-| 60 | Editorial boilerplate, BigBuy-Katalog | nein | an |
-| 48 | Sentry Core types im Vercel-Funktionscompiler | nein | an |
+| 218 | shop: Schaufenster zeigt bei leerem Katalog einen Leerzustand statt Dau | ja | aus |
+| 217 | build(deps): bump next from 16.4.3 to 16.4.5 in the npm_and_yarn group | nein | aus |
+| 216 | ops: Autotask-Stillstand belegen, Lösung sichern, Wiederanlauf nachwei | ja | aus |
+| 215 | brain-MCP mit Browser-Anmeldung: Stufe 0 Bestand + Stufe 1 Entwurf (AD | ja | aus |
+| 214 | shop: Katalog-Übernahme über die öffentliche Schnittstelle von teilekl | ja | aus |
+| 213 | Praesentation 16.11.2026: eigene Seiten im Browser durchgegangen und D | ja | aus |
+| 212 | inhalt-praesentation: Inhalts- und Angebotsprüfung der 29 eigenen Seit | ja | aus |
+| 211 | ci: next-web erzeugt die Seitendaten, die test:auth liest; Belegkette  | ja | aus |
+| 210 | chat: Gesprächsleiste startet standardmäßig offen in der kleinsten vor | nein | an |
+| 209 | deepseek-delegation: kontrollierter Arbeiter über den Router, ausgesch | nein | an |
+| 208 | shop: Umstellung auf Supabase/PostgreSQL vorbereitet und ausgeschaltet | nein | an |
+| 207 | betrieb: Speicher-Bereinigung 15.11.2026 – Messung, ausgeführte Schrit | nein | an |
+| 206 | stand: Regelbetrieb 15.11.2026, ca. 11:00 UTC (Live-Messung, Auto-Merg | ja | aus |
+| 205 | automatisierung: Prozesslandkarte und vier vorbereitete Automatisierun | nein | an |
+| 204 | Inhaltsentwurf: eigene Seiten deutlich erweitert, belegt, zur Abnahme  | nein | an |
+| 203 | master-audit: konsolidiertes belegtes Lagebild (15.11.2026) | nein | an |
+| 202 | Markenzeichen-Library: Handschrift dokumentieren, Design-Sperre nachwe | nein | an |
+| 201 | Zielkunden- und Marktrecherche NeXify AI + TEILEKLAR (14.11.2026) | nein | an |
+| 200 | betrieb: Netz-Inventur vom 14.11.2026 (Domains, Zonen, Änderungsverlau | nein | an |
+| 197 | brain: Cognee (cognee-x532) aufnehmen – IST, Integrationsentwurf und A | nein | an |
+| 195 | werkstatt: Terminbuchung Stufe 1 als getesteter Code hinter Schalter ( | nein | an |
+| 193 | hermes: Arbeitsbereich des Inhabers vorbereiten (IST-Messung, Graphite | nein | an |
+| 192 | sicherheit: /intern/workspace liefert ohne Anmeldung nur noch die Hüll | nein | an |
+| 190 | suite: Funktionsliste nutzbar/Hülle/fehlt für Suite und Werkstattservi | nein | an |
+| 189 | review: unabhängige Prüfung von PR 118 (Kunden-Suite, Backend-Fundamen | nein | an |
+| 187 | werkstatt: Terminlogik als umsetzbare Spezifikation (Paket J-1, Bauste | nein | an |
+| 186 | mailing: Einwilligungsweg hinter Schalter (Anmeldung mit Bestätigungsm | ja | aus |
+| 184 | hosting: Cloudflare-Umzug vorbereiten und mit Messwerten belegen | nein | aus |
+| 163 | Entscheidung: Eingangsgrenze des Chats (64 KB → 256 KB) – nicht mergen | nein | aus |
+| 150 | shop: Zugriffsschicht für Katalog und Warenkorb (weiter MongoDB, Paket | nein | aus |
+| 147 | shop: Zielschema auf PostgreSQL mit RLS und Umstellungsplan (Entwurf) | nein | aus |
+| 135 | NeX AIFly Suite: Produktseite unter /produkte/aifly-suite, 308-Umleitu | nein | aus |
+| 126 | chat: Ursache von chat_llm_failed geheimnisfrei protokollieren | nein | aus |
+| 125 | Skill nexify-design-system (lebender Skill, Entwurf) | nein | aus |
+| 124 | Entwurf: NeXify-MCP-Server (nur lesend, Schalter aus) | nein | aus |
+| 123 | suite: Composio-Anbindung hinter Schalter (Entwurf) | nein | aus |
+| 122 | Shop-API: 503-Ursache behoben (Code-Anteil), ehrliche Werkstattanfrage | nein | aus |
+| 121 | Entwurf: Python-Agentenkern und Wissensport (ohne Modell, ohne Betrieb | nein | aus |
+| 120 | Entwurf: Führungs-Skill, Chat-Daten-Migrationsentwurf, Messplan für We | nein | aus |
+| 119 | Marke und Texte: Namensregel, Markenarchitektur und Textvorlage in vie | nein | aus |
+| 118 | Kunden-Suite: technisches Fundament im Backend (Entwurf, hinter Schalt | nein | aus |
+| 115 | chat: inneren Aufbau, Sendevorgang und Darstellung neu aufbauen (Paket | nein | aus |
+| 105 | chat: Ursache von chat_llm_failed geheimnisfrei protokollieren (Paket  | nein | aus |
+| 75 | feat(leistungen): Ablauf- & Investitionssektion (de/nl/fr/en) | nein | aus |
+| 74 | docs(mcp): NEXIFY-MASTER-MCP-001 Phase 0/1 — current-state + capabilit | nein | aus |
+| 73 | feat(home): Startseite neu aufgebaut (Vorhaben, Einstieg, 4 Sprachen) | nein | aus |
+| 67 | Funktionsfähiger Gesamtstand: grüne Prüfkette, Live-Shop-Nachweis, Sho | nein | aus |
+| 65 | NeXify: Warenkorb und Mailbudget absichern, Fertigstellungsnachweise a | nein | aus |
+| 60 | Replace editorial boilerplate and prevent incomplete BigBuy catalog pu | nein | aus |
+| 48 | Resolve Sentry Core types in the Vercel function compiler | nein | aus |
 
-- PR 184 (Cloudflare-Umzug, D-021): wartet auf den Inhaber (Kostenweg, Token mit Worker-Recht; OA-028). IST: Auto-Merge ist dort nicht mehr eingeschaltet (20:35 UTC noch an); wer es abgeschaltet hat, ist hier nicht belegt.
-- 186, 187, 189, 190, 192, 193, 195, 197: Entwürfe einer zweiten Sitzung, offen, anderer Owner; hier nicht bewertet.
+- PR 184 (Cloudflare-Umzug, D-021): wartet auf den Inhaber (Kostenweg, Token mit Worker-Recht; OA-028); Auto-Merge aus.
+- PR 187 bis 217 außer 206: Arbeiten anderer Sitzungen oder von Dependabot, anderer Owner; hier nicht bewertet. PR 206 ist diese Nachführung, PR 218 der Heilungs-PR dieses Laufs (Entwurf).
 
 Kann die Fabrik (innerhalb D-017, ohne neue Freigabe; je Paket ein Schreiber und ein eigener Zweig):
 - A · Führende Dokumente nachführen (OA-060): fortgeführt mit dieser Nachführung.
@@ -261,10 +463,14 @@ Kann die Fabrik (innerhalb D-017, ohne neue Freigabe; je Paket ein Schreiber und
 - G · Lead-Plan und Wettbewerb (OA-095, OA-100): offen.
 - H, I, J · Folgepakete J-1 bis J-7: J-5 gebaut (PR 181); J-1 und weitere als Entwürfe der zweiten Sitzung (187, 195).
 - K · Shop-Zugriffsschicht, PR 150 (OA-076): offen.
-- M · Nur lesende Messungen (OA-021, OA-132): offen. Live-Nachmessung nach PR 198: läuft getrennt, Ergebnis hier nicht belegt.
+- M · Nur lesende Messungen (OA-021, OA-132, OA-181): offen. Regelbetrieb mit Sichtprüfung der eigenen Seiten: zuletzt 26.11.2026, 06:54 bis 07:05 UTC (`PROGRESS.md`, oberster Abschnitt); davor 20 Läufe vom 22.11.2026, 22:47 UTC, bis 26.11.2026, 02:47 UTC, ausgefallen (OA-151). Abbruch von `tools/live-check.mjs` gegen die Domain beheben (OA-189). Befund `/teileklar` „wird geladen“: Korrektur als Entwurf PR 218 (OA-183).
 
 Braucht den Inhaber (vollständige Liste: Arbeitsliste Abschnitte 6, 8 und 9; hier das Dringende):
-- GitHub Actions: Budget und Abrechnungseinstellungen prüfen (OA-022, unverändert 21:47 UTC). Vorher Auto-Merge an 21 offenen Pull Requests bestätigen oder abschalten (OA-027); über die übrigen PRs entscheiden (OA-051).
+- Kritisch · `nexifyai.de` und `www.nexifyai.de` zeigen auf eine fremde Auslieferung (A `185.158.133.1`, Lovable-Kennungen), nicht auf `main` über Vercel; das Vercel-Projekt `…-ut7r` trägt die Domain nicht mehr. Bestätigen, ob gewollt, und über Rückweg oder neue Führungsentscheidung befinden (OA-182; `AGENTS.md` 13.11.2026, D-012, D-021).
+- Dringend · Auto-Merge an 17 offenen Pull Requests (187, 189, 190, 192, 193, 195, 197, 200 bis 205, 207 bis 210) bestätigen oder abschalten, bevor er greift: Actions läuft seit spätestens 16.11.2026, 02:26 UTC mit echten Schritten (OA-022; `next-web` und `repository` auf `main` rot, PR 211), für `main` sind keine Statusprüfungen verlangt (OA-027). Darunter PR 207 (Speicher-Bereinigung auf `srv1941843`, OA-017, D-016). Über die übrigen PRs entscheiden (OA-051).
+- Dringend · Indexierung: Auf `nexifyai.de` liefert die fremde Auslieferung am 17.11.2026 keine Sperre und kein Meta-robots, auch nicht für `/teileklar`; die eigene Auslieferung war am 16.11. für die Agenturseiten freigegeben (IST 02:53 UTC); die Voraussetzungen der Vorlage (Rechtsform und Impressum, Rechtstexte in dieser Fassung) sind nicht belegt: bestätigen (OA-031, OA-009).
+- Gemeldete Entscheidungen und Regeln einer zweiten Sitzung bestätigen oder verwerfen, darunter Kundenschutzregel und Verkaufsgrundsatz (OA-179).
+- Snapshots (OA-018): Ablauf 15.11.2026, 11:47 UTC verstrichen, neue nicht belegt.
 - Codex-Kontingent (OA-146); fünf Vercel-Projekte ohne Repository trennen (OA-023).
 - Anfrageweg: Über die Formulare kommt keine Anfrage an; Empfänger wählen (OA-163, OA-092). Daran hängt auch der Versand der Mail zum Zurücksetzen (OA-173).
 - Neu · Google-Anmeldung im Shop-Dienst: eigene OAuth-Anwendung statt Vermittler, Admin per Google ja oder nein, Bestandskonten vor dem Binden prüfen (OA-172; `docs/04-betrieb/konto-verknuepfung-befund-2026-11-14.md`, Abschnitt 4).
@@ -277,14 +483,14 @@ Braucht den Inhaber (vollständige Liste: Arbeitsliste Abschnitte 6, 8 und 9; hi
 - Rechtsseiten `/agb`, `/avv`, `/widerruf` und der KI-Satz im Chat: Freigabe bestätigen oder zurücknehmen (D-010, D-017).
 - Hermes-Oberfläche aus dem öffentlichen Netz, Docker-Socket entfernen (D-019, OA-015, OA-016, OA-018); kein Volume-Prune.
 - Datenschutzrechtliche Bewertung im Kundenprojekt (OA-026, fristgebunden; nur Verweis).
-- Indexierung einschalten und Rolle von Apex, `www`, `.cloud` (OA-031); hängt an Rechtsform und Impressum (OA-009).
+- Rolle von Apex, `www`, `.cloud` (OA-031; Sitemap nennt `www`, gemeldet ist `nexifyai.de` als kanonisch, OA-179).
 - Mailing: Grundlage je Empfängergruppe vor jedem Werbeversand (OA-001, OA-002, OA-005, OA-006).
 - Architektur Suite und Arbeitsplatz (OA-044, OA-040); Cognee statt AgentMemory und LightRAG (OA-144); Composio-Status.
 - Modellkennung im Chat (OA-048), Ausgabenlimit am Router-Schlüssel (OA-025).
 - Supabase-Instanz und Bindung des Shop-Dienstes (D-013, OA-029, OA-067, OA-069). Regelbetrieb ohne offene Sitzung (OA-151).
 - Welches Register führt (OA-061, Widerspruch nicht aufgelöst). Entscheidungen E1, E3, E4, E5, E6, E12; Livegang der Kasse.
 
-Next Steps: Ergebnis der Live-Nachmessung zu PR 198 nachtragen, sobald es vorliegt; Actions-Budget und Auto-Merge klären; Anfrageweg entscheiden (OA-163); Google-Anbindung entscheiden (OA-172); nach jedem Merge diesen Abschnitt ersetzen.
+Next Steps: Herkunft der Auslieferung von `nexifyai.de` vom Inhaber klären lassen (OA-182); Auto-Merge-Lage und Indexierungsvoraussetzungen vom Inhaber klären lassen (OA-027, OA-031); PR 218 unabhängig prüfen lassen (OA-183); gemeldete Entscheidungen bestätigen lassen (OA-179); Katalog füllen oder `/teileklar` ehrlich als leer zeigen (Entscheidung Inhaber, OA-179 Punkt 5); nach jedem Merge diesen Abschnitt ersetzen.
 
 ## Shop-Projektbindung als Zulassungsliste · 14.11.2026
 Die feste Prüfung `VERCEL_PROJECT_ID == prj_Po7jl…` in `apps/shop-api/vercel_app.py` und `namespace_operator.py` ist eine optionale, nicht geheime Liste `SHOP_ALLOWED_PROJECT_IDS` (kommagetrennt, Leerzeichen toleriert) mit einer gemeinsamen Funktion `project_binding_verified`. Nicht gesetzt, leer oder nur Leerzeichen/Kommas gilt als nicht konfiguriert und ergibt exakt das bisherige Projekt, nie „offen“. Eine gesetzte Liste ersetzt den Standard. Diagnosecode weiter `project_binding_unverified`, ohne ID oder Liste in Antwort, Ausnahme oder Log. `PROJECT_ID`, Namespace-Marker und Plan-Digest bleiben an `prj_Po7jl…` gebunden. Doku: `docs/deployment/environment-variables.md` Abschnitt 6 (Nachträge in den beiden Release-Dokumenten vom 31.10.).

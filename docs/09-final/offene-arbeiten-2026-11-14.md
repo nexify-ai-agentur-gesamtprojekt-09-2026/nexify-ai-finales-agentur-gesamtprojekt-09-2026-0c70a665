@@ -232,6 +232,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Fertig, wenn:** Belegung unter 80 %, Vorher/Nachher-Messung im Server-Befund, nichts ohne Freigabe entfernt.
 - **Aufwand:** M · **Ausführung:** Agent nach Zugang: Shell + Freigabe je Schritt
 - **Quellen:** docs/04-betrieb/server-befund-2026-11-14.md (14.11.2026); DECISIONS.md (D-011 bis D-020, 14.11.2026)
+- **Stand 16.11.2026, ca. 03:00 UTC (überführt aus OA-180):** Gemeldet von einer zweiten Sitzung, hier nicht nachgemessen: geplantes „Original entfernen“ von Altläufen auf `srv1941843` über den Zweig `claude/speicher-bereinigung`. Risiko-Hinweis: widerspricht der Dauergrenze „nichts löschen“ (D-017) und verlangt nach D-016 Freigabe je Schritt und geprüften Rückweg; Sperrvermerk im Aufräumplan (kein Prune, Cognee-Volumes nicht anfassen) gilt. IST (`gh api …/pulls?state=open`, 02:56 UTC): PR 207 „betrieb: Speicher-Bereinigung 15.11.2026 – Messung, ausgeführte Schritte …“ ist offen, kein Entwurf, Auto-Merge eingeschaltet; Inhalt hier nicht bewertet, ob Schritte auf dem Server ausgeführt wurden, ist hier nicht nachgemessen. Bleibt BLOCKIERT bis zur Freigabe des Inhabers je Schritt.
 
 #### OA-018 · Infrastruktur & Server · OFFEN
 
@@ -241,6 +242,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Fertig, wenn:** Neue Snapshots mit Zeitstempel im Server-Befund vermerkt.
 - **Aufwand:** S · **Ausführung:** Agent sofort (Hostinger-Schnittstelle, nach Wort des Inhabers)
 - **Quellen:** docs/04-betrieb/server-befund-2026-11-14.md (14.11.2026)
+- **Stand 16.11.2026, ca. 03:00 UTC (überführt aus OA-180):** Der Ablaufzeitpunkt 15.11.2026, 11:47 UTC ist verstrichen. Ob vorher neue Snapshots angelegt wurden, ist hier nicht belegt (keine Hostinger-Abfrage in diesem Lauf). Ohne nachgewiesenen frischen Snapshot fehlt für OA-017 der Rückweg. Bleibt OFFEN.
 
 #### OA-019 · Infrastruktur & Server · BLOCKIERT
 
@@ -279,6 +281,9 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Quellen:** PROGRESS.md, Abschnitte „Stand 14.11.2026, ca. 14:25 UTC“ und „Offene Arbeiten“ (14.11.2026); docs/09-final/auftragsregister-2026-11-08.md (Fortschreibungen bis 12.11.2026); Linear, Team „Nexifyai“, Abruf 14.11.2026
 - **Stand 14.11.2026, 20:40 UTC:** Ursache belegt (IST, `gh api …/check-runs/<id>/annotations`, 20:34 UTC): GitHub meldet am Lauf „The job was not started because an Actions budget is preventing further use.“ Alle Läufe auf `main` (`500c52d`) und auf den Zweigen enden nach 3 bis 5 Sekunden ohne Schritt mit „failure“. Zu tun (nur Inhaber): Actions-Budget und Abrechnungseinstellungen prüfen. Bleibt BLOCKIERT.
 - **Stand 14.11.2026, ca. 22:00 UTC:** Unverändert (IST, `gh api …/commits/48f5072/check-runs` und Anmerkungen, 21:47 UTC): Die Läufe auf `48f5072` (CI, Chat owner schema fixture, Slack) enden um 21:45 UTC nach 2 bis 3 Sekunden mit „failure“, Anmerkung wie oben. Bleibt BLOCKIERT.
+- **Stand 15.11.2026, ca. 11:00 UTC:** Unverändert (IST, `gh api …/actions/runs` und Anmerkungen, ca. 10:55 UTC): Die Läufe „CI“ und „PR-Triage“ auf `af8d52a` (Zweig von PR 205) vom 15.11.2026, 10:50 bis 10:52 UTC, enden mit „failure“; Anmerkung am ersten CI-Job: „The job was not started because an Actions budget is preventing further use.“ Bleibt BLOCKIERT.
+- **Stand 16.11.2026, ca. 03:00 UTC:** Lage geändert (IST, `gh api …/actions/runs` und `…/runs/<id>/jobs`, 02:56 UTC): Actions startet wieder Jobs. Die Läufe auf `9def230` vom 16.11.2026, 02:26 UTC, führen Schritte aus; „CI“ dort mit 5 Jobs: `openapi-schema`, `postgres-isolation`, `react-site` bestanden, `next-web` und `repository` mit „Process completed with exit code 1“ (Befund am Code, hier nicht untersucht). Wann die Budgetsperre endete, ist hier nicht belegt (zuletzt am 15.11.2026, 10:52 UTC, gemessen). Budgetfrage erledigt, soweit messbar; offen bleibt, ob die Freigabe dauerhaft ist (Inhaber). Folge für OA-027.
+- **Stand 26.11.2026, ca. 07:00 UTC:** CI auf `main` (`9c9c806`): die zeitgesteuerten Läufe vom 23., 24. und 25.11.2026 enden jeweils rot; im Lauf vom 25.11.2026, 15:43 UTC, schlagen `next-web` und `repository` fehl, `openapi-schema`, `react-site` und `postgres-isolation` bestehen. Die Jobs starten also mit Schritten; die Ursache der roten Jobs ist nicht untersucht. Zustand unverändert.
 
 #### OA-023 · Infrastruktur & Server · ENTSCHEIDUNG NÖTIG
 
@@ -327,6 +332,8 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Quellen:** Sitzungsverlauf 69187537 (Zusammenfassungen 11:39 und 16:53 UTC, Nutzeraussagen bis 18:20 UTC, 14.11.2026); GitHub-Abruf offene PRs, 14.11.2026 ca. 18:30 UTC
 - **Stand 14.11.2026, 20:40 UTC:** IST (`gh api …/pulls?state=open`, 20:35 UTC): 26 Pull Requests offen, bei 22 ist Auto-Merge eingeschaltet, neu auch bei PR 184 (Cloudflare-Umzug). Wirksam wird das, sobald das Actions-Budget (OA-022) wieder Jobs zulässt. Frage an den Inhaber unverändert offen.
 - **Stand 14.11.2026, ca. 22:00 UTC:** IST (`gh api …/pulls?state=open`, 21:47 UTC): 31 Pull Requests offen, bei 21 ist Auto-Merge eingeschaltet. Nicht mehr bei PR 184 (Cloudflare-Umzug; wer es abgeschaltet hat, ist hier nicht belegt); weiter nicht bei 105 und bei den acht Entwürfen 186, 187, 189, 190, 192, 193, 195, 197. Frage an den Inhaber unverändert offen.
+- **Stand 15.11.2026, ca. 11:00 UTC:** IST (`gh api …/pulls?state=open` und `…/issues/<n>/events`, ca. 10:55 UTC): 37 Pull Requests offen, davon 14 Entwürfe; bei keinem ist Auto-Merge eingeschaltet. Ereignisse `auto_merge_disabled` des Kontos `nexifyai-dev` am 15.11.2026 zwischen 10:44:23 und 10:45:54 UTC an 21 PRs (48, 60, 65, 67, 73, 74, 75, 115, 118 bis 126, 135, 147, 150, 163; an PR 147 um 10:45:51, an PR 150 um 10:45:52 UTC); an PR 186 kurzzeitig `auto_squash_enabled` 09:20:40 und `auto_merge_disabled` 09:21:13 UTC. Wer über das gemeinsame Konto gehandelt hat, ist hier nicht belegt. Laut Meldung einer zweiten Sitzung entspricht das einer Generalfreigabe des Inhabers vom 15.11.2026 („Auto-Merge abschalten für nicht zweifach geprüfte PRs“); vom Inhaber in der Hauptsitzung nicht bestätigt (OA-179). Die Gefahr ungeprüfter Merges nach Wiederanlauf von Actions ist damit derzeit nicht gegeben; die Frage, ob und wann Auto-Merge wieder gelten soll, bleibt beim Inhaber.
+- **Stand 16.11.2026, ca. 03:00 UTC:** IST (`gh api …/pulls?state=open`, 02:56 UTC): 46 Pull Requests offen, davon 5 Entwürfe (186, 211, 212, 213, 214); Auto-Merge eingeschaltet an 18 (187, 189, 190, 192, 193, 195, 197, 200 bis 210), angestoßen jeweils über das Konto `nexifyai-dev`; wer gehandelt hat, ist nicht belegt. Darunter PR 206 (diese Nachführung, am 15.11.2026, 21:56 UTC auf „bereit“ gestellt) und PR 207 (Speicher-Bereinigung, siehe OA-017). Da Actions wieder Jobs startet (OA-022) und für `main` kein Branchenschutz mit verlangten Statusprüfungen gesetzt ist (`…/branches/main/protection`: 404; die Regeln für `main` verlangen u. a. CodeQL und ein Deployment `copilot`), ist die Gefahr ungeprüfter Merges wieder gegeben; die Aussage vom 15.11. („derzeit nicht gegeben“) ist überholt. Hier nichts umgeschaltet; Entscheidung beim Inhaber.
 
 ### Priorität 2 Verkaufsfähiger Auftritt und Arbeitsplatz
 
@@ -367,6 +374,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Aufwand:** S · **Ausführung:** nur Inhaber (Entscheidung); danach Agent
 - **Quellen:** PROGRESS.md, Abschnitte „Stand 14.11.2026, ca. 14:25 UTC“ und „Offene Arbeiten“ (14.11.2026); docs/09-final/auftragsregister-2026-11-08.md (Fortschreibungen bis 12.11.2026)
 - **Stand 14.11.2026, 20:40 UTC:** Vorbereitung erledigt mit PR 182 (`08b0456`): Die Regel wird im Proxy durchgesetzt, Standard gesperrt, Freigabe über `NEXIFY_INDEXING` (TEILEKLAR zusätzlich `NEXIFY_INDEXING_TEILEKLAR`), Vorlage `docs/04-betrieb/indexierung-freigabe-2026-11-14.md`. Eigene Messung 20:33 UTC: elf abgerufene Seiten auf vier Hosts tragen `X-Robots-Tag: noindex, nofollow`, Sitemap 28 Adressen ohne `/teileklar`. Das Abschlusskriterium (Seiten ohne `noindex`) ist nicht erfüllt und soll es ohne Freigabe nicht sein; die Entscheidung bleibt beim Inhaber. Rest: OA-164.
+- **Stand 16.11.2026, ca. 03:00 UTC:** IST (`curl`, 02:53 UTC): `/`, `/impressum`, `/agb`, `/avv`, `/widerruf`, `/datenschutz`, `/leistungen` ohne `X-Robots-Tag`, Meta `index, follow`; `/teileklar` und `/teileklar/kategorien` weiter `noindex, nofollow`; Sitemap 28 Adressen unter `https://www.nexifyai.de/`. Die Indexierung der Agenturseiten ist damit eingeschaltet; wann und durch wen, ist hier nicht belegt. OFFEN, Owner Inhaber: `docs/04-betrieb/indexierung-freigabe-2026-11-14.md`, Abschnitt 5, knüpft die Freigabe an bestätigte Rechtsform und Impressum und an die Freigabe der Rechtstexte in dieser Fassung; dass beides erfüllt ist, ist in den Dokumenten nicht belegt. Keine Bewertung, kein Zurückschalten; Bestätigung des Inhabers nötig (siehe auch OA-179, gemeldete kanonische Domain `nexifyai.de` gegenüber `www` in Sitemap und Canonical).
 
 #### OA-032 · Website · ENTSCHEIDUNG NÖTIG
 
@@ -1475,6 +1483,7 @@ Rechtsrahmen in Kürze (keine Rechtsberatung): § 7 Abs. 2 Nr. 2 UWG verlangt f�
 - **Fertig, wenn:** Zwei aufeinanderfolgende Läufe in eigener Umgebung mit Live-Prüfung und Gleichmacher belegt.
 - **Aufwand:** S · **Ausführung:** nur Inhaber (Umgebung/Repository-Zugriff einrichten); danach Agent
 - **Quellen:** PROGRESS.md, Abschnitte „Stand 14.11.2026, ca. 14:25 UTC“ und „Offene Arbeiten“ (14.11.2026); Abruf der geplanten Aufgaben (list_triggers), 14.11.2026 ca. 18:40 UTC
+- **Stand 26.11.2026, ca. 07:00 UTC:** Ausfall des Regelbetriebs belegt: Die geplanten Läufe vom 22.11.2026, 22:47 UTC, bis 26.11.2026, 02:47 UTC (20 Läufe), wurden nicht ausgeführt; die Benachrichtigungen kamen erst am 26.11.2026, 06:52 UTC, gesammelt in der Sitzung an. Für diesen Zeitraum gibt es keine Messung und keinen Tagesbericht. Ursache nicht belegt (die Sitzung war nicht erreichbar). Das bestätigt den Blocker: Der Regelbetrieb hängt an einer offenen Sitzung. Bleibt BLOCKIERT.
 
 #### OA-152 · Routinen & Dauerbetrieb · OFFEN
 
@@ -1911,3 +1920,285 @@ Herleitung: OFFEN 46 − 2 (164, 170 nach ERLEDIGT) + 5 neue (171, 174, 175, 177
 - **Fertig, wenn:** Format um ein Commit-Feld ergänzt, Prüfskript prüft es, künftige Läufe tragen es.
 - **Aufwand:** M · **Ausführung:** Fabrik (Paket C, ein Schreiber)
 - **Quellen:** docs/09-final/pin-rebase-2026-11-14.md, Abschnitt 12; Commit-Text von PR 198
+
+## 10. Nachführung 15.11.2026, ca. 11:00 UTC (Stand `origin/main` `9c9c806`, PR 199)
+
+Regelbetrieb-Lauf. Seit `9c9c806` ist nichts auf `main` gemergt (`git fetch` und `git log 9c9c806..origin/main`, 10:49 UTC, leer). Quelle der eigenen Angaben: `tools/live-check.mjs` und `tools/gleichmacher.mjs` gegen `https://nexifyai.de` (10:51 und 10:53 UTC), `gh api` (Pull Requests, Ereignisse, Actions-Läufe, Commit-Status; ca. 10:55 UTC). Angaben anderer Sitzungen sind als solche gekennzeichnet und hier nicht nachgemessen. Abschnitte 1 bis 9 sind bis auf zwei Zeilen „Stand 15.11.2026, ca. 11:00 UTC“ (OA-022, OA-027) unverändert.
+
+### 10.1 Geänderte Zustände
+
+Kein Zustand geändert. Nur mit Stand-Zeile versehen: OA-022 (Actions-Budget, unverändert), OA-027 (Auto-Merge an keinem der 37 offenen PRs mehr eingeschaltet).
+
+### 10.2 Zählung nach der Nachführung (181 Einträge)
+
+| Zustand | Stand `48f5072` | Stand `9c9c806` |
+|---|---|---|
+| OFFEN | 49 | 50 |
+| TEILWEISE | 13 | 13 |
+| BLOCKIERT | 38 | 38 |
+| ENTSCHEIDUNG NÖTIG | 60 | 62 |
+| HISTORIE-überholt | 8 | 8 |
+| ERLEDIGT | 10 | 10 |
+
+Herleitung: OFFEN 49 + 1 neu (181) = 50. ENTSCHEIDUNG NÖTIG 60 + 2 neue (179, 180) = 62.
+
+### 10.3 Neue Einträge
+
+#### OA-179 · Routinen & Dauerbetrieb · ENTSCHEIDUNG NÖTIG
+
+- **Priorität:** 1 Sicherheits-, Daten- und Betriebsrisiko
+- **Ziel:** Der Inhaber bestätigt oder verwirft die Entscheidungen, die eine zweite Sitzung als seine meldet; erst danach werden sie, soweit bestätigt, in `DECISIONS.md` mit Nummer geführt.
+- **Blocker:** Gemeldet von einer zweiten Sitzung, vom Inhaber in der Hauptsitzung NICHT bestätigt, keine Entscheidung im Sinne von `DECISIONS.md`: (1) KI-Kennzeichnung immer in allen Projekten wie im Footer; (2) Design-Sperre für die eigenen Seiten; (3) begrenzte Autonomie für rückholbare DNS-Reparaturen und das Mergen reifer, zweifach geprüfter PRs; (4) Generalfreigabe vom 15.11.2026, ca. 10:40 UTC, für offene Punkte, daraus u. a.: Shop-Zielbild neue Fassung auf Vercel mit altem Dienst als Rückweg; Auto-Merge abschalten für nicht zweifach geprüfte PRs; jetzt kein Cloudflare-Umzug (Vercel bleibt); Indexierung bleibt aus, bis die Impressumsdaten bestätigt sind; festgelegte Preise als „ab“-Preise nur in Textentwürfen; Referenzen anonymisiert (HISTORIE, überholt durch Punkt 6); kein zweiter Zeitplan neben dem Regelbetrieb. Punkt (3) berührt D-016 und D-017 (Freigabe je Schritt), Punkt (4) unter anderem D-021 (Cloudflare in Prüfung) und Preise (D-017).
+- **Abhängigkeiten:** keine (verwandt: OA-027, OA-180, OA-181)
+- **Fertig, wenn:** Der Inhaber hat jeden Punkt bestätigt, geändert oder verworfen; Bestätigtes steht in `DECISIONS.md` mit Quelle, Folgen und Offenem.
+- **Aufwand:** S · **Ausführung:** nur Inhaber · **Owner:** Inhaber · **Nächste Aktion:** Vorlage der Liste im nächsten Gespräch mit dem Inhaber
+- **Quellen:** Auftrag der koordinierenden Sitzung zum Regelbetrieb-Lauf 15.11.2026, 10:48 UTC (Meldung der zweiten Sitzung, hier nicht nachgeprüft); `DECISIONS.md` D-016, D-017
+- **Stand 16.11.2026, ca. 03:00 UTC:** Weitere Meldungen einer zweiten Sitzung, vom Inhaber in der Hauptsitzung nicht bestätigt, keine D-Nummer, hier gebündelt: (5) Entscheidungsliste vom 15.11.2026, ca. 12:15 UTC, u. a.: Katalogübernahme aus dem alten Shop; Umschalten der Shop-Domain erst ab 3.720 Produkten, mit Live-Zahlung und Testbestellung; kanonische Domain `nexifyai.de`; Rechtsform nach Handelsregisterstand; Merge-Reihenfolge 197, 193, 186, 195 nach grünem CI; DeepSeek-Delegation über den Router mit Tagesdeckel, bis zur Hinterlegung des Schlüssels aus. (6) Kundenschutzregel „Referenzen nur auf Anfrage“: keine Kundennamen, Kundenlogos, Fallbeispiele oder Referenzen auf den eigenen Seiten, auch nicht anonymisiert; überholt die Linie „Referenzen anonymisiert“ aus Punkt (4). (7) Verkaufsgrundsatz: Der eigene Auftritt ist Vertrieb, unfertige oder widersprüchliche öffentliche Stellen sind Befunde; Folge: Der Regelbetrieb enthält seit 16.11.2026 eine Sichtprüfung der eigenen Seiten (`PROGRESS.md`, Abschnitt „Stand 16.11.2026“). Abhängigkeiten aufgelöst: OA-179 setzt nichts voraus; OA-180 und OA-181 sind verwandt, keine Voraussetzung.
+
+#### OA-180 · Infrastruktur & Server · HISTORIE-überholt (bis 16.11.2026: ENTSCHEIDUNG NÖTIG)
+
+- **Stand 16.11.2026, ca. 03:00 UTC:** Überführt nach OA-017 (Platz auf `srv1941843`) und OA-018 (Snapshots); dort als Stand-Zeilen fortgeführt. Die Nummer bleibt vergeben, der Eintrag wird nicht weitergeführt.
+
+- **Priorität:** 1 Sicherheits-, Daten- und Betriebsrisiko
+- **Ziel:** Das geplante „Original entfernen“ von Altläufen auf `srv1941843` (Zweig `claude/speicher-bereinigung`, gemeldet von einer zweiten Sitzung) vor jeder Ausführung mit dem Inhaber klären.
+- **Blocker:** Risiko-Hinweis: Das Vorhaben widerspricht der Dauergrenze „nichts löschen“ (D-017) und verlangt nach D-016 Freigabe je Schritt und einen geprüften Rückweg. Laut Meldung läuft der Hostinger-Snapshot am 15.11.2026 um 11:47 UTC ab (Zeitpunkt hier nicht nachgeprüft); danach fehlt der gemeldete Rückweg. Der Sperrvermerk im Aufräumplan (kein Prune, Cognee-Volumes nicht anfassen) gilt.
+- **Abhängigkeiten:** keine (verwandt: OA-179)
+- **Fertig, wenn:** Ausdrückliche Freigabe oder Ablehnung des Inhabers je Schritt; vor einer Freigabe ein gültiger, geprüfter Rückweg (Snapshot oder Sicherung mit Wiederherstellungsnachweis).
+- **Aufwand:** S für die Entscheidung · **Ausführung:** Entscheidung nur Inhaber · **Owner:** Inhaber · **Nächste Aktion:** vor 11:47 UTC am 15.11.2026 vorlegen; ohne Freigabe nichts entfernen
+- **Quellen:** Auftrag der koordinierenden Sitzung zum Regelbetrieb-Lauf 15.11.2026 (Meldung der zweiten Sitzung, nicht nachgemessen); `DECISIONS.md` D-016, D-017
+
+#### OA-181 · Infrastruktur & Server · OFFEN
+
+- **Priorität:** 1 Sicherheits-, Daten- und Betriebsrisiko
+- **Ziel:** Die von einer zweiten Sitzung gemeldeten DNS-Änderungen in der Zone `nexifyai.de` lesend nachmessen und dem Inhaber zur Bestätigung vorlegen.
+- **Blocker:** Gemeldet, nicht nachgemessen: Einträge am 14.11.2026, 22:03 UTC (Resend) und am 15.11.2026, ca. 09:25 UTC (Clerk-CNAMEs; Hostinger-DKIM auf „nur DNS“ umgestellt). Eine Freigabe des Inhabers für diese Schritte ist hier nicht belegt (D-016, OA-179 Punkt 3). Der Live-Check vom 15.11.2026, 10:51 UTC, enthält keine Anmelde- oder Kontoprüfung und zeigt gegenüber 06:54 UTC keine Veränderung (329 Prüfungen, 2 Befunde, beide Shop-Dienst 503); Wirkungen auf Anmeldung und Mailzustellung sind damit nicht gemessen.
+- **Abhängigkeiten:** OA-163, OA-173 (verwandt: OA-179)
+- **Fertig, wenn:** Öffentliche DNS-Abfrage der betroffenen Namen abgelegt; Abgleich mit dem Stand vor der Änderung (Netz-Inventur, PR 200, sobald eingebracht); Bestätigung oder Rücknahme durch den Inhaber.
+- **Aufwand:** S · **Ausführung:** Messung Fabrik (nur lesend), Bestätigung Inhaber · **Owner:** koordinierende Sitzung · **Nächste Aktion:** lesende DNS-Abfrage im nächsten Regelbetrieb-Lauf
+- **Quellen:** Auftrag der koordinierenden Sitzung zum Regelbetrieb-Lauf 15.11.2026; `tools/live-check.mjs` 15.11.2026, 10:51 UTC
+- **Stand 17.11.2026, ca. 19:00 UTC:** Lesende DNS-Abfrage (DNS über HTTPS, 18:58 UTC): `nexifyai.de` und `www.nexifyai.de` A `185.158.133.1`, Nameserver bei Cloudflare; `nexifyai.cloud` und `www.nexifyai.cloud` A `172.66.40.167`, `172.66.43.89`. Die Apex-Domain zeigt damit nicht mehr auf Vercel; siehe OA-182. Die gemeldeten Einträge (Resend, Clerk, DKIM) sind weiter nicht einzeln nachgemessen.
+
+## 11. Nachführung 16.11.2026, ca. 03:00 UTC (Stand `origin/main` `9c9c806`, PR 199)
+
+Regelbetrieb-Lauf 02:48 UTC. Seit `9c9c806` kein Merge (`git log 9c9c806..origin/main`, 02:49 UTC, leer). Die Läufe vom 15.11.2026 um 14:47, 18:47 und 22:47 UTC sind ausgefallen. Quelle der eigenen Angaben: `PROGRESS.md`, Abschnitt „Stand 16.11.2026, ca. 03:00 UTC“. Nacharbeit aus dem Review von PR 206.
+
+### 11.1 Geänderte Zustände
+
+- OA-180: ENTSCHEIDUNG NÖTIG → HISTORIE-überholt, überführt nach OA-017 und OA-018 (Nummer bleibt vergeben).
+- Abhängigkeitskreis aufgelöst: OA-179 ohne Voraussetzung; OA-180 und OA-181 verweisen auf OA-179 als „verwandt“.
+- Stand-Zeilen: OA-017, OA-018 (aus OA-180), OA-022 (Actions startet wieder Jobs), OA-027 (Auto-Merge an 18 PRs), OA-031 (Indexierung der Agenturseiten an, Voraussetzungen nicht belegt), OA-179 (weitere gemeldete Punkte 5 bis 7).
+
+### 11.2 Zählung nach der Nachführung (181 Einträge)
+
+| Zustand | Stand 15.11.2026, ca. 11:00 UTC | Stand 16.11.2026, ca. 03:00 UTC |
+|---|---|---|
+| OFFEN | 50 | 50 |
+| TEILWEISE | 13 | 13 |
+| BLOCKIERT | 38 | 38 |
+| ENTSCHEIDUNG NÖTIG | 62 | 61 |
+| HISTORIE-überholt | 8 | 9 |
+| ERLEDIGT | 10 | 10 |
+
+Herleitung: ENTSCHEIDUNG NÖTIG 62 − 1 (OA-180) = 61; HISTORIE-überholt 8 + 1 (OA-180) = 9. Keine neuen Einträge.
+
+## 12. Nachführung 17.11.2026, ca. 19:00 UTC (Stand `origin/main` `9c9c806`, PR 199)
+
+Regelbetrieb-Lauf 18:47 UTC. Die Hauptsitzung war vom 16.11.2026, ca. 03:00 UTC, bis 17.11.2026, ca. 18:50 UTC, nicht erreichbar; zehn Läufe sind ausgefallen. Seit `9c9c806` kein Merge. Quelle der eigenen Angaben: `PROGRESS.md`, Abschnitt „Stand 17.11.2026, ca. 19:00 UTC“.
+
+### 12.1 Geänderte Zustände
+
+Kein Zustand geändert. Stand-Zeile an OA-181 (DNS lesend gemessen).
+
+### 12.2 Zählung nach der Nachführung (184 Einträge)
+
+| Zustand | Stand 16.11.2026, ca. 03:00 UTC | Stand 17.11.2026, ca. 19:00 UTC |
+|---|---|---|
+| OFFEN | 50 | 51 |
+| TEILWEISE | 13 | 13 |
+| BLOCKIERT | 38 | 38 |
+| ENTSCHEIDUNG NÖTIG | 61 | 63 |
+| HISTORIE-überholt | 9 | 9 |
+| ERLEDIGT | 10 | 10 |
+
+Herleitung: OFFEN 50 + 1 neu (183) = 51. ENTSCHEIDUNG NÖTIG 61 + 2 neue (182, 184) = 63.
+
+### 12.3 Neue Einträge
+
+#### OA-182 · Infrastruktur & Server · ENTSCHEIDUNG NÖTIG
+
+- **Priorität:** 1 Sicherheits-, Daten- und Betriebsrisiko
+- **Ziel:** Klären, wer `nexifyai.de` und `www.nexifyai.de` auf eine Auslieferung außerhalb dieses Repositorys umgestellt hat, ob das gewollt ist, und danach entweder einen geprüften Rückweg auf das Vercel-Projekt `…-ut7r` oder eine neue Führungsentscheidung festhalten.
+- **Blocker:** IST 17.11.2026, 18:58 bis 19:19 UTC: A `185.158.133.1`, Antwort über Cloudflare, Anwendung mit Lovable-Kennungen und einer Commit-Kennung, die es in diesem Repository nicht gibt; Vercel-Projekt `…-ut7r` ohne eigene Domain. Folgen: `tools/live-check.mjs` 313 Prüfungen, 16 Befunde; `tools/gleichmacher.mjs` 781 Abweichungen; Shop-Dienst 404; kein KI-Hinweis im Footer; keine Indexierungssperre für `/teileklar`; `/agb` 404; Katalogzahl ohne belegte Quelle. Widerspricht `AGENTS.md` (Führungsentscheidung 13.11.2026, „ausgeliefert ausschließlich über Vercel“) und D-012 (Gleichmacher vor jeder Auslieferung); berührt D-021. DNS und Vercel werden ohne Freigabe des Inhabers nicht geändert (D-016, D-017).
+- **Abhängigkeiten:** keine (verwandt: OA-031, OA-181, OA-179 Punkt 5 „kanonische Domain“)
+- **Fertig, wenn:** Der Inhaber hat die Auslieferung bestätigt oder einen Rückweg freigegeben; der Stand ist in `AGENTS.md` bzw. `DECISIONS.md` mit Quelle festgehalten; Live-Check und Gleichmacher gegen die öffentliche Domain sind wieder ohne Befund oder die Abweichung ist entschieden.
+- **Aufwand:** S für die Entscheidung · **Ausführung:** Entscheidung nur Inhaber, Messung Fabrik · **Owner:** Inhaber · **Nächste Aktion:** sofort vorlegen
+- **Quellen:** `PROGRESS.md`, Abschnitt „Stand 17.11.2026, ca. 19:00 UTC“; DNS über HTTPS, `curl`, Vercel-API (nur lesend), 17.11.2026
+- **Stand 19.11.2026, ca. 19:15 UTC:** `nexifyai.de`, `nexifyai.cloud` und `www.nexifyai.cloud` leiten mit 301 auf `www.nexifyai.de`; dort eine Vite-/TanStack-Anwendung mit Lovable-Kennungen und dem Titel der Startseite aus `main`, deren Kennungen in keinem Zweig dieses Repositorys vorkommen; nicht an den Vercel-Projekten `…-ut7r`/`…-s4k5`. Live-Check 315/15, Gleichmacher 731 Abweichungen. Herkunft weiter nicht belegt (`PROGRESS.md`, Abschnitt „Stand 19.11.2026, ca. 19:15 UTC“).
+- **Stand 26.11.2026, ca. 07:00 UTC:** Messung 06:54 bis 07:05 UTC. `www.nexifyai.de` antwortet weiter über Cloudflare (`server: cloudflare`) mit einer Anwendung, die nicht aus `main` stammt. Hauptskript jetzt `index-ChUwWm2E.js` (22.11.2026: `index-DsVj8dEd.js`), also ein anderer Build bei unverändertem `main` `9c9c806`; Herkunft nicht belegt. Sitemap 27 Einträge (22.11.2026: 36). `node tools/live-check.mjs https://nexifyai.de` bricht ab, ohne Prüfzahlen (OA-189); `node tools/gleichmacher.mjs` 28 Seiten, 296 Abweichungen, 97 Befunde, 20 Fehler (22.11.2026: 30/452/104/20). Zustand bleibt ENTSCHEIDUNG NÖTIG.
+
+#### OA-183 · Shop TEILEKLAR · OFFEN
+
+- **Priorität:** 2 Verkaufsfähiger Auftritt und Arbeitsplatz
+- **Ziel:** Entwurf PR 218 (`claude/heilung-schaufenster-leer`, Leerzustand statt Dauerladen auf `/teileklar`) unabhängig prüfen lassen und den dadurch roten Resize-Beleg in eigener Arbeit neu erheben.
+- **Blocker:** `evidence/resize-2026-11-10/text-spacing.json` bindet `apps/web/components` vollständig; neu rot: `test_current_report_has_exact_source_binding`, `test_css_script_new_source_and_uncompleted_report_fail_closed`. Erneuerung nur durch Lauf von `apps/site/tests/browser-text-spacing.mjs` am festen Commit (`nexify-belege-und-pins`).
+- **Abhängigkeiten:** keine (verwandt: OA-056)
+- **Fertig, wenn:** Unabhängige Prüfung liegt vor; Beleg am Merge-Stand neu erhoben, alte Fassung unter `superseded/`; Merge durch koordinierende Sitzung oder Inhaber.
+- **Aufwand:** S · **Ausführung:** Fabrik · **Owner:** koordinierende Sitzung · **Nächste Aktion:** Prüfauftrag an einen zweiten Agenten
+- **Quellen:** PR 218, Abschnitte „Prüfung“ und „Nicht belegt“
+
+#### OA-184 · Qualität & Belege · ENTSCHEIDUNG NÖTIG
+
+- **Priorität:** 1 Sicherheits-, Daten- und Betriebsrisiko
+- **Ziel:** Über die Aktualisierung von Next.js 16.4.3 entscheiden: `next build` meldet am 17.11.2026 eine bekannte Sicherheitslücke und bricht beim ersten Lauf ab; Dependabot-PR 217 hebt auf 16.4.5.
+- **Blocker:** Abhängigkeitswechsel braucht geprüfte Herkunft und Freigabe (`nexify-belege-und-pins`, Grenzen); CI an PR 217 rot wie auf `main`.
+- **Abhängigkeiten:** keine (verwandt: OA-022)
+- **Fertig, wenn:** PR 217 geprüft und eingebracht oder mit Begründung abgelehnt; `next build` ohne Abbruch.
+- **Aufwand:** S · **Ausführung:** Prüfung Fabrik, Freigabe Inhaber · **Owner:** Inhaber · **Nächste Aktion:** PR 217 prüfen lassen
+- **Quellen:** lokaler `next build` am 17.11.2026 in `claude/heilung-schaufenster-leer`; PR 217
+
+## 13. Nachführung 19.11.2026, ca. 19:15 UTC (Stand `origin/main` `9c9c806`, PR 199)
+
+Regelbetrieb-Lauf 18:47 UTC. Seit `9c9c806` kein Merge. Quelle der eigenen Angaben: `PROGRESS.md`, Abschnitt „Stand 19.11.2026, ca. 19:15 UTC“.
+
+### 13.1 Geänderte Zustände
+
+Kein Zustand geändert. Stand-Zeile an OA-182 (neue Domain-Lage).
+
+### 13.2 Zählung nach der Nachführung (187 Einträge)
+
+| Zustand | Stand 17.11.2026, ca. 19:00 UTC | Stand 19.11.2026, ca. 19:15 UTC |
+|---|---|---|
+| OFFEN | 51 | 52 |
+| TEILWEISE | 13 | 13 |
+| BLOCKIERT | 38 | 38 |
+| ENTSCHEIDUNG NÖTIG | 63 | 65 |
+| HISTORIE-überholt | 9 | 9 |
+| ERLEDIGT | 10 | 10 |
+
+Herleitung: OFFEN 51 + 1 neu (186) = 52. ENTSCHEIDUNG NÖTIG 63 + 2 neue (185, 187) = 65.
+
+### 13.3 Neue Einträge
+
+#### OA-185 · Recht & Shop · ENTSCHEIDUNG NÖTIG
+
+- **Priorität:** 1 Sicherheits-, Daten- und Betriebsrisiko
+- **Ziel:** Auf der öffentlichen Domain `www.nexifyai.de` fehlen Rechtsseiten: `/agb`, `/widerruf`, `/avv`, `/rechtliches`, `/teileklar/agb`, `/teileklar/widerruf` antworten 404; `/teileklar` verlinkt kein Impressum; `/teileklar/rechtliches` nennt die Kaufunterlagen selbst nicht freigegeben, während die Seite „Alle Preise inkl. MwSt.“, Warenkorb und Kasse zeigt und indexierbar ist. Klären, ob diese Auslieferung so öffentlich bleiben darf.
+- **Blocker:** Die Auslieferung stammt nicht aus `main` (OA-182); Rechtstexte ändern nur mit Freigabe des Inhabers (D-017). Eine Bestellung ist derzeit nicht möglich (Artikel laden nicht, Warenkorb und Kasse „derzeit nicht verfügbar“, Shop-Dienst 404).
+- **Abhängigkeiten:** OA-182 (verwandt: OA-031, OA-183)
+- **Fertig, wenn:** Der Inhaber hat entschieden (Rückweg auf die Auslieferung aus `main` oder Rechtsseiten in der fremden Auslieferung ergänzt und `/teileklar` bis dahin gesperrt); Rechtsseiten und Impressum-Verweis live gemessen.
+- **Aufwand:** S für die Entscheidung · **Ausführung:** Entscheidung Inhaber, Messung Fabrik · **Owner:** Inhaber · **Nächste Aktion:** sofort vorlegen
+- **Quellen:** `PROGRESS.md`, Abschnitt „Stand 19.11.2026, ca. 19:15 UTC“; `curl` und Playwright, 19.11.2026, 19:04 bis 19:06 UTC
+- **Stand 21.11.2026, ca. 19:00 UTC:** `/teileklar` und Unterpfade leiten auf `teileklar.shop` um; dort `/rechtliches`, `/warenkorb` und `/kasse` 404. Weiter siehe OA-188.
+- **Stand 26.11.2026, ca. 07:00 UTC:** Messung 07:04 UTC: `/agb`, `/widerruf`, `/avv` auf `www.nexifyai.de` weiterhin 404; `/impressum` und `/datenschutz` 200. `/teileklar` jetzt 404 (22.11.2026: 301 auf `teileklar.shop`), siehe OA-188. Zustand unverändert.
+
+#### OA-186 · Infrastruktur & Server · OFFEN
+
+- **Priorität:** 1 Sicherheits-, Daten- und Betriebsrisiko
+- **Ziel:** Drei Subdomains von `nexifyai.cloud` antworten mit Fehlern: `brain` 502, `workplace` 502, `agenten` 530 (Cloudflare 1033), laut Hauptsitzung seit mindestens 19.11.2026, 10:52 UTC; eigene Messung 19:07 UTC. Ursache feststellen und beheben.
+- **Blocker:** Server- und Tunnel-Eingriffe nur mit Freigabe des Inhabers je Schritt und Rückweg (D-016); ein aktuelles Server-Inventar liegt nicht vor.
+- **Abhängigkeiten:** keine (verwandt: OA-181)
+- **Fertig, wenn:** Die drei Adressen antworten wie vorgesehen oder sind mit Entscheidung abgeschaltet; Messung mit Uhrzeit.
+- **Aufwand:** S bis M · **Ausführung:** lesende Messung Fabrik, Eingriff nach Freigabe · **Owner:** Inhaber · **Nächste Aktion:** Freigabe für lesende Server-Messung (`nexify-server-messung`) einholen
+- **Quellen:** `curl`, 19.11.2026, 19:07 UTC; Meldung der Hauptsitzung (Beginn, nicht selbst gemessen)
+- **Stand 22.11.2026, ca. 07:00 UTC:** Messung zwischen 02:47 und 06:47 UTC: `brain.nexifyai.cloud` antwortet mit 307 auf `/docs`, dort 200 ohne Anmeldung abrufbar; ob die Schnittstellen dahinter offen sind, ist nicht geprüft (vorher 502). `workplace.nexifyai.cloud` 404 (vorher 502). `agenten.nexifyai.cloud` unverändert 530. Kein Eingriff dieser Sitzung; wer geändert hat, nicht belegt. Zustand bleibt OFFEN.
+- **Stand 26.11.2026, ca. 07:00 UTC:** Messung 07:04 UTC: `brain.nexifyai.cloud` 302 auf `/docs` (am 22.11.2026 als 307 erfasst), `/docs` 200 ohne Anmeldung; `workplace.nexifyai.cloud` 404; `agenten.nexifyai.cloud` 530 – in der Sache unverändert. `mcp.nexifyai.cloud` wurde in diesem Lauf nicht gemessen. Zwischen 22.11.2026, 22:47 UTC, und 26.11.2026, 02:47 UTC, liegt keine Messung vor (OA-151). Zustand bleibt OFFEN.
+
+#### OA-187 · Sicherheit · ENTSCHEIDUNG NÖTIG
+
+- **Priorität:** 1 Sicherheits-, Daten- und Betriebsrisiko
+- **Ziel:** Ein Agenten-Endpunkt einer eigenen Domain ist ohne Anmeldung erreichbar (Meldung der Hauptsitzung). Zugangsschutz herstellen oder den Endpunkt abschalten. Technische Einzelheiten stehen bewusst nicht in diesem Repository.
+- **Blocker:** Eingriff in Server, Zugangsschutz oder DNS nur mit Freigabe des Inhabers (D-016, D-017); hier nicht selbst abgerufen.
+- **Abhängigkeiten:** keine (verwandt: OA-186)
+- **Fertig, wenn:** Der Endpunkt verlangt eine Anmeldung oder ist abgeschaltet; nachgemessen ohne Werkzeugaufruf am Endpunkt.
+- **Aufwand:** S · **Ausführung:** Inhaber · **Owner:** Inhaber · **Nächste Aktion:** sofort vorlegen
+- **Quellen:** Meldung der Hauptsitzung vom 19.11.2026 (nicht nachgeprüft)
+
+## 14. Nachführung 21.11.2026, ca. 19:00 UTC (Stand `origin/main` `9c9c806`, PR 199)
+
+Regelbetrieb-Lauf 18:54 UTC. Seit `9c9c806` kein Merge. Quelle der eigenen Angaben: `PROGRESS.md`, Abschnitt „Stand 21.11.2026, ca. 19:00 UTC“.
+
+### 14.1 Geänderte Zustände
+
+Kein Zustand geändert. Stand-Zeile an OA-185 (Verweis auf OA-188).
+
+### 14.2 Zählung nach der Nachführung (188 Einträge)
+
+| Zustand | Stand 19.11.2026, ca. 19:15 UTC | Stand 21.11.2026, ca. 19:00 UTC |
+|---|---|---|
+| OFFEN | 52 | 52 |
+| TEILWEISE | 13 | 13 |
+| BLOCKIERT | 38 | 38 |
+| ENTSCHEIDUNG NÖTIG | 65 | 66 |
+| HISTORIE-überholt | 9 | 9 |
+| ERLEDIGT | 10 | 10 |
+
+Herleitung: ENTSCHEIDUNG NÖTIG 65 + 1 neu (188) = 66.
+
+### 14.3 Neue Einträge
+
+#### OA-188 · Shop TEILEKLAR · ENTSCHEIDUNG NÖTIG
+
+- **Priorität:** 1 Sicherheits-, Daten- und Betriebsrisiko
+- **Ziel:** Shop-Pfade von `www.nexifyai.de` auf `teileklar.shop` umgeleitet – Herkunft und Zuständigkeit klären; drei Zielpfade 404; Sitemap listet weitergeleitete Adressen. IST 21.11.2026: Seit einer Messung zwischen 14:47 und 18:47 UTC leiten `/teileklar` und alle Unterpfade mit 301 auf `teileklar.shop` (um 14:47 UTC noch 200). Dort 200 für `/`, `/shop`, `/impressum`, `/datenschutz`, `/agb`, `/widerruf`, `x-robots-tag: index, follow`, `/api/shop/products` mit `total` 3720; 404 für `/warenkorb`, `/kasse`, `/rechtliches`, `/werkstatt`, `/api/shop/status`. `/teileklar/warenkorb`, `/teileklar/kasse` und `/teileklar/rechtliches` enden damit auf 404. Die Sitemap von `www.nexifyai.de` (36 Adressen) listet weiterhin zehn `/teileklar`-Adressen, die nun weiterleiten.
+- **Blocker:** Auslöser ist keine Änderung in diesem Repository (`main` unverändert `9c9c806`); wer umgestellt hat und aus welchem Repository `teileklar.shop` stammt, ist nicht belegt. Ob dort Bestellungen möglich sind, wurde nicht geprüft. DNS, Weiterleitungen und Auslieferung werden ohne Freigabe des Inhabers nicht geändert (D-016, D-017).
+- **Abhängigkeiten:** OA-182 (verwandt: OA-183, OA-185)
+- **Fertig, wenn:** Der Inhaber hat bestätigt, ob `teileklar.shop` die gewollte Shop-Auslieferung ist und aus welchem Repository sie stammt; die Zielpfade antworten wie vorgesehen oder die Weiterleitungen sind angepasst; die Sitemap listet keine weitergeleiteten Adressen; Messung mit Uhrzeit.
+- **Aufwand:** S für die Entscheidung · **Ausführung:** Entscheidung Inhaber, Messung Fabrik · **Owner:** Inhaber (Entscheidung) · **Nächste Aktion:** Inhaber bestätigt, ob `teileklar.shop` die gewollte Shop-Auslieferung ist und aus welchem Repository sie stammt
+- **Quellen:** `PROGRESS.md`, Abschnitt „Stand 21.11.2026, ca. 19:00 UTC“; `curl`, `tools/live-check.mjs` und `tools/gleichmacher.mjs`, 21.11.2026, 14:47 bis 18:54 UTC
+- **Stand 22.11.2026, ca. 07:00 UTC:** Messung zwischen 18:47 und 22:47 UTC am 21.11.2026: Die Weiterleitungen sind geändert, Herkunft nicht belegt. `/teileklar/warenkorb` und `/teileklar/kasse` leiten auf `teileklar.shop/shop`, `/teileklar/rechtliches` auf `/impressum`, `/teileklar/werkstatt` auf `/werkstatt-partner`; die Ziele antworten jetzt mit 200. Direkt auf `teileklar.shop` bleiben `/warenkorb`, `/kasse` und `/api/shop/status` 404; Katalog dort `total` 3720. Wer umgestellt hat: nicht belegt; `main` unverändert `9c9c806`. Zustand bleibt ENTSCHEIDUNG NÖTIG.
+- **Stand 26.11.2026, ca. 07:00 UTC:** Messung 07:04 UTC: `www.nexifyai.de/teileklar` antwortet jetzt mit 404 (22.11.2026: 301 auf `teileklar.shop`). Auf `teileklar.shop` antwortet `/` mit 200; `/warenkorb`, `/kasse` und `/api/shop/status` antworten mit 503, die Schnittstelle meldet „TEILEKLAR.shop ist vorübergehend nicht verfügbar.“ (22.11.2026: dort 404, Katalog erreichbar). `gleichmacher` gegen `nexifyai.de` meldet 20 Fehler „Norm nicht messbar auf /teileklar“ (Shop-Kopfleisten-Bausteine, Breiten 390 und 1440). Wer umgestellt hat: nicht belegt; `main` unverändert `9c9c806`. Die in Entwurfs-PR 222 beschriebene Inhaberentscheidung D-023 (Agentur und Kundencenter zuerst, TEILEKLAR.shop pausiert) ist hier nicht bestätigt; die 503-Antwort passt zu ihr, belegt sie aber nicht. Zustand bleibt ENTSCHEIDUNG NÖTIG.
+
+## 15. Nachführung 22.11.2026, ca. 07:00 UTC (Stand `origin/main` `9c9c806`, PR 199)
+
+Regelbetrieb-Läufe vom 21.11.2026, 22:47 UTC, bis 22.11.2026, 07:00 UTC. Seit `9c9c806` kein Merge. Quelle der eigenen Angaben: `PROGRESS.md`, Abschnitt „Stand 22.11.2026, ca. 07:00 UTC“.
+
+### 15.1 Geänderte Zustände
+
+Kein Zustand geändert. Stand-Zeilen an OA-186 (Subdomains antworten anders) und OA-188 (Weiterleitungen geändert, Herkunft nicht belegt).
+
+### 15.2 Zählung nach der Nachführung (188 Einträge)
+
+| Zustand | Stand 21.11.2026, ca. 19:00 UTC | Stand 22.11.2026, ca. 07:00 UTC |
+|---|---|---|
+| OFFEN | 52 | 52 |
+| TEILWEISE | 13 | 13 |
+| BLOCKIERT | 38 | 38 |
+| ENTSCHEIDUNG NÖTIG | 66 | 66 |
+| HISTORIE-überholt | 9 | 9 |
+| ERLEDIGT | 10 | 10 |
+
+Herleitung: keine Zustandsänderung, keine neuen Einträge.
+
+## 16. Nachführung 26.11.2026, ca. 07:00 UTC (Stand `origin/main` `9c9c806`, PR 199)
+
+Regelbetrieb-Lauf 26.11.2026, 06:54 bis 07:05 UTC. Seit `9c9c806` kein Merge. Die geplanten Läufe vom 22.11.2026, 22:47 UTC, bis 26.11.2026, 02:47 UTC (20 Läufe), sind ausgefallen; für diesen Zeitraum gibt es keine Messung (OA-151). Quelle der eigenen Angaben: `PROGRESS.md`, Abschnitt „Stand 26.11.2026, ca. 07:00 UTC“.
+
+### 16.1 Geänderte Zustände
+
+Kein Zustand geändert. Stand-Zeilen an OA-022 (CI auf `main` täglich rot), OA-151 (Ausfall des Regelbetriebs), OA-182 (anderer Build auf `www.nexifyai.de`, Sitemap 27), OA-185 (Rechtsseiten unverändert 404), OA-186 (Subdomains in der Sache unverändert) und OA-188 (`/teileklar` 404, `teileklar.shop` 503).
+
+### 16.2 Zählung nach der Nachführung (189 Einträge)
+
+| Zustand | Stand 22.11.2026, ca. 07:00 UTC | Stand 26.11.2026, ca. 07:00 UTC |
+|---|---|---|
+| OFFEN | 52 | 53 |
+| TEILWEISE | 13 | 13 |
+| BLOCKIERT | 38 | 38 |
+| ENTSCHEIDUNG NÖTIG | 66 | 66 |
+| HISTORIE-überholt | 9 | 9 |
+| ERLEDIGT | 10 | 10 |
+
+Herleitung: OFFEN 52 + 1 neu (189) = 53.
+
+### 16.3 Neue Einträge
+
+#### OA-189 · Qualität & Belege · OFFEN
+
+- **Priorität:** 5 Betrieb und Skalierung
+- **Ziel:** `node tools/live-check.mjs` bricht gegen `https://nexifyai.de` mit einem unbehandelten Playwright-Timeout ab, statt einen Befund zu melden: `tools/live-check.mjs:55` ruft `scrollIntoViewIfNeeded()` auf `.hc-gallery-card` Nr. 3 außerhalb des `try` auf; findet die Seite die dritte Karte nicht, endet der Lauf nach 30 s mit Exit 1 ohne Prüfzahlen. Damit fehlen für die öffentliche Domain alle übrigen Prüfgruppen. Werkzeug so ändern, dass eine fehlende Karte als Befund zählt und der Lauf vollständig weiterläuft; die Prüfregel selbst nicht abschwächen.
+- **Blocker:** keiner; das Werkzeug wurde in diesem Lauf bewusst nicht geändert (Nachführung nur Dokumente).
+- **Abhängigkeiten:** keine (verwandt: OA-182)
+- **Fertig, wenn:** Ein Lauf gegen eine Seite ohne drei Galerie-Karten liefert Prüfzahlen mit einem Befund zur Galerie statt eines Abbruchs; Lauf gegen die Vercel-Adresse von `main` unverändert 329/0.
+- **Aufwand:** S · **Ausführung:** Fabrik, eigener Zweig · **Owner:** Fabrik · **Nächste Aktion:** Änderung im eigenen Zweig mit beiden Läufen als Beleg
+- **Quellen:** `node tools/live-check.mjs https://nexifyai.de`, 26.11.2026, 06:54 und 06:58 UTC, zweimal reproduziert (`TimeoutError`, „waiting for locator('.hc-gallery-card').nth(2)“, Exit 1); 22.11.2026 lieferte derselbe Aufruf 231 Prüfungen, 17 Befunde
+
